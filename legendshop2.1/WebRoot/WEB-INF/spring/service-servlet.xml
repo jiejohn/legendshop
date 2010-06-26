@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:oxm="http://www.springframework.org/schema/oxm"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
+    <!-- Add additional controller beans here -->
+    <bean id="logoService" class="com.done.service.LogoService">
+        <property name="baseDao" ref="logoDao"></property>
+    </bean>
+    <bean id="logoDao" class="com.done.dao.LogoDao" parent="baseDao"></bean>
+
+    <bean id="shopDetailDao" class="com.done.dao.ShopDetailDao" parent="baseDao">
+    </bean>
+
+    <bean id="shopDetailService" class="com.done.service.ShopDetailService">
+        <property name="baseDao" ref="shopDetailDao">
+        </property>
+    </bean>  
+    <bean id="adDao" class="com.done.dao.AdDao" parent="baseDao">
+    </bean>
+
+    <bean id="adService" class="com.done.service.AdService">
+        <property name="baseDao" ref="adDao">
+        </property>
+    </bean>
+    <bean id="newsDao" class="com.done.dao.NewsDao" parent="baseDao">
+    </bean>
+
+    <bean id="newsService" class="com.done.service.NewsService">
+        <property name="baseDao" ref="newsDao">
+        </property>
+    </bean>  
+    
+        <bean id="pubDao" class="com.done.dao.PubDao" parent="baseDao">
+    </bean>
+    <bean id="pubService" class="com.done.service.PubService">
+        <property name="baseDao" ref="pubDao">
+        </property>
+    </bean>  
+    <bean id="hotsearchDao" class="com.done.dao.HotsearchDao" parent="baseDao">
+    </bean>
+    <bean id="hotsearchService" class="com.done.service.HotsearchService">
+        <property name="baseDao" ref="hotsearchDao">
+        </property>
+    </bean>   
+    
+    <bean id="advertisementDao" class="com.done.dao.AdvertisementDao" parent="baseDao">
+    </bean>
+
+    <bean id="advertisementService" class="com.done.service.AdvertisementService">
+        <property name="baseDao" ref="advertisementDao">
+        </property>
+    </bean>  
+ 
+    <bean id="nsortDao" class="com.done.dao.NsortDao" parent="baseDao">
+    </bean>
+
+    <bean id="nsortService" class="com.done.service.NsortService">
+        <property name="baseDao" ref="nsortDao">
+        </property>
+    </bean>  
+
+    <bean id="myleagueDao" class="com.done.dao.MyleagueDao" parent="baseDao">
+	</bean>
+
+	<bean id="myleagueService" class="com.done.service.MyleagueService">
+        <property name="baseDao" ref="myleagueDao">
+        </property>
+    </bean>
+ 
+ 	<bean id="BusinessService" class="com.done.service.BusinessService">
+		<property name="baseDao">
+			<ref bean="baseDao" />
+		</property>
+		<property name="cacheDao">
+			<ref bean="cacheDao" />
+		</property>
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>	
+	</bean>
+	
+	<bean id="AdminService" class="com.done.service.AdminService">
+		<property name="baseDao">
+			<ref bean="baseDao" />
+		</property>
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>	
+		<property name="sqlPageDao">
+			<ref bean="sqlPageDao" />
+		</property>	
+	</bean>
+	
+    <bean id="newsCategoryDao" class="com.done.dao.NewsCategoryDao" parent="baseDao">
+	</bean>
+
+	<bean id="newsCategoryService" class="com.done.service.NewsCategoryService">
+        <property name="baseDao" ref="newsCategoryDao">
+        </property>
+    </bean>  
+	  
+</beans>

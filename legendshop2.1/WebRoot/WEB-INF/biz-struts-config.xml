@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  <form-beans>
+  	<form-bean name="basketForm" type="com.done.struts.form.BasketForm" />
+  	<form-bean name="memberForm" type="com.done.struts.form.MemberForm" />
+  	<form-bean name="userForm" type="com.done.struts.form.UserForm" />
+  	<form-bean name="searchForm" type="com.done.struts.form.SearchForm" />
+  </form-beans>
+  <action-mappings>
+	 <action
+      input="/common/jsp/error.jsp"
+      parameter="top"
+      path="/top"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="fail" path="/common/jsp/error.jsp" />
+      <forward name="success" path="/jsp/top.jsp" />
+    </action>
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="copy"
+      path="/copy"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="fail" path="/common/jsp/error.jsp" />
+      <forward name="success" path="/jsp/copy.jsp" />
+    </action>
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="topsort"
+      path="/topsort"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="fail" path="/common/jsp/error.jsp" />
+      <forward name="success" path="/jsp/topsort.jsp" />
+    </action>
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="notice"
+      path="/notice"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="fail" path="/common/jsp/error.jsp" />
+      <forward name="success" path="/jsp/notice.jsp" />
+    </action>
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="index"
+      path="/index"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="fail" path="/common/jsp/error.jsp" />
+      <forward name="success" path="/jsp/index.jsp"/>
+    </action>
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="league"
+      path="/league"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="fail" path="/common/jsp/error.jsp" />
+      <forward name="success" path="league" />
+    </action>
+   <!-- 排行榜 --> 
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="paihang"
+      path="/paihang"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="fail" path="/common/jsp/error.jsp" />
+      <forward name="success" path="/jsp/paihang.jsp" />
+    </action>
+    
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="friendlink"
+      path="/friendlink"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="fail" path="/common/jsp/error.jsp" />
+      <forward name="success" path="/jsp/friendlink.jsp" />
+    </action>
+     <action
+      input="/common/jsp/error.jsp"
+      parameter="topnews"
+      path="/topnews"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="fail" path="/common/jsp/error.jsp" />
+      <forward name="success" path="/jsp/topnews.jsp" />
+      <forward name="topsortnews" path="/jsp/topsortnews.jsp" />
+    </action>   
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="hoton"
+      path="/hoton"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="/jsp/hoton.jsp" />
+    </action>
+    
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="views"
+      path="/views"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="/jsp/views.jsp" />
+    </action>
+    
+     <action
+      input="/common/jsp/error.jsp"
+      parameter="basket"
+      path="/basket"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="/jsp/basket.jsp" />
+    </action>
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="bought"
+      path="/bought"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="/jsp/bought.jsp" />
+    </action>
+    <action
+      input="/common/jsp/error.jsp"
+      name="basketForm"
+      parameter="buy"
+      path="/buy"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="/jsp/buy.jsp" />
+      <forward name="nologin" path="loginhint" />
+    </action>
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="clear"
+      path="/clear"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="/jsp/buy.jsp" />
+    </action>
+    
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="cashsave"
+      path="/cashsave"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="/jsp/cashsave.jsp" />
+    </action>
+    
+    <action
+      input="/common/jsp/error.jsp"
+      name="memberForm"
+      parameter="saveto"
+      path="/saveto"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="true">
+      <forward name="success" path="/jsp/saveto.jsp" />
+    </action>
+    
+     <action
+      input="/common/jsp/error.jsp"
+      parameter="orderDetail"
+      path="/orderDetail"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="true">
+      <forward name="success" path="/jsp/orderDetail.jsp" />
+    </action>   
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="processOrder"
+      path="/processOrder"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="processingOrder" path="/jsp/processingOrder.jsp" />
+      <forward name="processedOrder" path="/jsp/processedOrder.jsp" />
+    </action>    
+    <!-- tiles -->
+     <action
+        input="/common/jsp/error.jsp"
+        path="/reg"
+        parameter="reg"
+        type="org.apache.struts.actions.ForwardAction"/>
+     <action
+        input="/common/jsp/error.jsp"
+        path="/sendoff"
+        parameter="sendoff"
+        type="org.apache.struts.actions.ForwardAction"/>
+     <action
+        input="/common/jsp/error.jsp"
+        path="/guarantee"
+        parameter="guarantee"
+        type="org.apache.struts.actions.ForwardAction"/>        
+     <action
+      input="/common/jsp/error.jsp"
+      parameter="leaveword"
+      path="/leaveword"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="true">
+      <forward name="success" path="leaveword" />
+      <forward name="nologin" path="loginhint" />
+    </action>
+     <action
+      input="/common/jsp/error.jsp"
+      parameter="news"
+      path="/news"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="news" />
+    </action>
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="sort"
+      path="/sort"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="productSort" />
+    </action>   
+   <action
+      name="searchForm"
+      input="/common/jsp/error.jsp"
+      attribute="searchForm"
+      parameter="search"
+      path="/search"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="productSort" />
+    </action>    
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="allNews"
+      path="/allNews"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="allNews" />
+    </action>
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="nsort"
+      path="/nsort"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="nsort" />
+    </action>
+    <action
+        input="/common/jsp/error.jsp"
+        path="/order"
+        parameter="order"
+        type="org.apache.struts.actions.ForwardAction"/>
+        
+     <!-- 用户注册 -->
+    <action
+      input="/common/jsp/error.jsp"
+      name="userForm"
+      attribute="userForm"
+      parameter="userReg"
+      path="/userReg"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="/afterReg.do" />
+    </action>
+    <!-- 用户信息查看 -->
+    <action
+        input="/common/jsp/error.jsp"
+        path="/myaccount"
+        parameter="myaccount"
+        type="com.done.struts.action.BizAction">
+        <forward name="success" path="myaccount" />
+        <forward name="login" path="/login.do" />
+      </action>
+      <!-- 用户修改信息 -->
+     <action
+      input="/common/jsp/error.jsp"
+      name="userForm"
+      attribute="userForm"
+      parameter="updateAccount"
+      path="/updateAccount"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="success" path="/afterUserUpdate.do" /> 
+    </action>
+    <action
+        input="/common/jsp/error.jsp"
+        path="/afterReg"
+        parameter="afterReg"
+        type="org.apache.struts.actions.ForwardAction"/>   
+   <action
+        input="/common/jsp/error.jsp"
+        path="/afterUserUpdate"
+        parameter="afterUserUpdate"
+        type="org.apache.struts.actions.ForwardAction"/>
+      <action
+        input="/common/jsp/error.jsp"
+        path="/operateSucessful"
+        parameter="operateSucessful"
+        type="org.apache.struts.actions.ForwardAction"/>        
+  </action-mappings>
+</struts-config>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+	@author He-WenQiang. Create in 2009-11-12 20:48:45
+-->
+<hibernate-mapping>
+	<class name="com.done.model.Advertisement" table="advertisement">
+	 <cache usage="read-write"/>
+    <id name="id" column="id" type="java.lang.Integer">
+     <generator class="increment" />
+	</id>
+	<property name="picUrl" column="pic_url" type="java.lang.String" />
+	<property name="linkUrl" column="link_url" type="java.lang.String" />
+	<property name="userId" column="user_id" type="java.lang.String" />
+	<property name="userName" column="user_name" type="java.lang.String" />
+	<property name="enabled" column="enabled" type="java.lang.Integer" />
+    <property name="type" column="type" type="java.lang.String" />
+	</class>
+</hibernate-mapping>

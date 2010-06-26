@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!-- 属性文件读入 -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>				
+				<!-- JDBC访问的用户名、密码等 -->
+				<value>classpath*:config/*.properties</value>				
+			</list>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PageProvider" class="com.done.util.PageProviderImpl" scope="prototype"/>
+    <bean id="SimplePageProvider" class="com.done.util.SimplePageProviderImpl" scope="prototype"/>
+    <bean id="codeTablesCache" class="com.done.util.CodeTablesCache">
+    	<property name="codeTables">
+    		<map>
+    			<entry key="NEW_STAUS">
+    				<map>
+    					<entry key="0">
+    						<value>链接</value>
+    					</entry>
+    					<entry key="1">
+    						<value>新闻</value>
+    					</entry>
+    					<entry key="2">
+    						<value>下线</value>
+    					</entry>
+    				</map>
+    			</entry>
+     			<entry key="LEAGUE_STAUS">
+    				<map>
+    					<entry key="0">
+    						<value>申请</value>
+    					</entry>
+    					<entry key="1">
+    						<value>同意</value>
+    					</entry>
+    					<entry key="2">
+    						<value>拒绝</value>
+    					</entry>
+    				</map>
+    			</entry>   			
+    		</map>
+    	</property>
+    </bean>
+    
+    <bean id="dataSource"
+		class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="driverUrl">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="user"><!-- 必须在这里也设置，但是 proxool却不使用它，或许是个bug-->
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password"><!-- 必须在这里也设置，但是 proxool却不使用它，或许是个bug-->
+			<value>${jdbc.password}</value>
+		</property>
+		<property name="alias">
+			<value>${alias}</value><!--别名-->
+		</property>
+		<property name="prototypeCount">
+			<value>${prototypeCount}</value>
+		</property>
+		<property name="maximumConnectionCount">
+			<value>${maximumConnectionCount}</value>
+		</property>
+		<property name="minimumConnectionCount">
+			<value>${minimumConnectionCount}</value>
+		</property>
+		<property name="trace">
+			<value>${trace}</value>
+		</property>
+		<property name="verbose">
+			<value>${verbose}</value>
+		</property>
+	</bean>
+	
+   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.query.factory_class">
+					org.hibernate.hql.ast.ASTQueryTranslatorFactory
+				</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="jdbc.fetch_size">5</prop>
+				<prop key="max_fetch_depth">4</prop>
+				<prop key="jdbc.batch_size">30</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<!--  
+                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                 -->
+                      <!--  打开hibernate统计功能，我们测试中使用hibernate的统计类
+                <prop key="hibernate.generate_statistics">true</prop>
+                -->
+                <!--  最优化二级缓存
+                <prop key="hibernate.cache.use_structured_entries">true</prop>-->
+                <!-- <prop key="hibernate.cache.provider_class">org.hibernate.cache.SingletonEhCacheProvider</prop> -->
+                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+			</props>
+		</property>
+		<property name="mappingLocations">
+			<list>
+				<value>
+					classpath*:/com/done/model/*.hbm.xml
+				</value>
+			</list>
+		</property>
+		</bean>
+		
+	<bean id="baseDao" class="bingosoft.jcf.dao.cache.BaseDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		<property name="cache"><value>false</value></property>
+	</bean>
+	<bean id="hibernateTemplate" 
+        class="org.springframework.orm.hibernate3.HibernateTemplate">
+         <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+   		 <property name="cacheQueries"><value>false</value></property>
+	</bean>
+
+	<bean id="cacheDao" class="bingosoft.jcf.dao.cache.BaseDao">
+		<property name="hibernateTemplate" ref="cachehibernateTemplate"></property>
+		<property name="cache"><value>true</value></property>
+	</bean>
+	<bean id="cachehibernateTemplate" 
+        class="org.springframework.orm.hibernate3.HibernateTemplate">
+         <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+   		 <property name="cacheQueries"><value>true</value></property>
+	</bean>	
+	
+	<bean id="sqlPageDao" class="com.done.dao.SqlPageDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		<property name="cache"><value>false</value></property>
+	</bean>
+</beans>

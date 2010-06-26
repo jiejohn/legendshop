@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="filterChainProxy" class="org.acegisecurity.util.FilterChainProxy">
+		<property name="filterInvocationDefinitionSource">
+			<value>
+				PATTERN_TYPE_APACHE_ANT
+				/**=httpSessionContextIntegrationFilter,logoutFilter,anonymousProcessingFilter,casProcessingFilter,securityContextHolderAwareRequestFilter,exceptionTranslationFilter,filterInvocationInterceptor
+			</value>
+		</property>
+	</bean>
+		
+   	<bean id="httpSessionContextIntegrationFilter" 
+   		class="org.acegisecurity.context.HttpSessionContextIntegrationFilter" />
+   
+	<bean id="casProcessingFilter" 
+		class="bingosoft.jcf.auth.CasProcessingFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<!-- 授权失败的跳转页面 -->
+		<property name="authenticationFailureUrl" value="/accessDenied.jsp" />
+		<property name="defaultTargetUrl" value="/" />
+		<property name="filterProcessesUrl" value="/j_acegi_cas_security_check" />
+		
+	</bean>
+	
+	<bean id="securityContextHolderAwareRequestFilter"
+		class="org.acegisecurity.wrapper.SecurityContextHolderAwareRequestFilter" />
+		
+	<bean id="authenticationManager" 
+   		class="org.acegisecurity.providers.ProviderManager">
+      <property name="providers">
+         <list>
+            <ref local="casAuthenticationProvider"/>
+         </list>
+      </property>
+	</bean>
+   
+	<bean id="casAuthenticationProvider" class="org.acegisecurity.providers.cas.CasAuthenticationProvider">
+		<property name="casAuthoritiesPopulator" ref="casAuthoritiesPopulator" />		
+		<property name="casProxyDecider" ref="rejectProxyTickets" />
+		<property name="ticketValidator" ref="casProxyTicketValidator" />
+		<property name="statelessTicketCache" ref="statelessTicketCache" />
+		<property name="key" value="bingo.soft.department.II" />
+	</bean>
+	
+	<!-- 用户权限 -->
+	<bean id="casAuthoritiesPopulator" 
+		class="org.acegisecurity.providers.cas.populator.DaoCasAuthoritiesPopulator">
+		<property name="userDetailsService" ref="hibernateDaoImpl" />
+	</bean>
+	
+  <bean id="authorityUserCache" class="bingosoft.jcf.auth.cache.EhCacheBasedUserAuthorityCache">
+     <property name="cache"><ref local="authorityUserCacheBackend"/></property>
+  </bean>
+
+    <!-- 根据 user 查 role -->
+  <bean id="authorityUserCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+     <property name="cacheManager"> <ref local="cacheManager"/> </property>
+     <property name="cacheName"> <value>authorityUserCache</value> </property>
+  </bean>
+  
+	<!--  自定义HibernateDaoImpl 检验用户合法性  -->
+	<bean id="hibernateDaoImpl"
+		class="bingosoft.jcf.auth.HibernateDaoImpl" >
+	    <property name="cache">
+	      <ref bean="authorityUserCache"/>
+	    </property>
+	    <property name="jdbcTemplate">
+	    	<ref bean="jdbcTemplate"/>
+	    </property>
+	</bean>
+	 <!--  
+  <bean id="casProxyTicketValidator1" class="org.acegisecurity.providers.cas.ticketvalidator.CasProxyTicketValidator">
+	  <property name="casValidate"><value>https://localhost/cas/proxyValidate</value></property>
+	  <property name="serviceProperties"><ref bean="serviceProperties"/></property>
+	 
+</bean>
+-->  
+	<!-- JA-SIG CAS Client 的Ticket验证实现 -->
+	<bean id="casProxyTicketValidator" class="bingosoft.jcf.auth.JasigCasClientTicketValidator">
+		<property name="jasigTicketValidator" ref="ticketValidator" />
+		<!-- <property name="trustStore" value="D:/apache-tomcat-5.5.20/conf/root.jks" />  -->
+		<property name="serviceProperties" ref="serviceProperties" />
+	</bean>		
+    	
+	<!-- 拒绝所有其它服务代理的PT -->
+	<bean id="rejectProxyTickets" class="org.acegisecurity.providers.cas.proxy.RejectProxyTickets" />
+	              
+    <bean id="ticketValidator"
+            class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
+        <constructor-arg index="0" value="${cas.server.url}/"/>      
+    </bean>	
+	
+	<bean id="statelessTicketCache" class="org.acegisecurity.providers.cas.cache.EhCacheBasedTicketCache">
+      	<property name="cache" ref="ticketCacheBackend" />
+	</bean>
+	
+	<bean id="ticketCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+       <property name="cacheManager" ref="cacheManager" />
+       <property name="cacheName" value="ticketCache" />
+    </bean>
+
+   	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
+				
+   	<bean id="exceptionTranslationFilter" class="org.acegisecurity.ui.ExceptionTranslationFilter">
+      <property name="authenticationEntryPoint" ref="casProcessingFilterEntryPoint" />
+      <property name="accessDeniedHandler">
+      	<bean class="org.acegisecurity.ui.AccessDeniedHandlerImpl">
+      		<property name="errorPage" value="/accessDenied.jsp"/>
+      	</bean>
+      </property>
+   	</bean>
+
+	<bean id="casProcessingFilterEntryPoint" class="org.acegisecurity.ui.cas.CasProcessingFilterEntryPoint">
+		<property name="loginUrl" value="${cas.server.url}/login" />
+		<property name="serviceProperties" ref="serviceProperties" />
+	</bean>
+
+	<bean id="serviceProperties" class="org.acegisecurity.ui.cas.ServiceProperties">
+		<property name="service">
+			<value>${cas.service.url}/j_acegi_cas_security_check</value>
+		</property>
+		<property name="sendRenew" value="false" />
+	</bean>
+	
+	<!-- 授权器拦截器 
+	<bean id="filterInvocationInterceptor"
+		class="org.acegisecurity.intercept.web.FilterSecurityInterceptor">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="accessDecisionManager" ref="accessDecisionManager" />
+		<property name="objectDefinitionSource" ref="objectDefinitionSource"/>
+	</bean>
+	-->
+	<!--  	
+		一票通过制（AffirmativeBased）：有一票通过即可以访问该资源	
+		全票通过制（ConsensusBased）：只有全部通过才能访问资源
+		一票否决制（UnanimousBased）：没有拒绝票时允许访问
+	-->
+	<bean id="accessDecisionManager" class="org.acegisecurity.vote.AffirmativeBased">
+      <!-- 是否全部弃权时视为通过 -->
+      <property name="allowIfAllAbstainDecisions" value="false" />      
+      <property name="decisionVoters">
+         <list>
+            <bean class="org.acegisecurity.vote.RoleVoter">
+				<property name="rolePrefix" value=""/>
+			</bean>
+			<bean class="org.acegisecurity.vote.AuthenticatedVoter" />
+         </list>
+      </property>
+   </bean>  				  
+   
+   <bean class="org.acegisecurity.event.authentication.LoggerListener"/>   
+   
+   <bean class="org.acegisecurity.event.authorization.LoggerListener"/>
+   
+   <bean id="logoutFilter" class="org.acegisecurity.ui.logout.LogoutFilter">
+  		<constructor-arg value="${cas.logout.chain}"></constructor-arg>
+  		<constructor-arg>
+  			<list>
+  				<bean class="org.acegisecurity.ui.logout.SecurityContextLogoutHandler"></bean>   				
+  			</list>
+  		</constructor-arg>
+  	</bean>
+  	
+ 	<bean id="anonymousProcessingFilter"
+		class="org.acegisecurity.providers.anonymous.AnonymousProcessingFilter">
+		<property name="key" value="loginManager" />
+		<property name="userAttribute"
+			value="anonymousUser,ROLE_ANONYMOUS" />
+	</bean> 
+	
+	<!-- 认证dao：得到角色的功能点 -->
+	<bean id="authDao"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>bingosoft.jcf.auth.AuthDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>authDaoTarget</value>
+			</list>
+		</property>
+	</bean>
+	
+	 <bean id="authDaoTarget" class="bingosoft.jcf.auth.AuthDaoImpl" >
+    <property name="cache">
+      <ref bean="functionRoleCache"/>
+    </property>
+    <property name="roleCache">
+      <ref bean="roleCache"/>
+    </property>
+    <property name="jdbcTemplate">
+    	<ref bean="jdbcTemplate"/>
+    </property>
+  </bean>
+  
+    <bean id="functionRoleCache" class="bingosoft.jcf.auth.cache.EhCacheBasedFunctionCache">
+     <property name="cache"><ref local="functionCacheBackend"/></property>
+  </bean>
+  
+    <!-- 根据 role 查 function -->
+  <bean id="functionCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+     <property name="cacheManager"> <ref bean="cacheManager"/> </property>
+     <property name="cacheName"> <value>functionRoleCache</value> </property>
+  </bean>
+  
+   <bean id="roleCache" class="bingosoft.jcf.auth.cache.EhCacheRoleByName">
+     <property name="cache"><ref local="roleCacheBackend"/></property>
+  </bean>
+   <!-- 根据rolename 查 role -->
+  <bean id="roleCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+     <property name="cacheManager"> <ref bean="cacheManager"/> </property>
+     <property name="cacheName"> <value>roleCache</value> </property>
+  </bean> 	
+  
+  <bean id="filterInvocationInterceptor"
+		class="org.acegisecurity.intercept.web.FilterSecurityInterceptor">
+		<property name="authenticationManager"
+			ref="authenticationManager" />
+		<property name="accessDecisionManager">
+			<ref local="accessDecisionManager" />
+		</property>
+		<property name="objectDefinitionSource">
+			<value>
+				CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+				PATTERN_TYPE_APACHE_ANT
+				/admin/**=ROLE_SUPERVISOR,ROLE_ADMIN
+				/member/**=ROLE_SUPERVISOR,ROLE_ADMIN
+                /system/**=ROLE_SUPERVISOR,ROLE_SYSTEM
+				/login**=IS_AUTHENTICATED_REMEMBERED
+				/order**=IS_AUTHENTICATED_REMEMBERED
+				/save**=IS_AUTHENTICATED_REMEMBERED
+				/**=IS_AUTHENTICATED_ANONYMOUSLY
+			</value>
+		</property>
+	</bean>  
+</beans>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by Hewq (Bingo) -->
+
+<DataAccessLayer>
+	<BusinessObjects>
+		<Object objectName="config">
+            <Method name="isDebug">1</Method>
+            <Method name="pageSize">10</Method>
+            <Method name="batchSize">1000</Method>
+            <Method name="MaxIndexJpg">7</Method>
+            <Method name="MaxFileSize">1048576</Method>
+		</Object>
+	</BusinessObjects>
+</DataAccessLayer>

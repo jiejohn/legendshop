@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>   
+    <diskStore path="java.io.tmpdir"/>    
+    <defaultCache
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="180"
+        timeToLiveSeconds="180"
+        overflowToDisk="true"
+        diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="180"
+        />
+     <cache name="com.done.model.Logo"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="200"
+        timeToLiveSeconds="200"
+        />
+       <cache name="com.done.model.ShopDetail"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="250"
+        timeToLiveSeconds="250"
+        />
+       <cache name="com.done.model.Sort"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="180"
+        timeToLiveSeconds="180"
+        />
+        <cache name="com.done.model.Nsort"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="180"
+        timeToLiveSeconds="180"
+        />
+        <cache name="com.done.model.Indexjpg"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="210"
+        timeToLiveSeconds="210"
+        /> 
+</ehcache>

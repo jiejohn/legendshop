@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+ <!-- UTF-8 Filter -->
+ <context-param>
+  <param-name>contextConfigLocation</param-name>
+  <param-value>/WEB-INF/springmvc-servlet.xml</param-value>
+ </context-param>
+ <context-param>
+  <param-name>definitions-config</param-name>
+  <param-value>/WEB-INF/tiles/tiles-defs.xml</param-value>
+ </context-param>
+ <filter>
+  <filter-name>encodingFilter</filter-name>
+  <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  <init-param>
+   <param-name>encoding</param-name>
+   <param-value>UTF-8</param-value>
+  </init-param>
+ </filter>
+ <!-- 
+        <filter>
+        <filter-name>indexCacheFilter</filter-name>
+        <filter-class>
+        net.sf.ehcache.constructs.web.filter.SimplePageCachingFilter
+        </filter-class>
+        </filter>
+    -->
+ <filter>
+  <filter-name>Acegi Filter Chain Proxy</filter-name>
+  <filter-class>org.acegisecurity.util.FilterToBeanProxy</filter-class>
+  <init-param>
+   <param-name>targetClass</param-name>
+   <param-value>org.acegisecurity.util.FilterChainProxy</param-value>
+  </init-param>
+ </filter>
+ <filter>
+  <filter-name>UrlRewriteFilter</filter-name>
+  <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+  <init-param>
+   <param-name>logLevel</param-name>
+   <param-value>WARN</param-value>
+  </init-param>
+ </filter>
+ <!-- 浏览器不支持put,delete等method,由该filter将/blog?_method=delete转换为标准的http delete方法 -->
+ <filter>
+  <filter-name>HiddenHttpMethodFilter</filter-name>
+  <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+ </filter>
+ <filter-mapping>
+  <filter-name>encodingFilter</filter-name>
+  <url-pattern>*.jsp</url-pattern>
+ </filter-mapping>
+ <filter-mapping>
+  <filter-name>encodingFilter</filter-name>
+  <url-pattern>*.c</url-pattern>
+ </filter-mapping>
+ <filter-mapping>
+  <filter-name>encodingFilter</filter-name>
+  <url-pattern>*.do</url-pattern>
+ </filter-mapping>
+ <filter-mapping>
+  <filter-name>Acegi Filter Chain Proxy</filter-name>
+  <url-pattern>*.do</url-pattern>
+ </filter-mapping>
+ <filter-mapping>
+  <filter-name>Acegi Filter Chain Proxy</filter-name>
+  <url-pattern>*.jsp</url-pattern>
+ </filter-mapping>
+ <filter-mapping>
+  <filter-name>Acegi Filter Chain Proxy</filter-name>
+  <url-pattern>*.c</url-pattern>
+ </filter-mapping>
+ <!-- acegi 校验 Cas Ticket的配置 -->
+ <filter-mapping>
+  <filter-name>Acegi Filter Chain Proxy</filter-name>
+  <url-pattern>/j_acegi_cas_security_check</url-pattern>
+ </filter-mapping>
+ <filter-mapping>
+  <filter-name>Acegi Filter Chain Proxy</filter-name>
+  <url-pattern>/j_acegi_logout</url-pattern>
+ </filter-mapping>
+ <filter-mapping>
+  <filter-name>UrlRewriteFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+  <dispatcher>REQUEST</dispatcher>
+  <dispatcher>FORWARD</dispatcher>
+ </filter-mapping>
+ <filter-mapping>
+  <filter-name>HiddenHttpMethodFilter</filter-name>
+  <servlet-name>springmvc</servlet-name>
+ </filter-mapping>
+ <listener>
+  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+ </listener>  
+ <listener>
+     <listener-class>com.done.common.InitSysListener</listener-class>
+  </listener>
+   
+ <servlet>
+  <servlet-name>action</servlet-name>
+  <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+  <init-param>
+   <param-name>config</param-name>
+   <param-value>/WEB-INF/struts-config.xml, /WEB-INF/biz-struts-config.xml, /WEB-INF/admin-struts-config.xml</param-value>
+  </init-param>
+  <init-param>
+   <param-name>debug</param-name>
+   <param-value>3</param-value>
+  </init-param>
+  <init-param>
+   <param-name>detail</param-name>
+   <param-value>3</param-value>
+  </init-param>
+  <init-param>
+   <param-name>chainConfig</param-name>
+   <param-value>org/apache/struts/tiles/chain-config.xml</param-value>
+  </init-param>
+  <load-on-startup>0</load-on-startup>
+ </servlet>
+ <!-- DWR配置 -->
+ <servlet>
+  <servlet-name>dwr-invoker</servlet-name>
+  <servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
+  <init-param>
+   <!-- 生产环境下需要把这个参数设置为false -->
+   <param-name>debug</param-name>
+   <param-value>false</param-value>
+  </init-param>
+  <init-param>
+   <param-name>classes</param-name>
+   <param-value>java.lang.Object</param-value>
+  </init-param>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet>
+  <servlet-name>proxooladmin</servlet-name>
+  <servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
+ </servlet>
+ <!-- fckeditor start -->
+ <servlet>
+  <servlet-name>ConnectorServlet</servlet-name>
+  <servlet-class>net.fckeditor.connector.ConnectorServlet</servlet-class>
+  <init-param>
+   <param-name>debug</param-name>
+   <param-value>true</param-value>
+  </init-param>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <!-- fckeditor end  分发器 控制器配置 -->
+ <servlet>
+  <servlet-name>springmvc</servlet-name>
+  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet>
+  <servlet-name>DownloadFileServlet</servlet-name>
+  <servlet-class>com.done.servlet.DownloadFileServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>action</servlet-name>
+  <url-pattern>*.do</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>dwr-invoker</servlet-name>
+  <url-pattern>/dwr/*</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>dwr-invoker</servlet-name>
+  <url-pattern>/anonymousdwr/*</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>proxooladmin</servlet-name>
+  <url-pattern>/admin/ds</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ConnectorServlet</servlet-name>
+  <url-pattern>/fckeditor/editor/filemanager/connectors/*</url-pattern>
+ </servlet-mapping>
+ <!-- Controller URLs (*.c) -->
+ <servlet-mapping>
+  <servlet-name>springmvc</servlet-name>
+  <url-pattern>*.c</url-pattern>
+ </servlet-mapping>
+ <!-- View URLs (*.v) -->
+ <servlet-mapping>
+  <servlet-name>springmvc</servlet-name>
+  <url-pattern>*.v</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>DownloadFileServlet</servlet-name>
+  <url-pattern>/servlet/downloadfileservlet/*</url-pattern>
+ </servlet-mapping>
+ <welcome-file-list>
+  <welcome-file>/index.jsp</welcome-file>
+ </welcome-file-list>
+ <!-- 
+ <error-page>
+  <error-code>404</error-code>
+  <location>/common/jsp/404.jsp</location>
+ </error-page>
+ <error-page>
+  <error-code>500</error-code>
+  <location>/common/jsp/500.jsp</location>
+ </error-page>
+  -->
+ <login-config>
+  <auth-method>BASIC</auth-method>
+ </login-config>
+</web-app>

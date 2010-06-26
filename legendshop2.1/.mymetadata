@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="legendshop2.1"
+  id="myeclipse.1277480561343"
+  context-root="/legendshop"
+  j2ee-spec="5.0"
+  archive="legendshop2.1.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

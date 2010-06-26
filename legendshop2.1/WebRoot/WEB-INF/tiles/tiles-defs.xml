@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+	<definition name="productSort" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/right.jsp" />
+	</definition>
+	<definition name="reg" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/reg.jsp" />
+	</definition>
+	<definition name="sendoff" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/sendoff.jsp" />
+	</definition>
+	<definition name="guarantee" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/guarantee.jsp" />
+	</definition>	
+	<definition name="leaveword" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/leaveword.jsp" />
+	</definition>
+    <definition name="loginhint" path="/jsp/sort.jsp">
+        <put name="right" value="/jsp/loginHint.jsp" />
+    </definition>
+	<definition name="news" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/news.jsp" />
+	</definition>
+	<definition name="allNews" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/allnews.jsp" />
+	</definition>
+	<definition name="nsort" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/smallsort.jsp" />
+	</definition>
+	<definition name="order" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/order.jsp" />
+	</definition>	
+	<definition name="operateSucessful" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/operateSucessful.jsp" />
+	</definition>	
+    <definition name="afterReg" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/afterReg.jsp" />
+	</definition>
+	<definition name="myaccount" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/updateMyAccount.jsp" />
+	</definition>
+    <definition name="afterUserUpdate" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/afterUserUpdate.jsp" />
+	</definition>
+    <definition name="league" path="/jsp/sort.jsp">
+		<put name="right" value="/jsp/league.jsp" />
+	</definition>
+</tiles-definitions>

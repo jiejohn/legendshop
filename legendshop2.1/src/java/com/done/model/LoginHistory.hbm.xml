@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+	@author He-WenQiang. Create in 2007-07-13 23:38:38
+-->
+<hibernate-mapping>
+	<class name="com.done.model.LoginHistory" table="t_login_history">
+	<id name="id" column="id" type="java.lang.String">
+		<generator class="uuid" />
+	</id>
+	<property name="userName" column="user_name" type="java.lang.String" />
+	<property name="ip" column="ip" type="java.lang.String" />
+	<property name="time" column="time" type="java.util.Date" />
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+	@author He-WenQiang. Create in 2010-06-25 22:17:19
+-->
+<hibernate-mapping>
+	<class name="com.done.model.NewsCategory" table="news_category">
+	<id name="newsCategoryId" column="news_category_id" type="java.lang.Integer">
+     <generator class="increment" />
+	</id>
+	<property name="newsCategoryName" column="news_category_name" type="java.lang.String" />
+	<property name="status" column="status" type="java.lang.Short" />
+	<property name="newsCategoryDate" column="news_category_date" type="java.util.Date" />
+	<property name="userId" column="user_id" type="java.lang.String" />
+	<property name="userName" column="user_name" type="java.lang.String" />
+
+	</class>
+</hibernate-mapping>

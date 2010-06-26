@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  <form-beans>
+  	<form-bean name="newsForm" type="com.done.struts.form.NewsForm" />
+  	<form-bean name="uploadForm" type="com.done.struts.form.FileUploadForm" />
+  	<form-bean name="indexJpgForm" type="com.done.struts.form.IndexJpgForm" />
+  	<form-bean name="hwForm" type="com.done.struts.form.HwForm" />
+  </form-beans>
+  
+  <action-mappings>
+  	<action forward="/admin/manage.jsp" path="/admin" />
+  	<!-- 保存新闻 -->
+  	<action
+      input="/common/jsp/error.jsp"
+      name="newsForm"
+      parameter="addNews"
+      path="/admin/addNews"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+    </action>
+    
+    <!-- 更新新闻 -->
+  	<action
+      input="/common/jsp/error.jsp"
+      name="newsForm"
+      parameter="updateNews"
+      path="/admin/updateNews"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/addnews.jsp"></forward>
+    </action>
+    
+     <!-- 得到sort -->
+  	<action
+      input="/common/jsp/error.jsp"
+      parameter="sortList"
+      path="/admin/sortList"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/sortList.jsp"></forward>
+    </action>
+  <!-- 得到indexjpg -->
+  	<action
+      input="/common/jsp/error.jsp"
+      parameter="indexjpgList"
+      path="/admin/indexjpgList"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/indexjpg/indexjpgList.jsp"></forward>
+    </action>
+    <!-- 得到userDetail -->
+  	<action
+      input="/common/jsp/error.jsp"
+      parameter="userDetailList"
+      path="/system/userDetailList"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/userDetailList.jsp"></forward>
+    </action>
+     <!-- 得到shopDetail -->
+  	<action
+      input="/common/jsp/error.jsp"
+      parameter="shopDetailList"
+      path="/admin/shopDetailList"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/shopDetailList.jsp"></forward>
+    </action>   
+    <!-- 得到nsort -->
+     <action
+      input="/common/jsp/error.jsp"
+      parameter="nsortList"
+      path="/admin/nsortList"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/nsortList.jsp"></forward>
+    </action>
+    
+    <!-- 删除sort -->
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="deleteSort"
+      path="/admin/deleteSort"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/sortList.do"></forward>
+    </action>
+    
+    <!-- 删除indexJpg -->
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="deleteindexJpg"
+      path="/admin/deleteindexJpg"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/indexjpgList.do"></forward>
+    </action>
+    
+    <!-- 删除nsort -->
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="deleteNSort"
+      path="/admin/deleteNSort"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/nsortList.do"></forward>
+    </action>  
+      
+    <!-- updatesort -->
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="updateSort"
+      path="/admin/updateSort"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/saveSort.jsp"></forward>
+    </action>  
+     <!-- updateIndexJpg -->
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="updateIndexJpg"
+      path="/admin/updateIndexJpg"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/indexjpg/saveIndexJpg.jsp"></forward>
+    </action>     
+
+    <action
+      attribute="uploadForm"
+      input="/common/jsp/error.jsp"
+  	  name="uploadForm"
+  	  parameter="upload"
+      path="/admin/fileUpload"
+      scope="request"
+      type="com.done.struts.action.AdminAction">
+      <forward name="success" path="/common/jsp/success.jsp" />
+      <forward name="error" path="/common/jsp/error.jsp" />
+    </action>
+    
+    <action
+      attribute="indexJpgForm"
+      input="/common/jsp/error.jsp"
+  	  name="indexJpgForm"
+  	  parameter="saveIndexJpg"
+      path="/admin/saveIndexJpg"
+      scope="request"
+      type="com.done.struts.action.AdminAction">
+      <forward name="success" path="/common/jsp/success.jsp" />
+      <forward name="error" path="/common/jsp/error.jsp" />
+    </action> 
+
+    <!-- 得到userCommentList -->
+  	<action
+      input="/common/jsp/error.jsp"
+      parameter="userCommentList"
+      path="/admin/userCommentList"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/userComment/userCommentList.jsp"></forward>
+    </action>
+    
+        <!-- 删除deleteUserComment -->
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="deleteUserComment"
+      path="/admin/deleteUserComment"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/userCommentList.do"></forward>
+    </action>
+   <!-- 更新阅读状态 -->
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="viewUserComment"
+      path="/admin/viewUserComment"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/userComment/viewUserComment.jsp"></forward>
+    </action> 
+     <action
+      input="/common/jsp/error.jsp"
+      parameter="adminProcessOrder"
+      path="/admin/adminProcessOrder"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="false">
+      <forward name="processingOrder" path="/admin/order/processingOrder.jsp" />
+      <forward name="processedOrder" path="/admin/order/processedOrder.jsp" />
+    </action>  
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="adminOrderDetail"
+      path="/admin/adminOrderDetail"
+      scope="request"
+      type="com.done.struts.action.BizAction"
+      validate="true">
+      <forward name="success" path="/jsp/orderDetail.jsp" />
+    </action>    
+   <!-- 得到Hw -->
+  	<action
+  	  attribute="hwForm"
+      input="/common/jsp/error.jsp"
+      name="hwForm"
+      parameter="hwList"
+      path="/admin/hwList"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/hw/hwList.jsp"></forward>
+    </action>
+     <action
+      attribute="hwForm"
+      input="/common/jsp/error.jsp"
+  	  name="hwForm"
+  	  parameter="saveHw"
+      path="/admin/saveHw"
+      scope="request"
+      type="com.done.struts.action.AdminAction">
+      <forward name="success" path="/admin/hwList.do" />
+      <forward name="error" path="/common/jsp/error.jsp" />
+    </action>   
+     <!-- updateHw -->
+    <action
+      input="/common/jsp/error.jsp"
+      parameter="updateHw"
+      path="/admin/updateHw"
+      scope="request"
+      type="com.done.struts.action.AdminAction"
+      validate="false">
+      <forward name="success" path="/admin/hw/saveHw.jsp"></forward>
+    </action>  
+   
+    
+     </action-mappings>
+</struts-config>
+

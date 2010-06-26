@@ -1,0 +1,56 @@
+@import "style_base.css";
+.headerbg {
+    float: left;
+    position: relative;
+    background: url(../../common/style/red/background.png) repeat-x 0px -90px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    padding: 0px;
+    color: #666666;
+
+    margin:0px 0 0px 0px;
+}
+.titlebg {
+    position: relative;
+    background: url(../../common/style/red/background.png) repeat-x 0px -90px;
+    border: 1px solid #FCD9D9;
+    font-size: 13px;
+    color: #666666;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin:0px 0 0px 0px;
+    padding: 0px;
+}
+.recommond {
+    position: relative;
+    background: url(../../common/style/red/background.png) repeat-x 0px -90px;
+    border: 1px solid #60798D;
+    font-size: 13px;
+    color: #666666;
+    margin:0px 0 0px 0px;
+    padding: 0px;
+}
+
+
+.pagerbg {
+    float: right;
+    position: relative;
+    background: url(../../common/style/red/background.png) repeat-x 0px -90px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    padding: 0px;
+    color: #666666;
+
+    margin:0px 0 0px 0px;
+}
+
+#hwpic:hover {
+    position: relative;
+    margin: 2px;
+    border: 2px solid #CC0304;
+    text-align: center;
+    padding: 2px;
+    width: 165px;
+    height: 120px;
+}
+

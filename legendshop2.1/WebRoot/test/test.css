@@ -1,0 +1,212 @@
+/* root element for tabs  */
+ul.tabs { 
+    list-style:none; 
+    margin:0 !important; 
+    padding:0;
+    height:30px;
+    border-bottom:1px solid #666;   
+}
+
+/* single tab */
+ul.tabs li { 
+    float:left;  
+    text-indent:0;
+    padding:0;
+    margin:0 !important;
+    list-style-image:none !important; 
+}
+
+/* link inside the tab. uses a background image */
+ul.tabs a { 
+    background: url(http://flowplayer.org/img/global/tabs.png) no-repeat -652px 0;
+    font-size:11px;
+    display:block;
+    height: 30px;  
+    line-height:30px;
+    width: 111px;
+    text-align:center;  
+    text-decoration:none;
+    color:#000;
+    padding:0px;
+    margin:0px; 
+    position:relative;
+    top:1px;
+}
+
+ul.tabs a:active {
+    outline:none;       
+}
+
+/* when mouse enters the tab move the background image */
+ul.tabs a:hover {
+    background-position: -652px -31px;  
+    color:#fff; 
+}
+
+/* active tab uses a class name "current". it's highlight is also done by moving the background image. */
+ul.tabs a.current, ul.tabs a.current:hover, ul.tabs li.current a {
+    background-position: -652px -62px;      
+    cursor:default !important; 
+    color:#000 !important;
+}
+
+/* Different widths for tabs: use a class name: w1, w2, w3 or w2 */
+
+
+/* width 1 */
+ul.tabs a.w1            { background-position: -519px 0; width:134px; }
+ul.tabs a.w1:hover  { background-position: -519px -31px; }
+ul.tabs a.w1.current { background-position: -519px -62px; }
+
+/* width 2 */
+ul.tabs a.w2            { background-position: -366px -0px; width:154px; }
+ul.tabs a.w2:hover  { background-position: -366px -31px; }
+ul.tabs a.w2.current { background-position: -366px -62px; }
+
+
+/* width 3 */
+ul.tabs a.w3            { background-position: -193px -0px; width:174px; }
+ul.tabs a.w3:hover  { background-position: -193px -31px; }
+ul.tabs a.w3.current { background-position: -193px -62px; }
+
+/* width 4 */
+ul.tabs a.w4            { background-position: -0px -0px; width:194px; }
+ul.tabs a.w4:hover  { background-position: -0px -31px; }
+ul.tabs a.w4.current { background-position: -0px -62px; }
+
+/* initially all panes are hidden */ 
+div.panes div.pane {
+    display:none;       
+}
+div.panes div{
+border-style:none solid solid;
+border-width:0 1px 1px;
+font-size:14px;
+height:100px;
+padding:15px 10px;
+}
+ul.tabs a {
+    outline:0;      
+}
+ul.tabs a{border:none;}
+#products img {
+    margin:10px 20px 10px 10px; 
+    cursor:pointer;
+    border:none!important;
+}
+
+div.description1 {
+    background-color:#ff9;
+    border:2px solid #ccc;  
+    width:450px;
+    min-height:140px;
+    display:none;
+    margin-top:17px;
+    -moz-border-radius:4px;
+    padding:0 20px;
+}
+
+div.description1 div.arrow {
+    width:34px;
+    height:34px;
+    background:transparent url(http://flowplayer.org/tools/img/tooltip/yellow.png) repeat scroll 0 -68px;
+    margin-top:-28px;
+    margin-left:36px;
+}
+
+#commercial div.arrow {
+    margin-left:210px;  
+}
+
+#multidomain div.arrow {
+    margin-left:385px;  
+}
+/* root element for accordion. decorated with rounded borders and gradient background image */
+#accordion {
+    background:#333 url(http://flowplayer.org/img/global/gradient/h600.png) 0 0;
+    width: 300px;
+    border:1px solid #333;
+}
+
+/* accordion header */
+#accordion h2 {
+    background:#ccc url(http://flowplayer.org/img/global/gradient/h30.png);
+    margin:0!important;
+    padding:5px 15px!important;
+    font-size:14px!important;
+    font-weight:normal;
+    border:1px solid #fff;
+    border-bottom:1px solid #ddd;
+    cursor:pointer!important;       
+}
+
+/* currently active header */
+#accordion h2.current {
+    cursor:default;
+    background-color:#fff;
+}
+
+/* accordion pane */
+#accordion div.pane {
+    border:1px solid #fff;
+    border-width:0 2px;
+    display:none;
+    height:100px;
+    padding:15px;
+    color:#fff;
+    font-size:12px;
+}
+
+/* a title inside pane */
+#accordion div.pane h3 {
+    font-weight:normal;
+    margin:0 0 -5px 0;
+    font-size:16px;
+    color:#999;
+}
+
+/* root element for accordion. decorated with rounded borders and gradient background image */
+#accordion1 {
+    padding:10px 0 10px 20px;
+    width:560px;
+}
+
+/* accordion header */
+#accordion1 img {
+    float:left;
+    margin-right:10px;
+    cursor:pointer;
+    opacity:0.5;
+    filter: alpha(opacity=50);
+}
+
+/* currently active header */
+#accordion1 img.current {
+    cursor:default;
+    opacity:1;
+    filter: alpha(opacity=100);
+}
+
+/* 
+    accordion pane. should initially have zero width and display:none.
+    the first pane should override these with inline style
+*/
+#accordion1 div {
+    width:0px;
+    float:left; 
+    display:none;       
+    margin-right:10px;
+}
+
+/* content inside a pane should have fixed width */
+#accordion1 div h3 {
+    color:#444;
+    margin:0 0 -10px 0;
+    width:190px;
+    font-size:15px; 
+}
+    
+#accordion1 div p { 
+    font-size:11px;
+    width:190px;
+}

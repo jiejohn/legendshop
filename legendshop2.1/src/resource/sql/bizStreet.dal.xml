@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by Hewq (Bingo) -->
+
+<DataAccessLayer>
+	<BusinessObjects>
+		<Object objectName="biz">
+		    <!-- 排行榜 -->
+            <Method name="getPaihang"><![CDATA[
+	      	select hw from Hw hw ,Sort sort
+			where hw.sortId = sort.sortId
+			and sort.userName = ?
+			order by hw.hwBuys desc
+            ]]></Method>
+           <Method name="getShopDetail"><![CDATA[
+	      	select new ShopDetail(s.userId,s.web,s.sitename,s.maddr,s.msn,s.mname,s.code,s.ymaddr,
+			s.ymname,s.storeName,s.visitTimes,s.modifyTime,
+			u.userMail,u.userTel,u.userPostcode,s.colorStyle,s.briefDesc)
+			from ShopDetail s,UserDetail u where s.userId =u.userId 
+			and s.status = 1
+			and s.storeName = ?
+            ]]></Method>
+            <!-- 登录历史统计 -->
+            <Method name="loginHistorySum">
+	            <![CDATA[
+				select user_Name,count(*) from t_Login_History
+				where 1=1
+					{ and user_name = '$userName$'}
+					{? and	time >= $startTime$}
+					{? and	time <= $endTime$}
+				  group by user_Name
+				   order by count(*) desc
+	            ]]>
+            </Method>
+            <Method name="loginHistoryCount">
+	            <![CDATA[
+	            select count(1) from(
+				select user_Name,count(*) from t_Login_History
+				where 1=1
+					{ and user_name = '$userName$'}
+					{? and	time >= $startTime$}
+					{? and	time <= $endTime$}
+				  group by user_Name) a
+	            ]]>
+            </Method>
+            
+            <Method name="QueryNsortCount">
+                select count(*) from Nsort as n,Sort as s where n.sortId=s.sortId and s.sortId = ? and n.parentNsortId is null
+                {? and s.userName = $userName$}
+                {? and n.nsortName = $nsortName$}
+            </Method>
+            <Method name="QueryNsort">
+             select n from Nsort as n,Sort as s where n.sortId = s.sortId and s.sortId = ? and n.parentNsortId is null
+                {? and s.userName = $userName$}
+                {? and n.nsortName = $nsortName$}
+                order by n.seq
+            </Method>
+		</Object>
+	</BusinessObjects>
+</DataAccessLayer>

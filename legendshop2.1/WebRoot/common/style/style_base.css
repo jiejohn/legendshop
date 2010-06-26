@@ -1,0 +1,43 @@
+.tables {
+	position: relative;
+	margin: auto;
+	overflow: hidden;
+	border: 1px solid #60798D;
+	text-align: center;
+	padding: 0px;
+	table-layout: fixed; 
+}
+
+.bodybg {
+	background-color: #ECECEC;
+}
+
+.selected {
+	color: #FF6600;
+	margin: 0px;
+	text-align: center
+}
+
+.banner {
+	position: relative;;
+	margin: auto;
+	border: 1px solid #ccc;
+	text-align: center;
+	padding: 2px;
+}
+
+#hwpic {
+	position: relative;
+	margin: 3px;
+	border: 1px solid #ccc;
+	text-align: center;
+	padding: 2px;
+	width: 165px;
+	height: 120px;
+}
+
+#master {
+	width: 100%;
+	background: url('../../common/style/master_bg.gif') repeat-x ;
+	z-index: 10;
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+           http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd"
+	   default-autowire="byName" default-lazy-init="true">
+
+	
+	<dwr:configuration>
+		<dwr:init>
+            <dwr:converter id="date" class="com.done.dwr.CalendarConverter" />
+        </dwr:init>
+  		<dwr:convert type="bean" class="java.lang.StackTraceElement"></dwr:convert>
+  		<dwr:convert type="exception" class="java.lang.Exception"></dwr:convert>
+		<dwr:convert type="date" class="java.util.Calendar"></dwr:convert>
+		<dwr:convert type="bean" class="com.done.model.Indexjpg"></dwr:convert>
+        <dwr:convert type="bean" class="com.done.entity.Model"></dwr:convert>  
+        <dwr:convert type="bean" class="com.done.entity.Item"></dwr:convert> 
+		<dwr:convert type="enum" class="com.done.common.MyLeagueEnum"></dwr:convert>	
+        <dwr:convert type="enum" class="com.done.entity.ModelType"></dwr:convert>	
+	</dwr:configuration>
+    
+    <bean id="commonService"
+		class="com.done.dwr.DwrCommonService">
+		<dwr:remote javascript="CommonService">
+		</dwr:remote>
+		<property name="businessService" ref="BusinessService"></property>
+		<property name="adminService" ref="AdminService"></property>
+	</bean>
+	  <bean id="optionService" class="com.done.dwr.OptionService">
+	    <dwr:remote javascript="optionService"/>
+	    <property name="baseDao" ref="baseDao"></property>
+	  </bean>
+</beans>
