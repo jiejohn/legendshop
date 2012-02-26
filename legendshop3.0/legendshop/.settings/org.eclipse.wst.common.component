@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="legendshop">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/resource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/java"/>
+        <dependent-module archiveName="legendshop_core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_core/legendshop_core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_util.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_util/legendshop_util">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_model.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_model/legendshop_model">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_search.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_search/legendshop_search">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_jcf.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_jcf/legendshop_jcf">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_central.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_central/legendshop_central">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/legendshop/build/classes"/>
+        <property name="context-root" value="/legendshop"/>
+    </wb-module>
+</project-modules>

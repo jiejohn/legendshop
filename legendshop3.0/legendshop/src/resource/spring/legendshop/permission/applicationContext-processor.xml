@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd" default-lazy-init="true">
+
+	<!-- error handler -->
+	<bean id="defaultErrorHandler"
+		class="com.legendshop.command.framework.JCFErrorHandler" />
+		
+	<bean id="ProcessorErrorHandler"
+		class="com.legendshop.business.permission.common.ProcessorErrorHandler" />
+	<bean id="FindRoleByFunctionProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindRoleByFunction" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="SaveFunctionToRoleProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="SaveFunctionToRole" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<!-- 2007-04-28 -->
+	<bean id="IsUserExistProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="IsUserExist" />
+			</list>
+		</property>
+	</bean>
+	<!-- 权限管理 -->
+	<bean id="SaveFunctionProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="SaveFunction" />
+			</list>
+		</property>
+	</bean>
+	<bean id="DeleteFunctionByIdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="DeleteFunctionById" />
+				<ref bean="DeletePermissionByFunctionId" />
+			</list>
+		</property>
+	</bean>
+   	<bean id="DeleteFunctionProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="DeleteFunction" />
+			</list>
+		</property>
+	</bean>
+	<bean id="UpdateFunctionProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="UpdateFunction" />
+			</list>
+		</property>
+	</bean>
+	<bean id="FindAllFunctionProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindAllFunction" />
+			</list>
+		</property>
+	</bean>
+	<bean id="FindFunctionByIdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindFunctionById" />
+			</list>
+		</property>
+	</bean>
+	<bean id="SaveRoleProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="SaveRole" />
+			</list>
+		</property>
+	</bean>
+	<bean id="DeleteRoleByIdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="DeleteRoleById" />
+				<ref bean="DeletePermissionByRoleId" />
+			</list>
+		</property>
+	</bean>
+   	<bean id="DeleteRoleProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="DeleteRole" />
+			</list>
+		</property>
+	</bean>
+	<bean id="UpdateRoleProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="UpdateRole" />
+			</list>
+		</property>
+	</bean>
+	<bean id="FindAllRoleProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindAllRole" />
+			</list>
+		</property>
+	</bean>
+	<bean id="FindRoleByIdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindRoleById" />
+			</list>
+		</property>
+	</bean>
+	<bean id="FindFunctionByRoleIdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindFunctionByRoleId" />
+			</list>
+		</property>
+	</bean>
+	<bean id="FindOtherFunctionByRoleIdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindOtherFunctionByRoleId" />
+			</list>
+		</property>
+	</bean>
+	<bean id="FindOtherFunctionByHqlProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindOtherFunctionByHql" />
+			</list>
+		</property>
+	</bean>
+	<bean id="SaveFunctionsToRoleProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="SaveFunctionsToRole" />
+			</list>
+		</property>
+	</bean>
+	<bean id="DeletePermissionByFunctionIdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="DeletePermissionByFunctionId" />
+			</list>
+		</property>
+	</bean>
+	<bean id="DeletePermissionByRoleIdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="DeletePermissionByRoleId" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="FindAllUserProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindAllUser" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="SaveRolesToUserProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="SaveRolesToUser" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="DeleteUserRoleByUserIdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="DeleteUserRoleByUserId" />
+			</list>
+		</property>
+	</bean>
+	<bean id="DeleteUserRoleByRoleIdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="DeleteUserRoleByRoleId" />
+			</list>
+		</property>
+	</bean>
+	<bean id="SaveUserProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="SaveUser" />
+			</list>
+		</property>
+	</bean>
+	<bean id="UpdateUserPassowrdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="UpdateUserPassowrd" />
+			</list>
+		</property>
+	</bean>
+	<bean id="UpdateUserProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="UpdateUser" />
+			</list>
+		</property>
+	</bean>
+	<bean id="DeleteFunctionsFromRoleProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="DeleteFunctionsFromRole" />
+			</list>
+		</property>
+	</bean>
+	<bean id="FindRoleByUserProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindRoleByUserId" />
+			</list>
+		</property>
+	</bean>
+	<bean id="FindFunctionByUserProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindFunctionByUser" />
+			</list>
+		</property>
+	</bean>
+	<bean id="FindUserByIdProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindUserById" />
+			</list>
+		</property>
+	</bean>
+	<bean id="DeleteRoleFromUserProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="DeleteRoleFromUser" />
+			</list>
+		</property>
+	</bean>	
+	<bean id="FindOtherRoleByUserProcessor"
+		class="com.legendshop.command.framework.SequenceProcessor">
+		<property name="activities">
+			<list>
+				<ref bean="FindOtherRoleByUser" />
+			</list>
+		</property>
+	</bean>	
+</beans>

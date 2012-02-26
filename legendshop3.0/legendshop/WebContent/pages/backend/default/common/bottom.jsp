@@ -1,0 +1,1 @@
+   <p id="footer">Power by. <a href="http://www.legendesign.net">LegendShop 3.0.3.2</a></p>

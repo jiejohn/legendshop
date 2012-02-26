@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="base.index" template="/pages/backend/default/index.jsp">
+		<put-attribute name="bottom" value="/pages/backend/default/common/bottom.jsp" />
+	</definition>
+
+	
+	<definition name="index" extends="base.index">
+		<put-attribute name="title" value="免费的企业级多用户商城官方网站 - Java商城|网店系统|商城系统|购物系统|电子商务系统|网上商城|购物社区|多用户商城|B2C商城|C2C商城"  type="string"/>
+		<put-attribute name="navigator" value="/pages/backend/default/common/navigator.jsp" />
+		<put-attribute name="left" value="/pages/backend/default/common/left.jsp" />
+        <put-attribute name="container" value="/pages/index.jsp" />
+	</definition>	
+	
+	
+	<!-- page define -->	
+	<definition name="cash.*"   template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/pages/frontend/{1}/cash.jsp" />
+	</definition>
+	
+	<definition name="savesub.*"   template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/pages/frontend/{1}/sub.jsp" /> 
+	</definition>
+	
+	 <definition name="afterOperation.*"  template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main"  value="/pages/frontend/{1}/afterOperation.jsp" />
+	</definition>
+	
+	<definition name="order.*"  template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main"  value="/pages/frontend/{1}/order.jsp" />
+	</definition>
+	<definition name="buy.*" template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/pages/frontend/{1}/buy.jsp" />
+	</definition>	
+	<definition name="productSort.*" template="/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/pages/frontend/{1}/right.jsp" />
+	</definition>
+	
+	<definition name="nsort.*" template="/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/pages/frontend/{1}/smallsort.jsp" />
+	</definition>
+	
+	<definition name="news.*" template="/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/pages/frontend/{1}/news.jsp" />
+	</definition>
+	
+	<definition name="allNews.*" template="/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/pages/frontend/{1}/allnews.jsp" />
+	</definition>
+
+	<definition name="userReg.*" template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/pages/frontend/{1}/reg.jsp" />
+	</definition>	
+	
+	<definition name="reg.*" template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/pages/frontend/{1}/reg.jsp" />
+	</definition>
+	
+	 <definition name="league.*" template="/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/pages/frontend/{1}/league.jsp" />
+	</definition>
+	
+	<definition name="searchall.*" template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/pages/frontend/{1}/searchall.jsp" />
+	</definition>
+	
+	<definition name="login.*"  template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/pages/frontend/{1}/login.jsp" />
+	</definition>	
+	
+	<definition name="myaccount.*" template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/pages/frontend/{1}/updateMyAccount.jsp" />
+	</definition>
+	
+	<definition name="leaveword.*" template="/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/pages/frontend/{1}/leaveword.jsp" />
+	</definition>
+	
+	<definition name="shopcontact.*"  template="/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/pages/frontend/{1}/shopContact.jsp" />
+	</definition>
+	
+	 <definition name="loginhint.*" template="/pages/frontend/{1}/sort.jsp">
+        <put-attribute name="right" value="/pages/frontend/{1}/loginHint.jsp" />
+    </definition>
+	
+</tiles-definitions>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>   
+    <diskStore path="java.io.tmpdir/hibernatecache"/>    
+    <defaultCache
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="60"
+        timeToLiveSeconds="60"
+        overflowToDisk="false"
+        diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="180"
+        />
+     <cache name="com.legendshop.model.entity.Logo"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToIdleSeconds="100"
+        timeToLiveSeconds="100"
+        />
+       <cache name="com.legendshop.model.entity.ShopDetail"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToIdleSeconds="100"
+        timeToLiveSeconds="100"
+        />
+       <cache name="com.legendshop.model.entity.Sort"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToIdleSeconds="100"
+        timeToLiveSeconds="100"
+        />
+        <cache name="com.legendshop.model.entity.Nsort"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToIdleSeconds="100"
+        timeToLiveSeconds="100"
+        />
+        <cache name="com.legendshop.model.entity.Indexjpg"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToIdleSeconds="110"
+        timeToLiveSeconds="110"
+        />
+        <cache name="com.legendshop.model.entity.Pub"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToIdleSeconds="110"
+        timeToLiveSeconds="110"
+        />  
+        <cache name="com.legendshop.model.entity.Advertisement"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToIdleSeconds="110"
+        timeToLiveSeconds="110"
+        /> 
+        <cache name="com.legendshop.model.entity.BusinessDaoCache"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToIdleSeconds="120"
+        timeToLiveSeconds="120"
+        />    
+         <cache name="com.legendshop.model.entity.News"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToIdleSeconds="120"
+        timeToLiveSeconds="120"
+        />         
+        
+              
+        
+</ehcache>

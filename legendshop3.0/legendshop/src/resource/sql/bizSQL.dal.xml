@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by Newway -->
+
+<DataAccessLayer>
+	<BusinessObjects>
+		<Object objectName="biz">
+		    <!-- 排行榜 -->
+            <Method name="gethotsale"><![CDATA[
+	      	select new Product(prod.prodId, prod.sortId, prod.nsortId,prod.subNsortId,prod.name) from Product prod ,Sort sort
+			where prod.sortId = sort.sortId
+			and sort.userName = ?
+			and (prod.startDate is null or prod.startDate <= ? ) 
+			and (prod.endDate is null or prod.endDate >= ? ) 
+			order by prod.buys desc
+            ]]></Method>
+           <Method name="getShopDetail"><![CDATA[
+	      	select new ShopDetail(s.userId,s.web,s.sitename,s.maddr,s.msn,s.mname,s.code,s.ymaddr,
+			s.ymname,s.storeName,s.visitTimes,s.modifyTime,
+			u.userMail,u.userTel,u.userPostcode,s.colorStyle,s.briefDesc,s.status,s.langStyle,s.detailDesc,u.qq)
+			from ShopDetail s,UserDetail u where s.userId =u.userId
+			and s.storeName = ?
+            ]]></Method>
+            <!-- 登录历史统计 -->
+            <Method name="loginHistorySum">
+	            <![CDATA[
+				select user_name,count(*) from ls_login_hist
+				where 1=1
+					{ and user_name = '$userName$'}
+					{? and	time >= $startTime$}
+					{? and	time <= $endTime$}
+				  group by user_name
+	            ]]>
+            </Method>
+            <Method name="loginHistoryCount">
+	            <![CDATA[
+	            select count(1) from(
+				select user_name,count(*) from ls_login_hist
+				where 1=1
+					{ and user_name = '$userName$'}
+					{? and	time >= $startTime$}
+					{? and	time <= $endTime$}
+				  group by user_name) a
+	            ]]>
+            </Method>
+            
+            <Method name="QueryNsortCount">
+                select count(*) from Nsort as n,Sort as s where n.sortId=s.sortId and s.sortId = ? and n.parentNsortId is null
+                {? and s.userName = $userName$}
+                {? and n.nsortName = $nsortName$}
+            </Method>
+            <Method name="QueryNsort">
+             select n from Nsort as n,Sort as s where n.sortId = s.sortId and s.sortId = ? and n.parentNsortId is null
+                {? and s.userName = $userName$}
+                {? and n.nsortName = $nsortName$}
+                order by n.seq
+            </Method>
+             <Method name="QueryNewsCount">
+                select count(*) from News n left join n.sort s left join n.newsCategory c where 1=1 
+                {? and n.userName = $userName$}
+                {? and c.newsCategoryId = $newsCategoryId$}
+                {? and s.sortId = $sortId$}
+                {? and n.newsTitle like $newsTitle$}
+                {? and n.status = $status$}
+            </Method>
+            <Method name="QueryNews">
+               select new News(n.newsId, c.newsCategoryId,
+			c.newsCategoryName, s.sortId, s.sortName,
+			n.newsTitle, n.newsContent, n.newsDate,
+			n.status, n.userId, n.userName,n.highLine) from News n left join n.sort s left join n.newsCategory c where 1=1 
+                {? and n.userName = $userName$}
+                {? and c.newsCategoryId = $newsCategoryId$}
+                {? and s.sortId = $sortId$}
+                {? and n.newsTitle like $newsTitle$}
+                {? and n.status = $status$}
+                {! order by n.newsDate desc||$orderIndicator$}
+            </Method>
+            <Method name="getCommend"><![CDATA[
+	      	 select new Product(prod.prodId, prod.sortId, prod.nsortId,prod.subNsortId,prod.name,prod.pic,prod.price,prod.cash,prod.proxyPrice,prod.views,prod.buys) from Product prod where prod.commend ='Y' and prod.userName = ? and prod.status = 1 and ( prod.startDate is null or prod.startDate <= ? ) and 
+         		(prod.endDate is null or prod.endDate >= ? ) order by prod.modifyDate desc
+            ]]></Method>
+            <Method name="getRelationProd"><![CDATA[
+	      	 select new Product(prod.prodId, prod.sortId, prod.nsortId,prod.subNsortId,prod.name,prod.pic,prod.price,prod.cash,prod.proxyPrice,prod.views,prod.buys) from Product prod
+	      	 where prod.userName = ? and prod.status = 1 and  ( prod.startDate is null or prod.startDate <= ? ) and (prod.endDate is null or prod.endDate >= ? )
+	      	 and exists ( select n.userName from RelProduct n where prod.prodId = n.relProdId and  n.prodId = ? )
+			]]></Method>
+             <Method name="getNewestProd"><![CDATA[
+    	 		select new Product(prod.prodId, prod.sortId, prod.nsortId,prod.subNsortId,prod.name) from Product prod where prod.userName = ? and prod.status = 1 and ( prod.startDate is null or prod.startDate <= ? ) and 
+         		( prod.endDate is null or prod.endDate >= ? ) order by prod.modifyDate desc
+            ]]></Method>
+            <Method name="getHotOnProd"><![CDATA[
+    	 		select new Product(prod.prodId, prod.sortId, prod.nsortId,prod.subNsortId,prod.name) from Product prod where prod.sortId = ? and prod.status = 1 and ( prod.startDate is null or prod.startDate <= ? ) and 
+         		( prod.endDate is null or prod.endDate >= ? ) order by prod.buys desc
+            ]]></Method>
+            <Method name="getHotViewProd"><![CDATA[
+    	 		select new Product(prod.prodId, prod.sortId, prod.nsortId,prod.subNsortId,prod.name,prod.pic,prod.price,prod.cash,prod.proxyPrice,prod.views,prod.buys) from Product prod where prod.userName = ? and prod.status = 1 and ( prod.startDate is null or prod.startDate <= ? ) and 
+         		( prod.endDate is null or prod.endDate >= ? ) order by prod.views desc
+            ]]></Method>
+            <Method name="getSortProd"><![CDATA[
+					select new Product(prod.prodId, prod.sortId, prod.nsortId,prod.subNsortId,prod.name,prod.pic,prod.price,prod.cash,prod.proxyPrice,prod.views,prod.buys)
+        			from Product prod where prod.sortId = ? 
+        			and prod.status = 1
+        			and ( prod.startDate is null or prod.startDate <= ? )
+        			and (prod.endDate is null or prod.endDate >= ? )
+        			order by prod.modifyDate desc
+            ]]></Method>
+            <Method name="getSortProdCount"><![CDATA[
+					select count(*) from Product prod where prod.sortId = ? 
+        			and prod.status = 1
+        			and ( prod.startDate is null or prod.startDate <= ? )
+        			and (prod.endDate is null or prod.endDate >= ? )
+        			order by prod.modifyDate desc
+            ]]></Method>
+             <Method name="QueryUserDetailCount">
+			         select count(*) from ls_usr_detail u, ls_user s where u.user_id = s.id
+					{? and u.user_name like $userName$}
+					{? and u.user_mail like $userMail$}
+					{? and s.enabled = $enabled$}
+					{$haveShop$}
+            </Method>
+            <Method name="QueryUserDetail">
+	                select  u.user_id, u.user_name, u.nick_name, u.user_mail, u.user_regip, u.modify_time, u.user_regtime,s.enabled, u.shop_id from
+                    (select ud.user_id, ud.user_name, ud.nick_name, ud.user_mail, ud.user_regip, ud.modify_time, 
+                    ud.user_regtime,s.shop_id from ls_usr_detail ud left join ls_shop_detail s on ud.user_id = s.user_id  where 1=1 
+                    {? and ud.user_name like $userName$}
+					{? and ud.user_mail like $userMail$}
+                    ) u,ls_user s where u.user_id = s.id 				
+                    {? and s.enabled = $enabled$}
+                    {$haveshop$}                  
+                    {! order by u.user_regtime desc||$orderIndicator$}
+            </Method>
+            <Method name="QueryUserDetailCount_HQL_BACKUP">
+					select count(*) from UserDetailView u, User s where u.userId = s.id 
+					{? and u.userName like $userName$}
+					{? and u.userMail like $userMail$}
+					{? and s.enabled = $enabled$}
+					{$haveShop$}
+            </Method>
+            <Method name="QueryUserDetail_HQL_BACKUP">
+					select new UserDetailView(u.userId, u.userName, u.nickName, u.userMail, u.userRegip, u.modifyTime, u.userRegtime, s.enabled, u.shopId) from UserDetailView u,User s where u.userId = s.id 
+					{? and u.userName like $userName$}
+					{? and u.userMail like $userMail$}
+					{? and s.enabled = $enabled$}
+					{$haveShop$}
+					{! order by u.userRegtime desc||$orderIndicator$}
+            </Method>
+             <Method name="getProductCommentCount">
+					select count(*) from ProductComment hc,Product prod where prod.prodId = hc.prodId and prod.status = 1
+					{? and hc.ownerName = $ownerName$}
+					{? and hc.userName like $userName$}
+					{? and prod.name like $name$}
+            </Method>
+            <Method name="getProductComment">
+					select new ProductComment(hc.id, hc.prodId,hc.ownerName,hc.userName,hc.content,hc.addtime,hc.postip,hc.score,hc.replyContent,hc.replyName,hc.replyTime,prod.name )
+					from ProductComment hc,Product prod where prod.prodId = hc.prodId and prod.status = 1
+					{? and hc.ownerName = $ownerName$}
+					{? and hc.userName like $userName$}
+					{? and prod.name like $name$}
+					{! order by hc.addtime desc||$orderIndicator$}
+            </Method>
+            <Method name="QueryLeagueCount">
+		            select count(*) from ls_league m,ls_logo l,ls_shop_detail sd 
+					where m.friend_id = l.user_name 
+					and sd.store_name = m.friend_id
+					and sd.status = 1 
+					and m.user_id = ?
+            </Method>
+            <Method name="QueryLeague">
+					select m.friend_id,m.friend_name,l.banner,s.province,s.city,s.area
+					from ls_league m,ls_logo l,
+					(select sd.store_name,p.province,c.city,a.area
+					from ls_shop_detail sd 
+					left join ls_provinces p on sd.provinceid = p.provinceid
+					left join ls_cities c on sd.cityid = c.cityid 
+					left join ls_areas a on sd.areaid = a.areaid
+					where sd.status = 1) s
+					where m.friend_id = l.user_name 
+					and s.store_name = m.friend_id 
+					and m.user_id = ? 
+					order by m.display_order desc
+            </Method>   
+            <Method name="getShopDetailView">
+		           	select sd.shop_id AS shop_id,sd.user_id AS user_id,sd.web AS web,sd.sitename AS sitename,sd.maddr AS maddr,sd.msn AS msn,sd.mname AS mname,
+					sd.code AS code,sd.ymaddr AS ymaddr,sd.ymname AS ymname,sd.status AS status,sd.store_name AS store_name,sd.visit_times AS visit_times,
+					sd.product_num AS product_num,sd.comm_num AS comm_num,sd.off_product_num AS off_product_num,sd.modify_time AS modify_time,
+					sd.addtime AS addtime,sd.brief_desc AS brief_desc,sd.detail_desc AS detail_desc,sd.shop_pic AS shop_pic,sd.color_style AS color_style,
+					sd.lang_style AS lang_style,sd.grade_id AS grade_id,sd.type AS type,sd.id_card_pic AS id_card_pic,sd.traffic_pic AS traffic_pic,
+					sd.id_card_num AS id_card_num,sd.create_country_code AS create_country_code,sd.create_area_code AS create_area_code,
+					sd.provinceid AS provinceid,sd.cityid AS cityid,sd.areaid AS areaid,p.province AS province,c.city AS city,a.area AS area,
+					u.user_tel AS user_tel,u.nick_name AS nick_name,
+					u.user_mobile AS user_mobile,u.qq AS qq,u.msn AS msnNumber,u.user_postcode AS user_postcode,u.fax AS fax
+					from ls_shop_detail sd left join ls_usr_detail u on sd.user_id = u.user_id
+					left join ls_provinces p on sd.provinceid = p.provinceid
+					left join ls_cities c on sd.cityid = c.cityid 
+					left join ls_areas a on sd.areaid = a.areaid
+					where sd.store_name = ?
+            </Method>  
+            <Method name="getProdDetail">
+		            select prod.prod_id AS prod_id,prod.sort_id AS sort_id,prod.nsort_id AS nsort_id,prod.sub_nsort_id AS sub_nsort_id,
+					prod.name AS name,prod.price AS price,prod.cash AS cash,prod.proxy_price AS proxy_price,prod.carriage AS carriage,prod.brief AS brief,prod.content AS content,
+					prod.views AS views,prod.buys AS buys,prod.rec_date AS rec_date,prod.pic AS pic,prod.commend AS commend,
+					prod.status AS status,prod.modify_date AS modify_date,prod.user_id AS user_id,prod.user_name AS user_name,
+					prod.start_date AS start_date,prod.end_date AS end_date,prod.stocks AS stocks,prod.prod_type AS prod_type,prod.key_word AS key_word,
+					prod.attribute AS attribute,prod.parameter AS parameter,prod.brand_id AS brand_id,sort.sort_name AS sort_name,nsort2.nsort_name AS nsort_name,
+					nsort3.nsort_name AS sub_nsort_name,brand.brand_name AS brand_name
+					from ls_prod prod 
+					left join ls_sort sort on prod.sort_id = sort.sort_id
+					left join ls_nsort nsort2 on prod.nsort_id = nsort2.nsort_id
+					left join ls_nsort nsort3 on prod.sub_nsort_id = nsort3.nsort_id
+					left join ls_brand brand on prod.brand_id = brand.brand_id
+					where prod_id = ?
+            </Method>
+             
+		</Object>
+		<Object objectName="ad">
+		     <Method name="getAdvertisement">
+					from Advertisement where enabled = '1' and (userName = ? or userName = 'common')
+            </Method>
+ 		     <Method name="getAdvertisementCount">
+					 select count(*) from Advertisement where userName = ? and type = ?
+            </Method>           
+           
+		</Object>
+		<Object objectName="login">
+ 		     <Method name="updateUserDetail">
+					update ls_usr_detail set user_lastip = ? , user_lasttime = ? where user_name = ?
+            </Method>
+		</Object>
+	</BusinessObjects>
+</DataAccessLayer>

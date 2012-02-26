@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataAccessLayer>
+<!-- 
+   用法如下：
+  2、在{之后紧跟！表示这个条件即使没有传值过来就采用默认值"",如果带有||则将||之前的作为默认值
+  3、如果{之后不跟!,表示如果不传值的话这个条件忽略
+  4、用$$括起来的参数（key）将会用parameterMap中的value代替
+  5、采用objectName.MethodName作为key放在parameterMap中
+ -->
+	<MappingFiles>
+	    <Mapping resource="classpath*:sql/**/*.dal.xml" />
+	</MappingFiles>
+</DataAccessLayer>
