@@ -1,0 +1,160 @@
+<project name="${app.name}" default="jar-jocky">
+	<import file="../jocky_build.xml" />
+	<property file="build.properties" />
+	<property name="dist.dir" value="${tmp.dir}/dist" />
+	<property name="war.file" value="${dist.dir}/${app.name}.war" />
+	<property name="ear.file" value="${dist.dir}/${app.name}.ear" />
+	<property name="jar.name" value="${release.root}/${app.name}.jar" />
+	<property name="jocky.name" value="${release.root}/${app.name}.3.jar" />
+	<property name="dest.dir" value="../${web.name}" />
+
+    <path id="project1.classpath">
+        <path refid="base.path"/>
+        <path refid="ant.classpath"/>
+    </path>
+	
+	<path id="base.path">
+			<fileset dir="${javalib}">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+	<path id="ant.classpath">
+		<fileset dir="../lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	<!-- ===================================
+				 显示可选任务，并按用户的选择执行任务
+				 ==================================== -->
+		<target name="usage" description="显示可选任务">
+			<echo message="${app.name} Build 文件"/>
+			<echo message="------------------------------------------------------"/>
+			<echo message="可选Target:"/>
+			<echo message=""/>
+			<echo message="compile      --&gt; 编译系统并拷贝相应的属性文件"/>
+			<echo message="clean        --&gt; 清除文件"/>
+			<echo message="war          --&gt; 生成项目war文件"/>
+			<echo message="jar          --&gt; 编译客户端jar包"/>
+			<echo message="deploy       --&gt; 部署应用到应用服务器,开发时使用"/>
+			<echo message="upgrade      --&gt; 代码有改动则重新部署,只是部署更改的文件"/>
+			<input message="请选择一个Target"
+				   validargs="compile,clean,war,jar,deploy,upgrade"
+				   addproperty="ant.task"/>
+			<antcall target="${ant.task}"/>
+		</target>
+
+	<!-- 系统初始化 -->
+	<target name="init">
+		<echo>系统初始化,建立相应的目录</echo>
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${class.dir}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+	
+	<!-- 清除文件 -->
+	<target name="clean" description="Deletes the build and distribution directories">
+		<delete dir="${dist.dir}" />
+		<delete dir="${class.dir}" />
+	</target>
+	
+	<!-- 检查环境 -->
+	<target name="check-env">
+		<echo>检查JDK版本为5.0</echo>
+		<fail message="Must Set the JAVA_HOME to JDK5.0">
+			<condition>
+				<not>
+					<equals arg1="${ant.java.version}" arg2="1.6"/>
+				</not>
+			</condition>
+		</fail>
+	</target>
+	 <!--   编译系统并拷贝相应的属性文件 -->
+	<target name="compile" depends="init" description="mkdir and compile file into class.dir">
+		<echo>从${src.dir}编译代码到目录${class.dir}并拷贝相关的属性文件</echo>
+		<javac srcdir="${src.dir}" destdir="${class.dir}" encoding="utf-8" debug="on" source="1.5">
+			<classpath refid="project.classpath" />
+		</javac>
+		<!-- 拷贝代码目录下的属性文件 -->
+		<copy todir="${class.dir}" preservelastmodified="true">
+			<!--
+			<fileset dir="${src.dir}/java" includes="**/*.xml" />
+			<fileset dir="${src.dir}/java" includes="**/*.properties" />
+			<fileset dir="${src.dir}/resource" includes="**/*.*" />
+			-->
+			<fileset dir="${src.dir}" includes="${config_file.type}" />
+			
+		</copy>
+		<!-- 拷贝resource目录下的属性文件 -->
+		<copy todir="${class.dir}" preservelastmodified="true">
+			<fileset dir="${resource.dir}" includes="**/*" />
+		</copy>
+	</target>
+	
+	<!--编译客户端包  -->
+	<target name="jar" depends="compile" description="--> tarapp_client">
+		<echo>编译客户端jar包：${jar.name} </echo>
+		<jar destfile="${jar.name}">
+			<fileset dir="${class.dir}" includes="com/legendshop/**/*.class"/>
+			<fileset dir="../src/java" includes="com/legendshop/**/*.hbm.xml"/>
+		</jar>
+	</target>
+	
+	<!--编译客户端包  -->
+	<target name="jar-jocky" depends="compile" description="--> tarapp_client">
+		<echo>编译客户端jar包：${jar.name} </echo>
+		<delete file="${jocky.name}" />
+		<jar destfile="${jocky.name}">
+			<fileset dir="../jocky/bin" includes="com/legendshop/**/*.class"/>
+			<fileset dir="../src/java" includes="com/legendshop/**/*.hbm.xml"/>
+		</jar>
+	</target>
+		
+	<!-- 编译war包 -->
+	<target name="war" depends="jar" description="Package a standard J2EE WAR">
+		<echo>编译war包:${war.file}</echo>
+		<war destfile="${war.file}" compress="false" update="true" webxml="../${web.name}/WEB-INF/web.xml">
+			<fileset dir="../${web.name}" excludes="**/web.xml,**/*.mex,**svn**"/>
+		</war>
+	</target>
+
+	<target name="deploy" depends="compile" description="部署应用到应用服务器">
+		<echo>部署应用到应用服务器 ${tomcat.home}</echo>
+		<mkdir dir="${webapps.home}/${app.name}" />
+		<copy todir="${webapps.home}/${app.name}" preservelastmodified="true">
+			<fileset dir="${dest.dir}" includes="**/*" />
+		</copy>
+	</target>
+	
+
+	<target name="upgrade" description="代码有改动则重新部署,只是部署更改的文件">
+		<echo>增量式重新部署应用到应用服务器 ${tomcat.home}</echo>
+		<mkdir dir="${webapps.home}/${app.name}" />
+		<copy todir="${webapps.home}/${app.name}" preservelastmodified="true">
+			<fileset dir="${dest.dir}" includes="**/*" />
+		</copy>
+	</target>
+	
+	<!-- 备份原有系统并拷贝生产环境配置文件 -->
+	<target name="backup" description="备份原有系统并拷贝生产环境配置文件">
+	    <tstamp prefix="build.">
+	         <format property="TimeSign" pattern="yyyy-MM-dd HH.mm.ss"/>
+	    </tstamp>
+		<property name="release.dir" value="${release.root}${app.name}-${build.TimeSign}" />
+		<mkdir dir="${release.dir}" />
+		<copy todir="${release.dir}" preservelastmodified="true" failonerror="no">
+			<fileset dir="${webapps.home}/${app.name}" includes="**/*" />
+		</copy>
+	</target>
+
+    <target name="callingTarget">
+            <antcall target="build">
+                   <param name="test.param" value="Modulation" />
+            </antcall>
+     </target>
+
+
+	
+</project>
+
