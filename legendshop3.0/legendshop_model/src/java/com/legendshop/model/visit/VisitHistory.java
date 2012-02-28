@@ -43,9 +43,9 @@ public class VisitHistory {
 
 		if (!find) {
 			if (visitedProd.size() >= maxLength) {
-				visitedProd.removeLast();
+				visitedProd.removeFirst();
 			}
-			visitedProd.addFirst(item);
+			visitedProd.addLast(item);
 		}
 
 	}
@@ -66,9 +66,9 @@ public class VisitHistory {
 
 		if (!find) {
 			if (visitedShop.size() >= maxLength) {
-				visitedShop.removeLast();
+				visitedShop.removeFirst();
 			}
-			visitedShop.addFirst(item);
+			visitedShop.addLast(item);
 		}
 
 	}
