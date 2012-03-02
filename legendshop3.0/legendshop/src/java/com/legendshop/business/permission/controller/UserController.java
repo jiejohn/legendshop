@@ -55,28 +55,6 @@ public class UserController extends BaseController {
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(UserController.class);
 
-	/** The USER s_ list. */
-	private final String USERS_LIST = "/member/user/usersList";
-	
-	/** The FIN d_ rol e_ b y_ user. */
-	private final String FIND_ROLE_BY_USER = "/member/user/findRoleByUser";
-	
-	/** The UPDAT e_ use r_ status. */
-	private final String UPDATE_USER_STATUS = "/member/user/updateUserStatus";
-	
-	/** The UPDAT e_ use r_ password. */
-	private final String UPDATE_USER_PASSWORD = "/member/user/updateUserPassword";
-	
-	/** The FIN d_ othe r_ rol e_ b y_ user. */
-	private final String FIND_OTHER_ROLE_BY_USER = "/member/user/findOtherRoleByUser";
-	
-	/** The FIN d_ functio n_ b y_ user. */
-	private final String FIND_FUNCTION_BY_USER = "/member/user/findFunctionByUser";
-	
-	/** The USE r_ lis t_ page. */
-	private final String USER_LIST_PAGE = "/member/user/userlist";
-	
-
 	/** The basket service. */
 	@Autowired
 	private RightDelegate rightDelegate;
@@ -425,7 +403,7 @@ public class UserController extends BaseController {
 		myaction = appendParamToURI(myaction, "enabled", enabled);
 			// Qbc查找方式
 			CriteriaQuery cq = new CriteriaQuery(User.class, curPageNO, myaction);
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+			cq.setPageSize(1);
 			// cq.eq("rightId","002");//0条件
 
 			// cq.like("rightUrl","u%");//2
