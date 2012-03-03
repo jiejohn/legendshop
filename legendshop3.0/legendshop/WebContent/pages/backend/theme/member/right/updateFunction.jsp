@@ -1,28 +1,39 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/common.jsp"%>
+<%@ include file="/pages/common/back-common.jsp"%>
 <%@ include file="/pages/common/taglib.jsp"%>
+<%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
-<html:html>
+<%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option" %>
+<html>
 <head>
-<LINK title=Style href="${pageContext.request.contextPath}/common/css/back_style.css" type=text/css rel=stylesheet>
-<title>修改权限</title>
+	<title>修改权限</title>
+        <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
 </head>
 
 
-<body>
-<br>
-<br>
-<div align="center">
-  <table width="386" height="185" >
-    <tr>
-      <td width="380" height="181"><html:form  action="/member/right/updateFunctionById${applicationScope.WEB_SUFFIX}">
-        <table width="380"  align="center" bordercolor="#66CCFF" class="tableBorder" style="border-collapse:collapse " >
-         
-		  <tr>
-            <th colspan="2">   
-                   修改权限
-            </th>
-          </tr>
+<body class="bodymargin">
+<div align="center">      
+      <form  action="/member/right/updateFunctionById${applicationScope.WEB_SUFFIX}">
+        <table class="${tableclass}" style="width: 100%">
+			 <thead>
+			  <tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; 权限管理 &raquo; 修改权限</td></tr>
+			 </thead>
+		</table>
+      
+      
+        <table align="center" class="${tableclass}" id="col1">
+                <thead>
+                    <tr class="sortable">
+                        <th colspan="2">
+                            <div align="center">
+                                 修改权限
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+     
           
 		 <tr style="display: none">
             <td width="163" height="29" align="center" class="forumRow"> 主键：</td>
@@ -31,31 +42,30 @@
 			</td>
         </tr>
           <tr>
-            <td height="27" align="center" class="forumRow">名称 <font color="#ff0000">*</font></td>
-            <td align="center" class="forumRow"><input type="text" name="function.name" value="<bean:write name="function" property="name"/>"></td>
+            <td height="27" align="center" class="forumRow">
+     <div align="right">名称 <font color="ff0000">*</font></div></td>
+            <td align="center" class="forumRow"><input type="text" name="function.name" value="${function.name}"></td>
           </tr>
           <tr>
-            <td height="27" align="center" class="forumRow">权限名称 <font color="#ff0000">*</font></td>
-            <td align="center" class="forumRow"><input type="text" name="function.protectFunction" value="<bean:write name="function" property="protectFunction"/>"></td>
+            <td height="27" align="center" class="forumRow"><div align="right">权限名称 <font color="#ff0000">*</font></div></td>
+            <td align="center" class="forumRow"><input type="text" name="function.protectFunction" value="${function.protectFunction }"/></td>
           </tr>
           <tr>
-            <td height="27" align="center" class="forumRow">备注：</td>
-            <td align="center" class="forumRow"><input type="text" name="function.note" value="<bean:write name="function" property="note"/>"></td>
+            <td height="27" align="center" class="forumRow"><div align="right">备注：</div></td>
+            <td align="center" class="forumRow"><input type="text" name="function.note" value="${function.note}"></td>
           </tr>
-          <tr bordercolor="#FFFFFF">
-            <td height="42" colspan="2" class="forumRow"><table width="338" >
-                <tr>
-                  <td width="162" align="center"> <input type="submit" name="Submit" value="修改"></td>
-                  <td width="166" align="center"><input type="reset" name="cancel" value="重置"></td>
-                </tr>
-            </table></td>
+          <tr >
+            <td height="42" colspan="2" class="forumRow">
+                  <div align="center">
+                   <input type="submit" name="Submit" value="修改">
+                   <input type="reset" name="cancel" value="重置">
+                   </div>
+            </td>
           </tr>
 </table>
-      </html:form></td>
-    </tr>
-  </table>
+      </form>
 </div>
 <p>&nbsp; </p>
 </body>
-</html:html>
+</html>
 

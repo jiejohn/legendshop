@@ -67,7 +67,7 @@
     </div>
 	<div align="center">
     <P> 点击此处
-    <a href="/member/right/saveFunction.jsp">创建权限</a>
+    <a href="${pageContext.request.contextPath}/member/right/saveFunction${applicationScope.WEB_SUFFIX}">创建权限</a>
     </div>
 	
 </body>
