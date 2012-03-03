@@ -150,7 +150,7 @@
     	</td></tr>
     </thead>
     <tr class="odd"><td>
-    	<jsp:include page="${pageContext.request.contextPath}/admin/product/createsetp${applicationScope.WEB_SUFFIX}">
+    	<jsp:include page="/admin/product/createsetp${applicationScope.WEB_SUFFIX}">
     		<jsp:param name="step" value="1"/>
     	</jsp:include>
     	</td></tr>

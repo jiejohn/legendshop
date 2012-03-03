@@ -47,16 +47,7 @@ public class IndexJpgAdminController extends BaseController {
 	
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(IndexJpgAdminController.class);
-	
-	/** The LIS t_ page. */
-	private final String LIST_PAGE = "/indexjpg/indexjpgList";
-	
-	/** The EDI t_ page. */
-	private final String EDIT_PAGE="/indexjpg/indexjpg";
-	
-	/** The LIS t_ query. */
-	private final String LIST_QUERY = "/admin/indexjpg/query";
-	
+		
 	/** The index jpg service. */
 	@Autowired
 	private IndexJpgService indexJpgService;

@@ -36,7 +36,7 @@
              商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${bean.userName}" />
          </auth:auth>
          <input type="submit" value="搜索"/>
-         <input type="button" value="创建热门商品" onclick='window.location="${pageContext.request.contextPath}/pages/hotsearch/hotsearch.jsp"'/>
+         <input type="button" value="创建热门商品" onclick='window.location="${pageContext.request.contextPath}/admin/hotsearch/load${applicationScope.WEB_SUFFIX}"'/>
     </form>
     <div align="center">
         <%@ include file="/pages/common/messages.jsp"%>

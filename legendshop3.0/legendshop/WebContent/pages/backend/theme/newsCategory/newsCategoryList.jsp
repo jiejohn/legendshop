@@ -36,7 +36,7 @@
                <input type="text" name="userName" maxlength="50" value="${bean.userName}" />
         </auth:auth>
                <input type="submit" value="搜索"/>
-            <input type="button" value="创建栏目" onclick='window.location="${pageContext.request.contextPath}/pages/newsCategory/newsCategory.jsp"'/>
+            <input type="button" value="创建栏目" onclick='window.location="${pageContext.request.contextPath}/admin/newsCategory/load${applicationScope.WEB_SUFFIX}"'/>
             <input type="button" value="新闻列表" onclick='window.location="${pageContext.request.contextPath}/admin/news/query${applicationScope.WEB_SUFFIX}"'/>
     </form>
     <div align="center">

@@ -28,7 +28,7 @@
            所属商城 <input type="text" name="userName" maxlength="50" value="${bean.userName}" />
             <input type="submit" value="搜索"/>
         </auth:auth>
-            <input type="button" value="创建公告" onclick='window.location="${pageContext.request.contextPath}/pages/pub/pub.jsp"'/>
+            <input type="button" value="创建公告" onclick='window.location="${pageContext.request.contextPath}/admin/pub/load${applicationScope.WEB_SUFFIX}"'/>
             <br>
     </form>
     <div align="center">

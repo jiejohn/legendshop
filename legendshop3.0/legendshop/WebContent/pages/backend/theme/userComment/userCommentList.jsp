@@ -32,7 +32,7 @@
 				<option value="0">未读</option>
 				<option value="1">已读</option>
 			</select>
-			<input type="submit" value="添加"/>
+			<input type="submit" value="搜索"/>
 <c:if test="${requestScope.list != null && fn:length(requestScope.list) > 0}">
 <div align="center">
         <%@ include file="/pages/common/messages.jsp"%>

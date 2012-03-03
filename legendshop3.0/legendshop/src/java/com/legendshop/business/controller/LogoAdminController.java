@@ -168,6 +168,20 @@ public class LogoAdminController extends BaseController {
 		request.setAttribute("bean", logo);
 		return PathResolver.getPath(request, PageLetEnum.LOGO_EDIT_PAGE);
 	}
+	
+	/**
+	 * Load.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the string
+	 */
+	@RequestMapping(value = "/load")
+	public String load(HttpServletRequest request, HttpServletResponse response) {
+		return PathResolver.getPath(request, PageLetEnum.LOGO_EDIT_PAGE);
+	}
 
 	/**
 	 * Update.

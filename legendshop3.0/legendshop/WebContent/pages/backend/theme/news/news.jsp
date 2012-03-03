@@ -114,7 +114,7 @@ jQuery("#form1").validate({
           <tr>
             <td>
             <auth:auth ifAnyGranted="F_OPERATOR">
-			<FCK:editor instanceName="newsContent" height="400px" width="100%" >
+			<FCK:editor instanceName="newsContent" height="400px" width="100%" basePath="/plugins/fckeditor">
                 <jsp:attribute name="value">${news.newsContent}</jsp:attribute>
             </FCK:editor>
             </auth:auth>

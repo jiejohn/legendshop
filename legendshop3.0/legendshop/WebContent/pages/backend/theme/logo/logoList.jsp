@@ -31,7 +31,7 @@
 			<input type="submit" value="搜索"/>
 		</auth:auth>
 		<c:if test="${fn:length(list) == 0}">
-			<input type="button" value="创建首页Logo" onclick='window.location="${pageContext.request.contextPath}/pages/logo/logo.jsp"'/>
+			<input type="button" value="创建首页Logo" onclick='window.location="${pageContext.request.contextPath}/admin/logo/load${applicationScope.WEB_SUFFIX}"'/>
 		</c:if>
 	</form>
 	<div align="center">

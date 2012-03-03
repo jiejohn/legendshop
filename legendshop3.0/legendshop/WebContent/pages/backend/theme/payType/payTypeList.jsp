@@ -28,7 +28,7 @@
            	用户名&nbsp;<input type="text" name="userName" maxlength="50" value="${bean.userName}" /> 
            	<input type="submit" value="搜索"/>
          </auth:auth>
-            <input type="button" value="创建支付方式" onclick='window.location="${pageContext.request.contextPath}/pages/payType/payType.jsp"'/>
+            <input type="button" value="创建支付方式" onclick='window.location="${pageContext.request.contextPath}/admin/paytype/load${applicationScope.WEB_SUFFIX}"'/>
     </form>
     <div align="center">
         <%@ include file="/pages/common/messages.jsp"%>

@@ -147,10 +147,26 @@ public class NewsCategoryAdminController extends BaseController {
 		request.setAttribute("bean", newsCategory);
 		return PathResolver.getPath(request, PageLetEnum.NEWSCAT_EDIT_PAGE);
 	}
+	
+	/**
+	 * Load.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the string
+	 */
+	@RequestMapping(value = "/load")
+	public String load(HttpServletRequest request, HttpServletResponse response) {
+		return PathResolver.getPath(request, PageLetEnum.NEWSCAT_EDIT_PAGE);
+	}
 
 	/**
 	 * Update.
 	 * 
+	 * @param request
+	 *            the request
 	 * @param newsCategory
 	 *            the news category
 	 * @return the string

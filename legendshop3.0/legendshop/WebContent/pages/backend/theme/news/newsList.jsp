@@ -51,8 +51,8 @@
 	                hql="select t.sortId, t.sortName from Sort t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${bean.sortId}"/>
 	            </select>
 	         <input type="submit" value="搜索"/>
-            <input type="button" value="创建新闻" onclick='window.location="${pageContext.request.contextPath}/pages/news/news.jsp"'/>
-            <input type="button" value="创建新闻栏目" onclick='window.location="${pageContext.request.contextPath}/pages/newsCategory/newsCategory.jsp"'/>
+            <input type="button" value="创建新闻" onclick='window.location="${pageContext.request.contextPath}/admin/news/load${applicationScope.WEB_SUFFIX}"'/>
+            <input type="button" value="创建新闻栏目" onclick='window.location="${pageContext.request.contextPath}/admin/newsCategory/load${applicationScope.WEB_SUFFIX}"'/>
             </div>
     </form>
     <div align="center">

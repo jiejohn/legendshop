@@ -180,6 +180,21 @@ public class AdvertisementAdminController extends BaseController {
 		return PathResolver.getPath(request, PageLetEnum.ADV_EDIT_PAGE);
 		
 	}
+	
+	/**
+	 * Load.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the string
+	 */
+	@RequestMapping(value = "/load")
+	public String load(HttpServletRequest request, HttpServletResponse response) {
+		return PathResolver.getPath(request, PageLetEnum.ADV_EDIT_PAGE);
+		
+	}
 
 	/**
 	 * Update.

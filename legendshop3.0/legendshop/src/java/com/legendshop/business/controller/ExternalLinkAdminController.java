@@ -187,6 +187,11 @@ public class ExternalLinkAdminController extends BaseController {
 		request.setAttribute("bean", externalLink);
 		return PathResolver.getPath(request, PageLetEnum.LINK_EDIT_PAGE);
 	}
+	
+	@RequestMapping(value = "/load")
+	public String load(HttpServletRequest request, HttpServletResponse response) {
+		return PathResolver.getPath(request, PageLetEnum.LINK_EDIT_PAGE);
+	}
 
 	/**
 	 * Update.

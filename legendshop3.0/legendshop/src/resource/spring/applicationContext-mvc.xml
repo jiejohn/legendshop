@@ -55,15 +55,8 @@
 		</property>
 		<property name="exceptionCodeMappings">
 			<map>
-				<entry key="com.legendshop.core.exception.ApplicationException" value="100" />
-				<entry key="com.legendshop.core.exception.BusinessException" value="101" />
-				<entry key="com.legendshop.core.exception.AuthorizationException" value="102" />
-				<entry key="com.legendshop.core.exception.ConflictException" value="103" />
-				<entry key="com.legendshop.core.exception.InternalException" value="104" />
-				<entry key="com.legendshop.core.exception.InvalidFormatException" value="105" />
-				<entry key="com.legendshop.core.exception.LimitationException" value="106" />
-				<entry key="com.legendshop.core.exception.NotFoundException" value="107" />
-				<entry key="com.legendshop.core.exception.PermissionException" value="108" />
+				<entry key="java.lang.RuntimeException" value="100" />
+				<entry key="java.lang.NullPointerException" value="101" />
 			</map>
 		</property>
 	</bean>

@@ -20,7 +20,7 @@
       	  	<c:otherwise>1.商品详细信息</c:otherwise>
       	  </c:choose>
       	 </a> 
-	      <a href="${pageContext.request.contextPath}/admin/imgFile/query.c?productId=${prod.prodId}">
+	      <a href="${pageContext.request.contextPath}/admin/imgFile/query${applicationScope.WEB_SUFFIX}?productId=${prod.prodId}">
 	           	  <c:choose>
 		      	  	<c:when test="${param.step == 2}"><b>2.商品图片</b></c:when>
 		      	  	<c:otherwise>2.商品图片</c:otherwise>

@@ -91,7 +91,7 @@
 	  <tr>
                     <td colspan="2">
                         <div align="center">
-                            <input type="submit" value="添加" />
+                            <input type="submit" value="提交" />
                             <input type="reset" value="重置" />
                             <input type="button" value="返回"
                                 onclick="window.location='${pageContext.request.contextPath}/admin/myleague/query${applicationScope.WEB_SUFFIX}'" />

@@ -188,7 +188,7 @@ public enum PageLetEnum implements PathEnum{
 	
 	PAY_TYPE_LIST_PAGE("/payType/payTypeList",BACK_PAGE),
 	
-	PAY_TYPE_LIST_QUERY("/admin/payType/query",FOWARD),
+	PAY_TYPE_LIST_QUERY("/admin/paytype/query",FOWARD),
 	
 	PAY_TYPE_EDIT_PAGE("/payType/payType",BACK_PAGE),
 	
@@ -284,14 +284,10 @@ public enum PageLetEnum implements PathEnum{
 	
 	FIND_OTHER_ROLE_BY_USER("/member/user/findOtherRoleByUser",BACK_PAGE),
 	
-	FIND_FUNCTION_BY_USER("/member/user/findFunctionByUser",BACK_PAGE), USER_LIST_PAGE("/member/user/userlist",BACK_PAGE)
+	FIND_FUNCTION_BY_USER("/member/user/findFunctionByUser",BACK_PAGE),
 	
-	
-	
-	
-	
-	
-	
+	USER_LIST_PAGE("/member/user/userlist",BACK_PAGE)
+
 	
 	;
 

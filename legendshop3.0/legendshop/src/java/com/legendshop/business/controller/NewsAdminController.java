@@ -218,6 +218,12 @@ public class NewsAdminController extends BaseController {
 		return PathResolver.getPath(request, PageLetEnum.NEWS_EDIT_PAGE);
 	}
 
+	
+	@RequestMapping(value = "/load")
+	public String load(HttpServletRequest request, HttpServletResponse response) {
+		return PathResolver.getPath(request, PageLetEnum.NEWS_EDIT_PAGE);
+	}
+	
 	/**
 	 * Update.
 	 * 

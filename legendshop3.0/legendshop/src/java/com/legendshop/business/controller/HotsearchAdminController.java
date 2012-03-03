@@ -88,7 +88,7 @@ public class HotsearchAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, Hotsearch hotsearch) {
-		String name = UserManager.getUsername(request.getSession());
+		String name = UserManager.getUsername(request);
 		hotsearch.setUserId(UserManager.getUserId(request.getSession()));
 		hotsearch.setUserName(name);
 		hotsearch.setDate(new Date());
@@ -161,6 +161,20 @@ public class HotsearchAdminController extends BaseController {
 		hotsearch.setUserName(origin.getUserName());
 		hotsearchService.update(hotsearch);
 		return PathResolver.getPath(request, PageLetEnum.HOT_LIST_QUERY);
+	}
+	
+	/**
+	 * Load.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the string
+	 */
+	@RequestMapping(value = "/load")
+	public String load(HttpServletRequest request, HttpServletResponse response) {
+		return  PathResolver.getPath(request, PageLetEnum.HOT_EDIT_PAGE);
 	}
 
 }

@@ -72,7 +72,7 @@
 			    	<option value="1">上线</option>
 	      			<option value="0" >下线</option>
 			</select>		
-			<input type="submit" value="添加"/>
+			<input type="submit" value="搜索"/>
 		   <input type="button" value="创建商品" onclick='window.location="${pageContext.request.contextPath}/admin/product/load${applicationScope.WEB_SUFFIX}"'/>
 			</div>
     	</td></tr>

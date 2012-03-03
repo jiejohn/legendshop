@@ -99,7 +99,7 @@ public class HotsearchServiceImpl implements HotsearchService {
 			}
 			return null;
 		}
-		return (Long) hotsearchDao.merge(hotsearch);
+		return (Long) hotsearchDao.save(hotsearch);
 	}
 
 	/* (non-Javadoc)

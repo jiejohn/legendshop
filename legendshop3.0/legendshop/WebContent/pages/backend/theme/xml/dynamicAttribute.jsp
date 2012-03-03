@@ -36,7 +36,7 @@
    	</thead>
     <tr class="odd">
       <td><div align="left">
-        <jsp:include page="${pageContext.request.contextPath}/admin/product/createsetp${applicationScope.WEB_SUFFIX}">
+        <jsp:include page="/admin/product/createsetp${applicationScope.WEB_SUFFIX}">
     		<jsp:param name="step" value="3"/>
     	</jsp:include>
       </div></td>
