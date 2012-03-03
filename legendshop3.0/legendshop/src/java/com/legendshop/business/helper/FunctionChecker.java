@@ -49,7 +49,9 @@ public class FunctionChecker implements Checker<String> {
 			String license = resopose.getLicense();
 			if (LicenseEnum.FREE.name().equals(license) || LicenseEnum.UNKNOWN.name().equals(license)) {
 				log.debug("user name = {} did not have function on this componment", userName);
-				return false;
+				//TODO				
+//				return false;
+				return true;
 			}
 		}
 

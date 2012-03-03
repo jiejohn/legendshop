@@ -1,10 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/pages/common/common.jsp"%>
 <%@ include file="/pages/common/taglib.jsp"%>
+<%@ include file="/pages/common/back-common.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
-<html:html>
+<%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
+<%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
+<html>
 <head>
-<LINK title=Style href="${pageContext.request.contextPath}/common/css/back_style.css" type=text/css rel=stylesheet>
+<script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
+  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
+  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
 <script language="JavaScript" type="text/javascript">
 <!--
   function confirmDelete()
@@ -27,63 +33,46 @@
 			int offset=((Integer)request.getAttribute("offset")).intValue();
 	%>
 <br>
-<html:form action="/member/right/findAllRole${applicationScope.WEB_SUFFIX}">
+<form action="${pageContext.request.contextPath}/member/right/findAllRole${applicationScope.WEB_SUFFIX}">
 <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
 			<div align="center">
 			&nbsp; 根据角色名称查找 ：
 			<input type="text" name="search" maxlength="50" value="<%=request.getAttribute("search")%>" />
 			<input type="submit" value="搜索"/>
 			&nbsp;&nbsp;
-			</div>
-<table width="100%"  align="center" class="tableBorder" style="margin-top: 5px">
-  <tr>
-    <th height="32" colspan="10" scope="col">角色列表</th>
-  </tr>
-  <logic:present name="list" scope="request">
-  <tr>
-    <td align="center" class="forumRow">顺序</td>
-    <td align="center" class="forumRow">名称</td>
-    <td align="center" class="forumRow">角色名称</td>
-    <td align="center" class="forumRow">状态</td>
-    <td align="center" class="forumRow">备注</td>
-    <td align="center" class="forumRow">对应权限</td>
-    <td align="center" class="forumRow">修改&nbsp;</td>
-    <td align="center" class="forumRow">删除&nbsp;</td>
-  </tr>
-  <logic:iterate id="role" name="list">
-  <logic:present name="role">
-  <tr>
-    <td align="center" class="forumRow"><%=offset++%></td>
-    <td align="center" class="forumRow"><bean:write name="role" property="name"/></td>
-    <td align="center" class="forumRow"><bean:write name="role" property="roleType"/></td>
-    <td align="center" class="forumRow">
-	    <logic:equal name="role" property="enabled" value="0"><font color="red">无效</font></logic:equal>
-		<logic:equal name="role" property="enabled" value="1">有效</logic:equal>    
-	</td>
-    <td align="center" class="forumRow"><bean:write name="role" property="note"/></td>
-    <td align="center" class="forumRow">
-    <html:link href="findFunctionByRole${applicationScope.WEB_SUFFIX}" paramId="roleId" paramName="role" paramProperty="id">权限</html:link>
-    </td>
-    <td align="center" class="forumRow">
-    <html:link href="findRoleById${applicationScope.WEB_SUFFIX}" paramId="id" paramName="role" paramProperty="id">修改</html:link> 
-     </td>
-    <td align="center" class="forumRow">
-        <html:link page="/member/right/deleteRoleById${applicationScope.WEB_SUFFIX}" paramId="id" paramName="role" paramProperty="id"  onclick="return confirmDelete();">删除</html:link>
-     </td>
-  </logic:present>
-  </logic:iterate>
-  </logic:present>
-</table>
-</html:form>
+			</div>	
+</form>	
+
+	 <div align="center">
+        <%@ include file="/pages/common/messages.jsp"%>
+    <display:table name="list" requestURI="/member/right/findAllRole${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
+      <display:column title="顺序"><%=offset++%></display:column>
+      <display:column title="名称 " property="name" sortable="true"></display:column>
+      <display:column title="角色名称 " property="roleType"></display:column>
+      <display:column title="状态" sortable="true">
+       <c:choose>
+       		<c:when test="${item.enabled == 1}">有效</c:when>
+       		<c:otherwise><font color="red">无效</font></c:otherwise>
+       </c:choose>
+      </display:column>
+      <display:column title="备注" property="note"></display:column>
+      <display:column title="对应权限">
+      	<a href="findFunctionByRole${applicationScope.WEB_SUFFIX}?roleId=${item.id}">权限</a>
+      </display:column>
+      <display:column title="操作" media="html" style="width:75px">
+      	<a href="findRoleById${applicationScope.WEB_SUFFIX}?id=${item.id}" ><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
+      	<a href="/member/right/deleteRoleById${applicationScope.WEB_SUFFIX}?id=${item.id}" title="删除"><img alt="删除" src="${pageContext.request.contextPath}/img/grid_delete.png"></a>
+      </display:column>
+    </display:table>
+        <c:if test="${not empty toolBar}">
+            <c:out value="${toolBar}" escapeXml="${toolBar}"></c:out>
+        </c:if>
+    </div>
 	<div align="center">
-	<logic:present name="toolBar">
-		<bean:write name="toolBar" filter="false"/>
-	</logic:present>
-	</div>
-	<div align="center">
-	<P> 点击此处
-	  <html:link page="/member/right/saveRole.jsp">创建角色</html:link>
-	</div>
+    <P> 点击此处
+    <a href="/member/right/saveRole.jsp">创建角色</a>
+       </div>
+ 
 </body>
-</html:html>
+</html>
 

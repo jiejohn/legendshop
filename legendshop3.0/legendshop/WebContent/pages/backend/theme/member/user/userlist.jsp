@@ -73,7 +73,7 @@
     </div>
 	<div align="center">
     <P> 点击此处
-    <html:link page="/member/user/saveUser.jsp">创建用户</html:link>
+    <a href="/member/user/saveUser.jsp">创建用户</a>
        </div>
 </body>
 </html>

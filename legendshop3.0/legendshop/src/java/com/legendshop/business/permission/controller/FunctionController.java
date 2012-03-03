@@ -240,7 +240,7 @@ public class FunctionController extends BaseController {
 			request.setAttribute("search", search);
 			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
 			request.setAttribute("offset", new Integer(ps.getOffset() + 1));
-			request.setAttribute("functionList", ps.getResultList());
+			request.setAttribute("list", ps.getResultList());
 			if (ps.hasMutilPage())
 				request.setAttribute("toolBar", ps.getToolBar());
 
