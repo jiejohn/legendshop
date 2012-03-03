@@ -15,7 +15,7 @@
 	%>
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/sort/query${applicationScope.WEB_SUFFIX}">类型管理</a></td></tr>
+    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/sort/query${applicationScope.WEB_SUFFIX}">类型管理</a></td></tr>
     </thead>
     </table>
     <form id="form1" action="${pageContext.request.contextPath}/admin/sort/query${applicationScope.WEB_SUFFIX}">
@@ -26,7 +26,7 @@
 			&nbsp; 商城名称
 			<input type="text" name="userName"  id="userName" maxlength="50" value="${sort.userName}" />
 			</auth:auth>
-			<input type="submit" value="添加"/>
+			<input type="submit" value="搜索"/>
 			<input type="button" value="创建商品类型" onclick='window.location="${pageContext.request.contextPath}/admin/sort/load${applicationScope.WEB_SUFFIX}"'/>
 			<input type="button" value="返回商品列表" onclick='window.location="${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}"'/>
 			</form>
@@ -40,7 +40,7 @@
       <display:column title="图片" style="width:300px" media="html"><a href="${pageContext.request.contextPath}/photoserver/photo/${item.picture}" target="_blank"><img src="${pageContext.request.contextPath}/photoserver/photo/${item.picture}" height="60" width="300"/></a></display:column>
       <auth:auth ifAnyGranted="F_VIEW_ALL_DATA"><display:column title="商城名称" property="userName" sortable="true" sortName="userName"></display:column></auth:auth>
       <display:column title="操作" media="html" style="width:100px">
-    <a href="${pageContext.request.contextPath}/admin/nsort/query.c?sortId=${item.sortId}">二级类型</a>
+    <a href="${pageContext.request.contextPath}/admin/nsort/query${applicationScope.WEB_SUFFIX}?sortId=${item.sortId}">二级类型</a>
      <a href="${pageContext.request.contextPath}/admin/sort/update/${item.sortId}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
      <auth:auth ifAnyGranted="F_OPERATOR">
         <a href='javascript:deleteSort("${item.sortId}")' title="删除"><img alt="删除" src="${pageContext.request.contextPath}/img/grid_delete.png"></a>

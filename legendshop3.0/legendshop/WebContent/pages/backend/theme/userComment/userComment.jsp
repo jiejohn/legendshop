@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
 <body class="bodymargin">
 	<table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/userComment/query${applicationScope.WEB_SUFFIX}?status=0">消息管理</a> &raquo; 回复用户消息</td></tr>
+    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/userComment/query${applicationScope.WEB_SUFFIX}?status=0">消息管理</a> &raquo; 回复用户消息</td></tr>
     </thead>
     </table>
   <table class="${tableclass}" style="width: 100%" id="col1">

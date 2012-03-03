@@ -26,7 +26,7 @@
 <form action="${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}" id="form1" method="post">
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><th style="font-weight: normal;"><a href="/member/" target="_parent">首页</a> &raquo; 商品管理 &raquo; <a href="${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}">商品管理</a></th></tr>
+    	<tr><th style="font-weight: normal;"><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商品管理 &raquo; <a href="${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}">商品管理</a></th></tr>
     </thead>
     <tbody>
     	<tr><td>

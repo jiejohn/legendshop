@@ -20,7 +20,7 @@
     <form action="${pageContext.request.contextPath}/admin/myleague/query${applicationScope.WEB_SUFFIX}" id="form1" method="post">
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/myleague/query${applicationScope.WEB_SUFFIX}">加盟商城管理</a></td></tr>
+	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/myleague/query${applicationScope.WEB_SUFFIX}">加盟商城管理</a></td></tr>
 	    </thead>
 	    </table>
 	         <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">&nbsp;商城

@@ -25,7 +25,7 @@
 										    </c:if>
 										</div>
 										<div style="margin-top: 10px">
-											<jsp:include page="/common/jsp/moreoption.jsp"></jsp:include>
+											<jsp:include page="/pages/common/moreoption.jsp"></jsp:include>
 										</div>
                                       </td>
                                     </tr>

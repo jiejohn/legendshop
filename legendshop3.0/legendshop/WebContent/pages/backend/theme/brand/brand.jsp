@@ -43,7 +43,7 @@
         <form action="${pageContext.request.contextPath}/admin/brand/save${applicationScope.WEB_SUFFIX}" method="post" id="form1" enctype="multipart/form-data">
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/brand/query${applicationScope.WEB_SUFFIX}">商品品牌管理</a> &raquo; 创建商品品牌</td></tr>
+	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/brand/query${applicationScope.WEB_SUFFIX}">商品品牌管理</a> &raquo; 创建商品品牌</td></tr>
 	    </thead>
 	    </table>
             <input id="brandId" name="brandId" value="${bean.brandId}" type="hidden">

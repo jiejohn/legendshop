@@ -23,7 +23,7 @@
 %>
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/order/query${applicationScope.WEB_SUFFIX}">订单管理</a></td></tr>
+    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/order/query${applicationScope.WEB_SUFFIX}">订单管理</a></td></tr>
     </thead>
     </table>
 <table style="width:100%" class="${tableclass}"> 

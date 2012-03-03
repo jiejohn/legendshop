@@ -52,7 +52,7 @@
             <div align="center">
           <table class="${tableclass}" style="width: 100%">
 		    <thead>
-		    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/paytype/query${applicationScope.WEB_SUFFIX}">支付管理</a> &raquo; 创建支付方式</td></tr>
+		    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/paytype/query${applicationScope.WEB_SUFFIX}">支付管理</a> &raquo; 创建支付方式</td></tr>
 		    </thead>
 		    </table>
             <table  align="center" class="${tableclass}" id="col1">

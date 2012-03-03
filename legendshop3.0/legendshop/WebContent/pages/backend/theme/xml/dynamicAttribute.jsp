@@ -30,7 +30,7 @@
 
  <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 商品管理 &raquo; <a href="${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}">商品管理</a> &raquo; <a href="${pageContext.request.contextPath}/admin/product/load${applicationScope.WEB_SUFFIX}">创建商品</a>
+    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商品管理 &raquo; <a href="${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}">商品管理</a> &raquo; <a href="${pageContext.request.contextPath}/admin/product/load${applicationScope.WEB_SUFFIX}">创建商品</a>
     	 <c:if test="${prod.name != null}"> &raquo; <a href= "${pageContext.request.contextPath}/views/${prod.prodId}${applicationScope.WEB_SUFFIX}" target="_blank">${prod.name}</a></c:if>
     	</td></tr>
    	</thead>

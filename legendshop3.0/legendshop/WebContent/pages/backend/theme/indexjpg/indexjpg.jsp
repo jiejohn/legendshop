@@ -53,7 +53,7 @@ $.validator.setDefaults({
   <input id="id" name="id" value="${index.id}" type="hidden">
   <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/indexjpg/query${applicationScope.WEB_SUFFIX}">首页广告图片管理</a> &raquo; 创建首页图片</td></tr>
+    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/indexjpg/query${applicationScope.WEB_SUFFIX}">首页广告图片管理</a> &raquo; 创建首页图片</td></tr>
     </thead>
     </table>
   <table class="${tableclass}" id="col1" style="width:100%">

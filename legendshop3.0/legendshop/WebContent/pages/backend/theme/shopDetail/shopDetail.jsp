@@ -136,7 +136,7 @@
 
                 <table class="${tableclass}" style="width: 100%">
 			    <thead>
-			    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/shopDetail/query${applicationScope.WEB_SUFFIX}">商城管理</a> &raquo; 创建商城</td></tr>
+			    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/shopDetail/query${applicationScope.WEB_SUFFIX}">商城管理</a> &raquo; 创建商城</td></tr>
 			    </thead>
 			    </table>
             <table style="width: 100%" class="${tableclass}" id="col1">

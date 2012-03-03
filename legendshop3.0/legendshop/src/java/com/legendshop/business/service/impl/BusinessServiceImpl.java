@@ -1043,7 +1043,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		}
 
 		uem.addCallBackList(ResourceBundleHelper.getString(locale, "login"),
-				ResourceBundleHelper.getString(locale, "logon.hint.desc"), "login.do");
+				ResourceBundleHelper.getString(locale, "logon.hint.desc"), "login"+AttributeKeys.WEB_SUFFIX);
 		request.setAttribute(UserMessages.MESSAGE_KEY, uem);
 
 		// 发送通知注册成功邮件

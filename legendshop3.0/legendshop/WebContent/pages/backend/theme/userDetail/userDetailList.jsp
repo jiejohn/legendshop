@@ -16,7 +16,7 @@
 	<%Integer offset = (Integer)request.getAttribute("offset");%>
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/system/userDetail/query${applicationScope.WEB_SUFFIX}">用户信息管理</a></td></tr>
+    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/system/userDetail/query${applicationScope.WEB_SUFFIX}">用户信息管理</a></td></tr>
     </thead>
     </table>
 <form action="${pageContext.request.contextPath}/system/userDetail/query${applicationScope.WEB_SUFFIX}" id="form1" name="form1">

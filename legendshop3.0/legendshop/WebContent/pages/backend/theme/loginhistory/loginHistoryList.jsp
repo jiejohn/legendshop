@@ -16,7 +16,7 @@
 <auth:auth ifAnyGranted="F_SYSTEM">
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/loginHistory/query${applicationScope.WEB_SUFFIX}">用户登录历史</a></td></tr>
+    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/loginHistory/query${applicationScope.WEB_SUFFIX}">用户登录历史</a></td></tr>
     </thead>
     </table>
 <form action="${pageContext.request.contextPath}/admin/loginHistory/query${applicationScope.WEB_SUFFIX}" id="form1">

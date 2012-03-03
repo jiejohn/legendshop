@@ -55,9 +55,9 @@
         <form action="${pageContext.request.contextPath}/admin/nsort/save${applicationScope.WEB_SUFFIX}" method="post" id="form1">
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="/member/" target="_parent">首页</a> &raquo; 商品管理  &raquo; 
+    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商品管理  &raquo; 
     	<a href="${pageContext.request.contextPath}/admin/sort/query${applicationScope.WEB_SUFFIX}">类型管理</a> &raquo; 
-    	<a href="${pageContext.request.contextPath}/admin/nsort/query.c?sortId=${param.sortId}">二级商品类型管理</a> &raquo; 创建二级商品类型
+    	<a href="${pageContext.request.contextPath}/admin/nsort/query${applicationScope.WEB_SUFFIX}?sortId=${param.sortId}">二级商品类型管理</a> &raquo; 创建二级商品类型
     	<c:if test="${param.parentNsortId != null}">  &raquo; 创建三级商品类型</c:if>
     	</td></tr>
     </thead>
