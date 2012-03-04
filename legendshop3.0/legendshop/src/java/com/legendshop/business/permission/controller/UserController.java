@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.PageLetEnum;
@@ -40,6 +41,7 @@ import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.UserMessages;
+import com.legendshop.model.entity.PayType;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserRole;
 import com.legendshop.model.entity.UserRoleId;
@@ -460,6 +462,36 @@ public class UserController extends BaseController {
 		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER_PAGE);
 	}
 
+	@RequestMapping(value = "/load/{id}")
+	public String load(HttpServletRequest request,
+			HttpServletResponse response, @PathVariable String id) {
+		
+
+		logger.info("Action findUserById with id  " + id);
+		
+		State state = new StateImpl();
+			User user = rightDelegate.findUserById(id, state);
+			if (!state.isOK()) {
+				return PathResolver.getPath(request, PageLetEnum.FAIL);
+			}
+			request.setAttribute("user", user);
+
+		return PathResolver.getPath(request, PageLetEnum.UPDATE_USER_PASSWORD);
+		
+	}
 	
+	/**
+	 * Load.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the string
+	 */
+	@RequestMapping(value = "/load")
+	public String load(HttpServletRequest request, HttpServletResponse response) {
+		return PathResolver.getPath(request, PageLetEnum.UPDATE_USER_PASSWORD);
+	}
 
 }
