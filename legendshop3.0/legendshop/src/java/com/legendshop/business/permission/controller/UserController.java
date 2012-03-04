@@ -41,7 +41,6 @@ import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.UserMessages;
-import com.legendshop.model.entity.PayType;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserRole;
 import com.legendshop.model.entity.UserRoleId;
@@ -398,15 +397,12 @@ public class UserController extends BaseController {
 			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
 			throw new PermissionException("UN_AUTHORIZATION", ErrorCodes.UN_AUTHORIZATION);
 		}
-		String myaction;
 		String search = request.getParameter("search") == null ? "" : request.getParameter("search");
 		String enabled = request.getParameter("enabled") == null ? "" : request.getParameter("enabled");
-		myaction = appendParamToURI("usersList" + AttributeKeys.WEB_SUFFIX, "search", search);
-		myaction = appendParamToURI(myaction, "enabled", enabled);
 			// Qbc查找方式
-			CriteriaQuery cq = new CriteriaQuery(User.class, curPageNO, myaction);
-//			cq.setPageSize(1);
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+			CriteriaQuery cq = new CriteriaQuery(User.class, curPageNO);
+			cq.setPageSize(1);
+//			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 			// cq.eq("rightId","002");//0条件
 
 			// cq.like("rightUrl","u%");//2
@@ -424,8 +420,8 @@ public class UserController extends BaseController {
 			
 			request.setAttribute("search", search);
 			request.setAttribute("enabled", enabled);
-			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
-			request.setAttribute("offset", new Integer(ps.getOffset() + 1));
+//			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
+//			request.setAttribute("offset", new Integer(ps.getOffset() + 1));
 //			if (ps.hasMutilPage()) {
 //				request.setAttribute("toolBar", ps.getToolBar());
 //			}
