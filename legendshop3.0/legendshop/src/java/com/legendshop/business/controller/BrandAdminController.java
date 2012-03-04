@@ -57,7 +57,7 @@ public class BrandAdminController extends BaseController implements AdminControl
 	@Override
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Brand brand) {
-		CriteriaQuery cq = new CriteriaQuery(Brand.class, curPageNO, "javascript:pager");
+		CriteriaQuery cq = new CriteriaQuery(Brand.class, curPageNO);
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(brand.getUserName()));
 		cq.add();
