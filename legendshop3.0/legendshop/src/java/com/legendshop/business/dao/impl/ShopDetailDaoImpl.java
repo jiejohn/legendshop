@@ -132,6 +132,7 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 */
 	
 	@Override
+	@Deprecated
 	public ShopDetailView getSimpleInfoShopDetail(final String storeName) {
 		return findUniqueBy("from ShopDetailView sd where sd.storeName = ?", ShopDetailView.class, storeName);
 	}

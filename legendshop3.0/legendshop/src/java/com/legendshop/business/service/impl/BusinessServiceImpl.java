@@ -288,12 +288,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 		ShopDetailView shopDetail = shopDetailDao.getShopDetailView(currentShopName);
 		log.debug("getShopDetailView currentShopName = {}, shopDetail = {}",currentShopName, shopDetail);
-		if (!inShopDetail) {
-			log.debug("setLocalByShopDetail calling");
-			// set Locale
+
+		if(!inShopDetail || request.getSession().getAttribute(Constants.SHOP_DETAIL) == null ){
+			log.debug("initing shopDetail and set to session");
+			request.getSession().setAttribute(Constants.SHOP_DETAIL, shopDetail);
 			setLocalByShopDetail(shopDetail, request, response);
 		}
-
 		return shopDetail;
 	}
 
@@ -408,7 +408,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			return PathResolver.getPath(request, PageLetEnum.FAIL);
 		}
 		// set Locale
-		setLocalByShopDetail(shopDetail, request, response);
+		//setLocalByShopDetail(shopDetail, request, response);
 
 		request.setAttribute("logo", logoDao.getLogo(shopName));
 		request.setAttribute("sortList", sortDao.getSort(shopName, true));
