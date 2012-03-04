@@ -50,8 +50,8 @@ public class FunctionChecker implements Checker<String> {
 			if (LicenseEnum.FREE.name().equals(license) || LicenseEnum.UNKNOWN.name().equals(license)) {
 				log.debug("user name = {} did not have function on this componment", userName);
 				//TODO				
-//				return false;
-				return true;
+				return false;
+//				return true;
 			}
 		}
 
