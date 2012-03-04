@@ -149,7 +149,7 @@ BODY {
 							</div>
 							<c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
 							<div style="color: green">
-							<fmt:message key="shop.name"/> - <a href="${pageContext.request.contextPath}/shop/${record.userName }" style="color: green" target="_blank">${record.userName}</a>
+							<fmt:message key="shop.name"/> - <a href="${pageContext.request.contextPath}/shop/${record.userName }${applicationScope.WEB_SUFFIX}" style="color: green" target="_blank">${record.userName}</a>
 							</div>
 							</c:if>
 							</div></td>
@@ -174,7 +174,7 @@ BODY {
 							<td style="vertical-align: top" align="left">
 							<div>
 							<div style="margin-top: 8px;font-size: 13pt">
-							  <a href="${pageContext.request.contextPath}/shop/${record.storeName}" target="_blank">${record.sitename}</a>
+							  <a href="${pageContext.request.contextPath}/shop/${record.storeName}${applicationScope.WEB_SUFFIX}" target="_blank">${record.sitename}</a>
 								
 							</div>
 							<div>${record.detailDesc}</div>
@@ -223,7 +223,7 @@ BODY {
 					    <tr><td class="titlebg"><fmt:message key="visited.mall"/></td></tr>
 						<tr><td align="left">
 							  <c:forEach items="${sessionScope.VisitHistory.visitedShop}" var="visitedShop" varStatus="status">
-							  <div style="margin: 2px;"><a href="${pageContext.request.contextPath}/shop/${visitedShop.name}" title="${visitedShop.title}" target="_blank">${visitedShop.name}</a></div>
+							  <div style="margin: 2px;"><a href="${pageContext.request.contextPath}/shop/${visitedShop.name}${applicationScope.WEB_SUFFIX}" title="${visitedShop.title}" target="_blank">${visitedShop.name}</a></div>
 							  </c:forEach>
 						</td></tr>
 					</table>

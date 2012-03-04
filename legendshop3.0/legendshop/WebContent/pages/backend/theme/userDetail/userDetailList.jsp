@@ -22,10 +22,10 @@
 <form action="${pageContext.request.contextPath}/system/userDetail/query${applicationScope.WEB_SUFFIX}" id="form1" name="form1">
 <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}">
 			&nbsp;用户名
-			<input type="text" name="search" maxlength="50" value="<%=request.getAttribute("search")%>" />
+			<input type="text" name="userName" maxlength="50" value="${requestScope.userName}" />
 			<auth:auth ifAllGranted="F_OPERATOR">
 			&nbsp;邮件
-				<input type="text" name="userMail" maxlength="50" value="<%=request.getAttribute("userMail")%>" />
+				<input type="text" name="userMail" maxlength="50" value="${requestScope.userMail}" />
 			</auth:auth>
 			    &nbsp;用户类型 
 	            <select id="haveShop" name="haveShop">
@@ -39,7 +39,7 @@
 			    	<option value="1">有效</option>	
 	      			<option value="0" >无效</option>
 			</select>
-			<input type="submit" value="添加"/>
+			<input type="submit" value="搜索"/>
 </form>
 
 <div align="center">
@@ -47,16 +47,16 @@
     <display:table name="list" requestURI="/system/userDetail/query${applicationScope.WEB_SUFFIX}" id="item"
          export="true"  class="${tableclass}" style="width:100%" sort="external">
       <display:column style="width:70px" title="<input type='checkbox'  id='checkbox' name='checkbox' onClick='javascript:selAll()' />顺序"><input type="checkbox" name="strArray" value="${item.userId}" arg="${item.userName}"/><%=offset++%></display:column>
-      <display:column title="用户名" property="userName" sortable="true" sortName="u.userName"></display:column>
-      <display:column title="用户昵称" property="nickName" sortable="true" sortName="u.nickName"></display:column>
+      <display:column title="用户名" property="userName" sortable="true" sortName="u.user_name"></display:column>
+      <display:column title="用户昵称" property="nickName" sortable="true" sortName="u.nick_name"></display:column>
       <auth:auth ifAllGranted="F_OPERATOR">
       	<display:column title="邮件" property="userMail"></display:column>
       </auth:auth>
       <display:column title="注册IP" property="userRegip"></display:column>
-      <display:column title="修改时间" sortable="true" sortName="u.modifyTime">
+      <display:column title="修改时间" sortable="true" sortName="u.modify_time">
      	 <fmt:formatDate value="${item.modifyTime}" pattern="yyyy-MM-dd HH:mm"/>
       </display:column>
-      <display:column title="注册时间" sortable="true" sortName="u.userRegtime">
+      <display:column title="注册时间" sortable="true" sortName="u.user_regtime">
       	 <fmt:formatDate value="${item.userRegtime}" pattern="yyyy-MM-dd HH:mm"/>
       </display:column>
        <display:column title="状态" sortable="true" sortName="s.enabled" style="width:40px">
@@ -73,11 +73,11 @@
 	      <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
 	      <c:choose>
 	      	<c:when test="${item.shopId != null}">
-	      		<a href='${pageContext.request.contextPath}/admin/shopDetail/load/${item.shopId}.c?userName=${item.userName}' title="修改用户${item.userName}当前商城"><img alt="修改用户当前商城" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
+	      		<a href='${pageContext.request.contextPath}/admin/shopDetail/load/${item.shopId}${applicationScope.WEB_SUFFIX}?userName=${item.userName}' title="修改用户${item.userName}当前商城"><img alt="修改用户当前商城" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
 	      	</c:when>
 	      	<c:otherwise>
 	      		<c:if test="${supportOpenShop == 'true' && 'C2C' == applicationScope.BUSINESS_MODE}">
-	      			<a href='${pageContext.request.contextPath}/admin/shopDetail/load/0.c?userName=${item.userName}'><img alt="为用户${item.userName}增加商城" src="${pageContext.request.contextPath}/img/grid_add.png"></a>
+	      			<a href='${pageContext.request.contextPath}/admin/shopDetail/load/0${applicationScope.WEB_SUFFIX}?userName=${item.userName}'><img alt="为用户${item.userName}增加商城" src="${pageContext.request.contextPath}/img/grid_add.png"></a>
 	      		</c:if>
 	      	</c:otherwise>
 	      </c:choose>

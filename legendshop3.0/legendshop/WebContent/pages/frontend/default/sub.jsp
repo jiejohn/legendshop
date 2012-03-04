@@ -34,7 +34,7 @@
         	  	<tr align="left"  bgcolor="#ECECEC" >
         	  		<td>
         	  		<div style="margin-top: 5px;margin-bottom: 5px;margin-left: 30px">
-        	  			<fmt:message key="shop.name"/>：<span style="color: red;font-weight: bold;"><a href="${pageContext.request.contextPath}/shop/${sub.shopName}">${sub.shopName}</a></span> &nbsp;
+        	  			<fmt:message key="shop.name"/>：<span style="color: red;font-weight: bold;"><a href="${pageContext.request.contextPath}/shop/${sub.shopName}${applicationScope.WEB_SUFFIX}">${sub.shopName}</a></span> &nbsp;
         	  			<fmt:message key="order.number"/>：<b>${sub.subNumber}</b> &nbsp;
         	  		     <fmt:message key="dateStr"/>：<fmt:formatDate value="${sub.subDate}" pattern="yyyy-MM-dd HH:mm"/> &nbsp;
         	  			<fmt:message key="Order.Status"/>：         		

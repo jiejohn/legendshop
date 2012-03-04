@@ -27,7 +27,6 @@ import com.legendshop.core.helper.PropertiesUtil;
  */
 public class ContextPathBuilder extends ServerRootPathBuilder {
 	
-	private final String PIC_PATH = "/fckeditor";
 
 	/* (non-Javadoc)
 	 * @see net.fckeditor.requestcycle.impl.ServerRootPathBuilder#getUserFilesPath(javax.servlet.http.HttpServletRequest)
@@ -39,12 +38,14 @@ public class ContextPathBuilder extends ServerRootPathBuilder {
 		if (userName == null) {
 			throw new PermissionException("did not logon yet!",EntityCodes.RIGHT);
 		}
-
-		return new StringBuffer().append(super.getUserFilesPath(request)).append("/").append(userName).append(PIC_PATH).toString();
+		return new StringBuffer().append(request.getContextPath()).append(super.getUserFilesPath(request)).append("/").append(userName).append(AttributeKeys.EDITOR_PIC_PATH).toString();
 	}
 
 	/* (non-Javadoc)
 	 * @see net.fckeditor.requestcycle.impl.ServerRootPathBuilder#getUserFilesAbsolutePath(javax.servlet.http.HttpServletRequest)
+	 */
+	/**
+	 * 返回图片实际路径
 	 */
 	@Override
 	public String getUserFilesAbsolutePath(HttpServletRequest request) {
@@ -52,7 +53,7 @@ public class ContextPathBuilder extends ServerRootPathBuilder {
 		if (userName == null) {
 			throw new PermissionException("did not logon yet!",EntityCodes.RIGHT);
 		}
-		return new StringBuffer().append(PropertiesUtil.getBigFilesAbsolutePath()).append("/").append(userName).append(PIC_PATH).toString();
+		return new StringBuffer().append(PropertiesUtil.getBigFilesAbsolutePath()).append("/").append(userName).append(AttributeKeys.EDITOR_PIC_PATH).toString();
 	}
 
 }

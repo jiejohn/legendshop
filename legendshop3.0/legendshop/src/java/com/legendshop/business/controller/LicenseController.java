@@ -25,7 +25,7 @@ import com.legendshop.core.constant.PathResolver;
  * License控制器.
  */
 @Controller
-@RequestMapping("/license")
+@RequestMapping("/admin/license")
 public class LicenseController extends BaseController {
 	
 	/** The log. */

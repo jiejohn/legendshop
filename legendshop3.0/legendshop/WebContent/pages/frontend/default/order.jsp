@@ -69,7 +69,7 @@
         <td height="25"><b><fmt:formatNumber type="currency" value="${order.total}" pattern="${CURRENCY_PATTERN}"/></b></td>
         <td height="25">${order.name}</td>
         <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
-        <td height="25"><a href="${pageContext.request.contextPath}/shop/${order.shopName}" target="_blank">${order.shopName}</a></td>
+        <td height="25"><a href="${pageContext.request.contextPath}/shop/${order.shopName}${applicationScope.WEB_SUFFIX}" target="_blank">${order.shopName}</a></td>
         </c:if>
         <td height="25"><fmt:formatDate value="${order.subDate}" pattern="yyyy-MM-dd HH:mm"/></td>
         <td height="25">

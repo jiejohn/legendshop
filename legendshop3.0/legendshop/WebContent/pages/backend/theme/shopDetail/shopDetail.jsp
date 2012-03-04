@@ -69,7 +69,7 @@
     }
      });   
          $("#col1 th").addClass('sortable'); 
-         $("#colorStyle").get(0).value  ='${bean.colorStyle}';
+         $("#colorStyle").get(0).value  ='${shopDetail.colorStyle}';
 });
 
 	//更改商城状态
@@ -123,16 +123,16 @@
 		}
 		
 	   window.onload=function(){
-		 	initSelect('${bean.provinceid}','${bean.cityid}','${bean.areaid}');
+		 	initSelect('${shopDetail.provinceid}','${shopDetail.cityid}','${shopDetail.areaid}');
 		}
 </script>
 
 </head>
     <body class="bodymargin">
         <form action="${pageContext.request.contextPath}/admin/shopDetail/save${applicationScope.WEB_SUFFIX}" method="post" id="form1" enctype="multipart/form-data">
-            <input id="userId" name="userId" value="${bean.userId == null ? param.userId:bean.userId}" type="hidden">
+            <input id="userId" name="userId" value="${shopDetail.userId == null ? param.userId:shopDetail.userId}" type="hidden">
              <input id="id" name="id" value="${id}" type="hidden">
-             <input id="shopId" name="shopId" value="${bean.shopId}" type="hidden">
+             <input id="shopId" name="shopId" value="${shopDetail.shopId}" type="hidden">
 
                 <table class="${tableclass}" style="width: 100%">
 			    <thead>
@@ -154,7 +154,7 @@
           <div align="right">用户名:</div>
        </td>
         <td>
-           <p><input type="text" name="storeName" id="storeName" value="${bean.storeName == null ? param.userName : bean.storeName}" size="50" readonly="readonly"/>
+           <p><input type="text" name="storeName" id="storeName" value="${shopDetail.storeName == null ? param.userName : shopDetail.storeName}" size="50" readonly="readonly"/>
            <a href="${pageContext.request.contextPath}/myaccount${applicationScope.WEB_SUFFIX}" target="_blank">我的账号</a></p>
         </td>
       </tr>
@@ -163,7 +163,7 @@
           <div align="right">网店名称: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="sitename" id="sitename" value="${bean.sitename}" size="50"/></p>
+           <p><input type="text" name="sitename" id="sitename" value="${shopDetail.sitename}" size="50"/></p>
         </td>
       </tr>
      <tr>
@@ -171,7 +171,7 @@
           <div align="right">网店地址: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="maddr" id="maddr" value="${bean.maddr}" size="50"/></p>
+           <p><input type="text" name="maddr" id="maddr" value="${shopDetail.maddr}" size="50"/></p>
         </td>
       </tr>
      <tr>
@@ -179,7 +179,7 @@
           <div align="right">银行汇款帐号:</div>
        </td>
         <td>
-           <p><input type="text" name="msn" id="msn" value="${bean.msn}" size="50"/></p>
+           <p><input type="text" name="msn" id="msn" value="${shopDetail.msn}" size="50"/></p>
         </td>
       </tr>
      <tr>
@@ -187,7 +187,7 @@
           <div align="right">收款人姓名:</div>
        </td>
         <td>
-           <p><input type="text" name="mname" id="mname" value="${bean.mname}" size="50" /></p>
+           <p><input type="text" name="mname" id="mname" value="${shopDetail.mname}" size="50" /></p>
         </td>
       </tr>
      <tr>
@@ -195,7 +195,7 @@
           <div align="right">邮政编码:</div>
        </td>
         <td>
-           <p><input type="text" name="code" id="code" value="${bean.code}" size="50"/></p>
+           <p><input type="text" name="code" id="code" value="${shopDetail.code}" size="50"/></p>
         </td>
       </tr>
      <tr>
@@ -203,7 +203,7 @@
           <div align="right">汇款地址:</div>
        </td>
         <td>
-           <p><input type="text" name="ymaddr" id="ymaddr" value="${bean.ymaddr}" size="50"/></p>
+           <p><input type="text" name="ymaddr" id="ymaddr" value="${shopDetail.ymaddr}" size="50"/></p>
         </td>
       </tr>
      <tr>
@@ -211,7 +211,7 @@
           <div align="right">邮递接收人: </div>
        </td>
         <td>
-           <p><input type="text" name="ymname" id="ymname" value="${bean.ymname}" size="50"/></p>
+           <p><input type="text" name="ymname" id="ymname" value="${shopDetail.ymname}" size="50"/></p>
         </td>
       </tr>
       <tr>
@@ -221,7 +221,7 @@
         <td><!-- see BusinessService getColorTyle -->
            	  <select id="colorStyle" name="colorStyle">
 				  <option:optionGroup type="select" required="true" cache="true"
-	                beanName="COLOR_STYLE" selectedValue="${bean.colorStyle}"/>
+	                beanName="COLOR_STYLE" selectedValue="${shopDetail.colorStyle}"/>
 	            </select>
         </td>
       </tr>    
@@ -233,7 +233,7 @@
         <td>
               <select id="langStyle" name="langStyle">
 				  <option:optionGroup type="select" required="true" cache="true"
-	                beanName="LANG_STYLE" selectedValue="${bean.langStyle}"/>
+	                beanName="LANG_STYLE" selectedValue="${shopDetail.langStyle}"/>
 	            </select>
         </td>
       </tr>
@@ -262,7 +262,7 @@
           <div align="right">简要描述: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="briefDesc" id="briefDesc" value="${bean.briefDesc}" size="50"/></p>
+           <p><input type="text" name="briefDesc" id="briefDesc" value="${shopDetail.briefDesc}" size="50"/></p>
         </td>
       </tr>
      <tr>
@@ -271,7 +271,7 @@
        </td>
         <td>
            <p>
-              <textarea  name="detailDesc" id="detailDesc">${bean.detailDesc}</textarea>
+              <textarea  name="detailDesc" id="detailDesc">${shopDetail.detailDesc}</textarea>
            </p>
         </td>
       </tr>
@@ -284,62 +284,62 @@
         <auth:auth ifAllGranted="F_VIEW_ALL_DATA,F_OPERATOR">
                 <font color="red">当前状态：
         		<option:optionGroup type="label" required="true" cache="true"
-	                beanName="SHOP_STATUS" selectedValue="${bean.status}"/></font>&nbsp;&nbsp;
+	                beanName="SHOP_STATUS" selectedValue="${shopDetail.status}"/></font>&nbsp;&nbsp;
         <c:choose>
-        	<c:when test="${bean.status == -1 }">
-        	         <a href='javascript:auditShop("${bean.userId}","${bean.shopId}",1)'>同意申请</a>
-        	         <a href='javascript:auditShop("${bean.userId}","${bean.shopId}",-2)'>拒绝申请</a>
+        	<c:when test="${shopDetail.status == -1 }">
+        	         <a href='javascript:auditShop("${shopDetail.userId}","${shopDetail.shopId}",1)'>同意申请</a>
+        	         <a href='javascript:auditShop("${shopDetail.userId}","${shopDetail.shopId}",-2)'>拒绝申请</a>
         	</c:when>
         	<c:otherwise>
-        	         <a href='javascript:auditShop("${bean.userId}","${bean.shopId}",1)'>上线</a>
-        	         <a href='javascript:auditShop("${bean.userId}","${bean.shopId}",0)'>下线</a>
-        	         <a href='javascript:auditShop("${bean.userId}","${bean.shopId}",-3)'>违规关闭（用户将不能登录后台）</a>
+        	         <a href='javascript:auditShop("${shopDetail.userId}","${shopDetail.shopId}",1)'>上线</a>
+        	         <a href='javascript:auditShop("${shopDetail.userId}","${shopDetail.shopId}",0)'>下线</a>
+        	         <a href='javascript:auditShop("${shopDetail.userId}","${shopDetail.shopId}",-3)'>违规关闭（用户将不能登录后台）</a>
         	</c:otherwise>
         </c:choose>
         </auth:auth>
         
         <!-- for user 已经审核成功的 -->
-        <c:if test="${bean.status != -1 && bean.status != -3 }">
+        <c:if test="${shopDetail.status != -1 && shopDetail.status != -3 }">
         <auth:auth ifNotGranted="F_VIEW_ALL_DATA">
                 <select id="status" name="status">
 				  <option:optionGroup type="select" required="true" cache="true"
-	                beanName="SHOP_STATUS" selectedValue="${bean.status}" exclude="-1,-2,-3"/>
+	                beanName="SHOP_STATUS" selectedValue="${shopDetail.status}" exclude="-1,-2,-3"/>
 	            </select>
         </auth:auth>
         </c:if>
         <!-- 还没有审核 -->
-        <c:if test="${bean.status == -1 || bean.status == -3}">
+        <c:if test="${shopDetail.status == -1 || shopDetail.status == -3}">
          <auth:auth ifNotGranted="F_VIEW_ALL_DATA">
         <font color="red">
         		<option:optionGroup type="label" required="true" cache="true"
-	                beanName="SHOP_STATUS" selectedValue="${bean.status}"/></font>
+	                beanName="SHOP_STATUS" selectedValue="${shopDetail.status}"/></font>
 	     </auth:auth>
         </c:if>
         
         </td>
       </tr>  
       
-      <c:if test="${bean.addtime!=null}">
+      <c:if test="${shopDetail.addtime!=null}">
      <tr>
         <td>
           <div align="right">修改时间: <font color="ff0000">*</font></div>
        </td>
-        <td><fmt:formatDate value="${bean.modifyTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+        <td><fmt:formatDate value="${shopDetail.modifyTime}" pattern="yyyy-MM-dd HH:mm"/></td>
       </tr>
       </c:if>
-      <c:if test="${bean.addtime!=null}">
+      <c:if test="${shopDetail.addtime!=null}">
      <tr>
         <td>
           <div align="right">创建时间: <font color="ff0000">*</font></div>
        </td>
-        <td><fmt:formatDate value="${bean.addtime}" pattern="yyyy-MM-dd HH:mm"/></td>
+        <td><fmt:formatDate value="${shopDetail.addtime}" pattern="yyyy-MM-dd HH:mm"/></td>
       </tr>
       </c:if>
       <tr>
       	<td><div align="right">商城图片</div></td>
       	<td><p><input type="file" name="file" id="file"/><br>
-			<c:if test="${bean.shopPic != null}">
-              <img src="${pageContext.request.contextPath}/photoserver/photo/${bean.shopPic}" height="150" width="200"/> &nbsp;&nbsp;&nbsp;
+			<c:if test="${shopDetail.shopPic != null}">
+              <img src="${pageContext.request.contextPath}/photoserver/photo/${shopDetail.shopPic}" height="150" width="200"/> &nbsp;&nbsp;&nbsp;
              </c:if>
 						</p></td>
       </tr>
@@ -349,18 +349,18 @@
        </td>
         <td>
            <p>
-           <c:if test="${bean.type != null}">
+           <c:if test="${shopDetail.type != null}">
               网店类型：
-             <option:optionGroup type="label" required="false" cache="true" beanName="SHOP_TYPE" selectedValue="${bean.type}"/><br><br>
+             <option:optionGroup type="label" required="false" cache="true" beanName="SHOP_TYPE" selectedValue="${shopDetail.type}"/><br><br>
             </c:if>
-            <c:if test="${bean.idCardNum != null}">
-              身份证： ${bean.idCardNum}<br><br>
+            <c:if test="${shopDetail.idCardNum != null}">
+              身份证： ${shopDetail.idCardNum}<br><br>
             </c:if>
-            <c:if test="${bean.idCardPic != null}">
-              身份证照片： <img src="${pageContext.request.contextPath}/photoserver/photo/${bean.idCardPic }" height="150" width="200"/> &nbsp;&nbsp;&nbsp;
+            <c:if test="${shopDetail.idCardPic != null}">
+              身份证照片： <img src="${pageContext.request.contextPath}/photoserver/photo/${shopDetail.idCardPic }" height="150" width="200"/> &nbsp;&nbsp;&nbsp;
               </c:if>
-              <c:if test="${bean.trafficPic != null}">
-             营业执照照片： <img src="${pageContext.request.contextPath}/photoserver/photo/${bean.trafficPic }" height="150" width="200"/><br>
+              <c:if test="${shopDetail.trafficPic != null}">
+             营业执照照片： <img src="${pageContext.request.contextPath}/photoserver/photo/${shopDetail.trafficPic }" height="150" width="200"/><br>
              </c:if>
            </p>
         </td>

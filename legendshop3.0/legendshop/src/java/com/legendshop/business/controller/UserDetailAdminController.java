@@ -140,12 +140,12 @@ public class UserDetailAdminController extends BaseController{
 	 */
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, UserDetail userDetail) {
-		String search = request.getParameter("search") == null ? "" : request.getParameter("search");
+		String userName = request.getParameter("userName") == null ? "" : request.getParameter("userName").trim();
 		String enabled = request.getParameter("enabled") == null ? "" : request.getParameter("enabled");
 		String haveShop = request.getParameter("haveShop") == null ? "" : request.getParameter("haveShop");
-		String userMail = request.getParameter("userMail") == null ? "" : request.getParameter("userMail");
+		String userMail = request.getParameter("userMail") == null ? "" : request.getParameter("userMail").trim();
 		
-		log.debug("search = {},enabled = {}, haveShop = {}, userMail ={} ", new Object[]{search,enabled,haveShop ,userMail} );
+		log.debug("search = {},enabled = {}, haveShop = {}, userMail ={} ", new Object[]{userName,enabled,haveShop ,userMail} );
 
 			Map<String, String> map = new HashMap<String, String>();
 			SqlQuery hqlQuery = new SqlQuery(60, curPageNO);
@@ -156,9 +156,9 @@ public class UserDetailAdminController extends BaseController{
 				map.put("haveShop", "and u.shop_id is null");
 			}
 
-			if (!AppUtils.isBlank(search)) {
-				map.put("userName", search);
-				hqlQuery.addParams("%" + search + "%");
+			if (!AppUtils.isBlank(userName)) {
+				map.put("userName", userName);
+				hqlQuery.addParams("%" + userName + "%");
 			}
 
 			if (!AppUtils.isBlank(enabled)) {
@@ -175,17 +175,17 @@ public class UserDetailAdminController extends BaseController{
 			if (!CommonServiceUtil.isDataSortByExternal(hqlQuery, request, map)) {
 				map.put(Constants.ORDER_INDICATOR, "order by u.user_regtime desc");
 			}
-			String QueryNsortCount = ConfigCode.getInstance().getCode("biz.QueryUserDetailCount", map);
-			String QueryNsort = ConfigCode.getInstance().getCode("biz.QueryUserDetail", map);
-			hqlQuery.setAllCountString(QueryNsortCount);
-			hqlQuery.setQueryString(QueryNsort);
+			String totalUserDetail = ConfigCode.getInstance().getCode("biz.QueryUserDetailCount", map);
+			String userDetailSQL = ConfigCode.getInstance().getCode("biz.QueryUserDetail", map);
+			hqlQuery.setAllCountString(totalUserDetail);
+			hqlQuery.setQueryString(userDetailSQL);
 	
 			LSResponse lsResponse = (LSResponse) request.getSession().getServletContext().getAttribute(
 					AttributeKeys.LEGENSHOP_LICENSE);
 			request.setAttribute("supportOpenShop", shopDetailService.isSupportOpenShop(lsResponse));
 			PageSupport ps = userDetailService.getUserDetailList(hqlQuery);
 			ps.setResultList(convert(ps.getResultList()));
-			request.setAttribute("search", search);
+			request.setAttribute("userName", userName);
 			request.setAttribute("userMail", userMail);
 			request.setAttribute("enabled", enabled);
 			request.setAttribute("haveShop", haveShop);

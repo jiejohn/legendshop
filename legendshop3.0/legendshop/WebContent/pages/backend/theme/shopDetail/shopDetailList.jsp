@@ -25,25 +25,25 @@
     </table>
         <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
         <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
-           商城名称&nbsp;<input type="text" name="storeName" maxlength="50" value="${bean.storeName}" size="30"/>
+           商城名称&nbsp;<input type="text" name="storeName" maxlength="50" value="${shopDetail.storeName}" size="30"/>
            &nbsp;类型&nbsp;	
            <select id="type" name="type">
            <option:optionGroup type="select" required="false" cache="true"
-	                beanName="SHOP_TYPE" selectedValue="${bean.type}"/>
+	                beanName="SHOP_TYPE" selectedValue="${shopDetail.type}"/>
 	        </select>
 	       &nbsp;风格&nbsp;	
            <select id="colorStyle" name="colorStyle">
 				  <option:optionGroup type="select" required="false" cache="true"
-	                beanName="COLOR_STYLE" selectedValue="${bean.colorStyle}"/>
+	                beanName="COLOR_STYLE" selectedValue="${shopDetail.colorStyle}"/>
 	        </select>
 	      &nbsp;状态&nbsp;
 	      <select id="status" name="status">
 	      <option:optionGroup type="select" required="false" cache="true"
-	                beanName="SHOP_STATUS" selectedValue="${bean.status}" />
+	                beanName="SHOP_STATUS" selectedValue="${shopDetail.status}" />
 	        </select>	
             <input type="submit" value="搜索"/>
              <c:if test="${fn:length(list) == 0}">
-            <input type="button" value="创建商城" onclick='window.location="${pageContext.request.contextPath}/pages/shopDetail/shopDetail.jsp"'/>
+            <input type="button" value="创建商城" onclick='window.location="${pageContext.request.contextPath}/admin/shopDetail/load${applicationScope.WEB_SUFFIX}"'/>
             </c:if>
             </auth:auth>
     </form>
@@ -54,7 +54,7 @@
       <display:column title="顺序" class="orderwidth"><%=offset++%></display:column>
       <c:if test="${'C2C' == applicationScope.BUSINESS_MODE }">
       <display:column title="商城名称">
-      	<a href="${pageContext.request.contextPath}/shop/${item.storeName}">${item.storeName}</a>
+      	<a href="${pageContext.request.contextPath}/shop/${item.storeName}${applicationScope.WEB_SUFFIX}">${item.storeName}</a>
       </display:column>
       </c:if>
       <display:column title="网站名称" property="sitename">

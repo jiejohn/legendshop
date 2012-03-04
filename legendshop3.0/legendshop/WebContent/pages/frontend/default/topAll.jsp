@@ -73,7 +73,7 @@
 	     <tr>
 		     <td align="left">
 		    <%if(PropertiesUtil.getDefaultShopName()!=null && PropertiesUtil.getDefaultShopName().length() > 0){ %>
-		   		<a href="${pageContext.request.contextPath}/shop/<%=PropertiesUtil.getDefaultShopName() %>"><fmt:message key="shop.index"/></a>
+		   		<a href="${pageContext.request.contextPath}/shop/<%=PropertiesUtil.getDefaultShopName() %>${applicationScope.WEB_SUFFIX}"><fmt:message key="shop.index"/></a>
 		   <%} %>
 		   <a href="${pageContext.request.contextPath}/all${applicationScope.WEB_SUFFIX}"><fmt:message key="search"/></a></td>
 		     <td align="right">
@@ -85,7 +85,7 @@
 						<a href="${pageContext.request.contextPath}/logout.jsp" target="_parent"><fmt:message key="logout"/></a>
        			        <auth:auth ifAnyGranted="F_ADMIN">
        			        	<c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
-       			                <a href="${pageContext.request.contextPath}/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}"><fmt:message key="myShop"/></a>
+       			                <a href="${pageContext.request.contextPath}/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}${applicationScope.WEB_SUFFIX}"><fmt:message key="myShop"/></a>
        			             </c:if>
 					            <a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}"><fmt:message key="system.management"/></a>
 					    </auth:auth>

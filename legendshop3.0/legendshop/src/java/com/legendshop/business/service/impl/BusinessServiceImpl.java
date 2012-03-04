@@ -663,64 +663,50 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 * @see com.legendshop.business.service.impl.BusinessService#nsort(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	public String getSecSort(HttpServletRequest request, HttpServletResponse response) {
-		String sortId = request.getParameter("sortId");
-		String nsortId = request.getParameter("nsortId");
-		String subNsortId = request.getParameter("subNsortId");
+	public String getSecSort(HttpServletRequest request, HttpServletResponse response,Long sortId,Long nsortId,Long subNsortId) {
 		String curPageNO = request.getParameter("curPageNO");
 		if (AppUtils.isBlank(curPageNO)) {
 			curPageNO = "1";
 		}
-		String myaction = "javascript:pager";
-		if ((sortId == null) || (nsortId == null)) {
-			log.error("sortId or nsortId is null! ");
-			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
-		}
-		// 数字转换
-		Long IsortId = convertStringToInteger(sortId);
-		Long InsortId = convertStringToInteger(nsortId);
-		Long IsubBsortId = convertStringToInteger(subNsortId);
-		if ((IsortId == null) || (InsortId == null)) {
-			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
-		}
-		String userName = UserManager.getUsername(request.getSession());
+
+		String userName = UserManager.getUsername(request);
 		log.info("{},{},{},{},{},nsort", new Object[] { request.getRemoteAddr(), userName == null ? "" : userName,
-				getSessionAttribute(request, Constants.SHOP_NAME), IsortId, InsortId });
-		Sort sort = sortDao.getSort(IsortId);
+				getSessionAttribute(request, Constants.SHOP_NAME), sortId, nsortId });
+		Sort sort = sortDao.getSort(sortId);
 		if (sort != null) {
 			setShopName(request, response, sort.getUserName());
 			setAdvertisement(sort.getUserName(), request);
 			request.setAttribute("sort", sort);
 		}
-		Nsort nsort = nsortDao.getNsort(InsortId);
+		Nsort nsort = nsortDao.getNsort(nsortId);
 		if ((nsort != null) && !AppUtils.isBlank(nsort.getSubSort())) {
 			request.setAttribute("hasSubSort", true);
 		}
-		if (IsubBsortId != null) {
-			Nsort subNsort = nsortDao.getNsort(IsubBsortId);
+		if (subNsortId != null) {
+			Nsort subNsort = nsortDao.getNsort(subNsortId);
 			request.setAttribute("subNsort", subNsort);
 			if (subNsort != null) {
 				request.setAttribute("CurrentSubNsortId", subNsort.getNsortId());
 			}
 		}
 
-		List<Nsort> nsortList = nsortDao.getNsortList(IsortId);
+		List<Nsort> nsortList = nsortDao.getNsortList(sortId);
 		request.setAttribute("nsort", nsort);
 
 		request.setAttribute("nsortList", nsortDao.getOthorNsort(nsortList));
-		request.setAttribute("subNsortList", nsortDao.getOthorSubNsort(InsortId, nsortList));
+		request.setAttribute("subNsortList", nsortDao.getOthorSubNsort(nsortId, nsortList));
 		if (nsort != null) {
 			request.setAttribute("CurrentNsortId", nsort.getNsortId());
 		}
 		try {
 			// Qbc查找方式
-			CriteriaQuery cq = new CriteriaQuery(Product.class, curPageNO, myaction);
+			CriteriaQuery cq = new CriteriaQuery(Product.class, curPageNO);
 			cq.setCurPage(curPageNO);
 			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
 			cq.addOrder("desc", "prodId");
-			cq.eq("sortId", IsortId);
-			cq.eq("nsortId", InsortId);
-			cq.eq("subNsortId", IsubBsortId);
+			cq.eq("sortId", sortId);
+			cq.eq("nsortId", nsortId);
+			cq.eq("subNsortId", subNsortId);
 			cq.add();
 			PageSupport ps = productDao.getProdDetail(cq);
 			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
@@ -732,7 +718,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			log.error("getProdDetail", e);
 			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
 		}
-		return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+		return PathResolver.getPath(request, PageLetEnum.NSORT);
 	}
 
 	// 查看商品

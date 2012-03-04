@@ -36,7 +36,7 @@
          export="true" class="${tableclass}" style="width:100%">
       <display:column title="顺序" class="orderwidth"><%=offset++%></display:column>
       <display:column title="加盟商城">
-      	<a href="${pageContext.request.contextPath}/shop/${item.friendId}" target="_blank">${item.friendId}</a>
+      	<a href="${pageContext.request.contextPath}/shop/${item.friendId}${applicationScope.WEB_SUFFIX}" target="_blank">${item.friendId}</a>
       </display:column>
       <display:column title="加盟商城说明" property="friendName"></display:column>
       <display:column title="显示顺序" property="displayOrder" sortable="true"></display:column>

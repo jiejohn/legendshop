@@ -183,11 +183,43 @@ public class BusinessController extends BaseController {
 	 *            the request
 	 * @param response
 	 *            the response
+	 * @param sortId
+	 *            the sort id
+	 * @param nsortId
+	 *            the nsort id
+	 * @return the string
+	 */
+	@RequestMapping("/nsort/{sortId}-{nsortId}")
+	public String nsort(HttpServletRequest request, HttpServletResponse response,@PathVariable Long sortId,@PathVariable Long nsortId) {
+		if (nsortId == null|| sortId == null) {
+			log.error("sortId or nsortId is null! ");
+			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+		}
+		return businessService.getSecSort(request, response,sortId,nsortId,null);
+	}
+	
+	/**
+	 * Nsort.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param sortId
+	 *            the sort id
+	 * @param nsortId
+	 *            the nsort id
+	 * @param subNsortId
+	 *            the sub nsort id
 	 * @return the string
 	 */
 	@RequestMapping("/nsort")
-	public String nsort(HttpServletRequest request, HttpServletResponse response) {
-		return businessService.getSecSort(request, response);
+	public String nsort(HttpServletRequest request, HttpServletResponse response,Long sortId, Long nsortId,Long subNsortId) {
+		if (nsortId == null|| sortId == null) {
+			log.error("sortId or nsortId is null! ");
+			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+		}
+		return businessService.getSecSort(request, response,sortId,nsortId,subNsortId);
 	}
 	
 	/**
@@ -425,6 +457,17 @@ public class BusinessController extends BaseController {
 		return businessService.saveUserReg(request, response,userForm);
 	}
 	
+	/**
+	 * Update account.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param userForm
+	 *            the user form
+	 * @return the string
+	 */
 	@RequestMapping("/updateAccount")
 	public String updateAccount(HttpServletRequest request, HttpServletResponse response,UserForm userForm) {
 		return businessService.updateAccount(request, response,userForm);
@@ -508,8 +551,8 @@ public class BusinessController extends BaseController {
 	 *            the request
 	 * @param response
 	 *            the response
-	 * @param form
-	 *            the form
+	 * @param shopDetail
+	 *            the shop detail
 	 * @return the string
 	 */
 	@RequestMapping("/addShop")
@@ -573,11 +616,37 @@ public class BusinessController extends BaseController {
 		return businessService.getSort(request, response, curPageNO, sortId);
 	}
 	
+	/**
+	 * Sort by id.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param curPageNO
+	 *            the cur page no
+	 * @param sortId
+	 *            the sort id
+	 * @return the string
+	 */
 	@RequestMapping("/sort")
 	public String sortById(HttpServletRequest request, HttpServletResponse response, String curPageNO,Long sortId ) {
 		return businessService.getSort(request, response, curPageNO, sortId);
 	}
 	
+	/**
+	 * Shop.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param curPageNO
+	 *            the cur page no
+	 * @param shopName
+	 *            the shop name
+	 * @return the string
+	 */
 	@RequestMapping("/shop/{shopName}")
 	public String shop(HttpServletRequest request, HttpServletResponse response, String curPageNO, @PathVariable String shopName) {
 		request.setAttribute(Constants.SHOP_NAME, shopName);
@@ -598,6 +667,19 @@ public class BusinessController extends BaseController {
 		return PathResolver.getPath(request, PageLetEnum.AFTER_OPERATION);
 	}
 	
+	/**
+	 * Product gallery.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param prodId
+	 *            the prod id
+	 * @return the string
+	 * @throws Exception
+	 *             the exception
+	 */
 	@RequestMapping("/productGallery/{prodId}")
 	public String productGallery(HttpServletRequest request, HttpServletResponse response, @PathVariable Long prodId) throws Exception {
 		if (AppUtils.isBlank(prodId)) {

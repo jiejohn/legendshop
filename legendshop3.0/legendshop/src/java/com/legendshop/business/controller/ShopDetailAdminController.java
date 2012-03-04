@@ -54,15 +54,6 @@ public class ShopDetailAdminController extends BaseController {
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(ShopDetailAdminController.class);
 	
-	/** The LIS t_ page. */
-	public static String LIST_PAGE = "/shopDetail/shopDetailList";
-	
-	/** The EDI t_ page. */
-	public static String EDIT_PAGE = "/shopDetail/shopDetail";
-	
-	/** The LIS t_ query. */
-	public static String LIST_QUERY = "/admin/shopDetail/query";
-	
 	/** The shop detail service. */
 	@Autowired
 	private ShopDetailService shopDetailService;
@@ -104,7 +95,7 @@ public class ShopDetailAdminController extends BaseController {
 		cq.add();
 		PageSupport ps = shopDetailService.getShopDetail(cq);
 		savePage(ps, request);
-		request.setAttribute("bean", shopDetail);
+		request.setAttribute("shopDetail", shopDetail);
 		return PathResolver.getPath(request, PageLetEnum.SHOP_DETAIL_LIST_PAGE);
 	}
 
@@ -209,8 +200,23 @@ public class ShopDetailAdminController extends BaseController {
 		if (shopDetail != null) {
 			checkPrivilege(request, UserManager.getUsername(request), shopDetail.getStoreName());
 		}
-		request.setAttribute("bean", shopDetail);
+		
+		request.setAttribute("shopDetail", shopDetail); 
 		request.setAttribute("id", request.getParameter("userId"));
+		return PathResolver.getPath(request, PageLetEnum.SHOP_DETAIL_EDIT_PAGE);
+	}
+	
+	/**
+	 * Load.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the string
+	 */
+	@RequestMapping(value = "/load")
+	public String load(HttpServletRequest request, HttpServletResponse response) {
 		return PathResolver.getPath(request, PageLetEnum.SHOP_DETAIL_EDIT_PAGE);
 	}
 

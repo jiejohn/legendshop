@@ -140,9 +140,15 @@ public interface BusinessService extends BaseService{
 	 *            the request
 	 * @param response
 	 *            the response
+	 * @param sortId
+	 *            the sort id
+	 * @param nsortId
+	 *            the nsort id
+	 * @param subNsortId
+	 *            the sub nsort id
 	 * @return the string
 	 */
-	public abstract String getSecSort(HttpServletRequest request, HttpServletResponse response);
+	public abstract String getSecSort(HttpServletRequest request, HttpServletResponse response,Long sortId,Long nsortId,Long subNsortId);
 
 	// 查看商品
 	/**

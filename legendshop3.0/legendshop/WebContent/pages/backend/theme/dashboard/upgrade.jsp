@@ -25,10 +25,10 @@
 		 &nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a>
 		 <br>
 		<c:if test="${postUpgrade}">
-			升级成功
+			升级成功,请关闭本页！
 		</c:if>
 	</form>
-		<script type="text/javascript">	
+	<script type="text/javascript">	
 		window.onload = function(){
 		changeRandImg('${pageContext.request.contextPath}');
     }

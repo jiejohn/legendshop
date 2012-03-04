@@ -16,8 +16,14 @@ import net.fckeditor.connector.impl.LocalConnector;
 import net.fckeditor.handlers.ResourceType;
 import net.fckeditor.requestcycle.ThreadLocalData;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
 
@@ -32,7 +38,7 @@ import com.legendshop.core.helper.PropertiesUtil;
  * ----------------------------------------------------------------------------
  */
 public class ContextConnector extends LocalConnector {
-
+	private final Logger log = LoggerFactory.getLogger(ContextConnector.class);
 	// 此方法中可以对文件重命名
 	/* (non-Javadoc)
 	 * @see net.fckeditor.connector.impl.AbstractLocalFileSystemConnector#fileUpload(net.fckeditor.handlers.ResourceType, java.lang.String, java.lang.String, java.io.InputStream)
@@ -40,6 +46,10 @@ public class ContextConnector extends LocalConnector {
 	@Override
 	public String fileUpload(ResourceType type, String currentFolder, String fileName, InputStream inputStream)
 			throws InvalidCurrentFolderException, WriteException {
+		String userName = UserManager.getUsername(ThreadLocalData.getRequest());
+		if (userName == null) {
+			throw new PermissionException("did not logon yet!",EntityCodes.RIGHT);
+		}
 		String name = fileName;
 		// 重命名操作在这里进行
 		try {
@@ -48,16 +58,11 @@ public class ContextConnector extends LocalConnector {
 				throw new RuntimeException("File is 0 or File Size exceeded MAX_FILE_SIZE: " + size);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("fileUpload error",e);
 		}
 		
-		String userName = UserManager.getUsername(ThreadLocalData.getRequest());
-		if (userName == null) {
-			throw new RuntimeException("You are no logging!");
-		}
-
-		String path = new StringBuffer().append(PropertiesUtil.getBigFilesAbsolutePath()).append("/").append(userName)
-				.append("/fckeditor/image/").append(currentFolder).toString();
+		String path = new StringBuffer().append(PropertiesUtil.getBigFilesAbsolutePath()).append("/").append(userName).append(AttributeKeys.EDITOR_PIC_PATH)
+				.append("/image/").append(currentFolder).toString();
 		FileProcessor.uploadFile(inputStream, path, "", fileName, true, false);
 		return name;
 	}

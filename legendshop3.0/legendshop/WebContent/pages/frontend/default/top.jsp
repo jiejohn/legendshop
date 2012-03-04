@@ -88,7 +88,7 @@
 	<ul id="topnav">
 	<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
 	   <c:if test="${shopExists && 'C2C' == applicationScope.BUSINESS_MODE}">
-               <li><a href="${pageContext.request.contextPath}/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}"><fmt:message key="myShop"/></a></li>
+               <li><a href="${pageContext.request.contextPath}/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}${applicationScope.WEB_SUFFIX}"><fmt:message key="myShop"/></a></li>
         </c:if>
 	   <auth:auth ifAnyGranted="F_ADMIN">
 	   	<c:if test="${canbeLeagueShop}"><li><a href='javascript:addMyLeague("${sessionScope.SPRING_SECURITY_LAST_USERNAME}","${sessionScope.shopName}")'><fmt:message key="addLeague"/><fmt:message key="this.shop"/></a></li></c:if>
@@ -158,7 +158,7 @@
 		</div>
 		<div id="topcatalog">
 			<h2>
-			    <a href='#' onclick="javascript:bookmark('${shopDetail.storeName} - ${shopDetail.sitename}','${DOMAIN_NAME}/shop/${shopDetail.storeName}');">
+			    <a href='#' onclick="javascript:bookmark('${shopDetail.storeName} - ${shopDetail.sitename}','${DOMAIN_NAME}/shop/${shopDetail.storeName}${applicationScope.WEB_SUFFIX}');">
                     <fmt:message key="favorite"/>
                 </a>
 			</h2>

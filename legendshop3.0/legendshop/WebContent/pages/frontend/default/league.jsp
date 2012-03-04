@@ -23,7 +23,7 @@
                                                         <tr>
                                                             <td align="center" >
                                                             <div id="apple">
-                                                             <a href="${pageContext.request.contextPath}/shop/${league.friendId}">
+                                                             <a href="${pageContext.request.contextPath}/shop/${league.friendId}${applicationScope.WEB_SUFFIX}">
                                                                     <img src="${pageContext.request.contextPath}/photoserver/photo/${league.banner}" 
                                                                         height="65px" style="margin: 2px" title="${league.province}/${league.city}/${league.area}/${league.friendId}">
                                                              </a>

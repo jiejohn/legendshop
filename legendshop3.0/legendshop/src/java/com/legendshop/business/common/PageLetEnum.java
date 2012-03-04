@@ -142,7 +142,7 @@ public enum PageLetEnum implements PathEnum{
 	
 	IJPG_EDIT_PAGE("/indexjpg/indexjpg",BACK_PAGE),
 	
-	UPGRADE_PAGE("/upgrade",BACK_PAGE),
+	UPGRADE_PAGE("/dashboard/upgrade",BACK_PAGE),
 	
 	LOGIN_HIST_LIST_PAGE("/loginhistory/loginHistoryList",BACK_PAGE),
 	

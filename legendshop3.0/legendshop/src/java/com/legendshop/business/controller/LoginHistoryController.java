@@ -42,12 +42,6 @@ public class LoginHistoryController extends BaseController{
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(LoginHistoryController.class);
 	
-	/** The LIS t_ page. */
-	public static String LIST_PAGE = "/loginhistory/loginHistoryList";
-	
-	/** The SU m_ page. */
-	public static String SUM_PAGE = "/loginhistory/loginHistorySum";
-
 	/** The login history service. */
 	@Autowired
 	private  LoginHistoryService loginHistoryService;

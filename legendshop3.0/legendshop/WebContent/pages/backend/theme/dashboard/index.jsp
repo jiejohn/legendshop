@@ -94,10 +94,10 @@
 								</td>
 								<td style="color: #BD1205;">
 									当前版本：${licenseDesc}
-									<c:if test="${applicationScope.LEGENSHOP_LICENSE != null && applicationScope.LEGENSHOP_LICENSE.expireDate != null && '' != applicationScope.LEGENSHOP_LICENSE.expireDate}">
-										, 有效期至：${applicationScope.LEGENSHOP_LICENSE.expireDate}
-									</c:if>
 									<c:if test="${needUpgrade}">
+										<c:if test="${applicationScope.LEGENSHOP_LICENSE != null && applicationScope.LEGENSHOP_LICENSE.expireDate != null && '' != applicationScope.LEGENSHOP_LICENSE.expireDate}">
+											, 有效期至：${applicationScope.LEGENSHOP_LICENSE.expireDate}
+										</c:if>
 										<a href='javascript:openScript("${pageContext.request.contextPath}/admin/license/upgrade${applicationScope.WEB_SUFFIX}","320","150")'>[升级]</a>
 									</c:if>
 								</td>

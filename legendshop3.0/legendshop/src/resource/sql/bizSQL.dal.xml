@@ -111,11 +111,14 @@
         			order by prod.modifyDate desc
             ]]></Method>
              <Method name="QueryUserDetailCount">
-			         select count(*) from ls_usr_detail u, ls_user s where u.user_id = s.id
-					{? and u.user_name like $userName$}
-					{? and u.user_mail like $userMail$}
-					{? and s.enabled = $enabled$}
-					{$haveShop$}
+	                select count(*) from
+                    (select ud.user_id, ud.user_name, ud.nick_name, ud.user_mail, ud.user_regip, ud.modify_time, 
+                    ud.user_regtime,s.shop_id from ls_usr_detail ud left join ls_shop_detail s on ud.user_id = s.user_id  where 1=1 
+                    {? and ud.user_name like $userName$}
+					{? and ud.user_mail like $userMail$}
+                    ) u,ls_user s where u.user_id = s.id 				
+                    {? and s.enabled = $enabled$}
+                    { $haveShop$ }
             </Method>
             <Method name="QueryUserDetail">
 	                select  u.user_id, u.user_name, u.nick_name, u.user_mail, u.user_regip, u.modify_time, u.user_regtime,s.enabled, u.shop_id from
@@ -125,7 +128,7 @@
 					{? and ud.user_mail like $userMail$}
                     ) u,ls_user s where u.user_id = s.id 				
                     {? and s.enabled = $enabled$}
-                    {$haveshop$}                  
+                    { $haveShop$ }                  
                     {! order by u.user_regtime desc||$orderIndicator$}
             </Method>
             <Method name="QueryUserDetailCount_HQL_BACKUP">
