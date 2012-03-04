@@ -403,7 +403,8 @@ public class UserController extends BaseController {
 		myaction = appendParamToURI(myaction, "enabled", enabled);
 			// Qbc查找方式
 			CriteriaQuery cq = new CriteriaQuery(User.class, curPageNO, myaction);
-			cq.setPageSize(1);
+//			cq.setPageSize(1);
+			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 			// cq.eq("rightId","002");//0条件
 
 			// cq.like("rightUrl","u%");//2
@@ -423,13 +424,13 @@ public class UserController extends BaseController {
 			request.setAttribute("enabled", enabled);
 			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
 			request.setAttribute("offset", new Integer(ps.getOffset() + 1));
-			if (ps.hasMutilPage()) {
-				request.setAttribute("toolBar", ps.getToolBar());
-			}
-			if (!AppUtils.isBlank(ps.getResultList())) {
-				request.setAttribute("list", ps.getResultList());
-			}
-
+//			if (ps.hasMutilPage()) {
+//				request.setAttribute("toolBar", ps.getToolBar());
+//			}
+//			if (!AppUtils.isBlank(ps.getResultList())) {
+//				request.setAttribute("list", ps.getResultList());
+//			}
+			savePage(ps, request);
 		return PathResolver.getPath(request, PageLetEnum.USER_LIST_PAGE);
 	}
 
