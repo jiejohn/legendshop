@@ -12,7 +12,7 @@
   		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
   		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
 		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-	<script language="JavaScript" type="text/javascript">
+<script language="JavaScript" type="text/javascript">
 <!--
   function confirmDelete()
 	{
@@ -28,6 +28,11 @@
 			DWRUtil.setValues({enabled:statusValue});
 		}	
 
+		function pager(curPageNO){
+			document.getElementById("curPageNO").value=curPageNO;
+			document.getElementById("form1").submit();
+		}  
+        
 //-->
 </script>
 </head>
@@ -38,8 +43,8 @@
 	%>
 	
 	<br>
-	<form action="${pageContext.request.contextPath}/member/user/usersList${applicationScope.WEB_SUFFIX}">
-    <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
+	<form action="${pageContext.request.contextPath}/member/user/usersList${applicationScope.WEB_SUFFIX}" id="form1">
+    <input type="hidden" id="curPageNO" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
 			&nbsp; 用户名
 			<input type="text" id="search" name="search" maxlength="50" value="<%=request.getAttribute("search")%>" />
 				&nbsp;状态 
@@ -48,7 +53,7 @@
 			    	<option value="1">有效</option>	
 	      			<option value="0" >无效</option>
 			</select>
-			<input type="submit" value="添加"/>
+			<input type="submit" value="搜索"/>
 	</form>
 	 <div align="center">
         <%@ include file="/pages/common/messages.jsp"%>
