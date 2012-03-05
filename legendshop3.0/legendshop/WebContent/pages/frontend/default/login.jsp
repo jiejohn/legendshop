@@ -75,7 +75,7 @@
 	            	<tr><td align="left"><img src="${pageContext.request.contextPath}/img/004.gif"/><fmt:message key="not.member.hint"/>,&nbsp;<a href="${pageContext.request.contextPath}/reg${applicationScope.WEB_SUFFIX}"><fmt:message key="regFree"/></a></td></tr>
 	            	<tr><td align="left"><img src="${pageContext.request.contextPath}/img/004.gif"/><fmt:message key="goto.home"/>&nbsp;<a href="${pageContext.request.contextPath}/index${applicationScope.WEB_SUFFIX}"><fmt:message key="shop.index"/></a></td></tr>
 	            	<tr><td align="left"><img src="${pageContext.request.contextPath}/img/004.gif"/><fmt:message key="forget.password.hint"/>
-	            	<a href="${pageContext.request.contextPath}/jsp/resetpassword.jsp" rel="superbox[iframe][300x200]">&nbsp;<fmt:message key="find.my.password"/></a>	   	
+	            	<a href="${pageContext.request.contextPath}/resetpassword${applicationScope.WEB_SUFFIX}" rel="superbox[iframe][300x200]">&nbsp;<fmt:message key="find.my.password"/></a>	   	
 	            	</td>
 	            	</tr>
             	</table>

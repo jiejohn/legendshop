@@ -97,7 +97,7 @@ public enum PageLetEnum implements PathEnum{
 	
 	CASH_SAVE("/cashsave",FRONT_PAGE),
 	
-	
+	RESETPASSWORD("/resetpassword",FRONT_PAGE),
 	
 	/////////////backend page
 	ADV_LIST_PAGE("/advertisement/advertisementList",BACK_PAGE),

@@ -17,11 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.action.form.SearchForm;
-import com.legendshop.business.action.form.UserForm;
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.form.SearchForm;
+import com.legendshop.business.form.UserForm;
 import com.legendshop.business.service.BusinessService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -686,5 +686,21 @@ public class BusinessController extends BaseController {
 			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
 		}
 		return businessService.getProductGallery(request, response,prodId);
+	}
+	
+	/**
+	 * Resetpassword.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the string
+	 * @throws Exception
+	 *             the exception
+	 */
+	@RequestMapping("/resetpassword")
+	public String resetpassword(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return PathResolver.getPath(request, PageLetEnum.RESETPASSWORD);
 	}
 }

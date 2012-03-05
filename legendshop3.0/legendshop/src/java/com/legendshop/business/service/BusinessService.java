@@ -10,8 +10,8 @@ package com.legendshop.business.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.legendshop.business.action.form.SearchForm;
-import com.legendshop.business.action.form.UserForm;
+import com.legendshop.business.form.SearchForm;
+import com.legendshop.business.form.UserForm;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.model.entity.Sub;

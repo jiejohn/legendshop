@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.action.form;
+package com.legendshop.business.form;
 
 
 
