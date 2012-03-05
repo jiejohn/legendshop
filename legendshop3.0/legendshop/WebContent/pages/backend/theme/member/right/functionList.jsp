@@ -22,33 +22,28 @@
 <title>权限列表</title>
 </head>
 <body>
-<%
-			String curPageNO = (String) request.getParameter("curPageNO");
-			int curpage = 1;
-			if ("".equals(curPageNO) || curPageNO == null)
-				curpage = 1;
-			else {
-				curpage = Integer.parseInt(curPageNO);
-			}
+
+	<%
 			int offset=((Integer)request.getAttribute("offset")).intValue();
-			String toolBar = (String) request.getAttribute("toolBar");
-	%>
-<br>
-	<form action="/member/right/listFunction${applicationScope.WEB_SUFFIX}">
+	%>	
+	<form action="${pageContext.request.contextPath}/member/right/query${applicationScope.WEB_SUFFIX}" method="post" id="form1">
+        <table class="${tableclass}" style="width: 100%">
+	    <thead>
+	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/right/query${applicationScope.WEB_SUFFIX}">权限管理</a> </td></tr>
+	    </thead>
+	    </table>
     <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
-			<div align="center">
-			&nbsp; 根据权限名称查找 ：
-			<input type="text" name="search" maxlength="50" value="<%=request.getAttribute("search")%>" />
+			&nbsp; 名称 ：
+			<input type="text" name="name" maxlength="50" value="${bean.name }" />
 			<input type="submit" value="搜索"/>
 			&nbsp;&nbsp;
-			</div>
 	</form>		
 	
 	
 	
 	<div align="center">
         <%@ include file="/pages/common/messages.jsp"%>
-    <display:table name="list" requestURI="/member/right/listFunction${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
+    <display:table name="list" requestURI="/member/right/query${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
       <display:column title="顺序"><%=offset++%></display:column>
       <display:column title="名称 " property="name" sortable="true"></display:column>
       <display:column title="权限名称 " property="protectFunction"></display:column>
@@ -57,8 +52,8 @@
       	<a href="findRoleByFunction${applicationScope.WEB_SUFFIX}?functionId=${item.id}">角色</a>
       </display:column>
       <display:column title="操作" media="html" style="width:75px">
-      	<a href="findFunctionById${applicationScope.WEB_SUFFIX}?id=${item.id}" ><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
-      	<a href="/member/right/deleteFunctionById${applicationScope.WEB_SUFFIX}?id=${item.id}" title="删除"><img alt="删除" src="${pageContext.request.contextPath}/img/grid_delete.png"></a>
+      	<a href="${pageContext.request.contextPath}/member/right/update/${item.id}${applicationScope.WEB_SUFFIX}" ><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
+      	<a href="${pageContext.request.contextPath}/member/right/delete/${item.id}${applicationScope.WEB_SUFFIX}" title="删除"><img alt="删除" src="${pageContext.request.contextPath}/img/grid_delete.png"></a>
       </display:column>
     </display:table>
         <c:if test="${not empty toolBar}">
@@ -67,7 +62,7 @@
     </div>
 	<div align="center">
     <P> 点击此处
-    <a href="${pageContext.request.contextPath}/member/right/saveFunction${applicationScope.WEB_SUFFIX}">创建权限</a>
+    <a href="${pageContext.request.contextPath}/member/right/load${applicationScope.WEB_SUFFIX}">创建权限</a>
     </div>
 	
 </body>

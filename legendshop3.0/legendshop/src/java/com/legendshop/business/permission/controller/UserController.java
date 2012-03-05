@@ -30,6 +30,7 @@ import com.legendshop.command.framework.State;
 import com.legendshop.command.framework.StateImpl;
 import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
+import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
@@ -39,8 +40,12 @@ import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.exception.PermissionException;
+import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.helper.RealPathUtil;
+import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.model.UserMessages;
+import com.legendshop.model.entity.Brand;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserRole;
 import com.legendshop.model.entity.UserRoleId;
@@ -51,7 +56,7 @@ import com.legendshop.util.AppUtils;
  */
 @Controller
 @RequestMapping("/member/user")
-public class UserController extends BaseController {
+public class UserController extends BaseController implements AdminController<User, String>{
 
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -420,14 +425,7 @@ public class UserController extends BaseController {
 			
 			request.setAttribute("search", search);
 			request.setAttribute("enabled", enabled);
-//			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
-//			request.setAttribute("offset", new Integer(ps.getOffset() + 1));
-//			if (ps.hasMutilPage()) {
-//				request.setAttribute("toolBar", ps.getToolBar());
-//			}
-//			if (!AppUtils.isBlank(ps.getResultList())) {
-//				request.setAttribute("list", ps.getResultList());
-//			}
+
 			savePage(ps, request);
 		return PathResolver.getPath(request, PageLetEnum.USER_LIST_PAGE);
 	}
@@ -457,24 +455,10 @@ public class UserController extends BaseController {
 
 		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER_PAGE);
 	}
+	
 
-	@RequestMapping(value = "/load/{id}")
-	public String load(HttpServletRequest request,
-			HttpServletResponse response, @PathVariable String id) {
-		
 
-		logger.info("Action findUserById with id  " + id);
-		
-		State state = new StateImpl();
-			User user = rightDelegate.findUserById(id, state);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
-			request.setAttribute("user", user);
-
-		return PathResolver.getPath(request, PageLetEnum.UPDATE_USER_PASSWORD);
-		
-	}
+	//new interface
 	
 	/**
 	 * Load.
@@ -487,6 +471,93 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
+		return PathResolver.getPath(request, PageLetEnum.UPDATE_USER_PASSWORD);
+	}
+
+
+	@Override
+	@RequestMapping(value = "/delete/{id}")
+	public String delete(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable String id) {
+		//TODO didn't have this function
+		return null;
+	}
+
+
+	@Override
+	@RequestMapping("/query")
+	public String query(HttpServletRequest request,
+			HttpServletResponse response, String curPageNO, User user) {
+
+		String userName = UserManager.getUsername(request);
+		if (userName == null) {
+			throw new BusinessException("not login yet",
+					ErrorCodes.BUSINESS_ERROR);
+		}
+		// 检查不通过
+		if (!functionChecker.check(userName, request)) {
+			UserMessages uem = new UserMessages();
+			uem.setTitle("免费版不提供该功能");
+			uem.setCode(ErrorCodes.UN_AUTHORIZATION);
+
+			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
+			throw new PermissionException("UN_AUTHORIZATION",
+					ErrorCodes.UN_AUTHORIZATION);
+		}
+		String name = user.getName();
+		String enabled = user.getEnabled();
+		CriteriaQuery cq = new CriteriaQuery(User.class, curPageNO);
+//		 cq.setPageSize(1);
+		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE,Integer.class));
+
+		if (AppUtils.isNotBlank(name)) {
+			cq.like("name", name + "%");// 1
+		}
+		if (AppUtils.isNotBlank(enabled)) {
+			cq.eq("enabled", enabled);
+		}
+		cq.add();
+		State state = new StateImpl();
+		PageSupport ps = rightDelegate.findAllUser(cq, state);
+
+		request.setAttribute("bean", user);
+
+		savePage(ps, request);
+		return PathResolver.getPath(request, PageLetEnum.USER_LIST_PAGE);
+	}
+
+	@Override
+	@RequestMapping(value = "/save")
+	public String save(HttpServletRequest request,
+			HttpServletResponse response, User user) {
+		State state = new StateImpl();
+
+		if (rightDelegate.isUserExist(user.getName(), state)) {
+			// return handleException(mapping, request,
+			// ActionMessages.GLOBAL_MESSAGE, "error.User.IsExist");
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		}
+
+		String id = rightDelegate.saveUser(Md5Password(user), state);
+		logger.info("success saveUser,id = " + id);
+		if (!state.isOK()) {
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		}
+
+		return PathResolver.getPath(request, PageLetEnum.USERS_LIST);
+	}
+
+
+	@Override
+	@RequestMapping(value = "/update/{id}")
+	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
+		logger.info("Action findUserById with id  " + id);		
+		State state = new StateImpl();
+			User user = rightDelegate.findUserById(id, state);
+			if (!state.isOK()) {
+				return PathResolver.getPath(request, PageLetEnum.FAIL);
+			}
+			request.setAttribute("bean", user);
 		return PathResolver.getPath(request, PageLetEnum.UPDATE_USER_PASSWORD);
 	}
 

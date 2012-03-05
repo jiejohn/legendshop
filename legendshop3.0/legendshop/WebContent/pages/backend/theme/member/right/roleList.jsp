@@ -32,36 +32,41 @@
 			}
 			int offset=((Integer)request.getAttribute("offset")).intValue();
 	%>
-<br>
-<form action="${pageContext.request.contextPath}/member/right/findAllRole${applicationScope.WEB_SUFFIX}">
+<form action="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}">
+        <table class="${tableclass}" style="width: 100%">
+	    <thead>
+	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}">角色管理</a> </td></tr>
+	    </thead>
+	    </table>
 <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
-			<div align="center">
-			&nbsp; 根据角色名称查找 ：
-			<input type="text" name="search" maxlength="50" value="<%=request.getAttribute("search")%>" />
+			&nbsp; 名称 ：
+			<input type="text" name="name" maxlength="50" value="${bean.name }" />
+				&nbsp;状态 
+				<select id="enabled" name="enabled">
+				  <option:optionGroup type="select" required="true" cache="true"
+	                beanName="ENABLED" selectedValue="${bean.enabled}"/>
+	            </select>
 			<input type="submit" value="搜索"/>
 			&nbsp;&nbsp;
-			</div>	
 </form>	
 
 	 <div align="center">
         <%@ include file="/pages/common/messages.jsp"%>
-    <display:table name="list" requestURI="/member/right/findAllRole${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
+    <display:table name="list" requestURI="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
       <display:column title="顺序"><%=offset++%></display:column>
       <display:column title="名称 " property="name" sortable="true"></display:column>
       <display:column title="角色名称 " property="roleType"></display:column>
-      <display:column title="状态" sortable="true">
-       <c:choose>
-       		<c:when test="${item.enabled == 1}">有效</c:when>
-       		<c:otherwise><font color="red">无效</font></c:otherwise>
-       </c:choose>
+      <display:column title="状态">      
+      <option:optionGroup type="label" required="true" cache="true"
+	                beanName="ENABLED" selectedValue="${enabled}" defaultDisp=""/>
       </display:column>
       <display:column title="备注" property="note"></display:column>
       <display:column title="对应权限">
       	<a href="findFunctionByRole${applicationScope.WEB_SUFFIX}?roleId=${item.id}">权限</a>
       </display:column>
       <display:column title="操作" media="html" style="width:75px">
-      	<a href="findRoleById${applicationScope.WEB_SUFFIX}?id=${item.id}" ><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
-      	<a href="/member/right/deleteRoleById${applicationScope.WEB_SUFFIX}?id=${item.id}" title="删除"><img alt="删除" src="${pageContext.request.contextPath}/img/grid_delete.png"></a>
+      	<a href="${pageContext.request.contextPath}/member/role/update/${item.id}${applicationScope.WEB_SUFFIX}" ><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
+      	<a href="${pageContext.request.contextPath}/member/role/delete/${item.id}${applicationScope.WEB_SUFFIX}" title="删除"><img alt="删除" src="${pageContext.request.contextPath}/img/grid_delete.png"></a>
       </display:column>
     </display:table>
         <c:if test="${not empty toolBar}">
@@ -70,7 +75,7 @@
     </div>
 	<div align="center">
     <P> 点击此处
-    <a href="/member/right/saveRole.jsp">创建角色</a>
+    <a href="${pageContext.request.contextPath}/member/role/load${applicationScope.WEB_SUFFIX}">创建角色</a>
        </div>
  
 </body>

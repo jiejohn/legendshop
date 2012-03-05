@@ -56,20 +56,20 @@
           <ul class='sitemu'>
             <li>
               <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/member/user/usersList${applicationScope.WEB_SUFFIX}' target='main'>用户管理</a></div>
-                <div class='flrct'><a href='${pageContext.request.contextPath}/member/user/usersList${applicationScope.WEB_SUFFIX}' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='用户管理' title='用户管理'/></a> </div>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}' target='main'>用户管理</a></div>
+                <div class='flrct'><a href='${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='用户管理' title='用户管理'/></a> </div>
               </div>
             </li>
              <li>
               <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/member/right/findAllRole${applicationScope.WEB_SUFFIX}' target='main'>角色管理</a></div>
-                <div class='flrct'><a href='${pageContext.request.contextPath}/member/right/findAllRole${applicationScope.WEB_SUFFIX}' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='角色管理' title='角色管理'/></a> </div>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}' target='main'>角色管理</a></div>
+                <div class='flrct'><a href='${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='角色管理' title='角色管理'/></a> </div>
               </div>
             </li>
             <li>
               <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/member/right/listFunction${applicationScope.WEB_SUFFIX}' target='main'>权限管理</a></div>
-                <div class='flrct'><a href='${pageContext.request.contextPath}/member/right/listFunction${applicationScope.WEB_SUFFIX}' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='权限管理' title='权限管理'/></a> </div>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/member/right/query${applicationScope.WEB_SUFFIX}' target='main'>权限管理</a></div>
+                <div class='flrct'><a href='${pageContext.request.contextPath}/member/right/query${applicationScope.WEB_SUFFIX}' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='权限管理' title='权限管理'/></a> </div>
               </div>
             </li>
          </ul>

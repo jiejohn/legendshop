@@ -10,12 +10,45 @@
         <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
+        <script language="javascript">
+    $.validator.setDefaults({
+    });
+
+    $(document).ready(function() {
+    jQuery("#form1").validate({
+        rules: {
+            name: {
+                required: true
+            },
+            roleType: {
+		        required: true
+		    }
+        },
+        messages: {
+            brandName: {
+                required: "请输入商品品牌名称"
+            }
+        }
+    });
+ 
+      $("#col1 tr").each(function(i){
+      if(i>0){
+         if(i%2 == 0){
+             $(this).addClass('even');
+         }else{    
+              $(this).addClass('odd'); 
+         }   
+    }
+     });   
+         $("#col1 th").addClass('sortable'); 
+});
+</script>
 </head>
 
 
 <body class="bodymargin">
 <div align="center">      
-      <form  action="/member/right/updateFunctionById${applicationScope.WEB_SUFFIX}">
+      <form  action="${pageContext.request.contextPath}/member/right/save${applicationScope.WEB_SUFFIX}">
         <table class="${tableclass}" style="width: 100%">
 			 <thead>
 			  <tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; 权限管理 &raquo; 修改权限</td></tr>
@@ -38,21 +71,21 @@
 		 <tr style="display: none">
             <td width="163" height="29" align="center" class="forumRow"> 主键：</td>
             <td width="211" align="center" class="forumRow">
-			<input type="text" name="function.id" value=<%=request.getParameter("id")%> readonly="true">
+			<input type="text" name="id" value="${bean.id }" readonly="true">
 			</td>
         </tr>
           <tr>
             <td height="27" align="center" class="forumRow">
      <div align="right">名称 <font color="ff0000">*</font></div></td>
-            <td align="center" class="forumRow"><input type="text" name="function.name" value="${function.name}"></td>
+            <td align="center" class="forumRow"><input type="text" name="name" value="${bean.name}"></td>
           </tr>
           <tr>
             <td height="27" align="center" class="forumRow"><div align="right">权限名称 <font color="#ff0000">*</font></div></td>
-            <td align="center" class="forumRow"><input type="text" name="function.protectFunction" value="${function.protectFunction }"/></td>
+            <td align="center" class="forumRow"><input type="text" name="protectFunction" value="${bean.protectFunction }"/></td>
           </tr>
           <tr>
             <td height="27" align="center" class="forumRow"><div align="right">备注：</div></td>
-            <td align="center" class="forumRow"><input type="text" name="function.note" value="${function.note}"></td>
+            <td align="center" class="forumRow"><input type="text" name="note" value="${bean.note}"></td>
           </tr>
           <tr >
             <td height="42" colspan="2" class="forumRow">

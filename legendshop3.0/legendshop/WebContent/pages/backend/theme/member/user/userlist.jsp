@@ -40,27 +40,34 @@
 <body>
 	<%
 			int offset=((Integer)request.getAttribute("offset")).intValue();
-	%>
+	%>	
+	<form action="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}" id="form1">
 	
-	<br>
-	<form action="${pageContext.request.contextPath}/member/user/usersList${applicationScope.WEB_SUFFIX}" id="form1">
+        <table class="${tableclass}" style="width: 100%">
+	    <thead>
+	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a> </td></tr>
+	    </thead>
+	    </table>
+      
     <input type="hidden" id="curPageNO" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
 			&nbsp; 用户名
-			<input type="text" id="search" name="search" maxlength="50" value="<%=request.getAttribute("search")%>" />
+			<input type="text" name="name" maxlength="50" value="${bean.name }" />
 				&nbsp;状态 
-	            <select id="enabled" name="enabled">
-					<option value="">请选择</option>	
-			    	<option value="1">有效</option>	
-	      			<option value="0" >无效</option>
-			</select>
+				<select id="enabled" name="enabled">
+				  <option:optionGroup type="select" required="true" cache="true"
+	                beanName="ENABLED" selectedValue="${bean.enabled}"/>
+	            </select>
 			<input type="submit" value="搜索"/>
 	</form>
 	 <div align="center">
         <%@ include file="/pages/common/messages.jsp"%>
-    <display:table name="list" requestURI="/member/user/usersList${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
+    <display:table name="list" requestURI="/member/user/query${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
       <display:column title="顺序"><%=offset++%></display:column>
       <display:column title="用户名 " property="name" sortable="true"></display:column>
-      <display:column title="状态" property="enabled" sortable="true"></display:column>
+      <display:column title="状态">
+      <option:optionGroup type="label" required="true" cache="true"
+	                beanName="ENABLED" selectedValue="${enabled}" defaultDisp=""/>
+      </display:column>
       <display:column title="注释" property="note"></display:column>
       <display:column title="用户角色">
       	<a href="${pageContext.request.contextPath}/member/user/findRoleByUser${applicationScope.WEB_SUFFIX}?userId=${item.id}">用户角色</a>
@@ -69,7 +76,7 @@
       	<a href="${pageContext.request.contextPath}/member/user/findFunctionByUser${applicationScope.WEB_SUFFIX}?userId=${item.id}" >用户权限</a>
       </display:column>
       <display:column title="修改密码">
-      	<a href="${pageContext.request.contextPath}/findUserById${applicationScope.WEB_SUFFIX}?userId=${item.id}">修改密码</a> 
+      	<a href="${pageContext.request.contextPath}/member/user/update/${item.id}${applicationScope.WEB_SUFFIX}">修改密码</a> 
       </display:column>
     </display:table>
         <c:if test="${not empty toolBar}">
@@ -78,7 +85,7 @@
     </div>
 	<div align="center">
     <P> 点击此处
-    <a href="/member/user/saveUser.jsp">创建用户</a>
+    <a href="${pageContext.request.contextPath}/member/user/load${applicationScope.WEB_SUFFIX}">创建用户</a>
        </div>
 </body>
 </html>

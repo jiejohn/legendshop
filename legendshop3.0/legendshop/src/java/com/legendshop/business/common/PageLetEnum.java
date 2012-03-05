@@ -286,7 +286,11 @@ public enum PageLetEnum implements PathEnum{
 	
 	FIND_FUNCTION_BY_USER("/member/user/findFunctionByUser",BACK_PAGE),
 	
-	USER_LIST_PAGE("/member/user/userlist",BACK_PAGE)
+	USER_LIST_PAGE("/member/user/userlist",BACK_PAGE),
+
+	ALL_ROLE("/member/role/query",FOWARD),
+	
+	SAVE_ROLE("/member/right/saveRole",BACK_PAGE)
 
 	
 	;
