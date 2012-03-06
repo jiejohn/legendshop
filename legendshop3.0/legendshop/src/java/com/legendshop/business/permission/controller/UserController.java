@@ -40,16 +40,13 @@ import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.exception.PermissionException;
-import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.core.helper.RealPathUtil;
-import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.model.UserMessages;
-import com.legendshop.model.entity.Brand;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserRole;
 import com.legendshop.model.entity.UserRoleId;
 import com.legendshop.util.AppUtils;
+import com.legendshop.util.StringUtil;
 
 /**
  * UserController.
@@ -471,7 +468,7 @@ public class UserController extends BaseController implements AdminController<Us
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.UPDATE_USER_PASSWORD);
+		return PathResolver.getPath(request, PageLetEnum.MODIFY_USER);
 	}
 
 
@@ -537,8 +534,14 @@ public class UserController extends BaseController implements AdminController<Us
 			// ActionMessages.GLOBAL_MESSAGE, "error.User.IsExist");
 			return PathResolver.getPath(request, PageLetEnum.FAIL);
 		}
-
-		String id = rightDelegate.saveUser(Md5Password(user), state);
+		
+		String id=user.getId();
+		
+		if(StringUtil.isEmpty(id)){
+			id = rightDelegate.saveUser(Md5Password(user), state);			
+		}else{
+			rightDelegate.updateUser(Md5Password(user), state);
+		}
 		logger.info("success saveUser,id = " + id);
 		if (!state.isOK()) {
 			return PathResolver.getPath(request, PageLetEnum.FAIL);
@@ -546,7 +549,28 @@ public class UserController extends BaseController implements AdminController<Us
 
 		return PathResolver.getPath(request, PageLetEnum.USERS_LIST);
 	}
+	
+	@RequestMapping(value = "/updatePassword")
+	public String updatePassword(HttpServletRequest request, HttpServletResponse response, User user) {
 
+		logger.info("Struts UserAction updateUserById");
+		String passwordag = user.getPasswordag();
+		if ((user.getPassword() == null) || (user.getPassword() == "")) {
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		}
+		if (!passwordag.endsWith(user.getPassword())) {// 2次密码要相等
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		}
+		State state = new StateImpl();
+		Md5PasswordEncoder coder = new Md5PasswordEncoder();
+		coder.setEncodeHashAsBase64(false);
+		rightDelegate.updateUserPassowrd(user.getId(), coder.encodePassword(user.getPassword(), user.getName()), state);
+		logger.info("updateFunctionById result  = " + state.isOK());
+		if (!state.isOK()) {
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		}
+		return PathResolver.getPath(request, PageLetEnum.USERS_LIST);
+	}
 
 	@Override
 	@RequestMapping(value = "/update/{id}")
@@ -560,5 +584,50 @@ public class UserController extends BaseController implements AdminController<Us
 			request.setAttribute("bean", user);
 		return PathResolver.getPath(request, PageLetEnum.UPDATE_USER_PASSWORD);
 	}
+	
+	@RequestMapping(value = "/roles/{id}")
+	public String roles(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
+		logger.info("UserAction findOtherRoleByUser : " + id);
+		State state = new StateImpl();
+		User user = rightDelegate.findUserById(id, state);
+		List roles = rightDelegate.findRoleByUser(id, state);
+		if (!state.isOK()) {
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		}
+		request.setAttribute("list", roles);
+		request.setAttribute("bean", user);
+
+		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER_PAGE);
+	}
+	
+	@RequestMapping(value = "/otherRoles/{id}")
+	public String otherRoles(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
+		String curPageNO = request.getParameter("curPageNO");
+		String userId = request.getParameter("userId");
+		String myAction = "findOtherRoleByUser" + AttributeKeys.WEB_SUFFIX;
+		if (userId != null) {
+			myAction = myAction + "?userId=" + userId;
+		}
+			// HQL查找方式
+			HqlQuery hq = new HqlQuery(myAction);
+			hq.setCurPage(curPageNO);
+			hq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+			State state = new StateImpl();
+			User user = rightDelegate.findUserById(userId, state);
+			PageSupport ps = rightDelegate.findOtherRoleByUser(hq, userId, state);
+			if (!state.isOK()) {
+				return PathResolver.getPath(request, PageLetEnum.FAIL);
+			}
+			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
+			request.setAttribute("offset", new Integer(ps.getOffset() + 1));
+			if (ps.hasMutilPage()) {
+				request.setAttribute("toolBar", ps.getToolBar());
+			}
+			request.setAttribute("roles", ps.getResultList());
+			request.setAttribute("user", user);
+
+		return PathResolver.getPath(request, PageLetEnum.FIND_OTHER_ROLE_BY_USER);
+	}
+	
 
 }

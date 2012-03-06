@@ -42,7 +42,12 @@
 			&nbsp; 名称 ：
 			<input type="text" name="name" maxlength="50" value="${bean.name }" />
 				&nbsp;状态 
-				<select id="enabled" name="enabled">
+				<select id="enabled" name="enabled">				
+			        <c:if test="${not empty bean.enabled}">
+						<option value="${bean.enabled}">      
+						<option:optionGroup type="label" required="true" cache="true" beanName="ENABLED" selectedValue="${bean.enabled}" defaultDisp=""/>
+						</option>							            
+			        </c:if>
 				  <option:optionGroup type="select" required="true" cache="true"
 	                beanName="ENABLED" selectedValue="${bean.enabled}"/>
 	            </select>

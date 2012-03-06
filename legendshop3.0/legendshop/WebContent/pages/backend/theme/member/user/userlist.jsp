@@ -41,7 +41,7 @@
 	<%
 			int offset=((Integer)request.getAttribute("offset")).intValue();
 	%>	
-	<form action="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}" id="form1">
+	<form action="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}" id="form1" method="post">
 	
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
@@ -53,8 +53,13 @@
 			&nbsp; 用户名
 			<input type="text" name="name" maxlength="50" value="${bean.name }" />
 				&nbsp;状态 
-				<select id="enabled" name="enabled">
-				  <option:optionGroup type="select" required="true" cache="true"
+				<select id="enabled" name="enabled">  
+			        <c:if test="${not empty bean.enabled}">
+						<option value="${bean.enabled}">      
+						<option:optionGroup type="label" required="true" cache="true" beanName="ENABLED" selectedValue="${bean.enabled}" defaultDisp=""/>
+						</option>							            
+			        </c:if>
+				  <option:optionGroup type="select" required="true" cache="true" 
 	                beanName="ENABLED" selectedValue="${bean.enabled}"/>
 	            </select>
 			<input type="submit" value="搜索"/>
@@ -68,9 +73,9 @@
       <option:optionGroup type="label" required="true" cache="true"
 	                beanName="ENABLED" selectedValue="${enabled}" defaultDisp=""/>
       </display:column>
-      <display:column title="注释" property="note"></display:column>
+      <display:column title="备注" property="note"></display:column>
       <display:column title="用户角色">
-      	<a href="${pageContext.request.contextPath}/member/user/findRoleByUser${applicationScope.WEB_SUFFIX}?userId=${item.id}">用户角色</a>
+      	<a href="${pageContext.request.contextPath}/member/user/roles/${item.id}${applicationScope.WEB_SUFFIX}">用户角色</a>
       </display:column>
       <display:column title="用户权限">
       	<a href="${pageContext.request.contextPath}/member/user/findFunctionByUser${applicationScope.WEB_SUFFIX}?userId=${item.id}" >用户权限</a>

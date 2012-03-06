@@ -276,11 +276,13 @@ public enum PageLetEnum implements PathEnum{
 	
 	FIND_ROLE_BY_USER_PAGE("/member/user/findRoleByUser",BACK_PAGE),
 	
-	USERS_LIST("/member/user/usersList",FOWARD),
+	USERS_LIST("/member/user/query",FOWARD),
 	
 	UPDATE_USER_STATUS("/member/user/updateUserStatus",BACK_PAGE),
 	
 	UPDATE_USER_PASSWORD("/member/user/updateUserPassword",BACK_PAGE),
+	
+	MODIFY_USER("/member/user/saveUser",BACK_PAGE),
 	
 	FIND_OTHER_ROLE_BY_USER("/member/user/findOtherRoleByUser",BACK_PAGE),
 	

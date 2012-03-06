@@ -1,64 +1,141 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/common.jsp"%>
+<%@ include file="/pages/common/back-common.jsp"%>
 <%@ include file="/pages/common/taglib.jsp"%>
-<html:html>
+<%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
+<html>
 <head>
-<LINK title=Style href="${pageContext.request.contextPath}/common/css/back_style.css" type=text/css rel=stylesheet>
+
+        <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
 <title>创建用户</title>
+
+        <script language="javascript">
+    $.validator.setDefaults({
+    });
+
+    $(document).ready(function() {
+    jQuery("#form1").validate({
+        rules: {
+            name: {
+                required: true
+            },
+            password: {
+		        required: true
+		    },
+		    passwordag: {
+		        required: true,
+		        equalTo:"#password" 
+		    }
+        },
+        messages: {
+            brandName: {
+                required: "请输入商品品牌名称"
+            }
+        }
+    });
+ 
+      $("#col1 tr").each(function(i){
+      if(i>0){
+         if(i%2 == 0){
+             $(this).addClass('even');
+         }else{    
+              $(this).addClass('odd'); 
+         }   
+    }
+     });   
+         $("#col1 th").addClass('sortable'); 
+});
+</script>
 </head>
-<br>
-<br>
-<html:form action="/member/user/saveUser${applicationScope.WEB_SUFFIX}" >
-  <table width="489" height="129"  align="center" bordercolor="#0099FF" class="tableBorder">
-    <tr>
-      <th colspan="2">创建用户</th>
-    </tr>
-    <tr>
-      <td width="217" class="forumRow"><div align="center">用户名<font color="#ff0000">*</font></div></td>
-      <td width="262" class="forumRow"><input type="text" name="user.name" value=""></td>
-    </tr>
-    <tr>
-      <td class="forumRow"><div align="center">密码<font color="#ff0000">*</font></div></td>
-      <td class="forumRow"><input type="password" name="user.password" value=""></td>
-    </tr>
-	    <tr>
-      <td class="forumRow"><div align="center">确认密码<font color="#ff0000">*</font></div></td>
-      <td class="forumRow"><input type="password" name="user.passwordag" value=""></td>
-    </tr>
-        <tr>
-      <td class="forumRow"><div align="center">状态</div></td>
-      <td class="forumRow">
-        <p>
+
+
+      <form  action="${pageContext.request.contextPath}/member/user/save${applicationScope.WEB_SUFFIX}" id="form1" method="post">
+      
+        <table class="${tableclass}" style="width: 100%">
+	    <thead>
+	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a> &raquo; 创建用户</td></tr>
+	    </thead>
+	    </table>
+            <div align="center">
+            <table  align="center" class="${tableclass}" id="col1">
+                <thead>
+                    <tr class="sortable">
+                        <th colspan="2">
+                            <div align="center">
+                               创建用户
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+      <tr>
+        <td>
+          <div align="center">名称 <font color="ff0000">*</font></div>
+       </td>
+        <td>
+           <p><input type="text" name="name" id="name" value="" maxlength="30" /></p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div align="center">密码 <font color="ff0000">*</font></div>
+       </td>
+        <td>
+           <p><input type="password" name="password" id="password" value="" maxlength="30"/></p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div align="center">确认密码 <font color="ff0000">*</font></div>
+       </td>
+        <td>
+           <p><input type="password" name="passwordag" id="passwordag" value="" maxlength="30"/></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div align="center">状态</div>
+       </td>
+        <td>
+           <p>           
           <label>
-            <input type="radio" name="user.enabled" value="1" checked="checked"/>
+            <input type="radio" name="enabled" value="1"             
+            checked="checked"
+            />
             有效</label> &nbsp; &nbsp; 
           <label>
-            <input type="radio" name="user.enabled" value="0" />
+            <input type="radio" name="enabled" value="0"
+        <c:if test="${bean.enabled eq 0}">
+            checked="checked"
+        </c:if>  
+            />
             无效</label>
-          <br />
-        </p>     </td>
-    </tr>
-	<tr>
-      <td class="forumRow"><div align="center">注释</div></td>
-      <td class="forumRow"><input type="text" name="user.note" value=""></td>
-    </tr>
-    <tr>
-      <td colspan="2" class="forumRow"><div align="center">        
-        <input type="submit" value="添加"/>
-        <html:reset  value="重置"/>
-		          
-      </div></td>
-    </tr>
-  </table>
-  <html:javascript formName="usersForm"/>
-</html:form>
-		<table  width="200" align="center">
-			<tr>
-				<td>
-					<p align="center">
-						<a href="usersList${applicationScope.WEB_SUFFIX}" title="GoBack">返回</a>
-					</p>
-				</td>
-			</tr>
-		</table>
-</html:html>
+           </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div align="center">注释</div>
+       </td>
+        <td>
+           <p><input type="text" name="note" id="note" value=""/></p>
+        </td>
+      </tr>
+       <tr>
+           <td colspan="2">
+               <div align="center">
+    				<auth:auth ifAnyGranted="F_OPERATOR"><input type="submit" value="提交" /></auth:auth>
+                   	<input type="reset" value="重置" />
+                   	<input type="button" value="返回"
+                       onclick="window.location='${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}'" />
+               </div>
+           </td>
+       </tr>
+   </table>
+  </div>
+       
+      </form>
+
+
+</html>

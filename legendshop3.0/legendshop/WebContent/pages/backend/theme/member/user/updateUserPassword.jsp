@@ -7,7 +7,7 @@
         <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
-<title>修改角色</title>
+<title>修改密码</title>
 
         <script language="javascript">
     $.validator.setDefaults({
@@ -48,7 +48,7 @@
 </script>
 </head>
 <body>
-      <form  action="${pageContext.request.contextPath}/member/user/save${applicationScope.WEB_SUFFIX}" id="form1" method="post">
+      <form  action="${pageContext.request.contextPath}/member/user/updatePassword${applicationScope.WEB_SUFFIX}" id="form1" method="post">
       
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
