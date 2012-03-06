@@ -601,30 +601,21 @@ public class UserController extends BaseController implements AdminController<Us
 	}
 	
 	@RequestMapping(value = "/otherRoles/{id}")
-	public String otherRoles(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
-		String curPageNO = request.getParameter("curPageNO");
-		String userId = request.getParameter("userId");
-		String myAction = "findOtherRoleByUser" + AttributeKeys.WEB_SUFFIX;
-		if (userId != null) {
-			myAction = myAction + "?userId=" + userId;
+	public String otherRoles(HttpServletRequest request, HttpServletResponse response, String curPageNO,
+			@PathVariable String id) {
+
+		// HQL查找方式
+		HqlQuery hq = new HqlQuery();
+		hq.setCurPage(curPageNO);
+		hq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+		State state = new StateImpl();
+		User user = rightDelegate.findUserById(id, state);
+		PageSupport ps = rightDelegate.findOtherRoleByUser(hq, id, state);
+		if (!state.isOK()) {
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
 		}
-			// HQL查找方式
-			HqlQuery hq = new HqlQuery(myAction);
-			hq.setCurPage(curPageNO);
-			hq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
-			State state = new StateImpl();
-			User user = rightDelegate.findUserById(userId, state);
-			PageSupport ps = rightDelegate.findOtherRoleByUser(hq, userId, state);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
-			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
-			request.setAttribute("offset", new Integer(ps.getOffset() + 1));
-			if (ps.hasMutilPage()) {
-				request.setAttribute("toolBar", ps.getToolBar());
-			}
-			request.setAttribute("roles", ps.getResultList());
-			request.setAttribute("user", user);
+		savePage(ps, request);
+		request.setAttribute("bean", user);
 
 		return PathResolver.getPath(request, PageLetEnum.FIND_OTHER_ROLE_BY_USER);
 	}
