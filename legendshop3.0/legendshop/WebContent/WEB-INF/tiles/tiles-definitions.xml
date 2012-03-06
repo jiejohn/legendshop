@@ -61,7 +61,7 @@
 		<put-attribute name="right" value="/pages/frontend/{1}/league.jsp" />
 	</definition>
 	
-	<definition name="searchall.*" template="/pages/frontend/{1}/topFrame.jsp">
+	<definition name="searchall.*" template="/pages/frontend/{1}/searchTopFrame.jsp">
 		<put-attribute name="main" value="/pages/frontend/{1}/searchall.jsp" />
 	</definition>
 	

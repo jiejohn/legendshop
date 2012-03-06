@@ -24,9 +24,10 @@ import org.apache.lucene.search.highlight.QueryScorer;
 import org.apache.lucene.search.highlight.Scorer;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 
+import com.legendshop.business.dao.ProductDao;
+import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.core.ContextServiceLocator;
-import com.legendshop.core.dao.BaseDao;
-import com.legendshop.model.entity.Product;
+import com.legendshop.model.entity.ProductDetail;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.search.HTMLParser;
 import com.legendshop.search.LuceneIndexer;
@@ -50,6 +51,10 @@ public class LuceneContentCollector implements LuceneResultCollector {
 	
 	/** The settings. */
 	private final LuceneSettings settings;
+	
+	private final ProductDao productDao =  (ProductDao)ContextServiceLocator.getInstance().getBean("productDao");
+	
+	private final ShopDetailDao shopDetailDao =  (ShopDetailDao)ContextServiceLocator.getInstance().getBean("shopDetailDao");
 
 	/**
 	 * Instantiates a new lucene content collector.
@@ -150,7 +155,8 @@ public class LuceneContentCollector implements LuceneResultCollector {
 		}
 		sb.setLength(sb.length() - 1);
 		sb.append(")");
-		List<ShopDetailView> shopDetails = getBaseDao().findByHQL(sb.toString(), postIdList.toArray());
+		//List<ShopDetailView> shopDetails = getBaseDao().findByHQL(sb.toString(), postIdList.toArray());
+		List<ShopDetailView> shopDetails = shopDetailDao.getShopDetail(postIds);
 		for (Iterator<ShopDetailView> iter = shopDetails.iterator(); iter.hasNext();) {
 			ShopDetailView shopDetail = iter.next();
 			Scorer scorer = new QueryScorer(query);
@@ -211,25 +217,15 @@ public class LuceneContentCollector implements LuceneResultCollector {
 	 * @throws InvalidTokenOffsetsException
 	 *             the invalid token offsets exception
 	 */
-	private List retrieveProd(SearchArgs args, Long[] postIds, Query query) throws IOException,
+	private List<ProductDetail> retrieveProd(SearchArgs args, Long[] postIds, Query query) throws IOException,
 			InvalidTokenOffsetsException {
 		if (AppUtils.isBlank(postIds)) {
-			return null;
-		}
-		List<Long> postIdList = new ArrayList<Long>();
-		StringBuffer sb = new StringBuffer("from Product prod where prod.status = 1 and prod.prodId in (");
-		for (int i = 0; i < postIds.length; i++) {
-			if (postIds[i] != null) {
-				sb.append("?,");
-				postIdList.add(postIds[i]);
-			}
+			return new ArrayList<ProductDetail>();
 		}
 
-		sb.setLength(sb.length() - 1);
-		sb.append(")");
-		List<Product> prods = getBaseDao().findByHQL(sb.toString(), postIdList.toArray());
-		for (Iterator<Product> iter = prods.iterator(); iter.hasNext();) {
-			Product prod = iter.next();
+		List<ProductDetail> prods = productDao.getProdDetail(postIds);
+		for (Iterator<ProductDetail> iter = prods.iterator(); iter.hasNext();) {
+			ProductDetail prod = iter.next();
 			Scorer scorer = new QueryScorer(query);
 			SimpleHTMLFormatter simpleHtmlFormatter = new SimpleHTMLFormatter("<span style='color:#ff0000'>", "</span>");// 设定高亮显示的格式，也就是对高亮显示的词组加上前缀后缀
 			Highlighter highlighter = new Highlighter(simpleHtmlFormatter, scorer);
@@ -280,10 +276,10 @@ public class LuceneContentCollector implements LuceneResultCollector {
 	 * @param postIds
 	 *            the post ids
 	 */
-	private void deleteProdDetailEntity(List<Product> prods, Long[] postIds) {
+	private void deleteProdDetailEntity(List<ProductDetail> prods, Long[] postIds) {
 		for (Long id : postIds) {
 			boolean found = false;
-			for (Product productDetail : prods) {
+			for (ProductDetail productDetail : prods) {
 				if (id != null) {
 					if (id.equals(productDetail.getProdId())) {
 						found = true;
@@ -326,14 +322,6 @@ public class LuceneContentCollector implements LuceneResultCollector {
 		}
 	}
 
-	/**
-	 * Gets the base dao.
-	 * 
-	 * @return the base dao
-	 */
-	private BaseDao getBaseDao() {
-		return (BaseDao) ContextServiceLocator.getInstance().getBean("baseDao");
-	}
 
 	/**
 	 * Gets the search facade.

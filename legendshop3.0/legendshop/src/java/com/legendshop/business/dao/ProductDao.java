@@ -1,3 +1,10 @@
+/*
+ * 
+ * LegendShop 多用户商城系统
+ * 
+ *  版权所有,并保留所有权利。
+ * 
+ */
 package com.legendshop.business.dao;
 
 import java.util.List;
@@ -9,6 +16,9 @@ import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ProductDetail;
 
+/**
+ * The Interface ProductDao.
+ */
 public interface ProductDao extends BaseDao{
 
 	/**
@@ -82,6 +92,16 @@ public interface ProductDao extends BaseDao{
 	 * @return the prod detail
 	 */
 	public abstract ProductDetail getProdDetail(final Long prodId);
+	
+	
+	/**
+	 * Gets the prod detail.
+	 * 
+	 * @param prodId
+	 *            the prod id
+	 * @return the prod detail
+	 */
+	public abstract List<ProductDetail> getProdDetail(final Long[] prodId);
 
 	/**
 	 * Gets the prod by id.

@@ -421,8 +421,16 @@ public class BusinessController extends BaseController {
 	 * @return the string
 	 */
 	@RequestMapping("/searchall")
-	public String searchall(HttpServletRequest request, HttpServletResponse response,String keyword,Integer entityType) {
-		return businessService.searchall(request, response,keyword,entityType);
+	public String searchall(HttpServletRequest request, HttpServletResponse response) {
+		String keyword = request.getParameter("keyword");
+		String entityType = request.getParameter("entityType");
+		int type = 0;
+		try {
+			type =Integer.parseInt(entityType);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return businessService.searchall(request, response,keyword,type);
 	}
 	
 	/**

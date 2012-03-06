@@ -38,12 +38,12 @@ public class LuceneDaoImpl extends BaseDaoImpl implements LuceneDao {
 		log.debug("firstPostIdByDate, entityType = {},fromDate = {} ", entityType, fromDate);
 		if (fromDate != null) {
 			if (LuceneIndexer.SEARCH_ENTITY_PROD.equals(entityType)) {
-				Long result = findUniqueByHQLLimit("select prodId from Product where prodDate > ?", Long.class, 0, 1, fromDate);
+				Long result = findUniqueByHQLLimit("select prodId from Product where modifyDate > ?", Long.class, 0, 1, fromDate);
 				if (AppUtils.isNotBlank(result)) {
 					return result;
 				}
 			} else if (LuceneIndexer.SEARCH_ENTITY_SHOPDETAIL.equals(entityType)) {
-				Long result = findUniqueByHQLLimit("select shopId from ShopDetail where addtime > ?", Long.class, 0, 1,
+				Long result = findUniqueByHQLLimit("select shopId from ShopDetail where modifyTime > ?", Long.class, 0, 1,
 						fromDate);
 				if (AppUtils.isNotBlank(result)) {
 					return result;
@@ -74,14 +74,14 @@ public class LuceneDaoImpl extends BaseDaoImpl implements LuceneDao {
 	public long getLastPostIdByDate(int entityType, Date toDate) {
 		if (toDate != null) {
 			if (LuceneIndexer.SEARCH_ENTITY_PROD.equals(entityType)) {
-				Long result = findUniqueByHQLLimit("select prodId from Product where prodDate < ? order by prodId desc",
+				Long result = findUniqueByHQLLimit("select prodId from Product where modifyDate < ? order by prodId desc",
 						Long.class, 0, 1, toDate);
 				if (AppUtils.isNotBlank(result)) {
 					return result;
 				}
 			} else if (LuceneIndexer.SEARCH_ENTITY_SHOPDETAIL.equals(entityType)) {
 				Long result = findUniqueByHQLLimit(
-						"select shopId from ShopDetail where addtime < ? order by shopId desc", Long.class, 0, 1,
+						"select shopId from ShopDetail where modifyTime < ? order by shopId desc", Long.class, 0, 1,
 						toDate);
 				if (AppUtils.isNotBlank(result)) {
 					return result;

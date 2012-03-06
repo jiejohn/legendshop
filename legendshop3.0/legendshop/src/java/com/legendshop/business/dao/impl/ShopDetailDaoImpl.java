@@ -351,4 +351,10 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 		shopdetail.setOffProductNum(getOffProductNum(product.getUserName()));
 		updateShopDetail(shopdetail);
 	}
+
+	@Override
+	public List<ShopDetailView> getShopDetail(Long[] shopId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

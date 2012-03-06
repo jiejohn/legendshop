@@ -4,7 +4,7 @@
 <div id="bodyer">
 <table width="100%" cellspacing="0" cellpadding="0" align="center" style="margin: 5px">
     <tr> 
-      <td><tiles:insert attribute="main"/></td>
+      <td><tiles2:insertAttribute name="main" ignore="true" /></td>
     </tr>
     <tr>
       <td valign="top">

@@ -9,6 +9,7 @@ package com.legendshop.business.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -46,7 +47,35 @@ public class ShopDetailJdbcDaoImpl extends ShopDetailDaoImpl implements ShopDeta
 		return list.get(0);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.impl.ShopDetailDaoImpl#getShopDetail(java.lang.Long[])
+	 */
+	@Override
+	public List<ShopDetailView> getShopDetail(Long[] shopId) {
+		List<Long> postIdList = new ArrayList<Long>();
+		StringBuffer sb = new StringBuffer(ConfigCode.getInstance().getCode("biz.getShopDetailViewList"));
+		for (int i = 0; i < shopId.length - 1; i++) {
+			if (shopId[i] != null) {
+				sb.append("?,");
+				postIdList.add(shopId[i]);
+			}
+		}
+		if (postIdList.size() == 0) {
+			return new ArrayList<ShopDetailView>();
+		}
+		sb.setLength(sb.length() - 1);
+		sb.append(")");
+		return jdbcTemplate.query(sb.toString(),postIdList.toArray(), new ShopDetailRowMapper());
+	}
+	
+	/**
+	 * The Class ShopDetailRowMapper.
+	 */
 	class ShopDetailRowMapper implements RowMapper<ShopDetailView>{
+		
+		/* (non-Javadoc)
+		 * @see org.springframework.jdbc.core.RowMapper#mapRow(java.sql.ResultSet, int)
+		 */
 		@Override
 		public ShopDetailView mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ShopDetailView shopDetail = new ShopDetailView();

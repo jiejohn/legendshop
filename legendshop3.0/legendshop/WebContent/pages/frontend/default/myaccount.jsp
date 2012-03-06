@@ -9,7 +9,7 @@
          <jsp:include page="/topsort${applicationScope.WEB_SUFFIX}" flush="true" />
          <jsp:include page="/hoton${applicationScope.WEB_SUFFIX}?sortId=${sort.sortId}" flush="true"/>
         </td>
-      <td valign="top" width="744px"><tiles:insert attribute="right"/></td>
+      <td valign="top" width="744px"><tiles2:insertAttribute name="right" ignore="true" /></td>
     </tr>
     <tr> 
       <td valign="top" colspan="2">

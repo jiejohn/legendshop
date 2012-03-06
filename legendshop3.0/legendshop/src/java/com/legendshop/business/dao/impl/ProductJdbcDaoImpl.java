@@ -9,6 +9,7 @@ package com.legendshop.business.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -43,6 +44,28 @@ public class ProductJdbcDaoImpl extends ProductDaoImpl {
 			return null;
 		}
 		return list.get(0);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.impl.ProductDaoImpl#getProdDetail(java.lang.Long[])
+	 */
+	@Override
+	public List<ProductDetail> getProdDetail(Long[] prodId) {
+		List<Long> postIdList = new ArrayList<Long>();
+		StringBuffer sb = new StringBuffer(ConfigCode.getInstance().getCode("biz.getProdDetailList"));
+		for (int i = 0; i < prodId.length; i++) {
+			if (prodId[i] != null) {
+				sb.append("?,");
+				postIdList.add(prodId[i]);
+			}
+		}
+		if(postIdList.isEmpty()){
+			return new ArrayList<ProductDetail>();
+		}
+		
+		sb.setLength(sb.length() - 1);
+		sb.append(")");
+		return jdbcTemplate.query(sb.toString(),postIdList.toArray(), new ProductDetailRowMapper());
 	}
 
 	

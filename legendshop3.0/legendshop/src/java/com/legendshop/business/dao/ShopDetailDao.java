@@ -7,6 +7,8 @@
  */
 package com.legendshop.business.dao;
 
+import java.util.List;
+
 import com.legendshop.central.license.LSResponse;
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.model.entity.Myleague;
@@ -63,6 +65,15 @@ public interface ShopDetailDao extends BaseDao{
 	 * @return the shop detail
 	 */
 	public abstract ShopDetail getShopDetail(final String storeName);
+	
+	/**
+	 * Gets the shop detail.
+	 * 
+	 * @param shopId
+	 *            the shop id
+	 * @return the shop detail
+	 */
+	public abstract List<ShopDetailView> getShopDetail(final Long[] shopId);
 
 	/**
 	 * Checks if is league shop exists.
@@ -108,6 +119,8 @@ public interface ShopDetailDao extends BaseDao{
 
 	/**
 	 * Inits the color type options.
+	 * 
+	 * @return the color type options
 	 */
 	public abstract void getColorTypeOptions();
 

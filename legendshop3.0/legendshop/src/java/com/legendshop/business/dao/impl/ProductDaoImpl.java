@@ -46,6 +46,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 		log.debug("getCommendProd, shopName = {},total = {}", shopName, total);
 		return (List<Product>) getObjectFromCache(getKey(CacheKeys.PRODUCTDAO_GETCOMMEND_PROD, shopName),
 				new CacheCallBack<List<Product>>() {
+					@Override
 					public List<Product> doInCache(String cahceName, Cache cache) {
 						Date date = new Date();
 						return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getCommend"), 0, total, shopName,
@@ -62,6 +63,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	public List<Product> getReleationProd(final String shopName, final Long prodId, final int total) {
 		return (List<Product>) getObjectFromCache(getKey(CacheKeys.PRODUCTDAO_GETRELEATION_PROD, shopName, prodId, total),
 				new CacheCallBack<List<Product>>() {
+					@Override
 					public List<Product> doInCache(String cahceName, Cache cache) {
 						Date date = new Date();
 						return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getRelationProd"), 0, total,
@@ -78,6 +80,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	public List<Product> getNewestProd(final String shopName, final int total) {
 		return (List<Product>) getObjectFromCache(getKey(CacheKeys.PRODUCTDAO_GETNEWEST_PROD, shopName),
 				new CacheCallBack<List<Product>>() {
+					@Override
 					public List<Product> doInCache(String cahceName, Cache cache) {
 						Date date = new Date();
 						return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getNewestProd"), 0, total, shopName,
@@ -96,6 +99,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 			return null;
 		}
 		return (List<Product>) getObjectFromCache(getKey(CacheKeys.RPODUCTDAO_GETORDERhotsale, name), new CacheCallBack() {
+			@Override
 			public List<Product> doInCache(String cahceName, Cache cache) {
 				Date date = new Date();
 				return findByHQLLimit(ConfigCode.getInstance().getCode("biz.gethotsale"), 0, 6, name, date, date);
@@ -191,6 +195,12 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	@Override
 	public Long saveProduct(Product product) {
 		return (Long)save(product);
+	}
+
+	@Override
+	public List<ProductDetail> getProdDetail(Long[] prodId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
