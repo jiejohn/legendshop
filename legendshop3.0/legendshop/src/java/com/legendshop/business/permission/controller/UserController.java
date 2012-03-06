@@ -599,7 +599,7 @@ public class UserController extends BaseController implements AdminController<Us
 
 		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER_PAGE);
 	}
-	
+
 	@RequestMapping(value = "/otherRoles/{id}")
 	public String otherRoles(HttpServletRequest request, HttpServletResponse response, String curPageNO,
 			@PathVariable String id) {
@@ -618,6 +618,28 @@ public class UserController extends BaseController implements AdminController<Us
 		request.setAttribute("bean", user);
 
 		return PathResolver.getPath(request, PageLetEnum.FIND_OTHER_ROLE_BY_USER);
+	}
+	@RequestMapping(value = "/deleteRoles/{id}")
+	public String deleteRoles(HttpServletRequest request, HttpServletResponse response, String[] strArray,@PathVariable String id) {
+
+		logger.info("Action deleteUserRoleByUserId with userId  " + id);
+		List<UserRole> userRoles = new ArrayList<UserRole>();
+		for (String element : strArray) {
+			UserRole userRole = new UserRole();
+			UserRoleId userRoleId = new UserRoleId();
+			userRoleId.setUserId(id);
+			userRoleId.setRoleId(element);
+			userRole.setId(userRoleId);
+			userRoles.add(userRole);
+		}
+		// removeRequestAttribute(mapping,request);
+		State state = new StateImpl();
+
+			rightDelegate.deleteRoleFromUser(userRoles, state);
+			if (!state.isOK()){
+				return PathResolver.getPath(request, PageLetEnum.FAIL);
+			}
+		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER);
 	}
 	
 

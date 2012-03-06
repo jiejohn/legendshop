@@ -63,7 +63,7 @@
       <display:column title="角色名称 " property="roleType"></display:column>
       <display:column title="状态">      
       <option:optionGroup type="label" required="true" cache="true"
-	                beanName="ENABLED" selectedValue="${enabled}" defaultDisp=""/>
+	                beanName="ENABLED" selectedValue="${item.enabled}" defaultDisp=""/>
       </display:column>
       <display:column title="备注" property="note"></display:column>
       <display:column title="对应权限">

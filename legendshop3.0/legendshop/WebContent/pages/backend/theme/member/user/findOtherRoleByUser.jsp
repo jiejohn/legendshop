@@ -1,10 +1,15 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/common.jsp"%>
+<%@ include file="/pages/common/back-common.jsp"%>
 <%@ include file="/pages/common/taglib.jsp"%>
-<%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
-<html:html>
+<%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
+<%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
+<%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
+<html>
 <head>
-<LINK title=Style href="${pageContext.request.contextPath}/common/css/back_style.css" type=text/css rel=stylesheet>
+  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
+  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
+		<script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript">
 <!--
   function confirmDelete()
@@ -56,58 +61,41 @@
 <title>角色列表</title>
 </head>
 <body>
-<%
-			String curPageNO = (String) request.getParameter("curPageNO");
-			int curpage = 1;
-			if ("".equals(curPageNO) || curPageNO == null)
-				curpage = 1;
-			else {
-				curpage = Integer.parseInt(curPageNO);
-			}
-			int offset=((Integer)request.getAttribute("offset")).intValue();
-	%>
-<br>
-<br>
-	<html:form action="/member/user/saveRoleToUser${applicationScope.WEB_SUFFIX}">
-    <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>"> 
-    <input type="hidden" name="userId" value="<bean:write name="user" property="id"/>"> 
-<table width="900"  align="center" class="tableBorder">
-  <tr>
-    <th height="29" colspan="9" scope="col">角色列表</th>
-  </tr>
-  <logic:present name="roles" scope="request">
-  <tr>
-    <td align="center" class="forumRow"><input name="checkbox" type=checkbox id=checkbox onClick="javascript:selAll();" value=checkbox>全选</td>
-    <td align="center" class="forumRow">名称</td>
-    <td align="center" class="forumRow">角色名称</td>
-    <td align="center" class="forumRow">状态</td>
-    <td align="center" class="forumRow">备注</td>
-  </tr>
-  <logic:iterate id="role" name="roles">
-  <logic:present name="role">
-  <tr>
-    <td align="center" class="forumRow"><html:multibox property="strArray"><bean:write name="role" property="id"/></html:multibox>&nbsp;<%=offset++%></td>
-    <td align="center" class="forumRow"><bean:write name="role" property="name"/></td>
-    <td align="center" class="forumRow"><bean:write name="role" property="roleType"/></td>
-    <td align="center" class="forumRow">
-	    <logic:equal name="role" property="enabled" value="0">无效</logic:equal>
-	    <logic:equal name="role" property="enabled" value="1">有效</logic:equal>
-    </td>
-    <td align="center" class="forumRow"><bean:write name="role" property="note"/></td>
-  </tr>
-  </logic:present>
-  </logic:iterate>
-  </logic:present>
-</table><p></p>
+<%int offset=((Integer)request.getAttribute("offset")).intValue();%>
+
+    <table class="${tableclass}" style="width: 100%">
+    <thead>
+    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a>&raquo;增加用户[${bean.name }]角色</td></tr>
+    </thead>
+    </table>
+<form action="${pageContext.request.contextPath}/member/user/saveRoleToUser${applicationScope.WEB_SUFFIX}" id="form1" name="form1">
+<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}">
+<input type="hidden" name="userId" value="${bean.id }">
+ 
+
+	 <div align="center">
+        <%@ include file="/pages/common/messages.jsp"%>
+        
+    <display:table name="list" id="item" export="true" class="${tableclass}" style="width:100%">
+      <display:column style="width:70px" title="<input type='checkbox'  id='checkbox' name='checkbox' onClick='javascript:selAll()' />顺序"><input type="checkbox" name="strArray" value="${item.id}" /><%=offset++%></display:column>
+      <display:column title="名称 " property="name" sortable="true"></display:column>
+      <display:column title="角色名称 " property="roleType" sortable="true"></display:column>
+      <display:column title="状态">
+      <option:optionGroup type="label" required="true" cache="true"
+	                beanName="ENABLED" selectedValue="${item.enabled}" defaultDisp=""/>
+      </display:column>
+      <display:column title="备注" property="note"></display:column>
+    </display:table>
+     </div>
+ 
+ 
 	<div align="center">
 		<input type="submit" value="添加" onclick="return saveLeastOne();"/>
 	</div>
-	</html:form>
+	</form>
 	<div align="center">
-	<logic:present name="toolBar">
-		<bean:write name="toolBar" filter="false"/>
-	</logic:present>
+	<c:out value="${toolBar}" escapeXml="${toolBar}"></c:out>
 	</div>  
 </body>
-</html:html>
+</html>
 

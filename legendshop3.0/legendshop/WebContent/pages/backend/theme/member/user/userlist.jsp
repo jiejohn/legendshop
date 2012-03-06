@@ -71,7 +71,7 @@
       <display:column title="用户名 " property="name" sortable="true"></display:column>
       <display:column title="状态">
       <option:optionGroup type="label" required="true" cache="true"
-	                beanName="ENABLED" selectedValue="${enabled}" defaultDisp=""/>
+	                beanName="ENABLED" selectedValue="${item.enabled}" defaultDisp=""/>
       </display:column>
       <display:column title="备注" property="note"></display:column>
       <display:column title="用户角色">
