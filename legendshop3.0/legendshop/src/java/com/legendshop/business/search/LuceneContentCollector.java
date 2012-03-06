@@ -26,7 +26,7 @@ import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 
 import com.legendshop.core.ContextServiceLocator;
 import com.legendshop.core.dao.BaseDao;
-import com.legendshop.model.entity.ProductDetail;
+import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.search.HTMLParser;
 import com.legendshop.search.LuceneIndexer;
@@ -217,7 +217,7 @@ public class LuceneContentCollector implements LuceneResultCollector {
 			return null;
 		}
 		List<Long> postIdList = new ArrayList<Long>();
-		StringBuffer sb = new StringBuffer("from ProductDetail prod where prod.status = 1 and prod.prodId in (");
+		StringBuffer sb = new StringBuffer("from Product prod where prod.status = 1 and prod.prodId in (");
 		for (int i = 0; i < postIds.length; i++) {
 			if (postIds[i] != null) {
 				sb.append("?,");
@@ -227,9 +227,9 @@ public class LuceneContentCollector implements LuceneResultCollector {
 
 		sb.setLength(sb.length() - 1);
 		sb.append(")");
-		List<ProductDetail> prods = getBaseDao().findByHQL(sb.toString(), postIdList.toArray());
-		for (Iterator<ProductDetail> iter = prods.iterator(); iter.hasNext();) {
-			ProductDetail prod = iter.next();
+		List<Product> prods = getBaseDao().findByHQL(sb.toString(), postIdList.toArray());
+		for (Iterator<Product> iter = prods.iterator(); iter.hasNext();) {
+			Product prod = iter.next();
 			Scorer scorer = new QueryScorer(query);
 			SimpleHTMLFormatter simpleHtmlFormatter = new SimpleHTMLFormatter("<span style='color:#ff0000'>", "</span>");// 设定高亮显示的格式，也就是对高亮显示的词组加上前缀后缀
 			Highlighter highlighter = new Highlighter(simpleHtmlFormatter, scorer);
@@ -280,10 +280,10 @@ public class LuceneContentCollector implements LuceneResultCollector {
 	 * @param postIds
 	 *            the post ids
 	 */
-	private void deleteProdDetailEntity(List<ProductDetail> prods, Long[] postIds) {
+	private void deleteProdDetailEntity(List<Product> prods, Long[] postIds) {
 		for (Long id : postIds) {
 			boolean found = false;
-			for (ProductDetail productDetail : prods) {
+			for (Product productDetail : prods) {
 				if (id != null) {
 					if (id.equals(productDetail.getProdId())) {
 						found = true;

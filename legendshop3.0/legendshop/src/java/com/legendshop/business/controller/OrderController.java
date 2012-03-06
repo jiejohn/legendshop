@@ -186,8 +186,7 @@ public class OrderController extends BaseController {
 	 */
 	@RequestMapping("/bought")
 	public String bought(HttpServletRequest request, HttpServletResponse response) {
-		String userName = (String) request.getSession().getAttribute("userName");
-		List<Basket> baskets = basketService.getBasketByuserName(userName);
+		List<Basket> baskets = basketService.getBasketByuserName(UserManager.getUsername(request));
 		if (!AppUtils.isBlank(baskets)) {
 			Double totalcash = CommonServiceUtil.calculateTotalCash(baskets);
 			request.setAttribute("baskets", baskets);

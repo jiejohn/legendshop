@@ -531,15 +531,11 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 * @see com.legendshop.business.service.impl.BusinessService#searchall(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String searchall(HttpServletRequest request, HttpServletResponse response, String keyword, String entityType) {
-		Integer iEntityType = 0;
-		try {
-			if (entityType != null) {
-				iEntityType = Integer.valueOf(entityType);
-			}
-		} catch (Exception e) {
-			iEntityType = 0;
+	public String searchall(HttpServletRequest request, HttpServletResponse response, String keyword, Integer entityType) {
+		if(entityType == null){
+			entityType = 0;
 		}
+
 		String priceStartValue = request.getParameter("priceStartValue");
 		String priceEndValue = request.getParameter("priceEndValue");
 
@@ -572,7 +568,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			}
 
 		}
-		args.setEntityType(iEntityType);
+		args.setEntityType(entityType);
 		if (LuceneIndexer.SEARCH_ENTITY_SHOPDETAIL.equals(args.getEntityType())) {
 			String provinceid = request.getParameter("provinceidValue");
 			if (AppUtils.isNotBlank(provinceid)) {

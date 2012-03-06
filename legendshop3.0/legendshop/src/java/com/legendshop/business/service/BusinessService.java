@@ -116,7 +116,7 @@ public interface BusinessService extends BaseService{
 	 * @return the string
 	 */
 	public abstract String searchall(HttpServletRequest request, HttpServletResponse response, String keyword,
-			String entityType);
+			Integer entityType);
 
 	/**
 	 * 大分类商品.

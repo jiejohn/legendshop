@@ -62,12 +62,12 @@
         <td width="100px"><fmt:message key="Order.Status"/></td>
         <td width="100px" height="25" align="center"><fmt:message key="operation"/></td>
       </tr>
-	<c:forEach items="${requestScope.processOrderList}" var="order" varStatus="status">
+	<c:forEach items="${requestScope.list}" var="order" varStatus="status">
       <tr>
         <td height="25">&nbsp;<%=offset++%>&nbsp;</td>
         <td height="25"><a href='${pageContext.request.contextPath}/orderDetail/${order.subNumber}${applicationScope.WEB_SUFFIX}' target="_blank">${order.subNumber}</a></td>
         <td height="25"><b><fmt:formatNumber type="currency" value="${order.total}" pattern="${CURRENCY_PATTERN}"/></b></td>
-        <td height="25">${order.name}</td>
+        <td height="25">${order.prodName}</td>
         <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
         <td height="25"><a href="${pageContext.request.contextPath}/shop/${order.shopName}${applicationScope.WEB_SUFFIX}" target="_blank">${order.shopName}</a></td>
         </c:if>
@@ -175,7 +175,7 @@ function deleteSub(subId,subNumber) {
 }	
 
 	
-	function onloadSetup(){
+ 	function onloadSetup(){
 		if(${subForm.subCheck == 'N'}){
 			document.getElementById('processingbutton').className='selected';
 			document.getElementById('processedbutton').className='';
