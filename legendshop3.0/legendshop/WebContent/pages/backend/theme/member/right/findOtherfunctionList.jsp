@@ -1,9 +1,15 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/common.jsp"%>
+<%@ include file="/pages/common/back-common.jsp"%>
 <%@ include file="/pages/common/taglib.jsp"%>
-<html:html>
+<%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
+<%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
+<%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
+<html>
 <head>
-<LINK title=Style href="${pageContext.request.contextPath}/common/css/back_style.css" type=text/css rel=stylesheet>
+  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
+  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
+		<script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript">
 <!--
   function confirmDelete()
@@ -56,52 +62,39 @@
 </head>
 <body>
 <%
-			String curPageNO = (String) request.getParameter("curPageNO");
-			int curpage = 1;
-			if ("".equals(curPageNO) || curPageNO == null)
-				curpage = 1;
-			else {
-				curpage = Integer.parseInt(curPageNO);
-			}
 			int offset=((Integer)request.getAttribute("offset")).intValue();
 	%>
-<br>
-<br>
-	<html:form action="/member/right/saveFunctionsToRoleList${applicationScope.WEB_SUFFIX}">
+
+    <table class="${tableclass}" style="width: 100%">
+    <thead>
+    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">角色管理</a>&raquo;增加角色[${bean.name }]权限</td></tr>
+    </thead>
+    </table>
+<form action="${pageContext.request.contextPath}/member/role/saveFunctionsToRole${applicationScope.WEB_SUFFIX}" id="form1" name="form1">
     <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>"> 
-    <input type="hidden" name="roleId" value="<bean:write name="role" property="id"/>"> 
-<table width="900"  align="center" class="tableBorder">
-  <tr>
-    <th height="29" colspan="9" scope="col">权限列表</th>
-  </tr>
-  <logic:present name="functionList" scope="request">
-  <tr>
-    <td align="center" class="forumRow"><input name="checkbox" type=checkbox id=checkbox onClick="javascript:selAll();" value=checkbox>全选</td>
-    <td align="center" class="forumRow">名称</td>
-    <td align="center" class="forumRow">权限名称</td>
-    <td align="center" class="forumRow">备注</td>
-  </tr>
-  <logic:iterate id="function" name="functionList">
-  <logic:present name="function">
-  <tr>
-    <td align="center" class="forumRow"><html:multibox property="strArray"><bean:write name="function" property="id"/></html:multibox>&nbsp;<%=offset++%></td>
-    <td align="center" class="forumRow"><bean:write name="function" property="name"/></td>
-    <td align="center" class="forumRow"><bean:write name="function" property="protectFunction"/></td>
-    <td align="center" class="forumRow"><bean:write name="function" property="note"/></td>
-  </tr>
-  </logic:present>
-  </logic:iterate>
-  </logic:present>
-</table><p></p>
+    <input type="hidden" name="roleId" value="${bean.id }"> 
+    
+    
+    
+	 <div align="center">
+        <%@ include file="/pages/common/messages.jsp"%>
+        
+    <display:table name="list" id="item" export="true" class="${tableclass}" style="width:100%">
+      <display:column style="width:70px" title="<input type='checkbox'  id='checkbox' name='checkbox' onClick='javascript:selAll()' />顺序"><input type="checkbox" name="strArray" value="${item.id}" /><%=offset++%></display:column>
+      <display:column title="名称 " property="name" sortable="true"></display:column>
+      <display:column title="权限名称 " property="protectFunction" sortable="true"></display:column>
+      <display:column title="备注" property="note"></display:column>
+    </display:table>
+     </div>
+ 
+    
 	<div align="center">
 		<input type="submit" value="增加" onclick="return saveLeastOne();"/>
 	</div>
-	</html:form>
+	</form>
 	<div align="center">
-	<logic:present name="toolBar">
-		<bean:write name="toolBar" filter="false"/>
-	</logic:present>
+	<c:out value="${toolBar}" escapeXml="${toolBar}"></c:out>
 	</div>  
 </body>
-</html:html>
+</html>
 

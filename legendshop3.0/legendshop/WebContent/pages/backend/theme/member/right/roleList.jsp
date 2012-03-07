@@ -67,7 +67,7 @@
       </display:column>
       <display:column title="备注" property="note"></display:column>
       <display:column title="对应权限">
-      	<a href="findFunctionByRole${applicationScope.WEB_SUFFIX}?roleId=${item.id}">权限</a>
+      	<a href="${pageContext.request.contextPath}/member/role/functions/${item.id}${applicationScope.WEB_SUFFIX}">权限</a>
       </display:column>
       <display:column title="操作" media="html" style="width:75px">
       	<a href="${pageContext.request.contextPath}/member/role/update/${item.id}${applicationScope.WEB_SUFFIX}" ><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>

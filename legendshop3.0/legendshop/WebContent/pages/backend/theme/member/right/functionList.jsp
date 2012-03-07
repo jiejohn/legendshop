@@ -49,7 +49,7 @@
       <display:column title="权限名称 " property="protectFunction"></display:column>
       <display:column title="备注" property="note"></display:column>
       <display:column title="对应角色">
-      	<a href="findRoleByFunction${applicationScope.WEB_SUFFIX}?functionId=${item.id}">角色</a>
+      	<a href="${pageContext.request.contextPath}/member/right/roles/${item.id}${applicationScope.WEB_SUFFIX}">角色</a>
       </display:column>
       <display:column title="操作" media="html" style="width:75px">
       	<a href="${pageContext.request.contextPath}/member/right/update/${item.id}${applicationScope.WEB_SUFFIX}" ><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>

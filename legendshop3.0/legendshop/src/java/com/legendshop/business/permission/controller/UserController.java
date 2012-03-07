@@ -102,7 +102,8 @@ public class UserController extends BaseController implements AdminController<Us
 			}
 
 		request.setAttribute("userId", userId);
-		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER);
+//		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER);
+		return "redirect:"+PageLetEnum.FIND_USER_ROLES.getValue()+"/"+userId+AttributeKeys.WEB_SUFFIX;
 	}
 
 	
@@ -304,8 +305,9 @@ public class UserController extends BaseController implements AdminController<Us
 				return PathResolver.getPath(request, PageLetEnum.FAIL);
 			}
 
-		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER);
+//		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER);
 
+		return "redirect:"+PageLetEnum.FIND_USER_ROLES.getValue()+"/"+userId+AttributeKeys.WEB_SUFFIX;
 	}
 
 	/**
@@ -641,6 +643,21 @@ public class UserController extends BaseController implements AdminController<Us
 			}
 		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER);
 	}
+
 	
+	@RequestMapping(value = "/functions/{id}")
+	public String functions(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {		
+		logger.info("UserAction findFunctionByUser : " + id);
+		State state = new StateImpl();
+			User user = rightDelegate.findUserById(id, state);
+			List functions = rightDelegate.findFunctionByUser(id, state);
+			if (!state.isOK()) {
+				return PathResolver.getPath(request, PageLetEnum.FAIL);
+			}
+			request.setAttribute("list", functions);
+			request.setAttribute("bean", user);
+
+		return PathResolver.getPath(request, PageLetEnum.FIND_FUNCTION_BY_USER);
+	}
 
 }

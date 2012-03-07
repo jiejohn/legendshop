@@ -78,7 +78,7 @@
       	<a href="${pageContext.request.contextPath}/member/user/roles/${item.id}${applicationScope.WEB_SUFFIX}">用户角色</a>
       </display:column>
       <display:column title="用户权限">
-      	<a href="${pageContext.request.contextPath}/member/user/findFunctionByUser${applicationScope.WEB_SUFFIX}?userId=${item.id}" >用户权限</a>
+      	<a href="${pageContext.request.contextPath}/member/user/functions/${item.id}${applicationScope.WEB_SUFFIX}" >用户权限</a>
       </display:column>
       <display:column title="修改密码">
       	<a href="${pageContext.request.contextPath}/member/user/update/${item.id}${applicationScope.WEB_SUFFIX}">修改密码</a> 

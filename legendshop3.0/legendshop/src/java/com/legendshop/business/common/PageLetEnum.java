@@ -260,7 +260,11 @@ public enum PageLetEnum implements PathEnum{
 	
 	UPDATE_FUNCTION("/member/right/updateFunction",BACK_PAGE),
 	
-	FIND_FUNCTION_BY_ROLE("/member/right/findFunctionByRole",FOWARD),
+//	FIND_FUNCTION_BY_ROLE("/member/right/findFunctionByRole",FOWARD),
+		
+	FIND_FUNCTION_BY_ROLE("/member/role/functions",FOWARD),
+	
+	ROLE_FUNCTION("/member/right/findFunctionByRole",BACK_PAGE),
 	
 	FIND_OTHER_FUNCTION_LIST("/member/right/findOtherfunctionList",BACK_PAGE),
 	

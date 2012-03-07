@@ -632,5 +632,21 @@ public class FunctionController extends BaseController implements AdminControlle
 
 		return PathResolver.getPath(request, PageLetEnum.UPDATE_FUNCTION);
 	}
+	
+	@RequestMapping(value = "/roles/{id}")
+	public String roles(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
+		logger.info("Struts Action findRoleByFunction with function id  " + id);
+		State state = new StateImpl();
 
+		Function function = rightDelegate.findFunctionById(id, state);
+		List list = rightDelegate.findRoleByFunction(id, state);
+		if (!state.isOK()) {
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		}
+
+		request.setAttribute("list", list);
+		request.setAttribute("bean", function);
+
+		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_FUNCTION);
+	}
 }

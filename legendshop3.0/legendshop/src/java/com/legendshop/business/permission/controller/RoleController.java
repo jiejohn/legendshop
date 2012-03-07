@@ -7,6 +7,9 @@
  */
 package com.legendshop.business.permission.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.PageLetEnum;
 import com.legendshop.business.helper.FunctionChecker;
+import com.legendshop.business.permission.form.FunctionForm;
+import com.legendshop.business.permission.form.PermissionForm;
 import com.legendshop.business.permission.service.RightDelegate;
 import com.legendshop.command.framework.State;
 import com.legendshop.command.framework.StateImpl;
@@ -29,12 +34,15 @@ import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
+import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.UserMessages;
+import com.legendshop.model.entity.Permission;
+import com.legendshop.model.entity.PerssionId;
 import com.legendshop.model.entity.Role;
 import com.legendshop.model.entity.User;
 import com.legendshop.util.AppUtils;
@@ -156,5 +164,88 @@ public class RoleController extends BaseController implements AdminController<Ro
 
 		return PathResolver.getPath(request, PageLetEnum.SAVE_ROLE);
 	}
+
+	@RequestMapping(value = "/functions/{id}")
+	public String functions(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
+		logger.info("Struts FunctionAction findFunctionByRole with roleId  " + id);
+		State state = new StateImpl();
+		Role role = rightDelegate.findRoleById(id, state);
+		List list = rightDelegate.findFunctionByRoleId(id, state);
+		if (!state.isOK()) {
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		}
+		request.setAttribute("list", list);
+		request.setAttribute("bean", role);
+
+		return PathResolver.getPath(request, PageLetEnum.ROLE_FUNCTION);
+	}
+	
+	@RequestMapping(value = "/otherFunctions/{id}")
+	public String otherFunctions(HttpServletRequest request, HttpServletResponse response, String curPageNO,
+			@PathVariable String id) {
+		
+		// HQL查找方式
+		HqlQuery hq = new HqlQuery();
+		hq.setCurPage(curPageNO);
+		hq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+
+		State state = new StateImpl();
+		Role role = rightDelegate.findRoleById(id, state);
+		PageSupport ps = rightDelegate.findOtherFunctionByHql(hq, id, state);
+		if (!state.isOK()) {
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		}
+		savePage(ps, request);
+		request.setAttribute("bean", role);
+
+		return PathResolver.getPath(request, PageLetEnum.FIND_OTHER_FUNCTION_LIST);
+	}
+	
+	@RequestMapping("/saveFunctionsToRole")
+	public String saveFunctionsToRole(HttpServletRequest request, HttpServletResponse response, String roleId,
+			PermissionForm permissionForm) {
+		List<Permission> permissions = new ArrayList<Permission>();
+		String[] strArray = permissionForm.getStrArray();
+		for (int i = 0; i < strArray.length; i++) {
+			Permission permission = new Permission();
+			PerssionId perssionId = new PerssionId();
+			perssionId.setRoleId(roleId);
+			perssionId.setFunctionId(strArray[i]);
+			permission.setId(perssionId);
+			permissions.add(permission);
+		}
+		State state = new StateImpl();
+		rightDelegate.saveFunctionsToRole(permissions, state);
+		if (!state.isOK()) {
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		}
+
+//		return PathResolver.getPath(request, PageLetEnum.FIND_FUNCTION_BY_ROLE);
+		return "redirect:"+PageLetEnum.FIND_FUNCTION_BY_ROLE.getValue()+"/"+roleId+AttributeKeys.WEB_SUFFIX;
+	}
+	
+	@RequestMapping("/deletePermissionByRoleId")
+	public String deletePermissionByRoleId(HttpServletRequest request, HttpServletResponse response, 
+			String roleId, FunctionForm functionForm) {
+		log.info("Action deletePermissionByRoleId with roleId {}", roleId);
+		List<Permission> permissions = new ArrayList<Permission>();
+		String[] strArray = functionForm.getStrArray();
+		for (int i = 0; i < strArray.length; i++) {
+			Permission permission = new Permission();
+			PerssionId perssionId = new PerssionId();
+			perssionId.setRoleId(roleId);
+			perssionId.setFunctionId(strArray[i]);
+			permission.setId(perssionId);
+			permissions.add(permission);
+		}
+		State state = new StateImpl();
+		rightDelegate.deleteFunctionsFromRole(permissions, state);
+		if (!state.isOK()) {
+			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		}
+//		return PathResolver.getPath(request, PageLetEnum.FIND_FUNCTION_BY_ROLE);
+		return "redirect:"+PageLetEnum.FIND_FUNCTION_BY_ROLE.getValue()+"/"+roleId+AttributeKeys.WEB_SUFFIX;
+	}
+
 
 }
