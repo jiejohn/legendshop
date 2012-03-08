@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.PageLetEnum;
 import com.legendshop.business.helper.FunctionChecker;
+import com.legendshop.business.helper.StateChecker;
 import com.legendshop.business.permission.form.UserRoleForm;
 import com.legendshop.business.permission.form.UsersForm;
 import com.legendshop.business.permission.service.RightDelegate;
@@ -39,9 +40,7 @@ import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
-import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserRole;
 import com.legendshop.model.entity.UserRoleId;
@@ -66,7 +65,9 @@ public class UserController extends BaseController implements AdminController<Us
 	@Autowired
 	private FunctionChecker functionChecker;
 	
-	
+	/** The state checker. */
+	@Autowired
+	private StateChecker stateChecker;
 	
 	/**
 	 * Delete user role by user id.
@@ -97,9 +98,7 @@ public class UserController extends BaseController implements AdminController<Us
 		State state = new StateImpl();
 
 			rightDelegate.deleteRoleFromUser(userRoles, state);
-			if (!state.isOK()){
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 
 		request.setAttribute("userId", userId);
 //		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER);
@@ -130,9 +129,7 @@ public class UserController extends BaseController implements AdminController<Us
 
 			String id = rightDelegate.saveUser(Md5Password(user), state);
 			logger.info("success saveUser,id = " + id);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 
 		return PathResolver.getPath(request, PageLetEnum.USERS_LIST);
 	}
@@ -181,9 +178,7 @@ public class UserController extends BaseController implements AdminController<Us
 			olduser.setEnabled(enabled);
 			olduser.setNote(user.getNote());
 			rightDelegate.updateUser(olduser, state);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 
 			return PathResolver.getPath(request, PageLetEnum.USERS_LIST);
 	}
@@ -204,9 +199,7 @@ public class UserController extends BaseController implements AdminController<Us
 		logger.info("Action preupdateStatus with id  " + id);
 		State state = new StateImpl();
 			User user = rightDelegate.findUserById(id, state);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 			request.setAttribute("user", user);
 		return PathResolver.getPath(request, PageLetEnum.UPDATE_USER_STATUS);
 	}
@@ -241,10 +234,7 @@ public class UserController extends BaseController implements AdminController<Us
 		coder.setEncodeHashAsBase64(false);
 			rightDelegate.updateUserPassowrd(user.getId(), coder.encodePassword(user.getPassword(), user.getName()),
 					state);
-			logger.info("updateFunctionById result  = " + state.isOK());
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 			return PathResolver.getPath(request, PageLetEnum.USERS_LIST);
 	}
 
@@ -265,9 +255,7 @@ public class UserController extends BaseController implements AdminController<Us
 		
 		State state = new StateImpl();
 			User user = rightDelegate.findUserById(id, state);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 			request.setAttribute("user", user);
 
 		return PathResolver.getPath(request, PageLetEnum.UPDATE_USER_PASSWORD);
@@ -301,10 +289,7 @@ public class UserController extends BaseController implements AdminController<Us
 		
 		State state = new StateImpl();
 			rightDelegate.saveRolesToUser(userRoles, state);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
-
+			stateChecker.check(state, request);
 //		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER);
 
 		return "redirect:"+PageLetEnum.FIND_USER_ROLES.getValue()+"/"+userId+AttributeKeys.WEB_SUFFIX;
@@ -335,9 +320,7 @@ public class UserController extends BaseController implements AdminController<Us
 			State state = new StateImpl();
 			User user = rightDelegate.findUserById(userId, state);
 			PageSupport ps = rightDelegate.findOtherRoleByUser(hq, userId, state);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
 			request.setAttribute("offset", new Integer(ps.getOffset() + 1));
 			if (ps.hasMutilPage()) {
@@ -366,9 +349,7 @@ public class UserController extends BaseController implements AdminController<Us
 		State state = new StateImpl();
 			User user = rightDelegate.findUserById(userId, state);
 			List functions = rightDelegate.findFunctionByUser(userId, state);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 			request.setAttribute("functions", functions);
 			request.setAttribute("user", user);
 
@@ -392,15 +373,8 @@ public class UserController extends BaseController implements AdminController<Us
 		if (userName == null) {
 			throw new BusinessException("not login yet", ErrorCodes.BUSINESS_ERROR);
 		}
-		// 检查不通过
-		if (!functionChecker.check(userName, request)) {
-			UserMessages uem = new UserMessages();
-			uem.setTitle("免费版不提供该功能");
-			uem.setCode(ErrorCodes.UN_AUTHORIZATION);
-
-			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-			throw new PermissionException("UN_AUTHORIZATION", ErrorCodes.UN_AUTHORIZATION);
-		}
+		//权限检查
+		functionChecker.check(userName, request);
 		String search = request.getParameter("search") == null ? "" : request.getParameter("search");
 		String enabled = request.getParameter("enabled") == null ? "" : request.getParameter("enabled");
 			// Qbc查找方式
@@ -446,9 +420,7 @@ public class UserController extends BaseController implements AdminController<Us
 		State state = new StateImpl();
 			User user = rightDelegate.findUserById(userId, state);
 			List roles = rightDelegate.findRoleByUser(userId, state);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 			request.setAttribute("roles", roles);
 			request.setAttribute("user", user);
 
@@ -468,6 +440,7 @@ public class UserController extends BaseController implements AdminController<Us
 	 *            the response
 	 * @return the string
 	 */
+	@Override
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
 		return PathResolver.getPath(request, PageLetEnum.MODIFY_USER);
@@ -491,18 +464,10 @@ public class UserController extends BaseController implements AdminController<Us
 		String userName = UserManager.getUsername(request);
 		if (userName == null) {
 			throw new BusinessException("not login yet",
-					ErrorCodes.BUSINESS_ERROR);
+					ErrorCodes.UN_LOGIN);
 		}
-		// 检查不通过
-		if (!functionChecker.check(userName, request)) {
-			UserMessages uem = new UserMessages();
-			uem.setTitle("免费版不提供该功能");
-			uem.setCode(ErrorCodes.UN_AUTHORIZATION);
-
-			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-			throw new PermissionException("UN_AUTHORIZATION",
-					ErrorCodes.UN_AUTHORIZATION);
-		}
+		//权限检查
+		functionChecker.check(userName, request);
 		String name = user.getName();
 		String enabled = user.getEnabled();
 		CriteriaQuery cq = new CriteriaQuery(User.class, curPageNO);
@@ -545,9 +510,7 @@ public class UserController extends BaseController implements AdminController<Us
 			rightDelegate.updateUser(Md5Password(user), state);
 		}
 		logger.info("success saveUser,id = " + id);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 
 		return PathResolver.getPath(request, PageLetEnum.USERS_LIST);
 	}
@@ -558,7 +521,7 @@ public class UserController extends BaseController implements AdminController<Us
 		logger.info("Struts UserAction updateUserById");
 		String passwordag = user.getPasswordag();
 		if ((user.getPassword() == null) || (user.getPassword() == "")) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
+			return PathResolver.getPath(request, PageLetEnum.ERROR_PAGE);
 		}
 		if (!passwordag.endsWith(user.getPassword())) {// 2次密码要相等
 			return PathResolver.getPath(request, PageLetEnum.FAIL);
@@ -567,10 +530,7 @@ public class UserController extends BaseController implements AdminController<Us
 		Md5PasswordEncoder coder = new Md5PasswordEncoder();
 		coder.setEncodeHashAsBase64(false);
 		rightDelegate.updateUserPassowrd(user.getId(), coder.encodePassword(user.getPassword(), user.getName()), state);
-		logger.info("updateFunctionById result  = " + state.isOK());
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		return PathResolver.getPath(request, PageLetEnum.USERS_LIST);
 	}
 
@@ -580,9 +540,7 @@ public class UserController extends BaseController implements AdminController<Us
 		logger.info("Action findUserById with id  " + id);		
 		State state = new StateImpl();
 			User user = rightDelegate.findUserById(id, state);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 			request.setAttribute("bean", user);
 		return PathResolver.getPath(request, PageLetEnum.UPDATE_USER_PASSWORD);
 	}
@@ -593,9 +551,7 @@ public class UserController extends BaseController implements AdminController<Us
 		State state = new StateImpl();
 		User user = rightDelegate.findUserById(id, state);
 		List roles = rightDelegate.findRoleByUser(id, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		request.setAttribute("list", roles);
 		request.setAttribute("bean", user);
 
@@ -613,9 +569,7 @@ public class UserController extends BaseController implements AdminController<Us
 		State state = new StateImpl();
 		User user = rightDelegate.findUserById(id, state);
 		PageSupport ps = rightDelegate.findOtherRoleByUser(hq, id, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		savePage(ps, request);
 		request.setAttribute("bean", user);
 
@@ -634,13 +588,9 @@ public class UserController extends BaseController implements AdminController<Us
 			userRole.setId(userRoleId);
 			userRoles.add(userRole);
 		}
-		// removeRequestAttribute(mapping,request);
-		State state = new StateImpl();
-
+			State state = new StateImpl();
 			rightDelegate.deleteRoleFromUser(userRoles, state);
-			if (!state.isOK()){
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 		return PathResolver.getPath(request, PageLetEnum.FIND_ROLE_BY_USER);
 	}
 
@@ -651,9 +601,7 @@ public class UserController extends BaseController implements AdminController<Us
 		State state = new StateImpl();
 			User user = rightDelegate.findUserById(id, state);
 			List functions = rightDelegate.findFunctionByUser(id, state);
-			if (!state.isOK()) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 			request.setAttribute("list", functions);
 			request.setAttribute("bean", user);
 

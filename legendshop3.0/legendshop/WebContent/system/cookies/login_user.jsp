@@ -8,9 +8,9 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-if(UserManager.getUser(request)!=null)
-    pageContext.setAttribute("auth",UserManager.getUser(session).getAuthorities());
-	pageContext.setAttribute("function",UserManager.getPrincipalFunctionByAuthorities(session));
+if(UserManager.getUser(request.getSession())!=null)
+    pageContext.setAttribute("auth",UserManager.getUser(request.getSession()).getAuthorities());
+	pageContext.setAttribute("function",UserManager.getPrincipalFunctionByAuthorities(request.getSession()));
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

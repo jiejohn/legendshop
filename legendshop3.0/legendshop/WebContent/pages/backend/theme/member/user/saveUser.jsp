@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
 <title>创建用户</title>
 
-        <script language="javascript">
+   <script language="javascript">
     $.validator.setDefaults({
     });
 
@@ -29,10 +29,21 @@
 		    }
         },
         messages: {
-            brandName: {
-                required: "请输入商品品牌名称"
-            }
+        	 name: {
+                 required: '<fmt:message key="username.required"/>',
+                 minlength: '<fmt:message key="username.minlength"/>'
+             },
+             password: {
+                 required: '<fmt:message key="password.required"/>',
+                 minlength: '<fmt:message key="password.minlength"/>'
+             },
+             passwordag: {
+                 required: '<fmt:message key="password.required"/>',
+                 minlength: '<fmt:message key="password.minlength"/>',
+                 equalTo: '<fmt:message key="password.equalTo"/>'
+             }
         }
+
     });
  
       $("#col1 tr").each(function(i){
@@ -46,6 +57,11 @@
      });   
          $("#col1 th").addClass('sortable'); 
 });
+
+	// check if confirm password is still valid after password changed
+	jQuery("#password").blur(function() {
+		jQuery("#passwordag").valid();
+	})
 </script>
 </head>
 
@@ -100,9 +116,7 @@
         <td>
            <p>           
           <label>
-            <input type="radio" name="enabled" value="1"             
-            checked="checked"
-            />
+            <input type="radio" name="enabled" value="1"  checked="checked" />
             有效</label> &nbsp; &nbsp; 
           <label>
             <input type="radio" name="enabled" value="0"

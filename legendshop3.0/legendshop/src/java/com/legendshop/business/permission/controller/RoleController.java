@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.PageLetEnum;
 import com.legendshop.business.helper.FunctionChecker;
+import com.legendshop.business.helper.StateChecker;
 import com.legendshop.business.permission.form.FunctionForm;
 import com.legendshop.business.permission.form.PermissionForm;
 import com.legendshop.business.permission.service.RightDelegate;
@@ -38,13 +39,10 @@ import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
-import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.Permission;
 import com.legendshop.model.entity.PerssionId;
 import com.legendshop.model.entity.Role;
-import com.legendshop.model.entity.User;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.StringUtil;
 
@@ -65,7 +63,14 @@ public class RoleController extends BaseController implements AdminController<Ro
 	/** The function checker. */
 	@Autowired
 	private FunctionChecker functionChecker;
+	
+	/** The state checker. */
+	@Autowired
+	private StateChecker stateChecker;
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.core.base.AdminController#delete(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
+	 */
 	@Override
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(HttpServletRequest request, HttpServletResponse response,@PathVariable String id) {
@@ -74,19 +79,23 @@ public class RoleController extends BaseController implements AdminController<Ro
 		State state = new StateImpl();
 
 		rightDelegate.deleteRoleById(id, state);
-		if (!state.isOK()){
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 
 		return PathResolver.getPath(request, PageLetEnum.ALL_ROLE);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.core.base.AdminController#load(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	@Override
 	@RequestMapping("/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
 		return PathResolver.getPath(request, PageLetEnum.SAVE_ROLE);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.core.base.AdminController#query(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String, java.lang.Object)
+	 */
 	@Override
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Role role) {
@@ -94,15 +103,8 @@ public class RoleController extends BaseController implements AdminController<Ro
 		if (userName == null) {
 			throw new BusinessException("not login yet", ErrorCodes.BUSINESS_ERROR);
 		}
-		// 检查不通过
-		if (!functionChecker.check(userName, request)) {
-			UserMessages uem = new UserMessages();
-			uem.setTitle("免费版不提供该功能");
-			uem.setCode(ErrorCodes.UN_AUTHORIZATION);
-
-			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-			throw new PermissionException("UN_AUTHORIZATION", ErrorCodes.UN_AUTHORIZATION);
-		}
+		//权限检查
+		functionChecker.check(userName, request);
 
 		// Qbc查找方式
 		CriteriaQuery cq = new CriteriaQuery(Role.class, curPageNO);
@@ -128,6 +130,9 @@ public class RoleController extends BaseController implements AdminController<Ro
 		return PathResolver.getPath(request, PageLetEnum.ROLE_LIST);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.core.base.AdminController#save(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
+	 */
 	@Override
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, Role role) {
@@ -144,42 +149,63 @@ public class RoleController extends BaseController implements AdminController<Ro
 			
 			
 			logger.info("success saveRole,id = " + id);
-			if (!state.isOK()){
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
-			}
+			stateChecker.check(state, request);
 
 			return PathResolver.getPath(request, PageLetEnum.ALL_ROLE);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.core.base.AdminController#update(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
+	 */
 	@Override
 	@RequestMapping(value = "/update/{id}")
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
 		logger.info("Action update with id  " + id);
 		State state = new StateImpl();
 		Role role= rightDelegate.findRoleById(id, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		request.setAttribute("bean", role);
 
 		return PathResolver.getPath(request, PageLetEnum.SAVE_ROLE);
 	}
 
+	/**
+	 * Functions.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param id
+	 *            the id
+	 * @return the string
+	 */
 	@RequestMapping(value = "/functions/{id}")
 	public String functions(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
 		logger.info("Struts FunctionAction findFunctionByRole with roleId  " + id);
 		State state = new StateImpl();
 		Role role = rightDelegate.findRoleById(id, state);
 		List list = rightDelegate.findFunctionByRoleId(id, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		request.setAttribute("list", list);
 		request.setAttribute("bean", role);
 
 		return PathResolver.getPath(request, PageLetEnum.ROLE_FUNCTION);
 	}
 	
+	/**
+	 * Other functions.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param curPageNO
+	 *            the cur page no
+	 * @param id
+	 *            the id
+	 * @return the string
+	 */
 	@RequestMapping(value = "/otherFunctions/{id}")
 	public String otherFunctions(HttpServletRequest request, HttpServletResponse response, String curPageNO,
 			@PathVariable String id) {
@@ -192,15 +218,26 @@ public class RoleController extends BaseController implements AdminController<Ro
 		State state = new StateImpl();
 		Role role = rightDelegate.findRoleById(id, state);
 		PageSupport ps = rightDelegate.findOtherFunctionByHql(hq, id, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		savePage(ps, request);
 		request.setAttribute("bean", role);
 
 		return PathResolver.getPath(request, PageLetEnum.FIND_OTHER_FUNCTION_LIST);
 	}
 	
+	/**
+	 * Save functions to role.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param roleId
+	 *            the role id
+	 * @param permissionForm
+	 *            the permission form
+	 * @return the string
+	 */
 	@RequestMapping("/saveFunctionsToRole")
 	public String saveFunctionsToRole(HttpServletRequest request, HttpServletResponse response, String roleId,
 			PermissionForm permissionForm) {
@@ -216,14 +253,25 @@ public class RoleController extends BaseController implements AdminController<Ro
 		}
 		State state = new StateImpl();
 		rightDelegate.saveFunctionsToRole(permissions, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 
 //		return PathResolver.getPath(request, PageLetEnum.FIND_FUNCTION_BY_ROLE);
 		return "redirect:"+PageLetEnum.FIND_FUNCTION_BY_ROLE.getValue()+"/"+roleId+AttributeKeys.WEB_SUFFIX;
 	}
 	
+	/**
+	 * Delete permission by role id.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param roleId
+	 *            the role id
+	 * @param functionForm
+	 *            the function form
+	 * @return the string
+	 */
 	@RequestMapping("/deletePermissionByRoleId")
 	public String deletePermissionByRoleId(HttpServletRequest request, HttpServletResponse response, 
 			String roleId, FunctionForm functionForm) {
@@ -240,9 +288,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		}
 		State state = new StateImpl();
 		rightDelegate.deleteFunctionsFromRole(permissions, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 //		return PathResolver.getPath(request, PageLetEnum.FIND_FUNCTION_BY_ROLE);
 		return "redirect:"+PageLetEnum.FIND_FUNCTION_BY_ROLE.getValue()+"/"+roleId+AttributeKeys.WEB_SUFFIX;
 	}

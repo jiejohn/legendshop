@@ -38,4 +38,11 @@
 		</property>
 	</bean>
 	
+     <bean id="shopStatusChecker" class="com.legendshop.business.helper.ShopStatusChecker" />
+     
+    <bean id="functionChecker" class="com.legendshop.business.helper.FunctionChecker" />
+    
+    <bean id="stateChecker" class="com.legendshop.business.helper.StateChecker" />
+    
+    <bean id="loginChecker" class="com.legendshop.business.helper.LoginChecker" />
 </beans>

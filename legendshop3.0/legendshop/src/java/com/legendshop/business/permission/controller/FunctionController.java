@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.PageLetEnum;
 import com.legendshop.business.helper.FunctionChecker;
+import com.legendshop.business.helper.StateChecker;
 import com.legendshop.business.permission.form.FunctionForm;
 import com.legendshop.business.permission.form.PermissionForm;
 import com.legendshop.business.permission.form.RoleForm;
@@ -39,14 +40,11 @@ import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
-import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.Function;
 import com.legendshop.model.entity.Permission;
 import com.legendshop.model.entity.PerssionId;
 import com.legendshop.model.entity.Role;
-import com.legendshop.model.entity.User;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.StringUtil;
 
@@ -67,6 +65,10 @@ public class FunctionController extends BaseController implements AdminControlle
 	/** The function checker. */
 	@Autowired
 	private FunctionChecker functionChecker;
+	
+	/** The state checker. */
+	@Autowired
+	private StateChecker stateChecker;
 
 	/**
 	 * Delete function by id.
@@ -92,9 +94,7 @@ public class FunctionController extends BaseController implements AdminControlle
 
 		boolean result = rightDelegate.deleteFunctionById(id, state);
 		logger.debug("deleteFunctionById result  = " + result);
-		if (!state.isOK() || !result) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 
 		return PathResolver.getPath(request, PageLetEnum.FUNCTION_LIST_QUERY);
 	}
@@ -115,9 +115,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		logger.info("Struts Action findFunctionById with id  " + id);
 		State state = new StateImpl();
 		Function function = rightDelegate.findFunctionById(id, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		request.setAttribute("function", function);
 
 		return PathResolver.getPath(request, PageLetEnum.UPDATE_FUNCTION);
@@ -140,9 +138,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		State state = new StateImpl();
 		Role role = rightDelegate.findRoleById(roleId, state);
 		List list = rightDelegate.findFunctionByRoleId(roleId, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		request.setAttribute("list", list);
 		request.setAttribute("role", role);
 
@@ -176,9 +172,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		State state = new StateImpl();
 		Role role = rightDelegate.findRoleById(roleId, state);
 		PageSupport ps = rightDelegate.findOtherFunctionByHql(hq, roleId, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
 		request.setAttribute("offset", new Integer(ps.getOffset() + 1));
 		if (ps.hasMutilPage())
@@ -211,15 +205,8 @@ public class FunctionController extends BaseController implements AdminControlle
 		if (userName == null) {
 			throw new BusinessException("not login yet", ErrorCodes.BUSINESS_ERROR);
 		}
-		// 检查不通过
-		if (!functionChecker.check(userName, request)) {
-			UserMessages uem = new UserMessages();
-			uem.setTitle("免费版不提供该功能");
-			uem.setCode(ErrorCodes.UN_AUTHORIZATION);
-
-			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-			throw new PermissionException("UN_AUTHORIZATION", ErrorCodes.UN_AUTHORIZATION);
-		}
+		//权限检查
+		functionChecker.check(userName, request);
 
 		String myaction = "listFunction" + AttributeKeys.WEB_SUFFIX;
 		String search = request.getParameter("search");
@@ -264,9 +251,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		State state = new StateImpl();
 		String id = rightDelegate.saveFunction(functionForm.getFunction(), state);
 		logger.info("success saveFunction,id = " + id);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		return PathResolver.getPath(request, PageLetEnum.FUNCTION_LIST_QUERY);
 	}
 
@@ -298,9 +283,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		}
 		State state = new StateImpl();
 		rightDelegate.saveFunctionsToRole(permissions, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 
 		return PathResolver.getPath(request, PageLetEnum.FIND_FUNCTION_BY_ROLE);
 	}
@@ -321,9 +304,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		logger.debug("Struts FunctionAction updateFunctionById");
 		State state = new StateImpl();
 		rightDelegate.updateFunction(functionForm.getFunction(), state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		return PathResolver.getPath(request, PageLetEnum.FUNCTION_LIST_QUERY);
 	}
 
@@ -359,9 +340,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		}
 		State state = new StateImpl();
 		rightDelegate.deleteFunctionsFromRole(permissions, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		request.setAttribute("roleId", roleId);
 		return PathResolver.getPath(request, PageLetEnum.FIND_FUNCTION_BY_ROLE);
 	}
@@ -382,9 +361,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		logger.info("Action findRoleById with id  " + id);
 		State state = new StateImpl();
 		Role role = rightDelegate.findRoleById(id, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		request.setAttribute("role", role);
 
 		return PathResolver.getPath(request, PageLetEnum.FIND_ALL_ROLE);
@@ -407,9 +384,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		State state = new StateImpl();
 
 		rightDelegate.deleteRoleById(id, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 
 		return PathResolver.getPath(request, PageLetEnum.FIND_ALL_ROLE);
 	}
@@ -429,15 +404,8 @@ public class FunctionController extends BaseController implements AdminControlle
 		if (userName == null) {
 			throw new BusinessException("not login yet", ErrorCodes.BUSINESS_ERROR);
 		}
-		// 检查不通过
-		if (!functionChecker.check(userName, request)) {
-			UserMessages uem = new UserMessages();
-			uem.setTitle("免费版不提供该功能");
-			uem.setCode(ErrorCodes.UN_AUTHORIZATION);
-
-			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-			throw new PermissionException("UN_AUTHORIZATION", ErrorCodes.UN_AUTHORIZATION);
-		}
+		//权限检查
+		functionChecker.check(userName, request);
 		String curPageNO = request.getParameter("curPageNO");
 		String myaction;
 		String search = request.getParameter("search");
@@ -488,9 +456,7 @@ public class FunctionController extends BaseController implements AdminControlle
 
 		Function function = rightDelegate.findFunctionById(functionId, state);
 		List list = rightDelegate.findRoleByFunction(functionId, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 
 		request.setAttribute("list", list);
 		request.setAttribute("function", function);
@@ -515,9 +481,7 @@ public class FunctionController extends BaseController implements AdminControlle
 
 		String id = rightDelegate.saveRole(roleForm.getRole(), state);
 		logger.info("success saveRole,id = " + id);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 
 		return PathResolver.getPath(request, PageLetEnum.FIND_ALL_ROLE);
 	}
@@ -538,10 +502,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		logger.info("Struts Action updateRoleById");
 		State state = new StateImpl();
 		rightDelegate.updateRole(roleForm.getRole(), state);
-		logger.info("updateRoleById result  = " + state.isOK());
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 
 		return PathResolver.getPath(request, PageLetEnum.FIND_ALL_ROLE);
 	}
@@ -554,8 +515,8 @@ public class FunctionController extends BaseController implements AdminControlle
 		State state = new StateImpl();
 		boolean result = rightDelegate.deleteFunctionById(id, state);
 		logger.debug("deleteFunctionById result  = " + result);
-		if (!state.isOK() || !result) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
+		if (!result) {
+			stateChecker.check(state, request);
 		}
 		return PathResolver.getPath(request, PageLetEnum.FUNCTION_LIST_QUERY);
 	}
@@ -574,15 +535,8 @@ public class FunctionController extends BaseController implements AdminControlle
 		if (userName == null) {
 			throw new BusinessException("not login yet", ErrorCodes.BUSINESS_ERROR);
 		}
-		// 检查不通过
-		if (!functionChecker.check(userName, request)) {
-			UserMessages uem = new UserMessages();
-			uem.setTitle("免费版不提供该功能");
-			uem.setCode(ErrorCodes.UN_AUTHORIZATION);
-
-			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-			throw new PermissionException("UN_AUTHORIZATION", ErrorCodes.UN_AUTHORIZATION);
-		}
+		//权限检查
+		functionChecker.check(userName, request);
 
 		// Qbc查找方式
 		CriteriaQuery cq = new CriteriaQuery(Function.class, curPageNO);
@@ -613,9 +567,7 @@ public class FunctionController extends BaseController implements AdminControlle
 			rightDelegate.updateFunction(function, state);
 		}
 		logger.info("success saveFunction,id = " + id);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		return PathResolver.getPath(request, PageLetEnum.FUNCTION_LIST_QUERY);
 	}
 
@@ -625,9 +577,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		logger.info("Struts Action findFunctionById with id  " + id);
 		State state = new StateImpl();
 		Function function = rightDelegate.findFunctionById(id, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 		request.setAttribute("bean", function);
 
 		return PathResolver.getPath(request, PageLetEnum.UPDATE_FUNCTION);
@@ -640,9 +590,7 @@ public class FunctionController extends BaseController implements AdminControlle
 
 		Function function = rightDelegate.findFunctionById(id, state);
 		List list = rightDelegate.findRoleByFunction(id, state);
-		if (!state.isOK()) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
-		}
+		stateChecker.check(state, request);
 
 		request.setAttribute("list", list);
 		request.setAttribute("bean", function);

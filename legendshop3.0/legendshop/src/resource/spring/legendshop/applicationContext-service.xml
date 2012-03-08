@@ -39,10 +39,7 @@
         <property name="productSearchFacade" ref="productSearchFacade"></property>
     </bean>
 
-    <bean id="shopStatusChecker" class="com.legendshop.business.helper.ShopStatusChecker" />
-     
-    <bean id="functionChecker" class="com.legendshop.business.helper.FunctionChecker" />
-    
+
     <bean id="shopDetailService" class="com.legendshop.business.service.impl.ShopDetailServiceImpl">
         <property name="shopDetailDao" ref="shopDetailDao" />
         <property name="userDetailDao" ref="userDetailDao" />

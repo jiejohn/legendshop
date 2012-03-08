@@ -16,17 +16,14 @@ import com.legendshop.central.license.LSResponse;
 import com.legendshop.central.license.LicenseEnum;
 import com.legendshop.central.license.LicenseHelper;
 import com.legendshop.core.AttributeKeys;
+import com.legendshop.core.exception.ErrorCodes;
+import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.Checker;
+import com.legendshop.model.UserMessages;
 
 /**
  * 
- * LegendShop 版权所有 2009-2011,并保留所有权利。
- * 
- * ------------------------------------------------------------------------------------
- * 提示：在未取得LegendShop商业授权之前，您不能将本软件应用于商业用途，否则LegendShop将保留追究的权力。
- * ------------------------------------------------------------------------------------
- * 
- * 官方网站：http://www.legendesign.net
+ * 系统权限Checker
  */
 public class FunctionChecker implements Checker<String> {
 	
@@ -38,6 +35,7 @@ public class FunctionChecker implements Checker<String> {
 	 */
 	@Override
 	public boolean check(String userName, HttpServletRequest request) {
+		boolean result = true;
 		LSResponse resopose = (LSResponse) request.getSession().getServletContext().getAttribute(AttributeKeys.LEGENSHOP_LICENSE);
 		if (resopose == null) {
 			try {
@@ -50,11 +48,19 @@ public class FunctionChecker implements Checker<String> {
 			if (LicenseEnum.FREE.name().equals(license) || LicenseEnum.UNKNOWN.name().equals(license)) {
 				log.debug("user name = {} did not have function on this componment", userName);
 				//TODO				
-				return false;
-//				return true;
+				result = false;
 			}
 		}
+		
+		if(!result){
+			UserMessages uem = new UserMessages();
+			uem.setTitle("免费版不提供该功能");
+			uem.setCode(ErrorCodes.UN_AUTHORIZATION);
 
-		return true;
+			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
+			throw new PermissionException("UN_AUTHORIZATION", ErrorCodes.UN_AUTHORIZATION);
+		}
+
+		return result;
 	}
 }
