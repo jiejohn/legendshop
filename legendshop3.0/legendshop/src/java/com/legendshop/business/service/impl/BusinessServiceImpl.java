@@ -461,7 +461,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public String search(HttpServletRequest request, HttpServletResponse response, SearchForm searchForm) {
-		String myaction = "javascript:searchPager";
 		Sort sort = null;
 		List<Nsort> nsortList = null;
 		// 1、关键字不能为空
@@ -483,14 +482,14 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 		try {
 			// Qbc查找方式
-			CriteriaQuery cq = new CriteriaQuery(Product.class, searchForm.getCurPageNOTop(), myaction);
+			CriteriaQuery cq = new CriteriaQuery(Product.class, searchForm.getCurPageNOTop());
 			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class) * 2);
 			cq.eq("userName", getShopName(request, response));
 			Criterion c = null;
 			if (!AppUtils.isBlank(searchForm.getKeyword())) {
 				String[] keywords = AppUtils.searchByKeyword(searchForm.getKeyword());
 				for (String word : keywords) {
-					Criterion temp = Restrictions.like("prodName", "%" + word + "%");
+					Criterion temp = Restrictions.like("name", "%" + word + "%");
 					if (c == null) {
 						c = temp;
 					} else {
@@ -522,7 +521,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			}
 		} catch (Exception e) {
 			log.error("getProdDetail", e);
-			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
 		}
 		return PathResolver.getPath(request, PageLetEnum.PRODUCTSORT);
 	}
