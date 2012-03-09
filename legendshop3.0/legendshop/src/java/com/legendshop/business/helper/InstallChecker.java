@@ -24,7 +24,7 @@ import com.legendshop.model.UserMessages;
  * 
  * 官方网站：http://www.legendesign.net
  */
-public class StateChecker implements Checker<State> {
+public class InstallChecker implements Checker<State> {
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.helper.Checker#check(java.lang.Object, javax.servlet.http.HttpServletRequest)

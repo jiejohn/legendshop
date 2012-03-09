@@ -193,7 +193,7 @@ public class BusinessController extends BaseController {
 	public String nsort(HttpServletRequest request, HttpServletResponse response,@PathVariable Long sortId,@PathVariable Long nsortId) {
 		if (nsortId == null|| sortId == null) {
 			log.error("sortId or nsortId is null! ");
-			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
 		}
 		return businessService.getSecSort(request, response,sortId,nsortId,null);
 	}
@@ -217,7 +217,7 @@ public class BusinessController extends BaseController {
 	public String nsort(HttpServletRequest request, HttpServletResponse response,Long sortId, Long nsortId,Long subNsortId) {
 		if (nsortId == null|| sortId == null) {
 			log.error("sortId or nsortId is null! ");
-			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
 		}
 		return businessService.getSecSort(request, response,sortId,nsortId,subNsortId);
 	}
@@ -691,7 +691,7 @@ public class BusinessController extends BaseController {
 	@RequestMapping("/productGallery/{prodId}")
 	public String productGallery(HttpServletRequest request, HttpServletResponse response, @PathVariable Long prodId) throws Exception {
 		if (AppUtils.isBlank(prodId)) {
-			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
 		}
 		return businessService.getProductGallery(request, response,prodId);
 	}

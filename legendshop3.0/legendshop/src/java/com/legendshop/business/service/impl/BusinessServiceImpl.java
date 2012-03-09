@@ -466,7 +466,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		// 1、关键字不能为空
 		if (AppUtils.isBlank(searchForm.getKeyword())) {
 			log.error("search keyword can't be null!");
-			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
 		}
 		// 2、查找对应的Sort,defaultValue=0表示没有选择类型
 		if (!AppUtils.isBlank(searchForm.getSortId()) && !defaultInt.equals(searchForm.getSortId())) {
@@ -614,7 +614,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			curPageNO = "1";
 		}
 		if (sortId == null) {
-			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
 		}
 		Sort sort = sortDao.getSort(sortId);
 		if (sort == null) {
@@ -711,7 +711,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			}
 		} catch (Exception e) {
 			log.error("getProdDetail", e);
-			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
 		}
 		return PathResolver.getPath(request, PageLetEnum.NSORT);
 	}
@@ -723,7 +723,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	@Override
 	public String getViews(HttpServletRequest request, HttpServletResponse response, Long prodId) {
 		if (prodId == null) {
-			return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
 		}
 		
 		ProductDetail prod = productDao.getProdDetail(prodId);

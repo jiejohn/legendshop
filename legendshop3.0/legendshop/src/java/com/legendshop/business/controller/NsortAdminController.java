@@ -194,7 +194,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 	 */
 	@RequestMapping(value = "/appendBrand/{id}")
 	public String appendBrand(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
-		request.setAttribute("id", id);
+		request.setAttribute("nsortId", id);
 		return PathResolver.getPath(request, PageLetEnum.NSORT_APPENDBRAND_PAGE);
 	}
 

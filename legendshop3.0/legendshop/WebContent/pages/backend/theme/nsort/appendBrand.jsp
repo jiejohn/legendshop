@@ -6,10 +6,7 @@
 		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
 		<script language="javascript" src='${pageContext.request.contextPath}/common/js/ScrachParam.js'></script>
 		<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/json.js"></script>
-	<%
-	  String id = request.getParameter("id") ;
-	  request.setAttribute("nsortId",id) ;
-   %>
+
 <html>
 	<head>
 		<title>增加品牌</title>

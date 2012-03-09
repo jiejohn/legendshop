@@ -45,7 +45,7 @@
 <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 <script type="text/javascript">
 	function appendBrand(id){
-	    var win = openWindow("${pageContext.request.contextPath}/admin/sort/appendBrand/" + id + "${applicationScope.WEB_SUFFIX}","appendBrand",'500','450') ;
+	    var win = openWindow("${pageContext.request.contextPath}/admin/nsort/appendBrand/" + id + "${applicationScope.WEB_SUFFIX}","appendBrand",'500','450') ;
 	    win.focus() ;
 	}
 </script>

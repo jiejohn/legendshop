@@ -77,7 +77,7 @@ jQuery.validator.setDefaults({
                <input name="basketId" value="${basketId}" type="hidden"/>
                <input name="subNember" value="${subNember}" type="hidden"/>
                <input name="total" value="${requestScope.totalcash}" type="hidden"/>
-               <input type="hidden" name="SESSION_TOKEN" value="${SESSION_TOKEN}" />
+               <input type="text" name="SESSION_TOKEN" value="${SESSION_TOKEN}" />
 				<table width="100%" cellpadding="0" cellspacing="0">
                             <tr>
                               <td align="left"><br>
