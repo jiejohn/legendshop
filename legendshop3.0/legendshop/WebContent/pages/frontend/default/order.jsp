@@ -2,8 +2,8 @@
 <%@include file='/pages/common/taglib.jsp'%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 	<link href="${pageContext.request.contextPath}/common/css/css.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/common/style/style_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/common/style/global_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/common/style/style_${sessionScope.shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/common/style/global_${sessionScope.shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/dwr/engine.js" ></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/dwr/util.js" ></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>

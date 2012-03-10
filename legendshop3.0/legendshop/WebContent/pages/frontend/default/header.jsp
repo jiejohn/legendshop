@@ -30,8 +30,8 @@
 							</c:if>
 							<LI>
 								<fmt:message key="nows.location" />
-								<c:if test="${shopDetail.province != null}">
-								  		 ${shopDetail.province}/${shopDetail.city}/${shopDetail.area}/
+								<c:if test="${sessionScope.shopDetail.province != null}">
+								  		 ${sessionScope.shopDetail.province}/${sessionScope.shopDetail.city}/${sessionScope.shopDetail.area}/
 								  </c:if>
 								<b><a href="${pageContext.request.contextPath}/shopcontact${applicationScope.WEB_SUFFIX}">${sessionScope.shopName}</a>
 								</b>

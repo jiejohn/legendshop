@@ -22,7 +22,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.TextEscapeUtils;
 
 import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.BasketDao;
@@ -101,12 +100,12 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
 
 		// Place the last username attempted into HttpSession for views
-		HttpSession session = request.getSession(false);
-
-		if (session != null || getAllowSessionCreation()) {
-			request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY,
-					TextEscapeUtils.escapeEntities(username));
-		}
+		HttpSession session = request.getSession();
+//
+//		if (session != null || getAllowSessionCreation()) {
+//			request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY,
+//					TextEscapeUtils.escapeEntities(username));
+//		}
 
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);
@@ -116,14 +115,15 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 		}
 
 		Authentication auth = this.getAuthenticationManager().authenticate(authRequest);
-		if (auth != null) {
+		if (auth != null && auth.isAuthenticated()) {
 			// 处理登录历史
 			loginHistoryServiceImpl.saveLoginHistory(username, request.getRemoteAddr());
 			// 增加session登录信息
-			request.getSession().setAttribute(Constants.USER_NAME, username);
+			
+			session.setAttribute(Constants.USER_NAME, username);
 
 			// 处理在session中的购物车
-			Map<String, Basket> basketMap = (Map<String, Basket>) request.getSession().getAttribute(
+			Map<String, Basket> basketMap = (Map<String, Basket>) session.getAttribute(
 					Constants.BASKET_KEY);
 			if (basketMap != null) {
 				// 保存进去数据库
@@ -132,7 +132,7 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 							.getBasketCount(), basket.getAttribute(), basket.getProdName(), basket.getCash(), basket
 							.getCarriage());
 				}
-				request.getSession().setAttribute(Constants.BASKET_KEY, null);
+				session.setAttribute(Constants.BASKET_KEY, null);
 			}
 
 			if (supportSSO) {

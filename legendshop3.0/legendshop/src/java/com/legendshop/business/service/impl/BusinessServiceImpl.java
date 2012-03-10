@@ -1150,7 +1150,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 					locale, "apply.shop.failed"), ResourceBundleHelper.getString(locale, "check.parameter"));
 			messages.addCallBackList(ResourceBundleHelper.getString(locale, "try.again"), null, "openShop.do");
 			request.setAttribute(UserMessages.MESSAGE_KEY, messages);
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
+			return PathResolver.getPath(request, PageLetEnum.ERROR_PAGE);
 		}
 
 	}

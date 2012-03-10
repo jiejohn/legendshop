@@ -711,4 +711,11 @@ public class BusinessController extends BaseController {
 	public String resetpassword(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return PathResolver.getPath(request, PageLetEnum.RESETPASSWORD);
 	}
+	
+	@RequestMapping("/openShop")
+	public String openShop(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return PathResolver.getPath(request, PageLetEnum.OPENSHOP);
+	}
+	
+	
 }

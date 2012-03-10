@@ -5,8 +5,8 @@
 <%@include file='/pages/common/common.jsp'%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><fmt:message key="operation.error"/></title>
-    <link href="${pageContext.request.contextPath}/common/style/style_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/common/style/global_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/common/style/style_${sessionScope.shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/common/style/global_${sessionScope.shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
 </head> 
 <body topmargin="0">
 

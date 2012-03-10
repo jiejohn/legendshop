@@ -303,7 +303,9 @@ public enum PageLetEnum implements PathEnum{
 	
 	SAVE_ROLE("/member/right/saveRole",BACK_PAGE), 
 	
-	MODIFYPRICE("/order/modifyPrice",BACK_PAGE)
+	MODIFYPRICE("/order/modifyPrice",BACK_PAGE), 
+	
+	OPENSHOP("openShop.",TILES)
 
 	
 	;

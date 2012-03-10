@@ -33,6 +33,11 @@
 	<definition name="buy.*" template="/pages/frontend/{1}/topFrame.jsp">
 		<put-attribute name="main" value="/pages/frontend/{1}/buy.jsp" />
 	</definition>	
+	
+	<definition name="openShop.*"  template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main"  value="/pages/frontend/{1}/openShop.jsp" />
+	</definition>
+	
 	<definition name="productSort.*" template="/pages/frontend/{1}/sort.jsp">
 		<put-attribute name="right" value="/pages/frontend/{1}/right.jsp" />
 	</definition>

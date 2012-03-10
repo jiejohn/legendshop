@@ -16,49 +16,49 @@ jQuery.validator.setDefaults({
 	jQuery(document).ready(function() {
 	jQuery("#openShopForm").validate({
 		rules: {
-			"shopDetail.sitename": {
+			"sitename": {
 				required: true,
 				minlength: 2
 			},
-            "shopDetail.ymaddr": {
+            "ymaddr": {
 				required: true,
 				minlength: 2
 			},
-		    "shopDetail.idCardNum": {
+		    "idCardNum": {
 				required: true,
 				minlength: 15
 			},
-		    "shopDetail.type": {
+		    "type": {
 				required: true
 			},
-		    "shopDetail.idCardPicFile": {
+		    "idCardPicFile": {
 				required: true
 			},			
-		    "shopDetail.trafficPicFile": {
+		    "trafficPicFile": {
 				required: "#type:checked"
 			}		
 			
 		},
 		messages: {
-            "shopDetail.sitename": {
+            "sitename": {
                required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>',
                minlength: '<fmt:message key="errors.minlength"><fmt:param value=""/><fmt:param value="2"/></fmt:message>'
             },   
-            "shopDetail.ymaddr":{
+            "ymaddr":{
                required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>',
                minlength: '<fmt:message key="errors.minlength"><fmt:param value=""/><fmt:param value="2"/></fmt:message>'
             }, 
-            "shopDetail.idCardNum": {
+            "idCardNum": {
                required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>',
                minlength: '<fmt:message key="errors.minlength"><fmt:param value=""/><fmt:param value="15"/></fmt:message>'
             }, 
-            "shopDetail.type": {
+            "type": {
                required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>'
             },             
- 		    "shopDetail.idCardPicFile":  {
+ 		    "idCardPicFile":  {
 				required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>'
 			},		           
- 		    "shopDetail.trafficPicFile": {
+ 		    "trafficPicFile": {
 				required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>'
 			}
         }
@@ -94,27 +94,27 @@ jQuery.validator.setDefaults({
                                 <td width="33%"><div align="right">
                                 <font color="#ff0000">*</font><fmt:message key="mall.name"/></div></td>
                                 <td height="27"><div align="left">
-                                    <input name="shopDetail.sitename" id="sitename" class="input"/>
+                                    <input name="sitename" id="sitename" class="input"/>
                                   </div></td>
                               </tr>
                               <tr>
                                 <td width="33%"><div align="right"><font color="#ff0000">*</font><fmt:message key="idcard.number"/></div></td>
                                 <td height="27"><div align="left"> 
-                                    <input type="text" name="shopDetail.idCardNum" id="idCardNum" class="input" maxlength="20" />
+                                    <input type="text" name="idCardNum" id="idCardNum" class="input" maxlength="20" />
                                   </div></td>
                               </tr> 
                               <tr>
                                 <td width="33%"><div align="right"><font color="#ff0000">*</font><fmt:message key="mall.type"/></div></td>
                                 <td height="27"><div align="left"> 
-                                    &nbsp;&nbsp;<fmt:message key="type.business"/><input type="radio" name="shopDetail.type" id="type" value="1" onclick="javascript:changeType(1)"/>&nbsp;
-                                         <fmt:message key="type.individual"/><input type="radio" name="shopDetail.type" value="0" onclick="javascript:changeType(0)"/>
+                                    &nbsp;&nbsp;<fmt:message key="type.business"/><input type="radio" name="type" id="type" value="1" onclick="javascript:changeType(1)"/>&nbsp;
+                                         <fmt:message key="type.individual"/><input type="radio" name="type" value="0" onclick="javascript:changeType(0)"/>
                                   </div></td>
                               </tr>
 
                               <tr>
                                 <td width="33%"><div align="right"><font color="#ff0000">*</font><fmt:message key="upload.IDcard.pic"/></div></td>
                                 <td height="27"><div align="left"> 
-                                    <input type="file" style="FONT-SIZE: 12px; WIDTH: 250px;margin-left: 10px" name="shopDetail.idCardPicFile" id="trafficPicFile" class="input" />
+                                    <input type="file" style="FONT-SIZE: 12px; WIDTH: 250px;margin-left: 10px" name="idCardPicFile" id="trafficPicFile" class="input" />
                                   </div></td>
                               </tr>
                               <tr>
@@ -127,7 +127,7 @@ jQuery.validator.setDefaults({
 	                                </td>
 	                                <td>
 	                                <div align="left">
-	                                <input type="file" style="FONT-SIZE: 12px; WIDTH: 250px;margin-left: 10px;" name="shopDetail.trafficPicFile" id="trafficPicFile" class="input" />
+	                                <input type="file" style="FONT-SIZE: 12px; WIDTH: 250px;margin-left: 10px;" name="trafficPicFile" id="trafficPicFile" class="input" />
 	                                </div></td>
 	                                </tr>
                                 </table>
