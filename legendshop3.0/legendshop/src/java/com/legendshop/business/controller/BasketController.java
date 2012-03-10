@@ -23,7 +23,6 @@ import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.model.entity.Basket;
 
 /**
  * 购物车控制器。.
@@ -46,17 +45,27 @@ public class BasketController extends BaseController {
 	 *            the request
 	 * @param response
 	 *            the response
-	 * @param curPageNO
-	 *            the cur page no
-	 * @param basket
-	 *            the basket
 	 * @return the string
 	 */
 	@RequestMapping("/query")
-	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO,
-			Basket basket) {
-		String userName = UserManager.getUsername(request);
+	public String query(HttpServletRequest request, HttpServletResponse response) {
 		String prodId = request.getParameter("prodId");
+		return getBasket(request, response, Long.parseLong(prodId));
+	}
+
+	/**
+	 * Gets the basket.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param prodId
+	 *            the prod id
+	 * @return the basket
+	 */
+	private String getBasket(HttpServletRequest request, HttpServletResponse response, Long prodId) {
+		String userName = UserManager.getUsername(request);
 		String addtoCart = request.getParameter("addtoCart");
 		String count = request.getParameter("count");
 		if (count == null) {
@@ -68,14 +77,30 @@ public class BasketController extends BaseController {
 		if (userName == null) {
 			String destView = "/views/";// 默认是重新回到产品介绍页面
 			if ("added".equals(addtoCart)) {// 如果是采用购物车订购的话直接进入付款页面
-				destView = "/basket/";
+				destView = "/basket/load/";
 			}
 			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + destView + prodId + Constants.WEB_SUFFIX);
 			return PathResolver.getPath(request, PageLetEnum.NO_LOGIN);
 		}
 		String shopName = getShopName(request, response);
-		basketService.saveToCart( Long.valueOf(prodId), addtoCart, shopName, prodattr, userName,  Integer.valueOf(count));
+		basketService.saveToCart(prodId, addtoCart, shopName, prodattr, userName,  Integer.valueOf(count));
 		return PathResolver.getPath(request, PageLetEnum.PAGE_CASH);
+	}
+	
+	/**
+	 * Load.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param prodId
+	 *            the prod id
+	 * @return the string
+	 */
+	@RequestMapping("/load/{prodId}")
+	public String load(HttpServletRequest request, HttpServletResponse response,Long prodId) {
+		return getBasket(request, response, prodId);
 	}
 
 }

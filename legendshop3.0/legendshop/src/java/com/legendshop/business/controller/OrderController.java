@@ -80,13 +80,17 @@ public class OrderController extends BaseController {
 	@RequestMapping("/order")
 	public String order(HttpServletRequest request, HttpServletResponse response, String curPageNO, Sub entity) {
 
-		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_950, request);
+	
 		String userName = UserManager.getUsername(request);
 
 		if (userName == null) {
 			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + "/order"+Constants.WEB_SUFFIX);
 			return PathResolver.getPath(request, PageLetEnum.NO_LOGIN);
 		} 
+		if(entity!=null && entity.getSubCheck() == null){
+			entity.setSubCheck(Constants.FALSE_INDICATOR);
+		}
+		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_950, request);
 		String subNumber = entity.getSubNumber();
 		if (AppUtils.isNotBlank(subNumber)) {
 			subNumber = subNumber.trim();

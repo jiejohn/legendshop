@@ -227,35 +227,35 @@
                               <tr> 
                                 <td height="29"><div align="right"><font color="#ff0000">*</font><fmt:message key="Phone"/>：</div></td>
                                 <td height="29"><div align="left"> 
-                                    <input style="WIDTH: 200px" type="text" name="userMobile" id="userMobile" size="20" class=input value="${user.userMobile}"  maxlength="20">
+                                    <input style="WIDTH: 200px" type="text" name="userMobile" id="userMobile" size="20" class=input value="${user.userMobile}"  maxlength="50">
                                   </div></td>
                               </tr>
                               <tr> 
                                 <td height="29"><div align="right"><fmt:message key="userTel"/>：</div></td>
                                 <td height="29"><div align="left"> 
-                                    <input style="WIDTH: 200px" type="text" name="userTel" id="userTel" size="20" class=input value="${user.userTel}" maxlength="20">
+                                    <input style="WIDTH: 200px" type="text" name="userTel" id="userTel" size="20" class=input value="${user.userTel}" maxlength="50">
                                   </div></td>
                               </tr>
                               <tr> 
                                 <td height="29"><div align="right">QQ：</div></td>
                                 <td height="29"><div align="left"> 
-                                    <input style="WIDTH: 200px" type="text" name="qq" id="qq" size="20" class=input value="${user.qq}">&nbsp;<fmt:message key="more.qq.number"/>
+                                    <input style="WIDTH: 200px" type="text" name="qq" id="qq" size="20" class=input value="${user.qq}" maxlength="50">&nbsp;<fmt:message key="more.qq.number"/>
                                   </div></td>
                               </tr>
                               <tr> 
                                 <td height="29"><div align="right">MSN：</div></td>
                                 <td height="29"><div align="left"> 
-                                    <input style="WIDTH: 200px" type="text" name="msn" id="msn" size="20" class=input value="${user.msn}">
+                                    <input style="WIDTH: 200px" type="text" name="msn" id="msn" size="20" class=input value="${user.msn}" maxlength="100">
                                   </div></td>
                               </tr>
                               <tr> 
                                 <td height="29"><div align="right"><fmt:message key="Fax"/>：</div></td>
-                                <td height="29"><div align="left"><input style="WIDTH: 200px" type="text" name="fax" id="fax" size="20" class=input value="${user.fax}"></div></td>
+                                <td height="29"><div align="left"><input style="WIDTH: 200px" type="text" name="fax" id="fax" size="20" class=input value="${user.fax}" maxlength="15"></div></td>
                               </tr>
                               <tr> 
                                 <td height="29"><div align="right"><fmt:message key="PostCode"/>：</div></td>
                                 <td height="29"><div align="left"> 
-                                    <input style="WIDTH: 200px" type="text" name="userPostcode" id="userPostcode" size="20" class=input value="${user.userPostcode}" maxlength="20"> 
+                                    <input style="WIDTH: 200px" type="text" name="userPostcode" id="userPostcode" size="20" class=input value="${user.userPostcode}" maxlength="15"> 
                                   </div></td>
                               </tr>
                               <tr> 

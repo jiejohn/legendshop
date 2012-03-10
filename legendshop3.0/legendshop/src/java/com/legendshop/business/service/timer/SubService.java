@@ -10,6 +10,7 @@ package com.legendshop.business.service.timer;
 import java.util.List;
 
 import com.legendshop.business.common.SubForm;
+import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.Sub;
 
 /**
@@ -40,4 +41,23 @@ public interface SubService {
 	 * @return the list
 	 */
 	public List<Sub> saveSub(SubForm form);
+	
+	// basket_check = Y 表示已经下单了，形成了一条订单
+	/**
+	 * Gets the basket by sub number.
+	 * 
+	 * @param subNumber
+	 *            the sub number
+	 * @return the basket by sub number
+	 */
+	public abstract List<Basket> getBasketBySubNumber(String subNumber);
+
+	/**
+	 * Find sub by sub number.
+	 * 
+	 * @param subNumber
+	 *            the sub number
+	 * @return the sub
+	 */
+	public Sub getSubBySubNumber(String subNumber);
 }

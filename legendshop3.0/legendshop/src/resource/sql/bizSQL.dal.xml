@@ -168,7 +168,7 @@
 					and m.user_id = ?
             </Method>
             <Method name="QueryLeague">
-					select m.friend_id,m.friend_name,l.banner,s.province,s.city,s.area
+					select m.friend_id as friendId,m.friend_name as friendName,l.banner,s.province,s.city,s.area
 					from ls_league m,ls_logo l,
 					(select sd.store_name,p.province,c.city,a.area
 					from ls_shop_detail sd 

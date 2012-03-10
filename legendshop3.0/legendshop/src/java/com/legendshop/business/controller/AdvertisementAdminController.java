@@ -151,7 +151,10 @@ public class AdvertisementAdminController extends BaseController {
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		Advertisement advertisement = advertisementService.getAdvertisement(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), advertisement.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), advertisement.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{}, delete Advertisement Url {}", advertisement.getUserName(), advertisement.getLinkUrl());
 		advertisementService.delete(id);
 		String url = RealPathUtil.getBigPicRealPath() + "/" + advertisement.getPicUrl();
@@ -175,7 +178,10 @@ public class AdvertisementAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		Advertisement advertisement = advertisementService.getAdvertisement(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), advertisement.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), advertisement.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("bean", advertisement);
 		return PathResolver.getPath(request, PageLetEnum.ADV_EDIT_PAGE);
 		
@@ -211,7 +217,10 @@ public class AdvertisementAdminController extends BaseController {
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Advertisement advertisement) {
 		Advertisement origin = advertisementService.getAdvertisement(advertisement.getId());
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		if(result!=null){
+			return result;
+		}
 		advertisement.setUserId(origin.getUserId());
 		advertisement.setUserName(origin.getUserName());
 		advertisementService.update(advertisement);

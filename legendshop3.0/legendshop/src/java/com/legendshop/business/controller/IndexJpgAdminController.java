@@ -117,7 +117,10 @@ public class IndexJpgAdminController extends BaseController {
 				//update indexjpg
 				String orginImg = null;
 				Indexjpg origin = indexJpgService.getIndexJpgById(indexjpg.getId());
-				checkPrivilege(request, name, origin.getUserName());
+				String checkPrivilegeResult = checkPrivilege(request, name, origin.getUserName());
+				if(checkPrivilegeResult!=null){
+					return checkPrivilegeResult;
+				}
 				if ((formFile != null) && (formFile.getSize() > 0)) {
 					orginImg = RealPathUtil.getBigPicRealPath() + "/" + origin.getImg();
 					// upload file
@@ -231,7 +234,10 @@ public class IndexJpgAdminController extends BaseController {
 		Indexjpg indexjpg = indexJpgService.getIndexJpgById(id);
 		checkNullable("indexjpg",indexjpg);
 		String userName = UserManager.getUsername(request);
-		checkPrivilege(request, userName, indexjpg.getUserName());
+		String result = checkPrivilege(request, userName, indexjpg.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.debug("{} delete indexjpg {}",userName,id);
 		indexJpgService.deleteIndexJpg(indexjpg);
 		FileProcessor.deleteFile(RealPathUtil.getBigPicRealPath() + "/" + indexjpg.getImg());
@@ -270,7 +276,10 @@ public class IndexJpgAdminController extends BaseController {
 			throw new BusinessException("indexjpg Id is non nullable", ErrorCodes.NON_NULLABLE);
 		}
 		Indexjpg indexjpg = indexJpgService.getIndexJpgById(id);
-		checkPrivilege(request, UserManager.getUsername(request), indexjpg.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request), indexjpg.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("index", indexjpg);
 		return  PathResolver.getPath(request, PageLetEnum.IJPG_EDIT_PAGE);
 	}

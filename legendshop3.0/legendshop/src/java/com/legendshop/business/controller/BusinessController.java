@@ -445,7 +445,7 @@ public class BusinessController extends BaseController {
 	@RequestMapping("/cash")
 	public String cash(HttpServletRequest request, HttpServletResponse response) {
 		// 加入token
-		request.getSession().setAttribute(Constants.TOKEN, CommonServiceUtil.generateRandom()); // 生成随机数并保存到token
+		//request.getSession().setAttribute(Constants.TOKEN, CommonServiceUtil.generateRandom()); // 生成随机数并保存到token
 		return PathResolver.getPath(request, PageLetEnum.PAGE_CASH);
 	}
 	

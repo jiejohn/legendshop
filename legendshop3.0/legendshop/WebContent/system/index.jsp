@@ -3,11 +3,11 @@
 <html>
   <head>
   <base target="_blank">
-    <title>开发者工具</title>
+    <title>LegendShop - 开发者辅佐工具</title>
   </head>
   
   <body>
-  <div style="font-weight: bold;">开发者工具</div><br>
+  <div style="font-weight: bold;">LegendShop - 开发者辅佐工具</div><br>
   <a href='sql/sqlCode.jsp' target='_blank'>系统SQL配置管理和刷新SQL缓存</a><br>
   <a href='cookies/login_user.jsp' target='_blank'>查看当前登录用户的权限</a><br>
    <a href='file/log_view.jsp' target='_blank'>下载文件管理</a><br>

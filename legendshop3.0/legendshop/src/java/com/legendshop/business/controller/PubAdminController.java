@@ -110,7 +110,10 @@ public class PubAdminController extends BaseController {
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		Pub pub = pubService.getPubById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), pub.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), pub.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{} delete Pub Title {}", pub.getUserName(), pub.getTitle());
 		pubService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
@@ -132,7 +135,10 @@ public class PubAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		Pub pub = pubService.getPubById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), pub.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), pub.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("bean", pub);
 		return PathResolver.getPath(request, PageLetEnum.PUB_EDIT_PAGE);
 	}

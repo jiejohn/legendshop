@@ -19,9 +19,9 @@ public enum PageLetEnum implements PathEnum{
 	
 	NO_LOGIN("loginhint.",TILES),
 	
-	ERROR_PAGE("/error",FRONT_PAGE),
+	ERROR_PAGE(ERROR_PAGE_PATH,FRONT_PAGE),
 	
-	BACK_ERROR_PAGE("/error",BACK_PAGE),
+	BACK_ERROR_PAGE(ERROR_PAGE_PATH,BACK_PAGE),
 	
 	AFTER_OPERATION("afterOperation.",TILES),
 	
@@ -45,7 +45,7 @@ public enum PageLetEnum implements PathEnum{
 	
 	VIEWS("/views",FRONT_PAGE),
 	
-	LOGIN("login.",TILES),
+	LOGIN(LOGIN_PATH,TILES),
 	
 	LEAVEWORD("leaveword.",TILES),
 	
@@ -99,7 +99,10 @@ public enum PageLetEnum implements PathEnum{
 	
 	RESETPASSWORD("/resetpassword",FRONT_PAGE),
 	
+	
 	/////////////backend page
+	ORDERDETAIL("/order/orderDetail",BACK_PAGE),
+	
 	ADV_LIST_PAGE("/advertisement/advertisementList",BACK_PAGE),
 	
 	ADV_LIST_QUERY("/admin/advertisement/query",FOWARD),
@@ -298,7 +301,9 @@ public enum PageLetEnum implements PathEnum{
 
 	ALL_ROLE("/member/role/query",FOWARD),
 	
-	SAVE_ROLE("/member/right/saveRole",BACK_PAGE)
+	SAVE_ROLE("/member/right/saveRole",BACK_PAGE), 
+	
+	MODIFYPRICE("/order/modifyPrice",BACK_PAGE)
 
 	
 	;

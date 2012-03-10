@@ -112,7 +112,10 @@ public class HotsearchAdminController extends BaseController {
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		Hotsearch hotsearch = hotsearchService.getHotsearchById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), hotsearch.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), hotsearch.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{} delete Hotsearch Title {}, Msg {}", new Object[] { hotsearch.getUserName(), hotsearch.getTitle(),
 				hotsearch.getMsg() });
 		hotsearchService.delete(id);
@@ -135,7 +138,10 @@ public class HotsearchAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		Hotsearch hotsearch = hotsearchService.getHotsearchById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), hotsearch.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), hotsearch.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("bean", hotsearch);
 		return PathResolver.getPath(request, PageLetEnum.HOT_EDIT_PAGE);
 	}
@@ -155,7 +161,10 @@ public class HotsearchAdminController extends BaseController {
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Hotsearch hotsearch) {
 		Hotsearch origin = hotsearchService.getHotsearchById(hotsearch.getId());
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{} update Hotsearch Title{}", origin.getUserName(), origin.getTitle());
 		hotsearch.setUserId(origin.getUserId());
 		hotsearch.setUserName(origin.getUserName());

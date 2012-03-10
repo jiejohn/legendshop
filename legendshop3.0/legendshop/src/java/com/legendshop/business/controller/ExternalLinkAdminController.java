@@ -154,7 +154,10 @@ public class ExternalLinkAdminController extends BaseController {
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		ExternalLink externalLink = externalLinkService.getExternalLinkById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), externalLink.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), externalLink.getUserName());
+		if(result!=null){
+			return result;
+		}
 		if (externalLink != null) {
 			log.info("{} delete ExternalLink Url{}", externalLink.getUserName(), externalLink.getUrl());
 			externalLinkService.delete(id);
@@ -183,7 +186,10 @@ public class ExternalLinkAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		ExternalLink externalLink = externalLinkService.getExternalLinkById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), externalLink.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), externalLink.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("bean", externalLink);
 		return PathResolver.getPath(request, PageLetEnum.LINK_EDIT_PAGE);
 	}
@@ -208,7 +214,10 @@ public class ExternalLinkAdminController extends BaseController {
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	ExternalLink externalLink) {
 		ExternalLink origin = externalLinkService.getExternalLinkById(externalLink.getId());
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		if(result!=null){
+			return result;
+		}
 		externalLink.setUserId(origin.getUserId());
 		externalLink.setUserName(origin.getUserName());
 		log.info("{} update ExternalLink Url{}", origin.getUserName(), externalLink.getUrl());

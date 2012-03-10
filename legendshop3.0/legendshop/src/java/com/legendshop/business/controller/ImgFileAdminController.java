@@ -130,7 +130,10 @@ public class ImgFileAdminController extends BaseController {
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		ImgFile imgFile = imgFileService.getImgFileById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), imgFile.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), imgFile.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{}, delete ImgFile filePath {}", imgFile.getUserName(), imgFile.getFilePath());
 		imgFileService.delete(id);
 		String url = RealPathUtil.getBigPicRealPath() + "/" + imgFile.getFilePath();

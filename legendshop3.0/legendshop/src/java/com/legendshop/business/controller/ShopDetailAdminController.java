@@ -119,7 +119,10 @@ public class ShopDetailAdminController extends BaseController {
 			String userName = shopDetail.getStoreName();
 
 			String shopPic = null;
-			checkPrivilege(request, UserManager.getUsername(request.getSession()), userName);
+			String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), userName);
+			if(result!=null){
+				return result;
+			}
 			if (AppUtils.isBlank(userName)) {
 				throw new NotFoundException("user name can not be null!",EntityCodes.SHOP);
 			}
@@ -198,7 +201,10 @@ public class ShopDetailAdminController extends BaseController {
 	Long id) {
 		ShopDetail shopDetail = shopDetailService.getShopDetailById(id);
 		if (shopDetail != null) {
-			checkPrivilege(request, UserManager.getUsername(request), shopDetail.getStoreName());
+			String result = checkPrivilege(request, UserManager.getUsername(request), shopDetail.getStoreName());
+			if(result!=null){
+				return result;
+			}
 		}
 		
 		request.setAttribute("shopDetail", shopDetail); 
@@ -238,7 +244,10 @@ public class ShopDetailAdminController extends BaseController {
 		}
 		String originShopPic = shop.getShopPic();
 		String shopPic = null;
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), shopDetail.getStoreName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), shopDetail.getStoreName());
+		if(result!=null){
+			return result;
+		}
 		try {
 			String subPath = shopDetail.getStoreName() + "/shop/";
 			SafeHtml safeHtml = new SafeHtml();

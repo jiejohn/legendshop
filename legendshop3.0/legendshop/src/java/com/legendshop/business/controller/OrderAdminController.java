@@ -7,6 +7,8 @@
  */
 package com.legendshop.business.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,11 +16,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
+import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.PageLetEnum;
 import com.legendshop.business.service.OrderService;
+import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
@@ -26,7 +31,10 @@ import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.Sub;
 import com.legendshop.util.AppUtils;
 
@@ -52,6 +60,10 @@ public class OrderAdminController extends BaseController implements AdminControl
 	/** The order service. */
 	@Autowired
 	private OrderService orderService;
+	
+	/** The sub service. */
+	@Autowired
+	private SubService subService;
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.base.AdminController#query(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String, java.lang.Object)
@@ -59,8 +71,11 @@ public class OrderAdminController extends BaseController implements AdminControl
 	@Override
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Sub entity) {
-		String subNumber = entity.getSubNumber();
 		String loginName = UserManager.getUsername(request);
+		String subNumber = entity.getSubNumber();
+		if(entity!=null && entity.getSubCheck() == null){
+			entity.setSubCheck(Constants.FALSE_INDICATOR);
+		}
 		if (!AppUtils.isBlank(subNumber)) {
 			subNumber = subNumber.trim();
 		}
@@ -121,10 +136,39 @@ public class OrderAdminController extends BaseController implements AdminControl
 	 * @see com.legendshop.core.base.AdminController#load(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	@RequestMapping(value = "/load/{id}")
+	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/**
+	 * Load by sub nember.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param subNumber
+	 *            the sub number
+	 * @return the string
+	 */
+	@RequestMapping(value = "/loadBySubnumber/{subNumber}")
+	public String loadBySubNember(HttpServletRequest request, HttpServletResponse response,@PathVariable String subNumber) {
+		// String userName = request.getParameter("userName");
+		//String subNumber = request.getParameter("subNumber");
+		List<Basket> baskets = subService.getBasketBySubNumber(subNumber);
+		if (!AppUtils.isBlank(baskets)) {// 每一个订单最少应该有一个商品
+			Double totalcash = CommonServiceUtil.calculateTotalCash(baskets);
+			Sub sub = subService.getSubBySubNumber(subNumber);
+			String loginName = UserManager.getUsername(request);
+			if (!CommonServiceUtil.haveViewAllDataFunction(request) && !sub.getShopName().equals(loginName)) {
+				throw new PermissionException(loginName + " cann't view Sub id is " + sub.getSubId(),EntityCodes.SUB);
+			}
+			request.setAttribute("sub", sub);
+			request.setAttribute("baskets", baskets);
+			request.setAttribute("totalcash", totalcash);
+		}
+		return PathResolver.getPath(request, PageLetEnum.ORDERDETAIL);
 	}
 
 	/* (non-Javadoc)
@@ -136,5 +180,12 @@ public class OrderAdminController extends BaseController implements AdminControl
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@RequestMapping(value = "/modifyPrice")
+	public String modifyPrice(HttpServletRequest request, HttpServletResponse response, Long id) {
+		// TODO Auto-generated method stub
+		return PathResolver.getPath(request, PageLetEnum.MODIFYPRICE);
+	}
+	
 
 }

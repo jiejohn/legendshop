@@ -124,7 +124,10 @@ public class ProductAdminController extends BaseController {
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, Product product) {
 		String name = UserManager.getUsername(request);
-		checkLogin(name);
+		String result = checkLogin(request,name);
+		if(result != null){
+			return result;
+		}
 		// 过滤特殊字符
 		SafeHtml safeHtml = new SafeHtml();
 		product.setName(safeHtml.makeSafe(product.getName()));
@@ -139,7 +142,10 @@ public class ProductAdminController extends BaseController {
 				String smallProdPic = null;
 				// update product
 				Product origin = productService.getProductById(product.getProdId());
-				checkPrivilege(request, name, origin.getUserName());
+				String checkPrivilegeResult = checkPrivilege(request, name, origin.getUserName());
+				if(checkPrivilegeResult!=null){
+					return checkPrivilegeResult;
+				}
 				if ((formFile != null) && (formFile.getSize() > 0)) {
 					orginProdPic = RealPathUtil.getBigPicRealPath() + "/" + origin.getPic();
 					smallProdPic = RealPathUtil.getSmallPicRealPath() + "/" + origin.getPic();
@@ -324,7 +330,10 @@ public class ProductAdminController extends BaseController {
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable Long prodId) {
 		checkNullable("prodId", prodId);
 		Product product = productService.getProductById(prodId);
-		checkPrivilege(request, UserManager.getUsername(request), product.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request), product.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("prod", product);
 		return PathResolver.getPath(request, PageLetEnum.PROD_EDIT_PAGE);
 	}

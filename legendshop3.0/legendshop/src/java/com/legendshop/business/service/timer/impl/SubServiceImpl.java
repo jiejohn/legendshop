@@ -236,6 +236,19 @@ public class SubServiceImpl implements SubService {
 		return subList;
 
 	}
+	
+	// basket_check = Y 表示已经下单了，形成了一条订单
+	/**
+	 * Gets the basket by sub number.
+	 * 
+	 * @param subNumber
+	 *            the sub number
+	 * @return the basket by sub number
+	 */
+	@Override
+	public List<Basket> getBasketBySubNumber(String subNumber){
+		return subDao.getBasketBySubNumber(subNumber);
+	}
 
 	// 初始化订单
 	/**
@@ -282,6 +295,12 @@ public class SubServiceImpl implements SubService {
 	@Required
 	public void setPayTypeService(PayTypeService payTypeService) {
 		this.payTypeService = payTypeService;
+	}
+
+	@Override
+	public Sub getSubBySubNumber(String subNumber) {
+		// TODO Auto-generated method stub
+		return subDao.getSubBySubNumber(subNumber);
 	}
 
 }

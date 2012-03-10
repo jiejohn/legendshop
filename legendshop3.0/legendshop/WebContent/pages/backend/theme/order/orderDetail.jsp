@@ -83,7 +83,7 @@
               </tr>
               <c:forEach items="${requestScope.baskets}" var="basket">
               <tr> 
-                <td><div align="center"><a target="_blank" href="${pageContext.request.contextPath}/views/${basket.prodId}${applicationScope.WEB_SUFFIX}"><font color="#FF0000">${basket.name}</font></a></div></td>
+                <td><div align="center"><a target="_blank" href="${pageContext.request.contextPath}/views/${basket.prodId}${applicationScope.WEB_SUFFIX}"><font color="#FF0000">${basket.prodName}</font></a></div></td>
                 <td><div align="center">${basket.attribute}</div></td>
                 <td> <div align="center"> 
                     ${basket.cash}

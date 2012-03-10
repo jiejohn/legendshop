@@ -140,7 +140,10 @@ public class LogoAdminController extends BaseController {
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		Logo logo = logoService.getLogoById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), logo.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), logo.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{}, delete Logo Url {}", logo.getUserName(), logo.getUrl());
 		logoService.delete(id);
 		String url = RealPathUtil.getBigPicRealPath() + "/" + logo.getBanner();
@@ -164,7 +167,10 @@ public class LogoAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		Logo logo = logoService.getLogoById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), logo.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), logo.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("bean", logo);
 		return PathResolver.getPath(request, PageLetEnum.LOGO_EDIT_PAGE);
 	}
@@ -198,7 +204,10 @@ public class LogoAdminController extends BaseController {
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Logo logo) {
 		Logo origin = logoService.getLogoById(logo.getId());
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		if(result!=null){
+			return result;
+		}
 		logo.setUserId(origin.getUserId());
 		logo.setUserName(origin.getUserName());
 		logoService.update(logo);

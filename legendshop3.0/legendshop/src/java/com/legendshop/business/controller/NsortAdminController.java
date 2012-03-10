@@ -116,7 +116,10 @@ public class NsortAdminController extends BaseController implements AdminControl
 	public String save(HttpServletRequest request, HttpServletResponse response, Nsort nsort) {
 		String name = UserManager.getUsername(request.getSession());
 		Sort sort = nsortService.getSort(nsort.getSortId());
-		checkPrivilege(request, name, sort.getUserName());
+		String result = checkPrivilege(request, name, sort.getUserName());
+		if(result!=null){
+			return result;
+		}
 		nsortService.save(nsort);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
 		Nsort bean = (Nsort) request.getAttribute("bean");
@@ -139,7 +142,10 @@ public class NsortAdminController extends BaseController implements AdminControl
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		Nsort nsort = nsortService.getNsort(id);
 		Sort sort = nsortService.getSort(nsort.getSortId());
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), sort.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), sort.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{} delete Pub NsortName {}", sort.getUserName(), nsort.getNsortName());
 		if (nsortService.isHasChildNsort(id)) {
 			throw new PermissionException("发现三级分类，请先删除三级分类再删除二级分类！", EntityCodes.SORT);
@@ -175,7 +181,10 @@ public class NsortAdminController extends BaseController implements AdminControl
 	@RequestMapping(value = "/update/{id}")
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		checkNullable("nsort Id", id);
-		checkLogin(UserManager.getUsername(request));
+		String result = checkLogin(request,UserManager.getUsername(request));
+		if(result != null){
+			return result;
+		}
 		Nsort nsort = nsortService.getNsortById(id);
 		request.setAttribute("bean", nsort);
 		return PathResolver.getPath(request, PageLetEnum.NSORT_EDIT_PAGE);

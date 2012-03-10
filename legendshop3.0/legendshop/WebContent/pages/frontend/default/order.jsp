@@ -32,11 +32,7 @@
         <a href="javascript:void(0)" onclick="changetab(1);"  id="processingbutton" name="processingbutton">
             <fmt:message key="order.processing"/>
         </a>
-        <a href="javascript:void(0)" onclick="changetab(2);" id="processedbutton" name="processedbutton">
-            
-            <fmt:message key="order.processed"/>
-           
-        </a>
+        <a href="javascript:void(0)" onclick="changetab(2);" id="processedbutton" name="processedbutton"><fmt:message key="order.processed"/></a>
         &nbsp;<fmt:message key="order.number"/>：<input type="text" value="${subForm.subNumber}" maxlength="30" name="subNumber" id="subNumber" class="input2"/>
                &nbsp; <fmt:message key="Order.Status"/>：
                 	<select id="status" name="status" style="height: 1.50em;">
@@ -176,14 +172,14 @@ function deleteSub(subId,subNumber) {
 
 	
  	function onloadSetup(){
-		if(${subForm.subCheck == 'N'}){
-			document.getElementById('processingbutton').className='selected';
-			document.getElementById('processedbutton').className='';
-			document.getElementById("subCheck").value= 'N';
-		}else{
+		if(${subForm.subCheck == 'Y'}){
 			document.getElementById('processedbutton').className='selected';
 			document.getElementById('processingbutton').className='';
 			document.getElementById("subCheck").value= 'Y';
+		}else{
+			document.getElementById('processingbutton').className='selected';
+			document.getElementById('processedbutton').className='';
+			document.getElementById("subCheck").value= 'N';
 		}
 	}
 	

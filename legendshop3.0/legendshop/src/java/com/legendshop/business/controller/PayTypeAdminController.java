@@ -152,7 +152,10 @@ public class PayTypeAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		PayType payType = payTypeService.getPayTypeById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), payType.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), payType.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("bean", payType);
 		return PathResolver.getPath(request, PageLetEnum.PAY_TYPE_EDIT_PAGE);
 	}
@@ -184,7 +187,10 @@ public class PayTypeAdminController extends BaseController {
 	 */
 	private String update(HttpServletRequest request, HttpServletResponse response, PayType payType) {
 		PayType origin = payTypeService.getPayTypeById(payType.getPayId());
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{} update paytype, Partner: {}, ValidateKey: {}, SellerEmail: {} ", new Object[] {
 				origin.getUserName(), origin.getPartner(), origin.getValidateKey(), origin.getSellerEmail() });
 		origin.setMemo(payType.getMemo());

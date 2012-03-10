@@ -119,7 +119,10 @@ public class BrandAdminController extends BaseController implements AdminControl
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		Brand brand = brandService.getBrand(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), brand.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), brand.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{}, delete Brand Picture {}", brand.getUserName(), brand.getBrandPic());
 		brandService.delete(id);
 		String url = RealPathUtil.getBigPicRealPath() + "/" + brand.getBrandPic();
@@ -144,7 +147,10 @@ public class BrandAdminController extends BaseController implements AdminControl
 	@RequestMapping(value = "/update/{id}")
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		Brand brand = brandService.getBrand(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), brand.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), brand.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("bean", brand);
 		return PathResolver.getPath(request, PageLetEnum.BRAND_EDIT_PAGE);
 	}

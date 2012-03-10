@@ -164,7 +164,10 @@ public class MyleagueAdminController extends BaseController {
 		if (origin == null) {
 			throw new NotFoundException("Myleague is NULL",EntityCodes.LEAGUE);
 		}
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserId());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserId());
+		if(result!=null){
+			return result;
+		}
 		log.info("{} update Myleague UserId{}", origin.getUserId(), origin.getFriendId());
 		origin.setDisplayOrder(myleague.getDisplayOrder());
 		origin.setFriendName(myleague.getFriendName());

@@ -191,7 +191,10 @@ public class NewsAdminController extends BaseController {
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		News news = newsService.getNewsById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), news.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), news.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{},delete News Title{}", news.getUserName(), news.getNewsTitle());
 		newsService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
@@ -213,7 +216,10 @@ public class NewsAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		News news = newsService.getNewsById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), news.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), news.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("news", news);
 		return PathResolver.getPath(request, PageLetEnum.NEWS_EDIT_PAGE);
 	}
@@ -237,7 +243,10 @@ public class NewsAdminController extends BaseController {
 	 */
 	public String update(HttpServletRequest request, HttpServletResponse response, News news) {
 		News origin = newsService.getNewsById(news.getNewsId());
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{} update News Title{}", origin.getUserName(), origin.getNewsTitle());
 		news.setUserId(origin.getUserId());
 		news.setUserName(origin.getUserName());

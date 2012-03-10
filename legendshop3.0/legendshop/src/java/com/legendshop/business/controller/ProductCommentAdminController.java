@@ -128,7 +128,10 @@ public class ProductCommentAdminController extends BaseController {
 			throw new NotFoundException("ProductComment Not Found",EntityCodes.PROD);
 		}
 		String username = UserManager.getUsername(request.getSession());
-		checkPrivilege(request, username, comment.getOwnerName());
+		String result = checkPrivilege(request, username, comment.getOwnerName());
+		if(result!=null){
+			return result;
+		}
 		SafeHtml safe = new SafeHtml();
 		comment.setReplyContent(safe.makeSafe(productComment.getReplyContent()));
 		comment.setReplyName(username);
@@ -154,7 +157,10 @@ public class ProductCommentAdminController extends BaseController {
 	Long id) {
 		String username = UserManager.getUsername(request.getSession());
 		ProductComment productComment = productCommentService.getProductCommentById(id);
-		checkPrivilege(request, username, productComment.getOwnerName());
+		String result = checkPrivilege(request, username, productComment.getOwnerName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{}, delete ProductComment Addtime {}, delete person", new Object[] { productComment.getUserName(),
 				productComment.getAddtime(), username });
 		productCommentService.delete(id);
@@ -182,7 +188,10 @@ public class ProductCommentAdminController extends BaseController {
 		}
 		Product product = productCommentService.getProduct(productComment.getProdId());
 		productComment.setProdName(product.getName());
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), productComment.getOwnerName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), productComment.getOwnerName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("bean", productComment);
 		return PathResolver.getPath(request, PageLetEnum.PROD_COMM_EDIT_PAGE);
 	}

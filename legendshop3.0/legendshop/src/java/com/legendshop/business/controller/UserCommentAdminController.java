@@ -109,7 +109,10 @@ public class UserCommentAdminController extends BaseController implements AdminC
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, UserComment comment) {
 		String loginName = UserManager.getUsername(request);
-		checkPrivilege(request, loginName, comment.getUserName());
+		String result = checkPrivilege(request, loginName, comment.getUserName());
+		if(result!=null){
+			return result;
+		}
 		String shopName = getShopName(request, response);
 		businessService.getShopDetailView(shopName, request, response);
 		comment.setAddtime(new Date());
@@ -129,7 +132,10 @@ public class UserCommentAdminController extends BaseController implements AdminC
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long id) {
 		UserComment userComment = userCommentService.getUserComment(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), userComment.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), userComment.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{} delete UserComment Id {}, ToUserName {}", new Object[] { userComment.getUserName(), userComment.getId(),
 				userComment.getToUserName() });
 		userCommentService.delete(userComment);
@@ -158,7 +164,10 @@ public class UserCommentAdminController extends BaseController implements AdminC
 			//管理员不能update别人的消息
 			userCommentService.updateUserCommentToReaded(comment);
 		}
-		checkPrivilege(request, UserManager.getUsername(request), comment.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request), comment.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("comment", comment);
 		return PathResolver.getPath(request, PageLetEnum.USER_COMM_EDIT_PAGE);
 	}

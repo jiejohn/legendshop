@@ -65,10 +65,13 @@ public class SubController extends BaseController {
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, SubForm sub) {
 		String userName = UserManager.getUsername(request);
-		checkLogin(userName);
+		String result = checkLogin(request,userName);
+		if(result != null){
+			return result;
+		}
 		log.debug("{} save sub ", userName);
 		Integer i = (Integer) request.getSession().getAttribute(Constants.TOKEN); // 取session中保存的token
-		Integer i2 = new Integer(request.getParameter(Constants.TOKEN)); // 取用户提交过来的token进行对比
+		Integer i2 = Integer.parseInt(request.getParameter(Constants.TOKEN)) ; // 取用户提交过来的token进行对比
 		if (i.equals(i2)) {// 这个“暗号”用过后约定用新的暗号, 在cash.do中加入
 			request.getSession().setAttribute(Constants.TOKEN, CommonServiceUtil.generateRandom());
 			List<Sub> subList = subService.saveSub(sub);

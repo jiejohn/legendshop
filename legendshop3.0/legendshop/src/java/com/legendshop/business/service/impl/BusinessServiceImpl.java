@@ -85,6 +85,7 @@ import com.legendshop.model.entity.ExternalLink;
 import com.legendshop.model.entity.Hotsearch;
 import com.legendshop.model.entity.ImgFile;
 import com.legendshop.model.entity.Indexjpg;
+import com.legendshop.model.entity.Myleague;
 import com.legendshop.model.entity.News;
 import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Product;
@@ -1353,6 +1354,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		sqlQuery.setAllCountString(queryAllSQL);
 		sqlQuery.setQueryString(querySQL);
 		sqlQuery.addParams(shopName);
+		sqlQuery.addEntityClass("myleague", Myleague.class);
 
 		PageSupport ps = businessDao.find(sqlQuery);
 		request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));

@@ -171,7 +171,10 @@ public class SortAdminController extends BaseController implements AdminControll
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		Sort sort = sortService.getSortById(id);
-		checkPrivilege(request, UserManager.getUsername(request.getSession()), sort.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), sort.getUserName());
+		if(result!=null){
+			return result;
+		}
 		log.info("{} delete SortName {}", new Object[] { sort.getUserName(), sort.getSortName()});
 		sortService.delete(sort);
 		FileProcessor.deleteFile(RealPathUtil.getBigPicRealPath() + "/" + sort.getPicture());
@@ -196,7 +199,10 @@ public class SortAdminController extends BaseController implements AdminControll
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		checkNullable("sortId", id);
 		Sort sort = sortService.getSortById(id);
-		checkPrivilege(request, UserManager.getUsername(request), sort.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request), sort.getUserName());
+		if(result!=null){
+			return result;
+		}
 		request.setAttribute("sort", sort);
 		return PathResolver.getPath(request, PageLetEnum.SORT_EDIT_PAGE);
 	}

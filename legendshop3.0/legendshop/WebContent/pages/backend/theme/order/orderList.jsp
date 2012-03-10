@@ -54,7 +54,7 @@
         <td valign="top">
    <div align="center">
         <%@ include file="/pages/common/messages.jsp"%>
-    <display:table name="processOrderList" requestURI="${pageContext.request.contextPath}/admin/order/query${applicationScope.WEB_SUFFIX}" id="item"
+    <display:table name="list" requestURI="${pageContext.request.contextPath}/admin/order/query${applicationScope.WEB_SUFFIX}" id="item"
          export="true"  class="${tableclass}" style="width:100%" sort="external">
       <display:column title="顺序" style="width:40px"><%=offset++%></display:column>
       <display:column title="订单号" sortable="true" sortName="subNumber">
@@ -63,7 +63,7 @@
       <display:column title="价格" sortable="true" sortName="total">
       	<b><fmt:formatNumber type="currency" value="${item.total}" pattern="${CURRENCY_PATTERN}"/></b>
       </display:column>
-      <display:column title="商品" property="name" sortable="true" sortName="name"></display:column>
+      <display:column title="商品" property="prodName" sortable="true" sortName="prodName"></display:column>
       <display:column title="买家帐号" sortable="true" sortName="userName">${item.userName}</display:column>
       <display:column title="日期" sortable="true" sortName="subDate">
       	<fmt:formatDate value="${item.subDate}" pattern="yyyy-MM-dd HH:mm"/>
@@ -84,7 +84,7 @@
         <a href="javascript:void(0)" onclick='javascript:openbag("${item.subNumber}","${item.userName}")'>详情</a>
       <c:if test="${subForm.subCheck == 'N'}">
         <c:if test="${item.status == 1}"> <!-- 1: 等待买家付款 -->
-        	<a href="javascript:void(0)" onclick='javascript:openScript("${pageContext.request.contextPath}/admin/order/modifyPrice.jsp?total=${item.total}&subId=${item.subId}&subNumber=${item.subNumber}","330","150")'>修改</a>
+        	<a href="javascript:void(0)" onclick='javascript:openScript("${pageContext.request.contextPath}/admin/order/modifyPrice${applicationScope.WEB_SUFFIX}?total=${item.total}&subId=${item.subId}&subNumber=${item.subNumber}","330","150")'>修改</a>
        	</c:if>
        <c:if test="${item.status == 2}"> <!-- 2:买家已经付款 -->
              <!-- 4:交易成功 -->
@@ -93,7 +93,7 @@
          <c:if test="${item.payTypeId == 3 &&( item.status != 3 && item.status != 6)}"> <!-- 3:货到付款,没有退货又没有发货的 -->
          	<a href="javascript:void(0)" onclick='javascript:updateSubStatus("${item.subId}",3,"${item.subNumber}");'>发货</a>
          </c:if>
-         </c:if>
+        </c:if>
         <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
             <a href="javascript:void(0)" onclick='javascript:deleteSub("${item.subId}","${item.subNumber}");'>删除</a>
         </auth:auth>
@@ -160,7 +160,7 @@ function deleteSub(subId,subNumber) {
 }
 
   function openbag(subNumber,userName) {
-   	window.open("${pageContext.request.contextPath}/admin/adminOrderDetail${applicationScope.WEB_SUFFIX}?subNumber="+subNumber+"&userName="+userName,"","height=500,width=720,left=190,top=0,resizable=yes,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no");
+   	window.open("${pageContext.request.contextPath}/admin/order/loadBySubnumber/" + subNumber+ '${applicationScope.WEB_SUFFIX}', "","height=500,width=720,left=190,top=0,resizable=yes,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no");
    } 
    
    function pager(curPageNO){
@@ -169,14 +169,15 @@ function deleteSub(subId,subNumber) {
 	}
 	
 	function onloadSetup(){
-		if(${subForm.subCheck == 'N'}){
-			document.getElementById('processingbutton').className='selected';
-			document.getElementById('processedbutton').className='';
-			document.getElementById("subCheck").value= 'N';
-		}else{
+		if(${subForm.subCheck == 'Y'}){
+
 			document.getElementById('processedbutton').className='selected';
 			document.getElementById('processingbutton').className='';
 			document.getElementById("subCheck").value= 'Y';
+		}else{
+			document.getElementById('processingbutton').className='selected';
+			document.getElementById('processedbutton').className='';
+			document.getElementById("subCheck").value= 'N';
 		}
 	}
 	
