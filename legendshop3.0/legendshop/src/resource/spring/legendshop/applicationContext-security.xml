@@ -51,7 +51,7 @@
 	
 	<beans:bean id="loginLogAuthenticationSuccessHandler"
 		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-		<beans:property name="defaultTargetUrl" value="/index.htm"></beans:property>
+		<beans:property name="defaultTargetUrl" value="/index${WEB_SUFFIX}"></beans:property>
 		<beans:property name="redirectStrategy" ref="originUrlRedirectStrategy"></beans:property>
 	</beans:bean>
 
@@ -60,7 +60,7 @@
 	
 	<beans:bean id="simpleUrlAuthenticationFailureHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-		<beans:property name="defaultFailureUrl" value="/login.htm?error=true"></beans:property>
+		<beans:property name="defaultFailureUrl" value="/login${WEB_SUFFIX}?error=true"></beans:property>
 	</beans:bean>
 
 	<!-- 一个自定义的filter，必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性，
