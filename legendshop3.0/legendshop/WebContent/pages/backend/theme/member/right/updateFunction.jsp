@@ -20,13 +20,17 @@
             name: {
                 required: true
             },
-            roleType: {
+            protectFunction: {
 		        required: true
 		    }
         },
         messages: {
-            brandName: {
-                required: "请输入商品品牌名称"
+
+          	 name: {
+                required: '<fmt:message key="name.required"/>'
+            },
+            protectFunction: {
+                required: '<fmt:message key="function.required"/>'
             }
         }
     });

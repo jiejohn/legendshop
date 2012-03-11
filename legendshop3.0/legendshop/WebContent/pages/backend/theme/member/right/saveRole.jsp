@@ -24,9 +24,12 @@
 		    }
         },
         messages: {
-            brandName: {
-                required: "请输入商品品牌名称"
-            }
+       	 name: {
+             required: '<fmt:message key="name.required"/>'
+         },
+         roleType: {
+             required: '<fmt:message key="roletype.required"/>'
+         }
         }
     });
  

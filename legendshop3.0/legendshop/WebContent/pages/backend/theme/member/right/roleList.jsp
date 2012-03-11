@@ -42,16 +42,11 @@
 			&nbsp; 名称 ：
 			<input type="text" name="name" maxlength="50" value="${bean.name }" />
 				&nbsp;状态 
-				<select id="enabled" name="enabled">				
-			        <c:if test="${not empty bean.enabled}">
-						<option value="${bean.enabled}">      
-						<option:optionGroup type="label" required="true" cache="true" beanName="ENABLED" selectedValue="${bean.enabled}" defaultDisp=""/>
-						</option>							            
-			        </c:if>
-				  <option:optionGroup type="select" required="true" cache="true"
-	                beanName="ENABLED" selectedValue="${bean.enabled}"/>
+				<select id="enabled" name="enabled">
+				  <option:optionGroup type="select" required="true" cache="true"  beanName="ENABLED" selectedValue="${bean.enabled}"/>
 	            </select>
 			<input type="submit" value="搜索"/>
+			<input type="button" value="创建角色" onclick='window.location="${pageContext.request.contextPath}/member/role/load${applicationScope.WEB_SUFFIX}"'/>
 			&nbsp;&nbsp;
 </form>	
 
@@ -78,10 +73,6 @@
             <c:out value="${toolBar}" escapeXml="${toolBar}"></c:out>
         </c:if>
     </div>
-	<div align="center">
-    <P> 点击此处
-    <a href="${pageContext.request.contextPath}/member/role/load${applicationScope.WEB_SUFFIX}">创建角色</a>
-       </div>
  
 </body>
 </html>

@@ -36,9 +36,9 @@
 			&nbsp; 名称 ：
 			<input type="text" name="name" maxlength="50" value="${bean.name }" />
 			<input type="submit" value="搜索"/>
+			<input type="button" value="创建权限" onclick='window.location="${pageContext.request.contextPath}/member/right/load${applicationScope.WEB_SUFFIX}"'/>
 			&nbsp;&nbsp;
 	</form>		
-	
 	
 	
 	<div align="center">
@@ -59,10 +59,6 @@
         <c:if test="${not empty toolBar}">
             <c:out value="${toolBar}" escapeXml="${toolBar}"></c:out>
         </c:if>
-    </div>
-	<div align="center">
-    <P> 点击此处
-    <a href="${pageContext.request.contextPath}/member/right/load${applicationScope.WEB_SUFFIX}">创建权限</a>
     </div>
 	
 </body>
