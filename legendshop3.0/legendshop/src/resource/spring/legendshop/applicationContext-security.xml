@@ -47,6 +47,7 @@
 		<beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
 		<beans:property name="loginHistoryService" ref="loginHistoryService"></beans:property>
 		<beans:property name="basketDao" ref="basketDao"></beans:property>
+		<beans:property name="supportSSO" value="false"></beans:property>
 	</beans:bean>
 	
 	<beans:bean id="loginLogAuthenticationSuccessHandler"

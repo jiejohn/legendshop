@@ -4,22 +4,271 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/resource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/java"/>
-        <dependent-module archiveName="legendshop_core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_core/legendshop_core">
+        <dependent-module archiveName="commons-fileupload-1.2.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons-fileupload-1.2.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="legendshop_util.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_util/legendshop_util">
+        <dependent-module archiveName="legendshop_core3.0.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/release/legendshop_core3.0.3.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="legendshop_model.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_model/legendshop_model">
+        <dependent-module archiveName="bsh-2.0b4.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/bsh-2.0b4.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="legendshop_search.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_search/legendshop_search">
+        <dependent-module archiveName="spring-security-config-3.0.2.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/spring-security-config-3.0.2.RELEASE.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="legendshop_jcf.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_jcf/legendshop_jcf">
+        <dependent-module archiveName="mysql-connector-java-5.0.8-bin.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/mysql-connector-java-5.0.8-bin.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="legendshop_central.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_central/legendshop_central">
+        <dependent-module archiveName="commons.io-1.4.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons.io-1.4.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="cglib-2.2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/cglib-2.2.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons.codec-1.3.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons.codec-1.3.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="displaytag-export-poi-1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/displaytag-export-poi-1.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_model3.0.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/release/legendshop_model3.0.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bsf-2.3.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/bsf-2.3.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.core-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.core-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-pool.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons-pool.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="tiles-core-2.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/tiles-core-2.2.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.asm-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.asm-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.orm-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.orm-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ehcache-1.6.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/ehcache-1.6.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="tiles-api-2.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/tiles-api-2.2.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.aspects-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.aspects-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="iTextAsian.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/iTextAsian.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.context-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.context-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-digester-1.8.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons-digester-1.8.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jta.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/jta.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javassist-3.9.0.GA.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/javassist-3.9.0.GA.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="hibernate3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/hibernate3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.context.support-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.context.support-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="tiles-jsp-2.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/tiles-jsp-2.2.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="htmlparser-1.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/htmlparser-1.5.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.web.servlet-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.web.servlet-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-logging-1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons-logging-1.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.jdbc-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.jdbc-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="tiles-freemarker-2.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/tiles-freemarker-2.2.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="oro-2.0.8.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/oro-2.0.8.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="activation-1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/activation-1.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ezmorph-1.0.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/ezmorph-1.0.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons.collections-3.2.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons.collections-3.2.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_search3.0.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/release/legendshop_search3.0.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="java-core-2.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/java-core-2.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="aspectjweaver.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/aspectjweaver.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-chain-1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons-chain-1.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="lucene-memory-3.0.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/lucene-memory-3.0.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="lucene-analyzers-3.0.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/lucene-analyzers-3.0.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-lang-2.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons-lang-2.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jaxen-1.1-beta-4.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/jaxen-1.1-beta-4.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="standard-1.0.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/standard-1.0.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="proxool1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/proxool1.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="xstream-1.2.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/xstream-1.2.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="displaytag-1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/displaytag-1.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="asm.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/asm.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="dwr.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/dwr.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="antlr-2.7.7.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/antlr-2.7.7.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-security-web-3.0.2.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/spring-security-web-3.0.2.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jarjar-0.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/jarjar-0.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-security-core-3.0.2.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/spring-security-core-3.0.2.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="imageinfo-1.9.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/imageinfo-1.9.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="aopalliance.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/aopalliance.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jstl-1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/jstl-1.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_util3.0.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/release/legendshop_util3.0.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="mail.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/mail.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="freemarker.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/freemarker.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="log4j-1.2.15.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/log4j-1.2.15.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jdom-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/jdom-1.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.expression-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.expression-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-dbcp.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons-dbcp.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="IKAnalyzer3.2.5Stable.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/IKAnalyzer3.2.5Stable.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="xpp3_min-1.1.3.4.O.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/xpp3_min-1.1.3.4.O.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="json-lib-2.3-jdk15.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/json-lib-2.3-jdk15.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="lucene-highlighter-3.0.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/lucene-highlighter-3.0.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="tiles-servlet-2.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/tiles-servlet-2.2.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="tiles-template-2.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/tiles-template-2.2.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.beans-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.beans-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="slf4j-all-log4j12-1.4.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/slf4j-all-log4j12-1.4.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-beanutils-1.8.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons-beanutils-1.8.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="proxool-cglib.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/proxool-cglib.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="dom4j-1.6.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/dom4j-1.6.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="poi-3.2-FINAL.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/poi-3.2-FINAL.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_central3.0.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/release/legendshop_central3.0.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-httpclient-3.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons-httpclient-3.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="lucene-core-3.0.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/lucene-core-3.0.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-validator-1.3.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/commons-validator-1.3.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.web-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.web-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.transaction-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.transaction-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.aop-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.aop-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="org.springframework.web.struts-3.1.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/org.springframework.web.struts-3.1.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_jcf3.0.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/release/legendshop_jcf3.0.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="itext-1.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/itext-1.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="xerces-2.8.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/xerces-2.8.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="proxool-0.9.1-ls.jar_bak" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/legendshop_lib/lib/proxool-0.9.1-ls.jar_bak">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_group.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_group/legendshop_group">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/legendshop/build/classes"/>

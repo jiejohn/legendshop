@@ -3,12 +3,7 @@
 	<name>legendshop</name>
 	<comment></comment>
 	<projects>
-		<project>legendshop_core</project>
-		<project>legendshop_util</project>
-		<project>legendshop_model</project>
-		<project>legendshop_search</project>
-		<project>legendshop_jcf</project>
-		<project>legendshop_central</project>
+		<project>legendshop_group</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
