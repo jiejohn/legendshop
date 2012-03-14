@@ -99,10 +99,7 @@
         <td>
            <p>           
           <label>
-            <input type="radio" name="enabled" value="1"             
-        <c:if test="${bean.enabled eq 1}">
-            checked="checked"
-        </c:if>  
+            <input type="radio" name="enabled" value="1"   checked="checked"
             />
             有效</label> &nbsp; &nbsp; 
           <label>
