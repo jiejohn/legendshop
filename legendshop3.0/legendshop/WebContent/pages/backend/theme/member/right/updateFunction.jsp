@@ -52,7 +52,7 @@
 
 <body class="bodymargin">
 <div align="center">      
-      <form  action="${pageContext.request.contextPath}/member/right/save${applicationScope.WEB_SUFFIX}">
+      <form  action="${pageContext.request.contextPath}/member/right/save${applicationScope.WEB_SUFFIX}" id="form1" method="post">
         <table class="${tableclass}" style="width: 100%">
 			 <thead>
 			  <tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; 权限管理 &raquo; 修改权限</td></tr>
