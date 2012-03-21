@@ -6,21 +6,21 @@
 -->
 <hibernate-mapping>
     <class name="com.legendshop.model.entity.DeliveryType" table="ls_dvy_type">
-        <id name="dvyTypeId" type="java.lang.Integer">
+        <id name="dvyTypeId" type="java.lang.Long">
             <column name="dvy_type_id" />
-            <generator class="identity" />
+            <generator class="native" />
         </id>
-        <property name="userId" type="java.lang.Integer">
-            <column name="user_id" not-null="true">
+        <property name="userId" type="java.lang.String">
+            <column name="user_id" not-null="true" length="32">
                 <comment>用户ID</comment>
             </column>
         </property>
-        <property name="userName" type="java.lang.Integer">
-            <column name="user_name" not-null="true">
+        <property name="userName" type="java.lang.Long">
+            <column name="user_name" not-null="true" length="50">
                 <comment>用户名称</comment>
             </column>
         </property>
-        <property name="dvyId" type="java.lang.Integer">
+        <property name="dvyId" type="java.lang.Long">
             <column name="dvy_id" not-null="true">
                 <comment>物流公司ID</comment>
             </column>
@@ -40,13 +40,13 @@
                 <comment>描述</comment>
             </column>
         </property>
-        <property name="createTime" type="java.sql.Timestamp">
-            <column name="create_time" length="0" not-null="true">
+        <property name="createTime" type="java.util.Date">
+            <column name="create_time" length="19" not-null="true">
                 <comment>建立时间</comment>
             </column>
         </property>
-        <property name="modifyTime" type="java.sql.Timestamp">
-            <column name="modify_time" length="0" not-null="true">
+        <property name="modifyTime" type="java.util.Date">
+            <column name="modify_time" length="19" not-null="true">
                 <comment>修改时间</comment>
             </column>
         </property>

@@ -6,12 +6,12 @@
 -->
 <hibernate-mapping>
     <class name="com.legendshop.model.entity.Cash" table="ls_cash">
-        <id name="cashId" type="java.lang.Integer">
+        <id name="cashId" type="java.lang.Long">
             <column name="cash_id" />
-            <generator class="identity" />
+            <generator class="native" />
         </id>
-        <property name="userId" type="java.lang.Integer">
-            <column name="user_id" not-null="true">
+        <property name="userId" type="java.lang.String">
+            <column name="user_id" not-null="true" length="32">
                 <comment>用户ID</comment>
             </column>
         </property>
@@ -30,7 +30,7 @@
                 <comment>商家ID</comment>
             </column>
         </property>
-        <property name="prodId" type="java.lang.Integer">
+        <property name="prodId" type="java.lang.Long">
             <column name="prod_id">
                 <comment>产品ID</comment>
             </column>
@@ -40,7 +40,7 @@
                 <comment>商户ID</comment>
             </column>
         </property>
-        <property name="subId" type="java.lang.Integer">
+        <property name="subId" type="java.lang.Long">
             <column name="sub_id">
                 <comment>订单ID</comment>
             </column>
@@ -50,7 +50,7 @@
                 <comment>描述</comment>
             </column>
         </property>
-        <property name="money" type="java.lang.Double">
+        <property name="money" type="java.math.BigDecimal">
             <column name="money" precision="15" not-null="true">
                 <comment>代金券金额</comment>
             </column>
@@ -60,12 +60,12 @@
                 <comment>状态，是否使用过</comment>
             </column>
         </property>
-        <property name="beginTime" type="java.sql.Timestamp">
+        <property name="beginTime" type="java.util.Date">
             <column name="begin_time" length="0" not-null="true">
                 <comment>有效期开始时间</comment>
             </column>
         </property>
-        <property name="endTime" type="java.sql.Timestamp">
+        <property name="endTime" type="java.util.Date">
             <column name="end_time" length="0">
                 <comment>有效期结束时间</comment>
             </column>
@@ -75,7 +75,7 @@
                 <comment>使用时的IP</comment>
             </column>
         </property>
-        <property name="createTime" type="java.sql.Timestamp">
+        <property name="createTime" type="java.util.Date">
             <column name="create_time" length="0" not-null="true">
                 <comment>建立时间</comment>
             </column>
