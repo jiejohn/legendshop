@@ -595,7 +595,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	public Map<String, String> changeRandImg() {
 		Map<String, String> map = new HashMap<String, String>();
 		DES2 des = new DES2();
-		String ra = RandomStringUtils.random(4, false, true);
+		String ra = RandomStringUtils.random(4, true, true);
 		String randStr = ByteConverter.encode(des.byteToString(des.createEncryptor(ra)));
 		map.put("rand", ra);
 		map.put("randStr", randStr);
