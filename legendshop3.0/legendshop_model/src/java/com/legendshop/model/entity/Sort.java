@@ -30,6 +30,9 @@ public class Sort extends UploadFile implements java.io.Serializable {
 
 	/** The user id. */
 	private String userId;
+	
+	/** The sort type. */
+	private String sortType;
 
 	/** The user name. */
 	private String userName;
@@ -240,6 +243,25 @@ public class Sort extends UploadFile implements java.io.Serializable {
 				&& n.getParentNsortId() == null) {
 			nsort.add(n);
 		}
+	}
+
+	/**
+	 * Gets the sort type.
+	 * 
+	 * @return the sort type
+	 */
+	public String getSortType() {
+		return sortType;
+	}
+
+	/**
+	 * Sets the sort type.
+	 * 
+	 * @param sortType
+	 *            the new sort type
+	 */
+	public void setSortType(String sortType) {
+		this.sortType = sortType;
 	}
 
 }

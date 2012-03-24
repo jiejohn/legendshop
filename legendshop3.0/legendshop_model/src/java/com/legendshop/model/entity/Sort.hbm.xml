@@ -24,13 +24,18 @@
                 <comment>商品分类顺序</comment>
             </column>
         </property>
+         <property name="sortType" type="java.lang.String">
+            <column name="sort_type" length="1">
+                <comment>产品分类类型</comment>
+            </column>
+        </property>
         <property name="userId" type="java.lang.String">
             <column name="user_id" length="32">
                 <comment>用户ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="100">
+            <column name="user_name" length="50">
                 <comment>用户名称</comment>
             </column>
         </property>

@@ -57,6 +57,9 @@ public class SubHistory implements java.io.Serializable {
 	/** The sub check. */
 	private String subCheck;
 	
+	/** The sub type. */
+	private String subType;
+	
 	/** The total. */
 	private Double total;
 	// 实付
@@ -110,6 +113,12 @@ public class SubHistory implements java.io.Serializable {
 	// 支付宝交易号
 	/** The trade no. */
 	private String tradeNo;
+	
+	/** The dvy type id.物流方式ID */
+	private Long dvyTypeId;
+	
+	/** The delivery flow id. 物流单号*/
+	private String deliveryFlowId;
 
 	/**
 	 * default constructor.
@@ -666,6 +675,41 @@ public class SubHistory implements java.io.Serializable {
 	 */
 	public void setTradeNo(String tradeNo) {
 		this.tradeNo = tradeNo;
+	}
+
+	/**
+	 * Gets the sub type.
+	 * 
+	 * @return the sub type
+	 */
+	public String getSubType() {
+		return subType;
+	}
+
+	/**
+	 * Sets the sub type.
+	 * 
+	 * @param subType
+	 *            the new sub type
+	 */
+	public void setSubType(String subType) {
+		this.subType = subType;
+	}
+
+	public Long getDvyTypeId() {
+		return dvyTypeId;
+	}
+
+	public void setDvyTypeId(Long dvyTypeId) {
+		this.dvyTypeId = dvyTypeId;
+	}
+
+	public String getDeliveryFlowId() {
+		return deliveryFlowId;
+	}
+
+	public void setDeliveryFlowId(String deliveryFlowId) {
+		this.deliveryFlowId = deliveryFlowId;
 	}
 
 }

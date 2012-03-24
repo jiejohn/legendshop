@@ -48,6 +48,11 @@
                 <comment>订购流水号</comment>
             </column>
         </property>
+        <property name="subType" type="java.lang.String">
+            <column name="sub_type" length="1">
+                <comment>订单类型</comment>
+            </column>
+        </property>
         <property name="subCheck" type="java.lang.String">
             <column name="sub_check" length="1">
                 <comment>订购审批状态，Y：审批通过，N：还没有审批</comment>
@@ -124,6 +129,16 @@
         <property name="tradeNo" type="java.lang.String">
             <column name="trade_no">
                 <comment>支付宝交易号</comment>
+            </column>
+        </property> 
+        <property name="dvyTypeId" type="java.lang.Long">
+            <column name="dvy_type_id">
+                <comment>物流方式ID</comment>
+            </column>
+        </property>        
+        <property name="deliveryFlowId" type="java.lang.String">
+            <column name="dvy_flow">
+                <comment>物流单号</comment>
             </column>
         </property>        
     </class>

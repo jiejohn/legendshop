@@ -25,7 +25,7 @@
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="100">
+            <column name="user_name" length="50">
                 <comment>用户名称,备用</comment>
             </column>
         </property>

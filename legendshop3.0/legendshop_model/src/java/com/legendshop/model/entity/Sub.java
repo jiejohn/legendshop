@@ -47,6 +47,9 @@ public class Sub implements java.io.Serializable {
 
 	/** The sub check. */
 	private String subCheck;
+	
+	/** The sub type. */
+	private String subType;
 
 	// 订单总数
 	/** The total. */
@@ -98,6 +101,12 @@ public class Sub implements java.io.Serializable {
 
 	/** The score. */
 	private Long score;
+	
+	/** The dvy type id.物流方式ID */
+	private Long dvyTypeId;
+	
+	/** The delivery flow id. 物流单号*/
+	private String deliveryFlowId;
 
 	// 支付宝交易号
 	/** The trade no. */
@@ -620,6 +629,63 @@ public class Sub implements java.io.Serializable {
 	 */
 	public void setTradeNo(String tradeNo) {
 		this.tradeNo = tradeNo;
+	}
+
+	/**
+	 * Gets the sub type.
+	 * 
+	 * @return the sub type
+	 */
+	public String getSubType() {
+		return subType;
+	}
+
+	/**
+	 * Sets the sub type.
+	 * 
+	 * @param subType
+	 *            the new sub type
+	 */
+	public void setSubType(String subType) {
+		this.subType = subType;
+	}
+
+	/**
+	 * Gets the dvy type id.
+	 * 
+	 * @return the dvy type id
+	 */
+	public Long getDvyTypeId() {
+		return dvyTypeId;
+	}
+
+	/**
+	 * Sets the dvy type id.
+	 * 
+	 * @param dvyTypeId
+	 *            the new dvy type id
+	 */
+	public void setDvyTypeId(Long dvyTypeId) {
+		this.dvyTypeId = dvyTypeId;
+	}
+
+	/**
+	 * Gets the delivery flow id.
+	 * 
+	 * @return the delivery flow id
+	 */
+	public String getDeliveryFlowId() {
+		return deliveryFlowId;
+	}
+
+	/**
+	 * Sets the delivery flow id.
+	 * 
+	 * @param deliveryFlowId
+	 *            the new delivery flow id
+	 */
+	public void setDeliveryFlowId(String deliveryFlowId) {
+		this.deliveryFlowId = deliveryFlowId;
 	}
 
 }

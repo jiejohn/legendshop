@@ -38,7 +38,7 @@
                 <comment>金额流动情况(Credit or Debit)</comment>
             </column>
         </property>
-        <property name="money" type="java.math.BigDecimal">
+        <property name="money" type="java.lang.Double">
             <column name="money" precision="15" not-null="true">
                 <comment>金额数量</comment>
             </column>

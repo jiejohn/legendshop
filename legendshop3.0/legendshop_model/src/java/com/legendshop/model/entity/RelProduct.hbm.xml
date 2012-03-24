@@ -29,7 +29,7 @@
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="32">
+            <column name="user_name" length="50">
                 <comment>商品对应的用户</comment>
             </column>
         </property>

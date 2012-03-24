@@ -7,7 +7,6 @@
  */
 package com.legendshop.model.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -46,7 +45,7 @@ public class Cash implements java.io.Serializable {
 	private String detail;
 	
 	/** The money. */
-	private BigDecimal money;
+	private Double money;
 	
 	/** The status. */
 	private String status;
@@ -239,7 +238,7 @@ public class Cash implements java.io.Serializable {
 	 * 
 	 * @return the money
 	 */
-	public BigDecimal getMoney() {
+	public Double getMoney() {
 		return money;
 	}
 	
@@ -249,7 +248,7 @@ public class Cash implements java.io.Serializable {
 	 * @param money
 	 *            the new money
 	 */
-	public void setMoney(BigDecimal money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
 	

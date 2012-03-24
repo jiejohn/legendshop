@@ -112,6 +112,22 @@
             <column name="score">
                 <comment>用户积分</comment>
             </column>
+        </property>  
+        <property name="totalCash" type="java.lang.Double">
+            <column name="total_cash">
+                <comment>总钱数</comment>
+            </column>
+        </property>
+         <property name="totalConsume" type="java.lang.Double">
+            <column name="total_consume">
+                <comment>总消耗钱数</comment>
+            </column>
+        </property>  
+        <property name="defaultAddrId" type="java.lang.Long">
+            <column name="addr_id">
+                <comment>用户积分</comment>
+            </column>
         </property>       
+               
     </class>
 </hibernate-mapping>

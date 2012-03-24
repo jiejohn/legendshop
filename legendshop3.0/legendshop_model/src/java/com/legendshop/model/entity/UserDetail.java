@@ -10,6 +10,7 @@ package com.legendshop.model.entity;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * LegendShop 版权所有 2009-2011,并保留所有权利。
@@ -93,11 +94,23 @@ public class UserDetail implements java.io.Serializable {
 	/** The shop detail. */
 	private ShopDetail shopDetail;
 
-	/** The register code. */
+	/** The register code.注册码 */
 	private String registerCode;
 
-	/** The score. */
+	/** The score. 总积分*/
 	private Long score;
+	
+	/** The total cash. 总钱数 */
+	private Double totalCash;
+	
+	/** The total consume. 总消耗钱数*/
+	private Double totalConsume;
+	
+	/** The user addresses. 用户地址 */
+	private Set<UserAddress> userAddresses;
+	
+	/** The default addr id. 默认地址 */
+	private Long defaultAddrId;
 
 	// Constructors
 
@@ -719,6 +732,71 @@ public class UserDetail implements java.io.Serializable {
 	 */
 	public void setScore(Long score) {
 		this.score = score;
+	}
+
+	/**
+	 * Gets the total cash.
+	 * 
+	 * @return the total cash
+	 */
+	public Double getTotalCash() {
+		return totalCash;
+	}
+
+	/**
+	 * Sets the total cash.
+	 * 
+	 * @param totalCash
+	 *            the new total cash
+	 */
+	public void setTotalCash(Double totalCash) {
+		this.totalCash = totalCash;
+	}
+
+	/**
+	 * Gets the user addresses.
+	 * 
+	 * @return the user addresses
+	 */
+	public Set<UserAddress> getUserAddresses() {
+		return userAddresses;
+	}
+
+	/**
+	 * Sets the user addresses.
+	 * 
+	 * @param userAddresses
+	 *            the new user addresses
+	 */
+	public void setUserAddresses(Set<UserAddress> userAddresses) {
+		this.userAddresses = userAddresses;
+	}
+
+	/**
+	 * Gets the default addr id.
+	 * 
+	 * @return the default addr id
+	 */
+	public Long getDefaultAddrId() {
+		return defaultAddrId;
+	}
+
+	/**
+	 * Sets the default addr id.
+	 * 
+	 * @param defaultAddrId
+	 *            the new default addr id
+	 */
+	public void setDefaultAddrId(Long defaultAddrId) {
+		this.defaultAddrId = defaultAddrId;
+	}
+
+	public Double getTotalConsume() {
+		return totalConsume;
+	}
+
+	public void setTotalConsume(Double totalConsume) {
+		this.totalConsume = totalConsume;
 	}
 
 }

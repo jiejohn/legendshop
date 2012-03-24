@@ -9,7 +9,7 @@
             <generator class="native" />
         </id>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="32" not-null="true" />
+            <column name="user_name" length="50" not-null="true" />
         </property>
         <property name="payTypeId" type="java.lang.Integer">
             <column name="pay_type_id" not-null="true" />
