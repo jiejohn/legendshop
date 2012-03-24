@@ -65,7 +65,7 @@
 																			<img id="randImage" name="randImage"/></td>
 																		</tr>					
 																		<tr><td></td><td align="left"><fmt:message key="change.random1"/> &nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a></td></tr>
-																		<tr>													
+																		<tr>										
 																			<td colspan="2">
 																				<div align="center">
 																				<%

@@ -92,7 +92,7 @@
 	<script type="text/javascript">	
 	window.onload = function(){
 	   if(window.top.location.href!=location.href)    
-		{    
+		{
     		window.top.location.href=location.href;    
 		}
 		changeRandImg('${pageContext.request.contextPath}');

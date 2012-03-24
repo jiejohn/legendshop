@@ -266,11 +266,11 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 		String currentShopName = getShopName(request, response);
 		// inShopDetail = true 表示第二次以上访问该商城，第一次访问时需要设置商城对应的Locale等参数，第二次则不需要
-		if (shopName == null && currentShopName == null) {//
+		if (shopName == null && currentShopName == null) {
 			log.debug("shopName and currentShopName can not both NULL");
 			return null;
 		}
-		Boolean inShopDetail = true;
+		boolean inShopDetail = true;
 		if (currentShopName != null) {
 			if (shopName != null && !shopName.equals(currentShopName)) {
 				// 换商城,第一次进入其他商城

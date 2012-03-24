@@ -16,6 +16,7 @@ import com.legendshop.central.license.LSResponse;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.ShopDetail;
+import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.model.entity.UserDetail;
 
 /**
@@ -91,6 +92,12 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 		shopDetailSearchFacade.create(shopDetail);
 	}
 	
+	@Override
+	public ShopDetailView getShopDetailView(String currentShopName) {
+		return shopDetailDao.getShopDetailView(currentShopName);
+	}
+
+	
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.ShopDetailService#isSupportOpenShop(com.legendshop.central.license.LSResponse)
 	 */
@@ -144,6 +151,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 	public void setShopDetailSearchFacade(ShopDetailSearchFacade shopDetailSearchFacade) {
 		this.shopDetailSearchFacade = shopDetailSearchFacade;
 	}
+
 
 
 }

@@ -17,7 +17,6 @@ import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
-import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Sort;
 import com.legendshop.util.AppUtils;
 
@@ -96,32 +95,7 @@ public class SortServiceImpl implements SortService  {
 	 */
     @Override
 	public List<Sort> getSort(String shopName, boolean loadAll) {
-        List<Sort> list = sortDao.findByHQL("from Sort where userName = ? order by seq",  shopName);
-        if (loadAll) {
-        	//找出所有的Nsort
-        	List<Nsort> nsortList = sortDao.findByHQL("select n from Nsort n, Sort s where n.sortId = s.sortId and s.userName = ?", shopName );
-            for (int i = 0; i < nsortList.size(); i++) {
-            	Nsort n1 = nsortList.get(i);
-                for (int j = i; j < nsortList.size(); j++) {
-                	Nsort n2 = nsortList.get(j);
-                		n1.addSubSort(n2);
-                		n2.addSubSort(n1);
-    			}
-			}
-        	
-        	for (Sort sort : list) {
-        		for (Nsort nsort : nsortList) {
-        			sort.addSubSort(nsort);
-				}
-            }
-        	/*
-            for (Sort sort : list) {
-                sort.setNsort(sortDao.findByHQL("from Nsort where sortId = ? and parentNsortId is null order by seq",
-                        new Object[] { sort.getSortId() }));
-            }
-            */
-        }
-        return list;
+    	return sortDao.getSort(shopName, loadAll);
     }
     
 

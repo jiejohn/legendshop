@@ -23,8 +23,8 @@ public enum ShopTypeEnum implements IntegerEnum{
 	
 	/** The PERSONAL. */
 	PERSONAL(0), 
- /** The BUSINESS. */
- BUSINESS(1);
+	 /** The BUSINESS. */
+	 BUSINESS(1);
 
 	/** The num. */
 	private Integer num;
@@ -32,6 +32,7 @@ public enum ShopTypeEnum implements IntegerEnum{
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.constant.IntegerEnum#value()
 	 */
+	@Override
 	public Integer value() {
 		return num;
 	}
