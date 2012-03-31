@@ -78,7 +78,6 @@
 	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.web.struts-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="/legendshop_lib/lib/oro-2.0.8.jar"/>
 	<classpathentry kind="lib" path="/legendshop_lib/lib/poi-3.2-FINAL.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/proxool-0.9.1-ls.jar_bak"/>
 	<classpathentry kind="lib" path="/legendshop_lib/lib/proxool-cglib.jar"/>
 	<classpathentry kind="lib" path="/legendshop_lib/lib/proxool1.0.jar"/>
 	<classpathentry kind="lib" path="/legendshop_lib/lib/slf4j-all-log4j12-1.4.3.jar"/>
@@ -101,5 +100,6 @@
 	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_model3.0.3.jar"/>
 	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_search3.0.3.jar"/>
 	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_util3.0.3.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_model"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
