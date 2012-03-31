@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.PubService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -70,7 +71,7 @@ public class PubAdminController extends BaseController {
 		PageSupport ps = pubService.getPubList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", pub);
-		return PathResolver.getPath(request, PageLetEnum.PUB_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.PUB_LIST_PAGE);
 	}
 
 	/**
@@ -92,7 +93,7 @@ public class PubAdminController extends BaseController {
 		pub.setUserName(name);
 		pubService.save(pub, name, CommonServiceUtil.haveViewAllDataFunction(request));
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, PageLetEnum.PUB_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.PUB_LIST_QUERY);
 	}
 
 	/**
@@ -117,7 +118,7 @@ public class PubAdminController extends BaseController {
 		log.info("{} delete Pub Title {}", pub.getUserName(), pub.getTitle());
 		pubService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, PageLetEnum.PUB_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.PUB_LIST_QUERY);
 	}
 
 	/**
@@ -140,7 +141,7 @@ public class PubAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("bean", pub);
-		return PathResolver.getPath(request, PageLetEnum.PUB_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.PUB_EDIT_PAGE);
 	}
 	
 	/**
@@ -154,7 +155,7 @@ public class PubAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.PUB_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.PUB_EDIT_PAGE);
 	}
 
 }

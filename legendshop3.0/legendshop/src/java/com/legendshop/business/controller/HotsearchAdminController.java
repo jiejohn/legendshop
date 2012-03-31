@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.HotsearchService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -72,7 +73,7 @@ public class HotsearchAdminController extends BaseController {
 		PageSupport ps = hotsearchService.getDataByCriteriaQuery(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", hotsearch);
-		return PathResolver.getPath(request, PageLetEnum.HOT_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.HOT_LIST_PAGE);
 	}
 
 	/**
@@ -94,7 +95,7 @@ public class HotsearchAdminController extends BaseController {
 		hotsearch.setDate(new Date());
 		hotsearchService.save(hotsearch, name, CommonServiceUtil.haveViewAllDataFunction(request));
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, PageLetEnum.HOT_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.HOT_LIST_QUERY);
 	}
 
 	/**
@@ -120,7 +121,7 @@ public class HotsearchAdminController extends BaseController {
 				hotsearch.getMsg() });
 		hotsearchService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, PageLetEnum.HOT_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.HOT_LIST_QUERY);
 	}
 
 	/**
@@ -143,7 +144,7 @@ public class HotsearchAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("bean", hotsearch);
-		return PathResolver.getPath(request, PageLetEnum.HOT_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.HOT_EDIT_PAGE);
 	}
 
 	/**
@@ -169,7 +170,7 @@ public class HotsearchAdminController extends BaseController {
 		hotsearch.setUserId(origin.getUserId());
 		hotsearch.setUserName(origin.getUserName());
 		hotsearchService.update(hotsearch);
-		return PathResolver.getPath(request, PageLetEnum.HOT_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.HOT_LIST_QUERY);
 	}
 	
 	/**
@@ -183,7 +184,7 @@ public class HotsearchAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return  PathResolver.getPath(request, PageLetEnum.HOT_EDIT_PAGE);
+		return  PathResolver.getPath(request, BackPage.HOT_EDIT_PAGE);
 	}
 
 }

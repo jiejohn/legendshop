@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.MyleagueService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -88,7 +89,7 @@ public class MyleagueAdminController extends BaseController {
 		PageSupport ps = myleagueService.getMyleagueList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", myleague);
-		return PathResolver.getPath(request, PageLetEnum.LEAGUE_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.LEAGUE_LIST_PAGE);
 	}
 
 	/**
@@ -106,7 +107,7 @@ public class MyleagueAdminController extends BaseController {
 	public String save(HttpServletRequest request, HttpServletResponse response, Myleague myleague) {
 		myleagueService.save(myleague);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, PageLetEnum.LEAGUE_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.LEAGUE_LIST_QUERY);
 	}
 
 	/**
@@ -125,7 +126,7 @@ public class MyleagueAdminController extends BaseController {
 	Long id) {
 		myleagueService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, PageLetEnum.LEAGUE_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.LEAGUE_LIST_QUERY);
 	}
 
 	/**
@@ -144,7 +145,7 @@ public class MyleagueAdminController extends BaseController {
 	Long id) {
 		Myleague myleague = myleagueService.getMyleagueById(id);
 		request.setAttribute("bean", myleague);
-		return PathResolver.getPath(request, PageLetEnum.LEAGUE_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.LEAGUE_EDIT_PAGE);
 	}
 
 	/**
@@ -173,7 +174,7 @@ public class MyleagueAdminController extends BaseController {
 		origin.setFriendName(myleague.getFriendName());
 		myleagueService.update(origin);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, PageLetEnum.LEAGUE_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.LEAGUE_LIST_QUERY);
 	}
 
 }

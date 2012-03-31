@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.AdvertisementService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -68,7 +69,7 @@ public class AdvertisementAdminController extends BaseController {
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO,
 			Advertisement advertisement) {
-		CriteriaQuery cq = new CriteriaQuery(Advertisement.class, curPageNO, "javascript:pager");
+		CriteriaQuery cq = new CriteriaQuery(Advertisement.class, curPageNO);
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(advertisement.getUserName()));
 		// cq.eq("enabled", ENABLED);
@@ -77,7 +78,7 @@ public class AdvertisementAdminController extends BaseController {
 		PageSupport ps = advertisementService.getDataByCriteriaQuery(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", advertisement);
-		return PathResolver.getPath(request, PageLetEnum.ADV_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.ADV_LIST_PAGE);
 	}
 
 	/**
@@ -133,7 +134,7 @@ public class AdvertisementAdminController extends BaseController {
 			advertisementService.save(advertisement);
 		}
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, PageLetEnum.ADV_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.ADV_LIST_QUERY);
 	}
 
 	/**
@@ -160,7 +161,7 @@ public class AdvertisementAdminController extends BaseController {
 		String url = RealPathUtil.getBigPicRealPath() + "/" + advertisement.getPicUrl();
 		FileProcessor.deleteFile(url);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, PageLetEnum.ADV_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.ADV_LIST_QUERY);
 	}
 
 	/**
@@ -183,7 +184,7 @@ public class AdvertisementAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("bean", advertisement);
-		return PathResolver.getPath(request, PageLetEnum.ADV_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.ADV_EDIT_PAGE);
 		
 	}
 	
@@ -198,7 +199,7 @@ public class AdvertisementAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.ADV_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.ADV_EDIT_PAGE);
 		
 	}
 
@@ -224,7 +225,7 @@ public class AdvertisementAdminController extends BaseController {
 		advertisement.setUserId(origin.getUserId());
 		advertisement.setUserName(origin.getUserName());
 		advertisementService.update(advertisement);
-		return PathResolver.getPath(request, PageLetEnum.ADV_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.ADV_LIST_QUERY);
 	}
 
 }

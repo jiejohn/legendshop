@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.Constants;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.service.ShopDetailService;
 import com.legendshop.business.service.UserDetailService;
 import com.legendshop.central.license.LSResponse;
@@ -122,7 +122,7 @@ public class UserDetailAdminController extends BaseController{
 			request.setAttribute("haveShop", haveShop);
 			savePage(ps, request);
 
-		return PathResolver.getPath(request, PageLetEnum.USER_DETAIL_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.USER_DETAIL_LIST_PAGE);
 	}
 	
 	/**
@@ -191,7 +191,7 @@ public class UserDetailAdminController extends BaseController{
 			request.setAttribute("haveShop", haveShop);
 			savePage(ps, request);
 
-		return PathResolver.getPath(request, PageLetEnum.USER_DETAIL_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.USER_DETAIL_LIST_PAGE);
 	}
 
 	/**

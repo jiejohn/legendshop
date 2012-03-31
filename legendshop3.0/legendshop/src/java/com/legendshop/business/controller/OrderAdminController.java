@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.Constants;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.service.OrderService;
 import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.UserManager;
@@ -108,7 +108,7 @@ public class OrderAdminController extends BaseController implements AdminControl
 			PageSupport ps = orderService.getOrderList(cq);
 			savePage(ps, request);
 			request.setAttribute("subForm", entity);
-			return PathResolver.getPath(request, PageLetEnum.ORDER_LIST_PAGE);
+			return PathResolver.getPath(request, BackPage.ORDER_LIST_PAGE);
 
 	}
 
@@ -168,7 +168,7 @@ public class OrderAdminController extends BaseController implements AdminControl
 			request.setAttribute("baskets", baskets);
 			request.setAttribute("totalcash", totalcash);
 		}
-		return PathResolver.getPath(request, PageLetEnum.ORDERDETAIL);
+		return PathResolver.getPath(request, BackPage.ORDERDETAIL);
 	}
 
 	/* (non-Javadoc)
@@ -184,7 +184,7 @@ public class OrderAdminController extends BaseController implements AdminControl
 	@RequestMapping(value = "/modifyPrice")
 	public String modifyPrice(HttpServletRequest request, HttpServletResponse response, Long id) {
 		// TODO Auto-generated method stub
-		return PathResolver.getPath(request, PageLetEnum.MODIFYPRICE);
+		return PathResolver.getPath(request, BackPage.MODIFYPRICE);
 	}
 	
 

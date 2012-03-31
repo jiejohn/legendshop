@@ -22,8 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
 import com.legendshop.business.common.ProductStatusEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.ProductService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -107,7 +108,7 @@ public class ProductAdminController extends BaseController {
 		PageSupport ps = productService.getProductList(cq);
 		savePage(ps, request);
 		request.setAttribute("prod", product);
-		return PathResolver.getPath(request, PageLetEnum.PROD_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.PROD_LIST_PAGE);
 	}
 
 	/**
@@ -183,10 +184,10 @@ public class ProductAdminController extends BaseController {
 		String nextAction = request.getParameter("nextAction");
 		if (nextAction != null && nextAction.equals("next")) {
 			request.setAttribute("productId", product.getProdId());
-			return PathResolver.getPath(request, PageLetEnum.IMG_LIST_QUERY);
+			return PathResolver.getPath(request, FowardPage.IMG_LIST_QUERY);
 		} else {
 			saveMessage(request, ResourceBundleHelper.getSucessfulString());
-			return PathResolver.getPath(request, PageLetEnum.PROD_LIST_QUERY);
+			return PathResolver.getPath(request, FowardPage.PROD_LIST_QUERY);
 		}
 	}
 
@@ -280,7 +281,7 @@ public class ProductAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.PROD_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.PROD_EDIT_PAGE);
 	}
 
 	/**
@@ -297,7 +298,7 @@ public class ProductAdminController extends BaseController {
 	@RequestMapping(value = "/append/{prodId}")
 	public String append (HttpServletRequest request, HttpServletResponse response,@PathVariable Long prodId) {
 		 request.setAttribute("prodId",prodId) ;
-		return PathResolver.getPath(request, PageLetEnum.APPEND_PRODUCT);
+		return PathResolver.getPath(request, BackPage.APPEND_PRODUCT);
 	}
 	
 	/**
@@ -311,7 +312,7 @@ public class ProductAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/createsetp")
 	public String createsetp (HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.CREATEP_RODUCT_STEP);
+		return PathResolver.getPath(request, BackPage.CREATEP_RODUCT_STEP);
 	}
 	
 
@@ -335,7 +336,7 @@ public class ProductAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("prod", product);
-		return PathResolver.getPath(request, PageLetEnum.PROD_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.PROD_EDIT_PAGE);
 	}
 
 }

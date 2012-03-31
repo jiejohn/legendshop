@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.service.PaymentService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -76,7 +76,7 @@ public class PaymentController extends BaseController {
 		log.debug("payment result = {}", payment_result);
 		// System.out.println("payment_result = " + payment_result);
 		request.setAttribute("payment_result", payment_result);
-		return PathResolver.getPath(request, PageLetEnum.PAY_PAGE);
+		return PathResolver.getPath(request, BackPage.PAY_PAGE);
 	}
 
 	/**

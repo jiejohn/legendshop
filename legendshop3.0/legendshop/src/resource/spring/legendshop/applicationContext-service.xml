@@ -365,5 +365,12 @@
 	<bean id="visitLogService" class="com.legendshop.business.service.impl.VisitLogServiceImpl">
         <property name="visitLogDao" ref="visitLogDao" />
     </bean>  
+    
+    <bean id="deliveryCorpDao" class="com.legendshop.business.dao.impl.DeliveryCorpDaoImpl" parent="baseDao" />
+
+	<bean id="deliveryCorpService" class="com.legendshop.business.service.impl.DeliveryCorpServiceImpl">
+        <property name="deliveryCorpDao" ref="deliveryCorpDao" />
+    </bean>  
+    
              	
 </beans>

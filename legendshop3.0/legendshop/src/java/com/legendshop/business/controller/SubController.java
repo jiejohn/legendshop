@@ -21,8 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.Constants;
-import com.legendshop.business.common.PageLetEnum;
 import com.legendshop.business.common.SubForm;
+import com.legendshop.business.common.page.FrontPage;
+import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.service.UserDetailService;
 import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.UserManager;
@@ -87,9 +88,9 @@ public class SubController extends BaseController {
 			uem.addCallBackList(ResourceBundleHelper.getString(locale, "myorder"),
 					ResourceBundleHelper.getString(locale, "Query.Order.Status"), "order.do");
 			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-			return PathResolver.getPath(request, PageLetEnum.ERROR_PAGE);
+			return PathResolver.getPath(request, FrontPage.ERROR_PAGE);
 		}
-		return PathResolver.getPath(request, PageLetEnum.PAGE_SUB);
+		return PathResolver.getPath(request, TilesPage.PAGE_SUB);
 	}
 
 }

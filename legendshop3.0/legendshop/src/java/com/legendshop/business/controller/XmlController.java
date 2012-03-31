@@ -23,7 +23,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.DynamicPropertiesHelper;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.AdminService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -79,7 +80,7 @@ public class XmlController extends BaseController {
 			request.setAttribute("list", modelList);
 
 		}
-		return PathResolver.getPath(request, PageLetEnum.SHOW_DYNAMIC_ATTRIBUTE);
+		return PathResolver.getPath(request, BackPage.SHOW_DYNAMIC_ATTRIBUTE);
 	}
 
 	/**
@@ -110,7 +111,7 @@ public class XmlController extends BaseController {
 			request.setAttribute("dynamicProperties", "<table class='goodsAttributeTable'>"
 					+ helper.gerenateHTML(modelList) + "</table>");
 		}
-		return PathResolver.getPath(request, PageLetEnum.SHOW_DYNAMIC);
+		return PathResolver.getPath(request, BackPage.SHOW_DYNAMIC);
 	}
 
 	/**
@@ -124,7 +125,7 @@ public class XmlController extends BaseController {
 	 */
 	@RequestMapping(value = "/dynamic/save")
 	public String save(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.DYNAMIC_QUERY);
+		return PathResolver.getPath(request, FowardPage.DYNAMIC_QUERY);
 		
 	}
 
@@ -152,7 +153,7 @@ public class XmlController extends BaseController {
 			}
 		}
 		request.setAttribute("DYNAMIC_TYPE", 1);
-		return PathResolver.getPath(request, PageLetEnum.DYNAMIC_ATTRIBUTE);
+		return PathResolver.getPath(request, BackPage.DYNAMIC_ATTRIBUTE);
 	}
 
 	/**
@@ -179,7 +180,7 @@ public class XmlController extends BaseController {
 			}
 		}
 		request.setAttribute("DYNAMIC_TYPE", 2);
-		return PathResolver.getPath(request, PageLetEnum.DYNAMIC_ATTRIBUTE);
+		return PathResolver.getPath(request, BackPage.DYNAMIC_ATTRIBUTE);
 	}
 
 }

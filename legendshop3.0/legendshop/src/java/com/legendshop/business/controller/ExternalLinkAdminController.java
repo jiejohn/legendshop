@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.ExternalLinkService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -79,7 +80,7 @@ public class ExternalLinkAdminController extends BaseController {
 		PageSupport ps = externalLinkService.getDataByCriteriaQuery(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", externalLink);
-		return PathResolver.getPath(request, PageLetEnum.LINK_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.LINK_LIST_PAGE);
 	}
 
 	/**
@@ -136,7 +137,7 @@ public class ExternalLinkAdminController extends BaseController {
 		}
 
 		saveMessage(request, ResourceBundleHelper.getString("operation.successful"));
-		return PathResolver.getPath(request, PageLetEnum.LINK_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.LINK_LIST_QUERY);
 	}
 
 	/**
@@ -168,7 +169,7 @@ public class ExternalLinkAdminController extends BaseController {
 		}
 
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, PageLetEnum.LINK_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.LINK_LIST_QUERY);
 	}
 
 	/**
@@ -191,12 +192,12 @@ public class ExternalLinkAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("bean", externalLink);
-		return PathResolver.getPath(request, PageLetEnum.LINK_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.LINK_EDIT_PAGE);
 	}
 	
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.LINK_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.LINK_EDIT_PAGE);
 	}
 
 	/**
@@ -222,7 +223,7 @@ public class ExternalLinkAdminController extends BaseController {
 		externalLink.setUserName(origin.getUserName());
 		log.info("{} update ExternalLink Url{}", origin.getUserName(), externalLink.getUrl());
 		externalLinkService.update(externalLink);
-		return PathResolver.getPath(request, PageLetEnum.LINK_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.LINK_LIST_QUERY);
 	}
 
 }

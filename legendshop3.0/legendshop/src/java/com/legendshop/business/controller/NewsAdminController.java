@@ -23,7 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.Constants;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.NewsService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -124,7 +125,7 @@ public class NewsAdminController extends BaseController {
 		PageSupport ps = newsService.getNewsList(hql);
 		savePage(ps, request);
 		request.setAttribute("bean", news);
-		return PathResolver.getPath(request, PageLetEnum.NEWS_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.NEWS_LIST_PAGE);
 	}
 
 	/**
@@ -151,7 +152,7 @@ public class NewsAdminController extends BaseController {
 		// }
 		newsService.save(news);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, PageLetEnum.NEWS_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.NEWS_LIST_QUERY);
 	}
 
 	/**
@@ -198,7 +199,7 @@ public class NewsAdminController extends BaseController {
 		log.info("{},delete News Title{}", news.getUserName(), news.getNewsTitle());
 		newsService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, PageLetEnum.NEWS_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.NEWS_LIST_QUERY);
 	}
 
 	/**
@@ -221,13 +222,13 @@ public class NewsAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("news", news);
-		return PathResolver.getPath(request, PageLetEnum.NEWS_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.NEWS_EDIT_PAGE);
 	}
 
 	
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.NEWS_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.NEWS_EDIT_PAGE);
 	}
 	
 	/**
@@ -255,6 +256,6 @@ public class NewsAdminController extends BaseController {
 		// }
 		newsService.update(news);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, PageLetEnum.NEWS_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.NEWS_LIST_QUERY);
 	}
 }

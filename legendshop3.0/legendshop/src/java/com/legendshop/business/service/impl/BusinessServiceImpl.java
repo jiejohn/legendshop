@@ -29,10 +29,12 @@ import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.NewsCategoryStatusEnum;
 import com.legendshop.business.common.OrderStatusEnum;
-import com.legendshop.business.common.PageLetEnum;
 import com.legendshop.business.common.RegisterEnum;
 import com.legendshop.business.common.ShopStatusEnum;
 import com.legendshop.business.common.VisitTypeEnum;
+import com.legendshop.business.common.page.FowardPage;
+import com.legendshop.business.common.page.FrontPage;
+import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.dao.AdvertisementDao;
 import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.BusinessDao;
@@ -201,12 +203,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 					//return PageLet.INSTALL;
 					throw new BusinessException("system did not installed",EntityCodes.SYSTEM);
 				}
-				return PathResolver.getPath(request, PageLetEnum.ALL_PAGE);
+				return PathResolver.getPath(request, FrontPage.ALL_PAGE);
 			}
 		} else {
 			shopName = shopDetail.getStoreName();
 			if (!shopStatusChecker.check(shopDetail, request)) {
-				return PathResolver.getPath(request, PageLetEnum.FAIL);
+				return PathResolver.getPath(request, FrontPage.FAIL);
 			}
 
 			// 登录历史
@@ -255,7 +257,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		} else {
 			log.info("[{}],{} visit index {}", new Object[] { request.getRemoteAddr(), userName, shopName });
 		}
-		return PathResolver.getPath(request, PageLetEnum.INDEX_PAGE);
+		return PathResolver.getPath(request,FrontPage.INDEX_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -403,10 +405,10 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		String userName = UserManager.getUsername(request.getSession());
 		ShopDetailView shopDetail = getShopDetailView(shopName, request, response);
 		if (shopDetail == null) {
-			return PathResolver.getPath(request, PageLetEnum.TOPALL);
+			return PathResolver.getPath(request, FrontPage.TOPALL);
 		}
 		if (!shopStatusChecker.check(shopDetail, request)) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
+			return PathResolver.getPath(request, FrontPage.FAIL);
 		}
 		// set Locale
 		//setLocalByShopDetail(shopDetail, request, response);
@@ -423,7 +425,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		boolean shopExists = shopDetailDao.isShopExists(userName);
 		request.setAttribute("shopExists", shopExists);
 		request.setAttribute("canbeLeagueShop", shopDetailDao.isBeLeagueShop(shopExists, userName, shopName));
-		return PathResolver.getPath(request, PageLetEnum.TOP);
+		return PathResolver.getPath(request, FrontPage.TOP);
 	}
 
 	/* (non-Javadoc)
@@ -433,7 +435,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	public String getTopSort(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = getShopName(request, response);
 		request.setAttribute("sortList", sortDao.getSort(shopName, true));
-		return PathResolver.getPath(request, PageLetEnum.TOPSORT);
+		return PathResolver.getPath(request, FrontPage.TOPSORT);
 	}
 
 
@@ -450,10 +452,10 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 					"newList",
 					newsDao.getNews(name, NewsCategoryStatusEnum.NEWS_NEWS,
 							PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class)));
-			return PathResolver.getPath(request, PageLetEnum.TOPSORTNEWS);
+			return PathResolver.getPath(request, FrontPage.TOPSORTNEWS);
 		} else {
 			request.setAttribute("newList", newsDao.getNews(name, NewsCategoryStatusEnum.NEWS_NEWS, 6));
-			return PathResolver.getPath(request, PageLetEnum.TOPNEWS);
+			return PathResolver.getPath(request, FrontPage.TOPNEWS);
 		}
 	}
 
@@ -467,7 +469,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		// 1、关键字不能为空
 		if (AppUtils.isBlank(searchForm.getKeyword())) {
 			log.error("search keyword can't be null!");
-			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
+			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
 		}
 		// 2、查找对应的Sort,defaultValue=0表示没有选择类型
 		if (!AppUtils.isBlank(searchForm.getSortId()) && !defaultInt.equals(searchForm.getSortId())) {
@@ -522,9 +524,9 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			}
 		} catch (Exception e) {
 			log.error("getProdDetail", e);
-			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
+			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
 		}
-		return PathResolver.getPath(request, PageLetEnum.PRODUCTSORT);
+		return PathResolver.getPath(request, TilesPage.PRODUCTSORT);
 	}
 
 	/* (non-Javadoc)
@@ -545,7 +547,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		}
 		log.debug("search by keyword {}", keyword);
 		if (AppUtils.isBlank(keyword)) {
-			return PathResolver.getPath(request, PageLetEnum.ALL);
+			return PathResolver.getPath(request, FrontPage.ALL);
 		}
 		int curPageNO = PagerUtil.getCurPageNO(curPageNOStr);// 当前页
 		SearchArgs args = new SearchArgs();
@@ -603,7 +605,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 				request.setAttribute("toolBar", ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
 			}
 		}
-		return PathResolver.getPath(request, PageLetEnum.SEARCHALL);
+		return PathResolver.getPath(request, TilesPage.SEARCHALL);
 	}
 
 	/* (non-Javadoc)
@@ -615,7 +617,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			curPageNO = "1";
 		}
 		if (sortId == null) {
-			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
+			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
 		}
 		Sort sort = sortDao.getSort(sortId);
 		if (sort == null) {
@@ -652,7 +654,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			request.setAttribute("toolBar", ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
 		}
 
-		return PathResolver.getPath(request, PageLetEnum.PRODUCTSORT);
+		return PathResolver.getPath(request, TilesPage.PRODUCTSORT);
 	}
 
 	/* (non-Javadoc)
@@ -712,9 +714,9 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			}
 		} catch (Exception e) {
 			log.error("getProdDetail", e);
-			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
+			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
 		}
-		return PathResolver.getPath(request, PageLetEnum.NSORT);
+		return PathResolver.getPath(request, TilesPage.NSORT);
 	}
 
 	// 查看商品
@@ -724,7 +726,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	@Override
 	public String getViews(HttpServletRequest request, HttpServletResponse response, Long prodId) {
 		if (prodId == null) {
-			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
+			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
 		}
 		
 		ProductDetail prod = productDao.getProdDetail(prodId);
@@ -740,10 +742,10 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			// 商家详细说明
 			ShopDetailView shopDetail = getShopDetailView(prod.getUserName(), request, response);
 			if (shopDetail == null) {
-				return PathResolver.getPath(request, PageLetEnum.TOPALL);
+				return PathResolver.getPath(request, FrontPage.TOPALL);
 			} else {
 				if (!shopStatusChecker.check(shopDetail, request)) {
-					return PathResolver.getPath(request, PageLetEnum.FAIL);
+					return PathResolver.getPath(request, FrontPage.FAIL);
 				}
 			}
 			// 相关商品
@@ -784,7 +786,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 				visitLog.setPage(VisitTypeEnum.HW.value());
 				threadPoolExecutor.execute(new TaskThread(new PersistVisitLogTask(visitLog, visitLogDao)));
 			}
-			return PathResolver.getPath(request, PageLetEnum.VIEWS);
+			return PathResolver.getPath(request, FrontPage.VIEWS);
 		} else {
 			UserMessages uem = new UserMessages();
 			Locale locale = localeResolver.resolveLocale(request);
@@ -792,7 +794,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			uem.setDesc(ResourceBundleHelper.getString(locale, "product.status.check"));
 			uem.setCode(ErrorCodes.PRODUCT_NO_FOUND);
 			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
+			return PathResolver.getPath(request, FrontPage.FAIL);
 		}
 
 	}
@@ -832,7 +834,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		} else {
 			request.setAttribute("availableScore", 0l);
 		}
-		return PathResolver.getPath(request, PageLetEnum.PAGE_SUB);
+		return PathResolver.getPath(request, TilesPage.PAGE_SUB);
 	}
 
 	/* (non-Javadoc)
@@ -850,7 +852,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 		}
 		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_740, request);
-		return PathResolver.getPath(request, PageLetEnum.NEWS);
+		return PathResolver.getPath(request, TilesPage.NEWS);
 	}
 
 	/* (non-Javadoc)
@@ -890,7 +892,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			}
 		}
 
-		return PathResolver.getPath(request, PageLetEnum.ALL_NEWS);
+		return PathResolver.getPath(request, TilesPage.ALL_NEWS);
 	}
 
 	// 初始化订单
@@ -928,7 +930,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (!AppUtils.isBlank(hotsaleList)) {
 			request.setAttribute("hotsaleList", hotsaleList);
 		}
-		return PathResolver.getPath(request, PageLetEnum.HOTSALE);
+		return PathResolver.getPath(request, FrontPage.HOTSALE);
 	}
 
 	/* (non-Javadoc)
@@ -941,7 +943,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (!AppUtils.isBlank(adList)) {
 			request.setAttribute("adList", adList);
 		}
-		return PathResolver.getPath(request, PageLetEnum.FRIENDLINK);
+		return PathResolver.getPath(request, FrontPage.FRIENDLINK);
 	}
 
 	/* (non-Javadoc)
@@ -954,7 +956,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (AppUtils.isNotBlank(hotonList)) {
 			request.setAttribute("hotonList", hotonList);
 		}
-		return PathResolver.getPath(request, PageLetEnum.HOTON);
+		return PathResolver.getPath(request, FrontPage.HOTON);
 	}
 
 	/* (non-Javadoc)
@@ -967,7 +969,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (AppUtils.isNotBlank(hotViewList)) {
 			request.setAttribute("hotViewList", hotViewList);
 		}
-		return PathResolver.getPath(request, PageLetEnum.HOTVIEW);
+		return PathResolver.getPath(request, FrontPage.HOTVIEW);
 	}
 
 	/* (non-Javadoc)
@@ -999,7 +1001,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			shopDetail.setIdCardNum(safeHtml.makeSafe(shopDetail.getIdCardNum()));
 		}
 		if (isUserInfoValid(form, request)) {
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
+			return PathResolver.getPath(request, FrontPage.FAIL);
 		}
 		User user = new User();
 		UserDetail userDetail = new UserDetail();
@@ -1059,7 +1061,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			}
 
 		}
-		return PathResolver.getPath(request, PageLetEnum.AFTER_OPERATION);
+		return PathResolver.getPath(request, TilesPage.AFTER_OPERATION);
 
 	}
 
@@ -1074,7 +1076,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		request.setAttribute("supportOpenShop", shopDetailDao.isCanAddShopDetail(lsResponse));
 		request.setAttribute("validationOnOpenShop",
 				PropertiesUtil.getObject(ParameterEnum.VALIDATION_ON_OPEN_SHOP, Boolean.class));
-		return PathResolver.getPath(request, PageLetEnum.REG);
+		return PathResolver.getPath(request, TilesPage.REG);
 	}
 
 	/* (non-Javadoc)
@@ -1142,7 +1144,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			UserMessages messages = new UserMessages(ErrorCodes.NORMAL_STAUTS, ResourceBundleHelper.getString(locale,
 					"apply.shop.success"), openResultDesc);
 			request.setAttribute(UserMessages.MESSAGE_KEY, messages);
-			return PathResolver.getPath(request, PageLetEnum.AFTER_OPERATION);
+			return PathResolver.getPath(request, TilesPage.AFTER_OPERATION);
 
 		} catch (Exception e) {
 			log.error("addShop ", e);
@@ -1150,7 +1152,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 					locale, "apply.shop.failed"), ResourceBundleHelper.getString(locale, "check.parameter"));
 			messages.addCallBackList(ResourceBundleHelper.getString(locale, "try.again"), null, "openShop.do");
 			request.setAttribute(UserMessages.MESSAGE_KEY, messages);
-			return PathResolver.getPath(request, PageLetEnum.ERROR_PAGE);
+			return PathResolver.getPath(request, FrontPage.ERROR_PAGE);
 		}
 
 	}
@@ -1162,7 +1164,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	public String getMyAccount(HttpServletRequest request, HttpServletResponse response) {
 		String userName = UserManager.getUsername(request);
 		if (userName == null) {
-			return PathResolver.getPath(request, PageLetEnum.LOGIN);
+			return PathResolver.getPath(request, TilesPage.LOGIN);
 		}
 		String viewName = request.getParameter("userName");
 		if (AppUtils.isNotBlank(viewName)) {
@@ -1195,7 +1197,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		request.setAttribute("totalProcessingOrder", businessDao.getTotalProcessingOrder(userName));
 		request.setAttribute("totalBasketByuserName", basketDao.getTotalBasketByuserName(userName));
 		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_740, request);
-		return PathResolver.getPath(request, PageLetEnum.MYACCOUNT);
+		return PathResolver.getPath(request, TilesPage.MYACCOUNT);
 	}
 
 	/**
@@ -1248,7 +1250,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			messages.addCallBackList(ResourceBundleHelper.getString(locale, "reupdate.myaccount"), null,
 					"updateAccount.do");
 			request.setAttribute(UserMessages.MESSAGE_KEY, messages);
-			return PathResolver.getPath(request, PageLetEnum.AFTER_OPERATION);
+			return PathResolver.getPath(request, TilesPage.AFTER_OPERATION);
 		}
 		UserDetail userDetail = userDetailDao.getUserDetail(userName);
 		if (!AppUtils.isBlank(form.getPassword())) {
@@ -1260,7 +1262,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 						ResourceBundleHelper.getString(locale, "notmatch.old.password"), "myaccount.do");
 				request.setAttribute(UserMessages.MESSAGE_KEY, messages);
 
-				return PathResolver.getPath(request, PageLetEnum.AFTER_OPERATION);
+				return PathResolver.getPath(request, TilesPage.AFTER_OPERATION);
 			}
 		}
 		boolean update = true;
@@ -1319,7 +1321,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		messages.addCallBackList(ResourceBundleHelper.getString(locale, "myaccount"),
 				ResourceBundleHelper.getString(locale, "reupdate.myaccount"), "myaccount" + Constants.WEB_SUFFIX);
 		request.setAttribute(UserMessages.MESSAGE_KEY, messages);
-		return PathResolver.getPath(request, PageLetEnum.AFTER_OPERATION);
+		return PathResolver.getPath(request, TilesPage.AFTER_OPERATION);
 	}
 
 	/* (non-Javadoc)
@@ -1334,7 +1336,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		}
 		request.setAttribute("ipAddress", ipAddress);
 		request.setAttribute("address", address);
-		return PathResolver.getPath(request, PageLetEnum.IPSEARCH);
+		return PathResolver.getPath(request, FrontPage.IPSEARCH);
 	}
 
 	/* (non-Javadoc)
@@ -1363,7 +1365,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			request.setAttribute("toolBar", ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
 		}
 		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_740, request);
-		return PathResolver.getPath(request, PageLetEnum.LEAGUE);
+		return PathResolver.getPath(request, TilesPage.LEAGUE);
 	}
 
 	/* (non-Javadoc)
@@ -1464,12 +1466,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			shopName = getShopName(request, response);
 		}
 		if (shopName == null) {
-			return PathResolver.getPath(request, PageLetEnum.SEARCHALL);
+			return PathResolver.getPath(request, TilesPage.SEARCHALL);
 		}
 		UserDetail userDetail = userDetailDao.getUserDetail(shopName);
 		// 如果加入即会返回当前用户的当铺
 		request.setAttribute("user", userDetail);
-		return PathResolver.getPath(request, PageLetEnum.SHOPCONTACT);
+		return PathResolver.getPath(request, TilesPage.SHOPCONTACT);
 	}
 
 	/* (non-Javadoc)
@@ -1497,7 +1499,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		messages.addCallBackList(ResourceBundleHelper.getString(locale, "login"),
 				ResourceBundleHelper.getString(locale, "logon.hint.desc"), "login.do");
 		request.setAttribute(UserMessages.MESSAGE_KEY, messages);
-		return PathResolver.getPath(request, PageLetEnum.AFTER_OPERATION);
+		return PathResolver.getPath(request, TilesPage.AFTER_OPERATION);
 	}
 
 	/* (non-Javadoc)
@@ -1528,7 +1530,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			shopName = Constants.COMMON_USER;
 		}
 		request.setAttribute("newsBottomList", newsDao.getNews(shopName, NewsCategoryStatusEnum.NEWS_BOTTOM, 8));
-		return PathResolver.getPath(request, PageLetEnum.COPY_ALL);
+		return PathResolver.getPath(request, FrontPage.COPY_ALL);
 	}
 
 	/* (non-Javadoc)
@@ -1548,7 +1550,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			if (AppUtils.isNotBlank(prodPics)) {
 				request.setAttribute("prodPics", prodPics);
 			}
-			return PathResolver.getPath(request, PageLetEnum.PROD_PIC_GALLERY);
+			return PathResolver.getPath(request, FrontPage.PROD_PIC_GALLERY);
 		} else {
 			UserMessages uem = new UserMessages();
 			Locale locale = localeResolver.resolveLocale(request);
@@ -1556,7 +1558,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			uem.setDesc(ResourceBundleHelper.getString(locale, "product.status.check"));
 			uem.setCode(ErrorCodes.PRODUCT_NO_FOUND);
 			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-			return PathResolver.getPath(request, PageLetEnum.FAIL);
+			return PathResolver.getPath(request, FrontPage.FAIL);
 		}
 	}
 	

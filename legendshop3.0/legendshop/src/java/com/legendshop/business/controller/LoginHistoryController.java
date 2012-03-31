@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.service.LoginHistoryService;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
@@ -73,7 +73,7 @@ public class LoginHistoryController extends BaseController{
 		PageSupport ps = loginHistoryService.getLoginHistory(cq);
 		savePage(ps, request);
 		request.setAttribute("login", login);
-		return PathResolver.getPath(request, PageLetEnum.LOGIN_HIST_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.LOGIN_HIST_LIST_PAGE);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class LoginHistoryController extends BaseController{
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.LOGIN_HIST_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.LOGIN_HIST_LIST_PAGE);
 	}
 	
 	/**
@@ -129,7 +129,7 @@ public class LoginHistoryController extends BaseController{
 			PageSupport ps = loginHistoryService.getLoginHistoryBySQL(query);
 			savePage(ps, request);
 			request.setAttribute("login", login);
-			return PathResolver.getPath(request, PageLetEnum.LOGIN_HIST_SUM_PAGE);
+			return PathResolver.getPath(request, BackPage.LOGIN_HIST_SUM_PAGE);
 
 	}
 

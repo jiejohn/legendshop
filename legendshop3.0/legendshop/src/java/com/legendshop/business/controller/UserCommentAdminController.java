@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommentTypeEnum;
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
+import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.service.BusinessService;
 import com.legendshop.business.service.UserCommentService;
 import com.legendshop.core.UserManager;
@@ -99,7 +101,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 		request.setAttribute("status", status);
 		request.setAttribute("userName", userName);
 		request.setAttribute("bean", userComment);
-		return PathResolver.getPath(request, PageLetEnum.USER_COMM_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.USER_COMM_LIST_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -121,7 +123,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 		comment.setToUserName(shopName);
 		comment.setStatus(CommentTypeEnum.COMMENT_UN_READ.value());
 		userCommentService.saveOrUpdateUserComment(comment);
-		return PathResolver.getPath(request, PageLetEnum.AFTER_OPERATION);
+		return PathResolver.getPath(request, TilesPage.AFTER_OPERATION);
 	}
 
 	/* (non-Javadoc)
@@ -140,7 +142,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 				userComment.getToUserName() });
 		userCommentService.delete(userComment);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, PageLetEnum.USER_COMM_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.USER_COMM_LIST_QUERY);
 	}
 
 	/* (non-Javadoc)
@@ -149,7 +151,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 	@Override
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.USER_COMM_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.USER_COMM_EDIT_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -169,7 +171,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 			return result;
 		}
 		request.setAttribute("comment", comment);
-		return PathResolver.getPath(request, PageLetEnum.USER_COMM_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.USER_COMM_EDIT_PAGE);
 	}
 
 }

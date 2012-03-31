@@ -17,7 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.Constants;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.service.BasketService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -80,11 +80,11 @@ public class BasketController extends BaseController {
 				destView = "/basket/load/";
 			}
 			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + destView + prodId + Constants.WEB_SUFFIX);
-			return PathResolver.getPath(request, PageLetEnum.NO_LOGIN);
+			return PathResolver.getPath(request, TilesPage.NO_LOGIN);
 		}
 		String shopName = getShopName(request, response);
 		basketService.saveToCart(prodId, addtoCart, shopName, prodattr, userName,  Integer.valueOf(count));
-		return PathResolver.getPath(request, PageLetEnum.PAGE_CASH);
+		return PathResolver.getPath(request, TilesPage.PAGE_CASH);
 	}
 	
 	/**

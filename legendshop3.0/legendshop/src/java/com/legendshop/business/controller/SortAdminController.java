@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.SortService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
@@ -74,7 +75,7 @@ public class SortAdminController extends BaseController implements AdminControll
 			PageSupport ps =sortService.getSortList(cq);
 			savePage(ps, request);
 			request.setAttribute("sort", sort);
-		return PathResolver.getPath(request, PageLetEnum.SORT_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.SORT_LIST_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -128,7 +129,7 @@ public class SortAdminController extends BaseController implements AdminControll
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
 		//TODO
 		//request.setAttribute(PageLet.CALL_BACK, "admin/sortList.do");
-		return PathResolver.getPath(request, PageLetEnum.SORT_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.SORT_LIST_QUERY);
 	}
 
 	/**
@@ -179,7 +180,7 @@ public class SortAdminController extends BaseController implements AdminControll
 		sortService.delete(sort);
 		FileProcessor.deleteFile(RealPathUtil.getBigPicRealPath() + "/" + sort.getPicture());
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, PageLetEnum.SORT_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.SORT_LIST_QUERY);
 	}
 
 	/* (non-Javadoc)
@@ -188,7 +189,7 @@ public class SortAdminController extends BaseController implements AdminControll
 	@Override
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.SORT_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.SORT_EDIT_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -204,7 +205,7 @@ public class SortAdminController extends BaseController implements AdminControll
 			return result;
 		}
 		request.setAttribute("sort", sort);
-		return PathResolver.getPath(request, PageLetEnum.SORT_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.SORT_EDIT_PAGE);
 	}
 
 }

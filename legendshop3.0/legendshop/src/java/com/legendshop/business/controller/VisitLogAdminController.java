@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.VisitLogService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
@@ -88,7 +89,7 @@ public class VisitLogAdminController extends BaseController implements AdminCont
 		PageSupport ps = visitLogService.getVisitLogList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", visitLog);
-		return PathResolver.getPath(request, PageLetEnum.VLOG_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.VLOG_LIST_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -99,7 +100,7 @@ public class VisitLogAdminController extends BaseController implements AdminCont
 	public String save(HttpServletRequest request, HttpServletResponse response, VisitLog visitLog) {
 		visitLogService.save(visitLog);
 		saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
-		return PathResolver.getPath(request, PageLetEnum.VLOG_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.VLOG_LIST_QUERY);
 	}
 
 	/* (non-Javadoc)
@@ -111,7 +112,7 @@ public class VisitLogAdminController extends BaseController implements AdminCont
 	Long id) {
 		visitLogService.delete(id);
 		saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("entity.deleted"));
-		return PathResolver.getPath(request, PageLetEnum.VLOG_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.VLOG_LIST_QUERY);
 	}
 
 	/* (non-Javadoc)

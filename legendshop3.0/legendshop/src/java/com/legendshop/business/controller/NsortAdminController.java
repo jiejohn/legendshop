@@ -22,7 +22,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.NsortService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
@@ -101,7 +102,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 		}
 		savePage(ps, request);
 		request.setAttribute("bean", nsort);
-		return PathResolver.getPath(request, PageLetEnum.NSORT_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.NSORT_LIST_PAGE);
 	}
 
 	/*
@@ -127,7 +128,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 			bean.setNsortName(null);
 			request.setAttribute("bean", bean);
 		}
-		return PathResolver.getPath(request, PageLetEnum.NSORT_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.NSORT_LIST_QUERY);
 	}
 
 	/*
@@ -155,7 +156,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 		}
 		nsortService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, PageLetEnum.NSORT_LIST_QUERY) + "?sortId=" + nsort.getSortId();
+		return PathResolver.getPath(request, FowardPage.NSORT_LIST_QUERY) + "?sortId=" + nsort.getSortId();
 	}
 
 	/*
@@ -167,7 +168,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 	@Override
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.NSORT_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.NSORT_EDIT_PAGE);
 	}
 
 	/*
@@ -187,7 +188,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 		}
 		Nsort nsort = nsortService.getNsortById(id);
 		request.setAttribute("bean", nsort);
-		return PathResolver.getPath(request, PageLetEnum.NSORT_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.NSORT_EDIT_PAGE);
 	}
 
 	/**
@@ -204,7 +205,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 	@RequestMapping(value = "/appendBrand/{id}")
 	public String appendBrand(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		request.setAttribute("nsortId", id);
-		return PathResolver.getPath(request, PageLetEnum.NSORT_APPENDBRAND_PAGE);
+		return PathResolver.getPath(request, BackPage.NSORT_APPENDBRAND_PAGE);
 	}
 
 }

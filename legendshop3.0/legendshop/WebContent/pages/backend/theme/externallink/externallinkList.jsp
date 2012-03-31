@@ -28,8 +28,9 @@
         <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
          <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
           商城名称&nbsp; <input type="text" name="userName" maxlength="50" value="${bean.userName}" />
+          </auth:auth>
             <input type="submit" value="搜索"/>
-        </auth:auth>
+        
             <input type="button" value="创建友情链接" onclick='window.location="${pageContext.request.contextPath}/admin/externallink/load${applicationScope.WEB_SUFFIX}"'/>
     </form>
       <div align="center">

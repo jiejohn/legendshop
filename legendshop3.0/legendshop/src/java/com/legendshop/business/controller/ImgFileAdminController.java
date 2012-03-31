@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.Constants;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.ImgFileService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
@@ -87,7 +88,7 @@ public class ImgFileAdminController extends BaseController {
 		PageSupport ps = imgFileService.getImgFileList(cq);
 		savePage(ps, request);
 		request.setAttribute("productId", productId);
-		return PathResolver.getPath(request, PageLetEnum.IMG_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.IMG_LIST_PAGE);
 	}
 
 	/**
@@ -115,7 +116,7 @@ public class ImgFileAdminController extends BaseController {
 			saveMessage(request, ResourceBundleHelper.getSucessfulString());
 		}
 		request.setAttribute("productId", imgFile.getProductId());
-		return PathResolver.getPath(request, PageLetEnum.IMG_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.IMG_LIST_QUERY);
 
 	}
 
@@ -140,7 +141,7 @@ public class ImgFileAdminController extends BaseController {
 		FileProcessor.deleteFile(url);
 		request.setAttribute("productId", imgFile.getProductId());
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, PageLetEnum.IMG_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.IMG_LIST_QUERY);
 	}
 
 	/**
@@ -155,7 +156,7 @@ public class ImgFileAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		ImgFile imgFile = imgFileService.getImgFileById(id);
 		request.setAttribute("bean", imgFile);
-		return PathResolver.getPath(request, PageLetEnum.IMG_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.IMG_EDIT_PAGE);
 	}
 
 	/**
@@ -167,7 +168,7 @@ public class ImgFileAdminController extends BaseController {
 	@RequestMapping(value = "/update")
 	public String update(HttpServletRequest request,@PathVariable ImgFile imgFile) {
 		imgFileService.update(imgFile);
-		return PathResolver.getPath(request, PageLetEnum.IMG_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.IMG_LIST_QUERY);
 	}
 
 }

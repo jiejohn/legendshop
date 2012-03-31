@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.service.BusinessService;
 import com.legendshop.business.service.IndexService;
 import com.legendshop.central.license.LSResponse;
@@ -77,12 +77,12 @@ public class IndexAdminController extends BaseController {
 				}
 			}
 		}
-		return PathResolver.getPath(request, PageLetEnum.DASH_BOARD);
+		return PathResolver.getPath(request, BackPage.DASH_BOARD);
 	}
 	
 	@RequestMapping("/admin/index")
 	public String home(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.ADMIN_HOME);
+		return PathResolver.getPath(request, BackPage.ADMIN_HOME);
 	}
 	
 	@RequestMapping("/admin/menu/{id}")
@@ -91,13 +91,13 @@ public class IndexAdminController extends BaseController {
 		if(id != null && id != 0){
 			path = ADMIN_MENU + id;
 		}
-		return PathResolver.getPath(request,path,PageLetEnum.BACK_PAGE);
+		return PathResolver.getPath(request,path,BackPage.BACK_PAGE);
 	}
 	
 	
 	@RequestMapping("/admin/top")
 	public String top(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.ADMIN_TOP);
+		return PathResolver.getPath(request, BackPage.ADMIN_TOP);
 	}
 	
 }

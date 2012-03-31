@@ -19,7 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.LocaleResolver;
 
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.util.AppUtils;
@@ -71,9 +72,9 @@ public class LocaleController extends BaseController {
 		}
 		String target = request.getParameter(PAGE);
 		if (AppUtils.isNotBlank(target)) {
-			return PathResolver.getPath(request, target,PageLetEnum.FOWARD);
+			return PathResolver.getPath(request, target,BackPage.FOWARD);
 		} else {
-			return PathResolver.getPath(request, PageLetEnum.INDEX_QUERY);
+			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
 		}
 
 	}

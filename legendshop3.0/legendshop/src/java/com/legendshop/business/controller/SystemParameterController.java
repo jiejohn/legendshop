@@ -15,7 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.SystemParameterService;
 import com.legendshop.core.ContextServiceLocator;
 import com.legendshop.core.base.BaseController;
@@ -73,7 +74,7 @@ public class SystemParameterController extends BaseController {
 		PageSupport ps = systemParameterService.getSystemParameterList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", systemParameter);
-		return PathResolver.getPath(request, PageLetEnum.PARAM_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.PARAM_LIST_PAGE);
 	}
 
 	/**
@@ -98,7 +99,7 @@ public class SystemParameterController extends BaseController {
 		} else {
 			saveMessage(request, ResourceBundleHelper.getErrorString());
 		}
-		return PathResolver.getPath(request, PageLetEnum.PARAM_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.PARAM_LIST_QUERY);
 	}
 
 	/**
@@ -118,7 +119,7 @@ public class SystemParameterController extends BaseController {
 
 		// systemParameterService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getErrorString());
-		return PathResolver.getPath(request, PageLetEnum.PARAM_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.PARAM_LIST_QUERY);
 	}
 
 	/**
@@ -137,7 +138,7 @@ public class SystemParameterController extends BaseController {
 	String id) {
 		SystemParameter systemParameter = systemParameterService.getSystemParameter(id);
 		request.setAttribute("bean", systemParameter);
-		return PathResolver.getPath(request, PageLetEnum.PARAM_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.PARAM_EDIT_PAGE);
 	}
 
 	/**
@@ -150,7 +151,7 @@ public class SystemParameterController extends BaseController {
 	@RequestMapping(value = "/update")
 	public String update(HttpServletRequest request,@PathVariable SystemParameter systemParameter) {
 		systemParameterService.update(systemParameter);
-		return PathResolver.getPath(request, PageLetEnum.PARAM_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.PARAM_LIST_QUERY);
 	}
 
 }

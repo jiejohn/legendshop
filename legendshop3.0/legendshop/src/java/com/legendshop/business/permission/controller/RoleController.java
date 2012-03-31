@@ -20,7 +20,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.helper.FunctionChecker;
 import com.legendshop.business.helper.StateChecker;
 import com.legendshop.business.permission.form.FunctionForm;
@@ -28,7 +29,6 @@ import com.legendshop.business.permission.form.PermissionForm;
 import com.legendshop.business.permission.service.RightDelegate;
 import com.legendshop.command.framework.State;
 import com.legendshop.command.framework.StateImpl;
-import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
@@ -81,7 +81,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		rightDelegate.deleteRoleById(id, state);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, PageLetEnum.ALL_ROLE);
+		return PathResolver.getPath(request, FowardPage.ALL_ROLE);
 	}
 
 	/* (non-Javadoc)
@@ -90,7 +90,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 	@Override
 	@RequestMapping("/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.SAVE_ROLE);
+		return PathResolver.getPath(request, BackPage.SAVE_ROLE);
 	}
 
 	/* (non-Javadoc)
@@ -127,7 +127,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 
 		savePage(ps, request);
 
-		return PathResolver.getPath(request, PageLetEnum.ROLE_LIST);
+		return PathResolver.getPath(request, BackPage.ROLE_LIST);
 	}
 
 	/* (non-Javadoc)
@@ -151,7 +151,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 			logger.info("success saveRole,id = " + id);
 			stateChecker.check(state, request);
 
-			return PathResolver.getPath(request, PageLetEnum.ALL_ROLE);
+			return PathResolver.getPath(request, FowardPage.ALL_ROLE);
 	}
 
 	/* (non-Javadoc)
@@ -166,7 +166,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		stateChecker.check(state, request);
 		request.setAttribute("bean", role);
 
-		return PathResolver.getPath(request, PageLetEnum.SAVE_ROLE);
+		return PathResolver.getPath(request, BackPage.SAVE_ROLE);
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		request.setAttribute("list", list);
 		request.setAttribute("bean", role);
 
-		return PathResolver.getPath(request, PageLetEnum.ROLE_FUNCTION);
+		return PathResolver.getPath(request, BackPage.ROLE_FUNCTION);
 	}
 	
 	/**
@@ -222,7 +222,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		savePage(ps, request);
 		request.setAttribute("bean", role);
 
-		return PathResolver.getPath(request, PageLetEnum.FIND_OTHER_FUNCTION_LIST);
+		return PathResolver.getPath(request, BackPage.FIND_OTHER_FUNCTION_LIST);
 	}
 	
 	/**
@@ -255,8 +255,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		rightDelegate.saveFunctionsToRole(permissions, state);
 		stateChecker.check(state, request);
 
-//		return PathResolver.getPath(request, PageLetEnum.FIND_FUNCTION_BY_ROLE);
-		return "redirect:"+PageLetEnum.FIND_FUNCTION_BY_ROLE.getValue()+"/"+roleId+AttributeKeys.WEB_SUFFIX;
+		return PathResolver.getPath(request, FowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 	
 	/**
@@ -289,8 +288,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		State state = new StateImpl();
 		rightDelegate.deleteFunctionsFromRole(permissions, state);
 		stateChecker.check(state, request);
-//		return PathResolver.getPath(request, PageLetEnum.FIND_FUNCTION_BY_ROLE);
-		return "redirect:"+PageLetEnum.FIND_FUNCTION_BY_ROLE.getValue()+"/"+roleId+AttributeKeys.WEB_SUFFIX;
+ 		return PathResolver.getPath(request, FowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 

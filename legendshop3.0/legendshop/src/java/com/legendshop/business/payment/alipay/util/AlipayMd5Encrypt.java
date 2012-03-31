@@ -8,7 +8,6 @@
 package com.legendshop.business.payment.alipay.util;
 
 import java.io.UnsupportedEncodingException;
-import java.security.SignatureException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

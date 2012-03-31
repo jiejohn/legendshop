@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.BrandService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
@@ -64,7 +65,7 @@ public class BrandAdminController extends BaseController implements AdminControl
 		PageSupport ps = brandService.getDataByCriteriaQuery(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", brand);
-		return PathResolver.getPath(request, PageLetEnum.BRAND_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.BRAND_LIST_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -108,7 +109,7 @@ public class BrandAdminController extends BaseController implements AdminControl
 			brandService.save(brand);
 		}
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, PageLetEnum.BRAND_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.BRAND_LIST_QUERY);
 	}
 
 	/* (non-Javadoc)
@@ -128,7 +129,7 @@ public class BrandAdminController extends BaseController implements AdminControl
 		String url = RealPathUtil.getBigPicRealPath() + "/" + brand.getBrandPic();
 		FileProcessor.deleteFile(url);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, PageLetEnum.BRAND_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.BRAND_LIST_QUERY);
 	}
 
 	/* (non-Javadoc)
@@ -137,7 +138,7 @@ public class BrandAdminController extends BaseController implements AdminControl
 	@Override
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.BRAND_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.BRAND_EDIT_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -152,7 +153,7 @@ public class BrandAdminController extends BaseController implements AdminControl
 			return result;
 		}
 		request.setAttribute("bean", brand);
-		return PathResolver.getPath(request, PageLetEnum.BRAND_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.BRAND_EDIT_PAGE);
 	}
 
 }

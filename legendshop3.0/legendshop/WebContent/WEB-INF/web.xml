@@ -152,6 +152,10 @@
   <servlet-name>randomImageServlet</servlet-name>
   <servlet-class>com.legendshop.core.randing.ImageServlet</servlet-class>
  </servlet>
+ <servlet>
+	<servlet-name>Jcaptcha</servlet-name>
+	<servlet-class>com.legendshop.core.randing.JcaptchaServlet</servlet-class>
+ </servlet>
 
   
   <!-- servlet mapping -->
@@ -192,6 +196,10 @@
   <servlet-name>randomImageServlet</servlet-name>
   <url-pattern>/servlet/ImageServlet</url-pattern>
  </servlet-mapping>
+ <servlet-mapping>
+		<servlet-name>Jcaptcha</servlet-name>
+		<url-pattern>/captcha.svl</url-pattern>
+  </servlet-mapping>
  <welcome-file-list>
   <welcome-file>/index.jsp</welcome-file>
  </welcome-file-list>

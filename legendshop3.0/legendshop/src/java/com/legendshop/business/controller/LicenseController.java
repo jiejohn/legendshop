@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.PageLetEnum;
+import com.legendshop.business.common.page.BackPage;
 import com.legendshop.central.license.LicenseEnum;
 import com.legendshop.central.license.LicenseHelper;
 import com.legendshop.core.base.BaseController;
@@ -42,7 +42,7 @@ public class LicenseController extends BaseController {
 	 */
 	@RequestMapping("/upgrade")
 	public String upgrade(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.UPGRADE_PAGE);
+		return PathResolver.getPath(request, BackPage.UPGRADE_PAGE);
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class LicenseController extends BaseController {
 		if (LicenseEnum.isNormal(license)) {
 			request.setAttribute("postUpgrade", true);
 		}
-		return PathResolver.getPath(request, PageLetEnum.UPGRADE_PAGE);
+		return PathResolver.getPath(request, BackPage.UPGRADE_PAGE);
 	}
 
 }

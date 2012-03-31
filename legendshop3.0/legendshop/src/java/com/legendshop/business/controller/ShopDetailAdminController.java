@@ -21,9 +21,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.PageLetEnum;
 import com.legendshop.business.common.ShopStatusEnum;
 import com.legendshop.business.common.ShopTypeEnum;
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.search.facade.ShopDetailSearchFacade;
 import com.legendshop.business.service.ShopDetailService;
 import com.legendshop.core.UserManager;
@@ -96,7 +97,7 @@ public class ShopDetailAdminController extends BaseController {
 		PageSupport ps = shopDetailService.getShopDetail(cq);
 		savePage(ps, request);
 		request.setAttribute("shopDetail", shopDetail);
-		return PathResolver.getPath(request, PageLetEnum.SHOP_DETAIL_LIST_PAGE);
+		return PathResolver.getPath(request, BackPage.SHOP_DETAIL_LIST_PAGE);
 	}
 
 	/**
@@ -157,7 +158,7 @@ public class ShopDetailAdminController extends BaseController {
 				throw new BusinessException(e, "error happened when save shop");
 			}
 
-			return PathResolver.getPath(request, PageLetEnum.SHOP_DETAIL_LIST_QUERY);
+			return PathResolver.getPath(request, FowardPage.SHOP_DETAIL_LIST_QUERY);
 		}
 	}
 
@@ -182,7 +183,7 @@ public class ShopDetailAdminController extends BaseController {
 		}
 
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, PageLetEnum.SHOP_DETAIL_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.SHOP_DETAIL_LIST_QUERY);
 	}
 
 	/**
@@ -209,7 +210,7 @@ public class ShopDetailAdminController extends BaseController {
 		
 		request.setAttribute("shopDetail", shopDetail); 
 		request.setAttribute("id", request.getParameter("userId"));
-		return PathResolver.getPath(request, PageLetEnum.SHOP_DETAIL_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.SHOP_DETAIL_EDIT_PAGE);
 	}
 	
 	/**
@@ -223,7 +224,7 @@ public class ShopDetailAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, PageLetEnum.SHOP_DETAIL_EDIT_PAGE);
+		return PathResolver.getPath(request, BackPage.SHOP_DETAIL_EDIT_PAGE);
 	}
 
 	/**
@@ -291,7 +292,7 @@ public class ShopDetailAdminController extends BaseController {
 
 		shopDetailSearchFacade.update(shop);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, PageLetEnum.SHOP_DETAIL_LIST_QUERY);
+		return PathResolver.getPath(request, FowardPage.SHOP_DETAIL_LIST_QUERY);
 	}
 
 }
