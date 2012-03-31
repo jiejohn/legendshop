@@ -241,7 +241,9 @@ public enum BackPage  implements PathEnum{
 	
 	DELIVERYCORP_LIST_PAGE("/deliveryCorp/deliveryCorpList"), 
 	
-	DELIVERYCORP_EDIT_PAGE("/deliveryCorp/deliveryCorp")
+	DELIVERYCORP_EDIT_PAGE("/deliveryCorp/deliveryCorp"), 
+	
+	DELIVERYTYPE_LIST_PAGE("/deliveryType/deliveryTypeList"), DELIVERYTYPE_EDIT_PAGE("/deliveryType/deliveryType"),
 	
 	;
 	

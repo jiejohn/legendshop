@@ -107,7 +107,9 @@ public enum FowardPage implements PathEnum{
 	/** The USER s_ list. */
 	USERS_LIST("/member/user/query"), 
 	
-	DELIVERYCORP_LIST_QUERY("/admin/deliveryCorp/query");
+	DELIVERYCORP_LIST_QUERY("/admin/deliveryCorp/query"), 
+	
+	DELIVERYTYPE_LIST_QUERY("/admin/deliveryType/query");
 	
 	
 	/** The value. */

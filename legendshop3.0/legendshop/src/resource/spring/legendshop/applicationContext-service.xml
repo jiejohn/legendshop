@@ -372,5 +372,46 @@
         <property name="deliveryCorpDao" ref="deliveryCorpDao" />
     </bean>  
     
+    <bean id="deliveryTypeDao" class="com.legendshop.business.dao.impl.DeliveryTypeDaoImpl" parent="baseDao" />
+
+	<bean id="deliveryTypeService" class="com.legendshop.business.service.impl.DeliveryTypeServiceImpl">
+        <property name="deliveryTypeDao" ref="deliveryTypeDao" />
+    </bean>  
+
+    <bean id="parnterDao" class="com.legendshop.business.dao.impl.ParnterDaoImpl" parent="baseDao" />
+
+	<bean id="parnterService" class="com.legendshop.business.service.impl.ParnterServiceImpl">
+        <property name="parnterDao" ref="parnterDao" />
+    </bean>  
+
+    <bean id="userAddressDao" class="com.legendshop.business.dao.impl.UserAddressDaoImpl" parent="baseDao" />
+
+	<bean id="userAddressService" class="com.legendshop.business.service.impl.UserAddressServiceImpl">
+        <property name="userAddressDao" ref="userAddressDao" />
+    </bean>  
+
+    <bean id="askDao" class="com.legendshop.business.dao.impl.AskDaoImpl" parent="baseDao" />
+
+	<bean id="askService" class="com.legendshop.business.service.impl.AskServiceImpl">
+        <property name="askDao" ref="askDao" />
+    </bean>  
+
+    <bean id="cashDao" class="com.legendshop.business.dao.impl.CashDaoImpl" parent="baseDao" />
+
+	<bean id="cashService" class="com.legendshop.business.service.impl.CashServiceImpl">
+        <property name="cashDao" ref="cashDao" />
+    </bean> 
+    
+    <bean id="cashFlowDao" class="com.legendshop.business.dao.impl.CashFlowDaoImpl" parent="baseDao" />
+
+	<bean id="cashFlowService" class="com.legendshop.business.service.impl.CashFlowServiceImpl">
+        <property name="cashFlowDao" ref="cashFlowDao" />
+    </bean>  
+
+    <bean id="eventDao" class="com.legendshop.business.dao.impl.EventDaoImpl" parent="baseDao" />
+
+	<bean id="eventService" class="com.legendshop.business.service.impl.EventServiceImpl">
+        <property name="eventDao" ref="eventDao" />
+    </bean>  
              	
 </beans>
