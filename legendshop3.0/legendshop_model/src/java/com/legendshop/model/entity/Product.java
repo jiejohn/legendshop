@@ -105,6 +105,9 @@ public class Product extends UploadFile implements java.io.Serializable {
 	
 	/** The actual stocks. */
 	private Integer actualStocks;
+	
+	
+	
 
 	/**
 	 * default constructor.
