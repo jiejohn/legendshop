@@ -1012,7 +1012,8 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		userDetail.setUserRegtime(date);
 		userDetail.setModifyTime(date);
 		userDetail.setUserRegip(request.getRemoteAddr());
-
+		userDetail.setTotalCash(0d);
+		userDetail.setTotalConsume(0d);
 		boolean isOpenShop = request.getParameter("openShop") != null;
 
 		userDetailDao.saveUser(user, userDetail, shopDetail, isOpenShop);

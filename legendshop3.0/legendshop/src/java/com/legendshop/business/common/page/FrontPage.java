@@ -9,15 +9,15 @@ package com.legendshop.business.common.page;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.legendshop.core.AttributeKeys;
-import com.legendshop.core.constant.PathEnum;
-import com.legendshop.model.entity.ShopDetailView;
+import com.legendshop.core.constant.PageDefinition;
+import com.legendshop.core.constant.PagePathCalculator;
 
 /**
  * The Enum FrontPage.
  */
-public enum FrontPage  implements PathEnum{
-	
+public enum FrontPage  implements PageDefinition{
+	/** The VARIABLE. 可变路径 */
+	VARIABLE(""),
 	/** The ERRO r_ page. */
 	ERROR_PAGE(ERROR_PAGE_PATH),
 
@@ -89,12 +89,18 @@ public enum FrontPage  implements PathEnum{
 	private final String value;
 
 	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PathEnum#getValue(javax.servlet.http.HttpServletRequest)
+	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
 	 */
 	@Override
 	public String getValue(HttpServletRequest request) {
-		return calculatePrefixPath(request) +value;
+		return getValue(request,value);
 	}
+	
+	@Override
+	public String getValue(HttpServletRequest request, String path) {
+		return PagePathCalculator.calculateFronendPath(request,path);
+	}
+
 	
 	/**
 	 * Instantiates a new front page.
@@ -106,42 +112,5 @@ public enum FrontPage  implements PathEnum{
 		this.value = value;
 	}
 	
-	/**
-	 * Calculate prefix path.
-	 * 
-	 * @param request
-	 *            the request
-	 * @return the string
-	 */
-	private String calculatePrefixPath(HttpServletRequest request){
-		//TODO
-		ShopDetailView shopDetail = (ShopDetailView) request.getSession().getAttribute(AttributeKeys.SHOP_DETAIL);
-		String path = "/frontend";
-		if(shopDetail !=null){
-			//每个商城可以自定义自己的模板
-			//path = shopDetail.getxxx
-			path += "/default";
-		}else{
-			path += "/default";
-		}
-		return path;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PathEnum#getType()
-	 */
-	@Override
-	public int getType() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PathEnum#getValue()
-	 */
-	@Override
-	public String getValue() {
-		return value;
-	}
 
 }

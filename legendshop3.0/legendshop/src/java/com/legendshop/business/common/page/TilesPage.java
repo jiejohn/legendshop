@@ -9,13 +9,16 @@ package com.legendshop.business.common.page;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.legendshop.core.constant.PathEnum;
+import com.legendshop.business.common.Constants;
+import com.legendshop.core.constant.PagePathCalculator;
+import com.legendshop.core.constant.PageDefinition;
 
 /**
  * The Enum TilesPage.
  */
-public enum TilesPage implements PathEnum{
-	
+public enum TilesPage implements PageDefinition{
+	/** The VARIABLE. 可变路径 */
+	VARIABLE(""),
 	/** The N o_ login. */
 	NO_LOGIN("loginhint."),
 
@@ -75,13 +78,18 @@ public enum TilesPage implements PathEnum{
 	private final String value;
 
 	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PathEnum#getValue(javax.servlet.http.HttpServletRequest)
+	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
 	 */
 	@Override
 	public String getValue(HttpServletRequest request) {
-		//TODO
-		return value + "default";
+		return getValue(request,value);
 	}
+	
+	@Override
+	public String getValue(HttpServletRequest request, String path) {
+		return PagePathCalculator.calculateTilesPath(path, Constants.DEFAULT_PAGE);
+	}
+
 	
 	/**
 	 * Instantiates a new tiles page.
@@ -93,21 +101,5 @@ public enum TilesPage implements PathEnum{
 		this.value = value;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PathEnum#getType()
-	 */
-	@Override
-	public int getType() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PathEnum#getValue()
-	 */
-	@Override
-	public String getValue() {
-		return value;
-	}
 
 }

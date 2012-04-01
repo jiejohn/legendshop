@@ -9,14 +9,16 @@ package com.legendshop.business.common.page;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.legendshop.core.AttributeKeys;
-import com.legendshop.core.constant.PathEnum;
-import com.legendshop.model.entity.ShopDetailView;
+import com.legendshop.core.constant.PagePathCalculator;
+import com.legendshop.core.constant.PageDefinition;
 
 /**
  * The Enum BackPage.
  */
-public enum BackPage  implements PathEnum{
+public enum BackPage implements PageDefinition{
+	
+	/** The VARIABLE. 可变路径 */
+	VARIABLE(""),
 	
 	/** The BAC k_ erro r_ page. */
 	BACK_ERROR_PAGE(ERROR_PAGE_PATH),
@@ -239,25 +241,23 @@ public enum BackPage  implements PathEnum{
 	/** The MODIFYPRICE. */
 	MODIFYPRICE("/order/modifyPrice"), 
 	
+	/** The DELIVERYCOR p_ lis t_ page. */
 	DELIVERYCORP_LIST_PAGE("/deliveryCorp/deliveryCorpList"), 
 	
+	/** The DELIVERYCOR p_ edi t_ page. */
 	DELIVERYCORP_EDIT_PAGE("/deliveryCorp/deliveryCorp"), 
 	
-	DELIVERYTYPE_LIST_PAGE("/deliveryType/deliveryTypeList"), DELIVERYTYPE_EDIT_PAGE("/deliveryType/deliveryType"),
+	/** The DELIVERYTYP e_ lis t_ page. */
+	DELIVERYTYPE_LIST_PAGE("/deliveryType/deliveryTypeList"), 
+	
+	/** The DELIVERYTYP e_ edi t_ page. */
+	DELIVERYTYPE_EDIT_PAGE("/deliveryType/deliveryType"),
 	
 	;
 	
 	
 	/** The value. */
 	private final String value;
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PathEnum#getValue(javax.servlet.http.HttpServletRequest)
-	 */
-	@Override
-	public String getValue(HttpServletRequest request) {
-		return calculatePrefixPath(request) + value;
-	}
 	
 	/**
 	 * Instantiates a new back page.
@@ -268,42 +268,22 @@ public enum BackPage  implements PathEnum{
 	private BackPage(String value) {
 		this.value = value;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
+	 */
+	@Override
+	public String getValue(HttpServletRequest request) {
+		return getValue(request,value);
+	}
 	
-	/**
-	 * Calculate prefix path.
-	 * 
-	 * @param request
-	 *            the request
-	 * @return the string
-	 */
-	private static String calculatePrefixPath(HttpServletRequest request){
-		ShopDetailView shopDetail = (ShopDetailView) request.getSession().getAttribute(AttributeKeys.SHOP_DETAIL);
-		String path = "/backend";
-		if(shopDetail !=null){
-			//每个商城可以自定义自己的模板
-			//path = shopDetail.getxxx
-			path += DEFAULT_THEME_PATH;
-		}else{
-			path += DEFAULT_THEME_PATH;
-		}
-		return path;
-	}
-
 	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PathEnum#getType()
+	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest, java.lang.String)
 	 */
 	@Override
-	public int getType() {
-		// TODO Auto-generated method stub
-		return 0;
+	public String getValue(HttpServletRequest request, String path) {
+		return PagePathCalculator.calculateBackendPath(request,path);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PathEnum#getValue()
-	 */
-	@Override
-	public String getValue() {
-		return value;
-	}
-
+	
 }

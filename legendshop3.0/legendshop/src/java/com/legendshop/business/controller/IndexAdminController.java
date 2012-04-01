@@ -91,7 +91,7 @@ public class IndexAdminController extends BaseController {
 		if(id != null && id != 0){
 			path = ADMIN_MENU + id;
 		}
-		return PathResolver.getPath(request,path,BackPage.BACK_PAGE);
+		return PathResolver.getPath(request,path,BackPage.VARIABLE);
 	}
 	
 	

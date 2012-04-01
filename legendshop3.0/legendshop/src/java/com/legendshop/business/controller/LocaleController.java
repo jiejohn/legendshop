@@ -72,7 +72,7 @@ public class LocaleController extends BaseController {
 		}
 		String target = request.getParameter(PAGE);
 		if (AppUtils.isNotBlank(target)) {
-			return PathResolver.getPath(request, target,BackPage.FOWARD);
+			return PathResolver.getPath(request, target,BackPage.VARIABLE);
 		} else {
 			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
 		}
