@@ -35,8 +35,8 @@ public class DeliveryType implements java.io.Serializable {
 	/** The name. */
 	private String name;
 	
-	/** The desc. */
-	private String desc;
+	/** The notes. */
+	private String notes;
 	
 	/** The create time. */
 	private Date createTime;
@@ -163,8 +163,8 @@ public class DeliveryType implements java.io.Serializable {
 	 * 
 	 * @return the desc
 	 */
-	public String getDesc() {
-		return desc;
+	public String getNotes() {
+		return notes;
 	}
 	
 	/**
@@ -173,8 +173,8 @@ public class DeliveryType implements java.io.Serializable {
 	 * @param desc
 	 *            the new desc
 	 */
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 	
 	/**

@@ -35,8 +35,8 @@
                 <comment>配送方式名称</comment>
             </column>
         </property>
-        <property name="desc" type="java.lang.String">
-            <column name="desc" length="65535">
+        <property name="notes" type="java.lang.String">
+            <column name="notes" length="150">
                 <comment>描述</comment>
             </column>
         </property>

@@ -183,6 +183,13 @@ public class ShopDetailView implements Serializable, Cloneable {
 	/** The qq list. */
 	private List<String> qqList = new ArrayList<String>(); // copy from
 
+	/** The front type. */
+    private String frontType;
+	
+	/** The end type. */
+	private String endType;
+	
+	
 	// userDetail qq
 	
 	/**
@@ -1211,6 +1218,44 @@ public class ShopDetailView implements Serializable, Cloneable {
 		shopDetail.qq = this.qq;
 		shopDetail.fax = this.fax;
 		return shopDetail;
+	}
+
+	/**
+	 * Gets the front type.
+	 * 
+	 * @return the front type
+	 */
+	public String getFrontType() {
+		return frontType;
+	}
+
+	/**
+	 * Sets the front type.
+	 * 
+	 * @param frontType
+	 *            the new front type
+	 */
+	public void setFrontType(String frontType) {
+		this.frontType = frontType;
+	}
+
+	/**
+	 * Gets the end type.
+	 * 
+	 * @return the end type
+	 */
+	public String getEndType() {
+		return endType;
+	}
+
+	/**
+	 * Sets the end type.
+	 * 
+	 * @param endType
+	 *            the new end type
+	 */
+	public void setEndType(String endType) {
+		this.endType = endType;
 	}
 
 }

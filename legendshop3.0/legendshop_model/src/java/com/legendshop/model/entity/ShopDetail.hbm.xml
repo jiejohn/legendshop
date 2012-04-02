@@ -167,6 +167,16 @@
             <column name="areaid">
                 <comment>地区</comment>
             </column>
+        </property>
+        <property name="frontType" type="java.lang.String">
+            <column name="front_type" length="15">
+                <comment>前台风格</comment>
+            </column>
+        </property>
+        <property name="endType" type="java.lang.String">
+            <column name="end_type" length="15">
+                <comment>后台风格</comment>
+            </column>
         </property> 
     </class>
 </hibernate-mapping>

@@ -159,6 +159,12 @@ public class ShopDetail extends UploadFile implements java.io.Serializable {
 	private List<String> qqList; //copy from userDetail qq
     // Constructors
 
+	/** The front type. */
+    private String frontType;
+	
+	/** The end type. */
+	private String endType;
+	
     /**
 	 * Gets the creates the area code.
 	 * 
@@ -1131,6 +1137,44 @@ public class ShopDetail extends UploadFile implements java.io.Serializable {
 	 */
 	public void setQqList(List<String> qqList) {
 		this.qqList = qqList;
+	}
+
+	/**
+	 * Gets the front type.
+	 * 
+	 * @return the front type
+	 */
+	public String getFrontType() {
+		return frontType;
+	}
+
+	/**
+	 * Sets the front type.
+	 * 
+	 * @param frontType
+	 *            the new front type
+	 */
+	public void setFrontType(String frontType) {
+		this.frontType = frontType;
+	}
+
+	/**
+	 * Gets the end type.
+	 * 
+	 * @return the end type
+	 */
+	public String getEndType() {
+		return endType;
+	}
+
+	/**
+	 * Sets the end type.
+	 * 
+	 * @param endType
+	 *            the new end type
+	 */
+	public void setEndType(String endType) {
+		this.endType = endType;
 	}
 	
 
