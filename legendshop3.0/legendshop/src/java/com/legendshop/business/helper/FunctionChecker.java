@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.legendshop.central.license.LSResponse;
-import com.legendshop.central.license.LicenseEnum;
-import com.legendshop.central.license.LicenseHelper;
-import com.legendshop.core.AttributeKeys;
+import com.legendshop.business.event.EventId;
 import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.Checker;
+import com.legendshop.event.EventContext;
+import com.legendshop.event.EventHome;
+import com.legendshop.event.GenericEvent;
 import com.legendshop.model.UserMessages;
 
 /**
@@ -35,23 +35,10 @@ public class FunctionChecker implements Checker<String> {
 	 */
 	@Override
 	public boolean check(String userName, HttpServletRequest request) {
-		boolean result = true;
-		LSResponse resopose = (LSResponse) request.getSession().getServletContext().getAttribute(AttributeKeys.LEGENSHOP_LICENSE);
-		if (resopose == null) {
-			try {
-				resopose = LicenseHelper.getPersistedResopnse();
-			} catch (Exception e) {
-			}
-		}
-		if (resopose != null) {
-			String license = resopose.getLicense();
-			if (LicenseEnum.FREE.name().equals(license) || LicenseEnum.UNKNOWN.name().equals(license)) {
-				log.debug("user name = {} did not have function on this componment", userName);
-				//TODO				
-				result = false;
-			}
-		}
-		
+		EventContext eventContext = new EventContext(request);
+		eventContext.setRequest(userName);
+		EventHome.publishEvent(new GenericEvent(eventContext,EventId.FUNCTION_CHECK_EVENT));
+		Boolean result = eventContext.getBooleanResponse();
 		if(!result){
 			UserMessages uem = new UserMessages();
 			uem.setTitle("免费版不提供该功能");

@@ -575,11 +575,13 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	 * @see com.legendshop.business.service.dwr.impl.DwrCommonService#answerWord(java.lang.Long, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String answerWord(Long id, String answer, String loginName) {
-		if (id == null) {
+	public String answerWord(Long id, String answer) {
+		String loginName = UserManager.getUsername(WebContextFactory.get().getSession());
+		if (id == null || loginName == null) {
 			return "fail";
 		}
-		boolean result = businessDao.updateUserComment(id, loginName, answer);
+		
+		boolean result = businessDao.updateUserComment(id, answer, loginName);
 		if (result) {
 			return null;
 		} else {

@@ -51,6 +51,7 @@ import com.legendshop.business.dao.SortDao;
 import com.legendshop.business.dao.SubDao;
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.dao.impl.VisitLogDaoImpl;
+import com.legendshop.business.event.EventId;
 import com.legendshop.business.form.MemberForm;
 import com.legendshop.business.form.SearchForm;
 import com.legendshop.business.form.UserForm;
@@ -60,7 +61,6 @@ import com.legendshop.business.helper.impl.PersistVisitLogTask;
 import com.legendshop.business.helper.impl.SendMailTask;
 import com.legendshop.business.service.BusinessService;
 import com.legendshop.business.service.PayTypeService;
-import com.legendshop.central.license.LSResponse;
 import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.FunctionEnum;
@@ -80,6 +80,9 @@ import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.core.page.PagerUtil;
+import com.legendshop.event.EventContext;
+import com.legendshop.event.EventHome;
+import com.legendshop.event.GenericEvent;
 import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.Advertisement;
 import com.legendshop.model.entity.Basket;
@@ -1072,9 +1075,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	@Override
 	public String saveUserReg(HttpServletRequest request, HttpServletResponse response) {
 		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_950, request);
-		LSResponse lsResponse = (LSResponse) request.getSession().getServletContext()
-				.getAttribute(AttributeKeys.LEGENSHOP_LICENSE);
-		request.setAttribute("supportOpenShop", shopDetailDao.isCanAddShopDetail(lsResponse));
+		
+		EventContext eventContext = new EventContext(request);
+		EventHome.publishEvent(new GenericEvent(eventContext,EventId.CAN_ADD_SHOPDETAIL_EVENT));
+		
+		request.setAttribute("supportOpenShop", eventContext.getBooleanResponse());
+		
 		request.setAttribute("validationOnOpenShop",
 				PropertiesUtil.getObject(ParameterEnum.VALIDATION_ON_OPEN_SHOP, Boolean.class));
 		return PathResolver.getPath(request, TilesPage.REG);
@@ -1192,9 +1198,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			userDetail.setScore(0l);// 默认
 		}
 		request.setAttribute("user", userDetail);
-		LSResponse lsResponse = (LSResponse) request.getSession().getServletContext()
-				.getAttribute(AttributeKeys.LEGENSHOP_LICENSE);
-		request.setAttribute("supportOpenShop", shopDetailDao.isCanAddShopDetail(lsResponse));
+		
+		EventContext eventContext = new EventContext(request);
+		EventHome.publishEvent(new GenericEvent(eventContext,EventId.CAN_ADD_SHOPDETAIL_EVENT));
+		
+		request.setAttribute("supportOpenShop", eventContext.getBooleanResponse());
+		
 		request.setAttribute("totalProcessingOrder", businessDao.getTotalProcessingOrder(userName));
 		request.setAttribute("totalBasketByuserName", basketDao.getTotalBasketByuserName(userName));
 		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_740, request);

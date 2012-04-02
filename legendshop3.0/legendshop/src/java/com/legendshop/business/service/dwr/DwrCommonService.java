@@ -262,7 +262,7 @@ public interface DwrCommonService {
 	 *            the login name
 	 * @return the string
 	 */
-	public abstract String answerWord(Long id, String answer, String loginName);
+	public abstract String answerWord(Long id, String answer);
 
 	/**
 	 * 生成加密后的随机数.

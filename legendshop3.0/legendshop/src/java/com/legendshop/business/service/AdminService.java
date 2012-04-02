@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.oro.text.regex.MalformedPatternException;
 
-import com.legendshop.central.license.LSResponse;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
@@ -441,14 +440,6 @@ public interface AdminService extends BaseService {
 	 */
 	public abstract void updateShopDetail(Product product);
 
-	/**
-	 * Can add shop detail.
-	 * 
-	 * @param lsResponse
-	 *            the ls response
-	 * @return true, if successful
-	 */
-	public abstract boolean isCanAddShopDetail(LSResponse lsResponse);
 
 
 }

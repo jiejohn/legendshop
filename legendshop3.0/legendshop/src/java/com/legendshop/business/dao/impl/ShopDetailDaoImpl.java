@@ -20,14 +20,10 @@ import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.common.CacheKeys;
 import com.legendshop.business.dao.ShopDetailDao;
-import com.legendshop.central.license.LSResponse;
-import com.legendshop.central.license.LicenseEnum;
 import com.legendshop.core.cache.CacheCallBack;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
-import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.tag.TableCache;
 import com.legendshop.model.entity.Myleague;
 import com.legendshop.model.entity.Product;
@@ -251,65 +247,6 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 		return findUniqueBy(sql, Long.class, userName).intValue();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.dao.impl.ShopDetailDao#canAddShopDetail(com.legendshop.central.license.LSResponse)
-	 */
-	@Override
-	public boolean isCanAddShopDetail(LSResponse lsResponse) {
-		if (!PropertiesUtil.getObject(ParameterEnum.OPEN_SHOP, Boolean.class)) {
-			return false;
-		}
-		Integer maxShopNumberByType = null;
-		if (lsResponse == null) {
-			maxShopNumberByType = getMaxShopNumberByType(null, LicenseEnum.FREE);
-		} else {
-			String license = lsResponse.getLicense();
-			if (LicenseEnum.instance(license)) {
-				maxShopNumberByType = getMaxShopNumberByType(lsResponse, LicenseEnum.valueOf(license));
-			} else {
-				maxShopNumberByType = getMaxShopNumberByType(lsResponse, LicenseEnum.FREE);
-			}
-		}
-		// always pass if null
-		if (maxShopNumberByType == null) {
-			return true;
-		}
-
-		return maxShopNumberByType > this.getMaxShopDetail();
-	}
-
-	/**
-	 * Gets the max shop detail.
-	 * 
-	 * @return the max shop detail
-	 */
-	private Long getMaxShopDetail() {
-		return findUniqueBy("select count(*) from ShopDetail sd where sd.status = 1", Long.class);
-	}
-
-	// if return null means no need to check
-	/**
-	 * Gets the max shop number by type.
-	 * 
-	 * @param lsResponse
-	 *            the ls response
-	 * @param licenseEnum
-	 *            the license enum
-	 * @return the max shop number by type
-	 */
-	private Integer getMaxShopNumberByType(LSResponse lsResponse, LicenseEnum licenseEnum) {
-		if (lsResponse != null && lsResponse.getShopCount() != null) {
-			return lsResponse.getShopCount();
-		}
-		if (LicenseEnum.B2C_YEAR.equals(licenseEnum) || LicenseEnum.C2C_YEAR.equals(licenseEnum)) {
-			return 100;
-		} else if (LicenseEnum.FREE.equals(licenseEnum) || LicenseEnum.EXPIRED.equals(licenseEnum)) {
-			return 10;
-		} else if (LicenseEnum.B2C_ALWAYS.equals(licenseEnum) || LicenseEnum.C2C_ALWAYS.equals(licenseEnum)) {
-			return null;
-		}
-		return 0;
-	}
 
 	/**
 	 * Gets the color tyle.

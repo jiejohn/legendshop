@@ -28,12 +28,11 @@ import com.legendshop.business.common.ProductStatusEnum;
 import com.legendshop.business.common.RoleEnum;
 import com.legendshop.business.common.ShopStatusEnum;
 import com.legendshop.business.dao.ShopDetailDao;
+import com.legendshop.business.event.EventId;
 import com.legendshop.business.helper.TaskThread;
 import com.legendshop.business.helper.impl.SendMailTask;
 import com.legendshop.business.service.AdminService;
 import com.legendshop.business.service.CommonUtil;
-import com.legendshop.central.license.LSResponse;
-import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
@@ -45,6 +44,9 @@ import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.randing.RandomStringUtils;
+import com.legendshop.event.EventContext;
+import com.legendshop.event.EventHome;
+import com.legendshop.event.GenericEvent;
 import com.legendshop.model.entity.DynamicTemp;
 import com.legendshop.model.entity.ImgFile;
 import com.legendshop.model.entity.News;
@@ -145,9 +147,10 @@ public class AdminServiceImpl extends BaseServiceImpl implements AdminService {
 	 */
 	@Override
 	public PageSupport getUserDetailList(HqlQuery hql, HttpServletRequest request) {
-		LSResponse lsResponse = (LSResponse) request.getSession().getServletContext().getAttribute(
-				AttributeKeys.LEGENSHOP_LICENSE);
-		request.setAttribute("supportOpenShop", shopDetailDao.isCanAddShopDetail(lsResponse));
+		EventContext eventContext = new EventContext(request);
+		EventHome.publishEvent(new GenericEvent(eventContext,EventId.CAN_ADD_SHOPDETAIL_EVENT));
+		Boolean isSupportOpenShop = eventContext.getBooleanResponse();
+		request.setAttribute("supportOpenShop", isSupportOpenShop);
 		return baseDao.find(hql);
 	}
 
@@ -682,14 +685,6 @@ public class AdminServiceImpl extends BaseServiceImpl implements AdminService {
 		shopdetail.setProductNum(shopDetailDao.getProductNum(product.getUserName()));
 		shopdetail.setOffProductNum(shopDetailDao.getOffProductNum(product.getUserName()));
 		shopDetailDao.update(shopdetail);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.AdminService#canAddShopDetail(com.legendshop.central.license.LSResponse)
-	 */
-	@Override
-	public boolean isCanAddShopDetail(LSResponse lsResponse) {
-		return shopDetailDao.isCanAddShopDetail(lsResponse);
 	}
 
 	/* (non-Javadoc)

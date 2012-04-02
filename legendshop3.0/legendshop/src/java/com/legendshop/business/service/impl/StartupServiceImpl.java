@@ -7,17 +7,21 @@
  */
 package com.legendshop.business.service.impl;
 
+import java.util.Map;
+
 import javax.servlet.ServletContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.context.ContextLoader;
 
 import com.legendshop.business.service.SystemParameterService;
-import com.legendshop.central.HealthCheckerHolder;
-import com.legendshop.central.install.StartupService;
+import com.legendshop.core.StartupService;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.plugins.Plugin;
 import com.legendshop.core.tag.TableCache;
 import com.legendshop.search.SearchFacade;
+import com.legendshop.util.AppUtils;
 
 /**
  * 系统启动时初始化
@@ -54,18 +58,26 @@ public class StartupServiceImpl implements StartupService {
 	 */
 	@Override
 	public synchronized void startup(ServletContext servletContext) {
+		if (PropertiesUtil.isSystemInstalled()) {
+			// Load System Parameter
+			systemParameterService.initSystemParameter();
+	
+			codeTablesCache.initCodeTablesCache();
+	
+			String luceneIndexPath = PropertiesUtil.getLucenePath();
+			log.info("luceneIndexPath is {}", luceneIndexPath);
+	
+			searchFacade.init(luceneIndexPath);
+		}
+		//init all plugins
+		Map<String,Plugin> beans = ContextLoader.getCurrentWebApplicationContext().getBeansOfType(Plugin.class);  
+		if(AppUtils.isNotBlank(beans)){
+			for (Plugin plugin : beans.values()) {
+				plugin.bind(servletContext);
+			}
+		}
 
-		// Load System Parameter
-		systemParameterService.initSystemParameter();
-
-		codeTablesCache.initCodeTablesCache();
-
-		String luceneIndexPath = PropertiesUtil.getLucenePath();
-		log.info("luceneIndexPath is {}", luceneIndexPath);
-
-		searchFacade.init(luceneIndexPath);
-
-		HealthCheckerHolder.isInitialized(servletContext);
+		
 	}
 
 	/**

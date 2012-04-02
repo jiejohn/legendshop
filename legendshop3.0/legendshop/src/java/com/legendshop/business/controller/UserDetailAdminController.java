@@ -25,15 +25,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.event.EventId;
 import com.legendshop.business.service.ShopDetailService;
 import com.legendshop.business.service.UserDetailService;
-import com.legendshop.central.license.LSResponse;
-import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.dao.support.SqlQuery;
+import com.legendshop.event.EventContext;
+import com.legendshop.event.EventHome;
+import com.legendshop.event.GenericEvent;
 import com.legendshop.model.entity.UserDetail;
 import com.legendshop.model.entity.UserDetailView;
 import com.legendshop.util.AppUtils;
@@ -111,10 +113,11 @@ public class UserDetailAdminController extends BaseController{
 			String QueryNsort = ConfigCode.getInstance().getCode("biz.QueryUserDetail", map);
 			hqlQuery.setAllCountString(QueryNsortCount);
 			hqlQuery.setQueryString(QueryNsort);
-
-			LSResponse lsResponse = (LSResponse) request.getSession().getServletContext().getAttribute(
-					AttributeKeys.LEGENSHOP_LICENSE);
-			request.setAttribute("supportOpenShop", shopDetailService.isSupportOpenShop(lsResponse));
+			
+			EventContext eventContext = new EventContext(request);
+			EventHome.publishEvent(new GenericEvent(eventContext,EventId.CAN_ADD_SHOPDETAIL_EVENT));
+			Boolean isSupportOpenShop = eventContext.getBooleanResponse();
+			request.setAttribute("supportOpenShop", isSupportOpenShop);
 			PageSupport ps = userDetailService.getUserDetailList(hqlQuery);
 			request.setAttribute("search", search);
 			request.setAttribute("userMail", userMail);
@@ -180,9 +183,13 @@ public class UserDetailAdminController extends BaseController{
 			hqlQuery.setAllCountString(totalUserDetail);
 			hqlQuery.setQueryString(userDetailSQL);
 	
-			LSResponse lsResponse = (LSResponse) request.getSession().getServletContext().getAttribute(
-					AttributeKeys.LEGENSHOP_LICENSE);
-			request.setAttribute("supportOpenShop", shopDetailService.isSupportOpenShop(lsResponse));
+			EventContext eventContext = new EventContext(request);
+			EventHome.publishEvent(new GenericEvent(eventContext,EventId.CAN_ADD_SHOPDETAIL_EVENT));
+			Boolean isSupportOpenShop = eventContext.getBooleanResponse();
+
+			request.setAttribute("supportOpenShop", isSupportOpenShop);
+			
+			
 			PageSupport ps = userDetailService.getUserDetailList(hqlQuery);
 			ps.setResultList(convert(ps.getResultList()));
 			request.setAttribute("userName", userName);

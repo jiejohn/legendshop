@@ -15,9 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.legendshop.central.HealthCheckerHolder;
-import com.legendshop.central.install.StartupService;
 import com.legendshop.core.ContextServiceLocator;
+import com.legendshop.core.StartupService;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.util.AppUtils;
@@ -75,10 +74,7 @@ public class InitSysListener implements ServletContextListener {
 		if (AppUtils.isBlank(PropertiesUtil.getLegendShopSystemId())) {
 			PropertiesUtil.changeLegendShopSystemId();
 		}
-		event.getServletContext().getContext("/");
 		
-		HealthCheckerHolder.isInitialized(event.getServletContext());
-
 		// 4.系统初始化
 		if (PropertiesUtil.isSystemInstalled()) {
 			StartupService startupService = (StartupService) ContextServiceLocator.getInstance().getBean(

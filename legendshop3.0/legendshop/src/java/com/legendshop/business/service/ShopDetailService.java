@@ -7,7 +7,6 @@
  */
 package com.legendshop.business.service;
 
-import com.legendshop.central.license.LSResponse;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.ShopDetail;
@@ -70,15 +69,6 @@ public interface ShopDetailService {
 	 *            the shop detail
 	 */
 	public abstract void save(ShopDetail shopDetail);
-
-	/**
-	 * Checks if is support open shop.
-	 * 
-	 * @param lsResponse
-	 *            the ls response
-	 * @return the boolean
-	 */
-	public abstract Boolean isSupportOpenShop(LSResponse lsResponse);
 
 	/**
 	 * Update.

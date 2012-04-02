@@ -94,10 +94,10 @@
 	   	<c:if test="${canbeLeagueShop}"><li><a href='javascript:addMyLeague("${sessionScope.SPRING_SECURITY_LAST_USERNAME}","${sessionScope.shopName}")'><fmt:message key="addLeague"/><fmt:message key="this.shop"/></a></li></c:if>
 	     <li><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}"><b><fmt:message key="system.management"/></b></a></li>
        </auth:auth>
+      	<li><a href="${pageContext.request.contextPath}/leaveword${applicationScope.WEB_SUFFIX}"><fmt:message key="leaveword"/></a></li>
 		<li><a href="${pageContext.request.contextPath}/order${applicationScope.WEB_SUFFIX}"><fmt:message key="myorder"/></a></li>
 	</c:if>
 		<li class="navCartSum"><a href="${pageContext.request.contextPath}/buy${applicationScope.WEB_SUFFIX}"><fmt:message key="shopingCar"/></a></li>	
-		<li><a href="${pageContext.request.contextPath}/leaveword${applicationScope.WEB_SUFFIX}"><fmt:message key="leaveword"/></a></li>
 		<li class="hl"><a href="${pageContext.request.contextPath}/allNews${applicationScope.WEB_SUFFIX}"><fmt:message key="newsCenter"/></a></li>
 	</ul>
 	</div>

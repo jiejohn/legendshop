@@ -22,9 +22,6 @@
         <dependent-module archiveName="legendshop_core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_core/legendshop_core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="legendshop_central.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_central/legendshop_central">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="legendshop_security.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_security/legendshop_security">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -32,6 +29,9 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="legendshop_c2c.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_c2c/legendshop_c2c">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendshop_central.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_central/legendshop_central">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/legendshop/build/classes"/>

@@ -9,7 +9,6 @@ package com.legendshop.business.dao;
 
 import java.util.List;
 
-import com.legendshop.central.license.LSResponse;
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.model.entity.Myleague;
 import com.legendshop.model.entity.Product;
@@ -142,14 +141,6 @@ public interface ShopDetailDao extends BaseDao{
 	 */
 	public abstract Integer getOffProductNum(String userName);
 
-	/**
-	 * Can add shop detail.
-	 * 
-	 * @param lsResponse
-	 *            the ls response
-	 * @return true, if successful
-	 */
-	public abstract boolean isCanAddShopDetail(LSResponse lsResponse);
 
 	/**
 	 * 更新产品.

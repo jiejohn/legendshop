@@ -19,14 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.event.EventId;
 import com.legendshop.business.service.BusinessService;
 import com.legendshop.business.service.IndexService;
-import com.legendshop.central.license.LSResponse;
-import com.legendshop.central.license.LicenseEnum;
-import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.event.EventContext;
+import com.legendshop.event.EventHome;
+import com.legendshop.event.GenericEvent;
 import com.legendshop.model.UserInfo;
 import com.legendshop.model.entity.ShopDetailView;
 
@@ -66,17 +67,14 @@ public class IndexAdminController extends BaseController {
 		ShopDetailView shopDetail = businessService.getSimpleInfoShopDetail(userName);
 		UserInfo userInfo = indexService.getAdminIndex(userName, shopDetail);
 		request.setAttribute("userInfo", userInfo);
-
-		LSResponse lsResponse = (LSResponse) request.getSession().getServletContext().getAttribute(
-				AttributeKeys.LEGENSHOP_LICENSE);
-		if (lsResponse != null) {
-			String license = lsResponse.getLicense();
-			if (LicenseEnum.instance(license)) {
-				if (LicenseEnum.needUpgrade(license) && CommonServiceUtil.haveViewAllDataFunction(request)) {
-					request.setAttribute("needUpgrade", true);
-				}
-			}
+		
+		EventContext eventContext = new EventContext(request);
+		EventHome.publishEvent(new GenericEvent(eventContext,EventId.LICENSE_UPGRADE_CHECK_EVENT));
+		
+		if(eventContext.getBooleanResponse() && CommonServiceUtil.haveViewAllDataFunction(request)){
+			request.setAttribute("needUpgrade", true);
 		}
+		
 		return PathResolver.getPath(request, BackPage.DASH_BOARD);
 	}
 	

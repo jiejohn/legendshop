@@ -73,14 +73,13 @@ jQuery(document).ready(function() {
 				alert("请认真填写回复内容，不能少于5个字");
 				return;
 			}
-		var loginName = '<%=gement.getUsername(session)%>';
-	      CommonService.answerWord(id,loginName,answer, function(retData){
+	      CommonService.answerWord(id,answer, function(retData){
 	          if(retData == null){
 					alert("回复成功");
 				    window.opener.location.reload(); //关键是这句：刷新父窗口
 				    window.close();
 	              }else{
-	            	 alert("回复失败");
+	            	 alert("回复失败: " + retData);
 	              }	       
 			});
 		}

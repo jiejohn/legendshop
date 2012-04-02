@@ -16,10 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.page.BackPage;
-import com.legendshop.central.license.LicenseEnum;
-import com.legendshop.central.license.LicenseHelper;
+import com.legendshop.business.event.EventId;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.event.EventContext;
+import com.legendshop.event.EventHome;
+import com.legendshop.event.GenericEvent;
 
 /**
  * License控制器.
@@ -56,11 +58,13 @@ public class LicenseController extends BaseController {
 	 */
 	@RequestMapping("/postUpgrade")
 	public String postUpgrade(HttpServletRequest request, HttpServletResponse response) {
-		String liensekey = request.getParameter("liensekey");
-		String license = LicenseHelper.updateLicense(request.getSession().getServletContext(), liensekey);
-		if (LicenseEnum.isNormal(license)) {
+		
+		EventContext eventContext = new EventContext(request);
+		EventHome.publishEvent(new GenericEvent(eventContext,EventId.LICENSE_STATUS_CHECK_EVENT));
+		if(eventContext.getBooleanResponse()){
 			request.setAttribute("postUpgrade", true);
 		}
+		
 		return PathResolver.getPath(request, BackPage.UPGRADE_PAGE);
 	}
 

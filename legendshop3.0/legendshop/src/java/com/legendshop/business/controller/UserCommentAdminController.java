@@ -12,7 +12,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +68,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 		String userName = request.getParameter("userName") == null ? "" : request.getParameter("userName").trim();
 		CriteriaQuery cq = new CriteriaQuery(UserComment.class, curPageNO, "javascript:pager");
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
-		cq = hasAllDataFunction(cq, request, StringUtils.trim(userComment.getUserName()));
+		//right check
 		if (!AppUtils.isBlank(status)) {
 			cq.eq("status", Integer.valueOf(status));
 		}
@@ -166,7 +165,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 			//管理员不能update别人的消息
 			userCommentService.updateUserCommentToReaded(comment);
 		}
-		String result = checkPrivilege(request, UserManager.getUsername(request), comment.getUserName());
+		String result = checkPrivilege(request, UserManager.getUsername(request), comment.getToUserName());
 		if(result!=null){
 			return result;
 		}
