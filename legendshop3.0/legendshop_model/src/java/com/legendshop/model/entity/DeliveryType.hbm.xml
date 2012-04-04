@@ -10,7 +10,7 @@
             <column name="dvy_type_id" />
             <generator class="native" />
         </id>
-        <property name="userId" type="java.lang.Long">
+        <property name="userId" type="java.lang.String">
             <column name="user_id" not-null="true" length="32">
                 <comment>用户ID</comment>
             </column>

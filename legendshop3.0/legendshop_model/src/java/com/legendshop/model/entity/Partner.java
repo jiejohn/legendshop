@@ -10,10 +10,10 @@ package com.legendshop.model.entity;
 import java.util.Date;
 
 /**
- * Parnter entity. @author MyEclipse Persistence Tools
+ * Partner entity. @author MyEclipse Persistence Tools
  */
 
-public class Parnter implements java.io.Serializable {
+public class Partner implements java.io.Serializable {
 
 	// Fields
 
