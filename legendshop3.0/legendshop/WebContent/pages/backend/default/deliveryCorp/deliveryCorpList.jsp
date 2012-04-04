@@ -31,22 +31,23 @@
         	<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
             	商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${deliveryCorp.userName}" />
             </auth:auth>
+            	物流公司名称&nbsp;<input type="text" name="name" maxlength="50" value="${deliveryCorp.name}" />
             <input type="submit" value="搜索"/>
             <input type="button" value="创建物流公司" onclick='window.location="<ls:url address='/admin/deliveryCorp/load'/>"'/>
             <br>
     </form>
     <div align="center">
           <%@ include file="/pages/common/messages.jsp"%>
-    <display:table name="list" requestURI="<ls:url address='/admin/deliveryCorp/query'/>" id="item" export="false" class="${tableclass}" style="width:100%">
-      <display:column title="Order">${item_rowNum}</display:column>
-      <display:column title="DvyId" property="dvyId"></display:column>
-      <display:column title="UserId" property="userId"></display:column>
-      <display:column title="UserName" property="userName"></display:column>
-      <display:column title="Name" property="name"></display:column>
-      <display:column title="Url" property="url"></display:column>
-      <display:column title="CreateTime" property="createTime"></display:column>
-      <display:column title="ModifyTime" property="modifyTime"></display:column>
-      <display:column title="Action" media="html">
+    <display:table name="list" requestURI="<ls:url address='/admin/deliveryCorp/query'/>" id="item" export="true" class="${tableclass}" style="width:100%">
+      <display:column title="顺序">${item_rowNum}</display:column>
+      <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
+      	<display:column title="商城名称" property="userName"></display:column>            	
+      </auth:auth>      
+      <display:column title="公司名称" property="name"></display:column>
+      <display:column title="URL" property="url"></display:column>
+      <%-- <display:column title="创建时间" property="createTime"></display:column>
+      <display:column title="修改时间" property="modifyTime"></display:column> --%>
+      <display:column title="操作" media="html">
       <a href="<ls:url address='/admin/deliveryCorp/load/${item.dvyId}'/>" title="修改">
      		 <img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/>">
       </a>

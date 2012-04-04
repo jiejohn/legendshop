@@ -22,7 +22,7 @@
 		    	<tr>
 			    	<td>
 				    	<a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; 
-				    	<a href="<ls:url address='/admin/deliveryType/query'/>">DeliveryType</a>
+				    	<a href="<ls:url address='/admin/deliveryType/query'/>">配送方式</a>			    	
 			    	</td>
 		    	</tr>
 		    </thead>
@@ -31,24 +31,21 @@
         	<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
             	商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${deliveryType.userName}" />
             </auth:auth>
+            	配送方式&nbsp;<input type="text" name="name" maxlength="50" value="${deliveryType.name}" />
             <input type="submit" value="搜索"/>
-            <input type="button" value="创建DeliveryType" onclick='window.location="<ls:url address='/admin/deliveryType/load'/>"'/>
+            <input type="button" value="创建配送方式" onclick='window.location="<ls:url address='/admin/deliveryType/load'/>"'/>
             <br>
     </form>
     <div align="center">
           <%@ include file="/pages/common/messages.jsp"%>
-		<display:table name="list" requestURI="/admin/deliveryType/query" id="item" export="false" class="${tableclass}" style="width:100%">
-	             <display:column title="DvyTypeId" property="dvyTypeId"></display:column>
-      <display:column title="UserId" property="userId"></display:column>
-      <display:column title="UserName" property="userName"></display:column>
-      <display:column title="DvyId" property="dvyId"></display:column>
-      <display:column title="Type" property="type"></display:column>
-      <display:column title="Name" property="name"></display:column>
-      <display:column title="Desc" property="desc"></display:column>
-      <display:column title="CreateTime" property="createTime"></display:column>
-      <display:column title="ModifyTime" property="modifyTime"></display:column>
+		<display:table name="list" requestURI="/admin/deliveryType/query" id="item" export="true" class="${tableclass}" style="width:100%">
+		<display:column title="顺序">${item_rowNum}</display:column>
+      <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
+      	<display:column title="商城名称" property="userName"></display:column>
+      </auth:auth>
+      <display:column title="配送方式" property="name"></display:column>
 
-	    <display:column title="Action" media="html">
+	    <display:column title="操作" media="html">
 		      <a href="<ls:url address='/admin/deliveryType/load/${item.dvyTypeId}'/>" title="修改">
 		     		 <img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/>">
 		      </a>

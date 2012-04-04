@@ -49,6 +49,16 @@
 </script>
 </head>
     <body>
+        <table class="${tableclass}" style="width: 100%">
+		    <thead>
+		    	<tr>
+			    	<td>
+				    	<a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; 
+				    	<a href="<ls:url address='/admin/deliveryType/query'/>">配送方式</a>			    	
+			    	</td>
+		    	</tr>
+		    </thead>
+	    </table>
         <form action="<ls:url address='/admin/deliveryType/save'/>" method="post" id="form1">
             <input id="dvyTypeId" name="dvyTypeId" value="${deliveryType.dvyTypeId}" type="hidden">
             <div align="center">
@@ -57,46 +67,18 @@
                     <tr class="sortable">
                         <th colspan="2">
                             <div align="center">
-                                创建DeliveryType
+							<c:choose>
+			                	<c:when test="${not empty deliveryType}">修改配送方式</c:when>
+			                	<c:otherwise>创建配送方式</c:otherwise>
+			                </c:choose>				
                             </div>
                         </th>
                     </tr>
                 </thead>
-     			     <tr>
-        <td>
-          <div align="center">UserId: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="userId" id="userId" value="${deliveryType.userId}" /></p>
-        </td>
-      </tr>
+     
      <tr>
         <td>
-          <div align="center">UserName: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="userName" id="userName" value="${deliveryType.userName}" /></p>
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="center">DvyId: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="dvyId" id="dvyId" value="${deliveryType.dvyId}" /></p>
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="center">Type: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="type" id="type" value="${deliveryType.type}" /></p>
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="center">Name: <font color="ff0000">*</font></div>
+          <div align="center">配送名称: <font color="ff0000">*</font></div>
        </td>
         <td>
            <p><input type="text" name="name" id="name" value="${deliveryType.name}" /></p>
@@ -104,33 +86,25 @@
       </tr>
      <tr>
         <td>
-          <div align="center">Desc: <font color="ff0000">*</font></div>
+          <div align="center">默认物流公司: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="desc" id="desc" value="${deliveryType.desc}" /></p>
+           <p><input type="text" name="dvyId" id="dvyId" value="${deliveryType.dvyId}" /></p>
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">CreateTime: <font color="ff0000">*</font></div>
+          <div align="center">描述: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="createTime" id="createTime" value="${deliveryType.createTime}" /></p>
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="center">ModifyTime: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="modifyTime" id="modifyTime" value="${deliveryType.modifyTime}" /></p>
+           <p><input type="text" name="notes" id="notes" value="${deliveryType.notes}" /></p>
         </td>
       </tr>
 
                 <tr>
                     <td colspan="2">
                         <div align="center">
-                            <input type="submit" value="添加" />
+                            <input type="submit" value="保存" />
                             <input type="reset" value="重置" />
                             <input type="button" value="返回"
                                 onclick="window.location='<ls:url address="/admin/deliveryType/query"/>'" />

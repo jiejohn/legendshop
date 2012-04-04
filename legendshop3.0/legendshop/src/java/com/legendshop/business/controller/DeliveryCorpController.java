@@ -32,6 +32,7 @@ import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.DeliveryCorp;
+import com.legendshop.util.AppUtils;
 
 /**
  * The Class DeliveryCorpController
@@ -47,8 +48,9 @@ public class DeliveryCorpController extends BaseController implements AdminContr
 	@RequestMapping("/query")
     public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, DeliveryCorp deliveryCorp) {
         CriteriaQuery cq = new CriteriaQuery(DeliveryCorp.class, curPageNO);
-        cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+        cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));        
         cq = hasAllDataFunction(cq, request, StringUtils.trim(deliveryCorp.getUserName()));
+        hasAllDataFunction(cq, request,"name", StringUtils.trim(deliveryCorp.getName()));
         /*
            //TODO add your condition
         */
@@ -62,11 +64,20 @@ public class DeliveryCorpController extends BaseController implements AdminContr
     @Override
 	@RequestMapping(value = "/save")
     public String save(HttpServletRequest request, HttpServletResponse response, DeliveryCorp deliveryCorp) {
-    	deliveryCorp.setUserId(UserManager.getUserId(request));
-    	deliveryCorp.setUserName(UserManager.getUsername(request));
-    	deliveryCorp.setCreateTime(new Date());
-    	deliveryCorp.setModifyTime(new Date());
-        deliveryCorpService.saveDeliveryCorp(deliveryCorp);
+    	DeliveryCorp dc=null;
+    	if (AppUtils.isNotBlank(deliveryCorp.getDvyId())) {
+    		dc=deliveryCorpService.getDeliveryCorp(deliveryCorp.getDvyId());
+    		dc.setName(deliveryCorp.getName());
+    		dc.setUrl(deliveryCorp.getUrl());
+    	}else{
+    		dc=deliveryCorp;
+    		deliveryCorp.setCreateTime(new Date());
+    	}
+    	dc.setUserId(UserManager.getUserId(request));
+    	dc.setUserName(UserManager.getUsername(request));
+    	dc.setModifyTime(new Date());
+    	
+        deliveryCorpService.saveDeliveryCorp(dc);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
         return PathResolver.getPath(request, FowardPage.DELIVERYCORP_LIST_QUERY);
     }
@@ -93,7 +104,7 @@ public class DeliveryCorpController extends BaseController implements AdminContr
 		if(result!=null){
 			return result;
 		}
-        request.setAttribute("#entityClassInstance", deliveryCorp);
+        request.setAttribute("deliveryCorp", deliveryCorp);
         return PathResolver.getPath(request, BackPage.DELIVERYCORP_EDIT_PAGE);
     }
     

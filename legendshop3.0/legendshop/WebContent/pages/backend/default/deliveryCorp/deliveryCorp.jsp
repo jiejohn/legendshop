@@ -17,20 +17,20 @@
 
     $(document).ready(function() {
     jQuery("#form1").validate({
-            rules: {
-            banner: {
+        rules: {
+        	name: {
                 required: true,
-                minlength: 5
             },
-            url: "required"
+        	url: {
+                required: true,
+            }
         },
         messages: {
-            banner: {
-                required: "Please enter banner",
-                minlength: "banner must consist of at least 5 characters"
+        	name: {
+                required: "not null",
             },
-            url: {
-                required: "Please provide a password"
+        	url: {
+                required: "not null",
             }
         }
     });
@@ -48,82 +48,74 @@
 });
 </script>
 </head>
-    <body>
-        <form action="<ls:url address='/admin/deliveryCorp/save'/>" method="post" id="form1">
-            <input id="dvyId" name="dvyId" value="${deliveryCorp.dvyId}" type="hidden">
-            <div align="center">
-            <table border="0" align="center" class="${tableclass}" id="col1">
-                <thead>
-                    <tr class="sortable">
-                        <th colspan="2">
-                            <div align="center">
-                                创建物流公司
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-      <tr>
-        <td>
-          <div align="center">UserId: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="userId" id="userId" value="${deliveryCorp.userId}" /></p>
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="center">UserName: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="userName" id="userName" value="${deliveryCorp.userName}" /></p>
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="center">Name: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="name" id="name" value="${deliveryCorp.name}" /></p>
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="center">Url: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="url" id="url" value="${deliveryCorp.url}" /></p>
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="center">CreateTime: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="createTime" id="createTime" value="${deliveryCorp.createTime}" /></p>
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="center">ModifyTime: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="modifyTime" id="modifyTime" value="${deliveryCorp.modifyTime}" /></p>
-        </td>
-      </tr>
+<body>        
+	<table class="${tableclass}" style="width: 100%">
+	    <thead>
+	    	<tr>
+		    	<td>
+			    	<a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; 
+			    	<a href="<ls:url address='/admin/deliveryCorp/query'/>">物流公司</a>
+		    	</td>
+	    	</tr>
+	    </thead>
+    </table>
+	<form action="<ls:url address='/admin/deliveryCorp/save'/>"
+		method="post" id="form1">
+		<input id="dvyId" name="dvyId" value="${deliveryCorp.dvyId}"
+			type="hidden">
+		<div align="center">
+			<table border="0" align="center" class="${tableclass}" id="col1">
+				<thead>
+					<tr class="sortable">
+						<th colspan="2">
+							<div align="center">
+							<c:choose>
+			                	<c:when test="${not empty deliveryCorp}">修改物流公司</c:when>
+			                	<c:otherwise>创建物流公司</c:otherwise>
+			                </c:choose>							
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tr>
+					<td>
+						<div align="center">
+							物流公司名称: <font color="ff0000">*</font>
+						</div>
+					</td>
+					<td>
+						<p>
+							<input type="text" name="name" id="name"
+								value="${deliveryCorp.name}" />
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div align="center">
+							URL: <font color="ff0000">*</font>
+						</div>
+					</td>
+					<td>
+						<p>
+							<input type="text" name="url" id="url"
+								value="${deliveryCorp.url}" />
+						</p>
+					</td>
+				</tr>
 
-                <tr>
-                    <td colspan="2">
-                        <div align="center">
-                            <input type="submit" value="添加" />
-                            <input type="reset" value="重置" />
-                            <input type="button" value="返回"
-                                onclick="window.location='<ls:url address="/admin/deliveryCorp/query"/>'" />
-                        </div>
-                    </td>
-                </tr>
-            </table>
-           </div>
-        </form>
-    </body>
+				<tr>
+					<td colspan="2">
+						<div align="center">
+							<input type="submit" value="保存" /> <input type="reset"
+								value="重置" /> <input type="button" value="返回"
+								onclick="window.location='<ls:url address="/admin/deliveryCorp/query"/>'" />
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</form>
+</body>
 </html>
 

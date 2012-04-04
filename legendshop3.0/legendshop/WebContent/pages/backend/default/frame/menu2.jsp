@@ -74,6 +74,24 @@
                 <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/externallink/query${applicationScope.WEB_SUFFIX}' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='链接管理' title='链接管理'/></a> </div>
               </div>
             </li>
+             <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/partner/query${applicationScope.WEB_SUFFIX}'   target='main'>供应商管理</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/partner/query${applicationScope.WEB_SUFFIX}'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='供应商管理' title='供应商管理'/></a> </div>
+              </div>
+            </li>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/deliveryCorp/query${applicationScope.WEB_SUFFIX}'   target='main'>物流公司管理</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/deliveryCorp/query${applicationScope.WEB_SUFFIX}'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='物流公司管理' title='物流公司管理'/></a> </div>
+              </div>
+            </li>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/deliveryType/query${applicationScope.WEB_SUFFIX}'   target='main'>配送方式管理</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/deliveryType/query${applicationScope.WEB_SUFFIX}'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='配送方式管理' title='配送方式管理'/></a> </div>
+              </div>
+            </li>
          </ul>
         </dd>
       </dl>   

@@ -16,28 +16,28 @@
     <title>Parnter列表</title>
 </head>
 <body>
-    <form action="<ls:url address='/admin/parnter/query'/>" id="form1" method="post">
+    <form action="<ls:url address='/admin/partner/query'/>" id="form1" method="post">
         <table class="${tableclass}" style="width: 100%">
 		    <thead>
 		    	<tr>
 			    	<td>
 				    	<a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; 
-				    	<a href="<ls:url address='/admin/parnter/query'/>">Parnter</a>
+				    	<a href="<ls:url address='/admin/partner/query'/>">供应商管理</a>
 			    	</td>
 		    	</tr>
 		    </thead>
 	    </table>
         <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
         	<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
-            	商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${parnter.userName}" />
+            	商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${partner.userName}" />
             </auth:auth>
             <input type="submit" value="搜索"/>
-            <input type="button" value="创建Parnter" onclick='window.location="<ls:url address='/admin/parnter/load'/>"'/>
+            <input type="button" value="创建Parnter" onclick='window.location="<ls:url address='/admin/partner/load'/>"'/>
             <br>
     </form>
     <div align="center">
           <%@ include file="/pages/common/messages.jsp"%>
-		<display:table name="list" requestURI="/admin/parnter/query" id="item" export="false" class="${tableclass}" style="width:100%">
+		<display:table name="list" requestURI="/admin/partner/query" id="item" export="false" class="${tableclass}" style="width:100%">
 	             <display:column title="PartnerId" property="partnerId"></display:column>
       <display:column title="PartnerName" property="partnerName"></display:column>
       <display:column title="Password" property="password"></display:column>
@@ -68,7 +68,7 @@
       <display:column title="CreateTime" property="createTime"></display:column>
 
 	    <display:column title="Action" media="html">
-		      <a href="<ls:url address='/admin/parnter/load/${item.partnerId}'/>" title="修改">
+		      <a href="<ls:url address='/admin/partner/load/${item.partnerId}'/>" title="修改">
 		     		 <img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/>">
 		      </a>
 		      <a href='javascript:deleteById("${item.partnerId}")' title="删除">
@@ -84,7 +84,7 @@
 			<!--
 			  function deleteById(id) {
 			      if(confirm("  确定删除 ?")){
-			            window.location = "<ls:url address='/admin/parnter/delete/" + id + "'/>";
+			            window.location = "<ls:url address='/admin/partner/delete/" + id + "'/>";
 			        }
 			    }
 			

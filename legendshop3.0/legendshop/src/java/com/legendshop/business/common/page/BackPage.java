@@ -251,7 +251,13 @@ public enum BackPage implements PageDefinition{
 	DELIVERYTYPE_LIST_PAGE("/deliveryType/deliveryTypeList"), 
 	
 	/** The DELIVERYTYP e_ edi t_ page. */
-	DELIVERYTYPE_EDIT_PAGE("/deliveryType/deliveryType"),
+	DELIVERYTYPE_EDIT_PAGE("/deliveryType/deliveryType"), 
+	
+	/** The DELIVERYTYP e_ lis t_ page. */
+	PARTNER_LIST_PAGE("/partner/partnerList"), 
+	
+	/** The DELIVERYTYP e_ edi t_ page. */
+	PARTNER_EDIT_PAGE("/partner/partner"),
 	
 	;
 	

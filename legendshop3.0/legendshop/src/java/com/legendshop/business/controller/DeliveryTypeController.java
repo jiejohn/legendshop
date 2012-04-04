@@ -8,6 +8,7 @@
 package com.legendshop.business.controller;
 
 
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
+import com.legendshop.business.service.DeliveryCorpService;
 import com.legendshop.business.service.DeliveryTypeService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
@@ -30,7 +32,9 @@ import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.model.entity.DeliveryCorp;
 import com.legendshop.model.entity.DeliveryType;
+import com.legendshop.util.AppUtils;
 
 /**
  * The Class DeliveryTypeController
@@ -48,6 +52,8 @@ public class DeliveryTypeController extends BaseController implements AdminContr
         CriteriaQuery cq = new CriteriaQuery(DeliveryType.class, curPageNO);
         cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
         cq = hasAllDataFunction(cq, request, StringUtils.trim(deliveryType.getUserName()));
+        hasAllDataFunction(cq, request,"name", StringUtils.trim(deliveryType.getName()));
+        
         /*
            //TODO add your condition
         */
@@ -61,10 +67,26 @@ public class DeliveryTypeController extends BaseController implements AdminContr
     @Override
 	@RequestMapping(value = "/save")
     public String save(HttpServletRequest request, HttpServletResponse response, DeliveryType deliveryType) {
-        deliveryTypeService.saveDeliveryType(deliveryType);
+    	DeliveryType dt=null;
+    	if (AppUtils.isNotBlank(deliveryType.getDvyTypeId())) {
+    		dt=deliveryTypeService.getDeliveryType(deliveryType.getDvyTypeId());
+    		dt.setName(deliveryType.getName());
+    		dt.setDvyId(deliveryType.getDvyId());
+    		dt.setNotes(deliveryType.getNotes());
+    	}else{
+    		dt=deliveryType;
+    		dt.setCreateTime(new Date());
+    	}
+    	System.out.println("---------"+dt.getDvyId());
+    	dt.setUserId(UserManager.getUserId(request));
+    	dt.setUserName(UserManager.getUsername(request));
+    	dt.setModifyTime(new Date());
+    	
+        deliveryTypeService.saveDeliveryType(dt);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
         return PathResolver.getPath(request, FowardPage.DELIVERYTYPE_LIST_QUERY);
     }
+    
 
     @Override
 	@RequestMapping(value = "/delete/{id}")
@@ -88,7 +110,7 @@ public class DeliveryTypeController extends BaseController implements AdminContr
 		if(result!=null){
 			return result;
 		}
-        request.setAttribute("#entityClassInstance", deliveryType);
+        request.setAttribute("deliveryType", deliveryType);
         return PathResolver.getPath(request, BackPage.DELIVERYTYPE_EDIT_PAGE);
     }
     
