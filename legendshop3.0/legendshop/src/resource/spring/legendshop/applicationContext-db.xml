@@ -72,14 +72,19 @@
 		<property name="prototypeCount"><value>${prototypeCount}</value></property>
 		<property name="maximumConnectionCount"><value>${maximumConnectionCount}</value></property>
 		<property name="minimumConnectionCount"><value>${minimumConnectionCount}</value></property>
+
+		<!-- 
 		<property name="trace"><value>${trace}</value></property>
 		<property name="verbose"><value>${verbose}</value></property>
 		<property name="testBeforeUse"><value>true</value></property>
+		<property name="houseKeepingSleepTime"><value>60000</value></property>
+		<property name="houseKeepingTestSql"><value>SELECT CURRENT_DATE</value></property>
+		 -->
+		<property name="simultaneousBuildThrottle"><value>30</value></property>
 		<!--
 		<property name="testAfterUse"><value>true</value></property>
 		 -->
- 		<property name="houseKeepingSleepTime"><value>60000</value></property>
-		<property name="houseKeepingTestSql"><value>SELECT CURRENT_DATE</value></property>
+
 	</bean>
  
 	<bean id="jdbcTemplate"

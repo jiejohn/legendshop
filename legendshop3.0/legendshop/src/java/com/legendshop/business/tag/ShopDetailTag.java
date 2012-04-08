@@ -49,8 +49,8 @@ public class ShopDetailTag extends LegendShopTag {
 	 */
 	@Override
 	public void doTag() throws JspException, IOException {
-		if(AppUtils.isNotBlank(request().getSession().getAttribute(Constants.SHOP_NAME))){
-			String shopName = (String)request().getSession().getAttribute(Constants.SHOP_NAME);
+		String shopName = (String)request().getSession().getAttribute(Constants.SHOP_NAME);
+		if(AppUtils.isNotBlank(shopName)){
 			ShopDetailView shopDetail = shopDetailService.getShopDetailView(shopName);
 			if(shopDetail != null){
 				this.setAttribute(this.var, shopDetail);

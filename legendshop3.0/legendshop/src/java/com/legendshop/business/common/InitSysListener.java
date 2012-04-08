@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.ContextServiceLocator;
 import com.legendshop.core.StartupService;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -74,6 +75,8 @@ public class InitSysListener implements ServletContextListener {
 		if (AppUtils.isBlank(PropertiesUtil.getLegendShopSystemId())) {
 			PropertiesUtil.changeLegendShopSystemId();
 		}
+		
+		event.getServletContext().setAttribute("WEB_SUFFIX",AttributeKeys.WEB_SUFFIX);
 		
 		// 4.系统初始化
 		if (PropertiesUtil.isSystemInstalled()) {

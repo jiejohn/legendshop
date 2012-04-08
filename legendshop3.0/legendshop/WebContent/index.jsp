@@ -1,3 +1,4 @@
+<!-- 
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
 <%
 	String name = request.getServerName();
@@ -6,3 +7,5 @@
 	}else{ %>
  <jsp:forward page="/index${applicationScope.WEB_SUFFIX}"></jsp:forward>
 <% }%>
+ -->
+ <jsp:forward page="/index${applicationScope.WEB_SUFFIX}"></jsp:forward>
