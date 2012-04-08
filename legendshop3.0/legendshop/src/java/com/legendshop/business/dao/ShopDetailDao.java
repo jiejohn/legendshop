@@ -157,5 +157,8 @@ public interface ShopDetailDao extends BaseDao{
 	 *            the product
 	 */
 	public abstract void updateShopDetailWhenProductChange(Product product);
+	
+	
+	public abstract ShopDetail getShopDetailByUserId(String userId);
 
 }

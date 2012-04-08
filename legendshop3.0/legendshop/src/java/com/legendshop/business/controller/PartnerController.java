@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.PartnerService;
+import com.legendshop.business.service.ShopDetailService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
@@ -30,9 +31,11 @@ import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.model.entity.DeliveryCorp;
 import com.legendshop.model.entity.Partner;
+import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -44,6 +47,9 @@ import com.legendshop.util.AppUtils;
 public class PartnerController extends BaseController implements AdminController<Partner, Long> {
     @Autowired
     private PartnerService partnerService;
+    
+    @Autowired
+    private ShopDetailService shopDetailService;
 
     @RequestMapping("/query")
     public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Partner partner) {
@@ -70,12 +76,25 @@ public class PartnerController extends BaseController implements AdminController
     	}else{
     		p=partner;
     		p.setCreateTime(new Date());
+    		p.setCommentBad(0);
+    		p.setCommentGood(0);
+    		p.setCommentNone(0);
     	}
     	
 
     	p.setUserId(UserManager.getUserId(request));
     	p.setUserName(UserManager.getUsername(request));
     	p.setModifyTime(new Date());
+    	
+    	ShopDetail shopDetail=shopDetailService.getShopDetailByUserId(UserManager.getUserId(request));
+    	
+    	if(shopDetail==null){
+    		throw new PermissionException("Can't find shopDetail by userId!",EntityCodes.SYSTEM);
+    	}
+    	
+    	p.setShopId(shopDetail.getShopId());
+    	
+    	
     	
     	
         partnerService.savePartner(p);

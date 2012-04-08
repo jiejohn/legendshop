@@ -86,5 +86,8 @@ public interface ShopDetailService {
 	 * @return the data by criteria query
 	 */
 	public abstract PageSupport getShopDetail(CriteriaQuery cq);
+	
+
+	public abstract ShopDetail getShopDetailByUserId(String userId);
 
 }

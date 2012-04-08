@@ -294,4 +294,9 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ShopDetail getShopDetailByUserId(String userId) {
+		return findUniqueBy("from ShopDetail sd where sd.userId = ?", ShopDetail.class, userId);
+	}
 }

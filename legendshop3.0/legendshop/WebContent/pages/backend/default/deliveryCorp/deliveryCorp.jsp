@@ -27,10 +27,10 @@
         },
         messages: {
         	name: {
-                required: "not null",
+                required: '<fmt:message key="deliverycorp.name.required"/>',
             },
         	url: {
-                required: "not null",
+                required: '<fmt:message key="deliverycorp.url.required"/>',
             }
         }
     });

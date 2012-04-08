@@ -50,7 +50,10 @@ public class DeliveryCorpController extends BaseController implements AdminContr
         CriteriaQuery cq = new CriteriaQuery(DeliveryCorp.class, curPageNO);
         cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));        
         cq = hasAllDataFunction(cq, request, StringUtils.trim(deliveryCorp.getUserName()));
-        hasAllDataFunction(cq, request,"name", StringUtils.trim(deliveryCorp.getName()));
+
+		if (!AppUtils.isBlank(deliveryCorp.getName())) {
+			cq.like("name", "%" + deliveryCorp.getName() + "%");
+		}
         /*
            //TODO add your condition
         */

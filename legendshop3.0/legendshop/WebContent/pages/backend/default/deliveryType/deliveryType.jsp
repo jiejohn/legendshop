@@ -2,6 +2,7 @@
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
 <%@ include file="/pages/common/back-common.jsp"%>
 <%@ include file="/pages/common/taglib.jsp"%>
+<%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option" %>
 <html>
     <head>
         <title>创建DeliveryType</title>
@@ -89,7 +90,17 @@
           <div align="center">默认物流公司: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="dvyId" id="dvyId" value="${deliveryType.dvyId}" /></p>
+           <p>
+           	<select id="dvyId" name="dvyId">
+	            <option:optionGroup type="select" required="true" cache="fasle"
+	                beanId="dvyId" beanDisp="name" defaultDisp="-- 物流公司 --" 
+	                hql="select t.dvyId, t.name from DeliveryCorp t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"
+	                selectedValue="${deliveryType.dvyId}"
+	                />
+			</select>
+           
+           
+           </p>
         </td>
       </tr>
      <tr>

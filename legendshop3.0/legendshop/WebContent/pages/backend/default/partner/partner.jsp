@@ -134,7 +134,7 @@
       </tr>
      <tr>
         <td>
-          <div align="center">商户所在位置: </div>
+          <div align="center">商户所在位置: <font color="ff0000">*</font></div>
        </td>
         <td>
            <p><input type="text" name="location" id="location" value="${partner.location}" /></p>

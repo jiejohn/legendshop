@@ -143,6 +143,11 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 		this.shopDetailSearchFacade = shopDetailSearchFacade;
 	}
 
+	@Override
+	public ShopDetail getShopDetailByUserId(String userId) {
+		return shopDetailDao.getShopDetailByUserId(userId);
+	}
+
 
 
 }
