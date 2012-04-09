@@ -155,6 +155,7 @@
  <servlet>
 	<servlet-name>Jcaptcha</servlet-name>
 	<servlet-class>com.legendshop.core.randing.JcaptchaServlet</servlet-class>
+	<load-on-startup>0</load-on-startup>
  </servlet>
 
   

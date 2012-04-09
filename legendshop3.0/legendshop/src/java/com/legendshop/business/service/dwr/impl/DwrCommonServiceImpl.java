@@ -56,6 +56,7 @@ import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
+import com.legendshop.core.randing.CaptchaServiceSingleton;
 import com.legendshop.core.randing.RandomStringUtils;
 import com.legendshop.model.dynamic.Item;
 import com.legendshop.model.dynamic.Model;
@@ -1145,5 +1146,16 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	@Required
 	public void setLocaleResolver(LocaleResolver localeResolver) {
 		this.localeResolver = localeResolver;
+	}
+
+	@Override
+	public boolean validateRandImg(String validateCodeParameter) {
+		if(PropertiesUtil.getObject(ParameterEnum.VALIDATION_IMAGE, Boolean.class)){
+			WebContext webContext = WebContextFactory.get();
+			boolean result = CaptchaServiceSingleton.getInstance().validateResponseForID(webContext.getSession().getId(), validateCodeParameter);
+			return result;
+		}else{
+			throw new BusinessException("not support VALIDATION_IMAGE", EntityCodes.SYSTEM);
+		}
 	}
 }

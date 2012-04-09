@@ -115,7 +115,7 @@ public class SubDaoImpl extends SubCommonDaoImpl implements SubDao {
 			if (status.equals(OrderStatusEnum.CONSIGNMENT.value())) {
 				try {
 					String result = alipaySendGoods(sub);
-					log.error("alipaySendGoods result = {}", result);
+					log.debug("alipaySendGoods result = {}", result);
 				} catch (Exception e) {
 					log.warn("alipaySendGoods fail", e);
 				}
@@ -153,7 +153,7 @@ public class SubDaoImpl extends SubCommonDaoImpl implements SubDao {
 
 			sub.setStatus(status);
 			sub.setUpdateDate(new Date());
-			log.info("userName {} update sub with status ", userName, status);
+			log.info("userName {} update sub with status {}", userName, status);
 			update(sub);
 			return true;
 		}

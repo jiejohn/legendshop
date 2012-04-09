@@ -67,6 +67,39 @@ public class SortDaoImpl extends BaseDaoImpl implements SortDao {
 					}
 				});
 	}
+	
+	@Override
+	public List<Sort> getSort(final String shopName, final String sortType,final boolean loadAll) {
+		log.debug("getSort, shopName = {}, loadAll = {}", shopName, loadAll);
+		return (List<Sort>) getObjectFromCache(getKey(CacheKeys.SORTDAO_GETSORT, shopName,sortType, loadAll),
+				new CacheCallBack<List<Sort>>() {
+					@Override
+					public List<Sort> doInCache(String cahceName, Cache cache) {
+						List<Sort> list = findByHQL("from Sort where userName = ? and sortType = ? order by seq", shopName,sortType);
+						if (loadAll) {
+							// 找出所有的Nsort
+							List<Nsort> nsortList = findByHQL(
+									"select n from Nsort n, Sort s where n.sortId = s.sortId and s.userName = ? and s.sortType = ?",
+									shopName,sortType);
+							for (int i = 0; i < nsortList.size(); i++) {
+								Nsort n1 = nsortList.get(i);
+								for (int j = i; j < nsortList.size(); j++) {
+									Nsort n2 = nsortList.get(j);
+									n1.addSubSort(n2);
+									n2.addSubSort(n1);
+								}
+							}
+
+							for (Sort sort : list) {
+								for (Nsort nsort : nsortList) {
+									sort.addSubSort(nsort);
+								}
+							}
+						}
+						return list;
+					}
+				});
+	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.SortDao#getSort(java.lang.Long)

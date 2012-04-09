@@ -7,6 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 	<head>
+	    <lb:shopDetail var="shopDetail" />
         <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
         <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/optionService.js'></script>
   		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>

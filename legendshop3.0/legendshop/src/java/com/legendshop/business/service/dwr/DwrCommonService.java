@@ -15,6 +15,9 @@ import com.legendshop.model.dynamic.Item;
 import com.legendshop.model.dynamic.Model;
 import com.legendshop.model.entity.Indexjpg;
 
+/**
+ * The Interface DwrCommonService.
+ */
 public interface DwrCommonService {
 
 	/**
@@ -258,8 +261,6 @@ public interface DwrCommonService {
 	 *            the id
 	 * @param answer
 	 *            the answer
-	 * @param loginName
-	 *            the login name
 	 * @return the string
 	 */
 	public abstract String answerWord(Long id, String answer);
@@ -270,6 +271,13 @@ public interface DwrCommonService {
 	 * @return the map
 	 */
 	public abstract Map<String, String> changeRandImg();
+	
+	/**
+	 * Validate rand img.
+	 * 
+	 * @return true, if successful
+	 */
+	public abstract boolean validateRandImg(String validateCodeParameter);
 
 	/**
 	 * 审核商城.

@@ -4,13 +4,15 @@
 <%@include file='/pages/common/taglib.jsp'%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
+<%@ taglib uri="http://www.legendesign.net/biz" prefix="lb"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
  <link href="${pageContext.request.contextPath}/common/css/searchall.css" rel="stylesheet" type="text/css" />
 <title>
+<lb:shopDetail var="shopDetail" />
 <c:choose>
-	<c:when test="${sessionScope.shopDetail != null}">
-		${sessionScope.shopDetail.sitename}
+	<c:when test="${shopDetail != null}">
+		${shopDetail.sitename}
 	</c:when>
 	<c:otherwise>
 		LegendShop - Java企业级商城系统

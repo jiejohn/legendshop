@@ -119,6 +119,14 @@ public class SortServiceImpl implements SortService  {
         this.sortDao = sortDao;
     }
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.service.SortService#getSort(java.lang.String, java.lang.String, boolean)
+	 */
+	@Override
+	public List<Sort> getSort(String name, String sortType, boolean loadAll) {
+		return sortDao.getSort(name,sortType, loadAll);
+	}
+
 
 }
 

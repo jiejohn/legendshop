@@ -3,8 +3,10 @@
 <html>
 <head>
 <%@include file='/pages/common/common.jsp'%>
-    <link href="${pageContext.request.contextPath}/common/style/style_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/common/style/global_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
+<lb:shopDetail var="shopDetail" >
+    <link href="<ls:templateResource item='/common/style/style_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
+    <link href="<ls:templateResource item='/common/style/global_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
+</lb:shopDetail>
 <title>
 
 <c:choose>

@@ -2,6 +2,7 @@
 <%@ include file="/pages/common/common.jsp"%>
 <%@include file='/pages/common/taglib.jsp'%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
+<lb:shopDetail var="shopDetail" />
 <c:if test="${requestScope.adList!=null}">
 <table width="954px" cellpadding="0" cellspacing="0" style="margin-top: 5px">
 <tr><td align="center">

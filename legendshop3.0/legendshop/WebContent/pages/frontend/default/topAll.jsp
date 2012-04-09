@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
 <%@include file='/pages/common/common.jsp'%>
 <%@include file='/pages/common/taglib.jsp'%>
@@ -7,10 +7,11 @@
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link href="${pageContext.request.contextPath}/common/style/style_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/common/style/global_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/common/css/searchall.css" rel="stylesheet" type="text/css" />
-    <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+	<lb:shopDetail var="shopDetail" />
+	    <link href="<ls:templateResource item='/common/style/style_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
+	    <link href="<ls:templateResource item='/common/style/global_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
+    <link href="<ls:templateResource item='/common/css/searchall.css'/>" rel="stylesheet" type="text/css" />
+    <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 <title>LegendShop
 <c:choose>
    <c:when test="${shopDetail != null}">
@@ -20,7 +21,7 @@
    </c:otherwise>
 </c:choose>
 </title>
-<link rel="icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="<ls:templateResource item='/favicon.ico'/>" type="image/x-icon" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="description" content="${shopDetail.storeName},${shopDetail.briefDesc}" />
 <meta name="keywords" content="${shopDetail.storeName},${shopDetail.briefDesc}"/>
@@ -47,7 +48,7 @@
 		if(document.getElementById("areaid")){
 			document.getElementById("areaidValue").value = document.getElementById("areaid").value;
 		}
-        document.getElementById("searchAllTopform").action = "${pageContext.request.contextPath}/searchall${applicationScope.WEB_SUFFIX}?entityType=" + entityType +"&keyword="+keyword;
+        document.getElementById("searchAllTopform").action = "<ls:url address='/searchall'/>?entityType=" + entityType +"&keyword="+keyword;
 		document.getElementById("searchAllTopform").submit();
 	}
 	
@@ -64,7 +65,7 @@
 <table width="954px" style="border-bottom-width: 1px;border-bottom-color: red;border: 1px">
     <tr>
     <td width="160px">
-    <a href="${pageContext.request.contextPath}/index${applicationScope.WEB_SUFFIX}"><img src="${pageContext.request.contextPath}/img/legendshop.gif" width="160px" title="LegendShop"/></a>
+    <a href="<ls:url address='/index'/>"><img src="<ls:templateResource item='/img/legendshop.gif'/>" width="160px" title="LegendShop"/></a>
     </td>
      <td>
 	     <table width="100%">
@@ -75,27 +76,27 @@
 		    <%if(PropertiesUtil.getDefaultShopName()!=null && PropertiesUtil.getDefaultShopName().length() > 0){ %>
 		   		<a href="${pageContext.request.contextPath}/shop/<%=PropertiesUtil.getDefaultShopName() %>${applicationScope.WEB_SUFFIX}"><fmt:message key="shop.index"/></a>
 		   <%} %>
-		   <a href="${pageContext.request.contextPath}/all${applicationScope.WEB_SUFFIX}"><fmt:message key="search"/></a></td>
+		   <a href="<ls:url address='/all'/>"><fmt:message key="search"/></a></td>
 		     <td align="right">
 		     	   <c:choose>
 					 <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
 					  <span style="color: red; font-weight: bold;">${sessionScope.SPRING_SECURITY_LAST_USERNAME}</span>
-					   	<a href="${pageContext.request.contextPath}/myaccount${applicationScope.WEB_SUFFIX}")><fmt:message key="myaccount"/></a>
-					   	<a href="${pageContext.request.contextPath}/order${applicationScope.WEB_SUFFIX}")><fmt:message key="myorder"/></a>
+					   	<a href="<ls:url address='/myaccount'/>")><fmt:message key="myaccount"/></a>
+					   	<a href="<ls:url address='/order'/>")><fmt:message key="myorder"/></a>
 						<a href="${pageContext.request.contextPath}/logout.jsp" target="_parent"><fmt:message key="logout"/></a>
        			        <auth:auth ifAnyGranted="F_ADMIN">
        			        	<c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
-       			                <a href="${pageContext.request.contextPath}/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}${applicationScope.WEB_SUFFIX}"><fmt:message key="myShop"/></a>
+       			                <a href="<ls:url address='/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}'/>"><fmt:message key="myShop"/></a>
        			             </c:if>
-					            <a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}"><fmt:message key="system.management"/></a>
+					            <a href="<ls:url address='/admin/index'/>"><fmt:message key="system.management"/></a>
 					    </auth:auth>
 					   </c:when>
 					   <c:otherwise>
-					     	<a href="${pageContext.request.contextPath}/login${applicationScope.WEB_SUFFIX}"><fmt:message key="login"/></a>
+					     	<a href="<ls:url address='/login'/>"><fmt:message key="login"/></a>
 				   </c:otherwise>
 	    		</c:choose>
 		     
-	    		<a href="${pageContext.request.contextPath}/reg${applicationScope.WEB_SUFFIX}"><fmt:message key="register.title"/></a> 
+	    		<a href="<ls:url address='/reg'/>"><fmt:message key="register.title"/></a> 
 				<a href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club"><fmt:message key="bbs"/></a>  
              </td>
 	     </tr>
@@ -104,7 +105,7 @@
      </tr>
      <tr>
      <td align="left">
-     <form action="${pageContext.request.contextPath}/searchall${applicationScope.WEB_SUFFIX}" method="post" id="searchAllTopform">
+     <form action="<ls:url address='/searchall'/>" method="post" id="searchAllTopform">
      	<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
      	<input type="hidden" id="priceStartValue" name="priceStartValue" />
      	<input type="hidden" id="priceEndValue" name="priceEndValue"/>

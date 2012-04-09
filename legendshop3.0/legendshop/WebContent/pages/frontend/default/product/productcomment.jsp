@@ -59,10 +59,10 @@
 																		<td align="right"><fmt:message key="validation.code"/></td>
 																			<input type="hidden" id="rand" name="rand"/>
 																			<input type="hidden" id="cannonull" name="cannonull" value="<fmt:message key="randomimage.errors.required"/>"/>
-																			<input type="hidden" id="charactors4" name="charactors4" value="<fmt:message key="randomimage.charactors4.required"/>"/>
+																			<input type="hidden" id="charactors4" name="charactors4" value="<ls:i18n key="randomimage.charactors.required" length="6"/>"/>
 																			<input type="hidden" id="errorImage" name="errorImage" value="<fmt:message key="error.image.validation"/>"/>
-																			<td align="left"><input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="4" size="4" tabindex="3" >
-																			<img id="randImage" name="randImage"/></td>
+																			<td align="left"><input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="7" size="7" tabindex="3" >
+																			<img id="randImage" name="randImage" src="<ls:templateResource item='/captcha.svl'/>"/></td>
 																		</tr>					
 																		<tr><td></td><td align="left"><fmt:message key="change.random1"/> &nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a></td></tr>
 																		<tr>										
@@ -107,7 +107,7 @@
   function addProdcutComment(){
 	var prodId = ${prod.prodId};
 	var content = document.getElementById("content"); 
-	if(checkRandNum()){
+	if(validateRandNum('${pageContext.request.contextPath}')){
 	if(checkform(content)){
              CommonService.addProdcutComment(prodId,content.value,function(dataArray){
                 try{
@@ -129,7 +129,4 @@
 	}
 }
    
-   	window.onload = function(){
-		changeRandImg('${pageContext.request.contextPath}');
-    } 
 </script>

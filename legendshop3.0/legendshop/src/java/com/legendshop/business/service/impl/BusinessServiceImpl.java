@@ -295,9 +295,9 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		ShopDetailView shopDetail = shopDetailDao.getShopDetailView(currentShopName);
 		log.debug("getShopDetailView currentShopName = {}, shopDetail = {}",currentShopName, shopDetail);
 
-		if(!inShopDetail || request.getSession().getAttribute(Constants.SHOP_DETAIL) == null ){
-			log.debug("initing shopDetail and set to session");
-			request.getSession().setAttribute(Constants.SHOP_DETAIL, shopDetail);
+		if(!inShopDetail){
+			//log.debug("initing shopDetail and set to session");
+			//request.getSession().setAttribute(Constants.SHOP_DETAIL, shopDetail);
 			setLocalByShopDetail(shopDetail, request, response);
 		}
 		return shopDetail;
@@ -368,6 +368,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public void setLocalByShopDetail(ShopDetailView shopDetail, HttpServletRequest request, HttpServletResponse response) {
+		log.debug("setLocalByShopDetail calling");
 		if (shopDetail == null) {
 			return;
 		}
@@ -394,7 +395,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		// cookie.setMaxAge(100000); // -1为永不过期,或者指定过期时间
 		// response.addCookie(cookie);// 在退出登录操作中删除cookie.
 		// session.setAttribute(AttributeKeys.LOCALE_KEY, locale);
-
+		log.debug("setLocal {}, By ShopDetail {}", locale, shopDetail.getSitename());
 		localeResolver.setLocale(request, response, locale);
 
 	}

@@ -22,7 +22,7 @@
 							</tr>
 							<tr>
 								<td>
-							<form method="POST" action="${pageContext.request.contextPath}/admin/userComment/save${applicationScope.WEB_SUFFIX}" id="form1" name="form1"  onsubmit="return checkRandNum();">
+							<form method="POST" action="${pageContext.request.contextPath}/admin/userComment/save${applicationScope.WEB_SUFFIX}" id="form1" name="form1"  onsubmit="return validateRandNum('${pageContext.request.contextPath}');">
 														<input id="userId" name="userId"
 															value="<%=UserManager.getUserId(request)%>" type="hidden" />
 														<input id="userName" name="userName"
@@ -65,10 +65,10 @@
 																		<td align="right"><fmt:message key="validation.code"/>：</td>
 																			<input type="hidden" id="rand" name="rand"/>
 																			<input type="hidden" id="cannonull" name="cannonull" value="<fmt:message key="randomimage.errors.required"/>"/>
-																			<input type="hidden" id="charactors4" name="charactors4" value="<fmt:message key="randomimage.charactors4.required"/>"/>
+																			<input type="hidden" id="charactors4" name="charactors4" value="<ls:i18n key="randomimage.charactors.required" length="6"/>"/>
 																			<input type="hidden" id="errorImage" name="errorImage" value="<fmt:message key="error.image.validation"/>"/>
-																			<td align="left"><input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="4" size="4" tabindex="3" >
-																			<img id="randImage" name="randImage"/></td>
+																			<td align="left"><input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="7" size="7" tabindex="3" >
+																			<img id="randImage" name="randImage" src="<ls:templateResource item='/captcha.svl'/>"/></td>
 																		</tr>					
 																		<tr><td></td><td align="left"><fmt:message key="change.random1"/> &nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a></td></tr>
 																		
@@ -109,7 +109,4 @@ jQuery(document).ready(function() {
     })
 });  
  
-   window.onload = function(){
-		changeRandImg('${pageContext.request.contextPath}');
-    } 
 </script>

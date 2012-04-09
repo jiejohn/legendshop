@@ -7,8 +7,10 @@
 		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
   		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
 		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-    <link href="${pageContext.request.contextPath}/common/style/style_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/common/style/global_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
+<lb:shopDetail var="shopDetail" >
+    <link href="<ls:templateResource item='/common/style/style_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
+    <link href="<ls:templateResource item='/common/style/global_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
+</lb:shopDetail>
   <c:choose>
    <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME == null}">
    </c:when>

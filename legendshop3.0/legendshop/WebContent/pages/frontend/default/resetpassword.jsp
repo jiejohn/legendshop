@@ -11,7 +11,7 @@
 		<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/randomimage.js"></script>
 	<script type="text/javascript">
 		function reset(){
-			if(checkRandNum()){
+			if(validateRandNum('${pageContext.request.contextPath}')){
 			var resetpass = document.getElementById("resetpass");
 			var sendMail = document.getElementById("sendMail");
 			var userName = document.getElementById("userName").value;
@@ -31,7 +31,7 @@
   <body>
   	        <input type="hidden" id="rand" name="rand"/>
 			<input type="hidden" id="cannonull" name="cannonull" value='<fmt:message key="randomimage.errors.required"/>'/>
-			<input type="hidden" id="charactors4" name="charactors4" value='<fmt:message key="randomimage.charactors4.required"/>'/>
+			<input type="hidden" id="charactors4" name="charactors4" value='<ls:i18n key="randomimage.charactors.required" length="6"/>'/>
 			<input type="hidden" id="errorImage" name="errorImage" value='<fmt:message key="error.image.validation"/>'/>
     <table class="tables" id="resetpass" cellpadding="0" cellspacing="0">
         	<tr height="25px">
@@ -51,23 +51,22 @@
     	<tr height="25px">
     	   <td><fmt:message key="validation.code"/>：</td>
     		<td>
-    			<img id="randImage" name="randImage"/>
-		<input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="4" size="4" tabindex="3" >
-		 &nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a>
-
+    			
+		<input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="50" tabindex="3" >
     		</td>
     	</tr>    	
-
+		<tr height="25px">
+			<td></td>
+			<td>
+			<img id="randImage" name="randImage" src="<ls:templateResource item='/captcha.svl'/>"/>
+			&nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a>
+			</td>
+		</tr>
 
     	<tr height="25px"><td colspan="2" align="center"><input type="submit" value='<fmt:message key="submit"/>' onclick="reset()"/></td></tr>
     </table>
     <table id="sendMail" style="display: none">
     	<tr><td><br><br><fmt:message key="reset.mail.sended"/></td></tr>
     </table>
-	<script type="text/javascript">	
-		window.onload = function(){
-		changeRandImg('${pageContext.request.contextPath}');
-    }
-    </script>
   </body>
 </html>

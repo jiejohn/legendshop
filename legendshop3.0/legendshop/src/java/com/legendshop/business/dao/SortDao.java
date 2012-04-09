@@ -1,3 +1,10 @@
+/*
+ * 
+ * LegendShop 多用户商城系统
+ * 
+ *  版权所有,并保留所有权利。
+ * 
+ */
 package com.legendshop.business.dao;
 
 import java.util.List;
@@ -7,6 +14,9 @@ import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.Sort;
 
+/**
+ * The Interface SortDao.
+ */
 public interface SortDao extends BaseDao{
 
 	/**
@@ -98,5 +108,18 @@ public interface SortDao extends BaseDao{
 	 *            the sort
 	 */
 	public abstract void deleteSort(Sort sort);
+
+	/**
+	 * Gets the sort.
+	 * 
+	 * @param name
+	 *            the name
+	 * @param sortType
+	 *            the sort type
+	 * @param loadAll
+	 *            the load all
+	 * @return the sort
+	 */
+	public abstract List<Sort> getSort(String name, String sortType, boolean loadAll);
 
 }

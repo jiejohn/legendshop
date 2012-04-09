@@ -9,14 +9,14 @@ package com.legendshop.business.service;
 
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.service.ShopService;
 import com.legendshop.model.entity.ShopDetail;
-import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.model.entity.UserDetail;
 
 /**
  * The Interface ShopDetailService.
  */
-public interface ShopDetailService {
+public interface ShopDetailService extends ShopService{
 
 	/**
 	 * Find shop detail.
@@ -36,14 +36,6 @@ public interface ShopDetailService {
 	 */
 	public abstract UserDetail getShopDetailByName(String userName);
 	
-	/**
-	 * Gets the shop detail view.
-	 * 
-	 * @param currentShopName
-	 *            the current shop name
-	 * @return the shop detail view
-	 */
-	public abstract ShopDetailView getShopDetailView(String currentShopName);
 
 	/**
 	 * Delete.

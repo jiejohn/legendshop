@@ -59,8 +59,10 @@ jQuery.validator.setDefaults({
     	document.getElementById("cashSaveForm").submit();
     }
 </script>
-    <link href="${pageContext.request.contextPath}/common/style/style_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/common/style/global_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
+<lb:shopDetail var="shopDetail" >
+    <link href="<ls:templateResource item='/common/style/style_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
+    <link href="<ls:templateResource item='/common/style/global_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
+</lb:shopDetail>
   <c:choose>
    <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME == null}">
 		<logic:forward name="nologon"/>

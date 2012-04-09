@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file='/pages/common/taglib.jsp'%>
-    <link href="${pageContext.request.contextPath}/common/style/style_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/common/style/global_${shopDetail.colorStyle}.css" rel="stylesheet" type="text/css" />
+<lb:shopDetail var="shopDetail" >
+    <link href="<ls:templateResource item='/common/style/style_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
+    <link href="<ls:templateResource item='/common/style/global_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
+</lb:shopDetail>
 		<table class="tablesnoborder" width="100%" cellpadding="0" cellspacing="0">
 			<tr style="font-weight: bold">
 			  <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">

@@ -25,6 +25,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.BasketDao;
+import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.randing.CaptchaServiceSingleton;
 import com.legendshop.model.entity.Basket;
 
 /**
@@ -45,18 +48,11 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 	private boolean postOnly = true;
 	
 	/** The login history service. */
-	private LoginHistoryService loginHistoryServiceImpl;
+	private LoginHistoryService loginHistoryService;
 	
 	/** The basket dao. */
-	private BasketDao basketDaoImpl;
+	private BasketDao basketDao;
 	
-	/** The allow empty validate code. */
-	private boolean allowEmptyValidateCode = false;
-	
-	/** The sessionvalidate code field. */
-	private String sessionvalidateCodeField = DEFAULT_SESSION_VALIDATE_CODE_FIELD;
-	
-	/** The Constant DEFAULT_SESSION_VALIDATE_CODE_FIELD. */
 	public static final String DEFAULT_SESSION_VALIDATE_CODE_FIELD = "randNum";
 	
 	/** The support sso. */
@@ -94,30 +90,35 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 		}
 
 		username = username.trim();
+		
+		// Place the last username attempted into HttpSession for views
+		HttpSession session = request.getSession();
+		
+//		if (session != null || getAllowSessionCreation()) {
+//			request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY,username);
+//		}
+		
+		// check validate code
+		if (isUseValidateCode()) {
+			if(!checkValidateCode(request)){
+				throw new AuthenticationServiceException("验证码失败");
+			}
+		}
 
 		// String pass= MD5Util.Md5Password(username, password);
 
 		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
 
-		// Place the last username attempted into HttpSession for views
-		HttpSession session = request.getSession();
-//
-//		if (session != null || getAllowSessionCreation()) {
-//			request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY,
-//					TextEscapeUtils.escapeEntities(username));
-//		}
+
 
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);
-		// check validate code
-		if (!isAllowEmptyValidateCode()) {
-			checkValidateCode(request);
-		}
+
 
 		Authentication auth = this.getAuthenticationManager().authenticate(authRequest);
 		if (auth != null && auth.isAuthenticated()) {
 			// 处理登录历史
-			loginHistoryServiceImpl.saveLoginHistory(username, request.getRemoteAddr());
+			loginHistoryService.saveLoginHistory(username, request.getRemoteAddr());
 			// 增加session登录信息
 			
 			session.setAttribute(Constants.USER_NAME, username);
@@ -128,7 +129,7 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 			if (basketMap != null) {
 				// 保存进去数据库
 				for (Basket basket : basketMap.values()) {
-					basketDaoImpl.saveToCart(basket.getProdId(), basket.getPic(), username, basket.getShopName(), basket
+					basketDao.saveToCart(basket.getProdId(), basket.getPic(), username, basket.getShopName(), basket
 							.getBasketCount(), basket.getAttribute(), basket.getProdName(), basket.getCash(), basket
 							.getCarriage());
 				}
@@ -151,8 +152,10 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 	 * 
 	 * @param request
 	 *            the request
+	 * @deprecated
 	 */
-	protected void checkValidateCode(HttpServletRequest request) {
+	@Deprecated
+	protected void checkValidateCode_bak(HttpServletRequest request) {
 		String sessionValidateCode = obtainSessionValidateCode(request);
 		String validateCodeParameter = obtainValidateCodeParameter(request);
 		if (StringUtils.isEmpty(validateCodeParameter) || !sessionValidateCode.equalsIgnoreCase(validateCodeParameter)) {
@@ -161,6 +164,11 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 		}
 	}
 
+	protected boolean checkValidateCode(HttpServletRequest request) {
+		String validateCodeParameter = obtainValidateCodeParameter(request);
+		return  CaptchaServiceSingleton.getInstance().validateResponseForID( request.getSession().getId(), validateCodeParameter);
+	}
+	
 	/**
 	 * Obtain validate code parameter.
 	 * 
@@ -180,7 +188,7 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 	 * @return the string
 	 */
 	protected String obtainSessionValidateCode(HttpServletRequest request) {
-		Object obj = request.getSession().getAttribute(sessionvalidateCodeField);
+		Object obj = request.getSession().getAttribute(DEFAULT_SESSION_VALIDATE_CODE_FIELD);
 		return null == obj ? "" : obj.toString();
 	}
 
@@ -201,62 +209,35 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 		this.postOnly = postOnly;
 	}
 
-	/**
-	 * Gets the validate code name.
-	 * 
-	 * @return the validate code name
-	 */
-	public String getValidateCodeName() {
-		return sessionvalidateCodeField;
-	}
-
-	/**
-	 * Sets the validate code name.
-	 * 
-	 * @param validateCodeName
-	 *            the new validate code name
-	 */
-	public void setValidateCodeName(String validateCodeName) {
-		this.sessionvalidateCodeField = validateCodeName;
-	}
 
 	/**
 	 * Checks if is allow empty validate code.
 	 * 
 	 * @return true, if is allow empty validate code
 	 */
-	public boolean isAllowEmptyValidateCode() {
-		return allowEmptyValidateCode;
+	public boolean isUseValidateCode() {
+		return PropertiesUtil.getObject(ParameterEnum.VALIDATION_IMAGE, Boolean.class);
 	}
 
-	/**
-	 * Sets the allow empty validate code.
-	 * 
-	 * @param allowEmptyValidateCode
-	 *            the new allow empty validate code
-	 */
-	public void setAllowEmptyValidateCode(boolean allowEmptyValidateCode) {
-		this.allowEmptyValidateCode = allowEmptyValidateCode;
-	}
 
 	/**
 	 * Sets the login history service.
 	 * 
-	 * @param loginHistoryServiceImpl
+	 * @param loginHistoryService
 	 *            the new login history service
 	 */
-	public void setLoginHistoryService(LoginHistoryService loginHistoryServiceImpl) {
-		this.loginHistoryServiceImpl = loginHistoryServiceImpl;
+	public void setLoginHistoryService(LoginHistoryService loginHistoryService) {
+		this.loginHistoryService = loginHistoryService;
 	}
 
 	/**
 	 * Sets the basket dao.
 	 * 
-	 * @param basketDaoImpl
+	 * @param basketDao
 	 *            the new basket dao
 	 */
-	public void setBasketDao(BasketDao basketDaoImpl) {
-		this.basketDaoImpl = basketDaoImpl;
+	public void setBasketDao(BasketDao basketDao) {
+		this.basketDao = basketDao;
 	}
 
 }

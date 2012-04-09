@@ -15,20 +15,17 @@
 <body>
 	        <input type="hidden" id="rand" name="rand"/>
 			<input type="hidden" id="cannonull" name="cannonull" value='<fmt:message key="randomimage.errors.required"/>'/>
-			<input type="hidden" id="charactors4" name="charactors4" value='<fmt:message key="randomimage.charactors4.required"/>'/>
+			<input type="hidden" id="charactors4" name="charactors4" value='<ls:i18n key="randomimage.charactors.required" length="6"/>'/>
 			<input type="hidden" id="errorImage" name="errorImage" value='<fmt:message key="error.image.validation"/>'/>
          订单<b>${param.subNumber}</b>, 原价<b><fmt:formatNumber type="currency" value="${param.total}" pattern="${CURRENCY_PATTERN}"/></b><br>
 		最新价格：<input type="text" id="price" name="price"/>
 		<input name="submit" type="button" value='确认' class="s" tabindex="4" onclick="javascript:changePrice();">
 		<br>
-		<img id="randImage" name="randImage"/>
-		<input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="4" size="4" tabindex="3" >
+		<img id="randImage" name="randImage" src="<ls:templateResource item='/captcha.svl'/>"/>
+		<input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="7" size="7" tabindex="3" >
 		 &nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a>
 		 <br>
 <script type="text/javascript">	
-	window.onload = function(){
-		changeRandImg('${pageContext.request.contextPath}');
-    }
  
     function changePrice(total,subId,subNumber) {
    	var price = document.getElementById("price");
@@ -39,7 +36,7 @@
    		return;
    	}
 
-   	if(price.value!= null && price.value != "null" && checkRandNum()){
+   	if(price.value!= null && price.value != "null" && validateRandNum('${pageContext.request.contextPath}')){
    	      var subId = '${param.subId}';
    	   	  CommonService.adminChangeSubPrice(subId,price.value, function(retData){
 	       if(retData == null ){

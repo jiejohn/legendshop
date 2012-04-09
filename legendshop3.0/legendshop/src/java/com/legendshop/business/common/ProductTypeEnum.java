@@ -7,47 +7,47 @@
  */
 package com.legendshop.business.common;
 
-import com.legendshop.core.constant.IntegerEnum;
+import com.legendshop.core.constant.StringEnum;
 
 
 /**
  * use by Product Sub Sort
  * The Enum ProductTypeEnum.
  */
-public enum ProductTypeEnum implements IntegerEnum {
+public enum ProductTypeEnum implements StringEnum {
 
 	/** 普通商品订单 *. */
-	PRODUCT(1),
+	PRODUCT("P"),
 
 	/** 团购商品订单. */
-	GROUP(2),
+	GROUP("G"),
 	
 	/** 二手商品订单 *. */
-	SECOND_HAND(3),
+	SECOND_HAND("S"),
 	
 	/** 打折商品 *. */
-	DISCOUNT(4)
+	DISCOUNT("D")
 	;
 
 	/** The num. */
-	private Integer num;
+	private String value;
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.constant.IntegerEnum#value()
 	 */
 	@Override
-	public Integer value() {
-		return num;
+	public String value() {
+		return value;
 	}
 
 	/**
 	 * Instantiates a new order status enum.
 	 * 
-	 * @param num
-	 *            the num
+	 * @param value
+	 *            the value
 	 */
-	ProductTypeEnum(Integer num) {
-		this.num = num;
+	ProductTypeEnum(String value) {
+		this.value = value;
 	}
 
 }

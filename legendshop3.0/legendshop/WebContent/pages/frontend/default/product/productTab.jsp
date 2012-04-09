@@ -1,11 +1,15 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/pages/common/common.jsp"%>
 <%@ include file="/pages/common/taglib.jsp"%>
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/css/productTab.css" />
-<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/productTab.js"></script>
+<%@ taglib uri="http://www.legendesign.net/biz" prefix="lb"%>
+
+	<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+	<lb:shopDetail var="shopDetail" />	
+		
+<link rel="stylesheet" type="text/css" media='screen' href="<ls:templateResource item='/css/productTab.css'/>" />
+<script type="text/javascript" language="javascript" src="<ls:templateResource item='/common/js/productTab.js'/>"></script>
 <DIV id="con">
 	<UL id="tags">
 	  <LI class="selectTag">
@@ -27,13 +31,13 @@
 		<DIV class="tagContent selectTag" id="tagContent0">
 			 ${prod.content}
 			 <br></br>
-			 ${sessionScope.shopDetail.detailDesc}
+			 ${shopDetail.detailDesc}
 			  <br/>
 		</DIV> 
 		<DIV class="tagContent" id="tagContent1">
 		<div id="prodParameter" name="prodParameter"></div>
 			<br/><br/>
-			 ${sessionScope.shopDetail.detailDesc}
+			 ${shopDetail.detailDesc}
 			  <br/>
 		</DIV>
 		<DIV class="tagContent" id="tagContent2">
@@ -49,15 +53,15 @@
 					<c:choose>
 						<c:when test="${fn:length(prod.name) > 30}">
 						<span>
-							<a href="${pageContext.request.contextPath}/views/${prod.prodId}${applicationScope.WEB_SUFFIX}" >
-							<img src="${pageContext.request.contextPath}/photoserver/images/${prod.pic}" width="150px" height="110px"
+							<a href="<ls:url address='/views'/>" >
+							<img src="<ls:templateResource item='/photoserver/images/${prod.pic}'/>" width="150px" height="110px"
 									title="${prod.name}" id="pic"></a></span><br>${fn:substring(prod.name,0,30)}...<br>
 									
 						</c:when>
 						<c:otherwise>
 						<span>
-				     <a href="${pageContext.request.contextPath}/views/${prod.prodId}${applicationScope.WEB_SUFFIX}">
-				     <img src="${pageContext.request.contextPath}/photoserver/images/${prod.pic}" width="150px" height="110px" id="pic"></a>
+				     <a href="<ls:url address='/views'/>">
+				     <img src="<ls:templateResource item='/photoserver/images/${prod.pic}'/>" width="150px" height="110px" id="pic"></a>
 				     </span><br>${prod.name}<br>
 						</c:otherwise>
 					</c:choose>

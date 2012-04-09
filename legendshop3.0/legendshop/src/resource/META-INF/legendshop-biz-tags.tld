@@ -23,6 +23,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>sortType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>loadAll</name>
 			<required>false</required>
 			<rtexprvalue>false</rtexprvalue>
@@ -37,5 +42,20 @@
 			<required>true</required>
 			<rtexprvalue>false</rtexprvalue>
 		</attribute>
+	</tag>
+	<tag>
+		<name>currentShop</name>
+		<tag-class>com.legendshop.business.tag.CurrentShopTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
+		<name>currentUser</name>
+		<tag-class>com.legendshop.business.tag.CurrentUserTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
+		<name>logined</name>
+		<tag-class>com.legendshop.business.tag.UserLoginedTag</tag-class>
+		<body-content>scriptless</body-content>
 	</tag>
 </taglib>

@@ -29,6 +29,9 @@ public class SortTag extends LegendShopTag {
 	/** The shop name. */
 	private String shopName;
 	
+	/** The sort type. */
+	private String sortType;
+	
 	/** The load all. */
 	private boolean loadAll;
 	
@@ -56,10 +59,23 @@ public class SortTag extends LegendShopTag {
 	@Override
 	public void doTag() throws JspException, IOException {
 		String name  = shopName;
-		if(name == null && request().getSession().getAttribute(Constants.SHOP_NAME)!=null){
-			name = (String)request().getSession().getAttribute(Constants.SHOP_NAME);
+		if(name == null ){
+			String sessionShopName = (String)request().getSession().getAttribute(Constants.SHOP_NAME);
+			if(sessionShopName!=null){
+				name = sessionShopName;
+			}else{
+				return;
+			}
+			
 		}
-		List<Sort> sorts = sortService.getSort(name, loadAll);
+		List<Sort> sorts;
+		
+		if(sortType == null){
+			 sorts = sortService.getSort(name, loadAll);
+		}else{
+			 sorts = sortService.getSort(name, sortType, loadAll);
+		}
+		
 		int index = 1;
 		if(sorts != null){
 			for (Sort sort : sorts) {
@@ -99,6 +115,16 @@ public class SortTag extends LegendShopTag {
 	 */
 	public void setLoadAll(boolean loadAll) {
 		this.loadAll = loadAll;
+	}
+
+	/**
+	 * Sets the sort type.
+	 * 
+	 * @param sortType
+	 *            the new sort type
+	 */
+	public void setSortType(String sortType) {
+		this.sortType = sortType;
 	}
 
 
