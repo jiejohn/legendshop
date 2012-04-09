@@ -73,7 +73,9 @@ public abstract class LegendShopTag extends SimpleTagSupport {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	protected void invokeJspBody() throws JspException, IOException {
-		this.getJspBody().invoke(this.pageContext().getOut());
+		if(this.getJspBody()!=null){
+			this.getJspBody().invoke(this.pageContext().getOut());
+		}
 	}
 	
 	/**
