@@ -18,20 +18,20 @@
 
     $(document).ready(function() {
     jQuery("#form1").validate({
-            rules: {
-            banner: {
+        rules: {
+        	name: {
                 required: true,
-                minlength: 5
             },
-            url: "required"
+            dvyId: {
+                required: true,
+            }
         },
         messages: {
-            banner: {
-                required: "Please enter banner",
-                minlength: "banner must consist of at least 5 characters"
+        	name: {
+                required: '<fmt:message key="name.required"/>',
             },
-            url: {
-                required: "Please provide a password"
+            dvyId: {
+                required: '<fmt:message key="deliverytype.dvyid.required"/>',
             }
         }
     });
@@ -105,7 +105,7 @@
       </tr>
      <tr>
         <td>
-          <div align="center">描述: <font color="ff0000">*</font></div>
+          <div align="center">描述: </div>
        </td>
         <td>
            <p><input type="text" name="notes" id="notes" value="${deliveryType.notes}" /></p>

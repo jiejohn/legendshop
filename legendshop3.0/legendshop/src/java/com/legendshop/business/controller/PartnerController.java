@@ -33,7 +33,9 @@ import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.PermissionException;
+import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.model.entity.Partner;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.util.AppUtils;
@@ -69,33 +71,88 @@ public class PartnerController extends BaseController implements AdminController
     @RequestMapping(value = "/save")
     public String save(HttpServletRequest request, HttpServletResponse response, Partner partner) {
     	Partner p=null;
-    	
-    	if (AppUtils.isNotBlank(partner.getPartnerId())) {
+
+		String username = UserManager.getUsername(request.getSession());
+		String subPath = username + "/partner/";
+    	if (AppUtils.isNotBlank(partner.getPartnerId())) {//update
     		p=partnerService.getPartner(partner.getPartnerId());
     		//set some value
-    	}else{
+    		partner.setCreateTime(p.getCreateTime());
+    		partner.setPassword(p.getPassword());
+    		partner.setShopId(p.getShopId());
+    		
+//    		private String image;
+//    		private String image1;
+//    		private String image2;
+
+    		partner.setCommentGood(p.getCommentGood());
+    		partner.setCommentNone(p.getCommentNone());
+    		partner.setCommentBad(p.getCommentBad());
+
+    		if(partner.getImageFile().getSize()>0){
+    			String image=FileProcessor.uploadFileAndCallback(partner.getImageFile(), subPath, "partner" + username);
+    			String originImage=p.getImage();
+    			if(StringUtils.isNotEmpty(originImage)){
+    				FileProcessor.deleteFile(RealPathUtil.getBigPicRealPath() + "/" + originImage);
+    			}
+    			partner.setImage(image);
+    		}
+    		if(partner.getImageFile1().getSize()>0){
+    			String image1=FileProcessor.uploadFileAndCallback(partner.getImageFile1(), subPath, "partner" + username);
+    			String originImage1=p.getImage1();
+    			if(StringUtils.isNotEmpty(originImage1)){
+    				FileProcessor.deleteFile(RealPathUtil.getBigPicRealPath() + "/" + originImage1);
+    			}
+    			partner.setImage1(image1);
+    		}
+    		if(partner.getImageFile2().getSize()>0){
+    			String image2=FileProcessor.uploadFileAndCallback(partner.getImageFile2(), subPath, "partner" + username);
+    			String originImage2=p.getImage2();
+    			if(StringUtils.isNotEmpty(originImage2)){
+    				FileProcessor.deleteFile(RealPathUtil.getBigPicRealPath() + "/" + originImage2);
+    			}
+    			partner.setImage2(image2);
+    		}
+    		
+    		p=partner;
+    	}else{//add
     		p=partner;
     		p.setCreateTime(new Date());
     		p.setCommentBad(0);
     		p.setCommentGood(0);
     		p.setCommentNone(0);
+        	
+        	ShopDetail shopDetail=shopDetailService.getShopDetailByUserId(UserManager.getUserId(request));
+        	
+        	if(shopDetail==null){
+        		throw new PermissionException("Can't find shopDetail by userId!",EntityCodes.SYSTEM);
+        	}        	
+        	p.setShopId(shopDetail.getShopId());
+
+			if (partner.getImageFile().getSize() > 0) {
+				String image = FileProcessor.uploadFileAndCallback(partner.getImageFile(), subPath, "partner"
+						+ username);
+				partner.setImage(image);
+			}
+
+			if (partner.getImageFile1().getSize() > 0) {
+				String image1 = FileProcessor.uploadFileAndCallback(partner.getImageFile1(), subPath, "partner"
+						+ username);
+				partner.setImage1(image1);
+			}
+			if (partner.getImageFile2().getSize() > 0) {
+				String image2 = FileProcessor.uploadFileAndCallback(partner.getImageFile2(), subPath, "partner"
+						+ username);
+				partner.setImage2(image2);
+			}
+        	
+        	
     	}
     	
 
     	p.setUserId(UserManager.getUserId(request));
-    	p.setUserName(UserManager.getUsername(request));
+    	p.setUserName(username);
     	p.setModifyTime(new Date());
-    	
-    	ShopDetail shopDetail=shopDetailService.getShopDetailByUserId(UserManager.getUserId(request));
-    	
-    	if(shopDetail==null){
-    		throw new PermissionException("Can't find shopDetail by userId!",EntityCodes.SYSTEM);
-    	}
-    	
-    	p.setShopId(shopDetail.getShopId());
-    	
-    	
-    	
     	
         partnerService.savePartner(p);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));

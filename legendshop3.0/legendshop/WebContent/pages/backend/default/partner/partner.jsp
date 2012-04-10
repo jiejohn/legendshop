@@ -5,7 +5,7 @@
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <html>
     <head>
-        <title>创建Parnter</title>
+        <title>创建供应商</title>
          <script type='text/javascript' src="<ls:templateResource item='/common/js/jquery.js'/>"></script>
          <script type='text/javascript' src="<ls:templateResource item='/common/js/jquery.validate.js'/>" /></script>
         <link rel="stylesheet" type="text/css" media="screen" href="<ls:templateResource item='/common/css/indexJpgForm.css'/>" />
@@ -19,19 +19,54 @@
 		    $(document).ready(function() {
 		        jQuery("#form1").validate({
 		            rules: {
-		            	name: {
+		            	partnerName: {
 		                    required: true,
 		                },
-		            	url: {
+
+		                <c:if test='${empty partner}'>
+		                password: {
+		                    required: true,
+		                },
+		                passwordag: {
+		                    required: true,
+		    		        equalTo:"#password"
+		                },
+		                </c:if>
+		                
+		                title: {
+		                    required: true,
+		                },
+		                location: {
+		                    required: true,
+		                },
+		                open: {
+		                    required: true,
+		                },
+		                status: {
+		                    required: true,
+		                },
+		                open: {
 		                    required: true,
 		                }
 		            },
 		            messages: {
-		            	name: {
-		                    required: "not null",
+		            	partnerName: {
+		                    required: '<fmt:message key="partner.username.required"/>',
 		                },
-		            	url: {
-		                    required: "not null",
+
+		                password: {
+		                    required: '<fmt:message key="password.required"/>',
+		                },
+		                passwordag: {
+		                    required: '<fmt:message key="password.required"/>',
+		                    equalTo: '<fmt:message key="password.equalTo"/>'
+		                },
+		                
+		                title: {
+		                    required: '<fmt:message key="partner.title.required"/>',
+		                },
+		                location: {
+		                    required: '<fmt:message key="partner.location.required"/>',
 		                }
 		            }
 		        });
@@ -60,7 +95,7 @@
 	    	</tr>
 	    </thead>
     </table>
-        <form action="<ls:url address='/admin/partner/save'/>" method="post" id="form1">
+        <form action="<ls:url address='/admin/partner/save'/>" method="post" id="form1" enctype="multipart/form-data">
             <input id="partnerId" name="partnerId" value="${partner.partnerId}" type="hidden">
             <div align="center">
             <table border="0" align="center" class="${tableclass}" id="col1">
@@ -84,6 +119,7 @@
            <p><input type="text" name="partnerName" id="partnerName" value="${partner.partnerName}" /></p>
         </td>
       </tr>
+     <c:if test="${empty partner}">
      <tr>
         <td>
           <div align="center">登录密码: <font color="ff0000">*</font></div>
@@ -92,6 +128,15 @@
            <p><input type="text" name="password" id="password" value="${partner.password}" /></p>
         </td>
       </tr>
+     <tr>
+        <td>
+          <div align="center">确认密码: <font color="ff0000">*</font></div>
+       </td>
+        <td>
+           <p><input type="text" name="passwordag" id="passwordag" value="${partner.password}" /></p>
+        </td>
+      </tr>
+      </c:if>
      <tr>
         <td>
           <div align="center">供应商名称: <font color="ff0000">*</font></div>
@@ -153,7 +198,13 @@
           <div align="center">商户图片1: </div>
        </td>
         <td>
-           <p><input type="text" name="image" id="image" value="${partner.image}" /></p>
+           <p>
+           
+     		<c:if test="${not empty partner.image}">
+     		<img width="300px" src="${pageContext.request.contextPath}/photoserver/photo/${partner.image}"/><br/>
+     		</c:if>
+           <input type="file" name="imageFile" id="file" size="50"/></p>
+           <input type="hidden" name="image" id="image" value="${partner.image}" />
         </td>
       </tr>
      <tr>
@@ -161,7 +212,12 @@
           <div align="center">商户图片2: </div>
        </td>
         <td>
-           <p><input type="text" name="image1" id="image1" value="${partner.image1}" /></p>
+           <p>
+     		<c:if test="${not empty partner.image1}">
+     		<img width="300px" src="${pageContext.request.contextPath}/photoserver/photo/${partner.image1}"/><br/>
+     		</c:if>
+           <input type="file" name="imageFile1" id="file" size="50"/></p>
+           <input type="hidden" name="image1" id="image1" value="${partner.image1}" />
         </td>
       </tr>
      <tr>
@@ -169,7 +225,12 @@
           <div align="center">商户图片3: </div>
        </td>
         <td>
-           <p><input type="text" name="image2" id="image2" value="${partner.image2}" /></p>
+           <p>
+     		<c:if test="${not empty partner.image2}">
+     		<img width="300px" src="${pageContext.request.contextPath}/photoserver/photo/${partner.image2}"/><br/>
+     		</c:if>
+           <input type="file" name="imageFile2" id="file" size="50"/></p>
+           <input type="hidden" name="image2" id="image2" value="${partner.image2}" />
         </td>
       </tr>
      <tr>
@@ -241,6 +302,8 @@
 	        </p>
         </td>
       </tr>
+      
+     <c:if test="${not empty partner}">
      <tr>
         <td>
           <div align="center">评论满意数量: </div>
@@ -265,11 +328,12 @@
            <p><input disabled="disabled" type="text" name="commentBad" id="commentBad" value="${partner.commentBad}" /></p>
         </td>
       </tr>
+      </c:if>
 
                 <tr>
                     <td colspan="2">
                         <div align="center">
-                            <input type="submit" value="添加" />
+                            <input type="submit" value="保存" />
                             <input type="reset" value="重置" />
                             <input type="button" value="返回"
                                 onclick="window.location='<ls:url address="/admin/partner/query"/>'" />
