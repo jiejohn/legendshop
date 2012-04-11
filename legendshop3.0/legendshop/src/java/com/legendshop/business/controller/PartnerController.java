@@ -200,6 +200,34 @@ public class PartnerController extends BaseController implements AdminController
 		request.setAttribute("partner", partner);
         return PathResolver.getPath(request, FowardPage.PARTNER_LIST_QUERY);
     }
+    @RequestMapping(value = "/changePassword/{id}")
+    public String changePassword(HttpServletRequest request, HttpServletResponse response, @PathVariable
+    Long id) {
+        Partner partner = partnerService.getPartner(id);
+        String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), partner.getUserName());
+		if(result!=null){
+			return result;
+		}
+        request.setAttribute("partner", partner);
+        return PathResolver.getPath(request, BackPage.PARTNER_CHANGE_PASSWORD_PAGE);
+    }
+
+
+    @RequestMapping(value = "/savePassword")
+    public String savePassword(HttpServletRequest request, HttpServletResponse response, Partner partner) {
+    	Partner p=null;
+    	if (AppUtils.isNotBlank(partner.getPartnerId())&&AppUtils.isNotBlank(partner.getPassword())) {//update
+    		p=partnerService.getPartner(partner.getPartnerId());
+    		p.setPassword(partner.getPassword());
+    	}   	
+
+    	p.setModifyTime(new Date());
+    	
+        partnerService.savePartner(p);
+        saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
+        return PathResolver.getPath(request, FowardPage.PARTNER_LIST_QUERY);
+    }    
+    
 
 }
 

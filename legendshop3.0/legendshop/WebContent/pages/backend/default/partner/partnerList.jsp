@@ -69,7 +69,8 @@
 		      <a href='javascript:deleteById("${item.partnerId}")' title="删除">
 		      		<img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/>">
 		      </a>
-		      <a>修改密码</a>
+		      
+		      <a href="<ls:url address='/admin/partner/changePassword/${item.partnerId}'/>" title="修改密码">修改密码</a>
 	      </display:column>
 	    </display:table>
         <c:if test="${not empty toolBar}">

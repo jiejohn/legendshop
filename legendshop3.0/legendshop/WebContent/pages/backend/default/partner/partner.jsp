@@ -125,7 +125,7 @@
           <div align="center">登录密码: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="password" id="password" value="${partner.password}" /></p>
+           <p><input type="password" name="password" id="password" value="${partner.password}" /></p>
         </td>
       </tr>
      <tr>
@@ -133,7 +133,7 @@
           <div align="center">确认密码: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="passwordag" id="passwordag" value="${partner.password}" /></p>
+           <p><input type="password" name="passwordag" id="passwordag" value="${partner.password}" /></p>
         </td>
       </tr>
       </c:if>
