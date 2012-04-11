@@ -9,6 +9,8 @@ package com.legendshop.model.entity;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * Partner entity. @author MyEclipse Persistence Tools
  */
@@ -101,6 +103,34 @@ public class Partner implements java.io.Serializable {
 	/** The create time. */
 	private Date createTime;
 	
+	protected MultipartFile imageFile;
+	protected MultipartFile imageFile1;
+	protected MultipartFile imageFile2;
+	
+	public MultipartFile getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(MultipartFile imageFile) {
+		this.imageFile = imageFile;
+	}
+
+	public MultipartFile getImageFile1() {
+		return imageFile1;
+	}
+
+	public void setImageFile1(MultipartFile imageFile1) {
+		this.imageFile1 = imageFile1;
+	}
+
+	public MultipartFile getImageFile2() {
+		return imageFile2;
+	}
+
+	public void setImageFile2(MultipartFile imageFile2) {
+		this.imageFile2 = imageFile2;
+	}
+
 	/**
 	 * Gets the partner id.
 	 * 
