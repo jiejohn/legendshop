@@ -3,28 +3,32 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/security
-           http://www.springframework.org/schema/security/spring-security-3.0.xsd" default-lazy-init="true">
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd" default-lazy-init="true">
+           
     <global-method-security pre-post-annotations="enabled">
     </global-method-security>
     
-	<http access-denied-page="/common/jsp/401.jsp"  entry-point-ref="authenticationProcessingFilterEntryPoint">
-	<!-- 
-		<intercept-url pattern="/login.jsp" filters="none" />
-		-->
+    <http realm="LegendShop Realm" access-denied-page="/pages/common/401.jsp"  entry-point-ref="authenticationProcessingFilterEntryPoint">
+		<remember-me />
 		<intercept-url pattern="/admin/**" access="ROLE_SUPERVISOR,ROLE_ADMIN" />		
 		<intercept-url pattern="/member/user/**" access="ROLE_SUPERVISOR" />
 		<intercept-url pattern="/member/right/**" access="ROLE_SUPERVISOR" />
 		<intercept-url pattern="/member/**" access="ROLE_SUPERVISOR,ROLE_ADMIN" />
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-			<custom-filter ref="validateCodeAuthenticationFilter" position="FORM_LOGIN_FILTER" />
-			<custom-filter ref="_logoutFilter" position="LOGOUT_FILTER" />
+		<custom-filter ref="validateCodeAuthenticationFilter" position="FORM_LOGIN_FILTER" />
+		<custom-filter ref="_logoutFilter" position="LOGOUT_FILTER" />
+		<!-- 
 		<http-basic />
-		<remember-me />
-	</http>
-
-
+		 -->
+    </http>
+    
+    <beans:bean id="authenticationProcessingFilterEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/login${WEB_SUFFIX}"></beans:property>
+	</beans:bean>
+ 
   <beans:bean id="_logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
 	  <beans:constructor-arg index="0" value="/" />
 	  <beans:constructor-arg index="1">
@@ -50,6 +54,9 @@
 		<beans:property name="supportSSO" value="false"></beans:property>
 	</beans:bean>
 	
+	<beans:bean id="loginService" class="com.legendshop.business.newservice.LoginServiceImpl" parent="validateCodeAuthenticationFilter">
+	</beans:bean>
+	
 	<beans:bean id="loginLogAuthenticationSuccessHandler"
 		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
 		<beans:property name="defaultTargetUrl" value="/index${WEB_SUFFIX}"></beans:property>
@@ -64,17 +71,6 @@
 		<beans:property name="defaultFailureUrl" value="/login${WEB_SUFFIX}?error=true"></beans:property>
 	</beans:bean>
 
-	<!-- 一个自定义的filter，必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性，
-	我们的所有控制将在这三个类中实现，解释详见具体配置 
-	<beans:bean id="myFilter" class="com.legendshop.core.security.MyFilterSecurityInterceptor">
-		<beans:property name="authenticationManager"
-			ref="authenticationManager" />
-		<beans:property name="accessDecisionManager"
-			ref="accessDecisionManager" />
-		<beans:property name="securityMetadataSource"
-			ref="securityMetadataSource" />
-	</beans:bean>
-	-->
 	<!-- 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider user-service-ref="authService">
@@ -100,11 +96,7 @@
 		<beans:property name="jdbcTemplate" ref="jdbcTemplate" />
     </beans:bean>
 
-	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源
-	<beans:bean id="myAccessDecisionManagerBean"
-		class="com.legendshop.core.security.MyAccessDecisionManager">
-	</beans:bean>
-	 -->
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
 	<beans:bean id="accessDecisionManager"
 		class="org.springframework.security.access.vote.AffirmativeBased">
 		<beans:property name="allowIfAllAbstainDecisions" value="false" />
@@ -116,15 +108,6 @@
 		</beans:property>
 	</beans:bean>
 	
-	
-	<!-- 资源源数据定义，即定义某一资源可以被哪些角色访问 
-	<beans:bean id="securityMetadataSource"
-		class="com.legendshop.core.security.MyInvocationSecurityMetadataSource" />
-	-->
-	<beans:bean id="authenticationProcessingFilterEntryPoint"
-		class="org.springframework.security.web.authentication.AuthenticationProcessingFilterEntryPoint">
-		<beans:property name="loginFormUrl" value="/login${WEB_SUFFIX}"></beans:property>
-	</beans:bean>
 	
 	<beans:bean id="loginHistoryService" class="com.legendshop.business.service.impl.LoginHistoryServiceImpl">
         <beans:property name="jdbcTemplate" ref="jdbcTemplate"></beans:property>

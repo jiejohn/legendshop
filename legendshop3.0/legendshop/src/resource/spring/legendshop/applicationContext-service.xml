@@ -192,6 +192,11 @@
 		<property name="hotsearchDao">
 			<ref bean="hotsearchDao" />
 		</property>
+		<!-- 
+		<property name="loginService">
+			<ref bean="loginService" />
+		</property>
+		 -->
 	</bean>
 	
 	<bean id="adminService" class="com.legendshop.business.service.impl.AdminServiceImpl" parent="baseService">

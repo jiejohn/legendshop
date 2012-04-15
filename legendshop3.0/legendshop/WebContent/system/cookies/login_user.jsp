@@ -9,8 +9,12 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 if(UserManager.getUser(request.getSession())!=null)
-    pageContext.setAttribute("auth",UserManager.getUser(request.getSession()).getAuthorities());
-	pageContext.setAttribute("function",UserManager.getPrincipalFunctionByAuthorities(request.getSession()));
+	if(UserManager.getUser(request.getSession()) != null){
+	    pageContext.setAttribute("auth",UserManager.getUser(request.getSession()).getAuthorities());
+		pageContext.setAttribute("function",UserManager.getPrincipalFunctionByAuthorities(request.getSession()));
+		
+	}
+
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -51,10 +55,13 @@ if(UserManager.getUser(request.getSession())!=null)
 	// 得到用户名称 
 	//ACEGI_SECURITY_CONTEXT
 	SecurityContext context=(SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT");
-	System.out.println("Authentication = "+context.getAuthentication());
 	// 得到用户的密码
 	SecurityContextImpl securityContext=(SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
-	Authentication authentication=securityContext.getAuthentication();
+	Authentication authentication = null;
+	if(securityContext != null){
+		 authentication = securityContext.getAuthentication();
+	}
+	
 	//String password=authentication.getCredentials(); 
      %>  
   </body>

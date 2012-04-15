@@ -39,7 +39,7 @@ import com.legendshop.model.entity.Basket;
  * 
  * 官方网站：http://www.legendesign.net
  */
-public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter implements LoginService{
 	
 	/** The log. */
 	Logger log = LoggerFactory.getLogger(ValidateCodeUsernamePasswordAuthenticationFilter.class);
@@ -91,9 +91,7 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 
 		username = username.trim();
 		
-		// Place the last username attempted into HttpSession for views
-		HttpSession session = request.getSession();
-		
+
 //		if (session != null || getAllowSessionCreation()) {
 //			request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY,username);
 //		}
@@ -107,9 +105,25 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 
 		// String pass= MD5Util.Md5Password(username, password);
 
+		return onAuthentication(request, response, username, password);
+	}
+
+	/**
+	 * 用户登录动作
+	 * @param request
+	 * @param response
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	@Override
+	public Authentication onAuthentication(HttpServletRequest request, HttpServletResponse response, String username,
+			String password) {
 		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
 
-
+		// Place the last username attempted into HttpSession for views
+		HttpSession session = request.getSession();
+		
 
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);

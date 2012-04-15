@@ -19,15 +19,18 @@
    <param-value>UTF-8</param-value>
   </init-param>
  </filter>
- <!--  
  <filter>
 	<filter-name>openSessionInViewFilter</filter-name>
 	<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+	<init-param>   
+		<param-name>singleSession</param-name>   
+		<param-value>true</param-value>   
+	</init-param>   
 </filter>
--->
  <filter>
   <filter-name>springSecurityFilterChain</filter-name>
-  <filter-class>com.legendshop.core.security.DelegatingFilterProxy</filter-class>
+  <!--  <filter-class>com.legendshop.core.security.DelegatingFilterProxy</filter-class> -->
+  <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
  </filter>
  <!-- 浏览器不支持put,delete等method,由该filter将/blog?_method=delete转换为标准的http delete方法 -->
  <filter>
@@ -56,8 +59,7 @@
  <filter-mapping>
   <filter-name>encodingFilter</filter-name>
   <url-pattern>*.htm</url-pattern>
- </filter-mapping>
-  <!-- 
+ </filter-mapping> 
  <filter-mapping>
 		<filter-name>openSessionInViewFilter</filter-name>
 		   <url-pattern>*.htm</url-pattern>
@@ -65,8 +67,7 @@
   <filter-mapping>
 		<filter-name>openSessionInViewFilter</filter-name>
 		<url-pattern>*.jsp</url-pattern>
-	</filter-mapping>	
-	 --> 
+ </filter-mapping>	
  <filter-mapping>
   <filter-name>springSecurityFilterChain</filter-name>
   <url-pattern>/*</url-pattern>

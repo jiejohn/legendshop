@@ -452,7 +452,7 @@ public class BusinessController extends BaseController {
 	}
 	
 	/**
-	 * User reg.
+	 * 用户注册动作
 	 * 
 	 * @param request
 	 *            the request
@@ -498,7 +498,7 @@ public class BusinessController extends BaseController {
 	}
 	
 	/**
-	 * Reg.
+	 * 加载用户注册页面.
 	 * 
 	 * @param request
 	 *            the request
@@ -592,6 +592,8 @@ public class BusinessController extends BaseController {
 	
 	/**
 	 * User reg success.
+	 * 
+	 * 用户用registerCode激活帐号
 	 * 
 	 * @param request
 	 *            the request

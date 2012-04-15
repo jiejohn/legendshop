@@ -14,30 +14,42 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<!-- Enable @AspectJ support -->
 	<aop:aspectj-autoproxy />
-
+	<!-- 
 	<bean id="profiler" class="com.legendshop.core.aop.SimpleProfiler">
-        <!-- execute before the transactional advice (hence the lower order number) -->
+       execute before the transactional advice (hence the lower order number) 
         <property name="order" value="2"/>
     </bean>
     
     <bean id="systemArchitecture" class="com.legendshop.core.aop.SystemArchitecture"></bean>
-
+ 	-->
 	<aop:config>
 		<aop:advisor id="managerTx" advice-ref="txAdvice"
-			pointcut="execution(* *..service.*.*(..))" order="0" />
+			pointcut="execution(* *..service.*.*(..))" order="1" />
+		<aop:advisor id="newManagerTx" advice-ref="txNewAdvice"
+			pointcut="execution(* *..newservice.*.*(..))" order="2" />
+		<!-- 
         <aop:aspect id="profilingAspect" ref="profiler">
             <aop:pointcut id="serviceMethodWithReturnValue" expression="execution(* *..service.*.*(..))"/>
             <aop:around method="profile" pointcut-ref="serviceMethodWithReturnValue"/>
         </aop:aspect>
+         -->
 	</aop:config>
 	
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
+		<!-- 
 			<tx:method name="load*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="list*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="is*" propagation="REQUIRED" read-only="true" />
+			 -->
 			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<tx:advice id="txNewAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRES_NEW" />
 		</tx:attributes>
 	</tx:advice>
 

@@ -60,6 +60,7 @@ import com.legendshop.business.helper.TaskThread;
 import com.legendshop.business.helper.impl.PersistVisitLogTask;
 import com.legendshop.business.helper.impl.SendMailTask;
 import com.legendshop.business.service.BusinessService;
+import com.legendshop.business.service.LoginService;
 import com.legendshop.business.service.PayTypeService;
 import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
@@ -186,6 +187,8 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 	/** The hotsearch dao. */
 	private HotsearchDao hotsearchDao;
+	
+	private  LoginService loginService;
 
 
 	/* (non-Javadoc)
@@ -1007,12 +1010,14 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (isUserInfoValid(form, request)) {
 			return PathResolver.getPath(request, FrontPage.FAIL);
 		}
+		
 		User user = new User();
 		UserDetail userDetail = new UserDetail();
 		BeanHelper.copyProperties(user, form, true);
 		BeanHelper.copyProperties(userDetail, form, true);
 		Date date = new Date();
-		user.setPassword(MD5Util.Md5Password(user.getName(), user.getPassword()));
+		String plaintPassword = user.getPassword();
+		user.setPassword(MD5Util.Md5Password(user.getName(), plaintPassword));
 		userDetail.setUserRegtime(date);
 		userDetail.setModifyTime(date);
 		userDetail.setUserRegip(request.getRemoteAddr());
@@ -1021,6 +1026,8 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		boolean isOpenShop = request.getParameter("openShop") != null;
 
 		userDetailDao.saveUser(user, userDetail, shopDetail, isOpenShop);
+		
+		//提醒语
 		UserMessages uem = new UserMessages();
 		Locale locale = localeResolver.resolveLocale(request);
 		uem.setTitle(ResourceBundleHelper.getString(locale, "regFree") + " " + form.getName() + " "
@@ -1035,6 +1042,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 				ResourceBundleHelper.getString(locale, "logon.hint.desc"), "login"+AttributeKeys.WEB_SUFFIX);
 		request.setAttribute(UserMessages.MESSAGE_KEY, uem);
 
+		//用户注册即登录
+		if(loginService!=null){
+			loginService.onAuthentication(request, response, user.getName(), plaintPassword);
+		}
+		
+		
 		// 发送通知注册成功邮件
 		if (sendMail()) {
 			try {
@@ -1048,7 +1061,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 				if (AppUtils.isNotBlank(userDetail.getRegisterCode())) {
 					StringBuffer buffer = new StringBuffer();
 					buffer.append("<p>你的帐号尚未开通，<a href=\"").append(Constants.LEGENDSHOP_DOMAIN_NAME)
-							.append("/userRegSuccess.do?userName=").append(user.getName()).append("&registerCode=")
+							.append("/userRegSuccess"+ Constants.WEB_SUFFIX + "?userName=").append(user.getName()).append("&registerCode=")
 							.append(userDetail.getRegisterCode()).append("\">点击开通我的帐号</a></p><br>");
 					values.put("#registerCode#", buffer.toString());
 				} else {
@@ -1493,8 +1506,8 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		this.payTypeService = payTypeService;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#userRegSuccess(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String, java.lang.String)
+	/**
+	 *  用户用registerCode激活帐号
 	 */
 	@Override
 	public String updateUserReg(HttpServletRequest request, HttpServletResponse response, String userName,
@@ -1508,7 +1521,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		UserMessages messages = new UserMessages(ErrorCodes.NORMAL_STAUTS, ResourceBundleHelper.getString(locale,
 				"reg.success.actived"), "");
 		messages.addCallBackList(ResourceBundleHelper.getString(locale, "login"),
-				ResourceBundleHelper.getString(locale, "logon.hint.desc"), "login.do");
+				ResourceBundleHelper.getString(locale, "logon.hint.desc"), "login" + Constants.WEB_SUFFIX);
 		request.setAttribute(UserMessages.MESSAGE_KEY, messages);
 		return PathResolver.getPath(request, TilesPage.AFTER_OPERATION);
 	}
@@ -1616,6 +1629,10 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	@Required
 	public void setHotsearchDao(HotsearchDao hotsearchDao) {
 		this.hotsearchDao = hotsearchDao;
+	}
+
+	public void setLoginService(LoginService loginService) {
+		this.loginService = loginService;
 	}
 
 }

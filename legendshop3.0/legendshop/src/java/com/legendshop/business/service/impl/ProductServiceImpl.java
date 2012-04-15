@@ -86,6 +86,9 @@ public class ProductServiceImpl implements ProductService {
 	 */
 	@Override
 	public Product getProductById(Long prodId) {
+		if(prodId == null){
+			return null;
+		}
 		return productDao.getProduct(prodId);
 	}
 

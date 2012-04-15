@@ -250,15 +250,13 @@ public class AuthServiceImpl implements  AuthService {
 	 * @see com.legendshop.business.service.AuthService#getFunctionsByRoles(java.util.Collection)
 	 */
 	@Override
-	public Collection<GrantedFunction> getFunctionsByRoles(Collection<GrantedAuthority> roles) {
+	public Collection<GrantedFunction> getFunctionsByRoles(Collection<? extends GrantedAuthority> roles) {
 		// log.debug("getFunctionsByRoles calling {}" , roles);
 		if (null == roles) {
 			throw new IllegalArgumentException("Granted Roles cannot be null");
 		}
-
 		Collection<GrantedFunction> grantedFunctions = new HashSet<GrantedFunction>();
-		for (Iterator<GrantedAuthority> it = roles.iterator(); it.hasNext();) {
-			GrantedAuthority grantedAuthority = it.next();
+		for (GrantedAuthority grantedAuthority : roles) {
 			Role role = roleCache.getRoleByRoleNameCache(grantedAuthority.getAuthority()); //
 			if (role == null) {
 				role = getgrantedAuthority(grantedAuthority.getAuthority());
@@ -268,13 +266,10 @@ public class AuthServiceImpl implements  AuthService {
 					return grantedFunctions;
 				}
 			}
-
 			if (role != null) {
 				List<Function> functions = role.getFunctions();
-				for (Iterator<Function> it2 = functions.iterator(); it2.hasNext();) {
-					Function function = it2.next();
-					GrantedFunction grantedFunction = new GrantedFunctionImpl(function.getName());
-					grantedFunctions.add(grantedFunction);
+				for (Function function : functions) {
+					grantedFunctions.add(new GrantedFunctionImpl(function.getName()));
 				}
 			}
 		}
