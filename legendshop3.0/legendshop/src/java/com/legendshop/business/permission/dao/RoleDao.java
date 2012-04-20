@@ -5,17 +5,17 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.permission.dao;
+package com.legendshop.permission.dao;
  
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.legendshop.command.framework.JCFException;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.exception.JCFException;
 import com.legendshop.util.StringUtil;
 
 /**

@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.permission.controller;
+package com.legendshop.permission.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.page.BackPage;
-import com.legendshop.business.common.page.FowardPage;
-import com.legendshop.business.helper.FunctionChecker;
-import com.legendshop.business.helper.StateChecker;
-import com.legendshop.business.permission.form.FunctionForm;
-import com.legendshop.business.permission.form.PermissionForm;
-import com.legendshop.business.permission.service.RightDelegate;
 import com.legendshop.command.framework.State;
 import com.legendshop.command.framework.StateImpl;
 import com.legendshop.core.UserManager;
@@ -39,10 +32,17 @@ import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
+import com.legendshop.core.helper.FunctionChecker;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.helper.StateChecker;
 import com.legendshop.model.entity.Permission;
 import com.legendshop.model.entity.PerssionId;
 import com.legendshop.model.entity.Role;
+import com.legendshop.permission.form.FunctionForm;
+import com.legendshop.permission.form.PermissionForm;
+import com.legendshop.permission.page.SecurityBackPage;
+import com.legendshop.permission.page.SecurityFowardPage;
+import com.legendshop.permission.service.RightDelegate;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.StringUtil;
 
@@ -71,7 +71,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.base.AdminController#delete(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
 	 */
-	@Override
+	
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(HttpServletRequest request, HttpServletResponse response,@PathVariable String id) {
 
@@ -81,22 +81,22 @@ public class RoleController extends BaseController implements AdminController<Ro
 		rightDelegate.deleteRoleById(id, state);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, FowardPage.ALL_ROLE);
+		return PathResolver.getPath(request, SecurityFowardPage.ALL_ROLE);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.base.AdminController#load(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
-	@Override
+	
 	@RequestMapping("/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.SAVE_ROLE);
+		return PathResolver.getPath(request, SecurityBackPage.SAVE_ROLE);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.base.AdminController#query(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String, java.lang.Object)
 	 */
-	@Override
+	
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Role role) {
 		String userName = UserManager.getUsername(request);
@@ -127,13 +127,13 @@ public class RoleController extends BaseController implements AdminController<Ro
 
 		savePage(ps, request);
 
-		return PathResolver.getPath(request, BackPage.ROLE_LIST);
+		return PathResolver.getPath(request, SecurityBackPage.ROLE_LIST);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.base.AdminController#save(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
 	 */
-	@Override
+	
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, Role role) {
 
@@ -151,13 +151,13 @@ public class RoleController extends BaseController implements AdminController<Ro
 			logger.info("success saveRole,id = " + id);
 			stateChecker.check(state, request);
 
-			return PathResolver.getPath(request, FowardPage.ALL_ROLE);
+			return PathResolver.getPath(request, SecurityFowardPage.ALL_ROLE);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.base.AdminController#update(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
 	 */
-	@Override
+	
 	@RequestMapping(value = "/update/{id}")
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
 		logger.info("Action update with id  " + id);
@@ -166,7 +166,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		stateChecker.check(state, request);
 		request.setAttribute("bean", role);
 
-		return PathResolver.getPath(request, BackPage.SAVE_ROLE);
+		return PathResolver.getPath(request, SecurityBackPage.SAVE_ROLE);
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		request.setAttribute("list", list);
 		request.setAttribute("bean", role);
 
-		return PathResolver.getPath(request, BackPage.ROLE_FUNCTION);
+		return PathResolver.getPath(request, SecurityBackPage.ROLE_FUNCTION);
 	}
 	
 	/**
@@ -222,7 +222,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		savePage(ps, request);
 		request.setAttribute("bean", role);
 
-		return PathResolver.getPath(request, BackPage.FIND_OTHER_FUNCTION_LIST);
+		return PathResolver.getPath(request, SecurityBackPage.FIND_OTHER_FUNCTION_LIST);
 	}
 	
 	/**
@@ -255,7 +255,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		rightDelegate.saveFunctionsToRole(permissions, state);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, FowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 	
 	/**
@@ -288,7 +288,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		State state = new StateImpl();
 		rightDelegate.deleteFunctionsFromRole(permissions, state);
 		stateChecker.check(state, request);
- 		return PathResolver.getPath(request, FowardPage.FIND_FUNCTION_BY_ROLE);
+ 		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 

@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.permission.controller;
+package com.legendshop.permission.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,20 +21,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.page.BackPage;
-import com.legendshop.business.common.page.FowardPage;
-import com.legendshop.business.common.page.FrontPage;
-import com.legendshop.business.helper.FunctionChecker;
-import com.legendshop.business.helper.StateChecker;
-import com.legendshop.business.permission.form.UserRoleForm;
-import com.legendshop.business.permission.form.UsersForm;
-import com.legendshop.business.permission.service.RightDelegate;
 import com.legendshop.command.framework.State;
 import com.legendshop.command.framework.StateImpl;
 import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
+import com.legendshop.core.constant.CommonPage;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
@@ -42,10 +35,17 @@ import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
+import com.legendshop.core.helper.FunctionChecker;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.helper.StateChecker;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserRole;
 import com.legendshop.model.entity.UserRoleId;
+import com.legendshop.permission.form.UserRoleForm;
+import com.legendshop.permission.form.UsersForm;
+import com.legendshop.permission.page.SecurityBackPage;
+import com.legendshop.permission.page.SecurityFowardPage;
+import com.legendshop.permission.service.RightDelegate;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.StringUtil;
 
@@ -103,8 +103,8 @@ public class UserController extends BaseController implements AdminController<Us
 			stateChecker.check(state, request);
 
 		request.setAttribute("userId", userId);
-		return PathResolver.getPath(request, FowardPage.FIND_ROLE_BY_USER);
-		//return "redirect:"+BackPage.FIND_USER_ROLES.getValue()+"/"+userId+AttributeKeys.WEB_SUFFIX;
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_ROLE_BY_USER);
+		//return "redirect:"+SecurityBackPage.FIND_USER_ROLES.getValue()+"/"+userId+AttributeKeys.WEB_SUFFIX;
 	}
 
 	
@@ -126,14 +126,14 @@ public class UserController extends BaseController implements AdminController<Us
 		User user = usersForm.getUser();
 			if (rightDelegate.isUserExist(user.getName(), state)) {
 				//return handleException(mapping, request, ActionMessages.GLOBAL_MESSAGE, "error.User.IsExist");
-				return PathResolver.getPath(request, FrontPage.FAIL);
+				return PathResolver.getPath(request, CommonPage.FAIL);
 			}
 
 			String id = rightDelegate.saveUser(Md5Password(user), state);
 			logger.info("success saveUser,id = " + id);
 			stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, FowardPage.USERS_LIST);
+		return PathResolver.getPath(request, SecurityFowardPage.USERS_LIST);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class UserController extends BaseController implements AdminController<Us
 			rightDelegate.updateUser(olduser, state);
 			stateChecker.check(state, request);
 
-			return PathResolver.getPath(request, FowardPage.USERS_LIST);
+			return PathResolver.getPath(request, SecurityFowardPage.USERS_LIST);
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class UserController extends BaseController implements AdminController<Us
 			User user = rightDelegate.findUserById(id, state);
 			stateChecker.check(state, request);
 			request.setAttribute("user", user);
-		return PathResolver.getPath(request, BackPage.UPDATE_USER_STATUS);
+		return PathResolver.getPath(request, SecurityBackPage.UPDATE_USER_STATUS);
 	}
 
 	/**
@@ -225,11 +225,11 @@ public class UserController extends BaseController implements AdminController<Us
 		String passwordag = user.getPasswordag();
 		if ((user.getPassword() == null) || (user.getPassword() == "")) {
 			//return handleException(mapping, request, ActionMessages.GLOBAL_MESSAGE, "error.Password.required");
-			return PathResolver.getPath(request, FrontPage.FAIL);
+			return PathResolver.getPath(request, CommonPage.FAIL);
 		}
 		if (!passwordag.endsWith(user.getPassword())) {// 2次密码要相等
 			//return handleException(mapping, request, ActionMessages.GLOBAL_MESSAGE, "error.Password.NotEqual");
-			return PathResolver.getPath(request, FrontPage.FAIL);
+			return PathResolver.getPath(request, CommonPage.FAIL);
 		}
 		State state = new StateImpl();
 		Md5PasswordEncoder coder = new Md5PasswordEncoder();
@@ -237,7 +237,7 @@ public class UserController extends BaseController implements AdminController<Us
 			rightDelegate.updateUserPassowrd(user.getId(), coder.encodePassword(user.getPassword(), user.getName()),
 					state);
 			stateChecker.check(state, request);
-			return PathResolver.getPath(request, FowardPage.USERS_LIST);
+			return PathResolver.getPath(request, SecurityFowardPage.USERS_LIST);
 	}
 
 	/**
@@ -260,7 +260,7 @@ public class UserController extends BaseController implements AdminController<Us
 			stateChecker.check(state, request);
 			request.setAttribute("user", user);
 
-		return PathResolver.getPath(request, BackPage.UPDATE_USER_PASSWORD);
+		return PathResolver.getPath(request, SecurityBackPage.UPDATE_USER_PASSWORD);
 	}
 
 	/**
@@ -292,9 +292,9 @@ public class UserController extends BaseController implements AdminController<Us
 		State state = new StateImpl();
 			rightDelegate.saveRolesToUser(userRoles, state);
 			stateChecker.check(state, request);
-		return PathResolver.getPath(request, FowardPage.FIND_USER_ROLES);
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_USER_ROLES);
 
-		//return "redirect:"+BackPage.FIND_USER_ROLES.getValue()+"/"+userId+AttributeKeys.WEB_SUFFIX;
+		//return "redirect:"+SecurityBackPage.FIND_USER_ROLES.getValue()+"/"+userId+AttributeKeys.WEB_SUFFIX;
 	}
 
 	/**
@@ -331,7 +331,7 @@ public class UserController extends BaseController implements AdminController<Us
 			request.setAttribute("roles", ps.getResultList());
 			request.setAttribute("user", user);
 
-		return PathResolver.getPath(request, BackPage.FIND_OTHER_ROLE_BY_USER);
+		return PathResolver.getPath(request, SecurityBackPage.FIND_OTHER_ROLE_BY_USER);
 	}
 
 	/**
@@ -355,7 +355,7 @@ public class UserController extends BaseController implements AdminController<Us
 			request.setAttribute("functions", functions);
 			request.setAttribute("user", user);
 
-		return PathResolver.getPath(request, BackPage.FIND_FUNCTION_BY_USER);
+		return PathResolver.getPath(request, SecurityBackPage.FIND_FUNCTION_BY_USER);
 	}
 
 	/**
@@ -402,7 +402,7 @@ public class UserController extends BaseController implements AdminController<Us
 			request.setAttribute("enabled", enabled);
 
 			savePage(ps, request);
-		return PathResolver.getPath(request, BackPage.USER_LIST_PAGE);
+		return PathResolver.getPath(request, SecurityBackPage.USER_LIST_PAGE);
 	}
 
 	/**
@@ -426,7 +426,7 @@ public class UserController extends BaseController implements AdminController<Us
 			request.setAttribute("roles", roles);
 			request.setAttribute("user", user);
 
-		return PathResolver.getPath(request, BackPage.FIND_ROLE_BY_USER_PAGE);
+		return PathResolver.getPath(request, SecurityBackPage.FIND_ROLE_BY_USER_PAGE);
 	}
 	
 
@@ -442,14 +442,14 @@ public class UserController extends BaseController implements AdminController<Us
 	 *            the response
 	 * @return the string
 	 */
-	@Override
+	
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.MODIFY_USER);
+		return PathResolver.getPath(request, SecurityBackPage.MODIFY_USER);
 	}
 
 
-	@Override
+	
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String id) {
@@ -458,7 +458,7 @@ public class UserController extends BaseController implements AdminController<Us
 	}
 
 
-	@Override
+	
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request,
 			HttpServletResponse response, String curPageNO, User user) {
@@ -489,10 +489,10 @@ public class UserController extends BaseController implements AdminController<Us
 		request.setAttribute("bean", user);
 
 		savePage(ps, request);
-		return PathResolver.getPath(request, BackPage.USER_LIST_PAGE);
+		return PathResolver.getPath(request, SecurityBackPage.USER_LIST_PAGE);
 	}
 
-	@Override
+	
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request,
 			HttpServletResponse response, User user) {
@@ -501,7 +501,7 @@ public class UserController extends BaseController implements AdminController<Us
 		if (rightDelegate.isUserExist(user.getName(), state)) {
 			// return handleException(mapping, request,
 			// ActionMessages.GLOBAL_MESSAGE, "error.User.IsExist");
-			return PathResolver.getPath(request, FrontPage.FAIL);
+			return PathResolver.getPath(request, CommonPage.FAIL);
 		}
 		
 		String id=user.getId();
@@ -514,7 +514,7 @@ public class UserController extends BaseController implements AdminController<Us
 		logger.info("success saveUser,id = " + id);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, FowardPage.USERS_LIST);
+		return PathResolver.getPath(request, SecurityFowardPage.USERS_LIST);
 	}
 	
 	@RequestMapping(value = "/updatePassword")
@@ -523,20 +523,20 @@ public class UserController extends BaseController implements AdminController<Us
 		logger.info("Struts UserAction updateUserById");
 		String passwordag = user.getPasswordag();
 		if ((user.getPassword() == null) || (user.getPassword() == "")) {
-			return PathResolver.getPath(request, FrontPage.ERROR_PAGE);
+			return PathResolver.getPath(request, CommonPage.ERROR_PAGE);
 		}
 		if (!passwordag.endsWith(user.getPassword())) {// 2次密码要相等
-			return PathResolver.getPath(request, FrontPage.FAIL);
+			return PathResolver.getPath(request, CommonPage.FAIL);
 		}
 		State state = new StateImpl();
 		Md5PasswordEncoder coder = new Md5PasswordEncoder();
 		coder.setEncodeHashAsBase64(false);
 		rightDelegate.updateUserPassowrd(user.getId(), coder.encodePassword(user.getPassword(), user.getName()), state);
 		stateChecker.check(state, request);
-		return PathResolver.getPath(request, FowardPage.USERS_LIST);
+		return PathResolver.getPath(request, SecurityFowardPage.USERS_LIST);
 	}
 
-	@Override
+	
 	@RequestMapping(value = "/update/{id}")
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
 		logger.info("Action findUserById with id  " + id);		
@@ -544,7 +544,7 @@ public class UserController extends BaseController implements AdminController<Us
 			User user = rightDelegate.findUserById(id, state);
 			stateChecker.check(state, request);
 			request.setAttribute("bean", user);
-		return PathResolver.getPath(request, BackPage.UPDATE_USER_PASSWORD);
+		return PathResolver.getPath(request, SecurityBackPage.UPDATE_USER_PASSWORD);
 	}
 	
 	@RequestMapping(value = "/roles/{id}")
@@ -557,7 +557,7 @@ public class UserController extends BaseController implements AdminController<Us
 		request.setAttribute("list", roles);
 		request.setAttribute("bean", user);
 
-		return PathResolver.getPath(request, BackPage.FIND_ROLE_BY_USER_PAGE);
+		return PathResolver.getPath(request, SecurityBackPage.FIND_ROLE_BY_USER_PAGE);
 	}
 
 	@RequestMapping(value = "/otherRoles/{id}")
@@ -575,7 +575,7 @@ public class UserController extends BaseController implements AdminController<Us
 		savePage(ps, request);
 		request.setAttribute("bean", user);
 
-		return PathResolver.getPath(request, BackPage.FIND_OTHER_ROLE_BY_USER);
+		return PathResolver.getPath(request, SecurityBackPage.FIND_OTHER_ROLE_BY_USER);
 	}
 	@RequestMapping(value = "/deleteRoles/{id}")
 	public String deleteRoles(HttpServletRequest request, HttpServletResponse response, String[] strArray,@PathVariable String id) {
@@ -593,7 +593,7 @@ public class UserController extends BaseController implements AdminController<Us
 			State state = new StateImpl();
 			rightDelegate.deleteRoleFromUser(userRoles, state);
 			stateChecker.check(state, request);
-		return PathResolver.getPath(request, FowardPage.FIND_ROLE_BY_USER);
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_ROLE_BY_USER);
 	}
 
 	
@@ -607,7 +607,7 @@ public class UserController extends BaseController implements AdminController<Us
 			request.setAttribute("list", functions);
 			request.setAttribute("bean", user);
 
-		return PathResolver.getPath(request, BackPage.FIND_FUNCTION_BY_USER);
+		return PathResolver.getPath(request, SecurityBackPage.FIND_FUNCTION_BY_USER);
 	}
 
 }

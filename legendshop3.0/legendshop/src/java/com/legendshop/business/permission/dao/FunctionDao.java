@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.permission.dao;
+package com.legendshop.permission.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,10 +18,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
+import com.legendshop.command.framework.JCFException;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.exception.JCFException;
 import com.legendshop.model.entity.Permission;
 import com.legendshop.util.StringUtil;
 /**

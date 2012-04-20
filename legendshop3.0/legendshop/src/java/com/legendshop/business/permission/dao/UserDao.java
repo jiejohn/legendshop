@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.permission.dao;
+package com.legendshop.permission.dao;
 
 import java.util.List;
 

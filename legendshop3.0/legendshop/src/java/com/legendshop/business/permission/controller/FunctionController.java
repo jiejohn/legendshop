@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.permission.controller;
+package com.legendshop.permission.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.page.BackPage;
-import com.legendshop.business.common.page.FowardPage;
-import com.legendshop.business.helper.FunctionChecker;
-import com.legendshop.business.helper.StateChecker;
-import com.legendshop.business.permission.form.FunctionForm;
-import com.legendshop.business.permission.form.PermissionForm;
-import com.legendshop.business.permission.form.RoleForm;
-import com.legendshop.business.permission.service.RightDelegate;
 import com.legendshop.command.framework.State;
 import com.legendshop.command.framework.StateImpl;
 import com.legendshop.core.AttributeKeys;
@@ -41,14 +33,21 @@ import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
+import com.legendshop.core.helper.FunctionChecker;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.helper.StateChecker;
 import com.legendshop.model.entity.Function;
 import com.legendshop.model.entity.Permission;
 import com.legendshop.model.entity.PerssionId;
 import com.legendshop.model.entity.Role;
+import com.legendshop.permission.form.FunctionForm;
+import com.legendshop.permission.form.PermissionForm;
+import com.legendshop.permission.form.RoleForm;
+import com.legendshop.permission.page.SecurityBackPage;
+import com.legendshop.permission.page.SecurityFowardPage;
+import com.legendshop.permission.service.RightDelegate;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.StringUtil;
-
 /**
  * FunctionController.
  */
@@ -97,7 +96,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		logger.debug("deleteFunctionById result  = " + result);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, FowardPage.FUNCTION_LIST_QUERY);
+		return PathResolver.getPath(request, SecurityFowardPage.FUNCTION_LIST_QUERY);
 	}
 
 	/**
@@ -119,7 +118,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		stateChecker.check(state, request);
 		request.setAttribute("function", function);
 
-		return PathResolver.getPath(request, BackPage.UPDATE_FUNCTION);
+		return PathResolver.getPath(request, SecurityBackPage.UPDATE_FUNCTION);
 	}
 
 	/**
@@ -143,7 +142,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		request.setAttribute("list", list);
 		request.setAttribute("role", role);
 
-		return PathResolver.getPath(request, FowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 	/**
@@ -181,7 +180,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		request.setAttribute("functionList", ps.getResultList());
 		request.setAttribute("role", role);
 
-		return PathResolver.getPath(request, BackPage.FIND_OTHER_FUNCTION_LIST);
+		return PathResolver.getPath(request, SecurityBackPage.FIND_OTHER_FUNCTION_LIST);
 	}
 
 	/**
@@ -233,7 +232,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		if (ps.hasMutilPage())
 			request.setAttribute("toolBar", ps.getToolBar());
 
-		return PathResolver.getPath(request, BackPage.FUNCTION_LIST);
+		return PathResolver.getPath(request, SecurityBackPage.FUNCTION_LIST);
 	}
 
 	/**
@@ -253,7 +252,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		String id = rightDelegate.saveFunction(functionForm.getFunction(), state);
 		logger.info("success saveFunction,id = " + id);
 		stateChecker.check(state, request);
-		return PathResolver.getPath(request, FowardPage.FUNCTION_LIST_QUERY);
+		return PathResolver.getPath(request, SecurityFowardPage.FUNCTION_LIST_QUERY);
 	}
 
 	/**
@@ -286,7 +285,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		rightDelegate.saveFunctionsToRole(permissions, state);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, FowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 	/**
@@ -306,7 +305,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		State state = new StateImpl();
 		rightDelegate.updateFunction(functionForm.getFunction(), state);
 		stateChecker.check(state, request);
-		return PathResolver.getPath(request, FowardPage.FUNCTION_LIST_QUERY);
+		return PathResolver.getPath(request, SecurityFowardPage.FUNCTION_LIST_QUERY);
 	}
 
 	// ////////////////////////////Role Controller
@@ -343,7 +342,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		rightDelegate.deleteFunctionsFromRole(permissions, state);
 		stateChecker.check(state, request);
 		request.setAttribute("roleId", roleId);
-		return PathResolver.getPath(request, FowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 	/**
@@ -365,7 +364,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		stateChecker.check(state, request);
 		request.setAttribute("role", role);
 
-		return PathResolver.getPath(request, FowardPage.FIND_ALL_ROLE);
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_ALL_ROLE);
 	}
 
 	/**
@@ -387,7 +386,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		rightDelegate.deleteRoleById(id, state);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, FowardPage.FIND_ALL_ROLE);
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_ALL_ROLE);
 	}
 
 	/**
@@ -436,7 +435,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		if (ps.hasMutilPage())
 			request.setAttribute("toolBar", ps.getToolBar());
 
-		return PathResolver.getPath(request, BackPage.ROLE_LIST);
+		return PathResolver.getPath(request, SecurityBackPage.ROLE_LIST);
 	}
 
 	/**
@@ -462,7 +461,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		request.setAttribute("list", list);
 		request.setAttribute("function", function);
 
-		return PathResolver.getPath(request, BackPage.FIND_ROLE_BY_FUNCTION);
+		return PathResolver.getPath(request, SecurityBackPage.FIND_ROLE_BY_FUNCTION);
 	}
 
 	/**
@@ -484,7 +483,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		logger.info("success saveRole,id = " + id);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, FowardPage.FIND_ALL_ROLE);
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_ALL_ROLE);
 	}
 
 	/**
@@ -505,10 +504,10 @@ public class FunctionController extends BaseController implements AdminControlle
 		rightDelegate.updateRole(roleForm.getRole(), state);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, FowardPage.FIND_ALL_ROLE);
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_ALL_ROLE);
 	}
 
-	@Override
+	
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String id) {
@@ -519,17 +518,17 @@ public class FunctionController extends BaseController implements AdminControlle
 		if (!result) {
 			stateChecker.check(state, request);
 		}
-		return PathResolver.getPath(request, FowardPage.FUNCTION_LIST_QUERY);
+		return PathResolver.getPath(request, SecurityFowardPage.FUNCTION_LIST_QUERY);
 	}
 
-	@Override
+	
 	@RequestMapping("/load")
 	public String load(HttpServletRequest request, HttpServletResponse arg1) {
 
-		return PathResolver.getPath(request, BackPage.UPDATE_FUNCTION);
+		return PathResolver.getPath(request, SecurityBackPage.UPDATE_FUNCTION);
 	}
 
-	@Override
+	
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Function function) {
 		String userName = UserManager.getUsername(request);
@@ -554,10 +553,10 @@ public class FunctionController extends BaseController implements AdminControlle
 		request.setAttribute("bean", function);
 		savePage(ps, request);
 
-		return PathResolver.getPath(request, BackPage.FUNCTION_LIST);
+		return PathResolver.getPath(request, SecurityBackPage.FUNCTION_LIST);
 	}
 
-	@Override
+	
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, Function function) {
 		State state = new StateImpl();
@@ -569,10 +568,10 @@ public class FunctionController extends BaseController implements AdminControlle
 		}
 		logger.info("success saveFunction,id = " + id);
 		stateChecker.check(state, request);
-		return PathResolver.getPath(request, FowardPage.FUNCTION_LIST_QUERY);
+		return PathResolver.getPath(request, SecurityFowardPage.FUNCTION_LIST_QUERY);
 	}
 
-	@Override
+	
 	@RequestMapping(value = "/update/{id}")
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
 		logger.info("Struts Action findFunctionById with id  " + id);
@@ -581,7 +580,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		stateChecker.check(state, request);
 		request.setAttribute("bean", function);
 
-		return PathResolver.getPath(request, BackPage.UPDATE_FUNCTION);
+		return PathResolver.getPath(request, SecurityBackPage.UPDATE_FUNCTION);
 	}
 	
 	@RequestMapping(value = "/roles/{id}")
@@ -596,6 +595,6 @@ public class FunctionController extends BaseController implements AdminControlle
 		request.setAttribute("list", list);
 		request.setAttribute("bean", function);
 
-		return PathResolver.getPath(request, BackPage.FIND_ROLE_BY_FUNCTION);
+		return PathResolver.getPath(request, SecurityBackPage.FIND_ROLE_BY_FUNCTION);
 	}
 }

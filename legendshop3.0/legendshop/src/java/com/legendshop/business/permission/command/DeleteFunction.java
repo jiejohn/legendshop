@@ -5,10 +5,10 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.permission.command;
+package com.legendshop.permission.command;
 import java.util.Map;
 
-import com.legendshop.business.permission.dao.FunctionDao;
+import com.legendshop.permission.dao.FunctionDao;
 import com.legendshop.command.framework.AbstractCommand;
 import com.legendshop.command.framework.ErrorCode;
 import com.legendshop.command.framework.JCFException;

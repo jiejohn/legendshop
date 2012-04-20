@@ -5,13 +5,13 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.permission.command;
+package com.legendshop.permission.command;
 import java.util.Map;
 
-import com.legendshop.business.permission.common.ErrorCode;
-import com.legendshop.business.permission.dao.RoleDao;
+import com.legendshop.permission.common.ErrorCode;
+import com.legendshop.permission.dao.RoleDao;
 import com.legendshop.command.framework.AbstractCommand;
-import com.legendshop.core.exception.JCFException;
+import com.legendshop.command.framework.JCFException;
 import com.legendshop.model.entity.Role;
 
 /**

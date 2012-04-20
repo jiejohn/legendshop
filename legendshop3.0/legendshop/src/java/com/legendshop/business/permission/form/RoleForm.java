@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.permission.form;
+package com.legendshop.permission.form;
 
 import com.legendshop.model.entity.Role;
 

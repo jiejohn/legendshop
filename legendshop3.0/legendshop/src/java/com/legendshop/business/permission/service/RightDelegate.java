@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.permission.service;
+package com.legendshop.permission.service;
 
 import java.io.File;
 import java.util.List;
