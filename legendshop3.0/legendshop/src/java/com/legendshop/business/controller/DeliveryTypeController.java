@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
-import com.legendshop.business.service.DeliveryCorpService;
 import com.legendshop.business.service.DeliveryTypeService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
@@ -32,7 +31,6 @@ import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.model.entity.DeliveryCorp;
 import com.legendshop.model.entity.DeliveryType;
 import com.legendshop.util.AppUtils;
 

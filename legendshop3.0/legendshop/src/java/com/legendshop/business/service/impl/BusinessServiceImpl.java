@@ -30,7 +30,6 @@ import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.NewsCategoryStatusEnum;
 import com.legendshop.business.common.OrderStatusEnum;
 import com.legendshop.business.common.RegisterEnum;
-import com.legendshop.business.common.ShopStatusEnum;
 import com.legendshop.business.common.VisitTypeEnum;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.common.page.FrontPage;
@@ -55,19 +54,19 @@ import com.legendshop.business.event.EventId;
 import com.legendshop.business.form.MemberForm;
 import com.legendshop.business.form.SearchForm;
 import com.legendshop.business.form.UserForm;
-import com.legendshop.business.helper.ShopStatusChecker;
 import com.legendshop.business.helper.TaskThread;
 import com.legendshop.business.helper.impl.PersistVisitLogTask;
 import com.legendshop.business.helper.impl.SendMailTask;
 import com.legendshop.business.service.BusinessService;
-import com.legendshop.business.service.LoginService;
 import com.legendshop.business.service.PayTypeService;
 import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.FunctionEnum;
 import com.legendshop.core.constant.LanguageEnum;
+import com.legendshop.core.constant.LuceneIndexerEnum;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
@@ -80,6 +79,7 @@ import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
+import com.legendshop.core.helper.ShopStatusChecker;
 import com.legendshop.core.page.PagerUtil;
 import com.legendshop.event.EventContext;
 import com.legendshop.event.EventHome;
@@ -103,7 +103,6 @@ import com.legendshop.model.entity.Sub;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserDetail;
 import com.legendshop.model.entity.VisitLog;
-import com.legendshop.search.LuceneIndexer;
 import com.legendshop.search.SearchArgs;
 import com.legendshop.search.SearchFacade;
 import com.legendshop.search.SearchResult;
@@ -188,8 +187,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/** The hotsearch dao. */
 	private HotsearchDao hotsearchDao;
 	
-	private  LoginService loginService;
-
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#index(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -578,7 +575,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 		}
 		args.setEntityType(entityType);
-		if (LuceneIndexer.SEARCH_ENTITY_SHOPDETAIL.equals(args.getEntityType())) {
+		if (LuceneIndexerEnum.SEARCH_ENTITY_SHOPDETAIL.equals(args.getEntityType())) {
 			String provinceid = request.getParameter("provinceidValue");
 			if (AppUtils.isNotBlank(provinceid)) {
 				args.setProvinceid(provinceid);
@@ -1041,11 +1038,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		uem.addCallBackList(ResourceBundleHelper.getString(locale, "login"),
 				ResourceBundleHelper.getString(locale, "logon.hint.desc"), "login"+AttributeKeys.WEB_SUFFIX);
 		request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-
-		//用户注册即登录
-		if(loginService!=null){
-			loginService.onAuthentication(request, response, user.getName(), plaintPassword);
-		}
+		userDetailDao.flush();
 		
 		
 		// 发送通知注册成功邮件
@@ -1629,10 +1622,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	@Required
 	public void setHotsearchDao(HotsearchDao hotsearchDao) {
 		this.hotsearchDao = hotsearchDao;
-	}
-
-	public void setLoginService(LoginService loginService) {
-		this.loginService = loginService;
 	}
 
 }

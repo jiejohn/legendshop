@@ -9,12 +9,12 @@ package com.legendshop.business.service.impl;
 
 import java.util.List;
 
+import com.legendshop.business.dao.AskDao;
+import com.legendshop.business.service.AskService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.util.AppUtils;
-import com.legendshop.business.dao.AskDao;
 import com.legendshop.model.entity.Ask;
-import com.legendshop.business.service.AskService;
+import com.legendshop.util.AppUtils;
 
 /**
  * The Class AskServiceImpl.

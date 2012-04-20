@@ -14,15 +14,14 @@ import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.service.SystemParameterService;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.core.plugins.Plugin;
-import com.legendshop.core.plugins.PluginConfig;
+import com.legendshop.core.plugins.AbstractPlugin;
 import com.legendshop.core.tag.TableCache;
 import com.legendshop.search.SearchFacade;
 
 /**
  * The Class BusinessPlugin.
  */
-public class BusinessPlugin implements Plugin{
+public class BusinessPlugin extends AbstractPlugin{
 	
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(BusinessPlugin.class);
@@ -35,9 +34,6 @@ public class BusinessPlugin implements Plugin{
 	/** The search facade. */
 	private SearchFacade searchFacade;
 	
-	/** The plugin config. */
-	private PluginConfig pluginConfig;
-
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.plugins.Plugin#bind(javax.servlet.ServletContext)
 	 */
@@ -64,13 +60,6 @@ public class BusinessPlugin implements Plugin{
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.plugins.Plugin#getPluginConfig()
-	 */
-	@Override
-	public PluginConfig getPluginConfig() {
-		return pluginConfig;
-	}
 	
 
 	/**
@@ -101,16 +90,6 @@ public class BusinessPlugin implements Plugin{
 	 */
 	public void setSearchFacade(SearchFacade searchFacade) {
 		this.searchFacade = searchFacade;
-	}
-
-	/**
-	 * Sets the plugin config.
-	 * 
-	 * @param pluginConfig
-	 *            the new plugin config
-	 */
-	public void setPluginConfig(PluginConfig pluginConfig) {
-		this.pluginConfig = pluginConfig;
 	}
 
 }

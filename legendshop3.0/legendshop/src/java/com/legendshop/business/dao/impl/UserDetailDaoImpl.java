@@ -16,10 +16,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.legendshop.business.common.RegisterEnum;
-import com.legendshop.business.common.ShopStatusEnum;
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.service.CommonUtil;
 import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;

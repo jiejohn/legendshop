@@ -9,8 +9,8 @@ package com.legendshop.business.common.page;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.legendshop.core.constant.PagePathCalculator;
 import com.legendshop.core.constant.PageDefinition;
+import com.legendshop.core.constant.PagePathCalculator;
 
 /**
  * The Enum RedirectPage.

@@ -27,10 +27,10 @@ import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.core.ContextServiceLocator;
+import com.legendshop.core.constant.LuceneIndexerEnum;
 import com.legendshop.model.entity.ProductDetail;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.search.HTMLParser;
-import com.legendshop.search.LuceneIndexer;
 import com.legendshop.search.LuceneResultCollector;
 import com.legendshop.search.LuceneSettings;
 import com.legendshop.search.SearchArgs;
@@ -76,11 +76,11 @@ public class LuceneContentCollector implements LuceneResultCollector {
 			for (int docIndex = args.startFrom(), i = 0; docIndex < args.startFrom() + args.fetchCount()
 					&& docIndex < hits.length; docIndex++, i++) {
 				Document doc = search.doc(hits[docIndex].doc);
-				if (LuceneIndexer.SEARCH_ENTITY_PROD.equals(args.getEntityType())) {
+				if (LuceneIndexerEnum.SEARCH_ENTITY_PROD.equals(args.getEntityType())) {
 					if (doc.get(SearchFields.Keyword.PROD_ID) != null) {
 						postIds[i] = Long.parseLong(doc.get(SearchFields.Keyword.PROD_ID));
 					}
-				} else if (LuceneIndexer.SEARCH_ENTITY_SHOPDETAIL.equals(args.getEntityType())) {
+				} else if (LuceneIndexerEnum.SEARCH_ENTITY_SHOPDETAIL.equals(args.getEntityType())) {
 					if (doc.get(SearchFields.Keyword.SHOP_ID) != null) {
 						postIds[i] = Long.parseLong(doc.get(SearchFields.Keyword.SHOP_ID));
 					}
@@ -115,12 +115,12 @@ public class LuceneContentCollector implements LuceneResultCollector {
 		if (AppUtils.isBlank(postIds)) {
 			return result;
 		}
-		if (LuceneIndexer.SEARCH_ENTITY_PROD.equals(args.getEntityType())) {
+		if (LuceneIndexerEnum.SEARCH_ENTITY_PROD.equals(args.getEntityType())) {
 			result = retrieveProd(args, postIds, query);
 
-		} else if (LuceneIndexer.SEARCH_ENTITY_SHOPDETAIL.equals(args.getEntityType())) {
+		} else if (LuceneIndexerEnum.SEARCH_ENTITY_SHOPDETAIL.equals(args.getEntityType())) {
 			result = retrieveShopDetail(args, postIds, query);
-		} else if (LuceneIndexer.SEARCH_ENTITY_NEWS.equals(args.getEntityType())) {
+		} else if (LuceneIndexerEnum.SEARCH_ENTITY_NEWS.equals(args.getEntityType())) {
 		}
 		return result;
 	}
@@ -290,7 +290,7 @@ public class LuceneContentCollector implements LuceneResultCollector {
 			if (id != null && !found) {
 				SearchEntity searchEntity = new SearchEntity();
 				searchEntity.setProdId(id);
-				searchEntity.setEntityType(LuceneIndexer.SEARCH_ENTITY_PROD);
+				searchEntity.setEntityType(LuceneIndexerEnum.SEARCH_ENTITY_PROD);
 				getSearchFacade().delete(searchEntity);
 			}
 		}
@@ -316,7 +316,7 @@ public class LuceneContentCollector implements LuceneResultCollector {
 			if (id != null && !found) {
 				SearchEntity searchEntity = new SearchEntity();
 				searchEntity.setShopId(id);
-				searchEntity.setEntityType(LuceneIndexer.SEARCH_ENTITY_SHOPDETAIL);
+				searchEntity.setEntityType(LuceneIndexerEnum.SEARCH_ENTITY_SHOPDETAIL);
 				getSearchFacade().delete(searchEntity);
 			}
 		}

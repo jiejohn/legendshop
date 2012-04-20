@@ -9,12 +9,12 @@ package com.legendshop.business.service.impl;
 
 import java.util.List;
 
+import com.legendshop.business.dao.DeliveryTypeDao;
+import com.legendshop.business.service.DeliveryTypeService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.util.AppUtils;
-import com.legendshop.business.dao.DeliveryTypeDao;
 import com.legendshop.model.entity.DeliveryType;
-import com.legendshop.business.service.DeliveryTypeService;
+import com.legendshop.util.AppUtils;
 
 /**
  * The Class DeliveryTypeServiceImpl.

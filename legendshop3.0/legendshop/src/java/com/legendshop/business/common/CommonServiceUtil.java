@@ -15,11 +15,11 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.legendshop.core.constant.LuceneIndexerEnum;
 import com.legendshop.core.helper.FunctionUtil;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
-import com.legendshop.search.LuceneIndexer;
 import com.legendshop.search.SearchEntity;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.Arith;
@@ -115,7 +115,7 @@ public class CommonServiceUtil extends FunctionUtil {
 			entity.setContents(new StringBuffer().append(product.getName()).append(" ").append(product.getContent())
 					.toString());
 			entity.setDate(product.getRecDate());
-			entity.setEntityType(LuceneIndexer.SEARCH_ENTITY_PROD);
+			entity.setEntityType(LuceneIndexerEnum.SEARCH_ENTITY_PROD);
 			entity.setProdId(product.getProdId());
 			entity.setPrice(product.getCash());
 			entity.setUserId(product.getUserId());
@@ -126,7 +126,7 @@ public class CommonServiceUtil extends FunctionUtil {
 			entity.setContents(new StringBuffer().append(sd.getStoreName()).append(" ").append(sd.getSitename())
 					.append(" ").append(sd.getBriefDesc()).append(" ").append(sd.getDetailDesc()).toString());
 			entity.setDate(sd.getAddtime());
-			entity.setEntityType(LuceneIndexer.SEARCH_ENTITY_SHOPDETAIL);
+			entity.setEntityType(LuceneIndexerEnum.SEARCH_ENTITY_SHOPDETAIL);
 			entity.setUserId(sd.getUserId());
 			entity.setProvinceid(String.valueOf(sd.getProvinceid()));
 			entity.setCityid(String.valueOf(sd.getCityid()));

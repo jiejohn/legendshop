@@ -14,8 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.dao.LuceneDao;
+import com.legendshop.core.constant.LuceneIndexerEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
-import com.legendshop.search.LuceneIndexer;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -37,12 +37,12 @@ public class LuceneDaoImpl extends BaseDaoImpl implements LuceneDao {
 	public long getFirstPostIdByDate(int entityType, Date fromDate) {
 		log.debug("firstPostIdByDate, entityType = {},fromDate = {} ", entityType, fromDate);
 		if (fromDate != null) {
-			if (LuceneIndexer.SEARCH_ENTITY_PROD.equals(entityType)) {
+			if (LuceneIndexerEnum.SEARCH_ENTITY_PROD.equals(entityType)) {
 				Long result = findUniqueByHQLLimit("select prodId from Product where modifyDate > ?", Long.class, 0, 1, fromDate);
 				if (AppUtils.isNotBlank(result)) {
 					return result;
 				}
-			} else if (LuceneIndexer.SEARCH_ENTITY_SHOPDETAIL.equals(entityType)) {
+			} else if (LuceneIndexerEnum.SEARCH_ENTITY_SHOPDETAIL.equals(entityType)) {
 				Long result = findUniqueByHQLLimit("select shopId from ShopDetail where modifyTime > ?", Long.class, 0, 1,
 						fromDate);
 				if (AppUtils.isNotBlank(result)) {
@@ -59,9 +59,9 @@ public class LuceneDaoImpl extends BaseDaoImpl implements LuceneDao {
 	@Override
 	public List getPostsToIndex(int entityType, long firstPostId, long toPostId) {
 		List list = null;
-		if (LuceneIndexer.SEARCH_ENTITY_PROD.equals(entityType)) {
+		if (LuceneIndexerEnum.SEARCH_ENTITY_PROD.equals(entityType)) {
 			list = findByHQL("from Product where prodId > ? and prodId < ?", firstPostId, toPostId);
-		} else if (LuceneIndexer.SEARCH_ENTITY_SHOPDETAIL.equals(entityType)) {
+		} else if (LuceneIndexerEnum.SEARCH_ENTITY_SHOPDETAIL.equals(entityType)) {
 			list = findByHQL("from ShopDetail where shopId > ? and shopId < ?", firstPostId, toPostId);
 		}
 		return list;
@@ -73,13 +73,13 @@ public class LuceneDaoImpl extends BaseDaoImpl implements LuceneDao {
 	@Override
 	public long getLastPostIdByDate(int entityType, Date toDate) {
 		if (toDate != null) {
-			if (LuceneIndexer.SEARCH_ENTITY_PROD.equals(entityType)) {
+			if (LuceneIndexerEnum.SEARCH_ENTITY_PROD.equals(entityType)) {
 				Long result = findUniqueByHQLLimit("select prodId from Product where modifyDate < ? order by prodId desc",
 						Long.class, 0, 1, toDate);
 				if (AppUtils.isNotBlank(result)) {
 					return result;
 				}
-			} else if (LuceneIndexer.SEARCH_ENTITY_SHOPDETAIL.equals(entityType)) {
+			} else if (LuceneIndexerEnum.SEARCH_ENTITY_SHOPDETAIL.equals(entityType)) {
 				Long result = findUniqueByHQLLimit(
 						"select shopId from ShopDetail where modifyTime < ? order by shopId desc", Long.class, 0, 1,
 						toDate);

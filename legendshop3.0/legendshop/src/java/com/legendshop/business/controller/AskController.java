@@ -18,17 +18,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.legendshop.core.UserManager;
-import com.legendshop.core.dao.support.CriteriaQuery;
-import com.legendshop.core.dao.support.PageSupport;
-
-import com.legendshop.core.base.BaseController;
-import com.legendshop.core.base.AdminController;
 
 import com.legendshop.business.service.AskService;
-import com.legendshop.model.entity.Ask;
-import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.UserManager;
+import com.legendshop.core.base.AdminController;
+import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.dao.support.CriteriaQuery;
+import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.model.entity.Ask;
 
 /**
  * The Class AskController

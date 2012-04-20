@@ -26,13 +26,13 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.legendshop.business.common.ProductStatusEnum;
 import com.legendshop.business.common.RoleEnum;
-import com.legendshop.business.common.ShopStatusEnum;
 import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.business.event.EventId;
 import com.legendshop.business.helper.TaskThread;
 import com.legendshop.business.helper.impl.SendMailTask;
 import com.legendshop.business.service.AdminService;
 import com.legendshop.business.service.CommonUtil;
+import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;

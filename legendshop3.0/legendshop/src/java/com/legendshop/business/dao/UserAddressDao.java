@@ -7,8 +7,9 @@
  */
 package com.legendshop.business.dao;
  
-import com.legendshop.core.dao.BaseDao;
 import java.util.List;
+
+import com.legendshop.core.dao.BaseDao;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.UserAddress;

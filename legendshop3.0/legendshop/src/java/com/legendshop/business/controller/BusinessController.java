@@ -25,6 +25,7 @@ import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.form.SearchForm;
 import com.legendshop.business.form.UserForm;
 import com.legendshop.business.service.BusinessService;
+import com.legendshop.business.service.LoginService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ConfigPropertiesEnum;
@@ -52,6 +53,9 @@ public class BusinessController extends BaseController {
 	/** The business service. */
 	@Autowired
 	private BusinessService businessService;
+	
+	@Autowired
+	private  LoginService loginService;
 
 	
 	/**
@@ -464,7 +468,15 @@ public class BusinessController extends BaseController {
 	 */
 	@RequestMapping("/userReg")
 	public String userReg(HttpServletRequest request, HttpServletResponse response,UserForm userForm) {
-		return businessService.saveUserReg(request, response,userForm);
+		String result =  businessService.saveUserReg(request, response,userForm);
+//		//用户注册即登录
+//		if(loginService!=null){
+//			Authentication authentication = loginService.onAuthentication(request, response, userForm.getName(), userForm.getPassword());
+//			SecurityContext context = new SecurityContextImpl();
+//			context.setAuthentication(authentication);
+//			request.getSession().setAttribute(Constants.SPRING_SECURITY_CONTEXT, context);
+//		}
+		return result;
 	}
 	
 	/**
