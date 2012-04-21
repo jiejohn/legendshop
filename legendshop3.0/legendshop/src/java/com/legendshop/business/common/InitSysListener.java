@@ -16,11 +16,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.legendshop.core.AttributeKeys;
-import com.legendshop.core.ContextServiceLocator;
 import com.legendshop.core.StartupService;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.util.AppUtils;
+import com.legendshop.util.ContextServiceLocator;
 import com.legendshop.util.sql.ConfigCode;
 
 /**

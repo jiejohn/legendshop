@@ -19,9 +19,9 @@ import org.slf4j.LoggerFactory;
 import com.legendshop.business.dao.SubDao;
 import com.legendshop.business.payment.alipay.config.AlipayConfig;
 import com.legendshop.business.service.PayTypeService;
-import com.legendshop.core.ContextServiceLocator;
 import com.legendshop.model.entity.PayType;
 import com.legendshop.model.entity.Sub;
+import com.legendshop.util.ContextServiceLocator;
 
 /* *
  *类名：AlipayNotify

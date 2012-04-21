@@ -1,4 +1,4 @@
-<%@page import="com.legendshop.core.ContextServiceLocator"%>
+<%@page import="com.legendshop.util.ContextServiceLocator"%>
 <%@page import="com.legendshop.business.service.impl.PayTypeServiceImpl"%>
 <%@page import="com.legendshop.model.entity.PayType"%>
 <%@page import="com.legendshop.model.entity.Sub"%>

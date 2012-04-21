@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.SystemParameterService;
-import com.legendshop.core.ContextServiceLocator;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
@@ -27,6 +26,7 @@ import com.legendshop.core.helper.PropertiesUpdater;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.model.entity.SystemParameter;
+import com.legendshop.util.ContextServiceLocator;
 
 /**
  * 系统参数控制器.

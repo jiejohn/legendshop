@@ -8,10 +8,10 @@
 package com.legendshop.business.payment.alipay.config;
 
 import com.legendshop.business.service.PayTypeService;
-import com.legendshop.core.ContextServiceLocator;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.page.PagerUtil;
 import com.legendshop.model.entity.PayType;
+import com.legendshop.util.ContextServiceLocator;
 
 /**
  * 

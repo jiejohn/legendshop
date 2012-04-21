@@ -23,12 +23,12 @@ import org.slf4j.LoggerFactory;
 import com.legendshop.business.common.Constants;
 import com.legendshop.command.framework.State;
 import com.legendshop.command.framework.StateImpl;
-import com.legendshop.core.ContextServiceLocator;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.FunctionEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.DownloadLog;
 import com.legendshop.util.AppUtils;
+import com.legendshop.util.ContextServiceLocator;
 import com.legendshop.util.ip.IPSeeker;
 
 /**
