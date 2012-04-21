@@ -15,7 +15,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_core"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_util"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/core_lib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
