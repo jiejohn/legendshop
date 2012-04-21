@@ -5,94 +5,20 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_23"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v6.0"/>
-	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_central3.0.3.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_core3.0.3.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_jcf3.0.3.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_model3.0.3.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_search3.0.3.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_util3.0.3.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/activation-1.1.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/antlr-2.7.7.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/aopalliance.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/asm.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/aspectjweaver.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/bsf-2.3.0.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/bsh-2.0b4.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/cglib-2.2.0.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons-beanutils-1.8.0.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons-chain-1.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons-dbcp.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons-digester-1.8.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons-fileupload-1.2.1.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons-httpclient-3.1.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons-lang-2.3.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons-pool.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons-validator-1.3.1.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons.codec-1.3.0.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons.collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/commons.io-1.4.0.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/displaytag-1.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/displaytag-export-poi-1.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/dwr.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/ehcache-1.6.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/ezmorph-1.0.6.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/freemarker.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/hibernate3.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/htmlparser-1.5.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/IKAnalyzer3.2.5Stable.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/imageinfo-1.9.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/itext-1.3.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/iTextAsian.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/jarjar-0.6.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/java-core-2.6.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/javassist-3.9.0.GA.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/jaxen-1.1-beta-4.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/jdom-1.0.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/json-lib-2.3-jdk15.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/jstl-1.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/jta.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/lucene-analyzers-3.0.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/lucene-core-3.0.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/lucene-highlighter-3.0.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/lucene-memory-3.0.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/mail.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/mysql-connector-java-5.0.8-bin.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.aop-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.asm-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.aspects-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.beans-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.context-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.context.support-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.core-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.expression-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.jdbc-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.orm-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.transaction-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.web-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.web.servlet-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/org.springframework.web.struts-3.1.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/oro-2.0.8.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/poi-3.2-FINAL.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/proxool-0.9.1-ls.jar_bak"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/proxool-cglib.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/proxool1.0.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/slf4j-all-log4j12-1.4.3.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/spring-security-config-3.0.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/spring-security-core-3.0.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/spring-security-web-3.0.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/standard-1.0.6.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/tiles-api-2.2.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/tiles-core-2.2.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/tiles-freemarker-2.2.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/tiles-jsp-2.2.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/tiles-servlet-2.2.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/tiles-template-2.2.2.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/xerces-2.8.1.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/xpp3_min-1.1.3.4.O.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/lib/xstream-1.2.1.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_group"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/legendshop_lib">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_c2c"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_model"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_security"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_payment"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/release_lib">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

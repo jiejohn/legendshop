@@ -11,10 +11,6 @@
 		<config>src/resource/spring/legendshop/applicationContext-quartz.xml</config>
 		<config>src/resource/spring/legendshop/applicationContext-security.xml</config>
 		<config>src/resource/spring/legendshop/applicationContext-util.xml</config>
-		<config>src/resource/spring/legendshop/permission/applicationContext-command.xml</config>
-		<config>src/resource/spring/legendshop/permission/applicationContext-dao.xml</config>
-		<config>src/resource/spring/legendshop/permission/applicationContext-processor.xml</config>
-		<config>src/resource/spring/legendshop/permission/applicationContext-service.xml</config>
 		<config>src/resource/spring/legendshop/applicationContext-cache.xml</config>
 		<config>src/resource/spring/legendshop/applicationContext-dwr.xml</config>
 		<config>src/resource/spring/legendshop/applicationContext-search.xml</config>
@@ -31,10 +27,6 @@
 				<config>src/resource/spring/legendshop/applicationContext-quartz.xml</config>
 				<config>src/resource/spring/legendshop/applicationContext-security.xml</config>
 				<config>src/resource/spring/legendshop/applicationContext-util.xml</config>
-				<config>src/resource/spring/legendshop/permission/applicationContext-command.xml</config>
-				<config>src/resource/spring/legendshop/permission/applicationContext-dao.xml</config>
-				<config>src/resource/spring/legendshop/permission/applicationContext-processor.xml</config>
-				<config>src/resource/spring/legendshop/permission/applicationContext-service.xml</config>
 				<config>src/resource/spring/legendshop/applicationContext-cache.xml</config>
 				<config>src/resource/spring/legendshop/applicationContext-dwr.xml</config>
 				<config>src/resource/spring/legendshop/applicationContext-search.xml</config>

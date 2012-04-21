@@ -3,7 +3,11 @@
 	<name>legendshop</name>
 	<comment></comment>
 	<projects>
+		<project>legendshop_payment</project>
+		<project>legendshop_model</project>
+		<project>legendshop_security</project>
 		<project>legendshop_group</project>
+		<project>legendshop_c2c</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -7,19 +7,7 @@
         <dependent-module archiveName="legendshop_payment.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_payment/legendshop_payment">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="legendshop_util.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_util/legendshop_util">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="legendshop_model.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_model/legendshop_model">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="legendshop_jcf.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_jcf/legendshop_jcf">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="legendshop_search.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_search/legendshop_search">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="legendshop_core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_core/legendshop_core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="legendshop_security.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_security/legendshop_security">
@@ -29,9 +17,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="legendshop_c2c.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_c2c/legendshop_c2c">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="legendshop_central.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendshop_central/legendshop_central">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/legendshop/build/classes"/>

@@ -138,7 +138,7 @@
 	<!-- 编译war包 -->
 	<target name="war" depends="jar" description="Package a standard J2EE WAR">
 		<echo>编译war包:${war.file}</echo>
-		<war destfile="${war.file}" compress="false" update="true" webxml="../${web.name}/WEB-INF/web.xml">
+		<war destfile="${war.file}" compress="true" update="true" webxml="../${web.name}/WEB-INF/web.xml">
 			<fileset dir="../${web.name}" excludes="**/web.xml,**/*.mex,**svn**" />
 			<lib dir="${lib.root}/lib">
 				<include name="**/*.jar" />
