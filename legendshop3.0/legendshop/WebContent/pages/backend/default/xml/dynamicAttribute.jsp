@@ -5,9 +5,9 @@
 <html>
 	<head>
 		<title>商品动态属性</title>
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-        <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
-        <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+        <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
+       <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
     <%
     Integer type = (Integer)request.getAttribute("DYNAMIC_TYPE");
     String userName = (String)session.getAttribute("SPRING_SECURITY_LAST_USERNAME");
@@ -30,7 +30,7 @@
 
  <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商品管理 &raquo; <a href="${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}">商品管理</a> &raquo; <a href="${pageContext.request.contextPath}/admin/product/load${applicationScope.WEB_SUFFIX}">创建商品</a>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理 &raquo; <a href="<ls:url address='/admin/product/query'/>">商品管理</a> &raquo; <a href="${pageContext.request.contextPath}/admin/product/load${applicationScope.WEB_SUFFIX}">创建商品</a>
     	 <c:if test="${prod.name != null}"> &raquo; <a href= "${pageContext.request.contextPath}/views/${prod.prodId}${applicationScope.WEB_SUFFIX}" target="_blank">${prod.name}</a></c:if>
     	</td></tr>
    	</thead>
@@ -64,7 +64,7 @@
 				<br><br>
 				模板名称 <input type="text" value="" id="tempName" name="tempName" size="14" maxlength="50"> 
 				<a href="javascript:addTemp('${DYNAMIC_TYPE}')" title="根据现有配置，创建商品属性模板"><img alt="创建商品属性模板" src="${pageContext.request.contextPath}/img/grid_add.png"></a>
-				<a href="javascript:deleteTemp('${DYNAMIC_TYPE}')" title="删除商品属性模板"><img alt="删除商品属性模板" src="${pageContext.request.contextPath}/img/grid_delete.png"></a>
+				<a href="javascript:deleteTemp('${DYNAMIC_TYPE}')" title="删除商品属性模板"><img alt="删除商品属性模板" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
 				<br><br><br><br>
 				<c:choose>
 					<c:when test="${DYNAMIC_TYPE == 1}">创建动态属性： <br>
@@ -84,7 +84,7 @@
 		</table>
    <table style="width: 100%; border: 0px"><tr><td align="left">说明：<br>
    1.<img alt="创建商品属性模板" src="${pageContext.request.contextPath}/img/grid_add.png">&nbsp;以“模板名称”为名称，以当前的属性配置作为内容，创建商品属性模板，在属性内容编辑器中则用于创建一个动态属性<br>
-   2.<img alt="删除商品属性模板" src="${pageContext.request.contextPath}/img/grid_delete.png">&nbsp;删除选择模板中选定的商品属性模板,在属性内容编辑器中则用于删除属性或者属性下的选项<br>
+   2.<img alt="删除商品属性模板" src="<ls:templateResource item='/img/grid_delete.png'/> ">&nbsp;删除选择模板中选定的商品属性模板,在属性内容编辑器中则用于删除属性或者属性下的选项<br>
    </td><tr></table> 
 		
 		
@@ -209,7 +209,7 @@
 		}
         
         //var del = "<input id='textButton' name ='textButton' type='button' value='删除参数框' onclick='del(this.parentNode)'/>";
-        var del = "<a href='#' onclick='del(this.parentNode)'><img src='${pageContext.request.contextPath}/img/grid_delete.png' title='删除'/></a>";
+        var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/img/grid_delete.png'/> ' title='删除'/></a>";
         var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/img/up.gif' title='上移'/></a>";
         
         var down = "&nbsp;<a href='#' onclick='moveDown(this.parentNode)'><img src='${pageContext.request.contextPath}/img/down.gif' title='下移'/></a>";
@@ -226,7 +226,7 @@
 	}
         var add = "<a href='#' onclick='addSelectOption(this.parentNode.parentNode)'><img src='${pageContext.request.contextPath}/img/grid_add.png'/></a>";
        // var del = "<input id='textButton' name ='textButton' type='button' value='删除选择框' onclick='del(this.parentNode)'/>";
-        var del = "<a href='#' onclick='del(this.parentNode)'><img src='${pageContext.request.contextPath}/img/grid_delete.png' title='删除'/></a>";
+        var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/img/grid_delete.png'/> ' title='删除'/></a>";
         
         var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/img/up.gif' title='上移'/></a>";
         
@@ -253,7 +253,7 @@
     		  text = "选项&nbsp;<input id='textInput' name ='textInput' type='text'/>";
     		}
 	        
-	        var del = "<input id='textButton' name ='textButton' type='image' src='${pageContext.request.contextPath}/img/grid_delete.png' title='删除' onclick='del(this)'/>";
+	        var del = "<input id='textButton' name ='textButton' type='image' src='<ls:templateResource item='/img/grid_delete.png'/> ' title='删除' onclick='del(this)'/>";
 	        var e = element("div", {"class": "selectOption","className": "selectOption"}, [text,del]);
 	        obj.appendChild(e);
         }
@@ -266,7 +266,7 @@
     		  text = "选项&nbsp;<input id='textInput' name ='textInput' type='text'/>";
     		}
 	        
-	        var del = "<input id='textButton' name ='textButton' type='image' src='${pageContext.request.contextPath}/img/grid_delete.png' title='删除' onclick='del(this)'/>";
+	        var del = "<input id='textButton' name ='textButton' type='image' src='<ls:templateResource item='/img/grid_delete.png'/> ' title='删除' onclick='del(this)'/>";
 	        var e = element("div", {"class": "selectOption","className": "selectOption"}, [text,del]);
 	        return e;
         }
@@ -279,7 +279,7 @@
 		  text = "多选框：<input id='textInput' name ='textInput' type='text'/>";
 		}
          var add = "<a href='#' onclick='addSelectOption(this.parentNode.parentNode)'><img src='${pageContext.request.contextPath}/img/grid_add.png'/></a>";
-         var del = "<a href='#' onclick='del(this.parentNode)'><img src='${pageContext.request.contextPath}/img/grid_delete.png' title='删除'/></a>";
+         var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/img/grid_delete.png'/> ' title='删除'/></a>";
          var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/img/up.gif' title='上移'/></a>";
          var down = "&nbsp;<a href='#' onclick='moveDown(this.parentNode)'><img src='${pageContext.request.contextPath}/img/down.gif' title='下移'/></a>"; 
          var e = element("div", {"class": "CheckBoxType","className": "CheckBoxType"}, [text,add,del,up,down]);
@@ -303,7 +303,7 @@
 		}
         var add = "<a href='#' onclick='addSelectOption(this.parentNode.parentNode)'><img src='${pageContext.request.contextPath}/img/grid_add.png'/></a>";
         //var del = "<input id='textButton' name ='textButton' type='button' value='删除单选框' onclick='del(this.parentNode)'/>";
-         var del = "<a href='#' onclick='del(this.parentNode)'><img src='${pageContext.request.contextPath}/img/grid_delete.png' title='删除'/></a>";  
+         var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/img/grid_delete.png'/> ' title='删除'/></a>";  
          var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/img/up.gif' title='上移'/></a>";
          var down = "&nbsp;<a href='#' onclick='moveDown(this.parentNode)'><img src='${pageContext.request.contextPath}/img/down.gif' title='下移'/></a>";
          

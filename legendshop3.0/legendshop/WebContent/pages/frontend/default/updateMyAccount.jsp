@@ -7,7 +7,7 @@
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
 		<script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
 <style>
 <!--
@@ -200,7 +200,7 @@
                                   			<fmt:message key="shop.audit.failed"/><a href="${pageContext.request.contextPath}/openShop${applicationScope.WEB_SUFFIX}"><b><fmt:message key="review.material"/></b></a>
                                   		</c:if>
                                   		<c:if test="${requestScope.myShopDetail.status == 1}">
-                                  			<a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}"><b><fmt:message key="fill.detail.shop"/></b></a>
+                                  			<a href="<ls:url address='/admin/index'/>"><b><fmt:message key="fill.detail.shop"/></b></a>
                                   		</c:if>
                                   	</c:otherwise>
                                   </c:choose>

@@ -8,8 +8,8 @@
         <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+  		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 <title>回复用户消息</title>
 <script type="text/javascript">
 jQuery(document).ready(function() {
@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
 <body class="bodymargin">
 	<table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/userComment/query${applicationScope.WEB_SUFFIX}?status=0">消息管理</a> &raquo; 回复用户消息</td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/userComment/query${applicationScope.WEB_SUFFIX}?status=0">消息管理</a> &raquo; 回复用户消息</td></tr>
     </thead>
     </table>
   <table class="${tableclass}" style="width: 100%" id="col1">

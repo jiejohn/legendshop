@@ -11,14 +11,14 @@
 			Integer offset = (Integer)request.getAttribute("offset");
 	%>
 <head>
-	<script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
+	<script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
 <title>用户登录历史列表次数</title>
 </head>
 <body>
 <auth:auth ifAnyGranted="F_SYSTEM">
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/loginHistory/sum${applicationScope.WEB_SUFFIX}">用户登录次数历史列表</a></td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/loginHistory/sum${applicationScope.WEB_SUFFIX}">用户登录次数历史列表</a></td></tr>
     </thead>
     </table>
 <form action="${pageContext.request.contextPath}/admin/loginHistory/sum${applicationScope.WEB_SUFFIX}" id="form1">

@@ -6,17 +6,17 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <html>
 <head>
-  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+  		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+  		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-		<script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
+		<script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
 <title>用户详细信息列表</title>
 </head>
 <body>
 	<%Integer offset = (Integer)request.getAttribute("offset");%>
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/system/userDetail/query${applicationScope.WEB_SUFFIX}">用户信息管理</a></td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/system/userDetail/query${applicationScope.WEB_SUFFIX}">用户信息管理</a></td></tr>
     </thead>
     </table>
 <form action="${pageContext.request.contextPath}/system/userDetail/query${applicationScope.WEB_SUFFIX}" id="form1" name="form1">
@@ -73,7 +73,7 @@
 	      <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
 	      <c:choose>
 	      	<c:when test="${item.shopId != null}">
-	      		<a href='${pageContext.request.contextPath}/admin/shopDetail/load/${item.shopId}${applicationScope.WEB_SUFFIX}?userName=${item.userName}' title="修改用户${item.userName}当前商城"><img alt="修改用户当前商城" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
+	      		<a href='${pageContext.request.contextPath}/admin/shopDetail/load/${item.shopId}${applicationScope.WEB_SUFFIX}?userName=${item.userName}' title="修改用户${item.userName}当前商城"><img alt="修改用户当前商城" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
 	      	</c:when>
 	      	<c:otherwise>
 	      		<c:if test="${supportOpenShop == 'true' && 'C2C' == applicationScope.BUSINESS_MODE}">
@@ -82,7 +82,7 @@
 	      	</c:otherwise>
 	      </c:choose>
 	      </c:if>
-  	 <a href='javascript:confirmDelete("${item.userId}","${item.userName}")' title="删除用户${item.userName}所有信息"><img alt="删除用户${item.userName}所有信息" src="${pageContext.request.contextPath}/img/grid_delete.png"></a>
+  	 <a href='javascript:confirmDelete("${item.userId}","${item.userName}")' title="删除用户${item.userName}所有信息"><img alt="删除用户${item.userName}所有信息" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
 	 </display:column>
       </auth:auth>
     </display:table> 

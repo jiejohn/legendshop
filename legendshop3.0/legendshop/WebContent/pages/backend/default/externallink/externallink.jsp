@@ -52,7 +52,7 @@
   <body class="bodymargin">
    <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/externallink/query${applicationScope.WEB_SUFFIX}">连接管理</a> &raquo; 创建友情连接</td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/externallink/query${applicationScope.WEB_SUFFIX}">连接管理</a> &raquo; 创建友情连接</td></tr>
     </thead>
     </table>
         <form action="${pageContext.request.contextPath}/admin/externallink/save${applicationScope.WEB_SUFFIX}" method="post" id="form1" enctype="multipart/form-data">

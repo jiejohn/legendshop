@@ -146,7 +146,7 @@
 		<property name="mappingLocations">
 			<list>
 				<value>
-					classpath*:/com/legendshop/model/entity/*.hbm.xml
+					classpath*:/com/legendshop/model/entity/**/*.hbm.xml
 				</value>
 			</list>
 		</property>

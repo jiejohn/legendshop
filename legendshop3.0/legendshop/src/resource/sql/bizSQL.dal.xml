@@ -243,7 +243,12 @@
 					left join ls_brand brand on prod.brand_id = brand.brand_id
 					where prod_id in (
             </Method>
-             
+             <Method name="getGroupProdList">
+             	select p, g from Product p, GroupProduct g where p.prodId = g.prodId
+             </Method>
+             <Method name="getGroupProdCount">
+               select count(*) from Product p, GroupProduct g where p.prodId = g.prodId
+             </Method>
 		</Object>
 		<Object objectName="ad">
 		     <Method name="getAdvertisement">

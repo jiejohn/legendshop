@@ -7,9 +7,9 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <html>
 <head>
-<script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
-  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+<script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
+  		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+  		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
 <script language="JavaScript" type="text/javascript">
 <!--
@@ -35,7 +35,7 @@
 <form action="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}">
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}">角色管理</a> </td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}">角色管理</a> </td></tr>
 	    </thead>
 	    </table>
 <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
@@ -65,8 +65,8 @@
       	<a href="${pageContext.request.contextPath}/member/role/functions/${item.id}${applicationScope.WEB_SUFFIX}">权限</a>
       </display:column>
       <display:column title="操作" media="html" style="width:75px">
-      	<a href="${pageContext.request.contextPath}/member/role/update/${item.id}${applicationScope.WEB_SUFFIX}" ><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
-      	<a href="${pageContext.request.contextPath}/member/role/delete/${item.id}${applicationScope.WEB_SUFFIX}" title="删除"><img alt="删除" src="${pageContext.request.contextPath}/img/grid_delete.png"></a>
+      	<a href="${pageContext.request.contextPath}/member/role/update/${item.id}${applicationScope.WEB_SUFFIX}" ><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
+      	<a href="${pageContext.request.contextPath}/member/role/delete/${item.id}${applicationScope.WEB_SUFFIX}" title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
       </display:column>
     </display:table>
         <c:if test="${not empty toolBar}">

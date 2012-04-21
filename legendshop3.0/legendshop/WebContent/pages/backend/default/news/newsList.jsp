@@ -6,11 +6,11 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <html>
 <head>
-    <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-    <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/optionService.js'></script>
-    <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
-    <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-    <script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
+   <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+    <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
     <title>新闻列表</title>
 </head>
 <body class="bodymargin">
@@ -20,7 +20,7 @@
     <form action="${pageContext.request.contextPath}/admin/news/query${applicationScope.WEB_SUFFIX}" id="form1" method="post">
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/news/query${applicationScope.WEB_SUFFIX}">新闻管理</a></td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/news/query${applicationScope.WEB_SUFFIX}">新闻管理</a></td></tr>
     </thead>
     </table>
     <div align="left" style="padding: 5px">
@@ -84,9 +84,9 @@
         <display:column title="商城" property="userName" sortable="true" sortName="n.userName"></display:column>
       </auth:auth>
       <display:column title="操作" media="html" style="width:40px">
-      <a href= "${pageContext.request.contextPath}/admin/news/load/${item.newsId}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
+      <a href= "${pageContext.request.contextPath}/admin/news/load/${item.newsId}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
       <auth:auth ifAnyGranted="F_OPERATOR">
-        <a href='javascript:deleteById("${item.newsId}")' title="删除"><img alt="删除" src="${pageContext.request.contextPath}/img/grid_delete.png"></a>
+        <a href='javascript:deleteById("${item.newsId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
       </auth:auth>
       </display:column>
     </display:table>

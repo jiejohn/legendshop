@@ -49,15 +49,6 @@ public class NewsAdminController extends BaseController {
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(NewsAdminController.class);
 	
-	/** The LIS t_ page. */
-	public static String LIST_PAGE = "/news/newsList";
-	
-	/** The EDI t_ page. */
-	public static String EDIT_PAGE = "/news/news";
-	
-	/** The LIS t_ query. */
-	public static String LIST_QUERY = "/admin/news/query";
-
 	/** The news service. */
 	@Autowired
 	private NewsService newsService;

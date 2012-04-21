@@ -44,7 +44,7 @@
 			<div align="center">
 				    <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/logo/query${applicationScope.WEB_SUFFIX}">Logo管理</a> &raquo; 创建 Logo</td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/logo/query${applicationScope.WEB_SUFFIX}">Logo管理</a> &raquo; 创建 Logo</td></tr>
 	    </thead>
 	    </table>
 			<table  align="center" class="${tableclass}" id="col1">

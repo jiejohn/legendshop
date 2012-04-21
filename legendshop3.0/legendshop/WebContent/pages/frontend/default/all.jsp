@@ -51,7 +51,7 @@
        			          <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
        			                <a href="${pageContext.request.contextPath}/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}${applicationScope.WEB_SUFFIX}"><fmt:message key="myShop"/></a>
        			           </c:if>
-					            <a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}"><fmt:message key="system.management"/></a>
+					            <a href="<ls:url address='/admin/index'/>"><fmt:message key="system.management"/></a>
 					    </auth:auth>
 					   </c:when>
 					   <c:otherwise>

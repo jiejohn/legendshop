@@ -6,11 +6,11 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <html>
 <head>
-    <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-    <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/optionService.js'></script>
-    <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
-    <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-    <script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
+   <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+    <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
     <title>系统配置参数列表</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
     %>
 	 <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 系统管理  &raquo; <a href="${pageContext.request.contextPath}/system/systemParameter/query${applicationScope.WEB_SUFFIX}">系统参数配置管理</a></td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 系统管理  &raquo; <a href="${pageContext.request.contextPath}/system/systemParameter/query${applicationScope.WEB_SUFFIX}">系统参数配置管理</a></td></tr>
 	    </thead>
 	    </table>
     <form action="${pageContext.request.contextPath}/system/systemParameter/query${applicationScope.WEB_SUFFIX}" id="form1" method="post">
@@ -44,7 +44,7 @@
       	</c:choose>
       </display:column>
       <display:column title="操作" media="html">
-      <a href= "${pageContext.request.contextPath}/system/systemParameter/load/${item.name}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
+      <a href= "${pageContext.request.contextPath}/system/systemParameter/load/${item.name}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
       </display:column>
     </display:table>
         <c:if test="${not empty toolBar}">

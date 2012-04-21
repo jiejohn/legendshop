@@ -6,10 +6,10 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <html>
 <head>
-  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+  		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+  		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-		<script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
+		<script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
 <title>角色列表</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
 
 	   <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">权限管理</a>&raquo;拥有[${bean.name }]权限的角色列表 </td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">权限管理</a>&raquo;拥有[${bean.name }]权限的角色列表 </td></tr>
 	    </thead>
 	    </table>
 	    

@@ -141,7 +141,7 @@ function writeTimeGroup(fieldNamePrefix)
 			<div align="center">
 		 <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 系统管理  &raquo; <a href="${pageContext.request.contextPath}/system/lucene/query${applicationScope.WEB_SUFFIX}">重建索引</a></td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 系统管理  &raquo; <a href="${pageContext.request.contextPath}/system/lucene/query${applicationScope.WEB_SUFFIX}">重建索引</a></td></tr>
 	    </thead>
 	    </table>
 	     <%@ include file="/pages/common/messages.jsp"%>

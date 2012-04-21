@@ -5,8 +5,8 @@
 <head>
 		<script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 <title>USER Register</title>
 <script type="text/javascript">
 	jQuery.validator.setDefaults({

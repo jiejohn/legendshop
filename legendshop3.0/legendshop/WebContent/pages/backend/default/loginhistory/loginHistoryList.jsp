@@ -6,7 +6,7 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script> 
 <script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/plugins/My97DatePicker/WdatePicker.js"></script>
-<script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
+<script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
 <html>
 <%Integer offset = (Integer)request.getAttribute("offset");%>
 <head>
@@ -16,7 +16,7 @@
 <auth:auth ifAnyGranted="F_SYSTEM">
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/loginHistory/query${applicationScope.WEB_SUFFIX}">用户登录历史</a></td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/loginHistory/query${applicationScope.WEB_SUFFIX}">用户登录历史</a></td></tr>
     </thead>
     </table>
 <form action="${pageContext.request.contextPath}/admin/loginHistory/query${applicationScope.WEB_SUFFIX}" id="form1">

@@ -9,14 +9,14 @@
 <html>
 <head>
      <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
-      <script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
+      <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
 <title>首页广告图片列表</title>
 </head>
 <body class="bodymargin">
 <% Integer offset = (Integer)request.getAttribute("offset");%>
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/indexjpg/query${applicationScope.WEB_SUFFIX}">首页Flash图片管理</a></td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/indexjpg/query${applicationScope.WEB_SUFFIX}">首页Flash图片管理</a></td></tr>
     </thead>
     </table>
     <form id="form1" action="${pageContext.request.contextPath}/admin/indexjpg/query${applicationScope.WEB_SUFFIX}">
@@ -45,9 +45,9 @@
             <display:column title="商城名称" property="userName"></display:column>
       </auth:auth>
       <display:column title="操作" media="html" class="actionwidth">
-	     <a href="${pageContext.request.contextPath}/admin/indexjpg/update/${item.id}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"></a>
+	     <a href="${pageContext.request.contextPath}/admin/indexjpg/update/${item.id}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
 	     <auth:auth ifAnyGranted="F_OPERATOR">
-	        <a href='javascript:deleteById("${item.id}")' title="删除"><img alt="删除" src="${pageContext.request.contextPath}/img/grid_delete.png"></a>
+	        <a href='javascript:deleteById("${item.id}")' title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
 	     </auth:auth>
       </display:column>
     </display:table>
@@ -61,8 +61,8 @@
    1. 首页中上部广告图片，文字均可以加上超链接<br>
    2. 创建首页中上部广告图片，注意:最多上传<b><%=PropertiesUtil.getObject(ParameterEnum.MAX_INDEX_JPG,Integer.class)%></b>张图片<br>
    3. <img src="${pageContext.request.contextPath}/img/grid_refresh.png" title="文字连接">指向图片、文字连接地址<br>
-   4. <img alt="修改" src="${pageContext.request.contextPath}/img/grid_edit.png"> 修改按钮<br>
-   5. <img alt="删除" src="${pageContext.request.contextPath}/img/grid_delete.png"> 删除按钮<br>
+   4. <img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "> 修改按钮<br>
+   5. <img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "> 删除按钮<br>
    </td><tr></table> 
    
    <script language="JavaScript" type="text/javascript">

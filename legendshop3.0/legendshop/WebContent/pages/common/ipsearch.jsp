@@ -81,7 +81,7 @@ function isIP() {
 						<a href="${pageContext.request.contextPath}/logout.jsp" target="_parent"><fmt:message key="logout"/></a>
        			        <auth:auth ifAnyGranted="F_ADMIN">
        			                <a href="${pageContext.request.contextPath}/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}${applicationScope.WEB_SUFFIX}"><fmt:message key="myShop"/></a>
-					            <a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}"><fmt:message key="system.management"/></a>
+					            <a href="<ls:url address='/admin/index'/>"><fmt:message key="system.management"/></a>
 					    </auth:auth>
 					   </c:when>
 					   <c:otherwise>

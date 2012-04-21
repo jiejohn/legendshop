@@ -4,8 +4,8 @@
 <%@include file='/pages/common/taglib.jsp'%>
 <%@include file='/pages/common/common.jsp'%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option" %>
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+  		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
 	<lb:shopDetail var="shopDetail" >
 	    <link href="<ls:templateResource item='/common/style/style_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />

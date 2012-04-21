@@ -50,7 +50,7 @@
       <form  action="${pageContext.request.contextPath}/member/role/save${applicationScope.WEB_SUFFIX}" id="form1" method="post">      
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}">角色管理</a> &raquo; 
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}">角色管理</a> &raquo; 
 	    			<c:choose>
 	                	<c:when test="${not empty bean}">修改角色</c:when>
 	                	<c:otherwise>创建角色</c:otherwise>

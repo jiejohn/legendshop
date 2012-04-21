@@ -7,9 +7,9 @@
 <html>
     <head>
         <title>创建商城</title>
-        <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-        <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/optionService.js'></script>
-  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+        <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+        <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
+  		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
         <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
@@ -136,7 +136,7 @@
 
                 <table class="${tableclass}" style="width: 100%">
 			    <thead>
-			    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/shopDetail/query${applicationScope.WEB_SUFFIX}">商城管理</a> &raquo; 创建商城</td></tr>
+			    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/shopDetail/query${applicationScope.WEB_SUFFIX}">商城管理</a> &raquo; 创建商城</td></tr>
 			    </thead>
 			    </table>
             <table style="width: 100%" class="${tableclass}" id="col1">

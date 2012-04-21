@@ -28,8 +28,8 @@
     <link href="browser.css" type="text/css" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript" src="js/common.js"></script>
-    <script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+	<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
     <script type="text/javascript">
 

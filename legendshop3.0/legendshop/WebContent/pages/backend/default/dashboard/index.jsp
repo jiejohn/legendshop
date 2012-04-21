@@ -9,18 +9,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/CommonService.js'></script>
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+  		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
 		<script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/common/js/top.js" type="text/javascript"></script>
-  		<script src="${pageContext.request.contextPath}/css/alternative.js" type="text/javascript"></script>
+  		<script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
 <title>LegendShop后台首页</title>
 </head>
 <body  class="bodymargin">
     <table class="${tableclass}" style="width: 100%;">
     <thead>
-    	<tr><td><a href="${pageContext.request.contextPath}/admin/index${applicationScope.WEB_SUFFIX}" target="_parent">首页</a> &raquo; 首页管理</td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 首页管理</td></tr>
     </thead>
     </table>
      <div align="center">
@@ -177,7 +177,7 @@
 								<td>
 									商品数量
 								</td>
-								<td>${userInfo.shopDetail.productNum} (下线商品数量：${userInfo.shopDetail.offProductNum})&nbsp; <a href="${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}">[查看商品]</a></td>
+								<td>${userInfo.shopDetail.productNum} (下线商品数量：${userInfo.shopDetail.offProductNum})&nbsp; <a href="<ls:url address='/admin/product/query'/>">[查看商品]</a></td>
 							</tr>
 							<tr>
 								<td>
@@ -234,7 +234,7 @@
 						
 							<tr>
 								<td width="100px">
-									<a href="${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}">商品管理</a>
+									<a href="<ls:url address='/admin/product/query'/>">商品管理</a>
 								</td>
 								<td>
 									增加，删除，修改商品。每个商品有若干固定属性、产品相关图片、相关产品等，另外还可以设置动态属性和动态参数
@@ -278,7 +278,7 @@
 							</tr>
 							<tr>
 								<td>
-									<a href="${pageContext.request.contextPath}/admin/hotsearch/query${applicationScope.WEB_SUFFIX}">热门商品</a>
+									<a href="<ls:url address='/admin/hotsearch/query'/>">热门商品</a>
 								</td>
 								<td>设置热门商品，将会在一级分类页面中出现</td>
 							</tr>

@@ -8,14 +8,16 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <html>
 <head>
-     <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+     <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
      <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
 
-  		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
-		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
-		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-		<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/linked-select.js"></script>
+	<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
+    <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+    <script type="text/javascript" src="<ls:templateResource item='/common/js/linked-select.js'/>"></script>
+		
+		
 
 <title>类型列表</title>
 </head>
@@ -73,7 +75,7 @@
 	      			<option value="0" >下线</option>
 			</select>		
 			<input type="submit" value="搜索"/>
-		   <input type="button" value="创建商品" onclick='window.location="${pageContext.request.contextPath}/admin/product/load${applicationScope.WEB_SUFFIX}"'/>
+		   <input type="button" value="创建商品" onclick='window.location=" <ls:url address='/admin/group/product/load'/>"'/>
 			</div>
     	</td></tr>
     </tbody>

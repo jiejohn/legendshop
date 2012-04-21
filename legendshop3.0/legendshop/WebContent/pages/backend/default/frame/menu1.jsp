@@ -33,15 +33,15 @@
           <ul class='sitemu'>
              <li>
               <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}'   target='main'>商品管理</a></div>
-                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='商品管理' title='商品管理'/></a> </div>
+                <div class='fllct'><a href='<ls:url address='/admin/product/query'/>'   target='main'>商品管理</a></div>
+                <div class='flrct'> <a href='<ls:url address='/admin/product/query'/>'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='商品管理' title='商品管理'/></a> </div>
               </div>
             </li>
             
            <li>
               <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/group/index${applicationScope.WEB_SUFFIX}'   target='main'>团购管理</a></div>
-                <div class='flrct'> <a href='${pageContext.request.contextPath}/group/index${applicationScope.WEB_SUFFIX}'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='团购管理' title='团购管理'/></a> </div>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/group/product/query${applicationScope.WEB_SUFFIX}'   target='main'>团购管理</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/group/product/query${applicationScope.WEB_SUFFIX}'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='团购管理' title='团购管理'/></a> </div>
               </div>
             </li>
             
@@ -71,8 +71,8 @@
             </li>
             <li>
               <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/hotsearch/query${applicationScope.WEB_SUFFIX}' target='main'>热门商品</a></div>
-                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/hotsearch/query${applicationScope.WEB_SUFFIX}' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='热门商品' title='热门商品'/></a> </div>
+                <div class='fllct'><a href='<ls:url address='/admin/hotsearch/query'/>' target='main'>热门商品</a></div>
+                <div class='flrct'> <a href='<ls:url address='/admin/hotsearch/query'/>' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='热门商品' title='热门商品'/></a> </div>
               </div>
             </li>
             <li>
