@@ -46,7 +46,7 @@ public class GroupProductController extends BaseController implements AdminContr
 	private GroupProductService groupProductService;
 	
 	
-	@Override
+	
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, GroupProduct groupProduct) {
 		// Qbc查找方式
@@ -88,28 +88,28 @@ public class GroupProductController extends BaseController implements AdminContr
 				return null;
 	}
 
-	@Override
+	
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, GroupProduct entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(HttpServletRequest request, HttpServletResponse response, Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	@RequestMapping(value = "/update/{prodId}")
 	public String update(HttpServletRequest request, HttpServletResponse response, Long id) {
 		// TODO Auto-generated method stub

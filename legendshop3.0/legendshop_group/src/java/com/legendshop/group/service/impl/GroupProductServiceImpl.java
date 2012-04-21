@@ -25,7 +25,7 @@ public class GroupProductServiceImpl implements GroupProductService {
 	/* (non-Javadoc)
 	 * @see com.legendshop.group.service.GroupProductService#getGroupGroupProductList(com.legendshop.core.dao.support.HqlQuery)
 	 */
-	@Override
+	
 	public PageSupport getGroupGroupProductList(HqlQuery hql) {
 		// TODO Auto-generated method stub
 		return null;
@@ -34,7 +34,7 @@ public class GroupProductServiceImpl implements GroupProductService {
 	/* (non-Javadoc)
 	 * @see com.legendshop.group.service.GroupProductService#getGroupProductList(com.legendshop.core.dao.support.CriteriaQuery)
 	 */
-	@Override
+	
 	public PageSupport getGroupProductList(CriteriaQuery cq) {
 		// TODO Auto-generated method stub
 		return null;
@@ -43,7 +43,7 @@ public class GroupProductServiceImpl implements GroupProductService {
 	/* (non-Javadoc)
 	 * @see com.legendshop.group.service.GroupProductService#getGroupGroupProductById(java.lang.Long)
 	 */
-	@Override
+	
 	public GroupProduct getGroupGroupProductById(Long groupProdId) {
 		// TODO Auto-generated method stub
 		return null;
@@ -52,7 +52,7 @@ public class GroupProductServiceImpl implements GroupProductService {
 	/* (non-Javadoc)
 	 * @see com.legendshop.group.service.GroupProductService#updateGroupProduct(com.legendshop.model.group.GroupProduct)
 	 */
-	@Override
+	
 	public void updateGroupProduct(GroupProduct groupProduct) {
 		// TODO Auto-generated method stub
 
@@ -61,7 +61,7 @@ public class GroupProductServiceImpl implements GroupProductService {
 	/* (non-Javadoc)
 	 * @see com.legendshop.group.service.GroupProductService#saveGroupProduct(com.legendshop.model.group.GroupProduct)
 	 */
-	@Override
+	
 	public Long saveGroupProduct(GroupProduct groupProduct) {
 		// TODO Auto-generated method stub
 		return null;
