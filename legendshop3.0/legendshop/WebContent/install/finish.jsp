@@ -116,8 +116,6 @@ function go(url)
           <a href='../shop/360buy${applicationScope.WEB_SUFFIX}'>天天购物网 360buy</a>, 密码 360buy<br>
           <br>
           	超级管理员帐号：root,密码：root <br><a href='../shop/common${applicationScope.WEB_SUFFIX}'>公共配置帐号common</a>,密码：common
-          <br>
-          	你也可以&nbsp;<a href="javascript:go('../reg${applicationScope.WEB_SUFFIX})"><b>注册<b/></a>&nbsp; 一个用户并拥有你自己的独立网店，试试看。
           </p>
           </td>
         	</c:when>
@@ -125,9 +123,6 @@ function go(url)
         		
         <td valign="top" style="line-height:20px;"><p><br>
           * <span class="STYLE4">为了确保您网站安全，安装成功后，请把install目录删除</span><br>
-          <br>
-          <a href='../shop/legenddesign${applicationScope.WEB_SUFFIX}'>前台</a>, 密码 legenddesign<br>
-          	用户&nbsp;<a href="javascript:go('../reg${applicationScope.WEB_SUFFIX}')"><b>注册<b/></a>。
           </p>
           </td>
         	</c:otherwise>

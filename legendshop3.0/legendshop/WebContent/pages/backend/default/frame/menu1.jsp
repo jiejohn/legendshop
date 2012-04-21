@@ -37,6 +37,14 @@
                 <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/product/query${applicationScope.WEB_SUFFIX}'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='商品管理' title='商品管理'/></a> </div>
               </div>
             </li>
+            
+           <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/group/index${applicationScope.WEB_SUFFIX}'   target='main'>团购管理</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/group/index${applicationScope.WEB_SUFFIX}'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='团购管理' title='团购管理'/></a> </div>
+              </div>
+            </li>
+            
             <li>
               <div class='items'>
                 <div class='fllct'><a href='${pageContext.request.contextPath}/admin/sort/query${applicationScope.WEB_SUFFIX}'  target='main'>类型管理</a></div>

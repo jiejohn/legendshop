@@ -19,6 +19,7 @@
    <param-value>UTF-8</param-value>
   </init-param>
  </filter>
+ <!-- 
  <filter>
 	<filter-name>openSessionInViewFilter</filter-name>
 	<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
@@ -27,6 +28,7 @@
 		<param-value>true</param-value>   
 	</init-param>   
 </filter>
+ -->
  <filter>
   <filter-name>springSecurityFilterChain</filter-name>
   <!--  <filter-class>com.legendshop.core.security.DelegatingFilterProxy</filter-class> -->
@@ -60,6 +62,7 @@
   <filter-name>encodingFilter</filter-name>
   <url-pattern>*.htm</url-pattern>
  </filter-mapping> 
+ <!-- 
  <filter-mapping>
 		<filter-name>openSessionInViewFilter</filter-name>
 		   <url-pattern>*.htm</url-pattern>
@@ -68,6 +71,7 @@
 		<filter-name>openSessionInViewFilter</filter-name>
 		<url-pattern>*.jsp</url-pattern>
  </filter-mapping>	
+  -->
  <filter-mapping>
   <filter-name>springSecurityFilterChain</filter-name>
   <url-pattern>/*</url-pattern>
@@ -149,10 +153,12 @@
   <servlet-class>com.legendshop.core.photo.ImagesServlet</servlet-class>
   <load-on-startup>1</load-on-startup>
  </servlet>
+ <!-- 
  <servlet>
   <servlet-name>randomImageServlet</servlet-name>
   <servlet-class>com.legendshop.core.randing.ImageServlet</servlet-class>
  </servlet>
+  -->
  <servlet>
 	<servlet-name>Jcaptcha</servlet-name>
 	<servlet-class>com.legendshop.core.randing.JcaptchaServlet</servlet-class>
@@ -194,10 +200,12 @@
   <servlet-name>photo-servlet</servlet-name>
   <url-pattern>/photoserver/photo/*</url-pattern>
  </servlet-mapping>
+ <!-- 
  <servlet-mapping>
   <servlet-name>randomImageServlet</servlet-name>
   <url-pattern>/servlet/ImageServlet</url-pattern>
  </servlet-mapping>
+  -->
  <servlet-mapping>
 		<servlet-name>Jcaptcha</servlet-name>
 		<url-pattern>/captcha.svl</url-pattern>
