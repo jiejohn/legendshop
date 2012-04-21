@@ -30,6 +30,7 @@ public class GroupController extends BaseController {
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request, HttpServletResponse response) {
 		log.debug("Index starting calling");
+		System.out.println("123123");
 		return "/group/default/index";
 //		return PathResolver.getPath(request, null);		
 	}

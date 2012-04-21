@@ -12,7 +12,7 @@ import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.group.dao.GroupProductDao;
 import com.legendshop.group.service.GroupProductService;
-import com.legendshop.model.group.GroupProduct;
+import com.legendshop.model.entity.group.GroupProduct;
 
 /**
  * The Class GroupProductServiceImpl.
@@ -22,13 +22,8 @@ public class GroupProductServiceImpl implements GroupProductService {
 	/** The group product dao. */
 	private  GroupProductDao groupProductDao;
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.group.service.GroupProductService#getGroupGroupProductList(com.legendshop.core.dao.support.HqlQuery)
-	 */
-	
-	public PageSupport getGroupGroupProductList(HqlQuery hql) {
-		// TODO Auto-generated method stub
-		return null;
+	public PageSupport getGroupProductList(HqlQuery hql) {
+		return groupProductDao.find(hql);
 	}
 
 	/* (non-Javadoc)
@@ -37,7 +32,7 @@ public class GroupProductServiceImpl implements GroupProductService {
 	
 	public PageSupport getGroupProductList(CriteriaQuery cq) {
 		// TODO Auto-generated method stub
-		return null;
+		return groupProductDao.find(cq);
 	}
 
 	/* (non-Javadoc)
@@ -76,5 +71,7 @@ public class GroupProductServiceImpl implements GroupProductService {
 	public void setGroupProductDao(GroupProductDao groupProductDao) {
 		this.groupProductDao = groupProductDao;
 	}
+
+
 
 }

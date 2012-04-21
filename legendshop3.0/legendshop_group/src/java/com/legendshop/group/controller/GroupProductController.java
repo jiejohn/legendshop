@@ -7,30 +7,36 @@
  */
 package com.legendshop.group.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
-import com.legendshop.core.dao.support.CriteriaQuery;
+import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.AuthorizationException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.FunctionUtil;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.group.page.GroupBackPage;
 import com.legendshop.group.service.GroupProductService;
 import com.legendshop.model.entity.Product;
-import com.legendshop.model.group.GroupProduct;
+import com.legendshop.model.entity.group.GroupProduct;
 import com.legendshop.util.AppUtils;
+import com.legendshop.util.sql.ConfigCode;
 
 /**
  * The Class GroupController.
@@ -50,42 +56,58 @@ public class GroupProductController extends BaseController implements AdminContr
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, GroupProduct groupProduct) {
 		// Qbc查找方式
-				CriteriaQuery cq = new CriteriaQuery(Product.class, curPageNO);
+				HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class), curPageNO);
+				Map<String, String> map = new HashMap<String, String>();
+				
 				Product product = groupProduct.getProduct();
-				if (!AppUtils.isBlank(groupProduct.getProduct().getName())) {
-					cq.like("name", "%" + groupProduct.getProduct().getName().trim() + "%");
+				if(product != null){
+					fillParameter(hql,map,"prodName", "%" + product.getName().trim() + "%");
+					fillParameter(hql,map,"sortId",String.valueOf(product.getSortId()) );
+					fillParameter(hql,map,"nsortId",String.valueOf(product.getNsortId()) );
+					fillParameter(hql,map,"subNsortId", String.valueOf(product.getSubNsortId()) );
+					fillParameter(hql,map,"status",String.valueOf(product.getStatus()) );
 				}
 
-				cq.eq("sortId", groupProduct.getProduct().getSortId());
-				cq.eq("nsortId", groupProduct.getProduct().getNsortId());
-				cq.eq("subNsortId", groupProduct.getProduct().getSubNsortId());
-				cq.eq("commend", groupProduct.getProduct().getCommend());
-				cq.eq("status", groupProduct.getProduct().getStatus());
-				cq.eq("brandId", groupProduct.getProduct().getBrandId());
-				if (FunctionUtil.haveViewAllDataFunction(request)) {
-					if (!AppUtils.isBlank(product.getUserName())) {
-						cq.eq("userName", StringUtils.trim(product.getUserName()));
-					}
-				} else {
-					String name = UserManager.getUsername(request);
-					if (name == null) {
+				//数据权限
+				if (!FunctionUtil.haveViewAllDataFunction(request)) {
+					String userName = UserManager.getUsername(request.getSession());
+					if (userName == null) {
 						throw new AuthorizationException("you are not logon yet!",EntityCodes.PROD);
 					}
-					cq.eq("userName", name);
+					fillParameter(hql,map,"userName",userName);
+				} else {
+					// 管理员
+					if (product!=null &&  AppUtils.isNotBlank(product.getUserName())) {
+						fillParameter(hql,map,"userName", product.getUserName());
+					}
 				}
+				
 
-				if (!FunctionUtil.isDataForExport(cq, request)) {// 非导出情况
-					cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+				if (!FunctionUtil.isDataForExport(hql, request)) {// 非导出情况
+					hql.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 				}
-				if (!FunctionUtil.isDataSortByExternal(cq, request)) {
-					cq.addOrder("desc", "recDate");
+				
+				if (!FunctionUtil.isDataSortByExternal(hql, request, map)) {
+					map.put(AttributeKeys.ORDER_INDICATOR, "order by p.modifyDate desc");
 				}
-				cq.add();
-				PageSupport ps = groupProductService.getGroupProductList(cq);
+				
+				String QueryGroupProdCount = ConfigCode.getInstance().getCode("biz.getGroupProdCount", map);
+				String QueryGroupProd = ConfigCode.getInstance().getCode("biz.getGroupProdList", map);
+				hql.setAllCountString(QueryGroupProdCount);
+				hql.setQueryString(QueryGroupProd);
+
+				PageSupport ps = groupProductService.getGroupProductList(hql);
 				savePage(ps, request);
 				request.setAttribute("prod", product);
-				//return PathResolver.getPath(request, BackPage.PROD_LIST_PAGE);
-				return null;
+				
+				return PathResolver.getPath(request, GroupBackPage.PROD_LIST_PAGE);
+	}
+	
+	private void fillParameter(HqlQuery hql,Map<String, String> map,String key,String value){
+		if (!AppUtils.isBlank(value)) {
+			map.put(key,value);
+			hql.addParams(value);
+		}
 	}
 
 	
@@ -105,8 +127,7 @@ public class GroupProductController extends BaseController implements AdminContr
 	
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+		return PathResolver.getPath(request, GroupBackPage.PROD_EDIT_PAGE);
 	}
 
 	

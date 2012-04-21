@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.model.group;
+package com.legendshop.model.entity.group;
 
 import java.util.Date;
 
@@ -65,8 +65,14 @@ public class GroupProduct{
 	private Integer salesMax;
 
 	/** 是否已经跟商家结算. */
-	private boolean isPost;
+	private Boolean isPost;
 
+	
+	public GroupProduct(){
+		
+	}
+	
+	
 	/**
 	 * Gets the partner id.
 	 * 
@@ -314,24 +320,7 @@ public class GroupProduct{
 		this.salesMax = salesMax;
 	}
 
-	/**
-	 * Gets the checks if is post.
-	 * 
-	 * @return the checks if is post
-	 */
-	public boolean getIsPost() {
-		return isPost;
-	}
 
-	/**
-	 * Sets the checks if is post.
-	 * 
-	 * @param isPost
-	 *            the new checks if is post
-	 */
-	public void setIsPost(boolean isPost) {
-		this.isPost = isPost;
-	}
 
 	/**
 	 * Gets the group prod id.
@@ -375,6 +364,16 @@ public class GroupProduct{
 	}
 
 	public void setPost(boolean isPost) {
+		this.isPost = isPost;
+	}
+
+
+	public Boolean getIsPost() {
+		return isPost;
+	}
+
+
+	public void setIsPost(Boolean isPost) {
 		this.isPost = isPost;
 	}
 }

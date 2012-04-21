@@ -7,10 +7,9 @@
  */
 package com.legendshop.group.service;
 
-import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.model.group.GroupProduct;
+import com.legendshop.model.entity.group.GroupProduct;
 
 
 /**
@@ -18,24 +17,15 @@ import com.legendshop.model.group.GroupProduct;
  */
 public interface GroupProductService {
 
-	/**
-	 * Gets the group group product list.
-	 * 
-	 * @param hql
-	 *            the hql
-	 * @return the group group product list
-	 */
-	public abstract PageSupport getGroupGroupProductList(HqlQuery hql);
-
 
 	/**
 	 * Gets the group product list.
 	 * 
-	 * @param cq
-	 *            the cq
+	 * @param hql
+	 *            the hql
 	 * @return the group product list
 	 */
-	public abstract PageSupport getGroupProductList(CriteriaQuery cq);
+	public abstract PageSupport getGroupProductList(HqlQuery hql);
 
 
 	/**
