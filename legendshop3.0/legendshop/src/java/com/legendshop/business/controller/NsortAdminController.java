@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -32,6 +33,7 @@ import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.exception.PermissionException;
@@ -121,6 +123,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 		if(result!=null){
 			return result;
 		}
+		System.out.println("-----------------"+nsort.getNsortName()+nsort.getSortDeputy());
 		nsortService.save(nsort);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
 		Nsort bean = (Nsort) request.getAttribute("bean");
@@ -128,6 +131,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 			bean.setNsortName(null);
 			request.setAttribute("bean", bean);
 		}
+		
 		return PathResolver.getPath(request, FowardPage.NSORT_LIST_QUERY);
 	}
 
@@ -168,6 +172,21 @@ public class NsortAdminController extends BaseController implements AdminControl
 	@Override
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
+
+		Nsort nsort = new Nsort();
+		long sortId=ServletRequestUtils.getLongParameter(request, "sortId", -1);
+		if(sortId!=-1){
+			nsort.setSortId(sortId);
+		}
+		long parentNsortId=ServletRequestUtils.getLongParameter(request, "parentNsortId", -1);		
+		if(parentNsortId!=-1){			
+			nsort.setParentNsortId(parentNsortId);
+		}
+		
+		
+
+		request.setAttribute("bean", nsort);
+		
 		return PathResolver.getPath(request, BackPage.NSORT_EDIT_PAGE);
 	}
 

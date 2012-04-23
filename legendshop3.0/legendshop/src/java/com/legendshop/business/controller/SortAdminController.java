@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.legendshop.business.common.CommonServiceUtil;
+import com.legendshop.business.common.ProductTypeEnum;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.SortService;
@@ -64,6 +65,15 @@ public class SortAdminController extends BaseController implements AdminControll
 			if (AppUtils.isNotBlank(sort.getSortName())) {
 				cq.like("sortName", "%" + sort.getSortName() + "%");
 			}
+			if (AppUtils.isNotBlank(sort.getSortType())) {
+				cq.eq("sortType", sort.getSortType());				
+			}
+			if (AppUtils.isNotBlank(sort.getHeaderMenu())) {
+				cq.eq("headerMenu", sort.getHeaderMenu());
+			}
+			if (AppUtils.isNotBlank(sort.getNavigationMenu())) {
+				cq.eq("navigationMenu", sort.getNavigationMenu());
+			}
 			 hasAllDataFunction(cq, request, "userName", sort.getUserName());
 			if (!CommonServiceUtil.isDataForExport(cq, request)) {// 非导出情况
 				cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
@@ -77,6 +87,8 @@ public class SortAdminController extends BaseController implements AdminControll
 			request.setAttribute("sort", sort);
 		return PathResolver.getPath(request, BackPage.SORT_LIST_PAGE);
 	}
+	
+	
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.base.AdminController#save(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
@@ -161,6 +173,9 @@ public class SortAdminController extends BaseController implements AdminControll
 	private void updateSort(HttpServletRequest request, HttpServletResponse response, Sort entity, Sort origin) {
 		origin.setSeq(entity.getSeq());
 		origin.setSortName(entity.getSortName());
+		origin.setSortType(entity.getSortType());
+		origin.setHeaderMenu(entity.getHeaderMenu());
+		origin.setNavigationMenu(entity.getNavigationMenu());
 		sortService.updateSort(origin);
 		
 	}
