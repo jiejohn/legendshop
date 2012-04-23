@@ -29,5 +29,10 @@
                 <comment>商品子分类的父ID，指向nsort_id</comment>
             </column>
         </property>
+       <property name="sortDeputy" type="java.lang.Integer">
+            <column name="sort_deputy">
+                <comment>是否代表</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

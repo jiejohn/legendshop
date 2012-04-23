@@ -39,5 +39,15 @@
                 <comment>用户名称</comment>
             </column>
         </property>
+        <property name="headerMenu" type="java.lang.Integer">
+            <column name="header_menu">
+                <comment>分类状态，1：首页菜单展示，0：首页菜单不展示</comment>
+            </column>
+        </property>
+        <property name="navigationMenu" type="java.lang.Integer">
+            <column name="navigation_menu">
+                <comment>分类状态，1：首页菜单展示，0：首页菜单不展示</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

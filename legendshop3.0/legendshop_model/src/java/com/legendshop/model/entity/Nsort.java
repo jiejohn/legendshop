@@ -42,6 +42,8 @@ public class Nsort implements java.io.Serializable {
 
 	/** The seq. */
 	private Integer seq;
+	
+	private Integer sortDeputy;
 	// 子节点
 	/** The sub sort. */
 	Set<Nsort> subSort = new TreeSet<Nsort>(new Comparator<Nsort>() {
@@ -86,10 +88,11 @@ public class Nsort implements java.io.Serializable {
 	 * @param sortId
 	 *            the sort id
 	 */
-	public Nsort(Long nsortId, String nsortName, Long sortId) {
+	public Nsort(Long nsortId, String nsortName, Long sortId,Integer sortDeputy) {
 		this.nsortId = nsortId;
 		this.nsortName = nsortName;
 		this.sortId = sortId;
+		this.sortDeputy=sortDeputy;
 	}
 
 	// Property accessors
@@ -237,6 +240,14 @@ public class Nsort implements java.io.Serializable {
 	 */
 	public void setParent(Nsort parent) {
 		this.parent = parent;
+	}
+
+	public Integer getSortDeputy() {
+		return sortDeputy;
+	}
+
+	public void setSortDeputy(Integer sortDeputy) {
+		this.sortDeputy = sortDeputy;
 	}
 
 }

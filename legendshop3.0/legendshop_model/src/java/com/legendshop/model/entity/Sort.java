@@ -39,6 +39,12 @@ public class Sort extends UploadFile implements java.io.Serializable {
 
 	/** The seq. */
 	private Integer seq;
+
+	/** 0:normal, 1:show in header menu  */
+	private Integer headerMenu;
+	
+	/** 0:normal, 1:show in navigation menu  */
+	private Integer navigationMenu;
 	
 	/** 按seq字段排序. */
 	Set<Nsort> nsort = new TreeSet<Nsort>(new Comparator<Nsort>() {
@@ -85,7 +91,7 @@ public class Sort extends UploadFile implements java.io.Serializable {
 	 * @param userId
 	 *            the user id
 	 * @param userName
-	 *            the user name
+	 *            the user name            
 	 */
 	public Sort(Long sortId, String sortName, String picture, String userId,
 			String userName) {
@@ -263,5 +269,23 @@ public class Sort extends UploadFile implements java.io.Serializable {
 	public void setSortType(String sortType) {
 		this.sortType = sortType;
 	}
+
+	public Integer getHeaderMenu() {
+		return headerMenu;
+	}
+
+	public void setHeaderMenu(Integer headerMenu) {
+		this.headerMenu = headerMenu;
+	}
+
+	public Integer getNavigationMenu() {
+		return navigationMenu;
+	}
+
+	public void setNavigationMenu(Integer navigationMenu) {
+		this.navigationMenu = navigationMenu;
+	}
+	
+
 
 }
