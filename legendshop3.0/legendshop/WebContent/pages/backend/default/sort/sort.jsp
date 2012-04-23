@@ -2,6 +2,7 @@
 <%@ include file="/pages/common/back-common.jsp"%>
 <%@ include file="/pages/common/taglib.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
+<%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <html>
 <head>
 <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
@@ -67,6 +68,33 @@
       <td width="30%" ><div align="center">次序(必须为数字)：</div></td>
       <td width="70%" >
       <input type="text" name="seq" id="seq" size="30" value="${sort.seq}">
+      </td>
+    </tr>
+    <tr>
+      <td width="30%" ><div align="center">分类类型：</div></td>
+      <td width="70%" >
+				<select id="sortType" name="sortType">
+				  <option:optionGroup type="select" required="false" cache="true"
+	                beanName="PRODUCT_TYPE" selectedValue="${sort.sortType}"/>
+	            </select>	
+      </td>
+    </tr>
+    <tr>
+      <td width="30%" ><div align="center">Header菜单：</div></td>
+      <td width="70%" >
+				<select id="headerMenu" name="headerMenu">
+				  <option:optionGroup type="select" required="true" cache="true"
+	                beanName="YES_NO" selectedValue="${sort.headerMenu}"/>
+	            </select>	
+      </td>
+    </tr>
+    <tr>
+      <td width="30%" ><div align="center">导航菜单：</div></td>
+      <td width="70%" >
+				<select id="navigationMenu" name="navigationMenu">
+				  <option:optionGroup type="select" required="true" cache="true"
+	                beanName="YES_NO" selectedValue="${sort.navigationMenu}"/>
+	            </select>	
       </td>
     </tr>
 	<tr>
