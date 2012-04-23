@@ -65,6 +65,9 @@ public enum FowardPage implements PageDefinition{
 
 	/** The SOR t_ lis t_ query. */
 	SORT_LIST_QUERY("/admin/sort/query"),
+	
+	/** The SOR t_ lis t_ query. */
+	GSORT_LIST_QUERY("/admin/gsort/query"),
 
 	/** The PARA m_ lis t_ query. */
 	PARAM_LIST_QUERY("/system/systemParameter/query"),
