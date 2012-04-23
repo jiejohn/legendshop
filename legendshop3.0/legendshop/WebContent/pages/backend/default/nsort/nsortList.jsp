@@ -41,6 +41,10 @@
       <display:column title="顺序"><%=offset++%></display:column>
       <display:column title="二级商品类型" property="nsortName"></display:column>
       <display:column title="次序" property="seq"></display:column>
+      <display:column title="分类代表">
+            	<option:optionGroup type="label" required="true" cache="true"
+	                beanName="YES_NO" selectedValue="${parent.sortDeputy}" defaultDisp="否"/>
+      </display:column>
       <c:set var="subSortList" value="${parent.subSort}" scope="request"/>
       <display:column title="三级商品类型" >
       <c:if test="${fn:length(subSortList) > 0}">
@@ -49,7 +53,7 @@
 	      <display:column title="次序" property="seq"></display:column>
 	      <display:column title="操作" media="html" autolink="true">
 	      <auth:auth ifAnyGranted="F_OPERATOR">
-	      <a href= "${pageContext.request.contextPath}/admin/nsort/update/${child.nsortId}${applicationScope.WEB_SUFFIX}?sortId=${bean.sortId}&parentNsortId=${parent.nsortId}"><img alt="修改三级商品类型" src="<ls:templateResource item='/img/grid_edit.png'/> " title="修改三级商品类型"></a>
+	      <a href= "${pageContext.request.contextPath}/admin/nsort/update/${child.nsortId}${applicationScope.WEB_SUFFIX}"><img alt="修改三级商品类型" src="<ls:templateResource item='/img/grid_edit.png'/> " title="修改三级商品类型"></a>
 	      <a href='javascript:deleteById("${child.nsortId}")'><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> " title="删除三级商品类型"></a>
 	      </auth:auth>
       </display:column>
@@ -59,7 +63,7 @@
       <display:column title="操作" media="html" style="width:80px">
       <auth:auth ifAnyGranted="F_OPERATOR">
       <a href= "${pageContext.request.contextPath}/admin/nsort/load${applicationScope.WEB_SUFFIX}?sortId=${bean.sortId}&parentNsortId=${parent.nsortId}"><img alt="创建三级商品类型" src="${pageContext.request.contextPath}/img/grid_add.png" title="创建三级商品类型"></a>
-      <a href= "${pageContext.request.contextPath}/admin/nsort/update/${parent.nsortId}${applicationScope.WEB_SUFFIX}?sortId=${bean.sortId}&parentNsortId=${parent.nsortId}""><img alt="修改二级商品类型" src="<ls:templateResource item='/img/grid_edit.png'/> " title="修改二级商品类型"></a>
+      <a href= "${pageContext.request.contextPath}/admin/nsort/update/${parent.nsortId}${applicationScope.WEB_SUFFIX}"><img alt="修改二级商品类型" src="<ls:templateResource item='/img/grid_edit.png'/> " title="修改二级商品类型"></a>
       <a href='javascript:deleteById("${parent.nsortId}")'><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> " title="删除二级商品类型"></a>
       </auth:auth>
       </display:column>

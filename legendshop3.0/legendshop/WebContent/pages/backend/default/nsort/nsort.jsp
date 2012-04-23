@@ -2,6 +2,7 @@
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
 <%@ include file="/pages/common/back-common.jsp"%>
+<%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <html>
     <head>
         <title>创建二级商品类型</title>
@@ -57,14 +58,14 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; 
     	<a href="${pageContext.request.contextPath}/admin/sort/query${applicationScope.WEB_SUFFIX}">类型管理</a> &raquo; 
-    	<a href="${pageContext.request.contextPath}/admin/nsort/query${applicationScope.WEB_SUFFIX}?sortId=${param.sortId}">二级商品类型管理</a> &raquo; 创建二级商品类型
-    	<c:if test="${param.parentNsortId != null}">  &raquo; 创建三级商品类型</c:if>
+    	<a href="${pageContext.request.contextPath}/admin/nsort/query${applicationScope.WEB_SUFFIX}?sortId=${bean.sortId}">二级商品类型管理</a> &raquo; 创建二级商品类型
+    	<c:if test="${bean.parentNsortId != null}">  &raquo; 创建三级商品类型</c:if>
     	</td></tr>
     </thead>
     </table>
             <input id="nsortId" name="nsortId" value="${bean.nsortId}" type="hidden">
-            <input id="sortId" name="sortId" value="${param.sortId}" type="hidden">
-            <input id="parentNsortId" name="parentNsortId" value="${param.parentNsortId}" type="hidden">
+            <input id="sortId" name="sortId" value="${bean.sortId}" type="hidden">
+            <input id="parentNsortId" name="parentNsortId" value="${bean.parentNsortId}" type="hidden">
             <div align="center">
             <table  align="center" class="${tableclass}" id="col1">
                 <thead>
@@ -72,7 +73,7 @@
                         <th colspan="2">
                             <div align="center">
                             <c:choose>
-                            	<c:when test="${param.parentNsortId == null}">创建二级商品类型</c:when>
+                            	<c:when test="${bean.parentNsortId == null}">创建二级商品类型</c:when>
                             	<c:otherwise>创建三级商品类型</c:otherwise>
                             </c:choose>
                           
@@ -96,7 +97,22 @@
            <p><input type="text" name="seq" id="seq" value="${bean.seq}" /></p>
         </td>
       </tr>
-      <c:if test="${param.parentNsortId != null && bean.nsortId != null}">
+      <c:if test="${bean.parentNsortId == null}">  
+      <tr>
+        <td>
+          <div align="center">分类代表：</div>
+       </td>
+        <td>
+           <p>           
+				<select id="sortDeputy" name="sortDeputy">
+				  <option:optionGroup type="select" required="true" cache="true"
+	                beanName="YES_NO" selectedValue="${bean.sortDeputy}"/>
+	            </select>
+           </p>
+        </td>
+      </tr>
+      </c:if>
+      <c:if test="${bean.parentNsortId != null && bean.nsortId != null}">
       <tr>
         <td>
           <div align="center">品牌：</div>
@@ -114,7 +130,7 @@
                             </auth:auth>
                             <input type="reset" value="重置" />
                             <input type="button" value="返回"
-                                onclick="window.location='${pageContext.request.contextPath}/admin/sort/query${applicationScope.WEB_SUFFIX}'" />
+                                onclick="window.location='${pageContext.request.contextPath}/admin/nsort/query${applicationScope.WEB_SUFFIX}?sortId=${bean.sortId}'" />
                         </div>
                     </td>
                 </tr>
