@@ -56,14 +56,25 @@
     </table>
   <table class="${tableclass}" style="width: 100%" id="col1" >
      <thead>
+
+                    <tr class="sortable">
+                        <th colspan="2">
+                            <div align="center">
+							<c:choose>
+			                	<c:when test="${not empty sort}">修改类型</c:when>
+			                	<c:otherwise>创建类型</c:otherwise>
+			                </c:choose>				
+                            </div>
+                        </th>
+                    </tr>
+    </thead>
+    <tbody>
     <tr>
       <td width="30%" ><div align="center">类型名称：<font color="#ff0000">*</font></div></td>
       <td width="70%" ><input type="text" name="sortName" id="sortName" size="30" value="${sort.sortName}">
       <input id="sortId" name="sortId" value="${sort.sortId}" type="hidden">
       </td>
     </tr>
-    </thead>
-    <tbody>
     <tr>
       <td width="30%" ><div align="center">次序(必须为数字)：</div></td>
       <td width="70%" >
