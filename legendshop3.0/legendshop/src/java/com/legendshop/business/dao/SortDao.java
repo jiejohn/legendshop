@@ -29,6 +29,19 @@ public interface SortDao extends BaseDao{
 	 * @return the sort
 	 */
 	public abstract List<Sort> getSort(final String shopName, final Boolean loadAll);
+	
+	/**
+	 * Gets the sort.
+	 * 
+	 * @param shopName
+	 *            the shop name
+	 * @param sortType
+	 *            the sort type
+	 * @param loadAll
+	 *            the load all
+	 * @return the sort
+	 */
+	public List<Sort> getSort(final String shopName,String sortType, final Boolean loadAll);
 
 	/**
 	 * Gets the sort.

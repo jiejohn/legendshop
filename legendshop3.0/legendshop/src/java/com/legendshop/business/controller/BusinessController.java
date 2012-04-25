@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -469,13 +471,12 @@ public class BusinessController extends BaseController {
 	@RequestMapping("/userReg")
 	public String userReg(HttpServletRequest request, HttpServletResponse response,UserForm userForm) {
 		String result =  businessService.saveUserReg(request, response,userForm);
-//		//用户注册即登录
-//		if(loginService!=null){
-//			Authentication authentication = loginService.onAuthentication(request, response, userForm.getName(), userForm.getPassword());
-//			SecurityContext context = new SecurityContextImpl();
-//			context.setAuthentication(authentication);
-//			request.getSession().setAttribute(Constants.SPRING_SECURITY_CONTEXT, context);
-//		}
+		//用户注册即登录
+		if(loginService!=null){
+			Authentication authentication = loginService.onAuthentication(request, response, userForm.getName(), userForm.getPassword());
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			request.getSession().setAttribute(Constants.SPRING_SECURITY_CONTEXT, SecurityContextHolder.getContext());
+		}
 		return result;
 	}
 	
