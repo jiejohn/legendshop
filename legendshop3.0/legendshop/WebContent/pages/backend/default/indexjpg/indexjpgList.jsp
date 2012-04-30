@@ -8,7 +8,7 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <html>
 <head>
-     <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+     <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
       <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
 <title>首页广告图片列表</title>
 </head>

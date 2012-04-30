@@ -11,7 +11,7 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
    <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
     <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
-    <script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/plugins/My97DatePicker/WdatePicker.js"></script>
+    <script src="<ls:templateResource item='/plugins/My97DatePicker/WdatePicker.js'/>" type="text/javascript"></script>
     <title>用户访问历史列表</title>
 </head>
 <body>

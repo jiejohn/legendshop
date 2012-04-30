@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/dwr/engine.js" ></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/dwr/util.js" ></script>
 	<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
-	<script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+	<script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 	<style type="text/css" media="all">
        tr.tableRowEven,tr.even {
 		background-color: #f5f5f5

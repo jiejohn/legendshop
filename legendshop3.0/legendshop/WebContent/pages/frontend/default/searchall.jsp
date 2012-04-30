@@ -11,9 +11,9 @@
         <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
         <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/linked-select.js"></script>
-  <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+<script src="<ls:templateResource item='/common/js/linked-select.js'/>" type="text/javascript"></script>
+  <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
   <script>
 		function changeCity(provinceid) {
   		DWREngine.setAsync(false);

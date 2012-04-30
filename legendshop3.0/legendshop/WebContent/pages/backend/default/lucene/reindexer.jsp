@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<title>重新建立索引</title>
-		<script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+		<script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
 		<script language="javascript">
 	$.validator.setDefaults({

@@ -7,8 +7,6 @@
  */
 package com.legendshop.business.controller;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,14 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.ProductStatusEnum;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
-import com.legendshop.business.service.ProductService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.AuthorizationException;
@@ -40,6 +37,7 @@ import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
+import com.legendshop.core.service.ProductService;
 import com.legendshop.model.entity.Product;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.SafeHtml;
@@ -86,6 +84,7 @@ public class ProductAdminController extends BaseController {
 		cq.eq("commend", product.getCommend());
 		cq.eq("status", product.getStatus());
 		cq.eq("brandId", product.getBrandId());
+		cq.eq("prodType", "P");
 		if (CommonServiceUtil.haveViewAllDataFunction(request)) {
 			if (!AppUtils.isBlank(product.getUserName())) {
 				cq.eq("userName", StringUtils.trim(product.getUserName()));
@@ -143,6 +142,9 @@ public class ProductAdminController extends BaseController {
 				String smallProdPic = null;
 				// update product
 				Product origin = productService.getProductById(product.getProdId());
+				if(origin == null){
+					throw new BusinessException("can not found product by id " + product.getProdId(), EntityCodes.PROD);
+				}
 				String checkPrivilegeResult = checkPrivilege(request, name, origin.getUserName());
 				if(checkPrivilegeResult!=null){
 					return checkPrivilegeResult;
@@ -155,7 +157,7 @@ public class ProductAdminController extends BaseController {
 					origin.setPic(filename);
 				}
 
-				updateProduct(request, response, product, origin);
+				productService.updateProduct(product, origin);
 				// delete file after update success
 				if ((formFile != null) && (formFile.getSize() > 0)) {
 					FileProcessor.deleteFile(orginProdPic);
@@ -171,7 +173,7 @@ public class ProductAdminController extends BaseController {
 					filename = FileProcessor.uploadFileAndCallback(formFile, subPath, "" + name);
 					product.setPic(filename);
 				}
-				saveProduct(request, response, product);
+				productService.saveProduct(product,ProductTypeEnum.PRODUCT.value());
 			}
 		} catch (Exception e) {
 			// delete file uploaded
@@ -191,68 +193,6 @@ public class ProductAdminController extends BaseController {
 		}
 	}
 
-	/**
-	 * Save product.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @param product
-	 *            the product
-	 */
-	private void saveProduct(HttpServletRequest request, HttpServletResponse response, Product product) {
-		Date date = new Date();
-		product.setStatus(ProductStatusEnum.PROD_ONLINE.value());
-		product.setRecDate(date);
-		product.setModifyDate(date);
-		product.setViews(0);
-		product.setBuys(0);
-		if (product.getStocks() != null) {
-			product.setActualStocks(product.getStocks());
-		}
-		Long prodId = productService.saveProduct(product);
-		log.debug("create Product success with ID: {}", prodId);
-	}
-
-	/**
-	 * Update product.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @param product
-	 *            the product
-	 * @param origin
-	 *            the origin
-	 */
-	private void updateProduct(HttpServletRequest request, HttpServletResponse response, Product product, Product origin) {
-		// update
-		Date date = new Date();
-		origin.setModifyDate(date);
-		if (product.getStocks() != null && !product.getStocks().equals(origin.getStocks())) {
-			origin.setActualStocks(product.getStocks());
-		}
-		origin.setName(product.getName());
-		origin.setSortId(product.getSortId());
-		origin.setSubNsortId(product.getSubNsortId());
-		origin.setNsortId(product.getNsortId());
-		origin.setModelId(product.getModelId());
-		origin.setKeyWord(product.getKeyWord());
-		origin.setPrice(product.getPrice());
-		origin.setCash(product.getCash());
-		origin.setCarriage(product.getCarriage());
-		origin.setStocks(product.getStocks());
-		origin.setBrandId(product.getBrandId());
-		origin.setBrief(product.getBrief());
-		origin.setContent(product.getContent());
-		origin.setProdType(product.getProdType());
-		origin.setStartDate(product.getStartDate());
-		origin.setEndDate(product.getEndDate());
-		origin.setCommend(product.getCommend());
-		productService.updateProduct(origin);
-	}
 
 	/**
 	 * Delete.

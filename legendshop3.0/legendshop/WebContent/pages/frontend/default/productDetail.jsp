@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file='/pages/common/taglib.jsp'%>
 <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/overlay.css" />
- <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+ <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/common/js/jquery.tools.min.js"></script>
 <script src="${pageContext.request.contextPath}/common/js/productDetail.js"></script>
 <lb:shopDetail var="shopDetail" />

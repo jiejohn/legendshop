@@ -25,10 +25,10 @@
 <%
 			Integer offset = (Integer)request.getAttribute("offset");
 	%>
-<form action="<ls:url address='/admin/product/query'/>" id="form1" method="post">
+<form action="<ls:url address='/admin/group/product/query'/>" id="form1" method="post">
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><th style="font-weight: normal;"><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理 &raquo; <a href="<ls:url address='/admin/product/query'/>">商品管理</a></th></tr>
+    	<tr><th style="font-weight: normal;"><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 团购管理 &raquo; <a href="<ls:url address='/admin/group/product/query'/>">团购管理</a></th></tr>
     </thead>
     <tbody>
     	<tr><td>
@@ -39,21 +39,21 @@
             <input type="text" name="userName" maxlength="50" value="${prod.userName}" size="15"/>
             </auth:auth>
 			<auth:auth ifNotGranted="F_VIEW_ALL_DATA">
-			商品类型&nbsp;<select id="sortId" name="sortId" onChange="changeNsort(this.value)">
+			商品类型&nbsp;<select id="sortId" name="product.sortId" onChange="changeNsort(this.value)">
 			<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null && sessionScope.SPRING_SECURITY_LAST_USERNAME !=''}">
 	            <option:optionGroup type="select" required="false" cache="fasle"
 	                defaultDisp="-- 一级类型 --" 
-	                hql="select t.sortId, t.sortName from Sort t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"/>
+	                hql="select t.sortId, t.sortName from Sort t where t.sortType = 'G' and t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"/>
              </c:if>
 		</select>
-		<select id="nsortId" name="nsortId" onChange="changeSubNsort(this.value)">
+		<select id="nsortId" name="product.nsortId" onChange="changeSubNsort(this.value)">
 			<option value="">-- 二级类型 --</option>
 		</select>  
-		 <select id="subNsortId" name="subNsortId">
+		 <select id="subNsortId" name="product.subNsortId">
             <option value="">-- 三级类型 --</option>
         </select>
           &nbsp;品牌
-        <select id="brandId" name="brandId">
+        <select id="brandId" name="product.brandId">
         	   <option:optionGroup type="select" required="false" cache="fasle"
                     hql="select t.brandId, t.brandName from Brand t where t.userName = ?" defaultDisp="--商品品牌--" 
                     param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
@@ -61,21 +61,15 @@
         </auth:auth>  
         </div><div align="left" style="padding: 5px">
 			商品名称
-			<input type="text" name="name" id="name" maxlength="50" value="${prod.name}" size="32"/>
-			推荐
-			<select id="commend" name="commend">
-					<option value="">请选择</option>	
-			    	<option value="Y">是</option>	
-	      			<option value="N" >否</option>
-			</select>
+			<input type="text" name="product.name" id="name" maxlength="50" value="${prod.name}" size="32"/>
 			状态
-			<select id="status" name="status">
+			<select id="status" name="product.status">
 					<option value="">请选择</option>	
 			    	<option value="1">上线</option>
 	      			<option value="0" >下线</option>
 			</select>		
 			<input type="submit" value="搜索"/>
-		   <input type="button" value="创建商品" onclick='window.location=" <ls:url address='/admin/group/product/load'/>"'/>
+		   <input type="button" value="创建团购" onclick='window.location="<ls:url address='/admin/group/product/load'/>"'/>
 			</div>
     	</td></tr>
     </tbody>
@@ -118,7 +112,7 @@
 		  			<a href='javascript:productTurnOn("${item.prodId}","${item.name}")'><font color="red">上线</font></a>
 		  		</c:otherwise>
 		  	</c:choose>
-		  	 <a href= "${pageContext.request.contextPath}/admin/product/update/${item.prodId}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
+		  	 <a href="<ls:url address='/admin/group/product/load/${item.prodId}'/>" title="修改"><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
 		     <a href='javascript:confirmDelete("${item.prodId}","${item.name}")' title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
 	      </display:column>
       </auth:auth>

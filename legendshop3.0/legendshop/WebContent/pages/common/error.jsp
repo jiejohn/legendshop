@@ -14,29 +14,32 @@
 	<center>
 		<TABLE cellSpacing="0" cellPadding="0" width="955px">
 			<TBODY>
-				<TR>
+				<tr>
 					<TD noWrap width="1%" rowSpan=3><a
 						href="${pageContext.request.contextPath}/index${applicationScope.WEB_SUFFIX}"><img
 							src="${pageContext.request.contextPath}/img/legendshop.gif"
 							width="200px" title="LegendShop" /></a>
 					<TD>&nbsp;</TD>
-				</TR>
-				<TR>
-					<TD bgColor=#3366cc><FONT face=arial,sans-serif color=#ffffff><B>
+				</tr>
+				<tr bgColor=#3366cc>
+					<TD><FONT face=arial,sans-serif color=#ffffff><B>
 								<c:choose>
 									<c:when test="${User_Messages.code != null}">${User_Messages.code}</c:when>
 									<c:otherwise>500</c:otherwise>
 								</c:choose> Error
 						</B></FONT></TD>
-				</TR>
-				<TR>
+				</tr>
+				<tr>
 					<TD>&nbsp;</TD>
-				</TR>
+				</tr>
 			</TBODY>
 		</TABLE>
 
 		<br>
 		<table cellSpacing=0 cellPadding=0 width="955px">
+			<tr  style="display: none" id="errorMessages" name="errorMessages">
+					<TD>${ERROR_MESSAGE}</TD>
+			</tr>
 			<tr>
 				<td>
 					<BLOCKQUOTE>

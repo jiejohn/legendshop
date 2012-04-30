@@ -6,7 +6,7 @@
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <html>
 <head>
-     <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+     <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
      <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
 <title>分类列表</title>
 </head>

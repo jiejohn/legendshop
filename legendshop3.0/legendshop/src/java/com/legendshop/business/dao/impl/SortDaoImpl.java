@@ -15,9 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.common.CacheKeys;
-import com.legendshop.business.common.ProductTypeEnum;
 import com.legendshop.business.dao.SortDao;
 import com.legendshop.core.cache.CacheCallBack;
+import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;

@@ -31,6 +31,7 @@
         	<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
             	商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${partner.userName}" />
             </auth:auth>
+            &nbsp;&nbsp;登录名&nbsp;<input type="text" name="partnerName" maxlength="50" value="${partner.partnerName}" />
             <input type="submit" value="搜索"/>
             <input type="button" value="创建供应商" onclick='window.location="<ls:url address='/admin/partner/load'/>"'/>
             <br>

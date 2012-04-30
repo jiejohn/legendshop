@@ -11,7 +11,7 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
    <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
     <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+    <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
     <title>商品图片列表</title>

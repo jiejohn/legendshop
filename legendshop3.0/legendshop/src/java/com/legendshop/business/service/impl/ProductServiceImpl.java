@@ -7,15 +7,18 @@
  */
 package com.legendshop.business.service.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Required;
 
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.business.search.facade.ProductSearchFacade;
-import com.legendshop.business.service.ProductService;
+import com.legendshop.core.constant.ProductStatusEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.service.ProductService;
 import com.legendshop.model.entity.Product;
 
 /**
@@ -96,17 +99,50 @@ public class ProductServiceImpl implements ProductService {
 	 * @see com.legendshop.business.service.ProductService#updateProduct(com.legendshop.model.entity.Product)
 	 */
 	@Override
-	public void updateProduct(Product product) {
-		productDao.updateProduct(product);
-		shopDetailDao.updateShopDetailWhenProductChange(product);
-		productSearchFacade.update(product);
+	public void updateProduct(Product product, Product origin) {
+		// update
+		Date date = new Date();
+		origin.setModifyDate(date);
+		if (product.getStocks() != null && !product.getStocks().equals(origin.getStocks())) {
+			origin.setActualStocks(product.getStocks());
+		}
+		origin.setName(product.getName());
+		origin.setSortId(product.getSortId());
+		origin.setSubNsortId(product.getSubNsortId());
+		origin.setNsortId(product.getNsortId());
+		origin.setModelId(product.getModelId());
+		origin.setKeyWord(product.getKeyWord());
+		origin.setPrice(product.getPrice());
+		origin.setCash(product.getCash());
+		origin.setCarriage(product.getCarriage());
+		origin.setStocks(product.getStocks());
+		origin.setBrandId(product.getBrandId());
+		origin.setBrief(product.getBrief());
+		origin.setContent(product.getContent());
+		origin.setProdType(product.getProdType());
+		origin.setStartDate(product.getStartDate());
+		origin.setEndDate(product.getEndDate());
+		origin.setCommend(product.getCommend());
+		productDao.updateProduct(origin);
+		shopDetailDao.updateShopDetailWhenProductChange(origin);
+		productSearchFacade.update(origin);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.ProductService#saveProduct(com.legendshop.model.entity.Product)
 	 */
 	@Override
-	public Long saveProduct(Product product) {
+	public Long saveProduct(Product product,String prodType) {
+		Date date = new Date();
+		product.setStatus(ProductStatusEnum.PROD_ONLINE.value());
+		product.setRecDate(date);
+		product.setModifyDate(date);
+		product.setViews(0);
+		product.setBuys(0);
+		product.setProdType(prodType);
+		if (product.getStocks() != null) {
+			product.setActualStocks(product.getStocks());
+		}
 		Long prodId = productDao.saveProduct(product);
 		product.setProdId(prodId);
 		shopDetailDao.updateShopDetailWhenProductChange(product);

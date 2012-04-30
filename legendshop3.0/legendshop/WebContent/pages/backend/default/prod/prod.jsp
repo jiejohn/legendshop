@@ -8,12 +8,12 @@
 <head>
 <title>创建商品类型</title>
 
-		<script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
-		<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/plugins/My97DatePicker/WdatePicker.js"></script>
+		<script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
+		<script src="<ls:templateResource item='/plugins/My97DatePicker/WdatePicker.js'/>" type="text/javascript"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-		<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/linked-select.js"></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+		<script src="<ls:templateResource item='/common/js/linked-select.js'/>" type="text/javascript"></script>
 <script language="javascript">
 	window.onload=function(){
 		 var sortId = '${prod.sortId}';
@@ -140,7 +140,7 @@
 </script>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/admin/product/save${applicationScope.WEB_SUFFIX}"  id="saveProdForm" name="saveProdForm" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
+<form action="<ls:url address='/admin/product/save'/>"  id="saveProdForm" name="saveProdForm" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
     <input type="hidden" value="next" id="nextAction" name="nextAction"/>
     <input type="hidden" id="prodId" name="prodId" value="${prod.prodId}">
     <table class="${tableclass}" style="width: 100%">
@@ -174,7 +174,7 @@
                 <c:if test="${prod.userName != null}">
                   <option:optionGroup type="select" required="false" cache="fasle"
                     beanName="Sort" beanId="sortId" beanDisp="sortName" defaultDisp="--商品大类--" 
-                    hql="select t.sortId, t.sortName from Sort t where t.userName = ?" param="${prod.userName}" />
+                    hql="select t.sortId, t.sortName from Sort t where t.sortType = 'P' and t.userName = ?" param="${prod.userName}" />
                 </c:if>
                 <c:if test="${prod.userName == null}">
                     <option value="">-- 一级类型 --</option>
@@ -184,7 +184,7 @@
             <c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null && sessionScope.SPRING_SECURITY_LAST_USERNAME !=''}">
             <option:optionGroup type="select" required="false" cache="fasle"
                 defaultDisp="- 一级类型 -" 
-                hql="select t.sortId, t.sortName from Sort t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"/>
+                hql="select t.sortId, t.sortName from Sort t where t.sortType = 'P' and  t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"/>
              </c:if>
             </auth:auth>
 		</select>    

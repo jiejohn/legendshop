@@ -48,6 +48,7 @@ import com.legendshop.business.service.ValidateCodeUsernamePasswordAuthenticatio
 import com.legendshop.business.service.dwr.DwrCommonService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.ApplicationException;
@@ -58,6 +59,7 @@ import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.randing.CaptchaServiceSingleton;
 import com.legendshop.core.randing.RandomStringUtils;
+import com.legendshop.core.service.GroupProductService;
 import com.legendshop.model.dynamic.Item;
 import com.legendshop.model.dynamic.Model;
 import com.legendshop.model.entity.Basket;
@@ -74,6 +76,7 @@ import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.Sub;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.Arith;
+import com.legendshop.util.ContextServiceLocator;
 import com.legendshop.util.converter.ByteConverter;
 import com.legendshop.util.des.DES2;
 
@@ -123,6 +126,8 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 
 	/** The locale resolver. */
 	private LocaleResolver localeResolver;
+	
+	private GroupProductService groupProductService;
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.dwr.impl.DwrCommonService#getSessionId()
@@ -281,13 +286,13 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			}
 
 			adminService.deleteById(Product.class, prodId);
-			String picUrl = RealPathUtil.getBigPicRealPath() + "/" + product.getPic();
-			// 删除文件
-			log.debug("delete Big Image file {}", picUrl);
-			FileProcessor.deleteFile(picUrl);
-			String smallPicUrl = RealPathUtil.getSmallPicRealPath() + "/" + product.getPic();
-			log.debug("delete small Image file {}", smallPicUrl);
-			FileProcessor.deleteFile(smallPicUrl);
+			
+			if(ProductTypeEnum.GROUP.value().equals(product.getProdType())){
+				//delete group product
+				if(getGroupProductService() != null){
+					groupProductService.deleteProduct(prodId);
+				}
+			}
 
 			// 删除相关产品
 			List<RelProduct> list = businessDao.find("from RelProduct n where n.prodId = ? and userName = ?", prodId,
@@ -313,8 +318,18 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			businessDao.exeByHQL("delete from ProductComment where prodId = ? and ownerName = ?", new Object[] {
 					prodId, product.getUserName() });
 			// 删除全文索引
-			productSearchFacade.delete(product);
 			adminService.updateShopDetail(product);
+			
+			productSearchFacade.delete(product);
+			
+			
+			String picUrl = RealPathUtil.getBigPicRealPath() + "/" + product.getPic();
+			// 删除文件
+			log.debug("delete Big Image file {}", picUrl);
+			FileProcessor.deleteFile(picUrl);
+			String smallPicUrl = RealPathUtil.getSmallPicRealPath() + "/" + product.getPic();
+			log.debug("delete small Image file {}", smallPicUrl);
+			FileProcessor.deleteFile(smallPicUrl);
 			return null;
 		} catch (Exception e) {
 			log.error("", e);
@@ -1157,5 +1172,18 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 		}else{
 			throw new BusinessException("not support VALIDATION_IMAGE", EntityCodes.SYSTEM);
 		}
+	}
+
+	public void setGroupProductService(GroupProductService groupProductService) {
+		this.groupProductService = groupProductService;
+	}
+
+	public GroupProductService getGroupProductService() {
+		if(groupProductService == null){
+			if(ContextServiceLocator.getInstance().containsBean("groupProductService")){
+				groupProductService = (GroupProductService)ContextServiceLocator.getInstance().getBean("groupProductService");
+			}
+		}
+		return groupProductService;
 	}
 }

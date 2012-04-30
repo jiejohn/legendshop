@@ -4,8 +4,8 @@
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
-<script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script> 
-<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/plugins/My97DatePicker/WdatePicker.js"></script>
+<script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script> 
+<script src="<ls:templateResource item='/plugins/My97DatePicker/WdatePicker.js'/>" type="text/javascript"></script>
 <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
 <html>
 <%Integer offset = (Integer)request.getAttribute("offset");%>

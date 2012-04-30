@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by Newway -->
+
+<DataAccessLayer>
+	<BusinessObjects>
+		<Object objectName="group">
+             <Method name="getGroupProdList">
+             	select p from Product p, GroupProduct g where p.prodId = g.prodId and p.prodType = 'G'
+             	{? and p.sortId = $sortId$}
+             	{? and p.nsortId = $nsortId$}
+             	{? and p.subNsortId = $subNsortId$}
+             	{? and p.status = $status$}
+             	{? and p.brandId = $brandId$}
+             	{? and p.name like $name$}
+             	{? and p.userName = $userName$}
+			    {! order by p.modifyDate desc||$orderIndicator$}
+             </Method>
+             <Method name="getGroupProdCount">
+               select count(*) from Product p, GroupProduct g where p.prodId = g.prodId and p.prodType = 'G'
+          		{? and p.sortId = $sortId$}
+             	{? and p.nsortId = $nsortId$}
+             	{? and p.subNsortId = $subNsortId$}
+             	{? and p.status = $status$}
+             	{? and p.brandId = $brandId$}
+             	{? and p.name like $name$}
+             	{? and p.userName = $userName$}
+			    {! order by p.modifyDate desc||$orderIndicator$}
+             </Method>
+		</Object>
+	</BusinessObjects>
+</DataAccessLayer>

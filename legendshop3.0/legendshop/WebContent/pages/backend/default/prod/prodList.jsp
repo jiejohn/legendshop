@@ -8,14 +8,14 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <html>
 <head>
-     <script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+     <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
      <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
 
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-		<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/linked-select.js"></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+		<script src="<ls:templateResource item='/common/js/linked-select.js'/>" type="text/javascript"></script>
 
 <title>类型列表</title>
 </head>
@@ -41,7 +41,7 @@
 			<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null && sessionScope.SPRING_SECURITY_LAST_USERNAME !=''}">
 	            <option:optionGroup type="select" required="false" cache="fasle"
 	                defaultDisp="-- 一级类型 --" 
-	                hql="select t.sortId, t.sortName from Sort t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"/>
+	                hql="select t.sortId, t.sortName from Sort t where t.sortType = 'P' and t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"/>
              </c:if>
 		</select>
 		<select id="nsortId" name="nsortId" onChange="changeSubNsort(this.value)">

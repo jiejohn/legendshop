@@ -6,9 +6,9 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <html>
 <head>
-<script src="${pageContext.request.contextPath}/common/js/jquery.js" type="text/javascript"></script>
+<script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
-<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
+<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
 <title>用户消息列表</title>
 </head>
 <body class="bodymargin">

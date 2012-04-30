@@ -11,7 +11,7 @@
 <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
-		<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
 <script language="JavaScript" type="text/javascript">
 <!--
   function confirmDelete()
