@@ -15,6 +15,7 @@
 
 	<bean id="groupProductService" class="com.legendshop.group.service.impl.GroupProductServiceImpl">
         <property name="groupProductDao" ref="groupProductDao" />
+        <property name="productService" ref="productService" />
     </bean>  
 </beans>
    

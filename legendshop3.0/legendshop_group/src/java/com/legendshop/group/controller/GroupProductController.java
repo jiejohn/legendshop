@@ -7,6 +7,7 @@
  */
 package com.legendshop.group.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,25 +18,33 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
-import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.AuthorizationException;
+import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.core.exception.ErrorCodes;
+import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.FunctionUtil;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.helper.RealPathUtil;
+import com.legendshop.core.helper.ResourceBundleHelper;
+import com.legendshop.core.service.GroupProductService;
 import com.legendshop.group.page.GroupBackPage;
-import com.legendshop.group.service.GroupProductService;
+import com.legendshop.group.page.GroupFowardPage;
+import com.legendshop.model.entity.GroupProduct;
 import com.legendshop.model.entity.Product;
-import com.legendshop.model.entity.group.GroupProduct;
 import com.legendshop.util.AppUtils;
+import com.legendshop.util.SafeHtml;
 import com.legendshop.util.sql.ConfigCode;
 
 /**
@@ -43,7 +52,7 @@ import com.legendshop.util.sql.ConfigCode;
  */
 @Controller
 @RequestMapping("/admin/group/product")
-public class GroupProductController extends BaseController implements AdminController<GroupProduct,Long>{
+public class GroupProductController extends BaseController{
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(GroupProductController.class);
 	
@@ -61,11 +70,14 @@ public class GroupProductController extends BaseController implements AdminContr
 				
 				Product product = groupProduct.getProduct();
 				if(product != null){
-					fillParameter(hql,map,"prodName", "%" + product.getName().trim() + "%");
-					fillParameter(hql,map,"sortId",String.valueOf(product.getSortId()) );
-					fillParameter(hql,map,"nsortId",String.valueOf(product.getNsortId()) );
-					fillParameter(hql,map,"subNsortId", String.valueOf(product.getSubNsortId()) );
-					fillParameter(hql,map,"status",String.valueOf(product.getStatus()) );
+					fillParameter(hql,map,"sortId",product.getSortId());
+					fillParameter(hql,map,"nsortId",product.getNsortId());
+					fillParameter(hql,map,"subNsortId", product.getSubNsortId() );
+					fillParameter(hql,map,"status",product.getStatus());
+					fillParameter(hql,map,"brandId",product.getBrandId());
+					if(AppUtils.isNotBlank(product.getName())){
+						fillParameter(hql,map,"name", "%" + product.getName().trim() + "%");
+					}
 				}
 
 				//数据权限
@@ -91,8 +103,8 @@ public class GroupProductController extends BaseController implements AdminContr
 					map.put(AttributeKeys.ORDER_INDICATOR, "order by p.modifyDate desc");
 				}
 				
-				String QueryGroupProdCount = ConfigCode.getInstance().getCode("biz.getGroupProdCount", map);
-				String QueryGroupProd = ConfigCode.getInstance().getCode("biz.getGroupProdList", map);
+				String QueryGroupProdCount = ConfigCode.getInstance().getCode("group.getGroupProdCount", map);
+				String QueryGroupProd = ConfigCode.getInstance().getCode("group.getGroupProdList", map);
 				hql.setAllCountString(QueryGroupProdCount);
 				hql.setQueryString(QueryGroupProd);
 
@@ -103,9 +115,9 @@ public class GroupProductController extends BaseController implements AdminContr
 				return PathResolver.getPath(request, GroupBackPage.PROD_LIST_PAGE);
 	}
 	
-	private void fillParameter(HqlQuery hql,Map<String, String> map,String key,String value){
+	private void fillParameter(HqlQuery hql,Map<String, String> map,String key,Object value){
 		if (!AppUtils.isBlank(value)) {
-			map.put(key,value);
+			map.put(key, String.valueOf(value));
 			hql.addParams(value);
 		}
 	}
@@ -113,15 +125,70 @@ public class GroupProductController extends BaseController implements AdminContr
 	
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, GroupProduct entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		String name = UserManager.getUsername(request);
+		String result = checkLogin(request,name);
+		if(result != null){
+			return result;
+		}
+		Product product = entity.getProduct();
+		entity.setProdId(product.getProdId());
+		// 过滤特殊字符
+		SafeHtml safeHtml = new SafeHtml();
+		product.setName(safeHtml.makeSafe(product.getName()));
+		product.setKeyWord(safeHtml.makeSafe(product.getKeyWord()));
+		product.setBrief(safeHtml.makeSafe(product.getBrief()));
+		MultipartFile formFile = product.getFile();// 取得上传的文件
+		String subPath = name + "/prod/";
+		String filename = null;
+		try {
+			if (product.getProdId() != null) {
+				String orginProdPic = null;
+				String smallProdPic = null;
+				// update product
+				Product origin = groupProductService.getProductById(product.getProdId());
+				if(origin == null){
+					throw new BusinessException("can not found product by id " + product.getProdId(), EntityCodes.PROD);
+				}
+				String checkPrivilegeResult = checkPrivilege(request, name, origin.getUserName());
+				if(checkPrivilegeResult!=null){
+					return checkPrivilegeResult;
+				}
+				if ((formFile != null) && (formFile.getSize() > 0)) {
+					orginProdPic = RealPathUtil.getBigPicRealPath() + "/" + origin.getPic();
+					smallProdPic = RealPathUtil.getSmallPicRealPath() + "/" + origin.getPic();
+					// upload file
+					filename = FileProcessor.uploadFileAndCallback(formFile, subPath, "" + name);
+					origin.setPic(filename);
+				}
 
-	
-	@RequestMapping(value = "/delete/{id}")
-	public String delete(HttpServletRequest request, HttpServletResponse response, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+				groupProductService.updateProduct(product, origin,entity);
+				// delete file after update success
+				if ((formFile != null) && (formFile.getSize() > 0)) {
+					FileProcessor.deleteFile(orginProdPic);
+					FileProcessor.deleteFile(smallProdPic);
+				}
+
+			} else {
+				// save product
+				product.setUserId(UserManager.getUserId(request));
+				product.setUserName(name);
+				// upload file
+				if ((formFile != null) && (formFile.getSize() > 0)) {
+					filename = FileProcessor.uploadFileAndCallback(formFile, subPath, "" + name);
+					product.setPic(filename);
+				}
+				groupProductService.saveProduct(product,entity);
+			}
+		} catch (Exception e) {
+			// delete file uploaded
+			if ((formFile != null) && (formFile.getSize() > 0)) {
+				FileProcessor.deleteFile(RealPathUtil.getBigPicRealPath()  + File.separator +  filename);
+			}
+			throw new BusinessException(e, "save group product error",EntityCodes.GROUP_PROD, ErrorCodes.BUSINESS_ERROR);
+		}
+
+		saveMessage(request, ResourceBundleHelper.getSucessfulString());
+		return PathResolver.getPath(request, GroupFowardPage.PROD_LIST_QUERY);
 	}
 
 	
@@ -129,12 +196,29 @@ public class GroupProductController extends BaseController implements AdminContr
 	public String load(HttpServletRequest request, HttpServletResponse response) {
 		return PathResolver.getPath(request, GroupBackPage.PROD_EDIT_PAGE);
 	}
-
 	
-	@RequestMapping(value = "/update/{prodId}")
-	public String update(HttpServletRequest request, HttpServletResponse response, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Update.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param prodId
+	 *            the prod id
+	 * @return the string
+	 */
+	@RequestMapping(value = "/load/{prodId}")
+	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable Long prodId) {
+		checkNullable("prodId", prodId);
+		GroupProduct product = groupProductService.getGroupProduct(prodId);
+		String result = checkPrivilege(request, UserManager.getUsername(request), product.getProduct().getUserName());
+		if(result!=null){
+			return result;
+		}
+		request.setAttribute("prod", product);
+		return PathResolver.getPath(request, GroupBackPage.PROD_EDIT_PAGE);
 	}
+
 	 
 }
