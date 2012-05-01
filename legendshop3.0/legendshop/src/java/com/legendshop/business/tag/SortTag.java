@@ -13,7 +13,7 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 
 import com.legendshop.business.common.Constants;
-import com.legendshop.business.service.SortService;
+import com.legendshop.core.service.SortService;
 import com.legendshop.core.tag.LegendShopTag;
 import com.legendshop.model.entity.Sort;
 

@@ -15,6 +15,7 @@ import net.sf.ehcache.Cache;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.common.CacheKeys;
 import com.legendshop.business.dao.ProductDao;
@@ -42,18 +43,22 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
+	@Cacheable("sortCache")
 	public List<Product> getCommendProd(final String shopName, final int total) {
 		log.debug("getCommendProd, shopName = {},total = {}", shopName, total);
-		return (List<Product>) getObjectFromCache(getKey(CacheKeys.PRODUCTDAO_GETCOMMEND_PROD, shopName),
-				new CacheCallBack<List<Product>>() {
-					@Override
-					public List<Product> doInCache(String cahceName, Cache cache) {
-						Date date = new Date();
-						return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getCommend"), 0, total, shopName,
-								date, date);
-					}
-
-				});
+//		return (List<Product>) getObjectFromCache(getKey(CacheKeys.PRODUCTDAO_GETCOMMEND_PROD, shopName),
+//				new CacheCallBack<List<Product>>() {
+//					@Override
+//					public List<Product> doInCache(String cahceName, Cache cache) {
+//						Date date = new Date();
+//						return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getCommend"), 0, total, shopName,
+//								date, date);
+//					}
+//
+//				});
+		Date date = new Date();
+		return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getCommend"), 0, total, shopName,
+				date, date);
 	}
 
 	/* (non-Javadoc)

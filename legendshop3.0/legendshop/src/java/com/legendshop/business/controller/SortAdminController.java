@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
-import com.legendshop.business.service.SortService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
@@ -37,6 +36,7 @@ import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
+import com.legendshop.core.service.SortService;
 import com.legendshop.model.entity.Sort;
 import com.legendshop.util.AppUtils;
 
