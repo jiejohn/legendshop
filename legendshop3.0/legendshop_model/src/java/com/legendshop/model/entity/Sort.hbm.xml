@@ -4,7 +4,9 @@
 <!--  LegendShop 版权所有 2009-2011,并保留所有权利。 -->
 <hibernate-mapping>
     <class name="com.legendshop.model.entity.Sort" table="ls_sort">
-        <cache usage="read-write"/>
+        	<!-- 
+	 <cache usage="read-write"/>
+	  -->
         <id name="sortId" type="java.lang.Long">
             <column name="sort_id" />
             <generator class="native" />

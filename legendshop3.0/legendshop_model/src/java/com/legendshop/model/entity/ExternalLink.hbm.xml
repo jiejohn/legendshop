@@ -4,7 +4,9 @@
 <!--  LegendShop 版权所有 2009-2011,并保留所有权利。 -->
 <hibernate-mapping>
     <class name="com.legendshop.model.entity.ExternalLink" table="ls_extl_link">
-        <cache usage="read-write"/>
+        	<!-- 
+	 <cache usage="read-write"/>
+	  -->
         <id name="id" type="java.lang.Long">
             <column name="id" />
             <generator class="native" />

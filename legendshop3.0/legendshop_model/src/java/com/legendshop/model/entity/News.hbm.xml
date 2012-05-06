@@ -4,7 +4,9 @@
 <!--  LegendShop 版权所有 2009-2011,并保留所有权利。 -->
 <hibernate-mapping>
     <class name="com.legendshop.model.entity.News" table="ls_news">
-        <cache usage="read-write"/>
+        	<!-- 
+	 <cache usage="read-write"/>
+	  -->
         <id name="newsId" type="java.lang.Long">
             <column name="news_id" />
             <generator class="native" />
