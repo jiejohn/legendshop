@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -37,6 +38,7 @@ public class ProductJdbcDaoImpl extends ProductDaoImpl {
 	 * @see com.legendshop.business.dao.impl.ProductDao#getProdDetail(java.lang.Long)
 	 */
 	@Override
+	@Cacheable(value="ProductDetail", key="#prodId")
 	public ProductDetail getProdDetail(final Long prodId) {
 		List<ProductDetail> list= null;
 		list = jdbcTemplate.query(ConfigCode.getInstance().getCode("biz.getProdDetail"),new Object[] { prodId }, new ProductDetailRowMapper());

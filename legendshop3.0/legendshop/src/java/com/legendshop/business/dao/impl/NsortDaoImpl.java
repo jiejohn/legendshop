@@ -11,14 +11,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.common.CacheKeys;
 import com.legendshop.business.dao.NsortDao;
-import com.legendshop.core.cache.CacheCallBack;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.model.entity.Nsort;
 
@@ -35,19 +32,15 @@ public class NsortDaoImpl extends BaseDaoImpl implements NsortDao {
 	 * @see com.legendshop.business.dao.impl.NsortDao#queryNsort(java.lang.Long)
 	 */
 	@Override
+	@Cacheable(value="Nsort",key="#nsortId")
 	public Nsort getNsort(final Long nsortId) {
 		log.debug("queryNsort,nsortId = {} ", nsortId);
-		return (Nsort) getObjectFromCache(getKey(CacheKeys.NSORTDAO_GETNSORT, nsortId), new CacheCallBack<Nsort>() {
-			@Override
-			public Nsort doInCache(String cahceName, Cache cache) {
-				Nsort nsort = get(Nsort.class, nsortId);
-				if (nsort != null) {
-					nsort.setSubSort(new HashSet<Nsort>(findByHQL("from Nsort where parent_nsort_id = ?", nsort
-							.getNsortId())));
-				}
-				return nsort;
-			}
-		});
+		Nsort nsort = get(Nsort.class, nsortId);
+		if (nsort != null) {
+			nsort.setSubSort(new HashSet<Nsort>(findByHQL("from Nsort where parent_nsort_id = ?", nsort
+					.getNsortId())));
+		}
+		return nsort;
 	}
 
 	// 得到其他的相关小类
@@ -55,14 +48,9 @@ public class NsortDaoImpl extends BaseDaoImpl implements NsortDao {
 	 * @see com.legendshop.business.dao.impl.NsortDao#queryNsortList(java.lang.Long, java.lang.Long)
 	 */
 	@Override
+	@Cacheable(value="NsortList")
 	public List<Nsort> getNsortList(final Long sortId, final Long nsortId) {
-		return (List<Nsort>) getObjectFromCache(getKey(CacheKeys.NSORTDAO_GETNSORTLIST, sortId, nsortId),
-				new CacheCallBack<List<Nsort>>() {
-					@Override
-					public List<Nsort> doInCache(String cahceName, Cache cache) {
-						return findByHQL("from Nsort where sortId = ? and nsortId <> ?", sortId, nsortId);
-					}
-				});
+		return findByHQL("from Nsort where sortId = ? and nsortId <> ?", sortId, nsortId);
 	}
 
 	// 得到其他的相关小类
@@ -70,15 +58,9 @@ public class NsortDaoImpl extends BaseDaoImpl implements NsortDao {
 	 * @see com.legendshop.business.dao.impl.NsortDao#queryNsortList(java.lang.Long)
 	 */
 	@Override
+	@Cacheable(value="NsortList")
 	public List<Nsort> getNsortList(final Long sortId) {
-		return (List<Nsort>) getObjectFromCache(getKey(CacheKeys.NSORTDAO_GETNSORTLIST, sortId),
-				new CacheCallBack<List<Nsort>>() {
-					@Override
-					public List<Nsort> doInCache(String cahceName, Cache cache) {
-						return findByHQL("from Nsort where sortId = ?", sortId);
-					}
-				});
-
+		return findByHQL("from Nsort where sortId = ?", sortId);
 	}
 
 	// 得到相关二级小类
@@ -115,15 +97,9 @@ public class NsortDaoImpl extends BaseDaoImpl implements NsortDao {
 	 * @see com.legendshop.business.dao.impl.NsortDao#queryNsortBySortId(java.lang.Long)
 	 */
 	@Override
+	@Cacheable(value="NsortList",key="#sortId")
 	public List<Nsort> getNsortBySortId(final Long sortId) {
-		return (List<Nsort>) getObjectFromCache(getKey(CacheKeys.NSORTDAO_GETNSORTBYSORTID, sortId),
-				new CacheCallBack<List<Nsort>>() {
-					@Override
-					public List<Nsort> doInCache(String cahceName, Cache cache) {
-						return findByHQL("from Nsort where sortId = ? and parent_nsort_id is null", sortId);
-					}
-				});
-
+		return findByHQL("from Nsort where sortId = ? and parent_nsort_id is null", sortId);
 	}
 
 }

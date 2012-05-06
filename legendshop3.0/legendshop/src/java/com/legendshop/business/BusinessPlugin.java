@@ -16,6 +16,7 @@ import com.legendshop.business.service.SystemParameterService;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.plugins.AbstractPlugin;
 import com.legendshop.core.tag.TableCache;
+import com.legendshop.event.EventHome;
 import com.legendshop.search.SearchFacade;
 
 /**
@@ -48,6 +49,8 @@ public class BusinessPlugin extends AbstractPlugin{
 		log.info("luceneIndexPath is {}", luceneIndexPath);
 
 		searchFacade.init(luceneIndexPath);
+		
+		EventHome.initBaseEventListener();
 		
 	}
 

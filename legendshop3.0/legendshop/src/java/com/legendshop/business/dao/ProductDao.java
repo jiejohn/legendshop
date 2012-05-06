@@ -8,10 +8,10 @@
 package com.legendshop.business.dao;
 
 import java.util.List;
+import java.util.Locale;
 
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.core.dao.support.CriteriaQuery;
-import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ProductDetail;
@@ -69,20 +69,32 @@ public interface ProductDao extends BaseDao{
 	/**
 	 * Gets the prod detail.
 	 * 
-	 * @param cq
-	 *            the cq
+	 * @param locale
+	 *            the locale
+	 * @param curPageNO
+	 *            the cur page no
+	 * @param sortId
+	 *            the sort id
+	 * @param nsortId
+	 *            the nsort id
+	 * @param subNsortId
+	 *            the sub nsort id
 	 * @return the prod detail
 	 */
-	public abstract PageSupport getProdDetail(CriteriaQuery cq);
+	public abstract PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId,Long nsortId,Long subNsortId);
 
 	/**
 	 * Gets the prod detail.
 	 * 
-	 * @param hql
-	 *            the hql
+	 * @param locale
+	 *            the locale
+	 * @param curPageNO
+	 *            the cur page no
+	 * @param sortId
+	 *            the sort id
 	 * @return the prod detail
 	 */
-	public abstract PageSupport getProdDetail(HqlQuery hql);
+	public abstract PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId);
 
 	/**
 	 * Gets the prod detail.
@@ -92,6 +104,15 @@ public interface ProductDao extends BaseDao{
 	 * @return the prod detail
 	 */
 	public abstract ProductDetail getProdDetail(final Long prodId);
+
+	/**
+	 * Gets the search prod detail.
+	 * 
+	 * @param cq
+	 *            the cq
+	 * @return the search prod detail
+	 */
+	public abstract PageSupport getProdDetail(CriteriaQuery cq);
 	
 	
 	/**

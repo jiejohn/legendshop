@@ -7,14 +7,11 @@
  */
 package com.legendshop.business.dao.impl;
 
-import net.sf.ehcache.Cache;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.common.CacheKeys;
 import com.legendshop.business.dao.LogoDao;
-import com.legendshop.core.cache.CacheCallBack;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -33,25 +30,21 @@ public class LogoDaoImpl extends BaseDaoImpl implements LogoDao {
 	 * @see com.legendshop.business.dao.impl.LogoDao#getLogo(java.lang.String)
 	 */
 	@Override
+	@Cacheable(value="Logo",key="#shopName")
 	public Logo getLogo(final String shopName) {
 		log.debug("getLogo, shopName = {}", shopName);
 		if (shopName == null) {
 			return null;
 		}
-		return (Logo) getObjectFromCache(getKey(CacheKeys.LOGODAO_GETLOGO, shopName), new CacheCallBack<Logo>() {
-			@Override
-			public Logo doInCache(String cahceName, Cache cache) {
-				Logo logo = findUniqueBy("from Logo where userName = ?", Logo.class, shopName);
-				if (logo == null) {
-					logo = getDefaultLogo();
-				}
-				if(logo == null){
-					logo = new Logo();
-					logo.setId(-1l);//id = -1 用于占位
-				}
-				return logo;
-			}
-		});
+		Logo logo = findUniqueBy("from Logo where userName = ?", Logo.class, shopName);
+		if (logo == null) {
+			logo = getDefaultLogo();
+		}
+		if(logo == null){
+			logo = new Logo();
+			logo.setId(-1l);//id = -1 用于占位
+		}
+		return logo;
 	}
 
 	/**

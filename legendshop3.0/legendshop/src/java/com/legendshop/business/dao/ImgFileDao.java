@@ -9,6 +9,8 @@ package com.legendshop.business.dao;
 
 import java.util.List;
 
+import net.sf.json.JSONArray;
+
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.model.entity.ImgFile;
 import com.legendshop.model.entity.Indexjpg;
@@ -26,6 +28,11 @@ public interface ImgFileDao extends BaseDao{
 	 * @return the index jpeg
 	 */
 	public abstract List<Indexjpg> getIndexJpeg(final String userName);
+	
+	
+	public abstract JSONArray getIndexJpegJSON(final String userName);
+	
+	
 
 	/**
 	 * 得到产品的描述图片.

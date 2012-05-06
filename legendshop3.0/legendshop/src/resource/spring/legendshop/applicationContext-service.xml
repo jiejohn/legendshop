@@ -10,12 +10,9 @@
         <property name="logoDao" ref="logoDao"></property>
     </bean>
     
-    <bean id="logoDao" class="com.legendshop.business.dao.impl.LogoDaoImpl" parent="baseDao">
-    	<property name="obejctCache" ref="logoDaoCache"></property>
-    </bean>
+    <bean id="logoDao" class="com.legendshop.business.dao.impl.LogoDaoImpl" parent="baseDao" />
 
     <bean id="shopDetailDao" class="com.legendshop.business.dao.impl.ShopDetailJdbcDaoImpl" parent="baseDao">
-    	<property name="obejctCache" ref="shopDetailCache"></property>
     	<property name="codeTablesCache" ref="codeTablesCache"></property>
     	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
@@ -46,8 +43,8 @@
         <property name="commonUtil" ref="commonUtil"></property>
         <property name="shopDetailSearchFacade" ref="shopDetailSearchFacade"></property>
     </bean>  
+    
     <bean id="externalLinkDao" class="com.legendshop.business.dao.impl.ExternalLinkDaoImpl" parent="baseDao">
-    	<property name="obejctCache" ref="externalLinkCache"></property> 
     </bean>
 
     <bean id="externalLinkService" class="com.legendshop.business.service.impl.ExternalLinkServiceImpl">
@@ -55,7 +52,6 @@
         </property>
     </bean>
     <bean id="newsDao" class="com.legendshop.business.dao.impl.NewsDaoImpl" parent="baseDao">
-    	<property name="obejctCache" ref="newsCache"></property>
     </bean>
 
     <bean id="newsService" class="com.legendshop.business.service.impl.NewsServiceImpl">
@@ -64,8 +60,8 @@
     </bean>  
     
     <bean id="pubDao" class="com.legendshop.business.dao.impl.PubDaoImpl" parent="baseDao">
-    	<property name="obejctCache" ref="pubCache"></property>
     </bean>
+    
     <bean id="pubService" class="com.legendshop.business.service.impl.PubServiceImpl">
         <property name="pubDao" ref="pubDao">
         </property>
@@ -77,12 +73,10 @@
     </bean>   
     
     <bean id="advertisementDao" class="com.legendshop.business.dao.impl.AdvertisementDaoImpl" parent="baseDao">
-    	<property name="obejctCache" ref="advertisementCache"></property>
     	<property name="maxNumPerType" value="3"></property>
     </bean>
     
     <bean id="businessDao" class="com.legendshop.business.dao.impl.BusinessDaoImpl" parent="baseDao">
-    	<property name="obejctCache" ref="businessDaoCache"></property>
     </bean>
 
     <bean id="advertisementService" class="com.legendshop.business.service.impl.AdvertisementServiceImpl">
@@ -91,7 +85,6 @@
     </bean>  
  
     <bean id="nsortDao" class="com.legendshop.business.dao.impl.NsortDaoImpl" parent="baseDao">
-    	<property name="obejctCache" ref="nsortCache"></property>
     </bean>
     
     <bean id="subDao" class="com.legendshop.business.dao.impl.SubDaoImpl" parent="subCommonDao">
@@ -216,7 +209,6 @@
     
     
     <bean id="sortDao" class="com.legendshop.business.dao.impl.SortDaoImpl" parent="baseDao">
-    	<property name="obejctCache" ref="sortCache"></property>
 	</bean> 
 	
 	<bean id="sortService" class="com.legendshop.business.service.impl.SortServiceImpl">

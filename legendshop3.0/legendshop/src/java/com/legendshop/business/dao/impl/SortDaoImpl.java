@@ -9,14 +9,12 @@ package com.legendshop.business.dao.impl;
 
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.common.CacheKeys;
 import com.legendshop.business.dao.SortDao;
-import com.legendshop.core.cache.CacheCallBack;
 import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
@@ -37,81 +35,73 @@ public class SortDaoImpl extends BaseDaoImpl implements SortDao {
 	 * @see com.legendshop.business.dao.impl.SortDao#getSort(java.lang.String, java.lang.Boolean)
 	 */
 	@Override
+	@Cacheable(value="SortList")
 	public List<Sort> getSort(final String shopName, final Boolean loadAll) {
 		return  getSort(shopName,ProductTypeEnum.PRODUCT.value(),loadAll);
 	}
 	
 	@Override
+	@Cacheable(value="SortList")
 	public List<Sort> getSort(final String shopName,final String sortType, final Boolean loadAll) {
 		log.debug("getSort, shopName = {}, loadAll = {}", shopName, loadAll);
-		return (List<Sort>) getObjectFromCache(getKey(CacheKeys.SORTDAO_GETSORT, shopName, loadAll),
-				new CacheCallBack<List<Sort>>() {
-					@Override
-					public List<Sort> doInCache(String cahceName, Cache cache) {
-						List<Sort> list = findByHQL("from Sort where userName = ? and sortType = ? order by seq", shopName,sortType);
-						if (loadAll) {
-							// 找出所有的Nsort
-							List<Nsort> nsortList = findByHQL(
-									"select n from Nsort n, Sort s where n.sortId = s.sortId and s.userName = ? and s.sortType = ? ",
-									shopName,sortType);
-							for (int i = 0; i < nsortList.size(); i++) {
-								Nsort n1 = nsortList.get(i);
-								for (int j = i; j < nsortList.size(); j++) {
-									Nsort n2 = nsortList.get(j);
-									n1.addSubSort(n2);
-									n2.addSubSort(n1);
-								}
-							}
+		List<Sort> list = findByHQL("from Sort where userName = ? and sortType = ? order by seq", shopName,sortType);
+		if (loadAll) {
+			// 找出所有的Nsort
+			List<Nsort> nsortList = findByHQL(
+					"select n from Nsort n, Sort s where n.sortId = s.sortId and s.userName = ? and s.sortType = ? ",
+					shopName,sortType);
+			for (int i = 0; i < nsortList.size(); i++) {
+				Nsort n1 = nsortList.get(i);
+				for (int j = i; j < nsortList.size(); j++) {
+					Nsort n2 = nsortList.get(j);
+					n1.addSubSort(n2);
+					n2.addSubSort(n1);
+				}
+			}
 
-							for (Sort sort : list) {
-								for (Nsort nsort : nsortList) {
-									sort.addSubSort(nsort);
-								}
-							}
-						}
-						return list;
-					}
-				});
+			for (Sort sort : list) {
+				for (Nsort nsort : nsortList) {
+					sort.addSubSort(nsort);
+				}
+			}
+		}
+		return list;
 	}
 	
 	
 	@Override
+	@Cacheable(value="SortList")
 	public List<Sort> getSort(final String shopName, final String sortType,final boolean loadAll) {
 		log.debug("getSort, shopName = {}, loadAll = {}", shopName, loadAll);
-		return (List<Sort>) getObjectFromCache(getKey(CacheKeys.SORTDAO_GETSORT, shopName,sortType, loadAll),
-				new CacheCallBack<List<Sort>>() {
-					@Override
-					public List<Sort> doInCache(String cahceName, Cache cache) {
-						List<Sort> list = findByHQL("from Sort where userName = ? and sortType = ? order by seq", shopName,sortType);
-						if (loadAll) {
-							// 找出所有的Nsort
-							List<Nsort> nsortList = findByHQL(
-									"select n from Nsort n, Sort s where n.sortId = s.sortId and s.userName = ? and s.sortType = ?",
-									shopName,sortType);
-							for (int i = 0; i < nsortList.size(); i++) {
-								Nsort n1 = nsortList.get(i);
-								for (int j = i; j < nsortList.size(); j++) {
-									Nsort n2 = nsortList.get(j);
-									n1.addSubSort(n2);
-									n2.addSubSort(n1);
-								}
-							}
+		List<Sort> list = findByHQL("from Sort where userName = ? and sortType = ? order by seq", shopName,sortType);
+		if (loadAll) {
+			// 找出所有的Nsort
+			List<Nsort> nsortList = findByHQL(
+					"select n from Nsort n, Sort s where n.sortId = s.sortId and s.userName = ? and s.sortType = ?",
+					shopName,sortType);
+			for (int i = 0; i < nsortList.size(); i++) {
+				Nsort n1 = nsortList.get(i);
+				for (int j = i; j < nsortList.size(); j++) {
+					Nsort n2 = nsortList.get(j);
+					n1.addSubSort(n2);
+					n2.addSubSort(n1);
+				}
+			}
 
-							for (Sort sort : list) {
-								for (Nsort nsort : nsortList) {
-									sort.addSubSort(nsort);
-								}
-							}
-						}
-						return list;
-					}
-				});
+			for (Sort sort : list) {
+				for (Nsort nsort : nsortList) {
+					sort.addSubSort(nsort);
+				}
+			}
+		}
+		return list;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.SortDao#getSort(java.lang.Long)
 	 */
 	@Override
+	@Cacheable(value="Sort", key="#sortId")
 	public Sort getSort(Long sortId) {
 		return get(Sort.class, sortId);
 	}
@@ -136,8 +126,9 @@ public class SortDaoImpl extends BaseDaoImpl implements SortDao {
 	 * @see com.legendshop.business.dao.impl.SortDao#deleteSortById(java.lang.Long)
 	 */
 	@Override
-	public void deleteSortById(Long id) {
-	      deleteById(Sort.class, id);
+	@CacheEvict(value="Sort", key="#sortId")
+	public void deleteSortById(Long sortId) {
+	      deleteById(Sort.class, sortId);
 	}
 
 	/* (non-Javadoc)
@@ -176,6 +167,7 @@ public class SortDaoImpl extends BaseDaoImpl implements SortDao {
 	 * @see com.legendshop.business.dao.impl.SortDao#deleteSort(com.legendshop.model.entity.Sort)
 	 */
 	@Override
+	@CacheEvict(value="Sort", key="#sort.sortId")
 	public void deleteSort(Sort sort) {
 		delete(sort);
 	}

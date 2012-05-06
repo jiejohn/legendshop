@@ -19,6 +19,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -31,9 +32,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.legendshop.business.service.AuthService;
 import com.legendshop.core.security.GrantedFunction;
 import com.legendshop.core.security.GrantedFunctionImpl;
-import com.legendshop.core.security.cache.AuthorityBasedUserCache;
-import com.legendshop.core.security.cache.FunctionCache;
-import com.legendshop.core.security.cache.RoleByNameCache;
 import com.legendshop.core.security.model.UserDetail;
 import com.legendshop.model.entity.Function;
 import com.legendshop.model.entity.Role;
@@ -50,16 +48,6 @@ public class AuthServiceImpl implements  AuthService {
 
 	/** The log. */
 	Logger log = LoggerFactory.getLogger(AuthServiceImpl.class);
-
-	/** The function cache. */
-	private FunctionCache functionCache;
-
-	/** The role cache. */
-	private RoleByNameCache roleCache;
-
-	// 用户有哪些Role的cache
-	/** The authority user cache. */
-	private AuthorityBasedUserCache authorityUserCache;
 
 	/** The jdbc template. */
 	private JdbcTemplate jdbcTemplate;
@@ -170,6 +158,7 @@ public class AuthServiceImpl implements  AuthService {
 	 * @return the list
 	 */
 	private List<Function> findFunctionsByUser(UserEntity user) {
+		log.debug("findFunctionsByUser calling, username {}" , user.getName());
 		return jdbcTemplate
 				.query(
 						"select f.* from ls_usr_role ur ,ls_role r,ls_perm p, ls_func f where ur.user_id= ? and ur.role_id=r.id and r.id=p.role_id and p.function_id=f.id",
@@ -193,6 +182,7 @@ public class AuthServiceImpl implements  AuthService {
 	@Override
 	@SuppressWarnings("unchecked")
 	public UserEntity findUserByName(String name) {
+		log.debug("findUserByName calling, name {}" , name);
 		return (UserEntity) jdbcTemplate.queryForObject("select * from ls_user where name = ?", new Object[] { name },
 				new RowMapper() {
 					@Override
@@ -213,7 +203,7 @@ public class AuthServiceImpl implements  AuthService {
 	 */
 	@Override
 	public List<Role> findRolesByUser(UserEntity user) {
-		// log.debug("findRolesByUser calling {}" , user);
+		log.debug("findRolesByUser calling,user name {}" , user.getName());
 		return jdbcTemplate.query("select r.* from ls_usr_role ur ,ls_role r where ur.user_id= ? and ur.role_id=r.id",
 				new Object[] { user.getId() }, new RowMapper<Role>() {
 					@Override
@@ -250,22 +240,15 @@ public class AuthServiceImpl implements  AuthService {
 	 * @see com.legendshop.business.service.AuthService#getFunctionsByRoles(java.util.Collection)
 	 */
 	@Override
+	@Cacheable(value="GrantedFunction")
 	public Collection<GrantedFunction> getFunctionsByRoles(Collection<? extends GrantedAuthority> roles) {
-		// log.debug("getFunctionsByRoles calling {}" , roles);
+		log.debug("getFunctionsByRoles calling {}" , roles);
 		if (null == roles) {
 			throw new IllegalArgumentException("Granted Roles cannot be null");
 		}
 		Collection<GrantedFunction> grantedFunctions = new HashSet<GrantedFunction>();
 		for (GrantedAuthority grantedAuthority : roles) {
-			Role role = roleCache.getRoleByRoleNameCache(grantedAuthority.getAuthority()); //
-			if (role == null) {
-				role = getgrantedAuthority(grantedAuthority.getAuthority());
-				if (role != null) {
-					roleCache.putRoleInCache(role);
-				} else {
-					return grantedFunctions;
-				}
-			}
+			Role role = getgrantedAuthority(grantedAuthority.getAuthority());
 			if (role != null) {
 				List<Function> functions = role.getFunctions();
 				for (Function function : functions) {
@@ -284,7 +267,7 @@ public class AuthServiceImpl implements  AuthService {
 	 */
 	@Override
 	public Collection<GrantedFunction> getFunctionsByUser(UserEntity user) {
-		// log.debug("getFunctionsByUser calling {}" , user);
+		log.debug("getFunctionsByUser calling {}" , user);
 		if (null == user)
 			throw new IllegalArgumentException("User Entity cannot be null");
 		Collection<GrantedFunction> grantedFunctions = new HashSet<GrantedFunction>();
@@ -303,6 +286,7 @@ public class AuthServiceImpl implements  AuthService {
 
 	@Override
 	public Role getgrantedAuthority(String authority) {
+		log.debug("getgrantedAuthority calling {}" , authority);
 		List<Role> roles = findRoleByName(authority);
 		if (AppUtils.isBlank(roles)) {
 			log.warn("authority {} can not get Role", authority);
@@ -323,6 +307,7 @@ public class AuthServiceImpl implements  AuthService {
 	 */
 	@Override
 	public List<Role> findRoleByName(String authority) {
+		log.debug("findRoleByName calling {}" , authority);
 		return jdbcTemplate.query("select * from ls_role where name = ?", new Object[] { authority },
 				new RowMapper<Role>() {
 					@Override
@@ -343,7 +328,7 @@ public class AuthServiceImpl implements  AuthService {
 	 */
 	@Override
 	public List<Function> findFunctionsByRole(Role role) {
-		// log.debug("findFunctionsByRole calling {}" , role);
+	    log.debug("findFunctionsByRole calling {}" , role);
 		return jdbcTemplate.query("select f.* from ls_perm p ,ls_func f where p.role_id= ? and p.function_id=f.id",
 				new Object[] { role.getId() }, new RowMapper<Function>() {
 					@Override
@@ -367,36 +352,6 @@ public class AuthServiceImpl implements  AuthService {
 	 */
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
-	}
-
-	/**
-	 * Sets the role cache.
-	 * 
-	 * @param roleCache
-	 *            the new role cache
-	 */
-	public void setRoleCache(RoleByNameCache roleCache) {
-		this.roleCache = roleCache;
-	}
-
-	/**
-	 * Sets the authority user cache.
-	 * 
-	 * @param authorityUserCache
-	 *            the new authority user cache
-	 */
-	public void setAuthorityUserCache(AuthorityBasedUserCache authorityUserCache) {
-		this.authorityUserCache = authorityUserCache;
-	}
-
-	/**
-	 * Sets the function cache.
-	 * 
-	 * @param functionCache
-	 *            the new function cache
-	 */
-	public void setFunctionCache(FunctionCache functionCache) {
-		this.functionCache = functionCache;
 	}
 
 }

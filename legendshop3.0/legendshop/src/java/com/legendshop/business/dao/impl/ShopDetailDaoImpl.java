@@ -13,14 +13,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.ehcache.Cache;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.common.CacheKeys;
 import com.legendshop.business.dao.ShopDetailDao;
-import com.legendshop.core.cache.CacheCallBack;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
@@ -61,18 +58,13 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#isShopExists(java.lang.String)
 	 */
 	@Override
+	@Cacheable(value="ShopDetail")
 	public Boolean isShopExists(final String storeName) {
 		if (AppUtils.isBlank(storeName)) {
 			return false;
 		}
-		return (Boolean) getObjectFromCache(getKey(CacheKeys.SHOPDETAILDAO_ISSHOPEXISTS, storeName),
-				new CacheCallBack<Boolean>() {
-					@Override
-					public Boolean doInCache(String cahceName, Cache cache) {
-						List list = findByHQL("select storeName from ShopDetail where storeName = ?", storeName);
-						return list != null && list.size() > 0;
-					}
-				});
+		List list = findByHQL("select storeName from ShopDetail where storeName = ?", storeName);
+		return list != null && list.size() > 0;
 	}
 
 	/* (non-Javadoc)
@@ -88,36 +80,30 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#getShopDetailView(java.lang.String)
 	 */
 	@Override
+	@Cacheable(value="ShopDetailList",key="#storeName")
 	public ShopDetailView getShopDetailView(final String storeName) {
 		if (AppUtils.isBlank(storeName)) {
 			return null;
 		}
-		return (ShopDetailView) getObjectFromCache(getKey(CacheKeys.SHOPDETAILDAO_GETSHOPDETAILVIEW, storeName),
-				new CacheCallBack<ShopDetailView>() {
-					@Override
-					public ShopDetailView doInCache(String cahceName, Cache cache) {
-						ShopDetailView shopDetail = getSimpleInfoShopDetail(storeName);
-						if (shopDetail != null) {
-							ShopDetailView result = shopDetail.clone();
-							if (result.getQq() != null) {
-								String[] qqs = result.getQq().split(",");
-								List<String> qqList = new ArrayList<String>(qqs.length);
-								for (int i = 0; i < qqs.length; i++) {
-									if (qqs[i] != null && qqs[i].length() > 0) {
-										qqList.add(qqs[i]);
-									}
-								}
-								result.setQqList(qqList);
-							}
-							if (colorTypeOneDay.equals(result.getColorStyle())) {
-								result.setColorStyle(getColorTyle(storeName));
-							}
-							return result;
-						}
-						return shopDetail;
+		ShopDetailView shopDetail = getSimpleInfoShopDetail(storeName);
+		if (shopDetail != null) {
+			ShopDetailView result = shopDetail.clone();
+			if (result.getQq() != null) {
+				String[] qqs = result.getQq().split(",");
+				List<String> qqList = new ArrayList<String>(qqs.length);
+				for (int i = 0; i < qqs.length; i++) {
+					if (qqs[i] != null && qqs[i].length() > 0) {
+						qqList.add(qqs[i]);
 					}
-
-				});
+				}
+				result.setQqList(qqList);
+			}
+			if (colorTypeOneDay.equals(result.getColorStyle())) {
+				result.setColorStyle(getColorTyle(storeName));
+			}
+			return result;
+		}
+		return shopDetail;
 	}
 
 	/* (non-Javadoc)
@@ -145,37 +131,27 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#isLeagueShopExists(java.lang.String)
 	 */
 	@Override
+	@Cacheable(value="ShopDetail")
 	public Boolean isLeagueShopExists(final String storeName) {
 		if (storeName == null)
 			return false;
-		return (Boolean) getObjectFromCache(getKey(CacheKeys.SHOPDETAILDAO_ISLEAGUESHOPEXISTS, storeName),
-				new CacheCallBack<Boolean>() {
-					@Override
-					public Boolean doInCache(String cahceName, Cache cache) {
-						Long num = findUniqueBy("select count(*) from Myleague where userId = ? ", Long.class,
-								storeName);
-						return num > 0;
-					}
-				});
+		Long num = findUniqueBy("select count(*) from Myleague where userId = ? ", Long.class,
+				storeName);
+		return num > 0;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#canbeLeagueShop(boolean, java.lang.String, java.lang.String)
 	 */
 	@Override
+	@Cacheable(value="ShopDetail")
 	public Boolean isBeLeagueShop(final boolean isShopExists, final String userName, final String storeName) {
 		if (!isShopExists || AppUtils.isBlank(userName) || userName.equals(storeName)) {
 			return false;
 		}
-		return (Boolean) getObjectFromCache(getKey(CacheKeys.SHOPDETAILDAO_CANBELEAGUESHOP, isShopExists, userName,
-				storeName), new CacheCallBack<Boolean>() {
-			@Override
-			public Boolean doInCache(String cahceName, Cache cache) {
-				Long result = findUniqueBy("select count(*) from Myleague where userId = ? and friendId = ?",
-						Long.class, userName, storeName);
-				return result <= 0;
-			}
-		});
+		Long result = findUniqueBy("select count(*) from Myleague where userId = ? and friendId = ?",
+				Long.class, userName, storeName);
+		return result <= 0;
 	}
 
 	/* (non-Javadoc)

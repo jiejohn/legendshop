@@ -68,7 +68,6 @@ import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
-import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.dao.support.SqlQuery;
 import com.legendshop.core.exception.ApplicationException;
@@ -642,22 +641,8 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		log.info("[{}],{},{},sort", new Object[] { request.getRemoteAddr(), userName == null ? "" : userName,
 				getSessionAttribute(request, Constants.SHOP_NAME) });
 
-		// HQL查找方式
-		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class), curPageNO);
-		String QueryNsortCount = ConfigCode.getInstance().getCode("biz.getSortProdCount");
-		String QueryNsort = ConfigCode.getInstance().getCode("biz.getSortProd");
-		hql.setAllCountString(QueryNsortCount);
-		hql.setQueryString(QueryNsort);
-		Date date = new Date();
-		hql.setParam(new Object[] { sortId, date, date });
-		PageSupport ps = productDao.getProdDetail(hql);
-		request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
-		request.setAttribute("offset", new Integer(ps.getOffset() + 1));
-		request.setAttribute("prodDetailList", ps.getResultList());
-		if (ps.hasMutilPage()) {
-			request.setAttribute("toolBar", ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
-		}
-
+		PageSupport ps = productDao.getProdDetail(localeResolver.resolveLocale(request), curPageNO, sortId);
+		ps.savePage(request);
 		return PathResolver.getPath(request, TilesPage.PRODUCTSORT);
 	}
 
@@ -699,27 +684,10 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		request.setAttribute("subNsortList", nsortDao.getOthorSubNsort(nsortId, nsortList));
 		if (nsort != null) {
 			request.setAttribute("CurrentNsortId", nsort.getNsortId());
-		}
-		try {
-			// Qbc查找方式
-			CriteriaQuery cq = new CriteriaQuery(Product.class, curPageNO);
-			cq.setCurPage(curPageNO);
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
-			cq.addOrder("desc", "prodId");
-			cq.eq("sortId", sortId);
-			cq.eq("nsortId", nsortId);
-			cq.eq("subNsortId", subNsortId);
-			cq.add();
-			PageSupport ps = productDao.getProdDetail(cq);
-			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
-			request.setAttribute("prodDetailList", ps.getResultList());
-			if (ps.hasMutilPage()) {
-				request.setAttribute("toolBar", ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
-			}
-		} catch (Exception e) {
-			log.error("getProdDetail", e);
-			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
-		}
+		}		
+		PageSupport ps = productDao.getProdDetail(localeResolver.resolveLocale(request), curPageNO,  sortId, nsortId, subNsortId);
+		ps.savePage(request);
+		
 		return PathResolver.getPath(request, TilesPage.NSORT);
 	}
 

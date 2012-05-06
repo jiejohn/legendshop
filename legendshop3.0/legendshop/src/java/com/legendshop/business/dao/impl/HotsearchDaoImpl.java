@@ -9,14 +9,11 @@ package com.legendshop.business.dao.impl;
 
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.common.CacheKeys;
 import com.legendshop.business.dao.HotsearchDao;
-import com.legendshop.core.cache.CacheCallBack;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.model.entity.Hotsearch;
 
@@ -49,13 +46,9 @@ public class HotsearchDaoImpl extends BaseDaoImpl implements HotsearchDao {
 	 * @see com.legendshop.business.dao.impl.HotsearchDao#getSearch(java.lang.String, java.lang.Long)
 	 */
 	@Override
+	@Cacheable(value="HotsearchList",key="#userName + #isortId")
 	public List<Hotsearch> getSearch(final String userName, final Long isortId) {
-		return (List<Hotsearch>) getObjectFromCache(getKey(CacheKeys.HOTSEARCHDAO_GETSEARCH, userName, isortId),
-				new CacheCallBack<List<Hotsearch>>() {
-					public List<Hotsearch> doInCache(String cahceName, Cache cache) {
-						return findByHQL("from Hotsearch where userName = ?  and sort = ?", userName, isortId);
-					}
-				});
+		return findByHQL("from Hotsearch where userName = ?  and sort = ?", userName, isortId);
 	}
 
 }

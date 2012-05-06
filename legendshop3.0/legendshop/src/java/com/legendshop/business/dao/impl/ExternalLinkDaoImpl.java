@@ -9,15 +9,12 @@ package com.legendshop.business.dao.impl;
 
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.common.CacheKeys;
 import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.ExternalLinkDao;
-import com.legendshop.core.cache.CacheCallBack;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.model.entity.ExternalLink;
 import com.legendshop.util.AppUtils;
@@ -42,23 +39,17 @@ public class ExternalLinkDaoImpl extends BaseDaoImpl implements ExternalLinkDao 
 	 * @see com.legendshop.business.dao.impl.ExternalLinkDao#getExternalLinkOrderbybs(java.lang.String)
 	 */
 	@Override
+	@Cacheable(value="ExternalLinkList",key="#shopName")
 	public List<ExternalLink> getExternalLink(final String shopName) {
 		log.debug("getExternalLink, shopName = {}", shopName);
 		if (shopName == null) {
 			return null;
 		}
-		return (List<ExternalLink>) getObjectFromCache(getKey(CacheKeys.EXTERNALLINKDAO_GETEXTERNALLINKORDERBYBS,
-				shopName), new CacheCallBack() {
-			@Override
-			public List<ExternalLink> doInCache(String cahceName, Cache cache) {
-				List list = findByHQL("from ExternalLink where userName = ? order by bs", shopName);
-				if (AppUtils.isBlank(list)) {
-					list = findByHQL("from ExternalLink where userName = ? order by bs", Constants.COMMON_USER);
-				}
-				return list;
-			}
-
-		});
+		List list = findByHQL("from ExternalLink where userName = ? order by bs", shopName);
+		if (AppUtils.isBlank(list)) {
+			list = findByHQL("from ExternalLink where userName = ? order by bs", Constants.COMMON_USER);
+		}
+		return list;
 	}
 
 }

@@ -12,16 +12,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.ehcache.Cache;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.common.CacheKeys;
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.dao.AdvertisementDao;
-import com.legendshop.core.cache.CacheCallBack;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.model.entity.Advertisement;
 import com.legendshop.util.AppUtils;
@@ -43,28 +40,21 @@ public class AdvertisementDaoImpl extends BaseDaoImpl implements AdvertisementDa
 	 * @see com.legendshop.business.dao.impl.AdvertisementDao#getAdvertisement(java.lang.String)
 	 */
 	@Override
+	@Cacheable(value="AdvertisementList",key="#shopName")
 	public Map<String, List<Advertisement>> getAdvertisement(final String shopName) {
 			log.debug("shopName = {}", shopName);
-		return (Map<String, List<Advertisement>>) getObjectFromCache(getKey(
-				CacheKeys.ADVERTISEMENTDAO_GETADVERTISEMENT, shopName),
-				new CacheCallBack<Map<String, List<Advertisement>>>() {
-					@Override
-					public Map<String, List<Advertisement>> doInCache(String cahceName, Cache cache) {
-						Map<String, List<Advertisement>> advertisementMap = new LinkedHashMap<String, List<Advertisement>>();
-						List<Advertisement> list = find(ConfigCode.getInstance().getCode("ad.getAdvertisement"),
-								shopName);
-						for (Advertisement advertisement : list) {
-							List<Advertisement> ads = advertisementMap.get(advertisement.getType());
-							if (ads == null) {
-								ads = new ArrayList<Advertisement>();
-							}
-							ads.add(advertisement);
-							advertisementMap.put(advertisement.getType(), ads);
-						}
-						return advertisementMap;
-					}
-
-				});
+			Map<String, List<Advertisement>> advertisementMap = new LinkedHashMap<String, List<Advertisement>>();
+			List<Advertisement> list = find(ConfigCode.getInstance().getCode("ad.getAdvertisement"),
+					shopName);
+			for (Advertisement advertisement : list) {
+				List<Advertisement> ads = advertisementMap.get(advertisement.getType());
+				if (ads == null) {
+					ads = new ArrayList<Advertisement>();
+				}
+				ads.add(advertisement);
+				advertisementMap.put(advertisement.getType(), ads);
+			}
+			return advertisementMap;
 	}
 
 	/* (non-Javadoc)

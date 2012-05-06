@@ -9,15 +9,12 @@ package com.legendshop.business.dao.impl;
 
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.common.CacheKeys;
 import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.PubDao;
-import com.legendshop.core.cache.CacheCallBack;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.model.entity.Pub;
@@ -43,28 +40,25 @@ public class PubDaoImpl extends BaseDaoImpl implements PubDao {
 	 * @see com.legendshop.business.dao.impl.PubDao#getPub(java.lang.String)
 	 */
 	@Override
+	@Cacheable(value="PubList",key="#shopName")
 	public List<Pub> getPub(final String shopName) {
 		log.debug("getPub, shopName = {}", shopName);
-		if (shopName == null)
+		if (shopName == null){
 			return null;
-		return (List<Pub>) getObjectFromCache(getKey(CacheKeys.PUBDAO_GETPUB, shopName),
-				new CacheCallBack<List<Pub>>() {
-					public List<Pub> doInCache(String cahceName, Cache cache) {
-						CriteriaQuery cq = new CriteriaQuery(Pub.class);
-						cq.eq("userName", shopName);
-						cq.addOrder("desc", "date");
-						cq.add();
-						List<Pub> list = findListByCriteria(cq, 0, 4);
-						if (AppUtils.isBlank(list)) {
-							cq = new CriteriaQuery(Pub.class);
-							cq.eq("userName", Constants.COMMON_USER);
-							cq.addOrder("desc", "date");
-							cq.add();
-							list = findListByCriteria(cq, 0, 4);
-						}
-						return list;
-					}
-				});
+		}
+		CriteriaQuery cq = new CriteriaQuery(Pub.class);
+		cq.eq("userName", shopName);
+		cq.addOrder("desc", "date");
+		cq.add();
+		List<Pub> list = findListByCriteria(cq, 0, 4);
+		if (AppUtils.isBlank(list)) {
+			cq = new CriteriaQuery(Pub.class);
+			cq.eq("userName", Constants.COMMON_USER);
+			cq.addOrder("desc", "date");
+			cq.add();
+			list = findListByCriteria(cq, 0, 4);
+		}
+		return list;
 	}
 
 }

@@ -90,9 +90,6 @@
 	</beans:bean>
 	
 	<beans:bean id="authService" class="com.legendshop.business.service.impl.AuthServiceImpl">
-	    <beans:property name="functionCache" ref="functionRoleCache" />
-        <beans:property name="roleCache" ref="roleCache" />
-        <beans:property name="authorityUserCache" ref="authorityUserCache" />
 		<beans:property name="jdbcTemplate" ref="jdbcTemplate" />
     </beans:bean>
 
@@ -114,34 +111,17 @@
         <beans:property name="baseDao" ref="baseDao"></beans:property>
         <beans:property name="threadPoolExecutor" ref="threadPoolExecutor"></beans:property>
     </beans:bean>
-    
+    <!-- 
    <beans:bean id="functionRoleCache" class="com.legendshop.core.security.cache.EhCacheBasedFunctionCache">
      <beans:property name="cache" ref="functionCacheBackend"></beans:property>
-  </beans:bean>
-    
-        <!-- 根据 role 查 function -->
-  <beans:bean id="functionCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-     <beans:property name="cacheManager" ref="cacheManager"> </beans:property>
-     <beans:property name="cacheName" value="functionRoleCache"></beans:property>
   </beans:bean>
   
    <beans:bean id="roleCache" class="com.legendshop.core.security.cache.EhCacheRoleByName">
      <beans:property name="cache" ref="roleCacheBackend"></beans:property>
   </beans:bean>
-   <!-- 根据rolename 查 role -->
-  <beans:bean id="roleCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-     <beans:property name="cacheManager" ref="cacheManager"></beans:property>
-     <beans:property name="cacheName" value="roleCache"></beans:property>
-  </beans:bean> 
   
    <beans:bean id="authorityUserCache" class="com.legendshop.core.security.cache.EhCacheBasedUserAuthorityCache">
      <beans:property name="cache" ref="authorityUserCacheBackend"></beans:property>
   </beans:bean>	
-  
-      <!-- 根据 user 查 role -->
-  <beans:bean id="authorityUserCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-     <beans:property name="cacheManager" ref="cacheManager"></beans:property>
-     <beans:property name="cacheName" value="authorityUserCache"></beans:property>
-  </beans:bean>
-  
+     -->
 </beans:beans>

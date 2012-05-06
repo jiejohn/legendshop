@@ -1,75 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:oxm="http://www.springframework.org/schema/oxm"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-                http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd" default-lazy-init="true">
-                
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
+
+	<cache:annotation-driven key-generator="stringKeyGenerator"/>
+	
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cache-manager-ref="ehcacheFactory"/>
+	
+	<!-- Ehcache library setup -->
+	<bean id="ehcacheFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:config-location="classpath:ehcache.xml" />
+	
+	<bean id="stringKeyGenerator" class="com.legendshop.core.cache.StringKeyGenerator" />
+<!-- 
 	<bean id="cacheManager"
 		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 		<property name="configLocation" value="classpath:ehcache-code.xml"></property>
 	</bean>
+	
 
 	<bean id="shopDetailCache"
 		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-		<property name="cacheManager" ref="cacheManager"></property>
+		<property name="cacheManager" ref="ehcacheFactory"></property>
 		<property name="cacheName" value="com.legendshop.model.entity.ShopDetail"></property>
 	</bean>
 
 	<bean id="sortCache"
 		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-		<property name="cacheManager" ref="cacheManager"></property>
+		<property name="cacheManager" ref="ehcacheFactory"></property>
 		<property name="cacheName" value="com.legendshop.model.entity.Sort"></property>
 	</bean>
 	
 	<bean id="nsortCache"
 		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-		<property name="cacheManager" ref="cacheManager"></property>
+		<property name="cacheManager" ref="ehcacheFactory"></property>
 		<property name="cacheName" value="com.legendshop.model.entity.NSort"></property>
 	</bean>
 	
 	<bean id="logoDaoCache"
 		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-		<property name="cacheManager" ref="cacheManager"></property>
+		<property name="cacheManager" ref="ehcacheFactory"></property>
 		<property name="cacheName" value="com.legendshop.model.entity.Logo"></property>
 	</bean>
 	
 	<bean id="externalLinkCache"
 		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-		<property name="cacheManager" ref="cacheManager"></property>
+		<property name="cacheManager" ref="ehcacheFactory"></property>
 		<property name="cacheName" value="com.legendshop.model.entity.ExternalLink"></property>
 	</bean>
 
 	<bean id="pubCache"
 		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-		<property name="cacheManager" ref="cacheManager"></property>
+		<property name="cacheManager" ref="ehcacheFactory"></property>
 		<property name="cacheName" value="com.legendshop.model.entity.Pub"></property>
 	</bean>
 	
 	<bean id="advertisementCache"
 		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-		<property name="cacheManager" ref="cacheManager"></property>
+		<property name="cacheManager" ref="ehcacheFactory"></property>
 		<property name="cacheName" value="com.legendshop.model.entity.Advertisement"></property>
 	</bean>	
 	
 	<bean id="businessDaoCache"
 		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-		<property name="cacheManager" ref="cacheManager"></property>
+		<property name="cacheManager" ref="ehcacheFactory"></property>
 		<property name="cacheName" value="com.legendshop.model.entity.BusinessDaoCache"></property>
 	</bean>	
 	
 	<bean id="newsCache"
 		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-		<property name="cacheManager" ref="cacheManager"></property>
+		<property name="cacheManager" ref="ehcacheFactory"></property>
 		<property name="cacheName" value="com.legendshop.model.entity.News"></property>
 	</bean>		
-	
-	
+	 -->
+  <!-- 根据 user 查 role
+  <bean id="authorityUserCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+     <property name="cacheManager" ref="ehcacheFactory"></property>
+     <property name="cacheName" value="authorityUserCache"></property>
+  </bean>
+   -->
+  <!-- 根据 role 查 function 
+  <bean id="functionCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+     <property name="cacheManager" ref="ehcacheFactory"> </property>
+     <property name="cacheName" value="functionRoleCache"></property>
+  </bean>
+  -->
+     <!-- 根据rolename 查 role
+  <bean id="roleCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+     <property name="cacheManager" ref="ehcacheFactory"></property>
+     <property name="cacheName" value="roleCache"></property>
+  </bean> 
+	 -->
 </beans>

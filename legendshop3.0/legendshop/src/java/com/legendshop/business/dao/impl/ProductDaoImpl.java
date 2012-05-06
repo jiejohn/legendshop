@@ -10,20 +10,21 @@ package com.legendshop.business.dao.impl;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
-import net.sf.ehcache.Cache;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.common.CacheKeys;
+import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.ProductDao;
-import com.legendshop.core.cache.CacheCallBack;
+import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ProductDetail;
 import com.legendshop.util.AppUtils;
@@ -43,7 +44,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	@Cacheable("sortCache")
+	@Cacheable("ProductList")
 	public List<Product> getCommendProd(final String shopName, final int total) {
 		log.debug("getCommendProd, shopName = {},total = {}", shopName, total);
 //		return (List<Product>) getObjectFromCache(getKey(CacheKeys.PRODUCTDAO_GETCOMMEND_PROD, shopName),
@@ -65,33 +66,22 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * @see com.legendshop.business.dao.impl.ProductDao#getReleationProd(java.lang.String, java.lang.Long, int)
 	 */
 	@Override
+	@Cacheable(value="Product")
 	public List<Product> getReleationProd(final String shopName, final Long prodId, final int total) {
-		return (List<Product>) getObjectFromCache(getKey(CacheKeys.PRODUCTDAO_GETRELEATION_PROD, shopName, prodId, total),
-				new CacheCallBack<List<Product>>() {
-					@Override
-					public List<Product> doInCache(String cahceName, Cache cache) {
-						Date date = new Date();
-						return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getRelationProd"), 0, total,
-								shopName, date, date, prodId);
-					}
-
-				});
+		Date date = new Date();
+		return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getRelationProd"), 0, total,
+				shopName, date, date, prodId);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.ProductDao#getNewestProd(java.lang.String, int)
 	 */
 	@Override
+	@Cacheable(value="ProductList")
 	public List<Product> getNewestProd(final String shopName, final int total) {
-		return (List<Product>) getObjectFromCache(getKey(CacheKeys.PRODUCTDAO_GETNEWEST_PROD, shopName),
-				new CacheCallBack<List<Product>>() {
-					@Override
-					public List<Product> doInCache(String cahceName, Cache cache) {
-						Date date = new Date();
-						return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getNewestProd"), 0, total, shopName,
-								date, date);
-					}
-				});
+		Date date = new Date();
+		return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getNewestProd"), 0, total, shopName,
+				date, date);
 
 	}
 
@@ -99,34 +89,52 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * @see com.legendshop.business.dao.impl.ProductDao#gethotsale(java.lang.String)
 	 */
 	@Override
+	@Cacheable(value="ProductList")
 	public List<Product> gethotsale(final String name) {
 		if (name == null) {
 			return null;
 		}
-		return (List<Product>) getObjectFromCache(getKey(CacheKeys.RPODUCTDAO_GETORDERhotsale, name), new CacheCallBack() {
-			@Override
-			public List<Product> doInCache(String cahceName, Cache cache) {
-				Date date = new Date();
-				return findByHQLLimit(ConfigCode.getInstance().getCode("biz.gethotsale"), 0, 6, name, date, date);
-			}
-
-		});
+		Date date = new Date();
+		return findByHQLLimit(ConfigCode.getInstance().getCode("biz.gethotsale"), 0, 6, name, date, date);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.ProductDao#getProdDetail(com.legendshop.core.dao.support.CriteriaQuery)
 	 */
 	@Override
-	public PageSupport getProdDetail(CriteriaQuery cq) {
-		return find(cq);
+	@Cacheable(value="ProductDetailList", condition="T(Integer).parseInt(#curPageNO) < 3")
+	public PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId,Long nsortId,Long subNsortId) {
+		// Qbc查找方式
+		CriteriaQuery cq = new CriteriaQuery(Product.class, curPageNO);
+		cq.setCurPage(curPageNO);
+		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
+		cq.addOrder("desc", "prodId");
+		cq.eq("sortId", sortId);
+		cq.eq("nsortId", nsortId);
+		cq.eq("subNsortId", subNsortId);
+		cq.add();
+		PageSupport ps = find(cq);
+		ps.setToolBar(locale, Constants.SIMPLE_PAGE_PROVIDER);
+		return ps;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.ProductDao#getProdDetail(com.legendshop.core.dao.support.HqlQuery)
 	 */
 	@Override
-	public PageSupport getProdDetail(HqlQuery hql) {
-		return find(hql);
+	@Cacheable(value="ProductDetailList",condition="T(Integer).parseInt(#curPageNO) < 3")
+	public PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId) {
+		// HQL查找方式
+		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class), curPageNO);
+		String QueryNsortCount = ConfigCode.getInstance().getCode("biz.getSortProdCount");
+		String QueryNsort = ConfigCode.getInstance().getCode("biz.getSortProd");
+		hql.setAllCountString(QueryNsortCount);
+		hql.setQueryString(QueryNsort);
+		Date date = new Date();
+		hql.setParam(new Object[] { sortId, date, date });
+		PageSupport ps = find(hql);
+		ps.setToolBar(locale, Constants.SIMPLE_PAGE_PROVIDER);
+		return ps;
 	}
 
 	/* (non-Javadoc)
@@ -150,6 +158,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * @see com.legendshop.business.dao.impl.ProductDao#getHotOn(java.lang.String)
 	 */
 	@Override
+	@Cacheable(value="ProductList")
 	public List<Product> getHotOn(String sortId) {
 		if (AppUtils.isBlank(sortId)) {
 			return Collections.EMPTY_LIST;
@@ -190,6 +199,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * @see com.legendshop.business.dao.impl.ProductDao#updateProduct(com.legendshop.model.entity.Product)
 	 */
 	@Override
+	@CacheEvict(value="Product", key="#origin.prodId")
 	public void  updateProduct(Product origin) {
 			update(origin);
 	}
@@ -206,6 +216,11 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	public List<ProductDetail> getProdDetail(Long[] prodId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public PageSupport getProdDetail(CriteriaQuery cq) {
+		return find(cq);
 	}
 
 }

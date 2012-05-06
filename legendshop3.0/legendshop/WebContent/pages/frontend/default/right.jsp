@@ -92,8 +92,8 @@
                                             cellpadding="0">
                                             <tr>
 						                    <c:choose>
-						                       <c:when test="${prodDetailList != null && fn:length(prodDetailList) > 0}">
-						                          <c:forEach items="${requestScope.prodDetailList}"
+						                       <c:when test="${list != null && fn:length(list) > 0}">
+						                          <c:forEach items="${requestScope.list}"
                                                     var="prodDetail" varStatus="status">
                                                     <td  align="center">
                                                     <table>

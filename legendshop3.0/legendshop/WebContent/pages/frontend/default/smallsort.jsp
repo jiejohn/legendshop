@@ -96,7 +96,7 @@
           <table width="100%" cellspacing="10"
 											cellpadding="0">
 											<tr>
-												<c:forEach items="${requestScope.prodDetailList}"
+												<c:forEach items="${requestScope.list}"
 													var="prodDetail" varStatus="status">
 													<c:choose>
 														<c:when
