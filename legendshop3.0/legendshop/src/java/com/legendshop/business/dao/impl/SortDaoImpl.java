@@ -7,6 +7,7 @@
  */
 package com.legendshop.business.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -170,6 +171,58 @@ public class SortDaoImpl extends BaseDaoImpl implements SortDao {
 	@CacheEvict(value="Sort", key="#sort.sortId")
 	public void deleteSort(Sort sort) {
 		delete(sort);
+	}
+
+	@Override
+	public List<Sort> getSort(final String shopName, final String sortType,final Integer headerMenu, final Integer navigationMenu, final boolean loadAll) {
+
+		log.debug("getSort, shopName = {}, loadAll = {}", shopName, loadAll);
+		return (List<Sort>) getObjectFromCache(getKey(CacheKeys.SORTDAO_GETSORT, shopName,sortType, loadAll),
+				new CacheCallBack<List<Sort>>() {
+					@Override
+					public List<Sort> doInCache(String cahceName, Cache cache) {
+						List<Object> paramList=new ArrayList<Object>();
+						String hql="from Sort where userName = ? ";
+						paramList.add(shopName);
+						
+						//,sortType,headerMenu,navigationMenu
+						if(sortType!=null){
+							hql+=" and sortType = ? ";
+							paramList.add(sortType);
+						}
+						if(headerMenu!=null){
+							hql+=" and headerMenu = ? ";
+							paramList.add(headerMenu);
+						}
+						if(navigationMenu!=null){
+							hql+=" and navigationMenu = ? ";
+							paramList.add(navigationMenu);
+						}
+						hql+=" order by seq ";
+						List<Sort> list = findByHQL(hql, paramList.toArray());
+						if (loadAll) {
+							// 找出所有的Nsort
+							List<Nsort> nsortList = findByHQL(
+									"select n from Nsort n, Sort s where n.sortId = s.sortId and s.userName = ? and s.sortType = ?",
+									shopName,sortType);
+							for (int i = 0; i < nsortList.size(); i++) {
+								Nsort n1 = nsortList.get(i);
+								for (int j = i; j < nsortList.size(); j++) {
+									Nsort n2 = nsortList.get(j);
+									n1.addSubSort(n2);
+									n2.addSubSort(n1);
+								}
+							}
+
+							for (Sort sort : list) {
+								for (Nsort nsort : nsortList) {
+									sort.addSubSort(nsort);
+								}
+							}
+						}
+						return list;
+					}
+				});
 	}
 
 }

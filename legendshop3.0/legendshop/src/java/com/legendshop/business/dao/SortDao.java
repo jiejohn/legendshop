@@ -134,5 +134,7 @@ public interface SortDao extends BaseDao{
 	 * @return the sort
 	 */
 	public abstract List<Sort> getSort(String name, String sortType, boolean loadAll);
+	
+	public abstract List<Sort> getSort(String name, String sortType,Integer headerMenu,Integer navigationMenu, boolean loadAll);
 
 }

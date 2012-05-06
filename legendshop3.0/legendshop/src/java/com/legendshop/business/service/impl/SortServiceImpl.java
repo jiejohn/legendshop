@@ -127,6 +127,11 @@ public class SortServiceImpl implements SortService  {
 		return sortDao.getSort(name,sortType, loadAll);
 	}
 
+	@Override
+	public List<Sort> getSort(String name, String sortType, Integer headerMenu, Integer navigationMenu, boolean loadAll) {		
+		return sortDao.getSort(name, sortType, headerMenu, navigationMenu, loadAll);
+	}
+
 
 }
 
