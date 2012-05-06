@@ -16,5 +16,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/core_lib"/>
+	<classpathentry kind="lib" path="/legendshop_lib/lib/spymemcached-2.8.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
