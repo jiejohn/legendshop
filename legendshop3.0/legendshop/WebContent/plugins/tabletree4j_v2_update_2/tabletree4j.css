@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+/**
+ * TABLETREE4J VESION 2 CSS
+ * @author LK
+ * @email lannerk@qq.com
+ * @date 2010-5-5
+ * @version 2.0
+ */
+
+.tabletree4j-menu {
+    border: none;
+    border-collapse: collapse;
+	width:100%;
+}
+
+.tabletree4j-menu td {
+    padding: 0;
+}
+
+.tabletree4j-gird{
+	border:1px solid #c8c8c8;
+	border-collapse: collapse;
+	width:100%;
+}
+.tabletree4j-gird td{
+	border:1px solid #c8c8c8;
+	padding:0;
+}
