@@ -7,13 +7,14 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * CashFlow entity. @author MyEclipse Persistence Tools
  */
 
-public class CashFlow implements java.io.Serializable {
+public class CashFlow implements BaseEntity {
 
 	// Fields
 
@@ -235,6 +236,10 @@ public class CashFlow implements java.io.Serializable {
 	 */
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Serializable getId() {
+		return flowId;
 	}
 
 }

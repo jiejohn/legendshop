@@ -7,13 +7,14 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 系统事件
  */
 
-public class Event implements java.io.Serializable {
+public class Event implements BaseEntity {
 
 	// Fields
 
@@ -169,6 +170,10 @@ public class Event implements java.io.Serializable {
 	 */
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Serializable getId() {
+		return eventId;
 	}
 
 }

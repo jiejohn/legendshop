@@ -17,7 +17,7 @@ import java.util.List;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class Role  implements java.io.Serializable {
+public class Role  implements BaseEntity {
 	 
  	/** The Constant serialVersionUID. */
  	private static final long serialVersionUID = 3162332789634848522L;

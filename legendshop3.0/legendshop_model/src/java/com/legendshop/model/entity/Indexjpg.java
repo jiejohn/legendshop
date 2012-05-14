@@ -10,7 +10,7 @@ package com.legendshop.model.entity;
 /**
  * 首页轮换图片.
  */
-public class Indexjpg extends UploadFile implements java.io.Serializable {
+public class Indexjpg extends UploadFile implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1888032358468727806L;

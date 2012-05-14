@@ -18,7 +18,7 @@ import java.util.List;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class UserEntity  implements java.io.Serializable {
+public class UserEntity  implements BaseEntity {
 	 
  	/** The Constant serialVersionUID. */
  	private static final long serialVersionUID = -8401714272377570649L;

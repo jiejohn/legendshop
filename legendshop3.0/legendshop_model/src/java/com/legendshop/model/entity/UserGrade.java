@@ -7,10 +7,12 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
+
 /**
  * 用户等级.
  */
-public class UserGrade implements java.io.Serializable {
+public class UserGrade implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2994159243674997206L;
@@ -164,6 +166,10 @@ public class UserGrade implements java.io.Serializable {
 	 */
 	public void setMaxProd(Integer maxProd) {
 		this.maxProd = maxProd;
+	}
+
+	public Serializable getId() {
+		return gradeId;
 	}
 
 }

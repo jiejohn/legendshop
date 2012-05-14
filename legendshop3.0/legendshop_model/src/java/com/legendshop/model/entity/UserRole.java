@@ -14,7 +14,7 @@ package com.legendshop.model.entity;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class UserRole implements java.io.Serializable {
+public class UserRole implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 5680621301003712147L;

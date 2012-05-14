@@ -7,11 +7,13 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
+
 
 /**
  * 产品品牌.
  */
-public class Brand extends UploadFile implements java.io.Serializable {
+public class Brand extends UploadFile implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3941969699979401870L;
@@ -152,6 +154,10 @@ public class Brand extends UploadFile implements java.io.Serializable {
 	 */
 	public void setBrandPic(String brandPic) {
 		this.brandPic = brandPic;
+	}
+
+	public Serializable getId() {
+		return brandId;
 	}
 
 }

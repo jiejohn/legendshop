@@ -16,7 +16,7 @@ import java.util.Date;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class Pub implements java.io.Serializable {
+public class Pub implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8540219784952126420L;

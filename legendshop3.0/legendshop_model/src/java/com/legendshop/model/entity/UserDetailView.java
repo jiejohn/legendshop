@@ -7,13 +7,14 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
 /**
  * The Class UserDetailView.
  */
-public class UserDetailView implements java.io.Serializable {
+public class UserDetailView implements BaseEntity {
 
 	// Fields
 
@@ -633,6 +634,10 @@ public class UserDetailView implements java.io.Serializable {
 	 */
 	public void setScore(Long score) {
 		this.score = score;
+	}
+
+	public Serializable getId() {
+		return userId;
 	}
 
 }

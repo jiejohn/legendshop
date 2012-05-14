@@ -6,6 +6,9 @@
  * 
  */
 package com.legendshop.model.entity;
+
+import java.io.Serializable;
+
 /**
  * LegendShop 版权所有 2009-2011,并保留所有权利。
  * ----------------------------------------------------------------------------
@@ -14,7 +17,7 @@ package com.legendshop.model.entity;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class PayType implements java.io.Serializable {
+public class PayType implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 173116392190218430L;
@@ -265,6 +268,10 @@ public class PayType implements java.io.Serializable {
 	 */
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+	public Serializable getId() {
+		return payId;
 	}
 
 }

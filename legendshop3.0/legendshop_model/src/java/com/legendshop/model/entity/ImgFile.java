@@ -7,12 +7,13 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 产品图片.
  */
-public class ImgFile extends UploadFile implements java.io.Serializable {
+public class ImgFile extends UploadFile implements BaseEntity{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7521569831212302925L;
@@ -220,6 +221,10 @@ public class ImgFile extends UploadFile implements java.io.Serializable {
 	 */
 	public void setStatus(Short status) {
 		this.status = status;
+	}
+
+	public Serializable getId() {
+		return fileId;
 	}
 
 }

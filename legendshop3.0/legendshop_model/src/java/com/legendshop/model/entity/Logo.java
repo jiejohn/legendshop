@@ -16,7 +16,7 @@ package com.legendshop.model.entity;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class Logo extends UploadFile implements java.io.Serializable {
+public class Logo extends UploadFile implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8146764684614656689L;

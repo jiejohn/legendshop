@@ -8,12 +8,13 @@
 
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 相关产品.
  */
-public class RelProduct implements java.io.Serializable {
+public class RelProduct implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8175142186764722214L;
@@ -148,6 +149,10 @@ public class RelProduct implements java.io.Serializable {
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public Serializable getId() {
+		return relId;
 	}
 
 

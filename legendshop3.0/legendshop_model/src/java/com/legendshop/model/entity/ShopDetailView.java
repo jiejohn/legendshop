@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class ShopDetailView implements Serializable, Cloneable {
+public class ShopDetailView implements BaseEntity, Cloneable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8763595849099410286L;
@@ -1256,6 +1256,10 @@ public class ShopDetailView implements Serializable, Cloneable {
 	 */
 	public void setEndType(String endType) {
 		this.endType = endType;
+	}
+
+	public Serializable getId() {
+		return shopId;
 	}
 
 }

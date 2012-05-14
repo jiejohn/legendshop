@@ -7,6 +7,7 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ import java.util.Date;
  * 官方网站：http://www.legendesign.net
  */
 
-public class SubHistory implements java.io.Serializable {
+public class SubHistory implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8432484297847924412L;
@@ -710,6 +711,10 @@ public class SubHistory implements java.io.Serializable {
 
 	public void setDeliveryFlowId(String deliveryFlowId) {
 		this.deliveryFlowId = deliveryFlowId;
+	}
+
+	public Serializable getId() {
+		return subHistId;
 	}
 
 }

@@ -7,13 +7,14 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * DeliveryCorp entity. @author MyEclipse Persistence Tools
  */
 
-public class DeliveryCorp implements java.io.Serializable {
+public class DeliveryCorp implements BaseEntity {
 
 
 	/** The dvy id. */
@@ -168,6 +169,10 @@ public class DeliveryCorp implements java.io.Serializable {
 	 */
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public Serializable getId() {
+		return dvyId;
 	}
 
 

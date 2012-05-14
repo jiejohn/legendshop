@@ -7,6 +7,7 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ import java.util.Set;
  * 
  * 官方网站：http://www.legendesign.net
  */
-public class UserDetail implements java.io.Serializable {
+public class UserDetail implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -3648830158220060652L;
@@ -797,6 +798,10 @@ public class UserDetail implements java.io.Serializable {
 
 	public void setTotalConsume(Double totalConsume) {
 		this.totalConsume = totalConsume;
+	}
+
+	public Serializable getId() {
+		return userId;
 	}
 
 }

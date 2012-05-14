@@ -7,6 +7,7 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class ShopDetail extends UploadFile implements java.io.Serializable {
+public class ShopDetail extends UploadFile implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3924728437878080050L;
@@ -1175,6 +1176,10 @@ public class ShopDetail extends UploadFile implements java.io.Serializable {
 	 */
 	public void setEndType(String endType) {
 		this.endType = endType;
+	}
+
+	public Serializable getId() {
+		return shopId;
 	}
 	
 

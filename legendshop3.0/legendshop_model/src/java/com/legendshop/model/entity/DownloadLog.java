@@ -7,6 +7,7 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 /**
  * LegendShop 版权所有 2009-2011,并保留所有权利。
@@ -16,7 +17,7 @@ import java.util.Date;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class DownloadLog implements java.io.Serializable {
+public class DownloadLog implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 5134672215418217047L;
@@ -201,6 +202,10 @@ public class DownloadLog implements java.io.Serializable {
 	 */
 	public void setArea(String area) {
 		this.area = area;
+	}
+
+	public Serializable getId() {
+		return dlId;
 	}
 
 }

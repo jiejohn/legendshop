@@ -7,6 +7,7 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -14,7 +15,7 @@ import java.util.Date;
  * The Class GroupProduct.
  * 团购产品
  */
-public class GroupProduct{
+public class GroupProduct implements BaseEntity{
 	
 	private Product product;
 	
@@ -355,5 +356,9 @@ public class GroupProduct{
 
 	public void setIsPost(Boolean isPost) {
 		this.isPost = isPost;
+	}
+
+	public Serializable getId() {
+		return prodId;
 	}
 }

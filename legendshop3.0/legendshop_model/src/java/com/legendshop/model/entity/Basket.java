@@ -7,12 +7,13 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 购物车对象.
  */
-public class Basket implements java.io.Serializable {
+public class Basket implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2428049829073308967L;
@@ -374,6 +375,10 @@ public class Basket implements java.io.Serializable {
 	 */
 	public void setLastUpdateDate(Date lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
+	}
+
+	public Serializable getId() {
+		return basketId;
 	}
 
 }

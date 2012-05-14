@@ -7,6 +7,7 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -17,7 +18,7 @@ import java.util.Date;
  * ------------------
  * ------------------------------------------------------------------.
  */
-public class Score implements java.io.Serializable {
+public class Score implements BaseEntity {
 
 	/** The score id. */
 	private Long scoreId;
@@ -157,6 +158,10 @@ public class Score implements java.io.Serializable {
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public Serializable getId() {
+		return scoreId;
 	}
 
 }

@@ -11,7 +11,7 @@ package com.legendshop.model.entity;
 /**
  * 广告对象.
  */
-public class Advertisement extends UploadFile implements java.io.Serializable {
+public class Advertisement extends UploadFile implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3118175679673767409L;

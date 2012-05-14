@@ -16,7 +16,7 @@ package com.legendshop.model.entity;
  * ----------------------------------------------------------------------------
  */
 
-public class NsortBrand implements java.io.Serializable {
+public class NsortBrand implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -213312180753350928L;

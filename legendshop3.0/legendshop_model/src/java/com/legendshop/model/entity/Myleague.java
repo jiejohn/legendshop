@@ -17,7 +17,7 @@ import java.util.Date;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class Myleague implements java.io.Serializable {
+public class Myleague implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7191239531193869658L;

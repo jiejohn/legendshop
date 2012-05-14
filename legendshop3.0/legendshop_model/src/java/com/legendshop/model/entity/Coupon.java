@@ -7,13 +7,14 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Coupon entity. @author MyEclipse Persistence Tools
  */
 
-public class Coupon implements java.io.Serializable {
+public class Coupon implements BaseEntity {
 
 	// Fields
 
@@ -441,6 +442,10 @@ public class Coupon implements java.io.Serializable {
 	 */
 	public void setBuyId(Integer buyId) {
 		this.buyId = buyId;
+	}
+
+	public Serializable getId() {
+		return couponId;
 	}
 
 }

@@ -17,7 +17,7 @@ import java.util.Date;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class Hotsearch implements java.io.Serializable {
+public class Hotsearch implements BaseEntity {
 
 	// Fields
 

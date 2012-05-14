@@ -6,12 +6,13 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 产品对象.
  */
-public class Product extends UploadFile implements java.io.Serializable {
+public class Product extends UploadFile implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7571396124663475715L;
@@ -890,6 +891,11 @@ public class Product extends UploadFile implements java.io.Serializable {
 	 */
 	public void setActualStocks(Integer actualStocks) {
 		this.actualStocks = actualStocks;
+	}
+
+
+	public Serializable getId() {
+		return prodId;
 	}
 
 }

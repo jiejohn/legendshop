@@ -7,6 +7,7 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Partner entity. @author MyEclipse Persistence Tools
  */
 
-public class Partner implements java.io.Serializable {
+public class Partner implements BaseEntity {
 
 	// Fields
 
@@ -661,6 +662,10 @@ public class Partner implements java.io.Serializable {
 	 */
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Serializable getId() {
+		return partnerId;
 	}
 
 

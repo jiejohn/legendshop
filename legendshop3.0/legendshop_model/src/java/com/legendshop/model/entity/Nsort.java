@@ -7,6 +7,7 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -20,7 +21,7 @@ import java.util.TreeSet;
  * ----------------------------------------------------------------------------
  */
 
-public class Nsort implements java.io.Serializable {
+public class Nsort implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2161524693470603026L;
@@ -248,6 +249,10 @@ public class Nsort implements java.io.Serializable {
 
 	public void setSortDeputy(Integer sortDeputy) {
 		this.sortDeputy = sortDeputy;
+	}
+
+	public Serializable getId() {
+		return nsortId;
 	}
 
 }

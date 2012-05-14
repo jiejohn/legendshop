@@ -10,7 +10,7 @@ package com.legendshop.model.entity;
 /**
  * 产品动态属性.
  */
-public class DynamicTemp implements java.io.Serializable {
+public class DynamicTemp implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8083024182117947985L;

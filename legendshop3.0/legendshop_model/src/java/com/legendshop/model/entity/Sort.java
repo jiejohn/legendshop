@@ -7,6 +7,7 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -14,7 +15,7 @@ import java.util.TreeSet;
 /**
  * 产品分类，第一级分类.
  */
-public class Sort extends UploadFile implements java.io.Serializable {
+public class Sort extends UploadFile implements BaseEntity {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6590849925688867352L;
@@ -284,6 +285,10 @@ public class Sort extends UploadFile implements java.io.Serializable {
 
 	public void setNavigationMenu(Integer navigationMenu) {
 		this.navigationMenu = navigationMenu;
+	}
+
+	public Serializable getId() {
+		return sortId;
 	}
 	
 

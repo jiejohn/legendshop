@@ -7,13 +7,14 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 用户访问历史对象.
  */
 
-public class VisitLog implements java.io.Serializable {
+public class VisitLog implements BaseEntity{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6138702495183168329L;
@@ -356,6 +357,10 @@ public class VisitLog implements java.io.Serializable {
 	 */
 	public void setVisitNum(Integer visitNum) {
 		this.visitNum = visitNum;
+	}
+
+	public Serializable getId() {
+		return visitId;
 	}
 
 }

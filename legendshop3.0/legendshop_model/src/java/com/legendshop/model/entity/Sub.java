@@ -7,13 +7,14 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * 订单对象.
  */
-public class Sub implements java.io.Serializable {
+public class Sub implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4030702631697447802L;
@@ -686,6 +687,10 @@ public class Sub implements java.io.Serializable {
 	 */
 	public void setDeliveryFlowId(String deliveryFlowId) {
 		this.deliveryFlowId = deliveryFlowId;
+	}
+
+	public Serializable getId() {
+		return subId;
 	}
 
 }

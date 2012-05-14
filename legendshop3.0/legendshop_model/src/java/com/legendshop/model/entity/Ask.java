@@ -7,13 +7,14 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
 /**
  * The Class Ask.
  */
-public class Ask implements java.io.Serializable {
+public class Ask implements BaseEntity{
 
 
 	/** The ask id. */
@@ -242,6 +243,10 @@ public class Ask implements java.io.Serializable {
 	 */
 	public void setReplyTime(Date replyTime) {
 		this.replyTime = replyTime;
+	}
+
+	public Serializable getId() {
+		return askId;
 	}
 
 

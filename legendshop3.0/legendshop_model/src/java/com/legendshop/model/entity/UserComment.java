@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 站内信对象.
  */
-public class UserComment implements java.io.Serializable {
+public class UserComment implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6496927494248199158L;

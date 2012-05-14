@@ -7,6 +7,7 @@
  */
 package com.legendshop.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ import java.util.Date;
  * ----------------------------------------------------------------------------
  */
 
-public class News implements java.io.Serializable {
+public class News implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 5866824730655175491L;
@@ -419,6 +420,10 @@ public class News implements java.io.Serializable {
 	 */
 	public void setNewsBrief(String newsBrief) {
 		this.newsBrief = newsBrief;
+	}
+
+	public Serializable getId() {
+		return newsId;
 	}
 
 }
