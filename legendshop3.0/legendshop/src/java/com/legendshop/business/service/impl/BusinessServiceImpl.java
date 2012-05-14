@@ -684,7 +684,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		request.setAttribute("subNsortList", nsortDao.getOthorSubNsort(nsortId, nsortList));
 		if (nsort != null) {
 			request.setAttribute("CurrentNsortId", nsort.getNsortId());
-		}		
+		}
 		PageSupport ps = productDao.getProdDetail(localeResolver.resolveLocale(request), curPageNO,  sortId, nsortId, subNsortId);
 		ps.savePage(request);
 		

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
+import com.legendshop.business.cache.SortUpdate;
 import com.legendshop.business.dao.SortDao;
 import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
@@ -154,6 +155,7 @@ public class SortDaoImpl extends BaseDaoImpl implements SortDao {
 	 * .entity.Sort)
 	 */
 	@Override
+	@SortUpdate
 	public void updateSort(Sort sort) {
 		update(sort);
 	}

@@ -14,9 +14,9 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
+import com.legendshop.business.cache.ProductUpdate;
 import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.core.constant.ParameterEnum;
@@ -44,7 +44,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	@Cacheable("ProductList")
+	@Cacheable(value="ProductList")
 	public List<Product> getCommendProd(final String shopName, final int total) {
 		log.debug("getCommendProd, shopName = {},total = {}", shopName, total);
 //		return (List<Product>) getObjectFromCache(getKey(CacheKeys.PRODUCTDAO_GETCOMMEND_PROD, shopName),
@@ -66,7 +66,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * @see com.legendshop.business.dao.impl.ProductDao#getReleationProd(java.lang.String, java.lang.Long, int)
 	 */
 	@Override
-	@Cacheable(value="Product")
+	@Cacheable(value="ProductList")
 	public List<Product> getReleationProd(final String shopName, final Long prodId, final int total) {
 		Date date = new Date();
 		return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getRelationProd"), 0, total,
@@ -102,7 +102,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * @see com.legendshop.business.dao.impl.ProductDao#getProdDetail(com.legendshop.core.dao.support.CriteriaQuery)
 	 */
 	@Override
-	@Cacheable(value="ProductDetailList", condition="T(Integer).parseInt(#curPageNO) < 3")
+	@Cacheable(value="ProductList", condition="T(Integer).parseInt(#curPageNO) < 3")
 	public PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId,Long nsortId,Long subNsortId) {
 		// Qbc查找方式
 		CriteriaQuery cq = new CriteriaQuery(Product.class, curPageNO);
@@ -122,7 +122,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * @see com.legendshop.business.dao.impl.ProductDao#getProdDetail(com.legendshop.core.dao.support.HqlQuery)
 	 */
 	@Override
-	@Cacheable(value="ProductDetailList",condition="T(Integer).parseInt(#curPageNO) < 3")
+	@Cacheable(value="ProductList",condition="T(Integer).parseInt(#curPageNO) < 3")
 	public PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId) {
 		// HQL查找方式
 		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class), curPageNO);
@@ -141,6 +141,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * @see com.legendshop.business.dao.impl.ProductDao#getProdDetail(java.lang.Long)
 	 */
 	@Override
+	@Cacheable(value="ProductDetail", key="#prodId")
 	public ProductDetail getProdDetail(final Long prodId) {
 		return get(ProductDetail.class, prodId);
 	}
@@ -199,9 +200,9 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * @see com.legendshop.business.dao.impl.ProductDao#updateProduct(com.legendshop.model.entity.Product)
 	 */
 	@Override
-	@CacheEvict(value="Product", key="#origin.prodId")
-	public void  updateProduct(Product origin) {
-			update(origin);
+	@ProductUpdate
+	public void updateProduct(Product product) {
+			update(product);
 	}
 
 	/* (non-Javadoc)

@@ -11,12 +11,11 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.context.ContextLoader;
 
 import com.legendshop.core.StartupService;
 import com.legendshop.core.plugins.Plugin;
+import com.legendshop.core.plugins.PluginManager;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -34,12 +33,11 @@ import com.legendshop.util.AppUtils;
  */
 public class StartupServiceImpl implements StartupService {
 
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(StartupServiceImpl.class);
-	
+	/** The plugin manager. */
+	private PluginManager pluginManager;
+
+	/** The is inited. */
 	private boolean isInited = false;
-
-
 
 	/**
 	 * 初始化,注意顺序不能调转.
@@ -49,20 +47,28 @@ public class StartupServiceImpl implements StartupService {
 	 */
 	@Override
 	public synchronized void startup(ServletContext servletContext) {
-		//init all plugins
-		if(!isInited){
-			Map<String,Plugin> beans = ContextLoader.getCurrentWebApplicationContext().getBeansOfType(Plugin.class);  
-			if(AppUtils.isNotBlank(beans)){
+		// init all plugins
+		if (!isInited) {
+			Map<String, Plugin> beans = ContextLoader.getCurrentWebApplicationContext().getBeansOfType(Plugin.class);
+			if (AppUtils.isNotBlank(beans)) {
 				for (Plugin plugin : beans.values()) {
-					log.info("start to init plugins {}, version {}",plugin.getPluginConfig().getPulginId(),plugin.getPluginConfig().getPulginVersion());
-					plugin.bind(servletContext);
+					pluginManager.registerPlugins(plugin);
 				}
 			}
+			pluginManager.startPlugins(servletContext);
 			isInited = true;
 		}
 
+	}
 
-		
+	/**
+	 * Sets the plugin manager.
+	 * 
+	 * @param pluginManager
+	 *            the new plugin manager
+	 */
+	public void setPluginManager(PluginManager pluginManager) {
+		this.pluginManager = pluginManager;
 	}
 
 }

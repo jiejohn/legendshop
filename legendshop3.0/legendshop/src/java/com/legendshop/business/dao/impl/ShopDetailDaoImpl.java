@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 
+import com.legendshop.business.cache.ShopDetailUpdate;
 import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.exception.EntityCodes;
@@ -80,7 +81,7 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#getShopDetailView(java.lang.String)
 	 */
 	@Override
-	@Cacheable(value="ShopDetailList",key="#storeName")
+	@Cacheable(value="ShopDetailView",key="#storeName")
 	public ShopDetailView getShopDetailView(final String storeName) {
 		if (AppUtils.isBlank(storeName)) {
 			return null;
@@ -247,6 +248,7 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#updateShopDetail(com.legendshop.model.entity.ShopDetail)
 	 */
 	@Override
+	@ShopDetailUpdate
 	public void updateShopDetail(ShopDetail shopdetail) {
 		update(shopdetail);
 	}

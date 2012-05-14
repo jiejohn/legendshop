@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.cache.annotation.CacheEvict;
 
 import com.legendshop.business.dao.AdvertisementDao;
 import com.legendshop.business.service.AdvertisementService;
@@ -75,6 +76,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 	 * @see com.legendshop.business.service.AdvertisementService#update(com.legendshop.model.entity.Advertisement)
 	 */
 	@Override
+	@CacheEvict(value = "Advertisement", key="#advertisement.id")
 	public void update(Advertisement advertisement) {
 		advertisementDao.update(advertisement);
 	}
