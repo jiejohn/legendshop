@@ -7,7 +7,9 @@
 
 	<cache:annotation-driven key-generator="stringKeyGenerator"/>
 	
-	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cache-manager-ref="ehcacheFactory"/>
+	<bean id="cacheManager" class="com.legendshop.business.cache.EhCacheCacheManager" 
+		p:cache-manager-ref="ehcacheFactory" 
+		p:supportQueryCache="true"/>
 	
 	<!-- Ehcache library setup -->
 	<bean id="ehcacheFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:config-location="classpath:ehcache.xml" />

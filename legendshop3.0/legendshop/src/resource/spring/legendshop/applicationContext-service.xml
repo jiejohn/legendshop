@@ -262,7 +262,10 @@
     </bean>  
     
     <bean id="startupService" class="com.legendshop.business.service.impl.StartupServiceImpl">
+    	<property name="pluginManager" ref="pluginManager" />
     </bean>  
+    
+    <bean id="pluginManager" class="com.legendshop.core.plugins.PluginManagerImpl" />
     
     <bean id="propertiesUpdater" class="com.legendshop.business.helper.PropertiesUpdaterImpl">
         <property name="parameterList">
