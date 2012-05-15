@@ -78,5 +78,8 @@ public interface NsortDao extends BaseDao{
 	 * @return the list
 	 */
 	public abstract List<Nsort> getNsortBySortId(final Long sortId);
+	
+	public abstract List<Nsort> getNavigationNsort(String userName);
+	
 
 }

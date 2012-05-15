@@ -1,16 +1,55 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@include file='/pages/common/taglib.jsp'%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>团购</title>
 <link type="text/css" href="${pageContext.request.contextPath}/css/legend.css" rel="stylesheet"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/jquery1.6.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/menu.js"></script>
+<script type="text/javascript">
+function lxfEndtime(){
+    $(".lxftime").each(function() {
+        var lxfday = $(this).attr("lxfday"); //用来判断是否显示天数的变量
+        
+        var endtime = new Date($(this).attr("endtime")).getTime(); //取结束日期(毫秒值)
+        var nowtime = new Date().getTime();        //今天的日期(毫秒值)
+        var youtime = endtime - nowtime; //还有多久(毫秒值)
+        var seconds = youtime / 1000;
+        var minutes = Math.floor(seconds / 60);
+        var hours = Math.floor(minutes / 60);
+        var days = Math.floor(hours / 24);
+        var CDay = days;
+        var CHour = hours % 24;
+        var CMinute = minutes % 60;
+        var CSecond = Math.floor(seconds % 60); //"%"是取余运算，可以理解为60进一后取余数，然后只要余数。
+        if (endtime <= nowtime) {
+            $(this).html("<strong>已过期</strong>");//如果结束日期小于当前日期就提示过期啦
+        } else {
+            if ($(this).attr("lxfday") == "no") {
+                $(this).html("<span>剩余</span><strong>" + CHour + "</strong>时<strong>" + CMinute + "</strong>分<strong>" + CSecond + "</strong>秒");          //输出没有天数的数据
+            }
+            else
+            {
+                $(this).html("<span>剩余</span><strong>" + days + "</strong>天<strong>" + CHour + "</strong>时<strong>" + CMinute + "</strong>分<strong>" + CSecond + "</strong>秒");          //输出有天数的数据
+            }
+        }
+    });
+ setTimeout("lxfEndtime()",1000);
+};
+$(function(){
+    lxfEndtime();
+ });
+ 
+ </script>
 </head>
 
 <body>
-<%@ include file="top.jsp" %>
 
-
+<jsp:include page="/common/top${applicationScope.WEB_SUFFIX}">
+	<jsp:param name="sortId" value="-1" />
+</jsp:include>
 <!----地址---->
  <div class="w addr">
    <span><a href="#">首页</a></span>&gt;<span>团购</span> 
@@ -21,98 +60,9 @@
 <!----两栏---->
  <div class="w"> 
     <!----右边---->
-    <div class="t_right">
-      <div class="sidebox">
-        <div class="boxtit">
-           <span><a href="#">更多 &gt;&gt;</a></span><b>客户服务</b>
-         </div>
-         <div class="phone">
-           <p class="pimg"><img src="${pageContext.request.contextPath}/img/group/phone.png" width="75" height="56" /></p>
-           <div class="pword">
-             <p class="phonenumber">400-100-1234</p>
-             <p class="phonetime">周一至周日 9:00-20:00</p>
-           </div>
-           <div class="clear"></div>
-        </div>
-         <div class="word">
-           <p><span><img src="${pageContext.request.contextPath}/img/group/dot.gif" width="7" height="7" /></span>
-           <span>10天无条件付款+先行赔付</span></p>
-           <p><span><img src="${pageContext.request.contextPath}/img/group/dot.gif" width="7" height="7" /></span>
-           <span>10天无条件付款+先行赔付</span></p>
-         </div>
-         <div class="clear"></div>
-      </div>
-      
-      <div class="sidebox mar12">
-        <div class="boxtit">
-           <span><a href="${pageContext.request.contextPath}/group/question${applicationScope.WEB_SUFFIX}">更多 &gt;&gt;</a></span><b>常见问题</b>
-         </div>
-         <ul class="lista listimg1">
-            <li><a href="#">如何付款，安全么？</a> </li>
-            <li><a href="#">如果参加团购人数不足，怎么办？</a> </li>
-            <li><a href="#">今天的团购看起来不错，怎么购买？</a> </li> 
-            <li><a href="#">如何付款，安全么？</a> </li> 
-            <li><a href="#">如果参加团购人数不足，怎么办？</a> </li>
-            <li><a href="#">今天的团购看起来不错，怎么购买？</a> </li>  
-            <li><a href="#">如果参加团购人数不足，怎么办？</a> </li>
-         </ul>         
-      </div>
-      
-      <div class="sidebox mar12" style="border:1px solid #fff;">
-         <div class="boxtit">
-           <span><a href="#">更多 &gt;&gt;</a></span><b>往期团购</b>
-         </div>
-         
-        <div class="t_boxa">
-           <p>2012年3月3日</p>
-           <p><a href="#">仅售55元！价值180元的华影星美双人观影套餐（含3D）</a></p>
-           <div class="t_imga">
-             <a href="#"><img src="${pageContext.request.contextPath}/img/group/wq_timg.jpg" width="330" height="170" /></a>
-             <div class="on"></div>
-           </div>
-           <div class="numboxa">
-              <div class="totala"><span>1789</span>人已购买</div>
-              <div class="partnuma">原价<br /><span>¥298</span></div>
-              <div class="partnuma">折扣<br /><span>2.32</span></div>
-              <div class="partnuma">节省<br /><span>¥229</span></div>
-           </div>
-           <div class="clear"></div>
-         </div>
-         
-         <div class="t_boxa">
-           <p>2012年3月3日</p>
-           <p><a href="#">仅售55元！价值180元的华影星美双人观影套餐（含3D）</a></p>
-           <div class="t_imga">
-             <a href="#"><img src="${pageContext.request.contextPath}/img/group/wq_timg.jpg" width="330" height="170" /></a>
-             <div class="out"></div>
-           </div>
-           <div class="numboxa">
-              <div class="totala"><span>1789</span>人已购买</div>
-              <div class="partnuma">原价<br /><span>¥298</span></div>
-              <div class="partnuma">折扣<br /><span>2.32</span></div>
-              <div class="partnuma">节省<br /><span>¥229</span></div>
-           </div>
-           <div class="clear"></div>
-         </div> 
-         
-         <div class="t_boxa">
-           <p>2012年3月3日</p>
-           <p><a href="#">仅售55元！价值180元的华影星美双人观影套餐（含3D）</a></p>
-           <div class="t_imga">
-             <a href="#"><img src="${pageContext.request.contextPath}/img/group/wq_timg.jpg" width="330" height="170" /></a>
-             <div class="out"></div>
-           </div>
-           <div class="numboxa">
-              <div class="totala"><span>1789</span>人已购买</div>
-              <div class="partnuma">原价<br /><span>¥298</span></div>
-              <div class="partnuma">折扣<br /><span>2.32</span></div>
-              <div class="partnuma">节省<br /><span>¥229</span></div>
-           </div>
-           <div class="clear"></div>
-         </div> 
-                
-      </div>
-       
+    <div class="t_right">   
+      <jsp:include page="/group/clientServicePanel${applicationScope.WEB_SUFFIX}" />
+      <jsp:include page="/group/questionPanel${applicationScope.WEB_SUFFIX}" />  
        
     </div>
 <!----右边end---->
@@ -122,7 +72,12 @@
        
        <!----up---->
        <div class="t_info_box">
-                <h1>【2店通用】仅售158元！价值259元的New Balance新百伦儿童功能性学步鞋（新芽绿/深影紫/天际蓝3色可选，5码/6码/7码3码可选）。创立于1906年的百年造鞋品牌，科学人性化设计，兼顾时尚与健康的新百伦2012春季新品，无论送给蹒跚学步的小朋友，还是即将出生的龙宝贝，都是您的最佳选择！走好人生第一步，就从新百伦开始~</h1>
+                <h1>
+                <c:choose>
+		          	<c:when test="${not empty groupProduct.product.brief }">${groupProduct.product.brief }</c:when>
+		          	<c:otherwise>${groupProduct.product.name}</c:otherwise>
+		          </c:choose>
+          </h1>
                 <div class="main">
                     <table class="deal_discount">
                         <tbody><tr>
@@ -131,26 +86,34 @@
                             <td>节省</td>
                         </tr>
                         <tr>
-                            <th><span><del>¥259</del></span></th>
-                            <th><span>6.1</span>折</th>
-                            <th><span>¥101</span></th>
+                            <th><span><del>¥<fmt:formatNumber value="${groupProduct.product.price}" pattern="#.0#"/></del></span></th>
+                            <th>
+                            
+	                        <c:if test="${groupProduct.product.cash > 0 and groupProduct.product.price > 0 }">
+	                        <span><fmt:formatNumber  value="${groupProduct.product.cash*10 / groupProduct.product.price}" pattern="#.#"/></span>折
+	                        </c:if>
+                        	</th>
+                            <th><span>¥<fmt:formatNumber value="${groupProduct.product.price-groupProduct.product.cash}" pattern="#.0#"/></span></th>
                         </tr>
                     </tbody></table>
                     <div class="deal-buy">                        
                         <p class="deal-price">
-                            <strong>¥ 158</strong><span><a href="#">抢购</a></span></p>
+                            <strong>¥<fmt:formatNumber value="${groupProduct.product.cash}" pattern="#.0#"/></strong><span><a href="#">抢购</a></span></p>
                     </div>
                     
-             <div class="downinfo" style="margin-top:75px;"><p><span class="text_red">141</span> 人已购买</p></div>                  
+             <div class="downinfo" style="margin-top:75px;"><p><span class="text_red">${groupProduct.product.buys }</span> 人已购买</p></div>                  
                     
-            <div class="downinfo" ><p><label>本团购剩余</label><br /><span class="text_gray">1</span>天<span class="text_gray">20</span>小时<span class="text_gray">10</span>分</p></div>
+            <div class="downinfo" ><p><label>本团购剩余</label>${groupProduct.product.stocks -groupProduct.product.buys  }<br />
+            <div class="lxftime" endtime="<fmt:formatDate value="${groupProduct.product.endDate }" pattern="MM/dd/yyyy hh:mm:ss" />"></div>
+            <!-- <span class="text_gray">1</span>天<span class="text_gray">20</span>小时<span class="text_gray">10</span>分</p> -->
+            </div>
             
-            <div class="downinfo"><p  class="mailfree">网上支付满69元免运费</p></div>             
+            <!-- <div class="downinfo"><p  class="mailfree">网上支付满69元免运费</p></div>     -->         
              
             </div>
             
             <div class="side">
-                <div class="deal-buy-cover-img"><img src="http://p1.meituan.net/deal/201203/06/nbl03067_0306210329.jpg"></div>
+                <div class="deal-buy-cover-img"><img src="${pageContext.request.contextPath}/photoserver/photo/${groupProduct.product.pic}" width="440"></div>
             </div>
             <div class="clear"></div>
             
@@ -164,29 +127,22 @@
          <div class="infonav">
            <table width="425" height="41" >
              <tr>
-             <td width="70" align="center"><strong>商品详情</strong></td><td width="3" align="center"><img src="${pageContext.request.contextPath}/img/group/bg2_06.gif" width="3" height="32" /></td><td width="142" align="center">客服电话<span class="red"><strong>400-866-3423</strong></span></td><td width="3" align="center"><img src="${pageContext.request.contextPath}/img/group/bg2_06.gif" width="3" height="32" /></td><td width="52" align="center" class="text_red">$48</td><td align="center" ><img src="${pageContext.request.contextPath}/img/group/gobuy.gif" width="87" height="29" /></td>
+             <td width="70" align="center"><strong>商品详情</strong></td><td width="3" align="center">
+             <img src="${pageContext.request.contextPath}/img/group/bg2_06.gif" width="3" height="32" /></td>
+             <%-- <td width="142" align="center">客服电话<span class="red"><strong>400-866-3423</strong></span></td>
+             <td width="3" align="center"><img src="${pageContext.request.contextPath}/img/group/bg2_06.gif" width="3" height="32" /></td>
+             <td width="52" align="center" class="text_red">$48</td> --%>
+             <td align="center" ><%-- <img src="${pageContext.request.contextPath}/img/group/gobuy.gif" width="87" height="29" /> --%></td>
            </tr></table>
          </div>
          <div class="tinfo_left">         
-           <h2>【本单详情】</h2>
-           <p>2店通用,仅售158元！价值259元的New Balance新百伦儿童功能性学步鞋（新芽绿/深影紫/天际蓝3色可选，5码/6码/7码3码可选）。创立于1906年的百年造鞋品牌，科学人性化设计，兼顾时尚与健康的新百伦2012春季新品，无论送给蹒跚学步的小朋友，还是即将出生的龙宝贝，都是您的最佳选择！走好人生第一步，就从新百伦开始~</p>
-           
-           <h2>【双人寒冬套餐】</h2>
-           <p>2店通用,仅售158元！价值259元的New Balance新百伦儿童功能性学步鞋（新芽绿/深影紫/天际蓝3色可选，5码/6码/7码3码可选）。创立于1906年的百年造鞋品牌，科学人性化设计，兼顾时尚与健康的新百伦2012春季新品，无论送给蹒跚学步的小朋友，还是即将出生的龙宝贝，都是您的最佳选择！走好人生第一步，就从新百伦开始~
-           </p>
-           <p><img src="http://p1.meituan.net/deal/201203/06/nbl03067_0306210329.jpg"></p>
-           <p>2店通用,仅售158元！价值259元的New Balance新百伦儿童功能性学步鞋（新芽绿/深影紫/天际蓝3色可选，5码/6码/7码3码可选）。创立于1906年的百年造鞋品牌，科学人性化设计，兼顾时尚与健康的新百伦2012春季新品，无论送给蹒跚学步的小朋友，还是即将出生的龙宝贝，都是您的最佳选择！走好人生第一步，就从新百伦开始~
-           </p>
-           <p><img src="http://p1.meituan.net/deal/201203/06/nbl03067_0306210329.jpg"></p>
-           <p>2店通用,仅售158元！价值259元的New Balance新百伦儿童功能性学步鞋（新芽绿/深影紫/天际蓝3色可选，5码/6码/7码3码可选）。创立于1906年的百年造鞋品牌，科学人性化设计，兼顾时尚与健康的新百伦2012春季新品，无论送给蹒跚学步的小朋友，还是即将出生的龙宝贝，都是您的最佳选择！走好人生第一步，就从新百伦开始~
-           </p>
-           <p><img src="http://p1.meituan.net/deal/201203/06/nbl03067_0306210329.jpg"></p>
+           ${groupProduct.product.content }
          </div>
          
          <div class="tinfo_right">
-           <strong>Drift Wood Cafe</strong><br />
+<!--            <strong>Drift Wood Cafe</strong><br />
            <strong>地址：</strong>萝岗区科学城科学大道北186号A栋2层（广州三星手机研究院）<br />
-           <strong>电话：</strong>020-34563231<br />
+           <strong>电话：</strong>020-34563231<br /> -->
          </div>
          
          <div class="clear"></div>
@@ -209,7 +165,7 @@
  </div>
 <!----两栏end---->
 
-<%@ include file="foot.jsp" %>
+<jsp:include page="/common/foot${applicationScope.WEB_SUFFIX}"/>
  
 </body>
 </html>

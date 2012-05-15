@@ -41,6 +41,25 @@ function lxfEndtime(){
 $(function(){
     lxfEndtime();
  });
+ 
+
+
+function pager(curPageNO){
+	document.getElementById("curPageNO").value=curPageNO;
+	document.getElementById("form1").submit();
+}  
+
+function changeCate(catId){
+	$("#sortId").attr("value",catId);
+	$("#form1").submit();
+}
+
+function changeOrder(order){
+	$("#order").attr("value",order);
+	$("#form1").submit();
+}
+
+
 </script>
 
 </head>
@@ -68,151 +87,74 @@ $(function(){
  <div class="w"> 
     <!----右边---->
     <div class="t_right">
-      <div class="sidebox">
-        <div class="boxtit">
-           <span><a href="#">更多 &gt;&gt;</a></span><b>客户服务</b>
-         </div>
-         <div class="phone">
-           <p class="pimg"><img src="${pageContext.request.contextPath}/img/group/phone.png" width="75" height="56" /></p>
-           <div class="pword">
-             <p class="phonenumber">400-100-1234</p>
-             <p class="phonetime">周一至周日 9:00-20:00</p>
-           </div>
-           <div class="clear"></div>
-        </div>
-         <div class="word">
-           <p><span><img src="${pageContext.request.contextPath}/img/group/dot.gif" width="7" height="7" /></span>
-           <span>10天无条件付款+先行赔付</span></p>
-           <p><span><img src="${pageContext.request.contextPath}/img/group/dot.gif" width="7" height="7" /></span>
-           <span>10天无条件付款+先行赔付</span></p>
-         </div>
-         <div class="clear"></div>
-      </div>
-      
-      <div class="sidebox mar12">
-        <div class="boxtit">
-           <span><a href="${pageContext.request.contextPath}/group/question${applicationScope.WEB_SUFFIX}">更多 &gt;&gt;</a></span><b>常见问题</b>
-         </div>
-         <ul class="lista listimg1">
-            <li><a href="#">如何付款，安全么？</a> </li>
-            <li><a href="#">如果参加团购人数不足，怎么办？</a> </li>
-            <li><a href="#">今天的团购看起来不错，怎么购买？</a> </li> 
-            <li><a href="#">如何付款，安全么？</a> </li> 
-            <li><a href="#">如果参加团购人数不足，怎么办？</a> </li>
-            <li><a href="#">今天的团购看起来不错，怎么购买？</a> </li>  
-            <li><a href="#">如果参加团购人数不足，怎么办？</a> </li>
-         </ul>         
-      </div>
-      
-      <div class="sidebox mar12" style="border:1px solid #fff;">
-         <div class="boxtit">
-           <span><a href="#">更多 &gt;&gt;</a></span><b>往期团购</b>
-         </div>
-         
-        <div class="t_boxa">
-           <p>2012年3月3日</p>
-           <p><a href="#">仅售55元！价值180元的华影星美双人观影套餐（含3D）</a></p>
-           <div class="t_imga">
-             <a href="#"><img src="${pageContext.request.contextPath}/img/group/wq_timg.jpg" width="330" height="170" /></a>
-             <div class="on"></div>
-           </div>
-           <div class="numboxa">
-              <div class="totala"><span>1789</span>人已购买</div>
-              <div class="partnuma">原价<br /><span>¥298</span></div>
-              <div class="partnuma">折扣<br /><span>2.32</span></div>
-              <div class="partnuma">节省<br /><span>¥229</span></div>
-           </div>
-           <div class="clear"></div>
-         </div>
-         
-         <div class="t_boxa">
-           <p>2012年3月3日</p>
-           <p><a href="#">仅售55元！价值180元的华影星美双人观影套餐（含3D）</a></p>
-           <div class="t_imga">
-             <a href="#"><img src="${pageContext.request.contextPath}/img/group/wq_timg.jpg" width="330" height="170" /></a>
-             <div class="out"></div>
-           </div>
-           <div class="numboxa">
-              <div class="totala"><span>1789</span>人已购买</div>
-              <div class="partnuma">原价<br /><span>¥298</span></div>
-              <div class="partnuma">折扣<br /><span>2.32</span></div>
-              <div class="partnuma">节省<br /><span>¥229</span></div>
-           </div>
-           <div class="clear"></div>
-         </div> 
-         
-         <div class="t_boxa">
-           <p>2012年3月3日</p>
-           <p><a href="#">仅售55元！价值180元的华影星美双人观影套餐（含3D）</a></p>
-           <div class="t_imga">
-             <a href="#"><img src="${pageContext.request.contextPath}/img/group/wq_timg.jpg" width="330" height="170" /></a>
-             <div class="out"></div>
-           </div>
-           <div class="numboxa">
-              <div class="totala"><span>1789</span>人已购买</div>
-              <div class="partnuma">原价<br /><span>¥298</span></div>
-              <div class="partnuma">折扣<br /><span>2.32</span></div>
-              <div class="partnuma">节省<br /><span>¥229</span></div>
-           </div>
-           <div class="clear"></div>
-         </div> 
-                
-      </div>
-       
-       
+      <jsp:include page="/group/clientServicePanel${applicationScope.WEB_SUFFIX}" />
+      <jsp:include page="/group/questionPanel${applicationScope.WEB_SUFFIX}" />
     </div>
 <!----右边end---->
     
     <!----左边---->
     <div class="t_left">
-    
+      <form action="<ls:url address='/group/index'/>" method="post" id="form1">
+    	<input type="hidden" id="curPageNO" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
+      	<input type="hidden" id="sortId" name="sortId" value="${prod.sortId }" />
+      	<input type="hidden" id="order" name="order" value="${order }" />
+      </form>
       <div id="filter">
       <ul class="cf">
       	<li class="first <c:if test='${empty prod.sortId }'>current</c:if>"><a href="<ls:url address='/group/index'/>">全部分类</a></li>
       	
       	<c:forEach items="${groupSortList }" var="item">
-      	<li class="<c:if test='${prod.sortId eq item.sortId }'>current</c:if>"><a href="<ls:url address='/group/index'/>?product.sortId=${item.sortId}">${item.sortName }<span>(33)</span></a></li>
+      	<li class="<c:if test='${prod.sortId eq item.sortId }'>current</c:if>"><a href="javascript:changeCate(${item.sortId})">${item.sortName }<!-- <span>(33)</span> --></a></li>
       	</c:forEach>
       	
-      	</ul></div>
+      	</ul>
+      </div>
       
       <div class="along">
          <div class="aligna">
          <span class="fl">排序方式：</span> 
-         <a href="#" class="aligna_aon">推荐</a>
-         <a href="#">人气</a>
-         <a href="#">价格</a>
-         <a href="#">即将过期</a></div>
          
+         <a href="javascript:changeOrder('recommend')" class="<c:if test="${empty order or order eq 'recommend' }">aligna_aon</c:if>">推荐</a>
+         <a href="javascript:changeOrder('hot')" class="<c:if test="${order eq 'hot' }">aligna_aon</c:if>">人气</a>
+         <a href="javascript:changeOrder('price')" class="<c:if test="${order eq 'price' }">aligna_aon</c:if>">价格</a>
+         <a href="javascript:changeOrder('time')" class="<c:if test="${order eq 'time' }">aligna_aon</c:if>">即将过期</a></div>         
          <%-- <div class="t_ss"> <span>搜索团购</span> <input name="" class="tss_input" type="text" /> <input name="" type="image" src="${pageContext.request.contextPath}/img/group/t_ss.jpg" /></div> --%>
          
       </div>
      <c:forEach items="${list }" var="item" varStatus="vs">
        
        <div class="list_item <c:if test='${vs.count % 2 eq 0 }'>odd</c:if>">
-          <h1><a href="${pageContext.request.contextPath}/group/view/1${applicationScope.WEB_SUFFIX}" >${item.name}</a></h1>
-          <div class="cover"><a href="#"><img src="${pageContext.request.contextPath}/photoserver/photo/${item.pic}" width="372" height="195" /></a></div>
+          <h1><a href="<ls:url address='/group/view/${item.prodId }'/>" >
+          <c:choose>
+          	<c:when test="${not empty item.brief }">${item.brief }</c:when>
+          	<c:otherwise>${item.name}</c:otherwise>
+          </c:choose>
           
-          <div class="detail">             
-            <ul class="info">               
-                <li>原价<br /><label><fmt:formatNumber type="currency" value="${item.price}" pattern="${CURRENCY_PATTERN}"/></label></li>
-                <li>折扣<br /><label><fmt:formatNumber  value="${item.cash*10 / item.price}" pattern="#.#"/>折</label></li>
-                <li>节省<br /><label><fmt:formatNumber type="currency" value="${item.price-item.cash}" pattern="${CURRENCY_PATTERN}"/></label></li>
-            </ul>
-            <ul class="status">
-                <li class="volume"><strong>${item.buys }</strong>人已购买</li>                
-                <li class="timeout"><div class="lxftime" endtime="<fmt:formatDate value="${item.endDate }" pattern="MM/dd/yyyy hh:mm:ss" />"></div></li>
-            </ul>
+          
+          </a></h1>
+          <div class="cover"><a href="<ls:url address='/group/view/${item.prodId }'/>"><img src="${pageContext.request.contextPath}/photoserver/photo/${item.pic}" width="372" height="225" /></a></div>
+          
+          <div class="priceit">
+                        <span><font>${item.buys }</font>人已购买</span>
+                        原价：<font><fmt:formatNumber value="${item.price}" pattern="#.0#"/>元</font>
+                        <font class="zhe">
+                        <c:if test="${item.cash > 0 and item.price > 0 }">
+                        <fmt:formatNumber  value="${item.cash*10 / item.price}" pattern="#.#"/>折
+                        </c:if>
+                        </font>
           </div>
-          <div class="action" >
-              <label><fmt:formatNumber type="currency" value="${item.cash}" pattern="${CURRENCY_PATTERN}"/></label>
-              <a href="#" target="_blank" hidefocus="true" rel="nofollow">去看看</a>
-          </div>
+          <a title="团购"  href="<ls:url address='/group/view/${item.prodId }'/>">
+          <div class="buyit">
+                        <span><fmt:formatNumber value="${item.cash}" pattern="#.0#"/></span>
+                       <span class="tg"></span>
+          </div></a>
       </div>
+     	
      	
      </c:forEach>
       
-       <c:if test="${toolBar!=null}">
+       <c:if test="${not empty toolBar}">
+       fff
 			<p align="right">
 				<c:out value="${toolBar}" escapeXml="${toolBar}"></c:out>
 			</p>
@@ -227,8 +169,7 @@ $(function(){
  </div>
 <!----两栏end---->
 
-
-<%@ include file="foot.jsp" %>
+<jsp:include page="/common/foot${applicationScope.WEB_SUFFIX}"/>
  
 </body>
 </html>

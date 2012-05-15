@@ -7,7 +7,10 @@
  */
 package com.legendshop.business.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ProductTypeEnum;
+import com.legendshop.core.service.NsortService;
 import com.legendshop.core.service.SortService;
+import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Sort;
 
 /**
@@ -35,17 +40,67 @@ public class CommonController extends BaseController {
 
 	@Autowired
 	private SortService sortService;
+	@Autowired
+	private NsortService nsortService;
 
 	@RequestMapping("/top")
 	public String top(HttpServletRequest request, HttpServletResponse response) {
 		log.debug("Top starting calling");
 		Long sortId=ServletRequestUtils.getLongParameter(request, "sortId",-1);
 		String shopName = getShopName(request, response);
-		List<Sort> sortList = sortService.getSort(shopName, ProductTypeEnum.PRODUCT.value(), 1, null, false);
-		request.setAttribute("sortList", sortList);
+		List<Sort> headerSortList = sortService.getSort(shopName, ProductTypeEnum.PRODUCT.value(), 1, null, false);
+		List<Sort> navigationSortList = sortService.getSort(shopName, ProductTypeEnum.PRODUCT.value(), null, 1, false);
+		
+		List<Nsort> nsortList=nsortService.getNavigationNsort(shopName);
+		
+		Map<Long,List<Nsort>> deputyMap=new HashMap<Long, List<Nsort>>();		
+		Map<Long,List<Nsort>> sTreeMap=new HashMap<Long, List<Nsort>>();
+		Map<Long,List<Nsort>> tTreeMap=new HashMap<Long, List<Nsort>>();
+		
+		for(Nsort nsort:nsortList){
+			Integer sortDeputy=nsort.getSortDeputy();
+			Long sid=nsort.getSortId();
+			Long pid=nsort.getParentNsortId();
+			if(sortDeputy!=null&&sortDeputy.longValue()==1){
+				
+				List<Nsort> sList=deputyMap.get(sid);
+				if(sList==null){
+					sList=new ArrayList<Nsort>();
+					deputyMap.put(sid, sList);
+				}
+				sList.add(nsort);
+			}
+			
+			if(pid==null){
+				List<Nsort> nsList=sTreeMap.get(sid.longValue());
+				if(nsList==null){
+					nsList=new ArrayList<Nsort>();
+					sTreeMap.put(sid.longValue(), nsList);
+				}
+				nsList.add(nsort);
+			}else{
+				List<Nsort> nsList=tTreeMap.get(pid.longValue());
+				if(nsList==null){
+					nsList=new ArrayList<Nsort>();
+					tTreeMap.put(pid.longValue(), nsList);
+				}
+				nsList.add(nsort);				
+			}
+			
+		}
+		request.setAttribute("deputyMap", deputyMap);
+		request.setAttribute("sTreeMap", sTreeMap);
+		request.setAttribute("tTreeMap", tTreeMap);
+		request.setAttribute("headerSortList", headerSortList);
+		request.setAttribute("navigationSortList", navigationSortList);
 		request.setAttribute("currentSortId", sortId);
 		return "/common/top";
-		// return PathResolver.getPath(request, null);
+	}
+
+	@RequestMapping("/foot")
+	public String foot(HttpServletRequest request, HttpServletResponse response){
+		
+		return "/common/foot";
 	}
 
 }

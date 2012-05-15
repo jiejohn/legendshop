@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.NsortDao;
+import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.model.entity.Nsort;
 
@@ -100,6 +101,11 @@ public class NsortDaoImpl extends BaseDaoImpl implements NsortDao {
 	@Cacheable(value="NsortList",key="#sortId")
 	public List<Nsort> getNsortBySortId(final Long sortId) {
 		return findByHQL("from Nsort where sortId = ? and parent_nsort_id is null", sortId);
+	}
+
+	@Override
+	public List<Nsort> getNavigationNsort(String userName) {
+		return findByHQL("select n from Nsort n,Sort s where n.sortId=s.id and s.userName=? and s.sortType=? and s.navigationMenu=?", userName,ProductTypeEnum.PRODUCT.value(),1);
 	}
 
 }

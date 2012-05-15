@@ -210,7 +210,6 @@ public class SortDaoImpl extends BaseDaoImpl implements SortDao {
 	}
 
 	@Override
-	@Cacheable(value = "SortList")
 	public List<Sort> getSort(final String shopName, final String sortType, final Integer headerMenu,
 			final Integer navigationMenu, final boolean loadAll) {
 

@@ -12,10 +12,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.legendshop.business.dao.NsortDao;
-import com.legendshop.business.service.NsortService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.service.NsortService;
 import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Sort;
 import com.legendshop.util.AppUtils;
@@ -148,6 +148,11 @@ public class NsortServiceImpl implements NsortService {
 	@Override
 	public List<Nsort> getNsortBySortId(Long sortId) {
 		return nsortDao.getNsortBySortId(sortId);
+	}
+
+	@Override
+	public List<Nsort> getNavigationNsort(String userName) {
+		return nsortDao.getNavigationNsort(userName);
 	}
 
 

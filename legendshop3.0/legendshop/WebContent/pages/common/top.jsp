@@ -5,23 +5,44 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/jquery1.6.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/menu.js"></script>
 <%@ include file="header.jsp" %>
-
+<script type="text/javascript">
+<!--
+function searchSubmit(){
+	$("#searchAllform").submit();
+}
+//-->
+</script>
 <!--logo+search--> 
 <div id="logo" class="w">
   
       <p class="logopic"><img src="${pageContext.request.contextPath}/img/group/logo.gif" width="257" height="42" /></p>
       
       <div class="searchwrap">
+      	<form action="${pageContext.request.contextPath}/searchall${applicationScope.WEB_SUFFIX}" method="get" id="searchAllform" name="searchAllform">
         <div class="search">
-          <div class="sleft"><select><option>商品</option><option>商场</option></select></div>
-          <input type="text"/>
+          <div class="sleft">
+          <select name="entityType">
+          <option value="0">商品</option>
+          <option value="1">商城</option>
+          </select>
+          </div>
+          <input name="keyword" type="text"/>
         </div>
-         <p class="searchpic"><a href="#"><img src="${pageContext.request.contextPath}/img/group/search.gif" width="104" height="40" /></a></p>
+         <p class="searchpic"><a href="javascript:searchSubmit()"><img src="${pageContext.request.contextPath}/img/group/search.gif" width="104" height="40" /></a></p>
+         
+        </form>
          <div class="clear"></div>
          <p class="hotword">热门搜索：希捷移动硬盘  减肥  北欧欧慕空间大师  i589电子书  瑞士军刀  方正笔记本</p>
       </div>
        
-      <p class="shoplist"><img src="${pageContext.request.contextPath}/img/group/geren.gif" width="142" height="46" /> &nbsp; 
+      <p class="shoplist">
+      
+	  <c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
+      <a href="<ls:url address='/myaccount'/>">
+      <img src="${pageContext.request.contextPath}/img/group/geren.gif" width="142" height="46" /> 
+      </a>
+      </c:if>
+      &nbsp;       
       <a href="<ls:url address='/buy'/>">
       <img src="${pageContext.request.contextPath}/img/group/shoplist.gif" width="156" height="47" />
       </a>
