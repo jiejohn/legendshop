@@ -109,6 +109,7 @@ public class GroupProductController extends BaseController{
 				hql.setQueryString(QueryGroupProd);
 
 				PageSupport ps = groupProductService.getGroupProductList(hql);
+				
 				savePage(ps, request);
 				request.setAttribute("prod", product);
 				
