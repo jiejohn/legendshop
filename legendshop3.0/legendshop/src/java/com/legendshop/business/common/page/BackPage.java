@@ -227,7 +227,6 @@ public enum BackPage implements PageDefinition{
 	
 	;
 	
-	
 	/** The value. */
 	private final String value;
 	
@@ -255,6 +254,11 @@ public enum BackPage implements PageDefinition{
 	@Override
 	public String getValue(HttpServletRequest request, String path) {
 		return PagePathCalculator.calculateBackendPath(request,path);
+	}
+
+	@Override
+	public String getValue() {
+		return value;
 	}
 
 	

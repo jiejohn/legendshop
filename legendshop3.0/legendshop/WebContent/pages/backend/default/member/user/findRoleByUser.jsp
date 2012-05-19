@@ -54,7 +54,7 @@
 	else
 	{
 	 if( confirmDelete()){
-     document.forms[0].action="${pageContext.request.contextPath}/member/user/deleteUserRoleByUserId${applicationScope.WEB_SUFFIX}";  
+     document.forms[0].action="<ls:url address='/member/user/deleteUserRoleByUserId'/>";  
      document.forms[0].submit(); 
      return true ;
      }else{
@@ -73,10 +73,10 @@
 			int offset=1;
 	%>
 
-	<form action="${pageContext.request.contextPath}/member/user/roles${applicationScope.WEB_SUFFIX}" id="form1" method="post">
+	<form action="<ls:url address='/member/user/roles'/>" id="form1" method="post">
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a>&raquo;用户[${bean.name }]角色列表 </td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="<ls:url address='/member/user/query'/>">权限用户管理</a>&raquo;用户[${bean.name }]角色列表 </td></tr>
 	    </thead>
 	    </table>
 <input type="hidden" name="userId" value="${bean.id }"> 
@@ -97,10 +97,9 @@
     </display:table>
      </div>
 
-
 <div align="center">
-  <P><input type="submit" value="删除" onclick="return deleteAction();"/><p>
-  <a href="${pageContext.request.contextPath}/member/user/otherRoles/${bean.id}${applicationScope.WEB_SUFFIX}" > 增加</a>
+<input type="button" value="增加角色" onclick="window.location='<ls:url address="/member/user/otherRoles/${bean.id}"/>'"/>&nbsp;
+<input type="submit" value="删除" onclick="return deleteAction();"/>
 </div>
   </form>
 </body>

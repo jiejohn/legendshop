@@ -124,6 +124,11 @@ public enum FowardPage implements PageDefinition{
 	private FowardPage(String value) {
 		this.value = value;
 	}
+
+	@Override
+	public String getValue() {
+		return value;
+	}
 	
 
 

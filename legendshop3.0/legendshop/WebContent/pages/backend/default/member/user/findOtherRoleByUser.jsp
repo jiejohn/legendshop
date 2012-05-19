@@ -68,14 +68,11 @@
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a>&raquo;增加用户[${bean.name }]角色</td></tr>
     </thead>
     </table>
-<form action="${pageContext.request.contextPath}/member/user/saveRoleToUser${applicationScope.WEB_SUFFIX}" id="form1" name="form1">
+<form action="<ls:url address='/member/user/saveRoleToUser'/>" id="form1" name="form1">
 <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}">
 <input type="hidden" name="userId" value="${bean.id }">
- 
-
 	 <div align="center">
         <%@ include file="/pages/common/messages.jsp"%>
-        
     <display:table name="list" id="item" export="true" class="${tableclass}" style="width:100%">
       <display:column style="width:70px" title="<input type='checkbox'  id='checkbox' name='checkbox' onClick='javascript:selAll()' />顺序"><input type="checkbox" name="strArray" value="${item.id}" /><%=offset++%></display:column>
       <display:column title="名称 " property="name" sortable="true"></display:column>
@@ -86,10 +83,6 @@
       </display:column>
       <display:column title="备注" property="note"></display:column>
     </display:table>
-     </div>
- 
- 
-	<div align="center">
 		<input type="submit" value="添加" onclick="return saveLeastOne();"/>
 	</div>
 	</form>

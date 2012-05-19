@@ -17,6 +17,7 @@ public interface LegendCacheManager extends CacheManager{
 	/**
 	 * 
 	 * Checks if is support query cache.
+	 * 是否支持查询缓存
 	 * 
 	 * @return true, if is support query cache
 	 */
@@ -24,6 +25,7 @@ public interface LegendCacheManager extends CacheManager{
 	
 	/**
 	 * Checks if is removes the all entries.
+	 * 在不支持查询缓存的情况下起效，当Entity Cache更新时是否删除List Cache所有对象
 	 * 
 	 * @return true, if is removes the all entries
 	 */
@@ -31,6 +33,7 @@ public interface LegendCacheManager extends CacheManager{
 	
 	/**
 	 * Gets the rel cache name.
+	 * RelationShop 缓存名称
 	 * 
 	 * @return the rel cache name
 	 */

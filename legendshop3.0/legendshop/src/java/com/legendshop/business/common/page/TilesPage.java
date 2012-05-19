@@ -102,4 +102,8 @@ public enum TilesPage implements PageDefinition{
 	}
 	
 
+	@Override
+	public String getValue() {
+		return value;
+	}
 }

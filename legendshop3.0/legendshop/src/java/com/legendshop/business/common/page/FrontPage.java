@@ -113,4 +113,8 @@ public enum FrontPage  implements PageDefinition{
 	}
 	
 
+	@Override
+	public String getValue() {
+		return value;
+	}
 }

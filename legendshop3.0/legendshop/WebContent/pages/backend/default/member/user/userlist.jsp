@@ -34,11 +34,11 @@
 	<%
 			int offset=((Integer)request.getAttribute("offset")).intValue();
 	%>	
-	<form action="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}" id="form1" method="post">
+	<form action="<ls:url address='/member/user/query'/>" id="form1" method="post">
 	
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a> </td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="<ls:url address='/member/user/query'/>">用户管理</a> </td></tr>
 	    </thead>
 	    </table>
       
@@ -47,14 +47,16 @@
 			<input type="text" name="name" maxlength="50" value="${bean.name }" />
 				&nbsp;状态 
 				<select id="enabled" name="enabled">
-				  <option:optionGroup type="select" required="true" cache="true"  beanName="ENABLED" selectedValue="${bean.enabled}"/>
+				  <option:optionGroup type="select" required="false" cache="true"  beanName="ENABLED" selectedValue="${bean.enabled}"/>
 	            </select>
 			<input type="submit" value="搜索"/>
-			<input type="button" value="创建用户" onclick='window.location="${pageContext.request.contextPath}/member/user/load${applicationScope.WEB_SUFFIX}"'/>
+			<!--
+			<input type="button" value="创建用户" onclick='window.location="<ls:url address='/member/user/load'/>"'/>
+			  -->
 	</form>
 	 <div align="center">
         <%@ include file="/pages/common/messages.jsp"%>
-    <display:table name="list" requestURI="/member/user/query${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
+    <display:table name="list" requestURI="<ls:url address='/member/user/query'/>" id="item" export="true" class="${tableclass}" style="width:100%">
       <display:column title="顺序"><%=offset++%></display:column>
       <display:column title="用户名 " property="name" sortable="true"></display:column>
       <display:column title="状态">
@@ -63,13 +65,13 @@
       </display:column>
       <display:column title="备注" property="note"></display:column>
       <display:column title="用户角色">
-      	<a href="${pageContext.request.contextPath}/member/user/roles/${item.id}${applicationScope.WEB_SUFFIX}">用户角色</a>
+      	<a href="<ls:url address='/member/user/roles/${item.id}'/>">用户角色</a>
       </display:column>
       <display:column title="用户权限">
-      	<a href="${pageContext.request.contextPath}/member/user/functions/${item.id}${applicationScope.WEB_SUFFIX}" >用户权限</a>
+      	<a href="<ls:url address='/member/user/functions/${item.id}'/>" >用户权限</a>
       </display:column>
       <display:column title="修改密码">
-      	<a href="${pageContext.request.contextPath}/member/user/update/${item.id}${applicationScope.WEB_SUFFIX}">修改密码</a> 
+      	<a href="<ls:url address='/member/user/update/${item.id}'/>">修改密码</a> 
       </display:column>
     </display:table>
         <c:if test="${not empty toolBar}">

@@ -77,13 +77,10 @@
 	
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">角色管理</a>&raquo;角色[${bean.name }]对应的权限列表 </td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="<ls:url address="/member/role/query"/>">角色管理</a>&raquo;角色[${bean.name }]对应的权限列表 </td></tr>
     </thead>
     </table>
-	
-<input type="hidden" name="roleId" value="${bean.id }"> 
-
-
+	<input type="hidden" name="roleId" value="${bean.id }"> 
 	 <div align="center">
         <%@ include file="/pages/common/messages.jsp"%>
         
@@ -93,13 +90,8 @@
       <display:column title="权限名称 " property="protectFunction" sortable="true"></display:column>
       <display:column title="备注" property="note"></display:column>
     </display:table>
-     </div>
-
-
-
-<div align="center">
-<P><input type="submit" value="删除" onclick="return deleteAction();"/><p>
-  <a href="${pageContext.request.contextPath}/member/role/otherFunctions/${bean.id}${applicationScope.WEB_SUFFIX}"> 增加</a>
+    <input type="button" value="增加权限" onclick="window.location='<ls:url address="/member/role/otherFunctions/${bean.id}"/>'"/> &nbsp;
+	<input type="submit" value="删除" onclick="return deleteAction();"/>
 </div>
   </form>
 </body>

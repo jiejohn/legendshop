@@ -94,7 +94,7 @@
           <tr >
             <td height="42" colspan="2" class="forumRow">
                   <div align="center">
-                   <input type="submit" name="Submit" value="修改">
+                   <input type="submit" name="Submit" value="提交">
                    <input type="reset" name="cancel" value="重置">
                    </div>
             </td>
