@@ -52,5 +52,7 @@ public enum GroupFowardPage implements PageDefinition{
 		return PagePathCalculator.calculateActionPath("forward:", path);
 	}
 
-	
+	public String getValue() {
+		return value;
+	}
 }

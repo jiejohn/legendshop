@@ -55,5 +55,8 @@ public enum GroupBackPage implements PageDefinition{
 		return PagePathCalculator.calculateBackendPath(request,path);
 	}
 
-	
+
+	public String getValue() {
+		return value;
+	}
 }
