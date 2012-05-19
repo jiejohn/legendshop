@@ -93,5 +93,7 @@ public enum SecurityBackPage implements PageDefinition{
 		return PagePathCalculator.calculateBackendPath(request,path);
 	}
 
-	
+	public String getValue() {
+		return value;
+	}
 }

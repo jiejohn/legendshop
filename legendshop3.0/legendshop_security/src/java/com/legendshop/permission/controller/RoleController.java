@@ -254,8 +254,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		State state = new StateImpl();
 		rightDelegate.saveFunctionsToRole(permissions, state);
 		stateChecker.check(state, request);
-
-		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 	
 	/**
@@ -288,7 +287,8 @@ public class RoleController extends BaseController implements AdminController<Ro
 		State state = new StateImpl();
 		rightDelegate.deleteFunctionsFromRole(permissions, state);
 		stateChecker.check(state, request);
- 		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+ 		//return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+ 		return PathResolver.getPath(request,SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 

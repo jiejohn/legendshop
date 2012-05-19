@@ -142,7 +142,8 @@ public class FunctionController extends BaseController implements AdminControlle
 		request.setAttribute("list", list);
 		request.setAttribute("role", role);
 
-		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		//return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(request,SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 	/**
@@ -173,11 +174,9 @@ public class FunctionController extends BaseController implements AdminControlle
 		Role role = rightDelegate.findRoleById(roleId, state);
 		PageSupport ps = rightDelegate.findOtherFunctionByHql(hq, roleId, state);
 		stateChecker.check(state, request);
-		request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
-		request.setAttribute("offset", new Integer(ps.getOffset() + 1));
-		if (ps.hasMutilPage())
-			request.setAttribute("toolBar", ps.getToolBar());
-		request.setAttribute("functionList", ps.getResultList());
+		
+		ps.setToolBar(localeResolver.resolveLocale(request));
+		ps.savePage(request);
 		request.setAttribute("role", role);
 
 		return PathResolver.getPath(request, SecurityBackPage.FIND_OTHER_FUNCTION_LIST);
@@ -226,11 +225,10 @@ public class FunctionController extends BaseController implements AdminControlle
 		State state = new StateImpl();
 		PageSupport ps = rightDelegate.findAllFunction(cq, state);
 		request.setAttribute("search", search);
-		request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
-		request.setAttribute("offset", new Integer(ps.getOffset() + 1));
-		request.setAttribute("list", ps.getResultList());
-		if (ps.hasMutilPage())
-			request.setAttribute("toolBar", ps.getToolBar());
+		ps.setToolBar(localeResolver.resolveLocale(request));
+		ps.savePage(request);
+		
+
 
 		return PathResolver.getPath(request, SecurityBackPage.FUNCTION_LIST);
 	}
@@ -285,7 +283,8 @@ public class FunctionController extends BaseController implements AdminControlle
 		rightDelegate.saveFunctionsToRole(permissions, state);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		//return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(request,SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 	/**
@@ -342,7 +341,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		rightDelegate.deleteFunctionsFromRole(permissions, state);
 		stateChecker.check(state, request);
 		request.setAttribute("roleId", roleId);
-		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(request,SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 	/**
@@ -429,12 +428,9 @@ public class FunctionController extends BaseController implements AdminControlle
 		State state = new StateImpl();
 		PageSupport ps = rightDelegate.findAllRole(cq, state);
 		request.setAttribute("search", search);
-		request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
-		request.setAttribute("offset", new Integer(ps.getOffset() + 1));
-		request.setAttribute("list", ps.getResultList());
-		if (ps.hasMutilPage())
-			request.setAttribute("toolBar", ps.getToolBar());
-
+		ps.setToolBar(localeResolver.resolveLocale(request));
+		ps.savePage(request);
+		
 		return PathResolver.getPath(request, SecurityBackPage.ROLE_LIST);
 	}
 

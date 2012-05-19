@@ -67,6 +67,8 @@ public enum SecurityFowardPage implements PageDefinition{
 		this.value = value;
 	}
 	
-
+	public String getValue() {
+		return value;
+	}
 
 }

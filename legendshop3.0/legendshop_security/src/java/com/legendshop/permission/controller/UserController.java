@@ -96,15 +96,13 @@ public class UserController extends BaseController implements AdminController<Us
 			userRole.setId(userRoleId);
 			userRoles.add(userRole);
 		}
-		// removeRequestAttribute(mapping,request);
 		State state = new StateImpl();
 
 			rightDelegate.deleteRoleFromUser(userRoles, state);
 			stateChecker.check(state, request);
 
 		request.setAttribute("userId", userId);
-		return PathResolver.getPath(request, SecurityFowardPage.FIND_ROLE_BY_USER);
-		//return "redirect:"+SecurityBackPage.FIND_USER_ROLES.getValue()+"/"+userId+AttributeKeys.WEB_SUFFIX;
+		return  PathResolver.getPath(request, SecurityFowardPage.FIND_USER_ROLES.getValue() +"/" + userId, SecurityFowardPage.FIND_USER_ROLES);
 	}
 
 	
@@ -292,9 +290,8 @@ public class UserController extends BaseController implements AdminController<Us
 		State state = new StateImpl();
 			rightDelegate.saveRolesToUser(userRoles, state);
 			stateChecker.check(state, request);
-		return PathResolver.getPath(request, SecurityFowardPage.FIND_USER_ROLES);
-
-		//return "redirect:"+SecurityBackPage.FIND_USER_ROLES.getValue()+"/"+userId+AttributeKeys.WEB_SUFFIX;
+			return  PathResolver.getPath(request, SecurityFowardPage.FIND_USER_ROLES.getValue() +"/" + userId, SecurityFowardPage.FIND_USER_ROLES);
+		//return "redirect:"+ .FIND_USER_ROLES.getValue()+"/"+userId+AttributeKeys.WEB_SUFFIX;
 	}
 
 	/**
@@ -323,12 +320,8 @@ public class UserController extends BaseController implements AdminController<Us
 			User user = rightDelegate.findUserById(userId, state);
 			PageSupport ps = rightDelegate.findOtherRoleByUser(hq, userId, state);
 			stateChecker.check(state, request);
-			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
-			request.setAttribute("offset", new Integer(ps.getOffset() + 1));
-			if (ps.hasMutilPage()) {
-				request.setAttribute("toolBar", ps.getToolBar());
-			}
-			request.setAttribute("roles", ps.getResultList());
+			ps.setToolBar(localeResolver.resolveLocale(request));
+			ps.savePage(request);
 			request.setAttribute("user", user);
 
 		return PathResolver.getPath(request, SecurityBackPage.FIND_OTHER_ROLE_BY_USER);
@@ -473,9 +466,7 @@ public class UserController extends BaseController implements AdminController<Us
 		String name = user.getName();
 		String enabled = user.getEnabled();
 		CriteriaQuery cq = new CriteriaQuery(User.class, curPageNO);
-//		 cq.setPageSize(1);
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE,Integer.class));
-
 		if (AppUtils.isNotBlank(name)) {
 			cq.like("name", name + "%");// 1
 		}
@@ -556,7 +547,6 @@ public class UserController extends BaseController implements AdminController<Us
 		stateChecker.check(state, request);
 		request.setAttribute("list", roles);
 		request.setAttribute("bean", user);
-
 		return PathResolver.getPath(request, SecurityBackPage.FIND_ROLE_BY_USER_PAGE);
 	}
 
