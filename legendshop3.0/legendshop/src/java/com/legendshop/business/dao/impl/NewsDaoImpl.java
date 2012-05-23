@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.common.Constants;
-import com.legendshop.business.common.NewsCategoryStatusEnum;
+import com.legendshop.business.common.NewsPositionEnum;
 import com.legendshop.business.dao.NewsDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
@@ -32,11 +32,11 @@ public class NewsDaoImpl extends BaseDaoImpl implements NewsDao {
 	private static Logger log = LoggerFactory.getLogger(NewsDaoImpl.class);
 
 	/* (non-Javadoc)
-	 * @see com.legendshop.business.dao.impl.NewsDao#getNews(java.lang.String, com.legendshop.business.common.NewsCategoryStatusEnum, java.lang.Integer)
+	 * @see com.legendshop.business.dao.impl.NewsDao#getNews(java.lang.String, com.legendshop.business.common.NewsPositionEnum, java.lang.Integer)
 	 */
 	@Override
 	@Cacheable(value="NewsList")
-	public List<News> getNews(final String shopName, final NewsCategoryStatusEnum newsCategoryStatusEnum,
+	public List<News> getNews(final String shopName, final NewsPositionEnum newsPositionEnum,
 			final Integer num) {
 		if (shopName == null) {
 			log.warn("shopName is null");
@@ -44,7 +44,8 @@ public class NewsDaoImpl extends BaseDaoImpl implements NewsDao {
 		}
 		CriteriaQuery cq = new CriteriaQuery(News.class);
 		cq.eq("userName", shopName);
-		cq.eq("status", newsCategoryStatusEnum.value());
+		cq.eq("position", newsPositionEnum.value());
+		cq.eq("status", Constants.ONLINE);
 		cq.addOrder("desc", "newsDate");
 		cq.add();
 		List<News> list = findListByCriteria(cq, 0, num);
@@ -52,7 +53,7 @@ public class NewsDaoImpl extends BaseDaoImpl implements NewsDao {
 		if (AppUtils.isBlank(list)) {
 			cq = new CriteriaQuery(News.class);
 			cq.eq("userName", Constants.COMMON_USER);
-			cq.eq("status", newsCategoryStatusEnum.value());
+			cq.eq("status", newsPositionEnum.value());
 			cq.addOrder("desc", "newsDate");
 			cq.add();
 			list = findListByCriteria(cq, 0, num);

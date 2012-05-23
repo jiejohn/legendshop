@@ -109,7 +109,7 @@
       </td>
     </tr>
 	<tr>
-      <td ><div align="center">类型图片(765*180)<font color="#ff0000">*</font></div></td>
+      <td ><div align="center">类型图片(765*240)<font color="#ff0000">*</font></div></td>
       <td >
       	<input type="file" name="file" id="file" size="30"/>
       	<input type="hidden" name="pictureName" id="pictureName" size="30" value="${sort.picture}"/>

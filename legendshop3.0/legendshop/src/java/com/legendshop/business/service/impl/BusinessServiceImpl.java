@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.Constants;
-import com.legendshop.business.common.NewsCategoryStatusEnum;
+import com.legendshop.business.common.NewsPositionEnum;
 import com.legendshop.business.common.OrderStatusEnum;
 import com.legendshop.business.common.RegisterEnum;
 import com.legendshop.business.common.VisitTypeEnum;
@@ -226,11 +226,11 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		request.setAttribute("pubList", pubDao.getPub(shopName));
 
 		// 普通新闻
-		request.setAttribute("newList", newsDao.getNews(shopName, NewsCategoryStatusEnum.NEWS_NEWS, 6));
+		request.setAttribute("newList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_NEWS, 6));
 		// 顶部新闻
-		request.setAttribute("newsTopList", newsDao.getNews(shopName, NewsCategoryStatusEnum.NEWS_TOP, 8));
+		request.setAttribute("newsTopList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_TOP, 8));
 		// 分类新闻
-		request.setAttribute("newsSortList", newsDao.getNews(shopName, NewsCategoryStatusEnum.NEWS_SORT, 8));
+		request.setAttribute("newsSortList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_SORT, 8));
 
 		setAdvertisement(shopName, request);
 		List<Indexjpg> indexJpgList = imgFileDao.getIndexJpeg(shopName);
@@ -420,10 +420,10 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		request.setAttribute("sortList", sortDao.getSort(shopName, true));
 
 		// 顶部新闻
-		request.setAttribute("newsTopList", newsDao.getNews(shopName, NewsCategoryStatusEnum.NEWS_TOP, 8));
+		request.setAttribute("newsTopList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_TOP, 8));
 
 		// 分类新闻
-		request.setAttribute("newsSortList", newsDao.getNews(shopName, NewsCategoryStatusEnum.NEWS_SORT, 8));
+		request.setAttribute("newsSortList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_SORT, 8));
 
 		boolean shopExists = shopDetailDao.isShopExists(userName);
 		request.setAttribute("shopExists", shopExists);
@@ -453,11 +453,11 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if ((topsortnews != null)) {
 			request.setAttribute(
 					"newList",
-					newsDao.getNews(name, NewsCategoryStatusEnum.NEWS_NEWS,
+					newsDao.getNews(name, NewsPositionEnum.NEWS_NEWS,
 							PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class)));
 			return PathResolver.getPath(request, FrontPage.TOPSORTNEWS);
 		} else {
-			request.setAttribute("newList", newsDao.getNews(name, NewsCategoryStatusEnum.NEWS_NEWS, 6));
+			request.setAttribute("newList", newsDao.getNews(name, NewsPositionEnum.NEWS_NEWS, 6));
 			return PathResolver.getPath(request, FrontPage.TOPNEWS);
 		}
 	}
@@ -1514,7 +1514,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (AppUtils.isBlank(shopName)) {
 			shopName = Constants.COMMON_USER;
 		}
-		request.setAttribute("newsBottomList", newsDao.getNews(shopName, NewsCategoryStatusEnum.NEWS_BOTTOM, 8));
+		request.setAttribute("newsBottomList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_BOTTOM, 8));
 		return PathResolver.getPath(request, FrontPage.COPY_ALL);
 	}
 

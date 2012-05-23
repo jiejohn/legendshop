@@ -36,7 +36,7 @@
             新闻类型
 	           <select id="status" name="status">
 				  <option:optionGroup type="select" required="false" cache="true"
-	                beanName="NEWCATEGORY_STAUS" selectedValue="${bean.status}"/>
+	                beanName="NEWS_POSITION" selectedValue="${bean.position}"/>
 	            </select>
 	      栏目
 	           <select id="newsCategoryId" name="newsCategoryId">

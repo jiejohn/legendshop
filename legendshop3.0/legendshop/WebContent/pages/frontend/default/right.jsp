@@ -16,7 +16,7 @@
 	    <tr>
                <c:choose>
                     <c:when test="${sort.picture !=null}">
-                      <td><img src="${pageContext.request.contextPath}/photoserver/photo/${sort.picture}" width="740px" class="banner"></a>
+                      <td><img src="${pageContext.request.contextPath}/photoserver/photo/${sort.picture}" width="740px" height="240px" class="banner"></a>
                       </td>
                     </c:when>
                     <c:otherwise>

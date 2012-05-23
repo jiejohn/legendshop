@@ -89,7 +89,7 @@ jQuery("#form1").validate({
 				新闻类型
 				<select id="status" name="status">
 				  <option:optionGroup type="select" required="true" cache="true"
-	                beanName="NEWCATEGORY_STAUS" selectedValue="${news.status}"/>
+	                beanName="NEWS_POSITION" selectedValue="${news.position}"/>
 	            </select>
 	            栏目
 	            <select id="newsCategoryId" name="newsCategoryId">

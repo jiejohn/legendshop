@@ -43,7 +43,7 @@
 	
 	<div align="center">
         <%@ include file="/pages/common/messages.jsp"%>
-    <display:table name="list" requestURI="/member/right/query${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
+    <display:table name="list" requestURI="${pageContext.request.contextPath}/member/right/query${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
       <display:column title="顺序"><%=offset++%></display:column>
       <display:column title="名称 " property="name" sortable="true"></display:column>
       <display:column title="权限名称 " property="protectFunction"></display:column>

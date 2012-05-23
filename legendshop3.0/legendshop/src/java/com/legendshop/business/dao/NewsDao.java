@@ -9,7 +9,7 @@ package com.legendshop.business.dao;
 
 import java.util.List;
 
-import com.legendshop.business.common.NewsCategoryStatusEnum;
+import com.legendshop.business.common.NewsPositionEnum;
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
@@ -25,13 +25,13 @@ public interface NewsDao extends BaseDao{
 	 * 
 	 * @param shopName
 	 *            the shop name
-	 * @param newsCategoryStatusEnum
+	 * @param newsPositionEnum
 	 *            the news category status enum
 	 * @param num
 	 *            the num
 	 * @return the news
 	 */
-	public abstract List<News> getNews(final String shopName, final NewsCategoryStatusEnum newsCategoryStatusEnum,
+	public abstract List<News> getNews(final String shopName, final NewsPositionEnum newsPositionEnum,
 			final Integer num);
 
 	/**

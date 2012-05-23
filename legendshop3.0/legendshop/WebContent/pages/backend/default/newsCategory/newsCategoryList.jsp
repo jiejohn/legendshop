@@ -29,7 +29,7 @@
 	     状态
 	           <select id="status" name="status">
 				  <option:optionGroup type="select" required="false" cache="true"
-	                beanName="NEWCATEGORY_STAUS" selectedValue="${bean.status}"/>
+	                beanName="NEWS_POSITION" selectedValue="${bean.position}"/>
 	            </select>
          <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
                  商城 
