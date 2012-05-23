@@ -42,6 +42,11 @@
                 <comment>新闻状态，1：上线，0：下线</comment>
             </column>
         </property>
+        <property name="position" type="java.lang.Integer">
+            <column name="position">
+                <comment>新闻位置</comment>
+            </column>
+        </property>
         <property name="highLine" type="java.lang.Integer">
             <column name="high_line">
                 <comment>是否高亮,1:yes,0:no</comment>

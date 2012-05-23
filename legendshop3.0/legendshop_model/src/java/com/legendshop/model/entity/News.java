@@ -56,6 +56,10 @@ public class News implements BaseEntity {
     
     /** 1:上线 0：下线. */
     private Integer status;
+    
+    /** 位置 *. */
+    private Integer position;
+    
     //是否高亮
     /** The high line. */
     private Integer highLine;
@@ -422,8 +426,30 @@ public class News implements BaseEntity {
 		this.newsBrief = newsBrief;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.model.entity.BaseEntity#getId()
+	 */
 	public Serializable getId() {
 		return newsId;
+	}
+
+	/**
+	 * Gets the position.
+	 * 
+	 * @return the position
+	 */
+	public Integer getPosition() {
+		return position;
+	}
+
+	/**
+	 * Sets the position.
+	 * 
+	 * @param position
+	 *            the new position
+	 */
+	public void setPosition(Integer position) {
+		this.position = position;
 	}
 
 }
