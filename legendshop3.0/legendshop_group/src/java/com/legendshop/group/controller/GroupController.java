@@ -27,13 +27,14 @@ import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.helper.FunctionUtil;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.service.GroupProductService;
 import com.legendshop.core.service.SortService;
 import com.legendshop.model.entity.GroupProduct;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.Sort;
+import com.legendshop.spi.constants.NewsPositionEnum;
+import com.legendshop.spi.service.NewsService;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.sql.ConfigCode;
 
@@ -52,6 +53,9 @@ public class GroupController extends BaseController {
 
 	@Autowired
 	private GroupProductService groupProductService;
+	
+	@Autowired
+	private NewsService newsService;
 	
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request, HttpServletResponse response,String curPageNO,String order,Product product) {
@@ -77,11 +81,6 @@ public class GroupController extends BaseController {
 
 		fillParameter(hql,map,"userName",shopName);
 		
-
-		if (!FunctionUtil.isDataForExport(hql, request)) {// 非导出情况
-			hql.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
-		}
-		
 		//TODO order by xxx
 //		if (!FunctionUtil.isDataSortByExternal(hql, request, map)) {
 		if("hot".equals(order)){
@@ -104,8 +103,7 @@ public class GroupController extends BaseController {
 		hql.setQueryString(QueryGroupProd);
 
 		PageSupport ps = groupProductService.getGroupProductList(hql);
-		
-		savePage(ps, request);
+		ps.savePage(request);
 		request.setAttribute("prod", product);
 		request.setAttribute("order", order);
 		request.setAttribute("groupSortList", groupSortList);
@@ -123,6 +121,8 @@ public class GroupController extends BaseController {
 	
 	@RequestMapping(value = "/clientServicePanel")
 	public String clientServicePannel(HttpServletRequest request, HttpServletResponse response) {
+		String shopName = getShopName(request, response);
+		request.setAttribute("groupNewsTopList", newsService.getNews(shopName, NewsPositionEnum.NEWS_GROUP_TOP, 10));
 		return "/group/default/clientServicePanel";
 	}
 	
@@ -145,6 +145,8 @@ public class GroupController extends BaseController {
 	@RequestMapping("/questionPanel")
 	public String questionPanel(HttpServletRequest request, HttpServletResponse response) {
 		log.debug("question starting calling");
+		String shopName = getShopName(request, response);
+		request.setAttribute("groupNewsBottomList", newsService.getNews(shopName, NewsPositionEnum.NEWS_GROUP_BOTTOM, 10));
 		return "/group/default/questionPanel";
 	}
 	
