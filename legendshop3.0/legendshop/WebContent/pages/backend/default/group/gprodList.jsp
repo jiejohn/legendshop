@@ -39,19 +39,20 @@
             <input type="text" name="userName" maxlength="50" value="${prod.userName}" size="15"/>
             </auth:auth>
 			<auth:auth ifNotGranted="F_VIEW_ALL_DATA">
-			商品类型&nbsp;<select id="sortId" name="product.sortId" onChange="changeNsort(this.value)">
+<!-- 			商品类型&nbsp;<select id="sortId" name="product.sortId" onChange="changeNsort(this.value)"> -->
+			商品类型&nbsp;<select id="sortId" name="product.sortId">
 			<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null && sessionScope.SPRING_SECURITY_LAST_USERNAME !=''}">
 	            <option:optionGroup type="select" required="false" cache="fasle"
 	                defaultDisp="-- 一级类型 --" 
 	                hql="select t.sortId, t.sortName from Sort t where t.sortType = 'G' and t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"/>
              </c:if>
-		</select>
+		</select><%-- 
 		<select id="nsortId" name="product.nsortId" onChange="changeSubNsort(this.value)">
 			<option value="">-- 二级类型 --</option>
 		</select>  
 		 <select id="subNsortId" name="product.subNsortId">
             <option value="">-- 三级类型 --</option>
-        </select>
+        </select> --%>
           &nbsp;品牌
         <select id="brandId" name="product.brandId">
         	   <option:optionGroup type="select" required="false" cache="fasle"

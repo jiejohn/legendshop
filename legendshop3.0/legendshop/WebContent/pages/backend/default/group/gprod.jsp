@@ -160,7 +160,8 @@
       <td width="120px"><div align="center">选择团购类型<font color="#ff0000">*</font></div></td>
       <td width="48%">
       <div>
-		<select id="sortId" name="product.sortId" onChange="changeNsort(this.value)">
+<!-- 		<select id="sortId" name="product.sortId" onChange="changeNsort(this.value)"> -->
+		<select id="sortId" name="product.sortId" >
             <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
                 <c:if test="${prod.product.userName != null}">
                   <option:optionGroup type="select" required="false" cache="fasle"
@@ -179,17 +180,17 @@
              </c:if>
             </auth:auth>
 		</select>    
-		<select id="nsortId" name="product.nsortId" onChange="changeSubNsort(this.value)">
+<%-- 		<select id="nsortId" name="product.nsortId" onChange="changeSubNsort(this.value)">
             <option value="">-- 二级类型 --</option>
         </select>  
          <select id="subNsortId" name="product.subNsortId">
             <option value="">-- 三级类型 --</option>
-        </select> 
+        </select>  --%>
         &nbsp;品牌
         <select id="brandId" name="product.brandId">
         	   <option:optionGroup type="select" required="false" cache="fasle"
                     hql="select t.brandId, t.brandName from Brand t where t.userName = ?" defaultDisp="--商品品牌--" 
-                    param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
+                    param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"  selectedValue="${prod.product.brandId}"/>
         </select>
         </div><div style="margin-top: 3px">
         还没有商品类型？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/sort/load${applicationScope.WEB_SUFFIX}">创建类型</a>&nbsp;<a href="${pageContext.request.contextPath}/admin/brand/load${applicationScope.WEB_SUFFIX}">创建品牌</a>
@@ -298,7 +299,7 @@
 			    <select id="partnerId" name="partnerId">	                
 	                <option:optionGroup type="select" required="false" cache="fasle"
                      defaultDisp="--请选择商户--"  
-                    hql="select t.partnerId, t.partnerName from Partner t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
+                    hql="select t.partnerId, t.partnerName from Partner t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${prod.partnerId}"/>
 		        </select>
 	 </td>
     </tr> 

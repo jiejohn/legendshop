@@ -68,7 +68,9 @@
       <display:column title="图片" style="width:300px" media="html"><a href="${pageContext.request.contextPath}/photoserver/photo/${item.picture}" target="_blank"><img src="${pageContext.request.contextPath}/photoserver/photo/${item.picture}" height="60" width="300"/></a></display:column>
       <auth:auth ifAnyGranted="F_VIEW_ALL_DATA"><display:column title="商城名称" property="userName" sortable="true" sortName="userName"></display:column></auth:auth>
       <display:column title="操作" media="html" style="width:100px">
-    <a href="${pageContext.request.contextPath}/admin/nsort/query${applicationScope.WEB_SUFFIX}?sortId=${item.sortId}">二级类型</a>
+      <c:if test="${item.sortType ne 'G'}">
+    	<a href="${pageContext.request.contextPath}/admin/nsort/query${applicationScope.WEB_SUFFIX}?sortId=${item.sortId}">二级类型</a>
+      </c:if>
      <a href="${pageContext.request.contextPath}/admin/sort/update/${item.sortId}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
      <auth:auth ifAnyGranted="F_OPERATOR">
         <a href='javascript:deleteSort("${item.sortId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>

@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
-import com.legendshop.business.service.PartnerService;
 import com.legendshop.business.service.ShopDetailService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
@@ -36,6 +35,7 @@ import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
+import com.legendshop.core.service.PartnerService;
 import com.legendshop.model.entity.Partner;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.util.AppUtils;

@@ -201,6 +201,15 @@ a:active{color:#900;}
 .aligna{ padding:3px 0 2px; line-height:25px; float:left; width:400px; }
 .aligna a{ display:block; float:left; height:18px; line-height:18px; padding:2px 20px 0 10px; background:url(../img/group/arowalign.jpg) no-repeat right 0 #cedbe8; margin-right:10px;}
 a.aligna_aon{ display:block; float:left; height:18px; line-height:18px; padding:2px 20px 0 10px; background:url(../img/group/arowaligon.jpg) no-repeat right 0 #cedbe8; margin-right:10px;}
+
+a.align_desc_off{background:url(../img/group/arowalign.jpg) no-repeat right 0 #cedbe8;}
+a.align_desc_on{background:url(../img/group/arowaligon.jpg) no-repeat right 0 #cedbe8;}
+a.align__off{background:url(../img/group/arowalign.jpg) no-repeat right 0 #cedbe8;}
+a.align__on{background:url(../img/group/arowaligon.jpg) no-repeat right 0 #cedbe8;}
+a.align_asc_off{background:url(../img/group/arowalign2.jpg) no-repeat right 0 #cedbe8;}
+a.align_asc_on{background:url(../img/group/arowaligon2.jpg) no-repeat right 0 #cedbe8;}
+
+
 .t_ss{ float:right; line-height:25px;}
 .t_ss .tss_input{ height:23px; border:1px solid #bfbfbf; background:#f2f2f2; padding:0 5px; line-height:23px;}
 .t_ss *{ float:left; margin-left:5px;}
@@ -211,7 +220,7 @@ a.aligna_aon{ display:block; float:left; height:18px; line-height:18px; padding:
  .list_item{float:left;position:relative;width:372px;height:360px;padding:10px ;margin-bottom:25px;background:#FFF;border:2px #e3e3e3 solid;}
  .odd{float:right;}
  .list_item img{ width:372px;height:225px; }
- .list_item h1{width:372px; font-size:16px; line-height:160%; height:60px; overflow:hidden; font-family:"microsoft yahei", "宋体"; text-indent:0;}
+ .list_item h1{overflow:hidden;text-overflow:ellipsis;width:372px; font-size:16px; line-height:160%; height:55px; overflow:hidden; font-family:"microsoft yahei", "宋体"; text-indent:0;}
  .list_item .priceit {
     background: #F2F2F2;     
     height: 20px;

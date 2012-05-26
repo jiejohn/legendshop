@@ -10,9 +10,9 @@ package com.legendshop.business.service.impl;
 import java.util.List;
 
 import com.legendshop.business.dao.PartnerDao;
-import com.legendshop.business.service.PartnerService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.service.PartnerService;
 import com.legendshop.model.entity.Partner;
 import com.legendshop.util.AppUtils;
 

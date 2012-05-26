@@ -52,7 +52,7 @@ $(function(){
 </jsp:include>
 <!----地址---->
  <div class="w addr">
-   <span><a href="#">首页</a></span>&gt;<span>团购</span> 
+   <span><a href="#">首页</a></span>&gt;<span><a href="<ls:url address='/group/index'/>">团购</a></span>&gt;<span>${groupProduct.product.name}</span> 
  </div>
 <!----地址end---->
  <div class="w banner1"><img src="${pageContext.request.contextPath}/img/group/banner1.gif" width="1216" height="128" /></div>
@@ -90,7 +90,7 @@ $(function(){
                             <th>
                             
 	                        <c:if test="${groupProduct.product.cash > 0 and groupProduct.product.price > 0 }">
-	                        <span><fmt:formatNumber  value="${groupProduct.product.cash*10 / groupProduct.product.price}" pattern="#.#"/></span>折
+	                        <span><fmt:formatNumber  value="${groupProduct.product.cash*10 / groupProduct.product.price}" pattern="#.#"/>折</span>
 	                        </c:if>
                         	</th>
                             <th><span>¥<fmt:formatNumber value="${groupProduct.product.price-groupProduct.product.cash}" pattern="#.0#"/></span></th>
@@ -101,10 +101,12 @@ $(function(){
                             <strong>¥<fmt:formatNumber value="${groupProduct.product.cash}" pattern="#.0#"/></strong><span><a href="#">抢购</a></span></p>
                     </div>
                     
-             <div class="downinfo" style="margin-top:75px;"><p><span class="text_red">${groupProduct.product.buys }</span> 人已购买</p></div>                  
+             <div class="downinfo" style="margin-top:75px;"><p><span class="text_red">${groupProduct.product.buys+groupProduct.visualBuys }</span> 人已购买</p></div>                  
                     
-            <div class="downinfo" ><p><label>本团购剩余</label>${groupProduct.product.stocks -groupProduct.product.buys  }<br />
-            <div class="lxftime" endtime="<fmt:formatDate value="${groupProduct.product.endDate }" pattern="MM/dd/yyyy hh:mm:ss" />"></div>
+            <div class="downinfo" ><p><label>本团购剩余</label>${groupProduct.product.actualStocks  }<br />
+            <c:if test="${not empty  groupProduct.product.endDate }">
+            <div class="lxftime" endtime="<fmt:formatDate value="${groupProduct.product.endDate }" pattern="MM/dd/yyyy hh:mm:ss" />"></div>            
+            </c:if>
             <!-- <span class="text_gray">1</span>天<span class="text_gray">20</span>小时<span class="text_gray">10</span>分</p> -->
             </div>
             
@@ -140,9 +142,14 @@ $(function(){
          </div>
          
          <div class="tinfo_right">
-<!--            <strong>Drift Wood Cafe</strong><br />
-           <strong>地址：</strong>萝岗区科学城科学大道北186号A栋2层（广州三星手机研究院）<br />
-           <strong>电话：</strong>020-34563231<br /> -->
+         <c:if test="${not empty partner }">
+           <strong>${partner.title }</strong><br />
+           <c:if test="${not empty partner.homepage }">
+           <strong>主页：</strong><a href="${partner.homepage}">${partner.homepage }</a><br />
+           </c:if>
+           <strong>地址：</strong>${partner.address}<br />
+           <strong>电话：</strong>${partner.phone}<br />
+         </c:if>
          </div>
          
          <div class="clear"></div>

@@ -199,7 +199,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * @see com.legendshop.business.dao.impl.ProductDao#updateProduct(com.legendshop.model.entity.Product)
 	 */
 	@Override
-	@ProductUpdate
+//	@ProductUpdate
 	public void updateProduct(Product product) {
 			update(product);
 	}

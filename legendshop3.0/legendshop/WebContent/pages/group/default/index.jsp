@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>团购</title>
-<link type="text/css" href="${pageContext.request.contextPath}/css/legend.css" rel="stylesheet"/>
+<%-- <link type="text/css" href="${pageContext.request.contextPath}/css/legend.css" rel="stylesheet"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/jquery1.6.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/menu.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/menu.js"></script> --%>
 <script type="text/javascript">
 function lxfEndtime(){
     $(".lxftime").each(function() {
@@ -54,7 +54,7 @@ function changeCate(catId){
 	$("#form1").submit();
 }
 
-function changeOrder(order){
+function changeOrder(order,seq){
 	$("#order").attr("value",order);
 	$("#form1").submit();
 }
@@ -98,6 +98,7 @@ function changeOrder(order){
     	<input type="hidden" id="curPageNO" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
       	<input type="hidden" id="sortId" name="sortId" value="${prod.sortId }" />
       	<input type="hidden" id="order" name="order" value="${order }" />
+      	<input type="hidden" id="seq" name="seq" value="${seq}" />
       </form>
       <div id="filter">
       <ul class="cf">
@@ -116,7 +117,17 @@ function changeOrder(order){
          
          <a href="javascript:changeOrder('recommend')" class="<c:if test="${empty order or order eq 'recommend' }">aligna_aon</c:if>">推荐</a>
          <a href="javascript:changeOrder('hot')" class="<c:if test="${order eq 'hot' }">aligna_aon</c:if>">人气</a>
-         <a href="javascript:changeOrder('price')" class="<c:if test="${order eq 'price' }">aligna_aon</c:if>">价格</a>
+         <c:set var="priceClass" value="" />
+         <c:choose>
+         	<c:when test="${order eq 'price' }">
+         		<c:set var="priceClass" value="align_${seq }_on" />
+         	</c:when>
+         	<c:otherwise>
+         		<c:set var="priceClass" value="align_${seq }_off" />
+         	</c:otherwise>
+         </c:choose>
+         <a href="javascript:changeOrder('price')" class="${priceClass }">价格</a>
+         
          <a href="javascript:changeOrder('time')" class="<c:if test="${order eq 'time' }">aligna_aon</c:if>">即将过期</a></div>         
          <%-- <div class="t_ss"> <span>搜索团购</span> <input name="" class="tss_input" type="text" /> <input name="" type="image" src="${pageContext.request.contextPath}/img/group/t_ss.jpg" /></div> --%>
          
@@ -153,19 +164,20 @@ function changeOrder(order){
      	
      </c:forEach>
       
+                
+   <div class="clear"></div>
+     
        <c:if test="${not empty toolBar}">
-       fff
 			<p align="right">
 				<c:out value="${toolBar}" escapeXml="${toolBar}"></c:out>
 			</p>
 			</c:if>
-       
-                
-     
     </div>
     <!----左边end---->
     
    <div class="clear"></div>
+   
+       
  </div>
 <!----两栏end---->
 
