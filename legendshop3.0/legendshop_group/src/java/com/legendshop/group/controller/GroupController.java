@@ -29,8 +29,10 @@ import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.service.GroupProductService;
+import com.legendshop.core.service.PartnerService;
 import com.legendshop.core.service.SortService;
 import com.legendshop.model.entity.GroupProduct;
+import com.legendshop.model.entity.Partner;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.Sort;
 import com.legendshop.spi.constants.NewsPositionEnum;
@@ -53,19 +55,22 @@ public class GroupController extends BaseController {
 
 	@Autowired
 	private GroupProductService groupProductService;
+
+	@Autowired
+	private PartnerService partnerService;
 	
 	@Autowired
 	private NewsService newsService;
 	
 	@RequestMapping("/index")
-	public String index(HttpServletRequest request, HttpServletResponse response,String curPageNO,String order,Product product) {
+	public String index(HttpServletRequest request, HttpServletResponse response,String curPageNO,String order,String seq,Product product) {
 		log.debug("Index starting calling");
 		
 		String shopName = getShopName(request, response);
 		
 		List<Sort> groupSortList=sortService.getSort(shopName, ProductTypeEnum.GROUP.value(),null , null, false);
 		
-		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class), curPageNO);
+		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class), curPageNO);
 		Map<String, String> map = new HashMap<String, String>();
 //		Product product = groupProduct.getProduct();
 		if(product != null){
@@ -80,13 +85,19 @@ public class GroupController extends BaseController {
 		}
 
 		fillParameter(hql,map,"userName",shopName);
+
 		
 		//TODO order by xxx
 //		if (!FunctionUtil.isDataSortByExternal(hql, request, map)) {
 		if("hot".equals(order)){
 			map.put(AttributeKeys.ORDER_INDICATOR, "order by p.buys desc");			
 		}else if("price".equals(order)){
-			map.put(AttributeKeys.ORDER_INDICATOR, "order by p.cash asc");
+			if("desc".equalsIgnoreCase(seq)){
+				seq="asc";
+			}else{
+				seq="desc";
+			}
+			map.put(AttributeKeys.ORDER_INDICATOR, "order by p.cash "+seq);
 			
 		}else if("time".equals(order)){
 			map.put(AttributeKeys.ORDER_INDICATOR, "order by p.endDate asc");
@@ -106,6 +117,7 @@ public class GroupController extends BaseController {
 		ps.savePage(request);
 		request.setAttribute("prod", product);
 		request.setAttribute("order", order);
+		request.setAttribute("seq", seq);
 		request.setAttribute("groupSortList", groupSortList);
 		return "/group/default/index";
 	}
@@ -132,6 +144,12 @@ public class GroupController extends BaseController {
 	public String view(HttpServletRequest request, HttpServletResponse response,@PathVariable Long id) {
 		log.debug("view starting calling");
 		GroupProduct groupProduct=groupProductService.getGroupProduct(id);
+		
+		Long partnerId=groupProduct.getPartnerId();
+		if(partnerId!=null){
+			Partner partner=partnerService.getPartner(partnerId);
+			request.setAttribute("partner", partner);
+		}
 		request.setAttribute("groupProduct", groupProduct);
 		return "/group/default/view";
 	}
