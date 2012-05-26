@@ -24,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.legendshop.business.common.RoleEnum;
 import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.business.event.EventId;
 import com.legendshop.business.helper.TaskThread;
@@ -60,6 +59,7 @@ import com.legendshop.model.entity.Sort;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserDetail;
 import com.legendshop.model.entity.UserRole;
+import com.legendshop.spi.constants.RoleEnum;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.MD5Util;
 

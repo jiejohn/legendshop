@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.cache.ProductUpdate;
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
@@ -27,6 +26,7 @@ import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ProductDetail;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.sql.ConfigCode;
 
@@ -106,7 +106,6 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	public PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId,Long nsortId,Long subNsortId) {
 		// Qbc查找方式
 		CriteriaQuery cq = new CriteriaQuery(Product.class, curPageNO);
-		cq.setCurPage(curPageNO);
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
 		cq.addOrder("desc", "prodId");
 		cq.eq("sortId", sortId);

@@ -18,7 +18,7 @@
 		<dwr:convert type="bean" class="com.legendshop.model.entity.Indexjpg"></dwr:convert>
         <dwr:convert type="bean" class="com.legendshop.model.dynamic.Model"></dwr:convert>   
         <dwr:convert type="bean" class="com.legendshop.model.dynamic.Item"></dwr:convert> 
-		<dwr:convert type="enum" class="com.legendshop.business.common.MyLeagueEnum"></dwr:convert>	
+		<dwr:convert type="enum" class="com.legendshop.spi.constants.MyLeagueEnum"></dwr:convert>	
         <dwr:convert type="enum" class="com.legendshop.model.dynamic.ModelType"></dwr:convert>	
 	</dwr:configuration>
     

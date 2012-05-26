@@ -19,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.CommentTypeEnum;
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
@@ -38,6 +37,7 @@ import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.model.entity.UserComment;
+import com.legendshop.spi.constants.CommentTypeEnum;
 import com.legendshop.util.AppUtils;
 
 /**

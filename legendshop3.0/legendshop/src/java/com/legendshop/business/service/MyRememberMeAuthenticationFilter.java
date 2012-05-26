@@ -17,9 +17,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter;
 import org.springframework.security.web.util.TextEscapeUtils;
 
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.BasketDao;
 import com.legendshop.model.entity.Basket;
+import com.legendshop.spi.constants.Constants;
 
 /**
  * The Class MyRememberMeAuthenticationFilter.

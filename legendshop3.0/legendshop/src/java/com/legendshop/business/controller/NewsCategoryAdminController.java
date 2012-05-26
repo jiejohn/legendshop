@@ -69,7 +69,7 @@ public class NewsCategoryAdminController extends BaseController {
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO,
 			NewsCategory newsCategory) {
-		CriteriaQuery cq = new CriteriaQuery(NewsCategory.class, curPageNO, "javascript:pager");
+		CriteriaQuery cq = new CriteriaQuery(NewsCategory.class, curPageNO);
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(newsCategory.getUserName()));
 		if (!AppUtils.isBlank(newsCategory.getNewsCategoryName())) {
@@ -77,15 +77,9 @@ public class NewsCategoryAdminController extends BaseController {
 
 		}
 		cq.eq("status", newsCategory.getStatus());
-		/*
-		 * if (UserManager.hasFunction(request.getSession(), Constants.FUNCTION_VIEW_ALL_DATA)) { if
-		 * (!AppUtils.isBlank(newsCategory.getUserName())) { cq.eq("userName",
-		 * StringUtils.trim(newsCategory.getUserName())); } } else { cq.eq("userName",
-		 * UserManager.getUsername(request.getSession())); }
-		 */
 		cq.add();
 		PageSupport ps = newsCategoryService.getNewsCategoryList(cq);
-		savePage(ps, request);
+		ps.savePage(request);
 		request.setAttribute("bean", newsCategory);
 		return PathResolver.getPath(request, BackPage.NEWSCAT_LIST_PAGE);
 	}

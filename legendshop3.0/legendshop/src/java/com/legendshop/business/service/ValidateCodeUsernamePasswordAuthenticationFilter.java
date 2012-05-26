@@ -23,12 +23,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.BasketDao;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.randing.CaptchaServiceSingleton;
 import com.legendshop.model.entity.Basket;
+import com.legendshop.spi.constants.Constants;
 
 /**
  * 带验证码校验功能的用户名、密码认证过滤器

@@ -7,12 +7,8 @@
            <span><a href="${pageContext.request.contextPath}/group/question${applicationScope.WEB_SUFFIX}">更多 &gt;&gt;</a></span><b>常见问题</b>
          </div>
          <ul class="lista listimg1">
-            <li><a href="#">如何付款，安全么？</a> </li>
-            <li><a href="#">如果参加团购人数不足，怎么办？</a> </li>
-            <li><a href="#">今天的团购看起来不错，怎么购买？</a> </li> 
-            <li><a href="#">如何付款，安全么？</a> </li> 
-            <li><a href="#">如果参加团购人数不足，怎么办？</a> </li>
-            <li><a href="#">今天的团购看起来不错，怎么购买？</a> </li>  
-            <li><a href="#">如果参加团购人数不足，怎么办？</a> </li>
+          <c:forEach items="${requestScope.groupNewsBottomList}" var="news" varStatus="status">
+            <li><a href="<ls:url address='/news/${news.newsId}'/>" target="_blank">${news.newsTitle}</a></li>
+            </c:forEach>
          </ul>         
       </div>

@@ -9,8 +9,8 @@ package com.legendshop.business.tag;
 
 import java.io.IOException;
 
-import com.legendshop.business.common.Constants;
 import com.legendshop.core.tag.LegendShopTag;
+import com.legendshop.spi.constants.Constants;
 
 
 /**

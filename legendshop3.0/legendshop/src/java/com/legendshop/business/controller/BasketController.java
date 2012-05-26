@@ -16,13 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.service.BasketService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.spi.constants.Constants;
 
 /**
  * 购物车控制器。.

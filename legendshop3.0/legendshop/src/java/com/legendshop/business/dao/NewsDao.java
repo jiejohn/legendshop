@@ -8,12 +8,12 @@
 package com.legendshop.business.dao;
 
 import java.util.List;
+import java.util.Locale;
 
-import com.legendshop.business.common.NewsPositionEnum;
 import com.legendshop.core.dao.BaseDao;
-import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.News;
+import com.legendshop.spi.constants.NewsPositionEnum;
 
 /**
  * The Interface NewsDao.
@@ -50,6 +50,6 @@ public interface NewsDao extends BaseDao{
 	 *            the cq
 	 * @return the news
 	 */
-	public abstract PageSupport getNews(CriteriaQuery cq);
+	public abstract PageSupport getNews(Locale locale, String curPageNO,String userName,Long newsCategoryId);
 
 }

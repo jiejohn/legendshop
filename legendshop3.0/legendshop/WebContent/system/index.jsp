@@ -17,7 +17,7 @@
    <a href='cookies/ReadCookies.jsp' target='_blank'>Cookies管理</a><br>
    <a href='system.jsp' target='_blank'>系统参数和内存管理</a><br>
    <a href='memery.jsp' target='_blank'>内存管理</a><br><br>
-   
+   <a href='cache.jsp' target='_blank'>缓存管理</a><br><br>
    <a href='tags.jsp' target='_blank'>LegendShop Tags Example</a><br>
    <a href='biztags.jsp' target='_blank'>LegendShop Biz Tags Example</a><br>
   </body>

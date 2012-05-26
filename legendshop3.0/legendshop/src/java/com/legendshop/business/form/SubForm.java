@@ -7,7 +7,7 @@
  */
 package com.legendshop.business.form;
 
-import com.legendshop.business.common.Constants;
+import com.legendshop.spi.constants.Constants;
 
 
 /**

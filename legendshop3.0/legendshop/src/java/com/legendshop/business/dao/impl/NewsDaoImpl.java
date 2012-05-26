@@ -8,18 +8,21 @@
 package com.legendshop.business.dao.impl;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.common.Constants;
-import com.legendshop.business.common.NewsPositionEnum;
 import com.legendshop.business.dao.NewsDao;
+import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.News;
+import com.legendshop.spi.constants.Constants;
+import com.legendshop.spi.constants.NewsPositionEnum;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -74,8 +77,20 @@ public class NewsDaoImpl extends BaseDaoImpl implements NewsDao {
 	 * @see com.legendshop.business.dao.impl.NewsDao#getNews(com.legendshop.core.dao.support.CriteriaQuery)
 	 */
 	@Override
-	public PageSupport getNews(CriteriaQuery cq) {
-		return find(cq);
+	@Cacheable(value="NewsList",condition="T(Integer).parseInt(#curPageNO) < 3")
+	public PageSupport getNews(Locale locale, String curPageNO,String userName,Long newsCategoryId) {
+		// Qbc查找方式
+		CriteriaQuery cq = new CriteriaQuery(News.class, curPageNO);
+		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+		cq.eq("status", Constants.ONLINE);
+		cq.eq("position", NewsPositionEnum.NEWS_NEWS.value());
+		cq.eq("userName", userName);
+		cq.eq("newsCategory.newsCategoryId", newsCategoryId);
+		cq.addOrder("desc", "newsDate");
+		cq.add();
+		PageSupport ps = find(cq);
+		ps.setToolBar(locale, Constants.SIMPLE_PAGE_PROVIDER);
+		return ps;
 	}
 
 }

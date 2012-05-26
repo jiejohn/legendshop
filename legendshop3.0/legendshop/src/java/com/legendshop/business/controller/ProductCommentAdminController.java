@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.ProductCommentService;
@@ -38,6 +37,7 @@ import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ProductComment;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.SafeHtml;
 import com.legendshop.util.sql.ConfigCode;

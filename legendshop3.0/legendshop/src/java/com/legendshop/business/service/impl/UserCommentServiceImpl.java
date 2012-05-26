@@ -11,12 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.legendshop.business.common.CommentTypeEnum;
 import com.legendshop.business.dao.UserCommentDao;
 import com.legendshop.business.service.UserCommentService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.UserComment;
+import com.legendshop.spi.constants.CommentTypeEnum;
 
 /**
  * 用户产品评论服务.

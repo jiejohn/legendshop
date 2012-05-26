@@ -24,11 +24,11 @@
 		</c:forEach>
           <table width="100%" class="tables" cellpadding="0" cellspacing="0">
             <tr><td class="titlebg"><fmt:message key="newsCenter"/></td></tr>
+         <ls:cache key="ALL_NEWS_CATEGORY_${newsCategoryId}" cacheName="NewsList">
           <tr> 
             <td> 
                <div style="margin: 8px;" align="right">
                 <form action="${pageContext.request.contextPath}/allNews${applicationScope.WEB_SUFFIX}" id="form1" method="post">
-                <c:out value="${toolBar}" escapeXml="${toolBar}"></c:out>
                   <fmt:message key="to.topic"/>：
 	           <select id="newsCategoryId" name="newsCategoryId" onchange="this.form.submit();">
 	          		 <option value=""><fmt:message key="please.select"/></option>
@@ -42,7 +42,8 @@
 	            </div>
              	</td>
              </tr>
-           <c:forEach items="${requestScope.newsList}" var="news" varStatus="status">
+             </ls:cache>
+           <c:forEach items="${requestScope.list}" var="news" varStatus="status">
 			<tr> 
                 <td align="left" style="border-bottom: 1px dotted #E9E9E9;padding: 3px">
                 <div>
@@ -63,5 +64,10 @@
 				</td>
 			 </tr>
 			</c:forEach>
+			<tr><td>
+			<div style="margin: 8px;" align="right">
+				<c:out value="${toolBar}" escapeXml="${toolBar}"></c:out>
+			</div>
+			</td></tr>
           </table>
 

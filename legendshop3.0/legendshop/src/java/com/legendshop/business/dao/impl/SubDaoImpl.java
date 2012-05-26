@@ -17,10 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.legendshop.business.common.Constants;
-import com.legendshop.business.common.OrderStatusEnum;
-import com.legendshop.business.common.PayTypeEnum;
-import com.legendshop.business.common.SubStatusEnum;
 import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.ScoreDao;
 import com.legendshop.business.dao.SubDao;
@@ -29,6 +25,10 @@ import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.PayType;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.Sub;
+import com.legendshop.spi.constants.Constants;
+import com.legendshop.spi.constants.OrderStatusEnum;
+import com.legendshop.spi.constants.PayTypeEnum;
+import com.legendshop.spi.constants.SubStatusEnum;
 import com.legendshop.util.AppUtils;
 
 /**

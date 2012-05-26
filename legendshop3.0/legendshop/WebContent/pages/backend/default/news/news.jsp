@@ -63,7 +63,7 @@ jQuery("#form1").validate({
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/news/query${applicationScope.WEB_SUFFIX}">新闻管理</a> &raquo; 创建新闻</td></tr>
     </thead>
-        <table style="width:80%;" class="${tableclass}" id="col1">
+        <table style="width:100%;" class="${tableclass}" id="col1">
           <thead>
                     <tr>
                         <th colspan="2">
@@ -75,44 +75,56 @@ jQuery("#form1").validate({
           <tr>
             <td>
                  新闻标题<font color="FF0000">*</font>
+            </td>
+            <td>
             <input type="text" name="newsTitle" id="newsTitle" size="40" class=input value="${news.newsTitle}" />
             <input type="hidden" id="newsId" name="newsId" value="${news.newsId}"/>
             </td>
           </tr>
-          <tr>
-            <td>
-                 <span title="如果不填写则以新闻内容前面部分代替" style="cursor: pointer;">新闻提要</span>
-                  <input type="text" name="newsBrief" id="newsBrief" size="120" maxlength="200" class=input value="${news.newsBrief}" />
-            </td>
-          </tr>
-         <tr><td>
-				新闻类型
-				<select id="status" name="status">
+         <tr><td>新闻类型</td>
+         <td>
+				<select id="position" name="position">
 				  <option:optionGroup type="select" required="true" cache="true"
 	                beanName="NEWS_POSITION" selectedValue="${news.position}"/>
 	            </select>
-	            栏目
+	            		   栏目
 	            <select id="newsCategoryId" name="newsCategoryId">
 	                 <option:optionGroup type="select" required="false" cache="fasle"
 	                beanName="NewsCategory" beanId="newsCategoryId" beanDisp="newsCategoryName" defaultDisp="-- 请选择 --"
-	                hql="select t.newsCategoryId, t.newsCategoryName from NewsCategory t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${news.newsCategoryId}"/>
+	                hql="select t.newsCategoryId, t.newsCategoryName from NewsCategory t where t.status = 1 and  t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${news.newsCategoryId}"/>
 	            </select>
-	            产品分类            
+	           
+	           
+	            还没有商品类型？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/sort/load${applicationScope.WEB_SUFFIX}">商品类型</a>&nbsp;<a href="${pageContext.request.contextPath}/pages/newsCategory/newsCategory.jsp">创建栏目</a>
+	            </td> 
+		</tr>
+		  <tr><td></td>
+		  <td>状态
+	           <select id="status" name="status">
+				  <option:optionGroup type="select" required="true" cache="true"
+	                beanName="ONOFF_STATUS" selectedValue="${bean.status}"/>
+	            </select>
+	            &nbsp;产品分类            
 	            <select id="sortId" name="sortId">
 	                 <option:optionGroup type="select" required="false" cache="fasle"
 	                beanName="Sort" beanId="sortId" beanDisp="sortName" defaultDisp="-- 请选择 --"
 	                hql="select t.sortId, t.sortName from Sort t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${news.sortId}"/>
 	            </select>
-	            是否重点
+	            &nbsp;高亮
 	            <select id="highLine" name="highLine">
 				  <option:optionGroup type="select" required="false" cache="true"
 	                beanName="YES_NO" selectedValue="${news.highLine}"/>
 	            </select>
-	            还没有商品类型？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/sort/load${applicationScope.WEB_SUFFIX}">商品类型</a>&nbsp;<a href="${pageContext.request.contextPath}/pages/newsCategory/newsCategory.jsp">创建栏目</a>
-	            </td> 
-		</tr>
-          <tr>
+		  </td></tr>
+		   <tr>
             <td>
+                 <span title="如果不填写则以新闻内容前面部分代替" style="cursor: pointer;">新闻提要</span>
+                 
+            </td>
+            <td><input type="text" name="newsBrief" id="newsBrief" size="120" maxlength="200" class=input value="${news.newsBrief}" /></td>
+          </tr>
+          <tr>
+            <td colspan="2">
             <auth:auth ifAnyGranted="F_OPERATOR">
 			<FCK:editor instanceName="newsContent" height="400px" width="100%" basePath="/plugins/fckeditor">
                 <jsp:attribute name="value">${news.newsContent}</jsp:attribute>

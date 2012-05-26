@@ -9,9 +9,9 @@ package com.legendshop.business.common.page;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.legendshop.business.common.Constants;
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
+import com.legendshop.spi.constants.Constants;
 
 /**
  * The Enum TilesPage.

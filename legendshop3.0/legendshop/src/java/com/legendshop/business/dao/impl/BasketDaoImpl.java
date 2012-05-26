@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
@@ -26,6 +25,7 @@ import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.Product;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 
 /**

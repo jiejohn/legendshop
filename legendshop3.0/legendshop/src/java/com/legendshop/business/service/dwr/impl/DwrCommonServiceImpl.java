@@ -28,9 +28,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.servlet.LocaleResolver;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.DynamicPropertiesHelper;
-import com.legendshop.business.common.MyLeagueEnum;
 import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.BrandDao;
 import com.legendshop.business.dao.BusinessDao;
@@ -74,6 +72,8 @@ import com.legendshop.model.entity.ProductDetail;
 import com.legendshop.model.entity.RelProduct;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.Sub;
+import com.legendshop.spi.constants.Constants;
+import com.legendshop.spi.constants.MyLeagueEnum;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.Arith;
 import com.legendshop.util.ContextServiceLocator;
@@ -1015,7 +1015,6 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 		}
 		try {
 			CriteriaQuery cq = new CriteriaQuery(ProductComment.class, curPageNO);
-			cq.setCurPage(curPageNO);
 			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
 			cq.addOrder("desc", "addtime");
 			cq.eq("prodId", prodId);

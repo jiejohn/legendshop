@@ -87,7 +87,7 @@
 	<cache name="ImgFileList" maxElementsInMemory="1000" eternal="false"
 		overflowToDisk="true" timeToIdleSeconds="620" timeToLiveSeconds="120" />
 		
-	<cache name="LEGENDSHOP_CACHE" maxElementsInMemory="10000" eternal="false"
+	<cache name="LEGENDSHOP_CACHE" maxElementsInMemory="30000" eternal="false"
 		overflowToDisk="true" timeToIdleSeconds="820" timeToLiveSeconds="120" />		
 
 </ehcache>

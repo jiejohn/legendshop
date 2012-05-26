@@ -12,12 +12,12 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.BusinessDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.UserComment;
+import com.legendshop.spi.constants.Constants;
 
 /**
  * LegendShop 版权所有 2009-2011,并保留所有权利。

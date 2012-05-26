@@ -20,7 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.SubForm;
 import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.common.page.TilesPage;
@@ -33,6 +32,7 @@ import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.Sub;
+import com.legendshop.spi.constants.Constants;
 
 /**
  * 购物车控制器。.

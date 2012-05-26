@@ -14,10 +14,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.legendshop.business.common.VisitTypeEnum;
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.event.TaskItem;
 import com.legendshop.model.entity.VisitLog;
+import com.legendshop.spi.constants.VisitTypeEnum;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.DateUtil;
 import com.legendshop.util.ip.IPSeeker;

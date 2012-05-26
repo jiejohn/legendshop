@@ -1,11 +1,15 @@
+<%@page import="com.legendshop.util.SafeHtml"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
 <%@page import="net.sf.ehcache.Cache"%>
 <%@page import="com.legendshop.util.ContextServiceLocator"%>
 <%@page import="net.sf.ehcache.CacheManager"%>
 <%@ page import="java.util.*, java.io.*"%>
 <%@page import="java.text.NumberFormat"%>
+
 <br>系统缓存<br>
 <%
+	SafeHtml safeHtml = new SafeHtml();
  	int total = 1000;
 	CacheManager cacheManager = (CacheManager)ContextServiceLocator.getInstance().getBean("ehcacheFactory");
 	String[] cacheNames = cacheManager.getCacheNames();
@@ -22,7 +26,8 @@
 							<tr>
 								<td width="150px"><%=j%> : <%=cache.getName() %> </td>
 								<td  width="30px"><%=cache.getSize() %> </td>
-								<td><%=cache.get(names.get(j)) %></td>
+								<td>
+								<%=cache.get(names.get(j)) == null ? null : safeHtml.makeSafe(cache.get(names.get(j)).toString()) %></pre> </td>
 							</tr>
 						</table>
 						<%

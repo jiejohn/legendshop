@@ -19,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.form.BasketForm;
@@ -38,6 +37,7 @@ import com.legendshop.model.entity.Advertisement;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.Sub;
 import com.legendshop.model.entity.UserDetail;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 
 @Controller

@@ -40,7 +40,7 @@ public class AdvertisementDaoImpl extends BaseDaoImpl implements AdvertisementDa
 	 * @see com.legendshop.business.dao.impl.AdvertisementDao#getAdvertisement(java.lang.String)
 	 */
 	@Override
-	@Cacheable(value="AdvertisementList",key="#shopName")
+	@Cacheable(value="Advertisement",key="#shopName")
 	public Map<String, List<Advertisement>> getAdvertisement(final String shopName) {
 			log.debug("shopName = {}", shopName);
 			Map<String, List<Advertisement>> advertisementMap = new LinkedHashMap<String, List<Advertisement>>();

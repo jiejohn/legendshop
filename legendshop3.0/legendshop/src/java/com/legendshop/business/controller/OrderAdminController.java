@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.service.OrderService;
 import com.legendshop.business.service.timer.SubService;
@@ -36,6 +35,7 @@ import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.Sub;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 
 /**

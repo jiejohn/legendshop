@@ -13,11 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.dao.PubDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.model.entity.Pub;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 
 /**

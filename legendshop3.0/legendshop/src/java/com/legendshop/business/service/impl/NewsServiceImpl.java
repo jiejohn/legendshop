@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.legendshop.business.dao.NewsDao;
-import com.legendshop.business.service.NewsService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
@@ -20,6 +19,8 @@ import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.model.entity.News;
 import com.legendshop.model.entity.NewsCategory;
 import com.legendshop.model.entity.Sort;
+import com.legendshop.spi.constants.NewsPositionEnum;
+import com.legendshop.spi.service.NewsService;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -149,5 +150,10 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	public PageSupport getNewsList(HqlQuery hql) {
 		return newsDao.find(hql);
+	}
+
+	@Override
+	public List<News> getNews(String shopName, NewsPositionEnum newsPositionEnum, Integer num) {
+		return newsDao.getNews(shopName, newsPositionEnum, num);
 	}
 }

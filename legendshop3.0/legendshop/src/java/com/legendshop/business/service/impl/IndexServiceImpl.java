@@ -9,11 +9,11 @@ package com.legendshop.business.service.impl;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.service.IndexService;
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.model.UserInfo;
 import com.legendshop.model.entity.ShopDetailView;
+import com.legendshop.spi.constants.Constants;
 
 /**
  * LegendShop 版权所有 2009-2011,并保留所有权利。

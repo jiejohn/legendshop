@@ -4,8 +4,8 @@
 <%@page import="com.legendshop.model.entity.Sub"%>
 <%@page import="com.legendshop.business.payment.alipay.util.AlipayNotify"%>
 <%@page import="com.legendshop.business.dao.impl.SubDaoImpl"%>
-<%@page import="com.legendshop.business.common.SubStatusEnum"%>
-<%@page import="com.legendshop.business.common.OrderStatusEnum"%>
+<%@page import="com.legendshop.spi.constants.SubStatusEnum"%>
+<%@page import="com.legendshop.spi.constants.OrderStatusEnum"%>
 
 <%
 	/* *

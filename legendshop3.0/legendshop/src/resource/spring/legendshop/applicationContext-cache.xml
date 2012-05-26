@@ -7,7 +7,7 @@
 
 	<cache:annotation-driven key-generator="stringKeyGenerator"/>
 	
-	<bean id="cacheManager" class="com.legendshop.business.cache.EhCacheCacheManager" 
+	<bean id="cacheManager" class="com.legendshop.core.cache.EhCacheCacheManager" 
 		p:cache-manager-ref="ehcacheFactory" 
 		p:supportQueryCache="true"/>
 	

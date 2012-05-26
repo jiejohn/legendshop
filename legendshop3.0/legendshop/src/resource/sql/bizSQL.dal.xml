@@ -61,17 +61,19 @@
                 {? and s.sortId = $sortId$}
                 {? and n.newsTitle like $newsTitle$}
                 {? and n.status = $status$}
+                {? and n.position = $position$}
             </Method>
             <Method name="QueryNews">
                select new News(n.newsId, c.newsCategoryId,
 			c.newsCategoryName, s.sortId, s.sortName,
 			n.newsTitle, n.newsContent, n.newsDate,
-			n.status, n.userId, n.userName,n.highLine) from News n left join n.sort s left join n.newsCategory c where 1=1 
+			n.status, n.position, n.userId, n.userName,n.highLine) from News n left join n.sort s left join n.newsCategory c where 1=1 
                 {? and n.userName = $userName$}
                 {? and c.newsCategoryId = $newsCategoryId$}
                 {? and s.sortId = $sortId$}
                 {? and n.newsTitle like $newsTitle$}
                 {? and n.status = $status$}
+                {? and n.position = $position$}
                 {! order by n.newsDate desc||$orderIndicator$}
             </Method>
             <Method name="getCommend"><![CDATA[

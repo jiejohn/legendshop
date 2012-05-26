@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.legendshop.business.common.RegisterEnum;
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.service.CommonUtil;
 import com.legendshop.core.constant.ParameterEnum;
@@ -29,6 +28,7 @@ import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserDetail;
+import com.legendshop.spi.constants.RegisterEnum;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.MD5Util;
 import com.legendshop.util.ip.IPSeeker;

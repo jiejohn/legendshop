@@ -26,11 +26,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.Constants;
-import com.legendshop.business.common.NewsPositionEnum;
-import com.legendshop.business.common.OrderStatusEnum;
-import com.legendshop.business.common.RegisterEnum;
-import com.legendshop.business.common.VisitTypeEnum;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.common.page.TilesPage;
@@ -105,6 +100,11 @@ import com.legendshop.model.entity.VisitLog;
 import com.legendshop.search.SearchArgs;
 import com.legendshop.search.SearchFacade;
 import com.legendshop.search.SearchResult;
+import com.legendshop.spi.constants.Constants;
+import com.legendshop.spi.constants.NewsPositionEnum;
+import com.legendshop.spi.constants.OrderStatusEnum;
+import com.legendshop.spi.constants.RegisterEnum;
+import com.legendshop.spi.constants.VisitTypeEnum;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.BeanHelper;
 import com.legendshop.util.MD5Util;
@@ -616,7 +616,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public String getSort(HttpServletRequest request, HttpServletResponse response, String curPageNO, Long sortId) {
-		if (AppUtils.isBlank(curPageNO)) {
+		if(curPageNO == null){
 			curPageNO = "1";
 		}
 		if (sortId == null) {
@@ -652,10 +652,9 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	@Override
 	public String getSecSort(HttpServletRequest request, HttpServletResponse response,Long sortId,Long nsortId,Long subNsortId) {
 		String curPageNO = request.getParameter("curPageNO");
-		if (AppUtils.isBlank(curPageNO)) {
+		if(curPageNO == null){
 			curPageNO = "1";
 		}
-
 		String userName = UserManager.getUsername(request);
 		log.info("{},{},{},{},{},nsort", new Object[] { request.getRemoteAddr(), userName == null ? "" : userName,
 				getSessionAttribute(request, Constants.SHOP_NAME), sortId, nsortId });
@@ -832,38 +831,16 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public String getAllNews(HttpServletRequest request, HttpServletResponse response, String curPageNO,
-			String newsCategory) {
-		Long newsCategoryId = null;
-		if (AppUtils.isNotBlank(newsCategory)) {
-			newsCategoryId = Long.parseLong(newsCategory);
-		}
-		if (AppUtils.isBlank(curPageNO)) {
+			Long newsCategoryId) {
+		if(curPageNO == null){
 			curPageNO = "1";
 		}
-		String name = getShopName(request, response);
-		// Qbc查找方式
-		CriteriaQuery cq = new CriteriaQuery(News.class, curPageNO);
-		cq.setCurPage(curPageNO);
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
-		cq.eq("status", Constants.ONLINE);
-		cq.eq("userName", name);
-		cq.eq("newsCategory.newsCategoryId", newsCategoryId);
-		cq.addOrder("desc", "newsDate");
-		cq.add();
-		PageSupport ps = newsDao.getNews(cq);
-		List<News> list = ps.getResultList();
+		String shopName = getShopName(request, response);
 
-		request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
-		request.setAttribute("offset", new Integer(ps.getOffset() + 1));
+		PageSupport ps = newsDao.getNews(localeResolver.resolveLocale(request), curPageNO,shopName,newsCategoryId);
+		ps.savePage(request);
 		request.setAttribute("newsCategoryId", newsCategoryId);
 		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_740, request);
-		if (!AppUtils.isBlank(list)) {
-			request.setAttribute("newsList", list);
-			if (ps.hasMutilPage()) {
-				request.setAttribute("toolBar", ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
-			}
-		}
-
 		return PathResolver.getPath(request, TilesPage.ALL_NEWS);
 	}
 

@@ -22,10 +22,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
-import com.legendshop.business.service.NewsService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
@@ -35,6 +33,8 @@ import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.model.entity.News;
+import com.legendshop.spi.constants.Constants;
+import com.legendshop.spi.service.NewsService;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.CodeFilter;
 import com.legendshop.util.sql.ConfigCode;
@@ -87,7 +87,7 @@ public class NewsAdminController extends BaseController {
 			map.put("newsCategoryId", String.valueOf(news.getNewsCategoryId()));
 			hql.addParams(news.getNewsCategoryId());
 		}
-
+		
 		if (!AppUtils.isBlank(news.getSortId())) {
 			map.put("sortId", String.valueOf(news.getSortId()));
 			hql.addParams(news.getSortId());
@@ -101,6 +101,12 @@ public class NewsAdminController extends BaseController {
 			map.put("status", String.valueOf(news.getStatus()));
 			hql.addParams(news.getStatus());
 		}
+		
+		if (!AppUtils.isBlank(news.getPosition())) {
+			map.put("position", String.valueOf(news.getPosition()));
+			hql.addParams(news.getPosition());
+		}
+		
 		if (!CommonServiceUtil.isDataForExport(hql, request)) {// 非导出情况
 			hql.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 		}
@@ -114,7 +120,7 @@ public class NewsAdminController extends BaseController {
 		hql.setQueryString(QueryNsort);
 
 		PageSupport ps = newsService.getNewsList(hql);
-		savePage(ps, request);
+		ps.savePage(request);
 		request.setAttribute("bean", news);
 		return PathResolver.getPath(request, BackPage.NEWS_LIST_PAGE);
 	}

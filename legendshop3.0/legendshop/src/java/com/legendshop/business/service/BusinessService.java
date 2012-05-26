@@ -199,12 +199,12 @@ public interface BusinessService extends BaseService{
 	 *            the response
 	 * @param curPageNO
 	 *            the cur page no
-	 * @param newsCategory
-	 *            the news category
+	 * @param newsCategoryId
+	 *            the news category id
 	 * @return the string
 	 */
 	public abstract String getAllNews(HttpServletRequest request, HttpServletResponse response, String curPageNO,
-			String newsCategory);
+			Long newsCategoryId);
 
 	/**
 	 * Hotsale.

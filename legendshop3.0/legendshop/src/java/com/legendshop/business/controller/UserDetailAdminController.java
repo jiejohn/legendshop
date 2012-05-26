@@ -23,7 +23,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.event.EventId;
 import com.legendshop.business.service.ShopDetailService;
@@ -38,6 +37,7 @@ import com.legendshop.event.EventHome;
 import com.legendshop.event.GenericEvent;
 import com.legendshop.model.entity.UserDetail;
 import com.legendshop.model.entity.UserDetailView;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.sql.ConfigCode;
 

@@ -20,7 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.ImgFileService;
@@ -38,6 +37,7 @@ import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.model.entity.ImgFile;
 import com.legendshop.model.entity.Product;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 
 /**

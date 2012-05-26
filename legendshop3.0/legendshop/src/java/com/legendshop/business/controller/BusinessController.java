@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.common.page.TilesPage;
@@ -40,6 +39,7 @@ import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.Sub;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.FileConfig;
 
@@ -290,8 +290,8 @@ public class BusinessController extends BaseController {
 	 * @return the string
 	 */
 	@RequestMapping("/allNews")
-	public String allNews(HttpServletRequest request, HttpServletResponse response,String curPageNO,String newsCategory) {
-		return businessService.getAllNews(request, response,curPageNO,newsCategory);
+	public String allNews(HttpServletRequest request, HttpServletResponse response,String curPageNO,Long newsCategoryId) {
+		return businessService.getAllNews(request, response,curPageNO,newsCategoryId);
 	}
 	
 	/**

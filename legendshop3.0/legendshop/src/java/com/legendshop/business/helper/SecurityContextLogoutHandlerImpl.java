@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
-import com.legendshop.business.common.Constants;
+import com.legendshop.spi.constants.Constants;
 /**
  * 
  * LegendShop 版权所有 2009-2011,并保留所有权利。

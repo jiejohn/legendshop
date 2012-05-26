@@ -28,8 +28,8 @@
 	            <input type="text" name="newsCategoryName" maxlength="50" value="${bean.newsCategoryName}" />
 	     状态
 	           <select id="status" name="status">
-				  <option:optionGroup type="select" required="false" cache="true"
-	                beanName="NEWS_POSITION" selectedValue="${bean.position}"/>
+				  <option:optionGroup type="select" required="true" cache="true"
+	                beanName="ONOFF_STATUS" selectedValue="${bean.status}"/>
 	            </select>
          <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
                  商城 

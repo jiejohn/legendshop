@@ -34,7 +34,7 @@
         </auth:auth>
 	</div><div align="left" style="padding: 5px">
             新闻类型
-	           <select id="status" name="status">
+	           <select id="position" name="position">
 				  <option:optionGroup type="select" required="false" cache="true"
 	                beanName="NEWS_POSITION" selectedValue="${bean.position}"/>
 	            </select>
@@ -42,13 +42,18 @@
 	           <select id="newsCategoryId" name="newsCategoryId">
 	                 <option:optionGroup type="select" required="false" cache="fasle"
 	                beanName="NewsCategory" beanId="newsCategoryId" beanDisp="newsCategoryName" 
-	                hql="select t.newsCategoryId, t.newsCategoryName from NewsCategory t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${bean.newsCategoryId}"/>
+	                hql="select t.newsCategoryId, t.newsCategoryName from NewsCategory t where t.status = 1 and t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${bean.newsCategoryId}"/>
 	            </select>
 	       产品分类
 	           <select id="sortId" name="sortId">
 	                 <option:optionGroup type="select" required="false" cache="fasle"
 	                beanName="Sort" beanId="sortId" beanDisp="sortName"
 	                hql="select t.sortId, t.sortName from Sort t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${bean.sortId}"/>
+	            </select>
+	          状态
+	           <select id="status" name="status">
+				  <option:optionGroup type="select" required="true" cache="true"
+	                beanName="ONOFF_STATUS" selectedValue="${bean.status}"/>
 	            </select>
 	         <input type="submit" value="搜索"/>
             <input type="button" value="创建新闻" onclick='window.location="${pageContext.request.contextPath}/admin/news/load${applicationScope.WEB_SUFFIX}"'/>
@@ -61,10 +66,14 @@
          export="true" class="${tableclass}" style="width:100%"  sort="external">
       <display:column title="顺序" class="orderwidth"><%=offset++%></display:column>
       <display:column title="标题"><a href="${pageContext.request.contextPath}/news/${item.newsId}${applicationScope.WEB_SUFFIX}" target="_blank">${item.newsTitle}</a></display:column>
+      <display:column title="新闻类型">
+	             <option:optionGroup type="label" required="true" cache="true"
+	                beanName="NEWS_POSITION" selectedValue="${item.position}" defaultDisp=""/>
+      </display:column>
       <display:column title="栏目">
 	                 ${item.newsCategoryName}
       </display:column>
-      <display:column title="分类">
+      <display:column title="产品分类">
 	                 ${item.sortName}
       </display:column>
       <display:column title="录入时间" property="newsDate" format="{0,date,yyyy-MM-dd HH:mm}" sortable="true" sortName="n.newsDate"></display:column>
@@ -74,7 +83,7 @@
                 <c:otherwise>上线</c:otherwise>
            </c:choose>
       </display:column>
-      <display:column title="重点" sortable="true" sortName="n.highLine">
+      <display:column title="高亮" sortable="true" sortName="n.highLine">
       		 <c:choose>
                 <c:when test="${item.highLine == 1}"><font color="red">是</font></c:when>
                 <c:otherwise></c:otherwise>

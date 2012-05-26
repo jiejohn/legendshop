@@ -15,10 +15,10 @@
            <div class="clear"></div>
         </div>
          <div class="word">
-           <p><span><img src="${pageContext.request.contextPath}/img/group/dot.gif" width="7" height="7" /></span>
-           <span>10天无条件付款+先行赔付</span></p>
-           <p><span><img src="${pageContext.request.contextPath}/img/group/dot.gif" width="7" height="7" /></span>
-           <span>10天无条件付款+先行赔付</span></p>
+          <c:forEach items="${requestScope.groupNewsTopList}" var="news">
+           	<p><span><img src="${pageContext.request.contextPath}/img/group/dot.gif" width="7" height="7" /></span>
+           	<span><a href="<ls:url address='/news/${news.newsId}'/>"  target="_blank">${news.newsTitle}</a></span></p>
+           </c:forEach>
          </div>
          <div class="clear"></div>
       </div>

@@ -7,7 +7,6 @@
  */
 package com.legendshop.business.dao;
 
-import com.legendshop.business.common.RegisterEnum;
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
@@ -15,6 +14,7 @@ import com.legendshop.core.dao.support.SqlQuery;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserDetail;
+import com.legendshop.spi.constants.RegisterEnum;
 
 /**
  * The Interface UserDetailDao.

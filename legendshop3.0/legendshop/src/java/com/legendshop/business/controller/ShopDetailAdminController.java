@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.common.ShopTypeEnum;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.search.facade.ShopDetailSearchFacade;
@@ -42,6 +41,7 @@ import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.UserDetail;
+import com.legendshop.spi.constants.ShopTypeEnum;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.SafeHtml;
 

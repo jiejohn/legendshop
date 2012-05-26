@@ -2,10 +2,10 @@
 <%@page import="com.legendshop.model.entity.Sub"%>
 <%@page import="com.legendshop.business.service.impl.PayTypeServiceImpl"%>
 <%@page import="com.legendshop.model.entity.PayType"%>
-<%@page import="com.legendshop.business.common.OrderStatusEnum"%>
+<%@page import="com.legendshop.spi.constants.OrderStatusEnum"%>
 <%@page import="com.legendshop.business.dao.impl.SubDaoImpl"%>
 <%@page import="com.legendshop.business.payment.alipay.util.AlipayNotify"%>
-<%@page import="com.legendshop.business.common.SubStatusEnum"%>
+<%@page import="com.legendshop.spi.constants.SubStatusEnum"%>
 <%
 	/* *
  功能：付完款后跳转的页面（页面跳转同步通知页面）

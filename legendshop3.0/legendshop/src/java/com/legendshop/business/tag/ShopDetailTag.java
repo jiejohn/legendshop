@@ -11,10 +11,10 @@ import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
 
-import com.legendshop.business.common.Constants;
 import com.legendshop.business.service.ShopDetailService;
 import com.legendshop.core.tag.LegendShopTag;
 import com.legendshop.model.entity.ShopDetailView;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 
 
