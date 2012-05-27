@@ -37,9 +37,9 @@ import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
-import com.legendshop.core.service.NsortService;
 import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Sort;
+import com.legendshop.spi.service.NsortService;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.sql.ConfigCode;
 

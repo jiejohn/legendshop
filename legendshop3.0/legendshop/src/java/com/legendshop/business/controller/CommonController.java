@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ProductTypeEnum;
-import com.legendshop.core.service.NsortService;
-import com.legendshop.core.service.SortService;
 import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Sort;
+import com.legendshop.spi.service.NsortService;
+import com.legendshop.spi.service.SortService;
 
 /**
  * The Class GroupController.

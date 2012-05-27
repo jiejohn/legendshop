@@ -18,8 +18,8 @@ import com.legendshop.core.constant.ProductStatusEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.service.ProductService;
 import com.legendshop.model.entity.Product;
+import com.legendshop.spi.service.ProductService;
 
 /**
  * 产品服务.

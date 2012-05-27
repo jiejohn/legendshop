@@ -35,8 +35,8 @@ import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
-import com.legendshop.core.service.SortService;
 import com.legendshop.model.entity.Sort;
+import com.legendshop.spi.service.SortService;
 import com.legendshop.util.AppUtils;
 
 /**

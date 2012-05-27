@@ -16,8 +16,8 @@ import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
-import com.legendshop.core.service.SortService;
 import com.legendshop.model.entity.Sort;
+import com.legendshop.spi.service.SortService;
 import com.legendshop.util.AppUtils;
 
 

@@ -9,9 +9,9 @@ package com.legendshop.business.tag;
 
 import java.io.IOException;
 
-import com.legendshop.core.service.ProductService;
 import com.legendshop.core.tag.LegendShopTag;
 import com.legendshop.model.entity.Product;
+import com.legendshop.spi.service.ProductService;
 
 
 /**

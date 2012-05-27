@@ -35,9 +35,9 @@ import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
-import com.legendshop.core.service.PartnerService;
 import com.legendshop.model.entity.Partner;
 import com.legendshop.model.entity.ShopDetail;
+import com.legendshop.spi.service.PartnerService;
 import com.legendshop.util.AppUtils;
 
 /**

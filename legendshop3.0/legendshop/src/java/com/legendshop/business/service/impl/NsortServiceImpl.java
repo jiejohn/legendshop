@@ -15,9 +15,9 @@ import com.legendshop.business.dao.NsortDao;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.service.NsortService;
 import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Sort;
+import com.legendshop.spi.service.NsortService;
 import com.legendshop.util.AppUtils;
 
 /**

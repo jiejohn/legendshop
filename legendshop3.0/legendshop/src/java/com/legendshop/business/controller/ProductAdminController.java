@@ -37,8 +37,8 @@ import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
-import com.legendshop.core.service.ProductService;
 import com.legendshop.model.entity.Product;
+import com.legendshop.spi.service.ProductService;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.SafeHtml;
 
