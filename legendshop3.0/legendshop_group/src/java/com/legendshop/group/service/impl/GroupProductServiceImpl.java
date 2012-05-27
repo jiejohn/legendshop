@@ -13,11 +13,11 @@ import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.service.GroupProductService;
-import com.legendshop.core.service.ProductService;
 import com.legendshop.group.dao.GroupProductDao;
 import com.legendshop.model.entity.GroupProduct;
 import com.legendshop.model.entity.Product;
+import com.legendshop.spi.service.GroupProductService;
+import com.legendshop.spi.service.ProductService;
 
 /**
  * The Class GroupProductServiceImpl.

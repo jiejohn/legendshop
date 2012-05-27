@@ -28,15 +28,15 @@ import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.core.service.GroupProductService;
-import com.legendshop.core.service.PartnerService;
-import com.legendshop.core.service.SortService;
 import com.legendshop.model.entity.GroupProduct;
 import com.legendshop.model.entity.Partner;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.Sort;
 import com.legendshop.spi.constants.NewsPositionEnum;
+import com.legendshop.spi.service.GroupProductService;
 import com.legendshop.spi.service.NewsService;
+import com.legendshop.spi.service.PartnerService;
+import com.legendshop.spi.service.SortService;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.sql.ConfigCode;
 
