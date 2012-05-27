@@ -18,13 +18,13 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.LocaleResolver;
 
-import com.legendshop.business.service.BaseService;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.ProductDetail;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.model.visit.VisitHistory;
 import com.legendshop.spi.constants.Constants;
+import com.legendshop.spi.service.BaseService;
 
 /**
  * BaseServiceImpl.

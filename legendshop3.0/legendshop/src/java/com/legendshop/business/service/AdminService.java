@@ -25,6 +25,7 @@ import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.Sort;
+import com.legendshop.spi.service.BaseService;
 
 /**
  * The Interface AdminService.

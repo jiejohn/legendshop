@@ -138,8 +138,6 @@ public class SortAdminController extends BaseController implements AdminControll
 			throw new BusinessException(e,  "save sort error",EntityCodes.SORT,ErrorCodes.BUSINESS_ERROR);
 		}
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		//TODO
-		//request.setAttribute(PageLet.CALL_BACK, "admin/sortList.do");
 		return PathResolver.getPath(request, FowardPage.SORT_LIST_QUERY);
 	}
 

@@ -15,6 +15,7 @@ import com.legendshop.business.form.UserForm;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.model.entity.Sub;
+import com.legendshop.spi.service.BaseService;
 
 public interface BusinessService extends BaseService{
 
