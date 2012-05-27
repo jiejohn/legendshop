@@ -17,5 +17,11 @@
         <property name="groupProductDao" ref="groupProductDao" />
         <property name="productService" ref="productService" />
     </bean>  
+
+	<bean id="groupService" class="com.legendshop.group.service.impl.GroupServiceImpl">
+        <property name="sortService" ref="sortService" />
+        <property name="groupProductService" ref="groupProductService" />
+        <property name="partnerService" ref="partnerService" />
+    </bean>  
 </beans>
    
