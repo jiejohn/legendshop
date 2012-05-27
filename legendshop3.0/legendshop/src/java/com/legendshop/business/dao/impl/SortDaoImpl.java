@@ -155,7 +155,7 @@ public class SortDaoImpl extends BaseDaoImpl implements SortDao {
 	 * .entity.Sort)
 	 */
 	@Override
-	@SortUpdate
+	@CacheEvict(value = "Sort", key="#sort.sortId")
 	public void updateSort(Sort sort) {
 		update(sort);
 	}

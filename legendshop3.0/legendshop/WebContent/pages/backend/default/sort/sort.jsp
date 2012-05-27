@@ -21,10 +21,11 @@
 			 seq: {
 			  required: true,
               number: true
-            },
-			file: {
-				required: "#pictureName:blank"
-			}
+            }
+    //,
+	//		file: {
+	//			required: "#pictureName:blank"
+	//		}
 		},
 		messages: {
 			sortName: "请输入类型名称",

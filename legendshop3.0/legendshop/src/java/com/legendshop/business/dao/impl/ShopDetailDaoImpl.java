@@ -15,9 +15,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
-import com.legendshop.business.cache.ShopDetailUpdate;
 import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.exception.EntityCodes;
@@ -248,7 +248,7 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#updateShopDetail(com.legendshop.model.entity.ShopDetail)
 	 */
 	@Override
-	@ShopDetailUpdate
+	@CacheEvict(value="ShopDetailView", key="#storeName")
 	public void updateShopDetail(ShopDetail shopdetail) {
 		update(shopdetail);
 	}
