@@ -32,7 +32,11 @@ function searchSubmit(){
          
         </form>
          <div class="clear"></div>
-         <p class="hotword">热门搜索：希捷移动硬盘  减肥  北欧欧慕空间大师  i589电子书  瑞士军刀  方正笔记本</p>
+         <p class="hotword">热门搜索：
+   			<c:forEach items="${searchList }" var="hot"> 
+   			<a href="<ls:url address='/searchall'/>?keyword=${hot.title }">${hot.title }</a>&nbsp;
+   			</c:forEach>      
+         </p>
       </div>
        
       <p class="shoplist">
