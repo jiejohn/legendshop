@@ -6,6 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>团购</title>
 <link type="text/css" href="${pageContext.request.contextPath}/css/legend.css" rel="stylesheet"/>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+	    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/addtocart.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/jquery1.6.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/menu.js"></script>
 <script type="text/javascript">
@@ -41,7 +45,63 @@ function lxfEndtime(){
 $(function(){
     lxfEndtime();
  });
- 
+
+
+
+//加入购物车
+ function showcart(show){
+	var facebox1 = document.getElementById("facebox");
+	if(show == 0){
+		facebox1.style.display = "none";
+	}else{
+		   var count = 1;			
+			var carriage = '${groupProduct.product.carriage}';
+			if(carriage == null){
+				carriage = 0;
+			}
+		var prodAttr = getProdAttr();
+		if(prodAttr.startWith("error")){
+			alert('<fmt:message key="please.select" />：' + prodAttr.substring(5));
+			return;
+		}
+		   CommonService.addtocart('${sessionScope.SPRING_SECURITY_LAST_USERNAME}', '${sessionScope.shopName}', ${groupProduct.product.prodId},'${groupProduct.product.pic}', '${groupProduct.product.name}', '${groupProduct.product.cash}', carriage, count,
+		   prodAttr, function(retData){
+		       document.getElementById("basket_total_cash").innerHTML = "<b>" + retData.BASKET_TOTAL_CASH + "</b>";
+		       document.getElementById("basket_count").innerHTML = retData.BASKET_COUNT;
+		       if(retData.BASKET_COUNT > 0){
+		       	document.getElementById("go_ToCash").style.display = "";
+		       }
+		       if(retData.PRODUCT_LESS){
+				 document.getElementById("can_AddToCart").innerHTML = '<fmt:message key="product.less" />';
+				 document.getElementById("product_Less").style.display = "";
+		       }
+    
+		    });
+		    facebox1.style.display = "block";
+	}
+}
+
+
+
+ function getProdAttr(){
+ 	var prodattr = "";
+ 	var errMsg = "";
+ 	var attrselect = $(".attrselect");
+ 	for(var i = 0; i< attrselect.size(); i++){
+ 		if(attrselect.get(i).value == ''){
+ 			errMsg = errMsg + " " + attrselect.get(i).getAttribute("dataValue") ;
+ 		}else{
+ 			prodattr = prodattr + attrselect.get(i).getAttribute("dataValue") +":"+attrselect.get(i).value + ";";
+ 		}
+ 		
+ 	}
+ 	if(errMsg != ""){
+ 		prodattr = "error"+errMsg;
+ 	}
+ 	return prodattr;
+ }
+
+
  </script>
 </head>
 
@@ -98,7 +158,7 @@ $(function(){
                     </tbody></table>
                     <div class="deal-buy">                        
                         <p class="deal-price">
-                            <strong>¥<fmt:formatNumber value="${groupProduct.product.cash}" pattern="#.0#"/></strong><span><a href="#">抢购</a></span></p>
+                            <strong>¥<fmt:formatNumber value="${groupProduct.product.cash}" pattern="#.0#"/></strong><span><a href="javascript:showcart(1)">抢购</a></span></p>
                     </div>
                     
              <div class="downinfo" style="margin-top:75px;"><p><span class="text_red">${groupProduct.product.buys+groupProduct.visualBuys }</span> 人已购买</p></div>                  
@@ -122,7 +182,18 @@ $(function(){
             
         </div>
         <!----up end---->
-        
+        <div id="facebox" style="position: absolute; z-index: 9999; top: 260px; left: 430px; display: none;overflow: hidden;">
+			<div>
+				<h2><span id="can_AddToCart"><fmt:message key="add.tocart.seccess"/></span></h2>
+				<p><fmt:message key="cart.have.products"><fmt:param value='<span id="basket_count">1</span>'/></fmt:message>
+				<span id="basket_total_cash">1.00</span>&nbsp;<fmt:message key="curreny.unit"/></p>
+				<p style="color:#666">
+				   <span id="go_ToCash" style="display: none;"><input type="button" value='<fmt:message key="goto.settlement" />' onclick="javascript:gotoCash();" /></span> 
+					<a href="javascript:showcart(0)"><fmt:message key="buy.others" /></a>
+					<span id="product_Less" style="display: none;"><a href="${pageContext.request.contextPath}/leaveword${applicationScope.WEB_SUFFIX}"><fmt:message key="notice.product.less"/></a></span>
+				</p>
+			</div>
+		</div>
         
         <!----down---->
        <div class="t_info_box t_inback">
