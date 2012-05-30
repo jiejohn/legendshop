@@ -22,8 +22,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.legendshop.business.service.HotsearchService;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ProductTypeEnum;
+import com.legendshop.model.entity.Hotsearch;
 import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Sort;
 import com.legendshop.spi.service.NsortService;
@@ -42,12 +44,16 @@ public class CommonController extends BaseController {
 	private SortService sortService;
 	@Autowired
 	private NsortService nsortService;
+	@Autowired
+	private HotsearchService hotsearchService; 
 
 	@RequestMapping("/top")
 	public String top(HttpServletRequest request, HttpServletResponse response) {
 		log.debug("Top starting calling");
 		Long sortId=ServletRequestUtils.getLongParameter(request, "sortId",-1);
 		String shopName = getShopName(request, response);
+		List<Hotsearch> searchList=hotsearchService.getHotsearch(shopName);
+		
 		List<Sort> headerSortList = sortService.getSort(shopName, ProductTypeEnum.PRODUCT.value(), 1, null, false);
 		List<Sort> navigationSortList = sortService.getSort(shopName, ProductTypeEnum.PRODUCT.value(), null, 1, false);
 		
@@ -88,6 +94,7 @@ public class CommonController extends BaseController {
 			}
 			
 		}
+		request.setAttribute("searchList", searchList);
 		request.setAttribute("deputyMap", deputyMap);
 		request.setAttribute("sTreeMap", sTreeMap);
 		request.setAttribute("tTreeMap", tTreeMap);
