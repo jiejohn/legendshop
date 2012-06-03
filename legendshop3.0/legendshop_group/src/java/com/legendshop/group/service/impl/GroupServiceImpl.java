@@ -2,24 +2,31 @@ package com.legendshop.group.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.servlet.LocaleResolver;
+
 import com.legendshop.core.AttributeKeys;
+import com.legendshop.core.constant.CommonPage;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.group.page.GroupBackPage;
+import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.group.page.GroupFrontPage;
+import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.GroupProduct;
 import com.legendshop.model.entity.Partner;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.Sort;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.GroupProductService;
 import com.legendshop.spi.service.GroupService;
 import com.legendshop.spi.service.PartnerService;
@@ -33,17 +40,20 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 	private SortService sortService;
 	private GroupProductService groupProductService;
 	private PartnerService partnerService;
+
+	private LocaleResolver localeResolver;
 	
+	@Override
 	public String index(HttpServletRequest request, HttpServletResponse response, String curPageNO, String order,
 			String seq, Product product) {
 
 		String shopName = getShopName(request, response);
 		List<Sort> groupSortList=sortService.getSort(shopName, ProductTypeEnum.GROUP.value(),null , null, false);
-		for(Sort s:groupSortList){
-			System.out.println(s.getSortName());
-		}
+//		for(Sort s:groupSortList){
+//			System.out.println(s.getSortName());
+//		}
 		
-		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class), curPageNO);
+		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class), curPageNO);
 		Map<String, String> map = new HashMap<String, String>();
 		if(product != null){
 			fillParameter(hql,map,"sortId",product.getSortId());
@@ -83,6 +93,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 		hql.setQueryString(QueryGroupProd);
 
 		PageSupport ps = groupProductService.getGroupProductList(hql);
+		ps.setToolBar(localeResolver.resolveLocale(request),Constants.SIMPLE_PAGE_PROVIDER);
 		ps.savePage(request);
 		request.setAttribute("prod", product);
 		request.setAttribute("order", order);
@@ -92,16 +103,27 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 		return "/frontend/default/group/index";
 	}
 	
+	@Override
 	public String view(HttpServletRequest request, HttpServletResponse response, Long id) {
 		GroupProduct groupProduct=groupProductService.getGroupProduct(id);
-		
-		Long partnerId=groupProduct.getPartnerId();
-		if(partnerId!=null){
-			Partner partner=partnerService.getPartner(partnerId);
-			request.setAttribute("partner", partner);
+		if(groupProduct!=null){
+			Long partnerId=groupProduct.getPartnerId();
+			if(partnerId!=null){
+				Partner partner=partnerService.getPartner(partnerId);
+				request.setAttribute("partner", partner);
+			}
+			request.setAttribute("groupProduct", groupProduct);
+			return PathResolver.getPath(request, GroupFrontPage.VIEW);
+		}else{
+			UserMessages uem = new UserMessages();
+			Locale locale = localeResolver.resolveLocale(request);
+			uem.setTitle(ResourceBundleHelper.getString(locale, "product.not.found"));
+			uem.setDesc(ResourceBundleHelper.getString(locale, "product.status.check"));
+			uem.setCode(ErrorCodes.PRODUCT_NO_FOUND);
+			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
+			return PathResolver.getPath(request, CommonPage.ERROR_PAGE);
 		}
-		request.setAttribute("groupProduct", groupProduct);
-		return PathResolver.getPath(request, GroupFrontPage.VIEW);
+
 	}
 
 	private void fillParameter(HqlQuery hql,Map<String, String> map,String key,Object value){
@@ -122,6 +144,10 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 
 	public void setPartnerService(PartnerService partnerService) {
 		this.partnerService = partnerService;
+	}
+
+	public void setLocaleResolver(LocaleResolver localeResolver) {
+		this.localeResolver = localeResolver;
 	}
 
 }

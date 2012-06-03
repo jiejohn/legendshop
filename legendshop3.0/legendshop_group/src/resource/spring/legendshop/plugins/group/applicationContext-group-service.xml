@@ -22,6 +22,7 @@
         <property name="sortService" ref="sortService" />
         <property name="groupProductService" ref="groupProductService" />
         <property name="partnerService" ref="partnerService" />
+        <property name="localeResolver" ref="localeResolver" />
     </bean>  
 </beans>
    

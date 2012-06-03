@@ -9,6 +9,8 @@ package com.legendshop.group.dao.impl;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
+
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.group.dao.GroupProductDao;
 import com.legendshop.model.entity.GroupProduct;
@@ -23,6 +25,7 @@ public class GroupProductDaoImpl extends BaseDaoImpl implements GroupProductDao 
 	/* (non-Javadoc)
 	 * @see com.legendshop.group.dao.GroupProductDao#getProductById(java.lang.Long)
 	 */
+	@Override
 	public Product getProductById(Long prodId) {
 		return get(Product.class, prodId);
 	}
@@ -30,6 +33,7 @@ public class GroupProductDaoImpl extends BaseDaoImpl implements GroupProductDao 
 	/* (non-Javadoc)
 	 * @see com.legendshop.group.dao.GroupProductDao#updateProduct(com.legendshop.model.entity.GroupProduct)
 	 */
+	@Override
 	public void updateProduct(GroupProduct product) {
 		update(product);
 	}
@@ -37,6 +41,7 @@ public class GroupProductDaoImpl extends BaseDaoImpl implements GroupProductDao 
 	/* (non-Javadoc)
 	 * @see com.legendshop.group.dao.GroupProductDao#saveProduct(com.legendshop.model.entity.GroupProduct)
 	 */
+	@Override
 	public void saveProduct(GroupProduct product) {
 		save(product);
 	}
@@ -44,8 +49,11 @@ public class GroupProductDaoImpl extends BaseDaoImpl implements GroupProductDao 
 	/* (non-Javadoc)
 	 * @see com.legendshop.group.dao.GroupProductDao#getGroupProduct(java.lang.Long)
 	 */
+	@Override
+	@Cacheable(value="Product")
 	public GroupProduct getGroupProduct(Long prodId){
-		String strHQL = "select p,g from Product p, GroupProduct g where p.prodId = g.prodId and p.prodId = ?";
+		//团购产品
+		String strHQL = "select p,g from Product p, GroupProduct g where p.prodId = g.prodId and p.prodId = ? and p.prodType = 'G'";
 		List<Object[]> list = findByHQL(strHQL, prodId);
 		if(AppUtils.isNotBlank(list)){
 			Product p = (Product)list.get(0)[0];
@@ -59,6 +67,7 @@ public class GroupProductDaoImpl extends BaseDaoImpl implements GroupProductDao 
 	/* (non-Javadoc)
 	 * @see com.legendshop.group.dao.GroupProductDao#deleteProduct(java.lang.Long)
 	 */
+	@Override
 	public void deleteProduct(Long prodId) {
 		deleteById(GroupProduct.class, prodId);
 	}
