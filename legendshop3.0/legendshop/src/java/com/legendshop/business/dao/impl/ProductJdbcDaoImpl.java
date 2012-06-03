@@ -114,6 +114,7 @@ public class ProductJdbcDaoImpl extends ProductDaoImpl {
 			product.setNsortName(rs.getString("nsort_name"));
 			product.setSubNsortName(rs.getString("sub_nsort_name"));
 			product.setBrandName(rs.getString("brand_name"));
+			product.setProdType(rs.getString("prod_type"));
 			return product;
 		}
 	}

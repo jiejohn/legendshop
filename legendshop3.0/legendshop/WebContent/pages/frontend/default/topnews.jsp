@@ -8,24 +8,24 @@
 	</tr>
 	<tr height="136px">
 		<td valign="top" align="left">
-			<c:forEach items="${requestScope.newList}" var="new">
+			<c:forEach items="${requestScope.newList}" var="article">
 				<div class="topnewsfixed">
 						<c:choose>
-                          <c:when test="${fn:length(new.newsTitle) > 20}">
-	                        <div title="${new.newsTitle}">
+                          <c:when test="${fn:length(article.newsTitle) > 20}">
+	                        <div title="${article.newsTitle}">
 	                            <img src="${pageContext.request.contextPath}/img/dot.gif" width="15" height="15" style="margin-left: 3px">
-	                            <a href="${pageContext.request.contextPath}/news/${new.newsId}${applicationScope.WEB_SUFFIX}"><c:choose>
-                                	<c:when test="${new.highLine == 1}"><span style="color:#FF6600">${new.newsTitle}</span></c:when>
-                                	<c:otherwise>${new.newsTitle}</c:otherwise>
+	                            <a href="${pageContext.request.contextPath}/news/${article.newsId}${applicationScope.WEB_SUFFIX}"><c:choose>
+                                	<c:when test="${article.highLine == 1}"><span style="color:#FF6600">${article.newsTitle}</span></c:when>
+                                	<c:otherwise>${article.newsTitle}</c:otherwise>
                                 </c:choose></a>&nbsp;
 	                        </div>
                           </c:when>
 						  <c:otherwise>
 						    <div>
                                 <img src="${pageContext.request.contextPath}/img/dot.gif" width="15" height="15" style="margin-left: 3px">
-                                <a href="${pageContext.request.contextPath}/news/${new.newsId}${applicationScope.WEB_SUFFIX}"><c:choose>
-                                	<c:when test="${new.highLine == 1}"><span style="color:#FF6600">${new.newsTitle}</span></c:when>
-                                	<c:otherwise>${new.newsTitle}</c:otherwise>
+                                <a href="${pageContext.request.contextPath}/news/${article.newsId}${applicationScope.WEB_SUFFIX}"><c:choose>
+                                	<c:when test="${article.highLine == 1}"><span style="color:#FF6600">${article.newsTitle}</span></c:when>
+                                	<c:otherwise>${article.newsTitle}</c:otherwise>
                                 </c:choose></a>&nbsp;
                             </div>
 						  </c:otherwise>

@@ -21,7 +21,6 @@ import com.legendshop.business.service.BasketService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
-import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.spi.constants.Constants;
 
 /**
@@ -79,7 +78,7 @@ public class BasketController extends BaseController {
 			if ("added".equals(addtoCart)) {// 如果是采用购物车订购的话直接进入付款页面
 				destView = "/basket/load/";
 			}
-			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + destView + prodId + Constants.WEB_SUFFIX);
+			//request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + destView + prodId + Constants.WEB_SUFFIX);
 			return PathResolver.getPath(request, TilesPage.NO_LOGIN);
 		}
 		String shopName = getShopName(request, response);

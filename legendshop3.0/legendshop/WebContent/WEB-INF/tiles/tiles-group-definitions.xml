@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE tiles-definitions PUBLIC        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-
+	<!-- page define -->	
+	<definition name="cash1.*"   template="/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/pages/frontend/{1}/cash.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>

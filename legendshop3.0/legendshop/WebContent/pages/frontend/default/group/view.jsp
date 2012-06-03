@@ -4,7 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>团购</title>
+<lb:shopDetail var="shopDetail" >
+<title>${shopDetail.sitename}</title>
+</lb:shopDetail>
 <link type="text/css" href="${pageContext.request.contextPath}/css/legend.css" rel="stylesheet"/>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
@@ -59,11 +61,7 @@ $(function(){
 			if(carriage == null){
 				carriage = 0;
 			}
-		var prodAttr = getProdAttr();
-		if(prodAttr.startWith("error")){
-			alert('<fmt:message key="please.select" />：' + prodAttr.substring(5));
-			return;
-		}
+		var prodAttr = "";
 		   CommonService.addtocart('${sessionScope.SPRING_SECURITY_LAST_USERNAME}', '${sessionScope.shopName}', ${groupProduct.product.prodId},'${groupProduct.product.pic}', '${groupProduct.product.name}', '${groupProduct.product.cash}', carriage, count,
 		   prodAttr, function(retData){
 		       document.getElementById("basket_total_cash").innerHTML = "<b>" + retData.BASKET_TOTAL_CASH + "</b>";
@@ -81,25 +79,10 @@ $(function(){
 	}
 }
 
-
-
- function getProdAttr(){
- 	var prodattr = "";
- 	var errMsg = "";
- 	var attrselect = $(".attrselect");
- 	for(var i = 0; i< attrselect.size(); i++){
- 		if(attrselect.get(i).value == ''){
- 			errMsg = errMsg + " " + attrselect.get(i).getAttribute("dataValue") ;
- 		}else{
- 			prodattr = prodattr + attrselect.get(i).getAttribute("dataValue") +":"+attrselect.get(i).value + ";";
- 		}
- 		
- 	}
- 	if(errMsg != ""){
- 		prodattr = "error"+errMsg;
- 	}
- 	return prodattr;
- }
+ function gotoCash(){
+		document.getElementById("addtoCart").value = "added";
+		document.getElementById("form1").submit();
+}
 
 
  </script>
@@ -112,11 +95,14 @@ $(function(){
 </jsp:include>
 <!----地址---->
  <div class="w addr">
-   <span><a href="#">首页</a></span>&gt;<span><a href="<ls:url address='/group/index'/>">团购</a></span>&gt;<span>${groupProduct.product.name}</span> 
+   <span><a href="<ls:url address='/group/index'/>">首页</a></span>&gt;<span>团购</span>&gt;<span>${groupProduct.product.name}</span> 
  </div>
-<!----地址end---->
+<!----地址end-
  <div class="w banner1"><img src="${pageContext.request.contextPath}/img/group/banner1.gif" width="1216" height="128" /></div>
-
+<c:forEach items="${requestScope.INDEX_ADV_TOP}" var="adv">
+ <div class="w banner1"><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" width="1216" height="128" /></a></div>
+</c:forEach>
+--->
 <!----两栏---->
  <div class="w"> 
     <!----右边---->
@@ -229,13 +215,7 @@ $(function(){
        </div>
         <!----down end---->
     
-           
-       
-       
-       
-        
-                
-     
+
     </div>
     <!----左边end---->
     
@@ -243,7 +223,9 @@ $(function(){
  </div>
 <!----两栏end---->
 
-<jsp:include page="/common/foot${applicationScope.WEB_SUFFIX}"/>
- 
+                     <form action="${pageContext.request.contextPath}/basket/query${applicationScope.WEB_SUFFIX}" id="form1" method="post">
+                      <input type="hidden" id="prodId" name="prodId" value="${groupProduct.product.prodId}"/>
+                      <input type="hidden" id="addtoCart" name="addtoCart"/>
+                      </form>
 </body>
 </html>

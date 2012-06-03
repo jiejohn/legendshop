@@ -1,5 +1,5 @@
   function openbag(id) {
-    window.open("/basket${applicationScope.WEB_SUFFIX}?prodprodId="+id,"","height=420,width=530,left=190,top=10,resizable=yes,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no");
+    window.open("/basket.htm?prodprodId="+id,"","height=420,width=530,left=190,top=10,resizable=yes,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no");
   } 
   function openScript(url, width, height){
 	var Win = window.open(url,"openScript",'width=' + width + ',height=' + height + ',resizable=1,scrollbars=yes,menubar=no,status=yes' );
@@ -24,9 +24,9 @@ function searchPager(curPageNO){
 function advanceSearch(path){
 	if(form1_onsubmit()){
 	if(path !=null && path != "undefined" && path != ""){
-		window.location.href = path+ '/searchall${applicationScope.WEB_SUFFIX}?keyword=' + document.getElementById("headerkeywordp").value;
+		window.location.href = path+ '/searchall.htm?keyword=' + document.getElementById("headerkeywordp").value;
 	}else{
-	    window.location.href = '/searchall${applicationScope.WEB_SUFFIX}?keyword=' + document.getElementById("headerkeywordp").value;
+	    window.location.href = '/searchall.htm?keyword=' + document.getElementById("headerkeywordp").value;
 	}
 		
 	}

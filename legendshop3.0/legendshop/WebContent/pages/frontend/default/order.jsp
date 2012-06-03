@@ -89,11 +89,11 @@
          	 <!-- 5:交易关闭 -->
             <a href="javascript:void(0)" onclick='javascript:updateSubStatus("${order.subId}",5,"${order.subNumber}");'><fmt:message key="trade.close"/></a>
         </c:if>
-       <!-- 用户不可删除，系统在30天后自动housekeep
+       <!-- 用户不可删除，系统在30天后自动housekeep-->
         <c:if test="${order.status == 1 or order.status == 7}">
         	<a href='javascript:deleteSub("${order.subId}","${order.subNumber}");'><fmt:message key="delete"/></a>
         </c:if>
-         -->
+         
         </td>
       
       </tr>

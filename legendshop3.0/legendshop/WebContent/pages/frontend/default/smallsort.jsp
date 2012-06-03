@@ -87,7 +87,7 @@
                     </tr>
         <tr> 
           <td width="100%">
-           				<form action="${pageContext.request.contextPath}/nsort${applicationScope.WEB_SUFFIX}" id="form1" method="post">
+           				<form action="${pageContext.request.contextPath}/nsort${applicationScope.WEB_SUFFIX}" id="form1" method="get">
 										<input type="hidden" id="curPageNO" name="curPageNO"
 											value="${prod.curPageNO}">
 										<input type="hidden" name="sortId" value="${sort.sortId}">

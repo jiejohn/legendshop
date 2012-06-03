@@ -4,10 +4,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>团购</title>
+<lb:shopDetail var="shopDetail" >
+<title>${shopDetail.sitename}</title>
+</lb:shopDetail>
 <%-- <link type="text/css" href="${pageContext.request.contextPath}/css/legend.css" rel="stylesheet"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/jquery1.6.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/menu.js"></script> --%>
+<link href="${pageContext.request.contextPath}/common/css/pager.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 function lxfEndtime(){
     $(".lxftime").each(function() {
@@ -39,7 +42,7 @@ function lxfEndtime(){
  setTimeout("lxfEndtime()",1000);
 };
 $(function(){
-    lxfEndtime();
+  //  lxfEndtime();
  });
  
 
@@ -72,7 +75,7 @@ function changeOrder(order,seq){
 
 <!----地址---->
  <div class="w addr">
-   <span><a href="#">首页</a></span>&gt;<span>团购</span> 
+   <span><a href="<ls:url address='/group/index'/>">首页</a></span>&gt;<span>团购</span> 
  </div>
 <!----地址end---->
  <div class="w banner1">
@@ -94,7 +97,7 @@ function changeOrder(order,seq){
     
     <!----左边---->
     <div class="t_left">
-      <form action="<ls:url address='/group/index'/>" method="post" id="form1">
+      <form action="<ls:url address='/group/index'/>" method="get" id="form1">
     	<input type="hidden" id="curPageNO" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
       	<input type="hidden" id="sortId" name="sortId" value="${prod.sortId }" />
       	<input type="hidden" id="order" name="order" value="${order }" />
@@ -140,21 +143,19 @@ function changeOrder(order,seq){
           	<c:when test="${not empty item.brief }">${item.brief }</c:when>
           	<c:otherwise>${item.name}</c:otherwise>
           </c:choose>
-          
-          
           </a></h1>
-          <div class="cover"><a href="<ls:url address='/group/view/${item.prodId }'/>"><img src="${pageContext.request.contextPath}/photoserver/photo/${item.pic}" width="372" height="225" /></a></div>
+          <div class="cover"><a href="<ls:url address='/group/view/${item.prodId}'/>"><img src="${pageContext.request.contextPath}/photoserver/photo/${item.pic}" width="372" height="225" /></a></div>
           
           <div class="priceit">
                         <span><font>${item.buys }</font>人已购买</span>
                         原价：<font><fmt:formatNumber value="${item.price}" pattern="#.0#"/>元</font>
                         <font class="zhe">
-                        <c:if test="${item.cash > 0 and item.price > 0 }">
+                        <c:if test="${item.cash > 0 and item.price > 0}">
                         <fmt:formatNumber  value="${item.cash*10 / item.price}" pattern="#.#"/>折
                         </c:if>
                         </font>
           </div>
-          <a title="团购"  href="<ls:url address='/group/view/${item.prodId }'/>">
+          <a title="团购"  href="<ls:url address='/group/view/${item.prodId}'/>">
           <div class="buyit">
                         <span><fmt:formatNumber value="${item.cash}" pattern="#.0#"/></span>
                        <span class="tg"></span>

@@ -10,37 +10,6 @@ a:link { text-decoration: none }
 td {  font-size: 10pt;}
 .afterOperate { font-weight: bold;font-size: 1.2em;color: #666666 }
 
-.pagerUnselected{
-	margin: 0 2px; 
-	padding: 0 5px;
-	color:black;
-	border: 1px solid #CCCCCC;
-	font-size: 10pt;
-	}
-.pagerDirectionLeft{
-	margin: 0 2px; 
-	padding: 0 5px;
-	color:black;
-	border: 1px solid #CCCCCC;
-	font-size: 10pt;
-	}
-.pagerDirectionRight{
-	margin: 0 2px ; 
-	padding: 0 5px;
-	color:black;
-	border: 1px solid #CCCCCC;
-	font-size: 10pt;
-	}	
-
-.pagerSelected {
-	font-weight: bold; 
-	margin: 0 2px; 
-	padding: 0 5px;
-	color:white;
-	background-color:#FF9900;
-	border: 1px solid #FF9900;
-	font-size: 10pt;
-	} 
 /* 
  flashNews 530px:长度
  flashNews, .firstNews 290px：宽度

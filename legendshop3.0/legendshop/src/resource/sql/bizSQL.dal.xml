@@ -222,7 +222,7 @@
 					prod.status AS status,prod.modify_date AS modify_date,prod.user_id AS user_id,prod.user_name AS user_name,
 					prod.start_date AS start_date,prod.end_date AS end_date,prod.stocks AS stocks,prod.prod_type AS prod_type,prod.key_word AS key_word,
 					prod.attribute AS attribute,prod.parameter AS parameter,prod.brand_id AS brand_id,sort.sort_name AS sort_name,nsort2.nsort_name AS nsort_name,
-					nsort3.nsort_name AS sub_nsort_name,brand.brand_name AS brand_name
+					nsort3.nsort_name AS sub_nsort_name,brand.brand_name AS brand_name,prod.prod_type AS prod_type
 					from ls_prod prod 
 					left join ls_sort sort on prod.sort_id = sort.sort_id
 					left join ls_nsort nsort2 on prod.nsort_id = nsort2.nsort_id
@@ -237,7 +237,7 @@
 					prod.status AS status,prod.modify_date AS modify_date,prod.user_id AS user_id,prod.user_name AS user_name,
 					prod.start_date AS start_date,prod.end_date AS end_date,prod.stocks AS stocks,prod.prod_type AS prod_type,prod.key_word AS key_word,
 					prod.attribute AS attribute,prod.parameter AS parameter,prod.brand_id AS brand_id,sort.sort_name AS sort_name,nsort2.nsort_name AS nsort_name,
-					nsort3.nsort_name AS sub_nsort_name,brand.brand_name AS brand_name
+					nsort3.nsort_name AS sub_nsort_name,brand.brand_name AS brand_name,prod.prod_type AS prod_type
 					from ls_prod prod 
 					left join ls_sort sort on prod.sort_id = sort.sort_id
 					left join ls_nsort nsort2 on prod.nsort_id = nsort2.nsort_id

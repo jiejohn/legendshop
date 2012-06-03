@@ -8,17 +8,17 @@
 	</tr>
 	<tr height="135px">
 		<td valign="top" align="left">
-			<c:forEach items="${requestScope.newList}" var="new">
+			<c:forEach items="${requestScope.newList}" var="article">
 				<div class="topnewsfixed">
                         <c:choose>
-                          <c:when test="${fn:length(new.newsTitle) > 18}">
-                            <div  title="${new.newsTitle}" class="topnewsfixed">
-                                <img src="${pageContext.request.contextPath}/img/dot.gif" style="margin-left: 3px"><a href="${pageContext.request.contextPath}/news/${new.newsId}${applicationScope.WEB_SUFFIX}">${new.newsTitle}</a>
+                          <c:when test="${fn:length(article.newsTitle) > 18}">
+                            <div  title="${article.newsTitle}" class="topnewsfixed">
+                                <img src="${pageContext.request.contextPath}/img/dot.gif" style="margin-left: 3px"><a href="${pageContext.request.contextPath}/news/${new.newsId}${applicationScope.WEB_SUFFIX}">${article.newsTitle}</a>
                             </div>
                           </c:when>
                           <c:otherwise>
                             <div class="topnewsfixed">
-                                <img src="${pageContext.request.contextPath}/img/dot.gif" width="15" height="15" style="margin-left: 3px"><a href="${pageContext.request.contextPath}/news/${new.newsId}${applicationScope.WEB_SUFFIX}">${new.newsTitle}</a>
+                                <img src="${pageContext.request.contextPath}/img/dot.gif" width="15" height="15" style="margin-left: 3px"><a href="${pageContext.request.contextPath}/news/${article.newsId}${applicationScope.WEB_SUFFIX}">${article.newsTitle}</a>
                             </div>
                           </c:otherwise>
                         </c:choose>

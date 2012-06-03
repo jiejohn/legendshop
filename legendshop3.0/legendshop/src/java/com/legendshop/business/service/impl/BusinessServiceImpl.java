@@ -61,6 +61,7 @@ import com.legendshop.core.constant.LanguageEnum;
 import com.legendshop.core.constant.LuceneIndexerEnum;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
@@ -699,9 +700,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (prodId == null) {
 			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
 		}
-		
 		ProductDetail prod = productDao.getProdDetail(prodId);
+
 		if (prod != null) {
+			if(ProductTypeEnum.GROUP.value().equals(prod.getProdType())){
+				return PathResolver.getPath(request,"/group/view/" + prodId, FowardPage.VARIABLE);
+			}
 			if (!Constants.ONLINE.equals(prod.getStatus())) {
 				throw new NotFoundException("Product does not online.",EntityCodes.PROD);
 			}
