@@ -108,7 +108,7 @@ public class News implements BaseEntity {
     public News(Long newsId, Long newsCategoryId,
 			String newsCategoryName, Long sortId, String sortName,
 			String newsTitle, String newsContent, Date newsDate,
-			Integer status, String userId, String userName,Integer highLine) {
+			Integer status, Integer position, String userId, String userName,Integer highLine) {
 		super();
 		this.newsId = newsId;
 		this.newsCategoryId = newsCategoryId;
@@ -119,6 +119,7 @@ public class News implements BaseEntity {
 		this.newsContent = newsContent;
 		this.newsDate = newsDate;
 		this.status = status;
+		this.position = position;
 		this.userId = userId;
 		this.userName = userName;
 		this.highLine = highLine;
