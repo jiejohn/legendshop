@@ -14,11 +14,14 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.ProductDetail;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.model.visit.VisitHistory;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.BaseService;
+import com.legendshop.util.AppUtils;
 
 /**
  * The Class AbstractService.
@@ -34,7 +37,7 @@ public abstract class AbstractService  implements BaseService{
 	
 	public Object getSessionAttribute(HttpServletRequest request, String name) {
 		Object obj = null;
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		if (session != null) {
 			obj = session.getAttribute(name);
 		}
@@ -46,7 +49,14 @@ public abstract class AbstractService  implements BaseService{
 	 */
 	
 	public String getShopName(HttpServletRequest request, HttpServletResponse response) {
-		return (String) getSessionAttribute(request, Constants.SHOP_NAME);
+		String shopName = (String) getSessionAttribute(request, Constants.SHOP_NAME);
+		if(AppUtils.isBlank(shopName)){
+			String defaultShopName =  PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
+			setSessionAttribute(request, Constants.SHOP_NAME, defaultShopName);
+			return defaultShopName;
+		}else{
+			return shopName;
+		}
 	}
 
 	/* (non-Javadoc)
@@ -54,7 +64,7 @@ public abstract class AbstractService  implements BaseService{
 	 */
 	
 	public void setSessionAttribute(HttpServletRequest request, String name, Object obj) {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		if (session != null) {
 			session.setAttribute(name, obj);
 		}
