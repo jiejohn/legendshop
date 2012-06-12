@@ -11,14 +11,14 @@ CREATE TABLE `ls_adv` (
   `source_input` varchar(255) DEFAULT NULL COMMENT '广告来源',
   PRIMARY KEY (`id`),
   KEY `advertisement_user_name` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COMMENT='广告表';
+) AUTO_INCREMENT=40  COMMENT='广告表';
 CREATE TABLE `ls_areas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `areaid` varchar(20) NOT NULL,
   `area` varchar(50) NOT NULL,
   `cityid` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3145 DEFAULT CHARSET=utf8;
+) AUTO_INCREMENT=3145  COMMENT='地区表';
 CREATE TABLE `ls_ask` (
   `ask_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '提问人ID',
@@ -31,7 +31,7 @@ CREATE TABLE `ls_ask` (
   `create_time` datetime NOT NULL COMMENT '提问时间',
   `reply_time` datetime DEFAULT NULL COMMENT '回复时间',
   PRIMARY KEY (`ask_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户提问表';
+)  COMMENT='用户提问表';
 CREATE TABLE `ls_basket` (
   `basket_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `prod_id` int(11) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `ls_basket` (
   PRIMARY KEY (`basket_id`),
   KEY `basket_shop_name_key` (`shop_name`),
   KEY `find_by_sub_number` (`sub_number`,`basket_check`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8 COMMENT='购物车';
+) AUTO_INCREMENT=135  COMMENT='购物车';
 CREATE TABLE `ls_brand` (
   `brand_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `brand_name` varchar(30) DEFAULT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE `ls_brand` (
   `memo` varchar(50) DEFAULT NULL,
   `seq` tinyint(3) DEFAULT NULL COMMENT '顺序',
   PRIMARY KEY (`brand_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) AUTO_INCREMENT=35  COMMENT='品牌表';
 CREATE TABLE `ls_cash` (
   `cash_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '代金券ID',
   `user_id` varchar(32) NOT NULL DEFAULT '0' COMMENT '用户ID',
@@ -79,14 +79,14 @@ CREATE TABLE `ls_cash` (
   `ip` varchar(16) DEFAULT NULL COMMENT '使用时的IP',
   `create_time` datetime NOT NULL COMMENT '建立时间',
   PRIMARY KEY (`cash_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代金券';
+)  COMMENT='代金券';
 CREATE TABLE `ls_cities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cityid` varchar(20) NOT NULL,
   `city` varchar(50) NOT NULL,
   `provinceid` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=346 DEFAULT CHARSET=utf8;
+) AUTO_INCREMENT=346  COMMENT='城市表';
 CREATE TABLE `ls_coupon` (
   `coupon_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` varchar(32) NOT NULL DEFAULT '0' COMMENT '用户ID',
@@ -108,24 +108,23 @@ CREATE TABLE `ls_coupon` (
   `sms_time` datetime DEFAULT NULL COMMENT '短信发送时间',
   `buy_id` int(11) NOT NULL COMMENT '该项目下的购买次序',
   PRIMARY KEY (`coupon_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='团购优惠券';
+)  COMMENT='团购优惠券';
 CREATE TABLE `ls_cst_table` (
   `type` varchar(50) NOT NULL DEFAULT '' COMMENT '常量类型',
   `key_value` varchar(50) NOT NULL DEFAULT '',
   `value` varchar(100) DEFAULT NULL,
-  `seq` int(5) DEFAULT NULL,
-  PRIMARY KEY (`key_value`,`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `seq` int(5) DEFAULT NULL
+)  COMMENT='常量表';
 CREATE TABLE `ls_delivery` (
   `dvy_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` varchar(32) NOT NULL DEFAULT '0' COMMENT '用户ID',
   `user_name` varchar(50) NOT NULL DEFAULT '0' COMMENT '用户名称',
-  `name` varchar(50) DEFAULT NULL COMMENT '物流公司名称',
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '物流公司名称',
   `url` varchar(255) DEFAULT NULL COMMENT '邮编',
   `create_time` datetime NOT NULL COMMENT '建立时间',
   `modify_time` datetime NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`dvy_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='物流公司';
+) AUTO_INCREMENT=16  COMMENT='物流公司';
 CREATE TABLE `ls_dol_log` (
   `dl_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `area` varchar(100) DEFAULT NULL,
@@ -136,20 +135,20 @@ CREATE TABLE `ls_dol_log` (
   `file_name` varchar(200) NOT NULL,
   `rec_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`dl_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='下载历史';
+)  COMMENT='下载历史';
 CREATE TABLE `ls_dvy_type` (
   `dvy_type_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` varchar(32) NOT NULL DEFAULT '0' COMMENT '用户ID',
   `user_name` varchar(50) NOT NULL DEFAULT '0' COMMENT '用户名称',
   `dvy_id` int(11) NOT NULL COMMENT '物流公司ID',
   `type` varchar(50) DEFAULT NULL COMMENT '配送类型',
-  `name` varchar(50) DEFAULT NULL COMMENT '配送方式名称',
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '配送方式名称',
   `notes` varchar(150) DEFAULT '' COMMENT '描述',
   `create_time` datetime NOT NULL COMMENT '建立时间',
   `modify_time` datetime NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`dvy_type_id`),
   KEY `dvy_id` (`dvy_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物流配送方式';
+) AUTO_INCREMENT=5  COMMENT='物流配送方式';
 CREATE TABLE `ls_dyn_temp` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '' COMMENT '名称',
@@ -158,7 +157,7 @@ CREATE TABLE `ls_dyn_temp` (
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名',
   PRIMARY KEY (`Id`),
   UNIQUE KEY `user_name` (`user_name`,`name`,`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COMMENT='商品动态属性模板';
+) AUTO_INCREMENT=57  COMMENT='商品动态属性模板';
 CREATE TABLE `ls_event` (
   `event_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` varchar(32) NOT NULL DEFAULT '0' COMMENT '操作员ID',
@@ -168,7 +167,7 @@ CREATE TABLE `ls_event` (
   `relate_data` text COMMENT '相关数据',
   `create_time` datetime NOT NULL COMMENT '建立时间',
   PRIMARY KEY (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统事件';
+)  COMMENT='系统事件';
 CREATE TABLE `ls_extl_link` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '广告',
   `url` varchar(300) DEFAULT NULL COMMENT 'url',
@@ -178,9 +177,8 @@ CREATE TABLE `ls_extl_link` (
   `user_id` varchar(32) NOT NULL DEFAULT '' COMMENT '用户ID',
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '所属用户名',
   `picture` varchar(250) DEFAULT NULL COMMENT '链接广告图片',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `ad_id_username` (`id`,`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='广告';
+  PRIMARY KEY (`id`)
+) AUTO_INCREMENT=40  COMMENT='外包链接表';
 CREATE TABLE `ls_favorite` (
   `id` varchar(32) NOT NULL COMMENT '主键',
   `prod_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品ID',
@@ -188,7 +186,7 @@ CREATE TABLE `ls_favorite` (
   `addtime` datetime DEFAULT NULL COMMENT '收藏时间',
   `memo` varchar(100) DEFAULT NULL COMMENT '收藏原因',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='我的收藏';
+)  COMMENT='我的收藏';
 CREATE TABLE `ls_flow` (
   `flow_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` varchar(32) NOT NULL COMMENT '用户ID',
@@ -201,7 +199,7 @@ CREATE TABLE `ls_flow` (
   `action` varchar(16) NOT NULL COMMENT '金额用途',
   `create_time` int(10) NOT NULL COMMENT '金额变动时间',
   PRIMARY KEY (`flow_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)  COMMENT='资金流动表';
 CREATE TABLE `ls_func` (
   `ID` varchar(32) NOT NULL,
   `NAME` varchar(100) NOT NULL COMMENT '功能名称',
@@ -212,14 +210,13 @@ CREATE TABLE `ls_func` (
   PRIMARY KEY (`ID`),
   KEY `PROTECT_FUNCTION` (`PROTECT_FUNCTION`),
   KEY `INDEX_PROTECT_FUNCTION` (`PROTECT_FUNCTION`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='功能表';
+)  COMMENT='功能表';
 CREATE TABLE `ls_group_prod` (
-  `group_prod_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '团购产品ID',
   `prod_id` int(11) NOT NULL DEFAULT '0' COMMENT '产品ID',
   `partner_id` int(11) DEFAULT '0' COMMENT '商户ID',
   `success_cause` char(1) NOT NULL DEFAULT '' COMMENT 'M:以购买成功人数成团，P:以产品购买数成团',
   `buy_condition` char(1) NOT NULL DEFAULT '' COMMENT '购买次数限制 O:仅购买一次，M:可购买多次',
-  `visual_buys` int(10) NOT NULL DEFAULT '0' COMMENT '虚拟购买数',
+  `visual_buys` int(10) DEFAULT NULL COMMENT '虚拟购买数',
   `max_buys` int(10) DEFAULT NULL COMMENT '每人限购数',
   `dvy_type_id` int(10) DEFAULT NULL COMMENT '递送方式',
   `max_money` double(15,3) DEFAULT NULL COMMENT '可使用代金券最大面额',
@@ -229,9 +226,9 @@ CREATE TABLE `ls_group_prod` (
   `sales_min` int(10) DEFAULT NULL COMMENT '最小成团数',
   `sales_num` int(10) DEFAULT NULL COMMENT '已经销售数量',
   `sales_max` int(10) DEFAULT NULL COMMENT '最大的销售数量，销售完不能再订购',
-  `isPost` char(1) DEFAULT NULL COMMENT '是否已经跟商家结算',
-  PRIMARY KEY (`group_prod_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_post` char(1) DEFAULT NULL COMMENT '是否已经跟商家结算',
+  PRIMARY KEY (`prod_id`)
+)  COMMENT='团购产品表';
 CREATE TABLE `ls_hsearch` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL COMMENT '标题',
@@ -240,11 +237,8 @@ CREATE TABLE `ls_hsearch` (
   `rec_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '录入时间',
   `user_id` varchar(32) DEFAULT NULL COMMENT '用户ID',
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名称,备用',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`,`user_name`),
-  KEY `FK_Reference_19` (`user_id`),
-  KEY `user_name_sort_id` (`user_name`,`sort`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='hotsearch';
+  PRIMARY KEY (`id`)
+) AUTO_INCREMENT=5  COMMENT='热门产品表';
 CREATE TABLE `ls_img_file` (
   `file_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名称',
@@ -257,7 +251,7 @@ CREATE TABLE `ls_img_file` (
   `status` tinyint(3) DEFAULT NULL,
   PRIMARY KEY (`file_id`),
   KEY `img_file_index` (`product_type`,`user_name`,`product_id`,`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=576 DEFAULT CHARSET=utf8 COMMENT='上传的文件表';
+) AUTO_INCREMENT=577  COMMENT='上传的文件表';
 CREATE TABLE `ls_index_jpg` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `href` varchar(200) DEFAULT '' COMMENT '连接地址',
@@ -271,7 +265,7 @@ CREATE TABLE `ls_index_jpg` (
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名称',
   PRIMARY KEY (`id`),
   KEY `indexjpg_user_name` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COMMENT='主页轮换图片';
+) AUTO_INCREMENT=43  COMMENT='主页轮换图片';
 CREATE TABLE `ls_league` (
   `ID` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` varchar(32) NOT NULL DEFAULT '' COMMENT '用户ID',
@@ -283,7 +277,7 @@ CREATE TABLE `ls_league` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `unique_user_friend_id` (`user_id`,`friend_id`),
   KEY `FK_league2user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='我的加盟店，店面之间的产品可以互相展现对方的产品';
+) AUTO_INCREMENT=33  COMMENT='我的加盟店，店面之间的产品可以互相展现对方的产品';
 CREATE TABLE `ls_login_hist` (
   `ID` int(32) NOT NULL AUTO_INCREMENT,
   `AREA` varchar(100) DEFAULT NULL,
@@ -293,35 +287,36 @@ CREATE TABLE `ls_login_hist` (
   `TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `ID` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=178 DEFAULT CHARSET=utf8 COMMENT='登录历史表';
+)  COMMENT='登录历史表';
 CREATE TABLE `ls_logo` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `banner` varchar(300) DEFAULT NULL COMMENT '标语位置',
   `url` varchar(50) DEFAULT NULL COMMENT '连接地址',
   `user_id` varchar(32) NOT NULL DEFAULT '' COMMENT '用户ID',
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名称,备用',
-  `memo` varchar(50) DEFAULT NULL,
+  `memo` varchar(50) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`),
   UNIQUE KEY `logo_user_name_ind` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='主广告位表';
+) AUTO_INCREMENT=4  COMMENT='主广告位表';
 CREATE TABLE `ls_news` (
   `news_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '新闻ID',
-  `news_category_id` int(11) DEFAULT NULL,
-  `sort` int(11) DEFAULT NULL,
+  `news_category_id` int(11) DEFAULT NULL COMMENT '新闻分类',
+  `sort` int(11) DEFAULT NULL COMMENT '商品分类',
   `news_title` varchar(100) DEFAULT NULL COMMENT '新闻标题',
   `news_brief` varchar(300) DEFAULT NULL COMMENT '新闻提要，保存是截取新闻前100个字',
   `news_content` text COMMENT '新闻内容',
   `news_date` datetime DEFAULT NULL COMMENT '发表时间',
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `high_line` tinyint(1) DEFAULT '0' COMMENT '1:yest,0:no',
-  `user_id` varchar(32) NOT NULL DEFAULT '',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '新闻状态，1：上线，0：下线',
+  `position` tinyint(3) DEFAULT NULL COMMENT '新闻位置',
+  `high_line` tinyint(1) DEFAULT '0' COMMENT '是否高亮,1:yes,0:no',
+  `user_id` varchar(32) NOT NULL DEFAULT '' COMMENT '用户ID',
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '所属用户名称',
   PRIMARY KEY (`news_id`),
   KEY `news_category_id` (`news_category_id`),
   KEY `sort` (`sort`),
   KEY `user_name` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=173 DEFAULT CHARSET=utf8 COMMENT='新闻';
+) AUTO_INCREMENT=184  COMMENT='新闻';
 CREATE TABLE `ls_news_cat` (
   `news_category_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '新闻栏目ID',
   `news_category_name` varchar(100) NOT NULL COMMENT '新闻栏目名称',
@@ -331,23 +326,24 @@ CREATE TABLE `ls_news_cat` (
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '所属用户名称',
   PRIMARY KEY (`news_category_id`),
   KEY `FK_news_category_to_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='新闻栏目';
+) AUTO_INCREMENT=23  COMMENT='新闻栏目';
 CREATE TABLE `ls_ns_brand` (
   `nsort_id` int(11) NOT NULL COMMENT '三级商品类型的ID',
   `brand_id` int(11) NOT NULL DEFAULT '0' COMMENT '品牌ID',
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名',
   PRIMARY KEY (`brand_id`,`nsort_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='三级类型和品牌的对照表';
+)  COMMENT='三级类型和品牌的对照表';
 CREATE TABLE `ls_nsort` (
   `nsort_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `nsort_name` varchar(50) NOT NULL DEFAULT '' COMMENT '名称',
   `seq` int(5) DEFAULT NULL COMMENT '排序',
   `sort_id` int(11) NOT NULL DEFAULT '0' COMMENT '对应的一级类型',
   `parent_nsort_id` int(11) DEFAULT NULL COMMENT '父节点ID',
+  `sort_deputy` tinyint(1) DEFAULT '0' COMMENT '是否代表，0否1是',
   PRIMARY KEY (`nsort_id`),
   KEY `sort_id` (`sort_id`),
   KEY `parent_nsort_id` (`parent_nsort_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=320 DEFAULT CHARSET=utf8 COMMENT='专柜，就是商品子类表';
+) AUTO_INCREMENT=325  COMMENT='专柜，就是商品子类表';
 CREATE TABLE `ls_partner` (
   `partner_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '供应商ID',
   `partner_name` varchar(50) NOT NULL DEFAULT '' COMMENT '供应商登录名',
@@ -360,7 +356,7 @@ CREATE TABLE `ls_partner` (
   `bank_name` varchar(128) DEFAULT NULL COMMENT '商户银行帐户名称',
   `bank_no` varchar(128) DEFAULT NULL COMMENT '商户银行帐户帐号',
   `bank_user` varchar(128) DEFAULT NULL COMMENT '商户银行用户名',
-  `location` varchar(255) NOT NULL COMMENT '商户所处位置',
+  `location` varchar(255) DEFAULT '' COMMENT '商户所处位置',
   `contact` varchar(32) DEFAULT NULL COMMENT '商户联系人',
   `image` varchar(255) DEFAULT NULL COMMENT '商户图片',
   `image1` varchar(128) DEFAULT NULL COMMENT '商户图片1',
@@ -380,7 +376,7 @@ CREATE TABLE `ls_partner` (
   PRIMARY KEY (`partner_id`),
   KEY `UNQ_ct` (`shop_id`,`title`),
   KEY `UNQ_u` (`partner_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户（产品供应商）';
+) AUTO_INCREMENT=5  COMMENT='商户（产品供应商）';
 CREATE TABLE `ls_pay_type` (
   `pay_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_name` varchar(50) NOT NULL DEFAULT '',
@@ -392,14 +388,14 @@ CREATE TABLE `ls_pay_type` (
   `memo` varchar(100) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`pay_id`),
   UNIQUE KEY `uni_user_name_pay_type_id` (`user_name`,`pay_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='付款方式';
+) AUTO_INCREMENT=15  COMMENT='付款方式';
 CREATE TABLE `ls_perm` (
   `ROLE_ID` varchar(32) NOT NULL DEFAULT '' COMMENT '角色ID',
   `FUNCTION_ID` varchar(32) NOT NULL DEFAULT '' COMMENT '功能ID',
   PRIMARY KEY (`ROLE_ID`,`FUNCTION_ID`),
   KEY `FUNCTION_ID` (`FUNCTION_ID`),
   KEY `ROLE_ID` (`ROLE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限表';
+)  COMMENT='权限表';
 CREATE TABLE `ls_prod` (
   `prod_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '产品ID',
   `sort_id` int(11) DEFAULT NULL COMMENT '一级分类',
@@ -407,9 +403,9 @@ CREATE TABLE `ls_prod` (
   `sub_nsort_id` int(11) DEFAULT NULL COMMENT '三级分类',
   `model_id` varchar(50) DEFAULT NULL COMMENT '型号',
   `name` varchar(120) DEFAULT '' COMMENT '商品名称',
-  `price` double(15,3) DEFAULT NULL,
-  `cash` double(15,3) DEFAULT NULL,
-  `proxy_price` double(15,3) DEFAULT NULL,
+  `price` double(15,3) DEFAULT NULL COMMENT '原价',
+  `cash` double(15,3) DEFAULT NULL COMMENT '现价',
+  `proxy_price` double(15,3) DEFAULT NULL COMMENT '代理价',
   `carriage` int(11) DEFAULT NULL COMMENT '运费',
   `brief` text COMMENT '简要描述',
   `content` text COMMENT '详细描述',
@@ -417,15 +413,15 @@ CREATE TABLE `ls_prod` (
   `buys` int(11) NOT NULL DEFAULT '0' COMMENT '以卖出数',
   `rec_date` datetime DEFAULT NULL COMMENT '录入时间',
   `pic` varchar(255) DEFAULT NULL COMMENT '图片',
-  `commend` char(1) DEFAULT NULL,
+  `commend` char(4) DEFAULT NULL COMMENT '是否精品推荐',
   `status` int(1) DEFAULT NULL COMMENT '默认是1，表示正常状态，如果管理员发现有非法图片，可以关闭该图片，设置为0即可',
   `modify_date` datetime DEFAULT NULL COMMENT '修改时间',
-  `user_id` varchar(32) DEFAULT NULL,
-  `user_name` varchar(100) DEFAULT NULL COMMENT '所属用户名称',
+  `user_id` varchar(32) NOT NULL DEFAULT '' COMMENT '用户ID',
+  `user_name` varchar(100) NOT NULL DEFAULT '' COMMENT '所属用户名称',
   `start_date` datetime DEFAULT NULL COMMENT '开始有效时间',
   `end_date` datetime DEFAULT NULL COMMENT '结束有效时间',
   `stocks` int(11) DEFAULT '0' COMMENT '库存量',
-  `prod_type` char(1) NOT NULL DEFAULT '1' COMMENT '商品类型，1.普通商品，2团购商品，3二手商品，4打折商品',
+  `prod_type` char(1) NOT NULL DEFAULT 'P' COMMENT '商品类型，P.普通商品，G:团购商品，S:二手商品，D:打折商品',
   `key_word` varchar(255) DEFAULT NULL COMMENT '关键字',
   `attribute` text COMMENT '产品动态属性',
   `parameter` text COMMENT '商品动态参数',
@@ -433,9 +429,10 @@ CREATE TABLE `ls_prod` (
   `actual_stocks` int(11) DEFAULT '0' COMMENT '实际库存',
   PRIMARY KEY (`prod_id`),
   UNIQUE KEY `hw_id_username` (`prod_id`,`user_name`),
-  KEY `nsort_id` (`nsort_id`),
-  KEY `sort_id` (`sort_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=520 DEFAULT CHARSET=utf8 COMMENT='商品';
+  KEY `key_product_status` (`status`,`start_date`,`end_date`),
+  KEY `key_prod_nsort_id` (`nsort_id`),
+  KEY `key_prod_sort_id` (`sort_id`)
+) AUTO_INCREMENT=537  COMMENT='商品';
 CREATE TABLE `ls_prod_comm` (
   `ID` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `prod_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品ID',
@@ -450,7 +447,7 @@ CREATE TABLE `ls_prod_comm` (
   `reply_time` datetime DEFAULT NULL COMMENT '回复时间',
   PRIMARY KEY (`ID`),
   KEY `comment_hw_id` (`prod_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='商品点评';
+) AUTO_INCREMENT=22  COMMENT='商品点评';
 CREATE TABLE `ls_prod_rel` (
   `rel_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `prod_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品ID',
@@ -459,13 +456,13 @@ CREATE TABLE `ls_prod_rel` (
   `addtime` datetime DEFAULT NULL COMMENT '添加时间',
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '商品对应的用户名',
   PRIMARY KEY (`rel_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8 COMMENT='相关产品';
+) AUTO_INCREMENT=191  COMMENT='相关产品';
 CREATE TABLE `ls_provinces` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `provinceid` varchar(20) NOT NULL,
   `province` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) AUTO_INCREMENT=35  COMMENT='省份表';
 CREATE TABLE `ls_pub` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL DEFAULT '' COMMENT '标题',
@@ -473,9 +470,8 @@ CREATE TABLE `ls_pub` (
   `rec_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '录入时间',
   `user_id` varchar(32) NOT NULL,
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名称,备用',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='public';
+  PRIMARY KEY (`id`)
+) AUTO_INCREMENT=27  COMMENT='商城公告表';
 CREATE TABLE `ls_role` (
   `ID` varchar(32) NOT NULL DEFAULT '' COMMENT '主键',
   `NAME` varchar(100) NOT NULL COMMENT '名称',
@@ -483,7 +479,7 @@ CREATE TABLE `ls_role` (
   `ENABLED` varchar(1) NOT NULL COMMENT '状态',
   `NOTE` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
+)  COMMENT='角色表';
 CREATE TABLE `ls_score` (
   `score_id` int(11) NOT NULL AUTO_INCREMENT,
   `sub_id` int(11) DEFAULT NULL COMMENT '订单ID',
@@ -492,7 +488,7 @@ CREATE TABLE `ls_score` (
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '所属用户',
   `rec_date` datetime DEFAULT NULL COMMENT '时间',
   PRIMARY KEY (`score_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) AUTO_INCREMENT=3  COMMENT='积分表';
 CREATE TABLE `ls_shop_detail` (
   `shop_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(32) NOT NULL,
@@ -533,7 +529,7 @@ CREATE TABLE `ls_shop_detail` (
   UNIQUE KEY `shop_id` (`shop_id`),
   UNIQUE KEY `user_id` (`user_id`),
   UNIQUE KEY `shop_detail_shop_name` (`store_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='用户详细信息表';
+) AUTO_INCREMENT=48  COMMENT='用户详细信息表';
 CREATE TABLE `ls_sort` (
   `sort_id` int(11) NOT NULL AUTO_INCREMENT,
   `sort_name` varchar(50) NOT NULL,
@@ -542,9 +538,11 @@ CREATE TABLE `ls_sort` (
   `seq` int(11) DEFAULT NULL COMMENT '排序',
   `user_id` varchar(32) NOT NULL DEFAULT '' COMMENT '用户ID',
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名称',
+  `header_menu` tinyint(1) DEFAULT '0' COMMENT '是否Header菜单展示，0否，1是',
+  `navigation_menu` tinyint(1) DEFAULT '0' COMMENT '导航菜单中显示，0否1是',
   PRIMARY KEY (`sort_id`),
   UNIQUE KEY `sort_name` (`sort_name`,`sort_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8 COMMENT='展柜，商品分类';
+) AUTO_INCREMENT=108  COMMENT='展柜，商品分类';
 CREATE TABLE `ls_sub` (
   `sub_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '订购ID',
   `basket_id` varchar(1024) DEFAULT NULL COMMENT '购物车ID',
@@ -576,7 +574,7 @@ CREATE TABLE `ls_sub` (
   `dvy_flow` varchar(100) DEFAULT '' COMMENT '物流单号',
   PRIMARY KEY (`sub_id`),
   UNIQUE KEY `sub_number_unique_ind` (`sub_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='订购表';
+) AUTO_INCREMENT=20  COMMENT='订购表';
 CREATE TABLE `ls_sub_hist` (
   `sub_hist_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `sub_id` int(11) unsigned NOT NULL COMMENT '订购ID',
@@ -611,7 +609,7 @@ CREATE TABLE `ls_sub_hist` (
   `dvy_type_id` int(11) DEFAULT NULL COMMENT '物流方式ID',
   `dvy_flow` varchar(100) DEFAULT NULL COMMENT '物流单号',
   PRIMARY KEY (`sub_hist_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='订购历史表';
+) AUTO_INCREMENT=64  COMMENT='订购历史表';
 CREATE TABLE `ls_sys_param` (
   `name` varchar(100) NOT NULL COMMENT '系统配置名称',
   `value` varchar(200) DEFAULT '' COMMENT '系统配置值',
@@ -621,7 +619,7 @@ CREATE TABLE `ls_sys_param` (
   `change_online` char(1) DEFAULT NULL COMMENT '是否可以线上修改',
   `display_order` int(11) DEFAULT NULL COMMENT '显示顺序',
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统配置';
+)  COMMENT='系统配置';
 CREATE TABLE `ls_user` (
   `ID` varchar(32) NOT NULL DEFAULT '' COMMENT '用户ID',
   `NAME` varchar(50) NOT NULL DEFAULT '' COMMENT '名称',
@@ -630,7 +628,7 @@ CREATE TABLE `ls_user` (
   `NOTE` varchar(255) DEFAULT NULL COMMENT '注释',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `INDEX_USER_NAME` (`NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+)  COMMENT='用户表';
 CREATE TABLE `ls_usr_addr` (
   `addr_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` varchar(32) NOT NULL DEFAULT '0' COMMENT '用户ID',
@@ -647,7 +645,7 @@ CREATE TABLE `ls_usr_addr` (
   `common_addr` char(1) DEFAULT NULL COMMENT '是否常用地址',
   `create_time` datetime NOT NULL COMMENT '建立时间',
   PRIMARY KEY (`addr_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户配送地址';
+)  COMMENT='用户配送地址';
 CREATE TABLE `ls_usr_comm` (
   `ID` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `comment_type` int(10) DEFAULT NULL COMMENT '留言类型,1:投诉，2：普通谈话',
@@ -664,7 +662,7 @@ CREATE TABLE `ls_usr_comm` (
   `answertime` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_usercomment` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='我的留言';
+)  COMMENT='我的留言';
 CREATE TABLE `ls_usr_detail` (
   `user_id` varchar(32) NOT NULL,
   `grade_id` int(10) DEFAULT NULL COMMENT '等级ID',
@@ -695,7 +693,7 @@ CREATE TABLE `ls_usr_detail` (
   UNIQUE KEY `user_name` (`user_name`),
   UNIQUE KEY `user_name_mail_unique` (`user_name`,`user_mail`),
   UNIQUE KEY `user_mail` (`user_mail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户详细表';
+)  COMMENT='用户详细表';
 CREATE TABLE `ls_usr_grad` (
   `grade_id` int(10) NOT NULL COMMENT '等级ID',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '名称',
@@ -703,14 +701,14 @@ CREATE TABLE `ls_usr_grad` (
   `max_nsort_size` int(10) DEFAULT NULL COMMENT '允许的最大展柜分类',
   `max_prod` int(10) DEFAULT NULL COMMENT '允许的最大产品数',
   PRIMARY KEY (`grade_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户等级\r\n1幼儿园\r\n2小学\r\n3中学\r\n4大学\r\n5硕士';
+)  COMMENT='用户等级\r\n1幼儿园\r\n2小学\r\n3中学\r\n4大学\r\n5硕士';
 CREATE TABLE `ls_usr_role` (
   `USER_ID` varchar(32) NOT NULL,
   `ROLE_ID` varchar(32) NOT NULL DEFAULT '' COMMENT '角色ID',
   PRIMARY KEY (`ROLE_ID`,`USER_ID`),
   KEY `ROLE_ID` (`ROLE_ID`),
   KEY `USER_ID` (`USER_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色对应表';
+)  COMMENT='用户角色对应表';
 CREATE TABLE `ls_vit_log` (
   `visit_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `ip` char(16) NOT NULL COMMENT 'IP',
@@ -725,13 +723,13 @@ CREATE TABLE `ls_vit_log` (
   `visit_num` int(11) DEFAULT NULL COMMENT '访问次数',
   PRIMARY KEY (`visit_id`),
   KEY `lgs_visit_log_visited_ind` (`ip`,`shop_name`,`rec_date`,`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='客户浏览历史';
+)  COMMENT='客户浏览历史';
 CREATE TABLE `ls_zipcode` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `areaid` varchar(20) NOT NULL,
   `zip` varchar(20) NOT NULL,
   `code` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3145 DEFAULT CHARSET=utf8;
+) AUTO_INCREMENT=3145 ;
 
 ALTER TABLE `ls_dvy_type` ADD CONSTRAINT `ls_dvy_type_ibfk_1` FOREIGN KEY (`dvy_id`) REFERENCES `ls_delivery` (`dvy_id`);
