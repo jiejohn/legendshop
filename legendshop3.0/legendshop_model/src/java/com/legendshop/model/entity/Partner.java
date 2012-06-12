@@ -81,7 +81,7 @@ public class Partner implements BaseEntity {
 	private String mobile;
 	
 	/** The open. */
-	private String open;
+	private String showInfo;
 	
 	/** The status. */
 	private String status;
@@ -512,25 +512,7 @@ public class Partner implements BaseEntity {
 		this.mobile = mobile;
 	}
 	
-	/**
-	 * Gets the open.
-	 * 
-	 * @return the open
-	 */
-	public String getOpen() {
-		return open;
-	}
-	
-	/**
-	 * Sets the open.
-	 * 
-	 * @param open
-	 *            the new open
-	 */
-	public void setOpen(String open) {
-		this.open = open;
-	}
-	
+
 	/**
 	 * Gets the status.
 	 * 
@@ -666,6 +648,14 @@ public class Partner implements BaseEntity {
 
 	public Serializable getId() {
 		return partnerId;
+	}
+
+	public String getShowInfo() {
+		return showInfo;
+	}
+
+	public void setShowInfo(String showInfo) {
+		this.showInfo = showInfo;
 	}
 
 

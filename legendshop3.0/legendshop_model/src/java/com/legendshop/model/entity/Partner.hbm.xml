@@ -101,8 +101,8 @@
                 <comment>商户手机号码</comment>
             </column>
         </property>
-        <property name="open" type="java.lang.String">
-            <column name="open" length="1" not-null="true">
+        <property name="showInfo" type="java.lang.String">
+            <column name="show_info" length="1" not-null="true">
                 <comment>商户是否展示相关信息</comment>
             </column>
         </property>
