@@ -13,11 +13,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.service.SystemParameterService;
+import com.legendshop.central.license.BusinessModeEnum;
+import com.legendshop.core.AttributeKeys;
+import com.legendshop.core.constant.ConfigPropertiesEnum;
+import com.legendshop.core.constant.LanguageEnum;
+import com.legendshop.core.constant.RuntimeModeEnum;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.page.PagerUtil;
 import com.legendshop.core.plugins.AbstractPlugin;
 import com.legendshop.core.tag.TableCache;
 import com.legendshop.event.EventHome;
 import com.legendshop.search.SearchFacade;
+import com.legendshop.util.FileConfig;
 
 /**
  * The Class BusinessPlugin.
@@ -51,6 +58,24 @@ public class BusinessPlugin extends AbstractPlugin{
 		searchFacade.init(luceneIndexPath);
 		
 		EventHome.initBaseEventListener();
+		
+		////////////
+		PagerUtil.setPath(servletContext.getContextPath());
+
+		servletContext.setAttribute(ConfigPropertiesEnum.CURRENCY_PATTERN.name(), PropertiesUtil.getCurrencyPattern());
+
+		servletContext.setAttribute(AttributeKeys.DOMAIN_NAME, PropertiesUtil.getDomainName());
+
+		servletContext.setAttribute("LEGENDSHOP_DOMAIN_NAME", AttributeKeys.LEGENDSHOP_DOMAIN_NAME);
+
+		servletContext.setAttribute(ConfigPropertiesEnum.LEGENDSHOP_VERSION.name(), PropertiesUtil.getProperties(
+				FileConfig.GlobalFile, ConfigPropertiesEnum.LEGENDSHOP_VERSION.name()));
+
+		servletContext.setAttribute(AttributeKeys.BUSINESS_MODE, BusinessModeEnum.C2C.name());
+
+		servletContext.setAttribute(AttributeKeys.RUNTIME_MODE, RuntimeModeEnum.PRODUCTION);
+
+		servletContext.setAttribute(AttributeKeys.LANGUAGE_MODE, LanguageEnum.USERCHOICE);
 		
 	}
 
