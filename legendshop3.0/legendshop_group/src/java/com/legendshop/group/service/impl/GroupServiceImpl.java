@@ -100,7 +100,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 		request.setAttribute("seq", seq);
 		request.setAttribute("groupSortList", groupSortList);
 
-		return "/frontend/default/group/index";
+		return PathResolver.getPath(request, GroupFrontPage.INDEX);
 	}
 	
 	@Override

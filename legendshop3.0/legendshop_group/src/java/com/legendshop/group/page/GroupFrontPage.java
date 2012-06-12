@@ -18,10 +18,16 @@ import com.legendshop.core.constant.PagePathCalculator;
 public enum GroupFrontPage  implements PageDefinition{
 	/** The VARIABLE. 可变路径 */
 	VARIABLE(""),
+	
+	INDEX("/group/index"),
+	
 	/** The VIEWS. */
 	VIEW("/group/view"),
+	
 	CLIENT_SERVICE_PANEL("/group/clientServicePanel"),
+	
 	QUESTION("/group/question"),
+	
 	QUESTION_PANEL("/group/questionPanel");
 	
 	
