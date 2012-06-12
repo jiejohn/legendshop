@@ -39,13 +39,13 @@
 		                location: {
 		                    required: true,
 		                },
-		                open: {
+		                showInfo: {
 		                    required: true,
 		                },
 		                status: {
 		                    required: true,
 		                },
-		                open: {
+		                showInfo: {
 		                    required: true,
 		                }
 		            },
@@ -271,8 +271,8 @@
        </td>
         <td>
            <p>           
-				<select id="open" name="open">
-				  <option:optionGroup type="select" required="true" cache="true"  beanName="YES_NO" selectedValue="${partner.open}"/>
+				<select id="showInfo" name="showInfo">
+				  <option:optionGroup type="select" required="true" cache="true"  beanName="YES_NO" selectedValue="${partner.showInfo}"/>
 	            </select>
         </td>
       </tr>

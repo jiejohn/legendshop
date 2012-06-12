@@ -49,7 +49,7 @@
       <display:column title="联系电话" property="phone"></display:column>
       <display:column title="展示相关信息"> 
       	<option:optionGroup type="label" required="true" cache="true"
-	                beanName="YES_NO" selectedValue="${item.open}" defaultDisp=""/>
+	                beanName="YES_NO" selectedValue="${item.showInfo}" defaultDisp=""/>
       </display:column>
       <display:column title="状态">      
       	<option:optionGroup type="label" required="true" cache="true"
