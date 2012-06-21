@@ -9,6 +9,8 @@ package com.legendshop.business.common.fck;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.fckeditor.connector.exception.InvalidCurrentFolderException;
 import net.fckeditor.connector.exception.WriteException;
@@ -23,6 +25,7 @@ import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.core.exception.InvalidFormatException;
 import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -39,6 +42,9 @@ import com.legendshop.core.helper.PropertiesUtil;
  */
 public class ContextConnector extends LocalConnector {
 	private final Logger log = LoggerFactory.getLogger(ContextConnector.class);
+	
+	private List<String> flashFileType;
+	
 	// 此方法中可以对文件重命名
 	/* (non-Javadoc)
 	 * @see net.fckeditor.connector.impl.AbstractLocalFileSystemConnector#fileUpload(net.fckeditor.handlers.ResourceType, java.lang.String, java.lang.String, java.io.InputStream)
@@ -61,9 +67,52 @@ public class ContextConnector extends LocalConnector {
 			log.error("fileUpload error",e);
 		}
 		
-		String path = new StringBuffer().append(PropertiesUtil.getBigFilesAbsolutePath()).append("/").append(userName).append(AttributeKeys.EDITOR_PIC_PATH)
-				.append("/image/").append(currentFolder).toString();
-		FileProcessor.uploadFile(inputStream, path, "", fileName, true, false);
-		return name;
+		String extName = FileProcessor.getFileExtName(name);
+		String fileType = null;
+		if(isPic(extName)){
+			fileType = "/image/";
+		}else if(isFlash(extName)){
+			fileType = "/flash/";
+		}
+		if(fileType != null){
+			String path = new StringBuffer().append(PropertiesUtil.getBigFilesAbsolutePath()).append("/").append(userName).append(AttributeKeys.EDITOR_PIC_PATH)
+					.append(fileType).append(currentFolder).toString();
+			FileProcessor.uploadFile(inputStream, path, "", fileName, true, false);
+			return name;
+		}else{
+			throw new InvalidFormatException("Invalidate File:" + name, EntityCodes.FILE);
+		}
+
+	}
+	
+	/**
+	 * 上传的文件是否是图片
+	 * @param extName 文件后缀名
+	 * @return
+	 */
+	private boolean isPic(String extName){
+		List list = PropertiesUtil.getObject(ParameterEnum.ALLOWED_UPLOAD_FILE_TPYE, List.class);
+		if (list.contains(extName)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * 上传的文件是否是Flash
+	 * @param extName 文件后缀名
+	 * @return
+	 */
+	private boolean isFlash(String extName){
+		if(flashFileType == null){
+			flashFileType = new ArrayList<String>();
+			flashFileType.add(".swf");
+		}
+		if (flashFileType.contains(extName)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

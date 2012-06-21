@@ -5,10 +5,6 @@
   <param-name>contextConfigLocation</param-name>
   <param-value>classpath*:spring/applicationContext.xml</param-value>
  </context-param>
- <context-param>
-  <param-name>definitions-config</param-name>
-  <param-value>/WEB-INF/tiles/tiles-defs.xml</param-value>
- </context-param>
  
    <!-- filter -->
  <filter>
@@ -125,10 +121,12 @@
   </init-param>
    -->
  </servlet>
+ <!-- 
  <servlet>
   <servlet-name>proxooladmin</servlet-name>
   <servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
  </servlet>
+  -->
  <!-- fckeditor start -->
  <servlet>
   <servlet-name>ConnectorServlet</servlet-name>
@@ -180,10 +178,12 @@
   <servlet-name>dwr-invoker</servlet-name>
   <url-pattern>/anonymousdwr/*</url-pattern>
  </servlet-mapping>
+ <!-- 
  <servlet-mapping>
   <servlet-name>proxooladmin</servlet-name>
   <url-pattern>/system/admin/ds</url-pattern>
  </servlet-mapping>
+  -->
  <servlet-mapping>
   <servlet-name>ConnectorServlet</servlet-name>
   <url-pattern>/plugins/fckeditor/editor/filemanager/connectors/*</url-pattern>
@@ -211,7 +211,6 @@
 		<url-pattern>/captcha.svl</url-pattern>
   </servlet-mapping>
  <welcome-file-list>
-  	<welcome-file>index.htm</welcome-file>
   	<welcome-file>index.jsp</welcome-file>
  </welcome-file-list>
  <!--  

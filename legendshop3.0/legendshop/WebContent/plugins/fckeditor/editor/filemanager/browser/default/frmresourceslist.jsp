@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@include file='/pages/common/taglib.jsp'%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <!--
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net

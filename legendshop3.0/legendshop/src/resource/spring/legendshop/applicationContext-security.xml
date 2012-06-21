@@ -13,9 +13,8 @@
     <http realm="LegendShop Realm" access-denied-page="/pages/common/401.jsp"  entry-point-ref="authenticationProcessingFilterEntryPoint">
 		<remember-me />
 		<intercept-url pattern="/admin/**" access="ROLE_SUPERVISOR,ROLE_ADMIN" />		
-		<intercept-url pattern="/member/user/**" access="ROLE_SUPERVISOR" />
-		<intercept-url pattern="/member/right/**" access="ROLE_SUPERVISOR" />
-		<intercept-url pattern="/member/**" access="ROLE_SUPERVISOR,ROLE_ADMIN" />
+		<intercept-url pattern="/member/**" access="ROLE_SUPERVISOR" />
+		<intercept-url pattern="/system/**" access="ROLE_SUPERVISOR,ROLE_SYSTEM" />
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<custom-filter ref="validateCodeAuthenticationFilter" position="FORM_LOGIN_FILTER" />
 		<custom-filter ref="_logoutFilter" position="LOGOUT_FILTER" />
@@ -111,17 +110,5 @@
         <beans:property name="baseDao" ref="baseDao"></beans:property>
         <beans:property name="threadPoolExecutor" ref="threadPoolExecutor"></beans:property>
     </beans:bean>
-    <!-- 
-   <beans:bean id="functionRoleCache" class="com.legendshop.core.security.cache.EhCacheBasedFunctionCache">
-     <beans:property name="cache" ref="functionCacheBackend"></beans:property>
-  </beans:bean>
-  
-   <beans:bean id="roleCache" class="com.legendshop.core.security.cache.EhCacheRoleByName">
-     <beans:property name="cache" ref="roleCacheBackend"></beans:property>
-  </beans:bean>
-  
-   <beans:bean id="authorityUserCache" class="com.legendshop.core.security.cache.EhCacheBasedUserAuthorityCache">
-     <beans:property name="cache" ref="authorityUserCacheBackend"></beans:property>
-  </beans:bean>	
-     -->
+
 </beans:beans>

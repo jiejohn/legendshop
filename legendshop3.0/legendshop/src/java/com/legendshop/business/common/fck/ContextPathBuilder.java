@@ -38,7 +38,7 @@ public class ContextPathBuilder extends ServerRootPathBuilder {
 		if (userName == null) {
 			throw new PermissionException("did not logon yet!",EntityCodes.RIGHT);
 		}
-		return new StringBuffer().append(request.getContextPath()).append(super.getUserFilesPath(request)).append("/").append(userName).append(AttributeKeys.EDITOR_PIC_PATH).toString();
+		return new StringBuilder().append(request.getContextPath()).append(super.getUserFilesPath(request)).append("/").append(userName).append(AttributeKeys.EDITOR_PIC_PATH).toString();
 	}
 
 	/* (non-Javadoc)
@@ -53,7 +53,7 @@ public class ContextPathBuilder extends ServerRootPathBuilder {
 		if (userName == null) {
 			throw new PermissionException("did not logon yet!",EntityCodes.RIGHT);
 		}
-		return new StringBuffer().append(PropertiesUtil.getBigFilesAbsolutePath()).append("/").append(userName).append(AttributeKeys.EDITOR_PIC_PATH).toString();
+		return new StringBuilder().append(PropertiesUtil.getBigFilesAbsolutePath()).append("/").append(userName).append(AttributeKeys.EDITOR_PIC_PATH).toString();
 	}
 
 }

@@ -148,14 +148,14 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 		if ((idCardPicFile != null) && (idCardPicFile.getSize() > 0)) {
 			filename = FileProcessor.uploadFileAndCallback(idCardPicFile, subPath,"sd" + userName);
 			log.info("{} 上传身份证照片文件 {} ", userDetail.getUserName(), filename);
-			shopDetail.setIdCardPic(subPath + filename);
+			shopDetail.setIdCardPic(filename);
 	
 		}
 
 		if ((trafficPicFile != null) && (trafficPicFile.getSize() > 0)) {
 			filename = FileProcessor.uploadFileAndCallback(trafficPicFile, subPath,"sd" + userName);
 			log.info("{} 营业执照照片文件 {} ", userDetail.getUserName(), filename);
-			shopDetail.setTrafficPic(subPath + filename);
+			shopDetail.setTrafficPic(filename);
 		}
 
 		this.save(shopDetail);

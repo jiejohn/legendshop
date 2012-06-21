@@ -23,7 +23,7 @@
             <!-- 登录历史统计 -->
             <Method name="loginHistorySum">
 	            <![CDATA[
-				select user_name,count(*) from ls_login_hist
+				select user_name,count(*) coun from ls_login_hist
 				where 1=1
 					{ and user_name = '$userName$'}
 					{? and	time >= $startTime$}
@@ -34,7 +34,7 @@
             <Method name="loginHistoryCount">
 	            <![CDATA[
 	            select count(1) from(
-				select user_name,count(*) from ls_login_hist
+				select user_name,count(*) coun from ls_login_hist
 				where 1=1
 					{ and user_name = '$userName$'}
 					{? and	time >= $startTime$}
@@ -110,7 +110,6 @@
         			and prod.status = 1
         			and ( prod.startDate is null or prod.startDate <= ? )
         			and (prod.endDate is null or prod.endDate >= ? )
-        			order by prod.modifyDate desc
             ]]></Method>
              <Method name="QueryUserDetailCount">
 	                select count(*) from

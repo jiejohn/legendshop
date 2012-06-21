@@ -110,11 +110,11 @@ public class LoginHistoryController extends BaseController{
 			Map<String, String> map = new HashMap<String, String>();
 			if (!AppUtils.isBlank(login.getStartTime())) {
 				map.put("startTime", login.getStartTime().toString());
-				query.addParam(login.getStartTime());
+				query.addParams(login.getStartTime());
 			}
 			if (!AppUtils.isBlank(login.getEndTime())) {
 				map.put("endTime", login.getEndTime().toString());
-				query.addParam(login.getEndTime());
+				query.addParams(login.getEndTime());
 			}
 			if (!AppUtils.isBlank(login.getUserName())) {// 因为name直接写进SQL，不用{?模式，不用设置参数
 				map.put("userName", login.getUserName());

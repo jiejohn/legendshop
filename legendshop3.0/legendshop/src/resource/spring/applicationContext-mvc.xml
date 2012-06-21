@@ -66,7 +66,7 @@
 		<property name="definitions">
 			<list>
 				<value>/WEB-INF/tiles/tiles-definitions.xml</value>
-				<!-- <value>/WEB-INF/tiles/tiles-group-definitions.xml</value> -->
+				<value>/WEB-INF/tiles/tiles-group-definitions.xml</value>
 			</list>
 		</property>
 	</bean>

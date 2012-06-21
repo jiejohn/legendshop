@@ -24,7 +24,6 @@
              	{? and p.brandId = $brandId$}
              	{? and p.name like $name$}
              	{? and p.userName = $userName$}
-			    {! order by p.modifyDate desc||$orderIndicator$}
              </Method>
 		</Object>
 	</BusinessObjects>

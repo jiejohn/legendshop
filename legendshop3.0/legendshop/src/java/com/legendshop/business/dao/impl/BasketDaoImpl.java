@@ -54,7 +54,7 @@ public class BasketDaoImpl extends BaseDaoImpl implements BasketDao {
 	@Override
 	public List<Basket> getBasketByuserName(String userName) {
 		log.debug("getBasketByuserName,userName = {}", userName);
-		return findByHQL("from Basket where userName=? and basket_check=?", userName,
+		return findByHQL("from Basket where userName=? and basket_check=? order by basketDate desc", userName,
 				Constants.FALSE_INDICATOR);
 
 	}
