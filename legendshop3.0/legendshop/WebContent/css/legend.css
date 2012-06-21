@@ -62,6 +62,7 @@ a:active{color:#900;}
          width:418px;
 		 height:32px;
 		 margin-left:50px;
+		 display:inline;
 		 }
 .search .sleft{ width:76px; float:left; height:25px; padding-top:7px; background:#eee; overflow:hidden; }
 .search input{ border:0;
@@ -83,6 +84,7 @@ a:active{color:#900;}
 .nav_vbox{ background:url(../img/group/menua.jpg) repeat-x; height:42px; float:left; width:215px; position:absolute;top:0;left:0;}
 .nav_vbox .navbtn{ position:relative;}
 .nav_vbox .navbtn a{ line-height:42px; font-size:14px; color:#fff; text-decoration:none; width:100px; padding:0 100px 0 15px; background:url(../img/group/navarrow.gif) no-repeat 110px 15px; display:block; }
+.nav_vbox .navbtn a:link,.nav_vbox .navbtn a:visited,.nav_vbox .navbtn a:hover,.nav_vbox .navbtn a:active{color:#fff; text-decoration:none;}
 .nav_vbox .extra{padding:5px 8px 5px 18px;height:30px;line-height:30px;overflow:hidden;  }
 .nav_vbox .extra a{ color:#006ad8;}
 
@@ -97,7 +99,7 @@ a:active{color:#900;}
 .nav_vbox .item .i-mc{display:none;position:absolute;left:202px;top:3px;width:500px;border:1px solid #c30;background:#fff;overflow:hidden;}
 .nav_vbox .item dt{padding:3px 6px 0 0;font-weight:bold;color:#C00;}
 .nav_vbox .item dd{padding:3px 0 0;overflow:hidden;zoom:1;}
-.nav_vbox .subitem{float:left;width:464px;padding:0 4px 0 8px;}
+.nav_vbox .subitem{float:left;width:464px;min-height:370px;padding:0 4px 0 8px;}
 .nav_vbox .subitem dl{border-top:1px dotted #EED6B7;padding:6px 0;overflow:hidden;zoom:1;}
 .nav_vbox .subitem .fore1{border-top:none;}
 .nav_vbox .subitem dt{float:left;width:54px;line-height:22px;text-align:right;}
@@ -113,11 +115,14 @@ a:active{color:#900;}
 .nav_vbox.hover .mt b{background-position:-28px -204px;}
 .nav_vbox.hover .mc{display:block;}
 
-
+.nav ul{ height:42px; width:885px;}
 .nav li a{ font: bold 16px/40px "microsoft yahei";}
 .nav li { float:left; height:25px; padding:8px 2px 0; background:url(../img/group/menuline.jpg) no-repeat 0 10px;}
-.nav li a{ padding: 0 25px; display:block; height:25px; line-height:25px; color:#fff; text-decoration:none;}
-.nav li a:hover{ color:#999;}
+
+.nav li a:link,.nav li a:visited{padding: 0 25px; display:block; height:25px; line-height:25px; color:#fff; text-decoration:none; float:left;}
+.nav li a:hover{color:#999;text-decoration:none;}
+.nav li a:active{color:#999;}
+
 .nav li.focus a{ background:url(../img/group/menufocus.jpg) repeat-x;}
 .addr{ width:1214px; border:1px solid #c2c2c2; background: url(../img/group/addr.jpg) repeat-x; height:33px; line-height:33px; color:#4e4e4e; text-indent:10px; margin-top:10px;}
 .addr span{ padding:0 5px;}
@@ -647,6 +652,7 @@ a.align_asc_on{background:url(../img/group/arowaligon2.jpg) no-repeat right 0 #c
     width: 74px;
 }
 .select { background:url(../img/group/select.jpg) no-repeat left bottom; }
+.selectfull{background:url(../img/group/select2.jpg) no-repeat left bottom; }
 .select .mt {
     background:url(../img/group/selecttit.jpg) repeat-x; 
     height: 30px;
@@ -685,6 +691,7 @@ a.align_asc_on{background:url(../img/group/arowaligon2.jpg) no-repeat right 0 #c
     width: 852px;
 	padding-top:2px;
 }
+.selectfull dd{ width: 1102px;}
 .select dd div {
     float: left;
     height: 20px;
@@ -1109,6 +1116,7 @@ a.align_asc_on{background:url(../img/group/arowaligon2.jpg) no-repeat right 0 #c
     margin-bottom: 10px;
     padding: 0 0 2px 130px;
     position: relative;
+	height:1%;
 }
 #comment .i-item {
     background: url(../img/group/comback.jpg) repeat-x #fff;
@@ -1143,6 +1151,7 @@ a.align_asc_on{background:url(../img/group/arowaligon2.jpg) no-repeat right 0 #c
     color: #999999;
     float: right;
 }
+.comment-content{ zoom:1;}
 .comment-content dl {
     overflow: hidden;
     padding: 2px 0;
@@ -1596,7 +1605,7 @@ td.Tfoot {
 .gengduo{ margin-left:15px;}
 .gengduo a{ color:#1158a5; text-decoration:none;}
 .gengduo a:hover{ color:#1158a5; text-decoration:underline;}
-.pinglun{ margin-left:25px; margin-top:20px; padding-bottom:25px;}
+.pinglun{ margin-left:25px; margin-top:20px; padding-bottom:25px; zoom:1;}
 .pinglun .nei input{ border:#d9d9d9 1px solid; width:700px; height:70px;}
 .pinglun .yan input{ border:#d9d9d9 1px solid; width:50px; height:20px;}
 .pinglun dt{ float:left; width:72px; margin-top:12px; font-weight:bold;}
@@ -1815,7 +1824,8 @@ element.style {
     margin: 10px 0 0 -235px;
     position: fixed;
     width: 470px;
-    z-index: 1;
+    z-index: 100;
+	
 }
 #locate, #static {
     background-position: 0 0;
@@ -2655,7 +2665,7 @@ h2, h3 {
     padding: 20px 0 10px 110px;
 }
 .model-prompt .con {
-    position: relative;
+    position: relative; height:1%;
 }
 #model-replyerror .failed {
     background-position: -35px 0;
@@ -2782,3 +2792,11 @@ ol, ul {
     color: red;
     margin-right: 5px;
 }
+
+.sspage{ text-align:center;}
+.ss_logo{  padding:80px 35px 30px 0;}
+.ss_area{ margin:0 auto; width:570px; text-align:left; padding-bottom:150px;}
+.ss_area .search{ margin-left:0;}
+.ss_area .hotword{ text-align:center; margin:0; padding-top:20px; padding-right:35px;}
+.ss_area .hotword a{ padding:0 10px;}
+.addrs{ padding:5px 20px 15px;}
