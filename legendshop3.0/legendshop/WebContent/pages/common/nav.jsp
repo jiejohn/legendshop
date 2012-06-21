@@ -52,44 +52,16 @@ $(".nav_vbox").hoverForIE6({delay:150});
                  
                  <!--  -->
                  
-           	</c:forEach>      
-<!--               <div class="item fore1">
-                 <span><h3><a href="#">图书</a>、<a href="#">电子书刊</a>、<a href="#">音像</a></h3><s></s></span>
-                 
-                 <div class="i-mc" style=" ">                    
-                    <div class="subitem">
-                       <dl class="fore1"> 
-                          <dt> <a href="#">电子书刊</a> </dt>
-                          <dd><em><a href="#">电子书</a></em><em><a href="#">网络原创</a></em><em><a href="#">数字杂志</a></em><em><a href="#">多媒体图书</a></em></dd> 
-                       </dl>
-                       <dl class="fore2">
-                          <dt><a href="#">音像</a></dt> 
-                          <dd><em><a href="#">音乐</a></em><em><a href="#">影视</a></em><em><a href="#">教育音像</a></em></dd>
-                       </dl>
-                       <dl class="fore3">
-                          <dt>英文原版</dt>
-                          <dd><em><a href="#">英文原版首页</a></em><em><a href="#">少儿</a></em><em><a href="#">商业投资</a></em><em><a href="#">英语学习与考试</a></em><em><a href="#">小说</a></em></dd>
-                       </dl>
-                       <dl class="fore4">
-                          <dt>文艺</dt>
-                          <dd><em><a href="#">小说</a></em><em><a href="#">文学</a></em><em><a href="#">青春文学</a></em><em><a href="#">传记</a></em><em><a href="#">艺术</a></em></dd>         </dl>
-                       <dl class="fore5">
-                          <dt>少儿</dt>
-                          <dd><em><a href="#">少儿</a></em><em><a href="#">0-2岁</a></em><em><a href="#">3-6岁</a></em><em><a href="#">7-10岁</a></em><em><a href="#">11-14岁</a></em></dd>
-                       </dl>
-                 </div>
-                </div>
-                      
-              </div> -->
+           	</c:forEach> 
               <div class="extra"><a href="#">全部商品分类</a></div>
               </div>
          
          
          <!------------------------------------->  
       </div>
-      <ul>
+      <ul >
       <c:forEach items="${headerSortList}" var="item">
-      <li class='<c:if test="${currentSortId eq item.sortId}">focus</c:if>'><a href="<ls:url address='/sort/${item.sortId}'/>">${item.sortName }</a></li>
+      <li style="overflow:hidden" class='<c:if test="${currentSortId eq item.sortId}">focus</c:if>'><a href="<ls:url address='/sort/${item.sortId}'/>">${item.sortName }</a></li>
       </c:forEach>        
         <!-- <li class="focus"><a href="#">团购</a></li> -->
 	
