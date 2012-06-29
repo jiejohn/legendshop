@@ -9,6 +9,7 @@ package com.legendshop.group.dao.impl;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.core.dao.impl.BaseDaoImpl;
@@ -34,6 +35,7 @@ public class GroupProductDaoImpl extends BaseDaoImpl implements GroupProductDao 
 	 * @see com.legendshop.group.dao.GroupProductDao#updateProduct(com.legendshop.model.entity.GroupProduct)
 	 */
 	@Override
+	@CacheEvict(value = "Product", key = "#product.prodId")
 	public void updateProduct(GroupProduct product) {
 		update(product);
 	}
@@ -50,7 +52,7 @@ public class GroupProductDaoImpl extends BaseDaoImpl implements GroupProductDao 
 	 * @see com.legendshop.group.dao.GroupProductDao#getGroupProduct(java.lang.Long)
 	 */
 	@Override
-	@Cacheable(value="Product")
+	@Cacheable(value="Product",key="#prodId")
 	public GroupProduct getGroupProduct(Long prodId){
 		//团购产品
 		String strHQL = "select p,g from Product p, GroupProduct g where p.prodId = g.prodId and p.prodId = ? and p.prodType = 'G'";
@@ -68,6 +70,7 @@ public class GroupProductDaoImpl extends BaseDaoImpl implements GroupProductDao 
 	 * @see com.legendshop.group.dao.GroupProductDao#deleteProduct(java.lang.Long)
 	 */
 	@Override
+	@CacheEvict(value = "Product", key = "#prodId")
 	public void deleteProduct(Long prodId) {
 		deleteById(GroupProduct.class, prodId);
 	}
