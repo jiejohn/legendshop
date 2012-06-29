@@ -9,10 +9,10 @@ package com.legendshop.permission.command;
 
 import java.util.Map;
 
-import com.legendshop.permission.dao.RoleDao;
 import com.legendshop.command.framework.AbstractCommand;
 import com.legendshop.command.framework.JCFException;
 import com.legendshop.model.entity.Role;
+import com.legendshop.permission.dao.RoleDao;
 
 /**
  * 
@@ -46,7 +46,7 @@ public class UpdateRole extends AbstractCommand
 	public void execute(Map params, Map response) throws Exception
 	{
 		
-		dao.update((Role) params.get("role"));
+		dao.updateRole((Role) params.get("role"));
 
 	}
 

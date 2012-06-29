@@ -9,11 +9,11 @@ package com.legendshop.permission.command;
 
 import java.util.Map;
 
-import com.legendshop.permission.common.ErrorCode;
-import com.legendshop.permission.dao.UserDao;
 import com.legendshop.command.framework.AbstractCommand;
 import com.legendshop.command.framework.JCFException;
 import com.legendshop.model.entity.User;
+import com.legendshop.permission.common.ErrorCode;
+import com.legendshop.permission.dao.UserDao;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -51,7 +51,7 @@ public class UpdateUser extends AbstractCommand
 			String msg = "UpdateRole PARAM_ERR ,role is not validated!";
 			throw new JCFException(ErrorCode.PARAMETER_ERROR, msg);
 		}
-			dao.update(user);
+			dao.updateUser(user);
 
 	}
 	 

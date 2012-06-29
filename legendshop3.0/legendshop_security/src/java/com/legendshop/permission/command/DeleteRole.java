@@ -8,11 +8,11 @@
 package com.legendshop.permission.command;
 import java.util.Map;
 
-import com.legendshop.permission.common.ErrorCode;
-import com.legendshop.permission.dao.RoleDao;
 import com.legendshop.command.framework.AbstractCommand;
 import com.legendshop.command.framework.JCFException;
 import com.legendshop.model.entity.Role;
+import com.legendshop.permission.common.ErrorCode;
+import com.legendshop.permission.dao.RoleDao;
 
 /**
  * 
@@ -49,7 +49,7 @@ public class DeleteRole extends AbstractCommand
 			String msg = "DeleteRole PARAM_ERR ,role is not validated!";
 			throw new JCFException(ErrorCode.PARAMETER_ERROR, msg);
 		}
-		dao.delete(role);
+		dao.deleteRole(role);
 	}
 	
 	/**

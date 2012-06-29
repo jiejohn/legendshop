@@ -9,10 +9,10 @@ package com.legendshop.permission.command;
 
 import java.util.Map;
 
-import com.legendshop.permission.dao.UserDao;
 import com.legendshop.command.framework.AbstractCommand;
 import com.legendshop.command.framework.JCFException;
 import com.legendshop.model.entity.User;
+import com.legendshop.permission.dao.UserDao;
 /**
  * 
  * LegendShop 版权所有 2009-2011,并保留所有权利。
@@ -43,9 +43,9 @@ public class UpdateUserPassowrd extends AbstractCommand
 	 */
 	public void execute(Map params, Map response) throws Exception
 	{
-		    User user=(User)dao.get(User.class, (String) params.get("userId"));
+		    User user=dao.get(User.class, (String) params.get("userId"));
 			user.setPassword((String)params.get("password"));
-			dao.update(user);
+			dao.updateUser(user);
 	}
 
 	/* (non-Javadoc)

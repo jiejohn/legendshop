@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.legendshop.core.dao.impl.BaseDaoImpl;
+import com.legendshop.model.entity.User;
 import com.legendshop.util.StringUtil;
 /**
  * 
@@ -112,5 +113,15 @@ public class UserDao extends BaseDaoImpl {
 	public List findUserRoleByUserId(String userId) {
 		logger.info(StringUtil.convert(findUserRoleByUserId, new String[]{userId}));
 		return find(findUserRoleByUserId, userId);
+	}
+
+	/**
+	 * Update user.
+	 * 
+	 * @param user
+	 *            the user
+	 */
+	public void updateUser(User user) {
+		update(user);
 	}
 }

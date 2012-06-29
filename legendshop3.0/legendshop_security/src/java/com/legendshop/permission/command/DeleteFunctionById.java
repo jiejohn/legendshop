@@ -8,10 +8,9 @@
 package com.legendshop.permission.command;
 import java.util.Map;
 
-import com.legendshop.permission.dao.FunctionDao;
 import com.legendshop.command.framework.AbstractCommand;
 import com.legendshop.command.framework.JCFException;
-import com.legendshop.model.entity.Function;
+import com.legendshop.permission.dao.FunctionDao;
 /**
  * 
  * LegendShop 版权所有 2009-2011,并保留所有权利。
@@ -42,7 +41,7 @@ public class DeleteFunctionById extends AbstractCommand
 	 */
 	public void execute(Map params, Map response) throws Exception
 	{
-		response.put("resultBoolean",Boolean.valueOf(dao.delete(Function.class,(String) params.get("functionId"))));
+		response.put("resultBoolean",Boolean.valueOf(dao.deleteFunction((String) params.get("functionId"))));
 
 	}
 	

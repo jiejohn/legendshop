@@ -8,11 +8,11 @@
 package com.legendshop.permission.command;
 import java.util.Map;
 
-import com.legendshop.permission.common.ErrorCode;
-import com.legendshop.permission.dao.FunctionDao;
 import com.legendshop.command.framework.AbstractCommand;
 import com.legendshop.command.framework.JCFException;
 import com.legendshop.model.entity.Function;
+import com.legendshop.permission.common.ErrorCode;
+import com.legendshop.permission.dao.FunctionDao;
 import com.legendshop.util.AppUtils;
 /**
  * 
@@ -50,7 +50,7 @@ public class UpdateFunction extends AbstractCommand
 			throw new JCFException(ErrorCode.PARAMETER_ERROR, msg);
 		}
 
-			dao.update(function);
+			dao.updateFunction(function);
 		
 	}
 	

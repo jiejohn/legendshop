@@ -22,6 +22,7 @@ import com.legendshop.command.framework.JCFException;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.model.entity.Function;
 import com.legendshop.model.entity.Permission;
 import com.legendshop.util.StringUtil;
 /**
@@ -182,5 +183,17 @@ public void DeletePermissionByFunctionId(List permissions){
 	public void setFindOtherFunctionByRoleIdHQLCount(
 			String findOtherFunctionByRoleIdHQLCount) {
 		this.findOtherFunctionByRoleIdHQLCount = findOtherFunctionByRoleIdHQLCount;
+	}
+
+	public void updateFunction(Function function) {
+		update(function);
+	}
+
+	public void deleteFunction(Function function) {
+		delete(function);
+	}
+
+	public boolean deleteFunction(String functionId) {
+		return delete(Function.class, functionId);
 	}
  	}

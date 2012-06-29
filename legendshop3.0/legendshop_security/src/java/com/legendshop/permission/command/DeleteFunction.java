@@ -8,11 +8,11 @@
 package com.legendshop.permission.command;
 import java.util.Map;
 
-import com.legendshop.permission.dao.FunctionDao;
 import com.legendshop.command.framework.AbstractCommand;
 import com.legendshop.command.framework.ErrorCode;
 import com.legendshop.command.framework.JCFException;
 import com.legendshop.model.entity.Function;
+import com.legendshop.permission.dao.FunctionDao;
 /**
  * 
  * LegendShop 版权所有 2009-2011,并保留所有权利。
@@ -48,8 +48,7 @@ public class DeleteFunction extends AbstractCommand
 			String msg = "DeleteFunction PARAMETER_ERROR ,function is not validated!";
 			throw new JCFException(ErrorCode.PARAMETER_ERROR, msg);
 		}
-		dao.delete(function);
-
+		dao.deleteFunction(function);
 	}
 	
 	/**

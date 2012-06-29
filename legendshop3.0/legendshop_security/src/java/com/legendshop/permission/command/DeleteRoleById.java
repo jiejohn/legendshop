@@ -9,10 +9,9 @@ package com.legendshop.permission.command;
 
 import java.util.Map;
 
-import com.legendshop.permission.dao.RoleDao;
 import com.legendshop.command.framework.AbstractCommand;
 import com.legendshop.command.framework.JCFException;
-import com.legendshop.model.entity.Role;
+import com.legendshop.permission.dao.RoleDao;
 
 /**
  * 
@@ -43,7 +42,7 @@ public class DeleteRoleById extends AbstractCommand {
 	 * @see com.legendshop.command.framework.Command#execute(java.util.Map, java.util.Map)
 	 */
 	public void execute(Map params, Map response) throws Exception {
-		dao.deleteById(Role.class, (String) params.get("roleId"));
+		dao.deleteRoleById((String) params.get("roleId"));
 	}
 
 	/* (non-Javadoc)

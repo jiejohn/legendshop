@@ -16,6 +16,7 @@ import com.legendshop.command.framework.JCFException;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.model.entity.Role;
 import com.legendshop.util.StringUtil;
 
 /**
@@ -147,6 +148,20 @@ public class RoleDao extends BaseDaoImpl {
 	 */
 	public void setFindOtherRoleByUserCount(String findOtherRoleByUserCount) {
 		this.findOtherRoleByUserCount = findOtherRoleByUserCount;
+	}
+
+	public void updateRole(Role role) {
+		update(role);
+	}
+
+	public void deleteRole(Role role) {
+		delete(role);
+		
+	}
+
+	public void deleteRoleById(String roleId) {
+		deleteById(Role.class, roleId);
+		
 	}
 	
  }
