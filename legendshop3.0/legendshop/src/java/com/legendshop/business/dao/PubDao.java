@@ -26,4 +26,20 @@ public interface PubDao extends BaseDao{
 	 */
 	public abstract List<Pub> getPub(final String shopName);
 
+	/**
+	 * Delete pub by id.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	public abstract void deletePubById(Long id);
+
+	/**
+	 * Update pub.
+	 * 
+	 * @param pub
+	 *            the pub
+	 */
+	public abstract void updatePub(Pub pub);
+
 }

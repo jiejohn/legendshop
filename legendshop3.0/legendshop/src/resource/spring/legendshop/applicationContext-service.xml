@@ -15,6 +15,7 @@
     <bean id="shopDetailDao" class="com.legendshop.business.dao.impl.ShopDetailJdbcDaoImpl" parent="baseDao">
     	<property name="codeTablesCache" ref="codeTablesCache"></property>
     	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    	<property name="commonUtil" ref="commonUtil"></property>
     </bean>
     
     <bean id="basketDao" class="com.legendshop.business.dao.impl.BasketDaoImpl" parent="baseDao">
@@ -40,7 +41,6 @@
     <bean id="shopDetailService" class="com.legendshop.business.service.impl.ShopDetailServiceImpl">
         <property name="shopDetailDao" ref="shopDetailDao" />
         <property name="userDetailDao" ref="userDetailDao" />
-        <property name="commonUtil" ref="commonUtil"></property>
         <property name="shopDetailSearchFacade" ref="shopDetailSearchFacade"></property>
     </bean>  
     
@@ -76,9 +76,6 @@
     	<property name="maxNumPerType" value="3"></property>
     </bean>
     
-    <bean id="businessDao" class="com.legendshop.business.dao.impl.BusinessDaoImpl" parent="baseDao">
-    </bean>
-
     <bean id="advertisementService" class="com.legendshop.business.service.impl.AdvertisementServiceImpl">
         <property name="advertisementDao" ref="advertisementDao">
         </property>
@@ -94,9 +91,15 @@
     
      <bean id="userDetailDao" class="com.legendshop.business.dao.impl.UserDetailDaoImpl" parent="baseDao">
      	<property name="commonUtil" ref="commonUtil"></property>
+     	 <property name="threadPoolExecutor">
+			<ref bean="threadPoolExecutor" />
+		</property>
+	    <property name="javaMailSender">
+			<ref bean="javaMailSender" />
+		</property>
     </bean> 
     
-      <bean id="userDetailService" class="com.legendshop.business.service.impl.UserDetailServiceImpl">
+      <bean id="userDetailService" class="com.legendshop.business.service.impl.UserDetailServiceImpl" parent="baseService">
         <property name="userDetailDao" ref="userDetailDao">
         </property>
     </bean>  
@@ -134,9 +137,6 @@
 		<property name="advertisementDao">
 			<ref bean="advertisementDao" />
 		</property>
-		<property name="businessDao">
-			<ref bean="businessDao" />
-		</property>	
 		<property name="logoDao">
 			<ref bean="logoDao" />
 		</property>	
@@ -157,10 +157,7 @@
 		</property>	
 		<property name="userDetailDao">
 			<ref bean="userDetailDao" />
-		</property>	
-		<property name="visitLogDao">
-			<ref bean="visitLogDao" />
-		</property>	
+		</property>
 		<property name="payTypeService">
 			<ref bean="payTypeService" />
 		</property>
@@ -186,19 +183,7 @@
 			<ref bean="hotsearchDao" />
 		</property>
 	</bean>
-	
-	<bean id="adminService" class="com.legendshop.business.service.impl.AdminServiceImpl" parent="baseService">
-		<property name="baseDao">
-			<ref bean="baseDao" />
-		</property>
-		<property name="commonUtil">
-			<ref bean="commonUtil" />
-		</property>
-		<property name="shopDetailDao">
-			<ref bean="shopDetailDao" />
-		</property>
-	</bean>
-	
+		
     <bean id="newsCategoryDao" class="com.legendshop.business.dao.impl.NewsCategoryDaoImpl" parent="baseDao">
 	</bean>
 
@@ -217,7 +202,11 @@
     </bean>  
     
     <bean id="indexService" class="com.legendshop.business.service.impl.IndexServiceImpl">
-        <property name="baseDao" ref="sortDao" />
+        <property name="newsDao" ref="newsDao" />
+        <property name="shopDetailDao" ref="shopDetailDao" />
+        <property name="subDao" ref="subDao" />
+        <property name="userCommentDao" ref="userCommentDao" />
+        <property name="userDetailDao" ref="userDetailDao" />
     </bean>  
     
     <bean id="downloadLogDao" class="com.legendshop.business.dao.impl.DownloadLogDaoImpl" parent="baseDao">
@@ -225,7 +214,7 @@
 
 	<bean id="downloadLogService" class="com.legendshop.business.service.impl.DownloadLogServiceImpl">
         <property name="downloadLogDao" ref="downloadLogDao" />
-        <property name="businessDao" ref="businessDao" />
+        <property name="subDao" ref="subDao" />
         <property name="interValMinutes"  value="-30" />
         <property name="maxTimes" value="30" />
     </bean>
@@ -279,7 +268,12 @@
         </property>
     </bean> 
     
-    <bean id="commonUtil" class="com.legendshop.business.service.impl.CommonUtilImpl" />
+    <bean id="commonUtil" class="com.legendshop.business.service.impl.CommonUtilImpl" >
+    	<property name="commonUtilDao" ref="commonUtilDao"></property>
+    </bean>
+    
+    <bean id="commonUtilDao" class="com.legendshop.business.dao.impl.CommonUtilDaoImpl" parent="baseDao">
+	</bean>
 
 	<bean id="productCommentDao" class="com.legendshop.business.dao.impl.ProductCommentDaoImpl" parent="baseDao">
 	</bean>
@@ -343,14 +337,7 @@
     
     <bean id="userCommentDao" class="com.legendshop.business.dao.impl.UserCommentDaoImpl" parent="baseDao">
     </bean>
-    
-      <bean id="orderService" class="com.legendshop.business.service.impl.OrderServiceImpl">
-        <property name="orderDao" ref="orderDao"></property>
-    </bean>
-    
-    <bean id="orderDao" class="com.legendshop.business.dao.impl.OrderDaoImpl" parent="baseDao">
-    </bean>
-    
+        
     <bean id="visitLogDao" class="com.legendshop.business.dao.impl.VisitLogDaoImpl" parent="baseDao">
     </bean>
 
@@ -405,5 +392,9 @@
 	<bean id="eventService" class="com.legendshop.business.service.impl.EventServiceImpl">
         <property name="eventDao" ref="eventDao" />
     </bean>  
-             	
+             
+     <bean id="constTableDao" class="com.legendshop.business.dao.impl.ConstTableDaoImpl" parent="baseDao" />	
+     
+     <bean id="tagLibDao" class="com.legendshop.business.dao.impl.TagLibDaoImpl" parent="baseDao" />	
+     
 </beans>

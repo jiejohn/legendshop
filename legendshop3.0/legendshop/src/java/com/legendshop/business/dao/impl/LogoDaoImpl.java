@@ -9,6 +9,7 @@ package com.legendshop.business.dao.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.LogoDao;
@@ -57,17 +58,17 @@ public class LogoDaoImpl extends BaseDaoImpl implements LogoDao {
 				ParameterEnum.DEFAULT_SHOP, String.class));
 	}
 
-	/**
-	 * Gets the key.
-	 * 
-	 * @param methodName
-	 *            the method name
-	 * @param storeName
-	 *            the store name
-	 * @return the key
-	 */
-	private String getKey(String methodName, String storeName) {
-		return new StringBuffer().append("logo_").append(methodName).append(storeName).toString();
+	@Override
+	@CacheEvict(value = "Logo", key = "#logo.userName")
+	public void deleteLogo(Logo logo) {
+		delete(logo);
+	}
+
+	@Override
+	@CacheEvict(value = "Logo", key = "#logo.userName")
+	public void updateLogo(Logo logo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

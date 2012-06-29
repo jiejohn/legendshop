@@ -53,7 +53,7 @@
     <!-- 以message:开头则查找properties文件 -->
 	<bean id="codeTablesCache"
 		class="com.legendshop.business.service.impl.MapCodeTablesCache">
-		<property name="baseDao" ref="baseDao" />
+		<property name="constTableDao" ref="constTableDao" />
 	</bean>
 	<!-- 
 	<bean id="dataSource"
@@ -130,7 +130,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${DB_DIALECT}</prop>
-				<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
+				<prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
 				<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
 				<prop key="hibernate.show_sql">${SHOW_SQL}</prop>
 				<!-- 
@@ -165,14 +165,13 @@
 		-->
 		<property name="mappingLocations">
 			<list>
-				<value>
-					classpath*:/com/legendshop/model/entity/**/*.hbm.xml
-				</value>
+				<value>classpath*:/com/legendshop/model/entity/**/*.hbm.xml</value>
 			</list>
 		</property>
+		
 	</bean>
 
-	<bean id="baseDao" class="com.legendshop.core.dao.impl.BaseDaoImpl">
+	<bean id="baseDao" class="com.legendshop.core.dao.impl.BaseDaoImpl" abstract="true">
 		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
 	</bean>
 	

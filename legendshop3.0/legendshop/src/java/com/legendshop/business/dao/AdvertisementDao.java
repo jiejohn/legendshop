@@ -1,3 +1,10 @@
+/*
+ * 
+ * LegendShop 多用户商城系统
+ * 
+ *  版权所有,并保留所有权利。
+ * 
+ */
 package com.legendshop.business.dao;
 
 import java.util.List;
@@ -6,6 +13,9 @@ import java.util.Map;
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.model.entity.Advertisement;
 
+/**
+ * The Interface AdvertisementDao.
+ */
 public interface AdvertisementDao extends BaseDao{
 
 	/**
@@ -50,5 +60,21 @@ public interface AdvertisementDao extends BaseDao{
 	 * @return true, if successful
 	 */
 	public abstract boolean isMaxNum(String userName, String type);
+
+	/**
+	 * Delete adv by id.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	public abstract void deleteAdvById(Long id);
+
+	/**
+	 * Update adv.
+	 * 
+	 * @param advertisement
+	 *            the advertisement
+	 */
+	public abstract void updateAdv(Advertisement advertisement);
 
 }

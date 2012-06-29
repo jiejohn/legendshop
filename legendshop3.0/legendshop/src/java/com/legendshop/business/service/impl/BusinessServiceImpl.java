@@ -31,11 +31,11 @@ import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.dao.AdvertisementDao;
 import com.legendshop.business.dao.BasketDao;
-import com.legendshop.business.dao.BusinessDao;
 import com.legendshop.business.dao.ExternalLinkDao;
 import com.legendshop.business.dao.HotsearchDao;
 import com.legendshop.business.dao.ImgFileDao;
 import com.legendshop.business.dao.LogoDao;
+import com.legendshop.business.dao.MyleagueDao;
 import com.legendshop.business.dao.NewsDao;
 import com.legendshop.business.dao.NsortDao;
 import com.legendshop.business.dao.ProductDao;
@@ -44,7 +44,6 @@ import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.business.dao.SortDao;
 import com.legendshop.business.dao.SubDao;
 import com.legendshop.business.dao.UserDetailDao;
-import com.legendshop.business.dao.impl.VisitLogDaoImpl;
 import com.legendshop.business.event.EventId;
 import com.legendshop.business.form.MemberForm;
 import com.legendshop.business.form.SearchForm;
@@ -65,7 +64,6 @@ import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.dao.support.SqlQuery;
 import com.legendshop.core.exception.ApplicationException;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
@@ -86,7 +84,6 @@ import com.legendshop.model.entity.ExternalLink;
 import com.legendshop.model.entity.Hotsearch;
 import com.legendshop.model.entity.ImgFile;
 import com.legendshop.model.entity.Indexjpg;
-import com.legendshop.model.entity.Myleague;
 import com.legendshop.model.entity.News;
 import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Product;
@@ -111,7 +108,6 @@ import com.legendshop.util.BeanHelper;
 import com.legendshop.util.MD5Util;
 import com.legendshop.util.SafeHtml;
 import com.legendshop.util.ip.IPSeeker;
-import com.legendshop.util.sql.ConfigCode;
 
 /**
  * 
@@ -139,9 +135,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/** The pub dao. */
 	private PubDao pubDao;
 
-	/** The business dao. */
-	private BusinessDao businessDao;
-
 	/** The logo dao. */
 	private LogoDao logoDao;
 
@@ -159,9 +152,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 	/** The user detail dao. */
 	private UserDetailDao userDetailDao;
-
-	/** The visit log dao. */
-	private VisitLogDaoImpl visitLogDao;
 
 	/** The pay type service. */
 	private PayTypeService payTypeService;
@@ -187,6 +177,8 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/** The hotsearch dao. */
 	private HotsearchDao hotsearchDao;
 	
+	private MyleagueDao myleagueDao;
+	
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#index(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -209,7 +201,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 				return PathResolver.getPath(request, FrontPage.ALL_PAGE);
 			}
 		} else {
-			shopName = shopDetail.getStoreName();
+			shopName = shopDetail.getUserName();
 			if (!shopStatusChecker.check(shopDetail, request)) {
 				return PathResolver.getPath(request, FrontPage.FAIL);
 			}
@@ -256,7 +248,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			visitLog.setShopName(shopName);
 			visitLog.setUserName(userName);
 			visitLog.setPage(VisitTypeEnum.INDEX.value());
-			threadPoolExecutor.execute(new TaskThread(new PersistVisitLogTask(visitLog, visitLogDao)));
+			threadPoolExecutor.execute(new TaskThread(new PersistVisitLogTask(visitLog)));
 		} else {
 			log.info("[{}],{} visit index {}", new Object[] { request.getRemoteAddr(), userName, shopName });
 		}
@@ -395,7 +387,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		// cookie.setMaxAge(100000); // -1为永不过期,或者指定过期时间
 		// response.addCookie(cookie);// 在退出登录操作中删除cookie.
 		// session.setAttribute(AttributeKeys.LOCALE_KEY, locale);
-		log.debug("setLocal {}, By ShopDetail {}", locale, shopDetail.getSitename());
+		log.debug("setLocal {}, By ShopDetail {}", locale, shopDetail.getSiteName());
 		localeResolver.setLocale(request, response, locale);
 
 	}
@@ -759,7 +751,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 				visitLog.setUserName(userName);
 				visitLog.setProductId(String.valueOf(prod.getProdId()));
 				visitLog.setPage(VisitTypeEnum.HW.value());
-				threadPoolExecutor.execute(new TaskThread(new PersistVisitLogTask(visitLog, visitLogDao)));
+				threadPoolExecutor.execute(new TaskThread(new PersistVisitLogTask(visitLog)));
 			}
 			return PathResolver.getPath(request, FrontPage.VIEWS);
 		} else {
@@ -949,8 +941,8 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (shopDetail != null) {
 			shopDetail.setRealPath(RealPathUtil.getBigPicRealPath());
 			shopDetail.setIp(request.getRemoteAddr());
-			shopDetail.setSitename(safeHtml.makeSafe(shopDetail.getSitename()));
-			shopDetail.setYmaddr(safeHtml.makeSafe(shopDetail.getYmaddr()));
+			shopDetail.setSiteName(safeHtml.makeSafe(shopDetail.getSiteName()));
+			shopDetail.setPostAddr(safeHtml.makeSafe(shopDetail.getPostAddr()));
 			shopDetail.setIdCardNum(safeHtml.makeSafe(shopDetail.getIdCardNum()));
 		}
 		if (isUserInfoValid(form, request)) {
@@ -991,7 +983,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		
 		
 		// 发送通知注册成功邮件
-		if (sendMail()) {
+		if (PropertiesUtil.sendMail()) {
 			try {
 				String filePath = request.getSession().getServletContext().getRealPath("/")
 						+ "/system/mailTemplate/registersuccess.jsp";
@@ -1160,7 +1152,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		
 		request.setAttribute("supportOpenShop", eventContext.getBooleanResponse());
 		
-		request.setAttribute("totalProcessingOrder", businessDao.getTotalProcessingOrder(userName));
+		request.setAttribute("totalProcessingOrder", subDao.getTotalProcessingOrder(userName));
 		request.setAttribute("totalBasketByuserName", basketDao.getTotalBasketByuserName(userName));
 		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_740, request);
 		return PathResolver.getPath(request, TilesPage.MYACCOUNT);
@@ -1192,8 +1184,8 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 * @see com.legendshop.business.service.impl.BusinessService#getSimpleInfoShopDetail(java.lang.String)
 	 */
 	@Override
-	public ShopDetailView getSimpleInfoShopDetail(String storeName) {
-		return shopDetailDao.getSimpleInfoShopDetail(storeName);
+	public ShopDetailView getSimpleInfoShopDetail(String userName) {
+		return shopDetailDao.getSimpleInfoShopDetail(userName);
 	}
 
 	/* (non-Javadoc)
@@ -1316,15 +1308,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			this.setShopName(request, response, shopName);
 		}
 		String curPageNO = request.getParameter("curPageNO");
-		SqlQuery sqlQuery = new SqlQuery(15, curPageNO);
-		String queryAllSQL = ConfigCode.getInstance().getCode("biz.QueryLeagueCount");
-		String querySQL = ConfigCode.getInstance().getCode("biz.QueryLeague");
-		sqlQuery.setAllCountString(queryAllSQL);
-		sqlQuery.setQueryString(querySQL);
-		sqlQuery.addParams(shopName);
-		sqlQuery.addEntityClass("myleague", Myleague.class);
-
-		PageSupport ps = businessDao.find(sqlQuery);
+		PageSupport ps = myleagueDao.getLeague(shopName, curPageNO);
 		request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
 		request.setAttribute("leagues", ps.getResultList());
 		if (ps.hasMutilPage()) {
@@ -1333,6 +1317,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_740, request);
 		return PathResolver.getPath(request, TilesPage.LEAGUE);
 	}
+
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setShopDetailDao(com.legendshop.business.dao.ShopDetailDao)
@@ -1356,14 +1341,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	@Required
 	public void setPubDao(PubDao pubDao) {
 		this.pubDao = pubDao;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#setBusinessDao(com.legendshop.business.dao.BusinessDao)
-	 */
-	@Required
-	public void setBusinessDao(BusinessDao businessDao) {
-		this.businessDao = businessDao;
 	}
 
 	/* (non-Javadoc)
@@ -1412,14 +1389,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	@Required
 	public void setUserDetailDao(UserDetailDao userDetailDao) {
 		this.userDetailDao = userDetailDao;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#setVisitLogDao(com.legendshop.business.dao.VisitLogDao)
-	 */
-	@Required
-	public void setVisitLogDao(VisitLogDaoImpl visitLogDao) {
-		this.visitLogDao = visitLogDao;
 	}
 
 	/* (non-Javadoc)
@@ -1572,5 +1541,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	public void setHotsearchDao(HotsearchDao hotsearchDao) {
 		this.hotsearchDao = hotsearchDao;
 	}
+
 
 }

@@ -123,7 +123,7 @@ public class CommonServiceUtil extends FunctionUtil {
 			ShopDetail sd = (ShopDetail) obj;
 			entity = new SearchEntity();
 			entity.setShopId(sd.getShopId());
-			entity.setContents(new StringBuffer().append(sd.getStoreName()).append(" ").append(sd.getSitename())
+			entity.setContents(new StringBuffer().append(sd.getUserName()).append(" ").append(sd.getSiteName())
 					.append(" ").append(sd.getBriefDesc()).append(" ").append(sd.getDetailDesc()).toString());
 			entity.setDate(sd.getAddtime());
 			entity.setEntityType(LuceneIndexerEnum.SEARCH_ENTITY_SHOPDETAIL);

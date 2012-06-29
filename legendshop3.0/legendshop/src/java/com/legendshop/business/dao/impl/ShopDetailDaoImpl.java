@@ -15,11 +15,16 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 
 import com.legendshop.business.dao.ShopDetailDao;
+import com.legendshop.business.service.CommonUtil;
+import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
+import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.tag.TableCache;
@@ -40,7 +45,7 @@ import com.legendshop.util.AppUtils;
  * 
  * 官方网站：http://www.legendesign.net
  */
-public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
+public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(ShopDetailDaoImpl.class);
@@ -54,17 +59,20 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	// shopDetail.jsp
 	/** The color type one day. */
 	protected final String colorTypeOneDay = "oneday"; // 每天一个风格
+	
+	/** The common util. */
+	private CommonUtil commonUtil;
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#isShopExists(java.lang.String)
 	 */
 	@Override
 	@Cacheable(value="ShopDetail")
-	public Boolean isShopExists(final String storeName) {
-		if (AppUtils.isBlank(storeName)) {
+	public Boolean isShopExists(final String userName) {
+		if (AppUtils.isBlank(userName)) {
 			return false;
 		}
-		List list = findByHQL("select storeName from ShopDetail where storeName = ?", storeName);
+		List list = findByHQL("select userName from ShopDetail where userName = ?", userName);
 		return list != null && list.size() > 0;
 	}
 
@@ -72,8 +80,8 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#getShopDetailForUpdate(java.lang.String)
 	 */
 	@Override
-	public ShopDetail getShopDetailForUpdate(final String storeName) {
-		ShopDetail shopDetail = findUniqueBy("from ShopDetail sd where sd.storeName = ?", ShopDetail.class, storeName);
+	public ShopDetail getShopDetailForUpdate(final String userName) {
+		ShopDetail shopDetail = findUniqueBy("from ShopDetail sd where sd.userName = ?", ShopDetail.class, userName);
 		return shopDetail;
 	}
 
@@ -81,51 +89,32 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#getShopDetailView(java.lang.String)
 	 */
 	@Override
-	@Cacheable(value="ShopDetailView",key="#storeName")
-	public ShopDetailView getShopDetailView(final String storeName) {
-		if (AppUtils.isBlank(storeName)) {
-			return null;
-		}
-		ShopDetailView shopDetail = getSimpleInfoShopDetail(storeName);
-		if (shopDetail != null) {
-			ShopDetailView result = shopDetail.clone();
-			if (result.getQq() != null) {
-				String[] qqs = result.getQq().split(",");
-				List<String> qqList = new ArrayList<String>(qqs.length);
-				for (int i = 0; i < qqs.length; i++) {
-					if (qqs[i] != null && qqs[i].length() > 0) {
-						qqList.add(qqs[i]);
-					}
-				}
-				result.setQqList(qqList);
-			}
-			if (colorTypeOneDay.equals(result.getColorStyle())) {
-				result.setColorStyle(getColorTyle(storeName));
-			}
-			return result;
-		}
-		return shopDetail;
+	public ShopDetailView getShopDetailView(final String userName) {
+		return getSimpleInfoShopDetail(userName);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#getSimpleInfoShopDetail(java.lang.String)
 	 */
-	/**
-	 * Hibernate View做法，已经抛弃 @Deprecated
-	 */
 	
+	/**
+	 * 在子类中采用JDBC实现.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @return the simple info shop detail
+	 */
 	@Override
-	@Deprecated
-	public ShopDetailView getSimpleInfoShopDetail(final String storeName) {
-		return findUniqueBy("from ShopDetailView sd where sd.storeName = ?", ShopDetailView.class, storeName);
+	public ShopDetailView getSimpleInfoShopDetail(final String userName) {
+		throw new BusinessException("NOT Support getSimpleInfoShopDetail", EntityCodes.SHOP);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#getShopDetail(java.lang.String)
 	 */
 	@Override
-	public ShopDetail getShopDetail(final String storeName) {
-		return findUniqueBy("from ShopDetail sd where sd.storeName = ?", ShopDetail.class, storeName);
+	public ShopDetail getShopDetail(final String userName) {
+		return findUniqueBy("from ShopDetail sd where sd.userName = ?", ShopDetail.class, userName);
 	}
 
 	/* (non-Javadoc)
@@ -133,11 +122,11 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 */
 	@Override
 	@Cacheable(value="ShopDetail")
-	public Boolean isLeagueShopExists(final String storeName) {
-		if (storeName == null)
+	public Boolean isLeagueShopExists(final String userName) {
+		if (userName == null)
 			return false;
 		Long num = findUniqueBy("select count(*) from Myleague where userId = ? ", Long.class,
-				storeName);
+				userName);
 		return num > 0;
 	}
 
@@ -146,12 +135,12 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 */
 	@Override
 	@Cacheable(value="ShopDetail")
-	public Boolean isBeLeagueShop(final boolean isShopExists, final String userName, final String storeName) {
-		if (!isShopExists || AppUtils.isBlank(userName) || userName.equals(storeName)) {
+	public Boolean isBeLeagueShop(final boolean isShopExists, final String userName, final String friendName) {
+		if (!isShopExists || AppUtils.isBlank(userName) || userName.equals(friendName)) {
 			return false;
 		}
 		Long result = findUniqueBy("select count(*) from Myleague where userId = ? and friendId = ?",
-				Long.class, userName, storeName);
+				Long.class, userName, friendName);
 		return result <= 0;
 	}
 
@@ -228,15 +217,15 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	/**
 	 * Gets the color tyle.
 	 * 
-	 * @param storeName
+	 * @param userName
 	 *            the store name
 	 * @return the color tyle
 	 */
-	protected String getColorTyle(String storeName) {
+	protected String getColorTyle(String userName) {
 		getColorTypeOptions();
 		SimpleDateFormat simpledateformat = new SimpleDateFormat("yyyyMMdd");
 		String s = simpledateformat.format(new Date());
-		long i = (Long.valueOf(s) + Long.valueOf(storeName.hashCode())) % colorTypeOptions.length;
+		long i = (Long.valueOf(s) + Long.valueOf(userName.hashCode())) % colorTypeOptions.length;
 		if (i < 0) {
 			i = -i;
 		}
@@ -248,10 +237,22 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#updateShopDetail(com.legendshop.model.entity.ShopDetail)
 	 */
 	@Override
-	@CacheEvict(value="ShopDetailView", key="#storeName")
+	@CacheEvict(value="ShopDetailView", key="#shopdetail.userName")
 	public void updateShopDetail(ShopDetail shopdetail) {
 		update(shopdetail);
 	}
+	
+	/**
+	 * Save or update shop detail.
+	 * 
+	 * @param shopdetail
+	 *            the shopdetail
+	 */
+	@CacheEvict(value="ShopDetailView", key="#shopdetail.userName")
+	private void saveOrUpdateShopDetail(ShopDetail shopdetail) {
+		saveOrUpdate(shopdetail);
+	}
+	
 	
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#updateShopDetailWhenProductChange(com.legendshop.model.entity.Product)
@@ -267,14 +268,124 @@ public class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetailDao {
 		updateShopDetail(shopdetail);
 	}
 
-	@Override
-	public List<ShopDetailView> getShopDetail(Long[] shopId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.ShopDetailDao#getShopDetailByUserId(java.lang.String)
+	 */
 	@Override
 	public ShopDetail getShopDetailByUserId(String userId) {
 		return findUniqueBy("from ShopDetail sd where sd.userId = ?", ShopDetail.class, userId);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.ShopDetailDao#updateShopDetail(java.lang.String)
+	 */
+	@Override
+	public void updateShopDetail(String userName) {
+		ShopDetail shopdetail = getShopDetailForUpdate(userName);
+		if (shopdetail == null) {
+			throw new NotFoundException("ShopDetail is null, UserName = " + userName,EntityCodes.PROD);
+		}
+		shopdetail.setProductNum(getProductNum(userName));
+		shopdetail.setOffProductNum(getOffProductNum(userName));
+		updateShopDetail(shopdetail);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.ShopDetailDao#updateShop(java.lang.String, java.lang.String, com.legendshop.model.entity.ShopDetail, java.lang.Integer)
+	 */
+	@Override
+	public  boolean updateShop(String loginUserName, String userId, ShopDetail shopDetail, Integer status){
+		
+		boolean result = true;
+		try {
+				if (new Integer(ShopStatusEnum.REJECT.value()).equals(status) || new Integer(ShopStatusEnum.CLOSE.value()).equals(status)) {
+					//拒绝开店
+					commonUtil.removeAdminRight(userId);
+				} else if (new Integer(1).equals(status)) {
+					commonUtil.saveAdminRight(userId);
+
+				}
+				shopDetail.setStatus(status);
+				saveOrUpdateShopDetail(shopDetail);
+
+		} catch (Exception e) {
+			log.error("auditShop ", e);
+			result = false;
+		}
+		return result;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.ShopDetailDao#saveShopDetail(com.legendshop.model.entity.ShopDetail)
+	 */
+	@Override
+	public void saveShopDetail(ShopDetail shopDetail) {
+		save(shopDetail);
+	// save right
+	// 保存管理员角色
+	commonUtil.saveAdminRight(shopDetail.getUserId());
+		
+	}
+	
+	/**
+	 * Delete shop detail by id.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	@Override
+	@Caching(evict = { 
+			@CacheEvict(value="ShopDetail", key="#id"),
+			@CacheEvict(value="ShopDetailView", key="#id")
+			})
+	public void deleteShopDetailById(Long id){
+		deleteById(ShopDetail.class, id);
+	}
+
+	/**
+	 * Delete shop detail.
+	 * 
+	 * @param shopDetail
+	 *            the shop detail
+	 */
+	@Override
+	@Caching(evict = {
+			@CacheEvict(value="ShopDetail", key="#shopDetail.userName"),
+			@CacheEvict(value="ShopDetailView", key="#shopDetail.userName")
+			})
+	public void deleteShopDetail(ShopDetail shopDetail){
+		delete(shopDetail);
+		
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.ShopDetailDao#getShopDetailByShopId(java.lang.Long)
+	 */
+	@Override
+	public  ShopDetail getShopDetailByShopId(final Long shopId){
+		return get(ShopDetail.class, shopId);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.ShopDetailDao#getAllShopCount()
+	 */
+	@Override
+	public Long getAllShopCount(){
+		return findUniqueBy("select count(*) from ShopDetail", Long.class);
+	}
+
+
+	
+	/**
+	 * Sets the common util.
+	 * 
+	 * @param commonUtil
+	 *            the new common util
+	 */
+	@Required
+	public void setCommonUtil(CommonUtil commonUtil) {
+		this.commonUtil = commonUtil;
+	}
+
 }

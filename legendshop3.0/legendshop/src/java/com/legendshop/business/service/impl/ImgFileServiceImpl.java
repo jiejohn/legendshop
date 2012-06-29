@@ -9,6 +9,8 @@ package com.legendshop.business.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Required;
+
 import com.legendshop.business.dao.ImgFileDao;
 import com.legendshop.business.service.ImgFileService;
 import com.legendshop.core.dao.support.CriteriaQuery;
@@ -61,7 +63,7 @@ public class ImgFileServiceImpl implements ImgFileService {
 	 */
 	@Override
 	public void delete(Long id) {
-		imgFileDao.deleteById(ImgFile.class, id);
+		imgFileDao.deleteImgFileById(id);
 	}
 
 	/* (non-Javadoc)
@@ -81,7 +83,7 @@ public class ImgFileServiceImpl implements ImgFileService {
 	 */
 	@Override
 	public void update(ImgFile imgFile) {
-		imgFileDao.update(imgFile);
+		imgFileDao.updateImgFile(imgFile);
 	}
 
 	/* (non-Javadoc)
@@ -98,7 +100,25 @@ public class ImgFileServiceImpl implements ImgFileService {
 	 * @param imgFileDao
 	 *            the new img file dao
 	 */
+	@Required
 	public void setImgFileDao(ImgFileDao imgFileDao) {
 		this.imgFileDao = imgFileDao;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.service.impl.AdminService#imgFileOnline(java.lang.Long)
+	 */
+	@Override
+	public boolean updateImgFileOnline(Long fileId) {	
+		return imgFileDao.updateImgFileOnline(fileId);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.service.impl.AdminService#imgFileOffline(java.lang.Long)
+	 */
+	@Override
+	public boolean updateImgFileOffline(Long fileId) {
+		return imgFileDao.updateImgFileOffline(fileId);
+	}
+
 }

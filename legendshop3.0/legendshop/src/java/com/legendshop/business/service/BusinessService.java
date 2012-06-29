@@ -313,11 +313,11 @@ public interface BusinessService extends BaseService{
 	/**
 	 * Gets the simple info shop detail.
 	 * 
-	 * @param storeName
-	 *            the store name
+	 * @param userName
+	 *            the user name
 	 * @return the simple info shop detail
 	 */
-	public abstract ShopDetailView getSimpleInfoShopDetail(String storeName);
+	public abstract ShopDetailView getSimpleInfoShopDetail(String userName);
 
 	/**
 	 * 修改我的帐户，用于修改用户信息.

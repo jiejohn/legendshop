@@ -31,15 +31,15 @@ import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.DynamicPropertiesHelper;
 import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.BrandDao;
-import com.legendshop.business.dao.BusinessDao;
 import com.legendshop.business.dao.ImgFileDao;
+import com.legendshop.business.dao.ProductCommentDao;
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.business.dao.SubDao;
+import com.legendshop.business.dao.UserCommentDao;
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.helper.PageGengrator;
 import com.legendshop.business.search.facade.ProductSearchFacade;
-import com.legendshop.business.service.AdminService;
 import com.legendshop.business.service.PayTypeService;
 import com.legendshop.business.service.ScoreService;
 import com.legendshop.business.service.ValidateCodeUsernamePasswordAuthenticationFilter;
@@ -88,12 +88,6 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(DwrCommonServiceImpl.class);
 
-	/** The business dao. */
-	private BusinessDao businessDao;
-
-	/** The admin service. */
-	private AdminService adminService;
-
 	/** The user detail dao. */
 	private UserDetailDao userDetailDao;
 
@@ -128,6 +122,10 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	private LocaleResolver localeResolver;
 	
 	private GroupProductService groupProductService;
+	
+	private UserCommentDao userCommentDao;
+	
+	private ProductCommentDao productCommentDao;
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.dwr.impl.DwrCommonService#getSessionId()
@@ -200,7 +198,8 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 		if (subId == null) {
 			return "fail";
 		}
-		Sub sub = businessDao.get(Sub.class, subId);
+		
+		Sub sub = subDao.getSubById(subId);
 		// 检查权限
 		String userName = UserManager.getUsername(WebContextFactory.get().getSession());
 		if (!CommonServiceUtil.haveViewAllDataFunction(WebContextFactory.get().getHttpServletRequest())) {
@@ -237,7 +236,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			return "fail";
 		}
 
-		Sub sub = businessDao.get(Sub.class, subId);
+		Sub sub = subDao.getSubById(subId);
 		// 检查权限
 		String userName = UserManager.getUsername(WebContextFactory.get().getSession());
 		if (!CommonServiceUtil.haveViewAllDataFunction(WebContextFactory.get().getHttpServletRequest())) {
@@ -285,7 +284,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 				}
 			}
 
-			adminService.deleteById(Product.class, prodId);
+			productDao.deleteProdById(prodId);
 			
 			if(ProductTypeEnum.GROUP.value().equals(product.getProdType())){
 				//delete group product
@@ -295,30 +294,28 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			}
 
 			// 删除相关产品
-			List<RelProduct> list = businessDao.find("from RelProduct n where n.prodId = ? and userName = ?", prodId,
-					product.getUserName());
+			
+			List<RelProduct> list = productDao.getReleationProd(prodId, product.getUserName());
 			if (AppUtils.isNotBlank(list)) {
-				businessDao.deleteAll(list);
+				productDao.deleteAll(list);
 			}
+			
 			// 删除相关图片
-			List<ImgFile> imgFileList = businessDao.findByHQL(
-					"from ImgFile where productType = 1 and  userName = ? and productId = ? ", product.getUserName(),
-					prodId);
+			List<ImgFile> imgFileList = imgFileDao.getAllProductPics(product.getUserName(), prodId);
 			if (AppUtils.isNotBlank(imgFileList)) {
 				for (ImgFile imgFile : imgFileList) {
 					String imgFileUrl = RealPathUtil.getBigPicRealPath() + "/" + imgFile.getFilePath();
 					// 删除文件
 					log.debug("delete Big imgFileUrl file {}", imgFileUrl);
 					FileProcessor.deleteFile(imgFileUrl);
-					businessDao.delete(imgFile);
+					imgFileDao.deleteImgFile(imgFile);
 				}
 
 			}
 			// 删除商品评论
-			businessDao.exeByHQL("delete from ProductComment where prodId = ? and ownerName = ?", new Object[] {
-					prodId, product.getUserName() });
+			productCommentDao.deleteProductComment(prodId, product.getUserName());
 			// 删除全文索引
-			adminService.updateShopDetail(product);
+			shopDetailDao.updateShopDetail(product.getUserName());
 			
 			productSearchFacade.delete(product);
 			
@@ -347,7 +344,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			return "fail";
 		}
 		try {
-			if (adminService.updateProdOnline(prodId)) {
+			if (productDao.updateProdOnline(prodId)) {
 				return null;
 			} else {
 				return "fail";
@@ -368,7 +365,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			return "fail";
 		}
 		try {
-			if (adminService.updateImgFileOnline(fileId)) {
+			if (imgFileDao.updateImgFileOnline(fileId)) {
 				return null;
 			} else {
 				return "fail";
@@ -389,7 +386,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			return "fail";
 		}
 		try {
-			if (adminService.updateProdOffline(prodId)) {
+			if (productDao.updateProdOffline(prodId)) {
 				return null;
 			} else {
 				return "fail";
@@ -410,7 +407,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			return "fail";
 		}
 		try {
-			if (adminService.updateImgFileOffline(fileId)) {
+			if (imgFileDao.updateImgFileOffline(fileId)) {
 				return null;
 			} else {
 				return "fail";
@@ -422,13 +419,6 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.dwr.impl.DwrCommonService#setAdminService(com.legendshop.business.service.AdminService)
-	 */
-	@Override
-	public void setAdminService(AdminService adminService) {
-		this.adminService = adminService;
-	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.dwr.impl.DwrCommonService#isUserExist(java.lang.String)
@@ -455,7 +445,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			return "fail";
 		}
 		try {
-			return adminService.deleteUserDetail(userId, userName, RealPathUtil.getBigPicRealPath(),
+			return userDetailDao.deleteUserDetail(userId, userName, RealPathUtil.getBigPicRealPath(),
 					RealPathUtil.getSmallPicRealPath());
 		} catch (Exception e) {
 			log.error("deleteUserDetail", e);
@@ -469,16 +459,9 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	 */
 	@Override
 	public List<Model> loadDynamicAttribute(Long prodId, String userName) {
-		// String jsonStr =
-		// "[{\"id\":\"型号\",\"items\":[{\"key\":\"型号\",\"value\":\"SANXING
-		// G2000\"}],\"type\":\"Text\"},{\"id\":\"大小\",\"items\":[{\"key\":\"S\",\"value\":\"\"},{\"key\":\"M\",\"value\":\"\"},{\"key\":\"L\",\"value\":\"\"},{\"key\":\"LX\",\"value\":\"\"}],\"type\":\"CheckBox\"},{\"id\":\"颜色\",\"items\":[{\"key\":\"红色\",\"value\":\"\"},{\"key\":\"黄色\",\"value\":\"\"},{\"key\":\"蓝色\",\"value\":\"\"}],\"type\":\"Radio\"},{\"id\":\"高度\",\"items\":[{\"key\":\"100\",\"value\":\"\"},{\"key\":\"200\",\"value\":\"\"},{\"key\":\"300\",\"value\":\"\"}],\"type\":\"Select\"},{\"id\":\"厂家\",\"items\":[{\"key\":\"厂家\",\"value\":\"三星\"}],\"type\":\"Text\"}]";
-		List<Model> list = new ArrayList<Model>();
-		Product product = adminService.getProd(prodId, userName);
-		if (AppUtils.isNotBlank(product)) {
-			if (AppUtils.isNotBlank(product.getAttribute()))
-				list = JSONArray.fromObject(product.getAttribute());
-		}
-		return list;
+		
+		return productDao.loadDynamicAttribute(prodId,userName);
+
 	}
 
 	/* (non-Javadoc)
@@ -487,7 +470,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	@Override
 	public List<Model> loadDynamicAttributeFromTemp(Long tempId, String userName) {
 		List<Model> list = new ArrayList<Model>();
-		DynamicTemp temp = adminService.getDynamicTemp(tempId, userName);
+		DynamicTemp temp = productDao.getDynamicTemp(tempId, userName);
 		if (AppUtils.isNotBlank(temp)) {
 			if (AppUtils.isNotBlank(temp.getContent()))
 				list = JSONArray.fromObject(temp.getContent());
@@ -504,14 +487,14 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			JSONArray json = JSONArray.fromObject(model);
 			String result = json.toString();
 			if (AppUtils.isNotBlank(result)) {
-				Product product = adminService.getProd(prodId, userName);
+				Product product = productDao.getProd(prodId, userName);
 				if (type != null && type.equals(Constants.HW_TEMPLATE_ATTRIBUTE)) {
 					product.setAttribute(result);
 				} else {
 					product.setParameter(result);
 				}
 
-				adminService.updateProd(product);
+				productDao.updateProduct(product);
 			}
 		}
 
@@ -526,7 +509,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 		boolean result = true;
 		if (model != null) {
 			JSONArray json = JSONArray.fromObject(model);
-			result = adminService.saveDynamicTemp(tempName, userName, type, json.toString());
+			result = productDao.saveDynamicTemp(tempName, userName, type, json.toString());
 		}
 
 		return result;
@@ -540,7 +523,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 		boolean result = true;
 		if (model != null) {
 			JSONArray json = JSONArray.fromObject(model);
-			result = adminService.updateDynamicTemp(tempId, userName, type, json.toString());
+			result = productDao.updateDynamicTemp(tempId, userName, type, json.toString());
 		}
 
 		return result;
@@ -559,14 +542,14 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 				return false;
 			}
 		}
-		return adminService.deleteDynamicTemp(tempId, userName);
+		return productDao.deleteDynamicTemp(tempId, userName);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.dwr.impl.DwrCommonService#addMyLeague(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Integer addMyLeague(String userName, String shopName, String sitename) {
+	public Integer addMyLeague(String userName, String shopName, String siteName) {
 		if (AppUtils.isBlank(userName) || AppUtils.isBlank(shopName)) {
 			return MyLeagueEnum.ERROR.value();
 		}
@@ -581,7 +564,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 		myleague.setAddtime(new Date());
 		myleague.setFriendId(shopName);
 		myleague.setStatus(MyLeagueEnum.ONGOING.value());
-		myleague.setFriendName(sitename);
+		myleague.setFriendName(siteName);
 		myleague.setUserId(userName);
 		shopDetailDao.saveMyleague(myleague);
 		return MyLeagueEnum.ONGOING.value();
@@ -597,7 +580,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			return "fail";
 		}
 		
-		boolean result = businessDao.updateUserComment(id, answer, loginName);
+		boolean result = userCommentDao.updateUserComment(id, answer, loginName);
 		if (result) {
 			return null;
 		} else {
@@ -627,19 +610,20 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	 * @see com.legendshop.business.service.dwr.impl.DwrCommonService#auditShop(java.lang.String, java.lang.String, java.lang.Long, java.lang.Integer)
 	 */
 	@Override
-	public String auditShop(String loginUserName, String storeName, Long shopId, Integer status) {
-		if (storeName == null) {
+	public String auditShop(String loginUserName, String userId, Long shopId, Integer status) {
+		if (userId == null) {
 			return Constants.FAIL;
 		}
-		ShopDetail shopDetail = businessDao.get(ShopDetail.class, shopId);
+		
+		ShopDetail shopDetail = shopDetailDao.getShopDetailByShopId(shopId);
 		if (shopDetail != null) {
-			if (!loginUserName.equals(shopDetail.getStoreName())) {
+			if (!loginUserName.equals(shopDetail.getUserName())) {
 				if (!CommonServiceUtil.haveViewAllDataFunction(WebContextFactory.get().getHttpServletRequest())) {
-					throw new BusinessException(loginUserName + "you can not edit " + shopDetail.getStoreName()
+					throw new BusinessException(loginUserName + "you can not edit " + shopDetail.getUserName()
 							+ "'s data if you are not a admin",EntityCodes.PROD);
 				}
 			}
-			boolean result = adminService.updateShop(loginUserName, storeName, shopDetail, status);
+			boolean result = shopDetailDao.updateShop(loginUserName, userId, shopDetail, status);
 			if (result) {
 				return null;
 			} else {
@@ -712,7 +696,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	@Override
 	public String saveBrandItem(String idJson, String nameJson, Long nsortId, String userName) {
 		JSONArray array = JSONArray.fromObject(idJson);
-		return adminService.saveBrandItem(array, nsortId, userName);
+		return brandDao.saveBrandItem(array, nsortId, userName);
 	}
 
 	/* (non-Javadoc)
@@ -722,15 +706,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	public String saveProdItem(String idJson, String nameJson, Long prodId, String userName) {
 		JSONArray arrayId = JSONArray.fromObject(idJson);
 		JSONArray arrayName = JSONArray.fromObject(nameJson);
-		return adminService.saveProdItem(arrayId, arrayName, prodId, userName);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.dwr.impl.DwrCommonService#setBusinessDao(com.legendshop.business.dao.BusinessDao)
-	 */
-	@Required
-	public void setBusinessDao(BusinessDao businessDao) {
-		this.businessDao = businessDao;
+		return productDao.saveProdItem(arrayId, arrayName, prodId, userName);
 	}
 
 	/* (non-Javadoc)
@@ -879,7 +855,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 				sub.setPayTypeId(payType.getPayTypeId());
 				sub.setPayId(payType.getPayId());
 				sub.setPayDate(new Date());
-				businessDao.update(sub);
+				subDao.updateSub(sub);
 			}
 		}
 	}
@@ -922,7 +898,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			WebContext webContext = WebContextFactory.get();
 			String templateFilePath = webContext.getSession().getServletContext().getRealPath("/")
 					+ "/system/mailTemplate/resetpassmail.jsp";
-			if (adminService.updatePassword(userName, mail, templateFilePath)) {
+			if (userDetailDao.updatePassword(userName, mail, templateFilePath)) {
 				return null;
 			} else {
 				return "fail";
@@ -953,7 +929,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 		productComment.setOwnerName(product.getUserName());
 		HttpServletRequest request = WebContextFactory.get().getHttpServletRequest();
 		productComment.setPostip(request.getRemoteAddr());
-		businessDao.save(productComment);
+		productCommentDao.saveProductComment(productComment);
 		// create HTML though Freemarker
 		String curPageNO = request.getParameter("curPageNO");
 		return getgetProductCommentHtml(request, prodId, curPageNO);
@@ -979,7 +955,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			if (AppUtils.isBlank(userName)) {
 				return "NOLOGON"; // 没有登录
 			}
-			if (!businessDao.isUserOrderProduct(prodId, userName)) {
+			if (!subDao.isUserOrderProduct(prodId, userName)) {
 				return "NOBUYED";
 			}
 		} else if (Constants.NO_COMMENT.equals(level)) {
@@ -1054,7 +1030,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 		if (prod != null) {
 			parameter = prod.getParameter();
 		} else {
-			parameter = adminService.getProdParameter(prodId);
+			parameter = productDao.getProdParameter(prodId);
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (AppUtils.isNotBlank(parameter)) {
@@ -1184,5 +1160,14 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			}
 		}
 		return groupProductService;
+	}
+	@Required
+	public void setUserCommentDao(UserCommentDao userCommentDao) {
+		this.userCommentDao = userCommentDao;
+	}
+
+	@Required
+	public void setProductCommentDao(ProductCommentDao productCommentDao) {
+		this.productCommentDao = productCommentDao;
 	}
 }

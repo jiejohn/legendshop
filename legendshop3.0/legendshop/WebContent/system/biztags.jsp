@@ -37,7 +37,7 @@
 			<td>用法</td>
 			<td>
 				<lb:shopDetail var="shopDetail" />
-				${shopDetail.sitename}
+				${shopDetail.siteName}
 				
 			</td>
 		</tr>

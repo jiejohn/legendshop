@@ -22,37 +22,37 @@
     $(document).ready(function() {
     jQuery("#form1").validate({
             rules: {
-             sitename: {
+             siteName: {
 				required: true,
 				minlength: 2
 			},
-            maddr: "required",
+            shopAddr: "required",
             briefDesc: "required"
         },
         messages: {
-             maddr: {
+             shopAddr: {
                 required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>'
             },
-             msn: {
+             bankCard: {
                 required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>'
             },
-            mname: {
+            payee: {
                 required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>'
             },
            code: {
                 required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>'
             },
-            ymname: {
+            recipient: {
                 required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>'
             },
-           ymaddr: {
+           postAddr: {
                 required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>',
                 minlength: '<fmt:message key="errors.minlength"><fmt:param value=""/><fmt:param value="2"/></fmt:message>'
             }, 
 		   briefDesc: {
                 required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>'
             },
-            sitename: {
+            siteName: {
                 required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>',
                 minlength: '<fmt:message key="errors.minlength"><fmt:param value=""/><fmt:param value="2"/></fmt:message>'
             }
@@ -154,7 +154,7 @@
           <div align="right">用户名:</div>
        </td>
         <td>
-           <p><input type="text" name="storeName" id="storeName" value="${shopDetail.storeName == null ? param.userName : shopDetail.storeName}" size="50" readonly="readonly"/>
+           <p><input type="text" name="userName" id="userName" value="${shopDetail.userName == null ? param.userName : shopDetail.userName}" size="50" readonly="readonly"/>
            <a href="${pageContext.request.contextPath}/myaccount${applicationScope.WEB_SUFFIX}" target="_blank">我的账号</a></p>
         </td>
       </tr>
@@ -163,7 +163,7 @@
           <div align="right">网店名称: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="sitename" id="sitename" value="${shopDetail.sitename}" size="50"/></p>
+           <p><input type="text" name="siteName" id="siteName" value="${shopDetail.siteName}" size="50"/></p>
         </td>
       </tr>
      <tr>
@@ -171,7 +171,7 @@
           <div align="right">网店地址: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="maddr" id="maddr" value="${shopDetail.maddr}" size="50"/></p>
+           <p><input type="text" name="shopAddr" id="shopAddr" value="${shopDetail.shopAddr}" size="50"/></p>
         </td>
       </tr>
      <tr>
@@ -179,7 +179,7 @@
           <div align="right">银行汇款帐号:</div>
        </td>
         <td>
-           <p><input type="text" name="msn" id="msn" value="${shopDetail.msn}" size="50"/></p>
+           <p><input type="text" name="bankCard" id="bankCard" value="${shopDetail.bankCard}" size="50"/></p>
         </td>
       </tr>
      <tr>
@@ -187,7 +187,7 @@
           <div align="right">收款人姓名:</div>
        </td>
         <td>
-           <p><input type="text" name="mname" id="mname" value="${shopDetail.mname}" size="50" /></p>
+           <p><input type="text" name="payee" id="payee" value="${shopDetail.payee}" size="50" /></p>
         </td>
       </tr>
      <tr>
@@ -203,7 +203,7 @@
           <div align="right">汇款地址:</div>
        </td>
         <td>
-           <p><input type="text" name="ymaddr" id="ymaddr" value="${shopDetail.ymaddr}" size="50"/></p>
+           <p><input type="text" name="postAddr" id="postAddr" value="${shopDetail.postAddr}" size="50"/></p>
         </td>
       </tr>
      <tr>
@@ -211,7 +211,7 @@
           <div align="right">邮递接收人: </div>
        </td>
         <td>
-           <p><input type="text" name="ymname" id="ymname" value="${shopDetail.ymname}" size="50"/></p>
+           <p><input type="text" name="recipient" id="recipient" value="${shopDetail.recipient}" size="50"/></p>
         </td>
       </tr>
       <tr>
@@ -234,6 +234,22 @@
               <select id="langStyle" name="langStyle">
 				  <option:optionGroup type="select" required="true" cache="true"
 	                beanName="LANG_STYLE" selectedValue="${shopDetail.langStyle}"/>
+	            </select>
+        </td>
+      </tr>
+       <tr>
+        <td>
+          <div align="right">模板选择: <font color="ff0000">*</font></div>
+       </td>
+        <td>前台风格:
+              <select id="frontType" name="frontType">
+				  <option:optionGroup type="select" required="true" cache="true"
+	                beanName="FRONT_END_TEMPLATE" selectedValue="${shopDetail.frontType}"/>
+	            </select>
+	            后台风格:
+	          <select id="endType" name="endType">
+				  <option:optionGroup type="select" required="true" cache="true"
+	                beanName="BACK_END_TEMPLATE" selectedValue="${shopDetail.endType}"/>
 	            </select>
         </td>
       </tr>

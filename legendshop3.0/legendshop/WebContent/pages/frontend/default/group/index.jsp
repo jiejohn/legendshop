@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <lb:shopDetail var="shopDetail" >
-<title>${shopDetail.sitename}</title>
+<title>${shopDetail.siteName}</title>
 </lb:shopDetail>
 <%-- <link type="text/css" href="${pageContext.request.contextPath}/css/legend.css" rel="stylesheet"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/jquery1.6.js"></script>

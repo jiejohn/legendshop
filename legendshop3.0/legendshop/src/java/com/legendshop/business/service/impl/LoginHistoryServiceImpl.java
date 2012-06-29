@@ -15,10 +15,10 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import com.legendshop.business.dao.LoginHistoryDao;
 import com.legendshop.business.helper.TaskThread;
 import com.legendshop.business.service.LoginHistoryService;
 import com.legendshop.core.constant.ParameterEnum;
-import com.legendshop.core.dao.BaseDao;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.dao.support.SqlQuery;
@@ -36,8 +36,8 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(LoginHistoryServiceImpl.class);
 
-	/** The base dao. */
-	private BaseDao baseDao;
+	/** The login history dao. */
+	private LoginHistoryDao loginHistoryDao;
 
 	/** The jdbc template. */
 	private JdbcTemplate jdbcTemplate;
@@ -103,7 +103,7 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
 				loginHistory.setArea(IPSeeker.getInstance().getArea(ip));
 				loginHistory.setCountry(IPSeeker.getInstance().getCountry(ip));
 				loginHistory.setUserName(userName);
-				baseDao.save(loginHistory);
+				loginHistoryDao.save(loginHistory);
 				jdbcTemplate.update(ConfigCode.getInstance().getCode("login.updateUserDetail"), new Object[] {
 						loginHistory.getIp(), loginHistory.getTime(), loginHistory.getUserName() });
 
@@ -115,17 +115,7 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
 
 	}
 
-	/**
-	 * Sets the base dao.
-	 * 
-	 * @param baseDao
-	 *            the new base dao
-	 */
-	@Required
-	public void setBaseDao(BaseDao baseDao) {
-		this.baseDao = baseDao;
-	}
-	
+
 	/**
 	 * Sets the jdbc template.
 	 * 
@@ -142,7 +132,7 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
 	 */
 	@Override
 	public PageSupport getLoginHistory(CriteriaQuery cq) {
-		return baseDao.find(cq);
+		return loginHistoryDao.getLoginHistory(cq);
 	}
 
 	/* (non-Javadoc)
@@ -150,6 +140,17 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
 	 */
 	@Override
 	public PageSupport getLoginHistoryBySQL(SqlQuery query) {
-		return baseDao.find(query);
+		return loginHistoryDao.getLoginHistoryBySQL(query);
+	}
+
+	/**
+	 * Sets the login history dao.
+	 * 
+	 * @param loginHistoryDao
+	 *            the new login history dao
+	 */
+	@Required
+	public void setLoginHistoryDao(LoginHistoryDao loginHistoryDao) {
+		this.loginHistoryDao = loginHistoryDao;
 	}
 }

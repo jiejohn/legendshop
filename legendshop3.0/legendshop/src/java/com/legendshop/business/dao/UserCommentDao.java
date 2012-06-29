@@ -58,5 +58,27 @@ public interface UserCommentDao extends BaseDao{
 	 *            the comment
 	 */
 	public abstract void saveOrUpdateUserComment(UserComment comment);
+	
+	/**
+	 * Answre word.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param answer
+	 *            the answer
+	 * @param toUserName
+	 *            the to user name
+	 * @return true, if successful
+	 */
+	public abstract boolean updateUserComment(Long id, String answer, String toUserName);
+
+	/**
+	 * Gets the total un read message.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @return the total un read message
+	 */
+	public abstract Long getTotalUnReadMessage(String userName);
 
 }

@@ -61,7 +61,7 @@ public class VisitLogServiceImpl implements VisitLogService  {
 	 */
     @Override
 	public void delete(Long id) {
-        visitLogDao.deleteById(VisitLog.class, id);
+        visitLogDao.deleteVisitLogById(id);
     }
 
     /* (non-Javadoc)
@@ -81,7 +81,7 @@ public class VisitLogServiceImpl implements VisitLogService  {
 	 */
     @Override
 	public void update(VisitLog visitLog) {
-        visitLogDao.update(visitLog);
+        visitLogDao.updateVisitLog(visitLog);
     }
 
     /* (non-Javadoc)

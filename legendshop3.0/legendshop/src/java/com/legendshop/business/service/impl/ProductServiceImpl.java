@@ -8,6 +8,7 @@
 package com.legendshop.business.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Required;
 
@@ -18,6 +19,7 @@ import com.legendshop.core.constant.ProductStatusEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.model.entity.DynamicTemp;
 import com.legendshop.model.entity.Product;
 import com.legendshop.spi.service.ProductService;
 
@@ -148,6 +150,71 @@ public class ProductServiceImpl implements ProductService {
 		shopDetailDao.updateShopDetailWhenProductChange(product);
 		productSearchFacade.create(product);
 		return prodId;
+	}
+	
+	// 商品动态属性
+	@Override
+	public String getAttributeprodAttribute(Long prodId) {
+		return productDao.findUniqueBy("select prod.attribute from Product prod where prod.prodId = ?", String.class, prodId);
+	}
+
+	/**
+	 * 确保该产品属于指定用户
+	 */
+	@Override
+	public Product getProd(Long prodId, String userName) {
+		return productDao.getProd(prodId,userName);
+	}
+
+	/**
+	 * 	商品动态参数
+	 */
+	@Override
+	public String getProdParameter(Long prodId) {
+		return productDao.getProdParameter(prodId);
+	}
+
+	@Override
+	public boolean saveDynamicTemp(String tempName, String userName, Short type, String content) {
+		return productDao.saveDynamicTemp(tempName, userName, type, content);
+	}
+
+	@Override
+	public boolean updateDynamicTemp(Long tempId, String userName, Short type, String content) {
+		return productDao.updateDynamicTemp(tempId, userName, type, content);
+	}
+
+	@Override
+	public DynamicTemp getDynamicTemp(Long tempId, String userName) {
+		return productDao.getDynamicTemp(tempId, userName);
+	}
+
+	@Override
+	public boolean deleteDynamicTemp(Long tempId, String userName) {
+		return productDao.deleteDynamicTemp(tempId, userName);
+	}
+
+	@Override
+	public String saveProdItem(List<String> idList, List<String> nameList, Long prodId, String userName) {
+		return productDao.saveProdItem(idList, nameList, prodId, userName);
+		
+	}
+
+	@Override
+	public boolean updateProdOnline(Long prodId) {
+		return productDao.updateProdOnline(prodId);
+	}
+
+	@Override
+	public boolean updateProdOffline(Long prodId) {
+		return productDao.updateProdOffline(prodId);
+	}
+	
+
+
+	@Override
+	public void updateProd(Product product) {
+		productDao.updateProduct(product);
 	}
 
 }

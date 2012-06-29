@@ -10,6 +10,8 @@ package com.legendshop.business.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.legendshop.core.dao.support.CriteriaQuery;
+import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.Sub;
 
@@ -118,5 +120,38 @@ public interface SubDao extends SubCommonDao{
 	 *            the date
 	 */
 	public abstract void deleteOverTimeBasket(Date date);
+
+	public abstract void updateSub(Sub sub);
+	
+	/**
+	 * Find order.
+	 * 
+	 * @param cq
+	 *            the cq
+	 * @return the page support
+	 */
+	public abstract PageSupport getOrder(CriteriaQuery cq);
+	
+	/**
+	 * Gets the total processing order.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @return the total processing order
+	 */
+	public abstract Long getTotalProcessingOrder(String userName);
+	
+	// 判断用户是否已经订购产品，条件:订单状态为Y
+	/**
+	 * Checks if is user order product.
+	 * 
+	 * @param prodId
+	 *            the prod id
+	 * @param userName
+	 *            the user name
+	 * @return true, if is user order product
+	 */
+	public abstract boolean isUserOrderProduct(Long prodId, String userName);
+
 
 }

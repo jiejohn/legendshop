@@ -10,6 +10,8 @@ package com.legendshop.business.service.timer;
 import java.util.List;
 
 import com.legendshop.business.common.SubForm;
+import com.legendshop.core.dao.support.CriteriaQuery;
+import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.Sub;
 
@@ -60,4 +62,21 @@ public interface SubService {
 	 * @return the sub
 	 */
 	public Sub getSubBySubNumber(String subNumber);
+	
+	/**
+	 * Update sub.
+	 * 
+	 * @param sub
+	 *            the sub
+	 */
+	public void updateSub(Sub sub);
+
+	/**
+	 * Gets the order list.
+	 * 
+	 * @param cq
+	 *            the cq
+	 * @return the order list
+	 */
+	public PageSupport getOrderList(CriteriaQuery cq);
 }

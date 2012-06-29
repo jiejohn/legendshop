@@ -25,12 +25,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.legendshop.business.common.DynamicPropertiesHelper;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
-import com.legendshop.business.service.AdminService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ProductDetail;
+import com.legendshop.spi.service.ProductService;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -41,10 +41,9 @@ public class XmlController extends BaseController {
 	
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(XmlController.class);
-
-	/** The admin service. */
+	
 	@Autowired
-	private AdminService adminService;
+	private ProductService productService;
 
 	/**
 	 * Query attribute.
@@ -65,7 +64,7 @@ public class XmlController extends BaseController {
 		if (prod != null) {
 			attribute = prod.getAttribute();
 		} else {
-			attribute = adminService.getAttributeprodAttribute(prodId);
+			attribute = productService.getAttributeprodAttribute(prodId);
 		}
 
 		// if (AppUtils.isNotBlank(attribute)) {
@@ -102,7 +101,7 @@ public class XmlController extends BaseController {
 		if (prod != null) {
 			parameter = prod.getParameter();
 		} else {
-			parameter = adminService.getProdParameter(prodId);
+			parameter = productService.getProdParameter(prodId);
 		}
 
 		if (AppUtils.isNotBlank(parameter)) {
@@ -144,7 +143,7 @@ public class XmlController extends BaseController {
 	public String loadAttributeprodAttribute(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long prodId) {
 		String userName = UserManager.getUsername(request.getSession());
-		Product product = adminService.getProd(prodId, userName);
+		Product product = productService.getProd(prodId, userName);
 		if (AppUtils.isNotBlank(product)) {
 			request.setAttribute("prod", product);
 			if (AppUtils.isNotBlank(product.getAttribute())) {
@@ -171,7 +170,7 @@ public class XmlController extends BaseController {
 	public String loadParameter(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long prodId) {
 		String userName = UserManager.getUsername(request.getSession());
-		Product product = adminService.getProd(prodId, userName);
+		Product product = productService.getProd(prodId, userName);
 		if (AppUtils.isNotBlank(product)) {
 			request.setAttribute("prod", product);
 			if (AppUtils.isNotBlank(product.getAttribute())) {

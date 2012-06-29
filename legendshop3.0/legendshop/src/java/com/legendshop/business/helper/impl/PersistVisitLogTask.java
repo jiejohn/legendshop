@@ -14,11 +14,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.legendshop.core.dao.BaseDao;
+import com.legendshop.business.dao.VisitLogDao;
 import com.legendshop.event.TaskItem;
 import com.legendshop.model.entity.VisitLog;
 import com.legendshop.spi.constants.VisitTypeEnum;
 import com.legendshop.util.AppUtils;
+import com.legendshop.util.ContextServiceLocator;
 import com.legendshop.util.DateUtil;
 import com.legendshop.util.ip.IPSeeker;
 
@@ -39,10 +40,10 @@ public class PersistVisitLogTask implements TaskItem {
 	private static Logger log = LoggerFactory.getLogger(PersistVisitLogTask.class);
 	
 	/** The dao. */
-	private final BaseDao dao;
+	private VisitLogDao visitLogDao;
 	
 	/** The visit log. */
-	private final VisitLog visitLog;
+	private final  VisitLog visitLog;
 
 	/**
 	 * Instantiates a new persist visit log task.
@@ -52,9 +53,8 @@ public class PersistVisitLogTask implements TaskItem {
 	 * @param dao
 	 *            the dao
 	 */
-	public PersistVisitLogTask(VisitLog visitLog, BaseDao dao) {
+	public PersistVisitLogTask(VisitLog visitLog) {
 		this.visitLog = visitLog;
-		this.dao = dao;
 	}
 
 	/* (non-Javadoc)
@@ -72,14 +72,14 @@ public class PersistVisitLogTask implements TaskItem {
 		if (VisitTypeEnum.INDEX.value().equals(visitLog.getPage())) {
 			String sql = "select v from VisitLog v where v.ip = ? and v.shopName = ? and v.date > ?";
 			Date date = DateUtil.add(new Date(), Calendar.MINUTE, -30);
-			List<VisitLog> list = dao.findByHQLLimit(sql, 0, 1, visitLog.getIp(), visitLog.getShopName(), date);
+			List<VisitLog> list = getVisitLogDao().findByHQLLimit(sql, 0, 1, visitLog.getIp(), visitLog.getShopName(), date);
 			if (AppUtils.isNotBlank(list)) {
 				origin = list.get(0);
 			}
 		} else {
 			String sql = "select v from VisitLog v where v.ip = ? and v.shopName = ? and v.productId = ? and v.date > ?";
 			Date date = DateUtil.add(new Date(), Calendar.MINUTE, -30);
-			List<VisitLog> list = dao.findByHQLLimit(sql, 0, 1, visitLog.getIp(), visitLog.getShopName(), visitLog
+			List<VisitLog> list = getVisitLogDao().findByHQLLimit(sql, 0, 1, visitLog.getIp(), visitLog.getShopName(), visitLog
 					.getProductId(), date);
 			if (AppUtils.isNotBlank(list)) {
 				origin = list.get(0);
@@ -94,12 +94,19 @@ public class PersistVisitLogTask implements TaskItem {
 			}
 			origin.setVisitNum(num);
 			origin.setDate(new Date());
-			dao.update(origin);
+			getVisitLogDao().updateVisitLog(origin);
 		} else {
 			visitLog.setVisitNum(1);
-			dao.save(visitLog);
+			getVisitLogDao().save(visitLog);
 
 		}
+	}
+	
+	private VisitLogDao getVisitLogDao(){
+		if(visitLogDao == null){
+			visitLogDao = (VisitLogDao)ContextServiceLocator.getInstance().getBean("visitLogDao");
+		}
+		return visitLogDao;
 	}
 
 }

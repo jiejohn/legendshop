@@ -14,10 +14,12 @@ import net.sf.json.JSONArray;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.ImgFileDao;
 import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.ProductStatusEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.ImgFile;
@@ -53,11 +55,12 @@ public class ImgFileDaoImpl extends BaseDaoImpl implements ImgFileDao {
 	@Override
 	@Cacheable(value="ImgFileList",key="#userName + #prodId")
 	public List<ImgFile> getProductPics(final String userName, final Long prodId) {
-		return findByHQL(
-				"from ImgFile where productType = 1 and status = 1 and  userName = ? and productId = ? ",
-				userName, prodId);
+		return findByHQL("from ImgFile where productType = 1 and status = 1 and  userName = ? and productId = ?",userName, prodId);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.ImgFileDao#getIndexJpegJSON(java.lang.String)
+	 */
 	@Override
 	@Cacheable(value="IndexjpgList")
 	public JSONArray getIndexJpegJSON(String userName) {
@@ -73,5 +76,58 @@ public class ImgFileDaoImpl extends BaseDaoImpl implements ImgFileDao {
 			return null;
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.ImgFileDao#deleteImgFileById(java.lang.Class, java.lang.Long)
+	 */
+	@Override
+	@CacheEvict(value = "ImgFile", key = "#fileId")
+	public void deleteImgFileById(Long fileId) {
+		deleteById(ImgFile.class, fileId);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.ImgFileDao#updateImgFile(com.legendshop.model.entity.ImgFile)
+	 */
+	@Override
+	@CacheEvict(value = "ImgFile", key = "#imgFile.fileId")
+	public void updateImgFile(ImgFile imgFile) {
+		update(imgFile);
+	}
+	
+	@Override
+	public boolean updateImgFileOnline(Long fileId) {	
+		return updateImgFileStatus(fileId,ProductStatusEnum.PROD_ONLINE.value());
+	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.service.impl.AdminService#imgFileOffline(java.lang.Long)
+	 */
+	@Override
+	public boolean updateImgFileOffline(Long fileId) {
+		return updateImgFileStatus(fileId,ProductStatusEnum.PROD_OFFLINE.value());
+	}
+	
+	private boolean updateImgFileStatus(Long fileId,Integer status){
+		ImgFile imgFile = get(ImgFile.class, fileId);
+		if (imgFile.getStatus() != status.shortValue()) {
+			imgFile.setStatus(status.shortValue());
+			updateImgFile(imgFile);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	@CacheEvict(value = "ImgFile", key = "#imgFile.fileId")
+	public void deleteImgFile(ImgFile imgFile) {
+		delete(imgFile);
+	}
+
+	@Override
+	public List<ImgFile> getAllProductPics(String userName, Long prodId) {
+		return findByHQL("from ImgFile where productType = 1 and  userName = ? and productId = ?",userName, prodId);
+	}
+
 
 }

@@ -21,6 +21,8 @@ import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.ScoreDao;
 import com.legendshop.business.dao.SubDao;
 import com.legendshop.business.payment.alipay.AlipayService;
+import com.legendshop.core.dao.support.CriteriaQuery;
+import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.PayType;
 import com.legendshop.model.entity.Product;
@@ -250,6 +252,39 @@ public class SubDaoImpl extends SubCommonDaoImpl implements SubDao {
 	@Required
 	public void setBasketDao(BasketDao basketDaoImpl) {
 		this.basketDao = basketDaoImpl;
+	}
+
+	@Override
+	public void updateSub(Sub sub) {
+		update(sub);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.impl.OrderDao#findOrder(com.legendshop.core.dao.support.CriteriaQuery)
+	 */
+	@Override
+	public PageSupport getOrder(CriteriaQuery cq) {
+		return find(cq);
+	}
+
+	/**
+	 * 所有正在处理的订单
+	 */
+	@Override
+	public Long getTotalProcessingOrder(String userName) {
+		return findUniqueBy("select count(*) from Sub where subCheck = ? and userName = ?", Long.class,
+				Constants.FALSE_INDICATOR, userName);
+	}
+	
+	// 判断用户是否已经订购产品，条件:订单状态为Y
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.impl.BusinessDao#isUserOrderProduct(java.lang.Long, java.lang.String)
+	 */
+	@Override
+	public boolean isUserOrderProduct(Long prodId, String userName) {
+		String sql = "select count(*) from Basket b, Sub s where s.subNumber = b.subNumber and s.subCheck = ? and b.prodId = ? and b.userName = ?";
+		Long result = findUniqueBy(sql, Long.class, Constants.TRUE_INDICATOR, prodId, userName);
+		return result > 0;
 	}
 
 }

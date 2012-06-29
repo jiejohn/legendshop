@@ -9,25 +9,36 @@ package com.legendshop.business.service.impl;
 
 import org.springframework.beans.factory.annotation.Required;
 
+import com.legendshop.business.dao.NewsDao;
+import com.legendshop.business.dao.ShopDetailDao;
+import com.legendshop.business.dao.SubDao;
+import com.legendshop.business.dao.UserCommentDao;
+import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.service.IndexService;
-import com.legendshop.core.dao.BaseDao;
 import com.legendshop.model.UserInfo;
 import com.legendshop.model.entity.ShopDetailView;
-import com.legendshop.spi.constants.Constants;
 
 /**
- * LegendShop 版权所有 2009-2011,并保留所有权利。
- * 
- * ----------------------------------------------------------------------------
- * 
- * 提示：在未取得LegendShop商业授权之前，您不能将本软件应用于商业用途，否则LegendShop将保留追究的权力。
- * 
- * ----------------------------------------------------------------------------.
+ * 首页相关服务.
  */
 public class IndexServiceImpl implements IndexService {
 
 	/** The base dao. */
-	private BaseDao baseDao;
+	private NewsDao newsDao;
+	
+	/** The sub dao. */
+	private SubDao subDao;
+	
+	/** The user comment dao. */
+	private UserCommentDao userCommentDao;
+	
+	/** The user detail dao. */
+	private UserDetailDao userDetailDao;
+	
+	/** The shop detail dao. */
+	private ShopDetailDao shopDetailDao;
+	
+	
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.IndexService#indexAdmin(java.lang.String, com.legendshop.model.entity.ShopDetailView)
@@ -37,40 +48,87 @@ public class IndexServiceImpl implements IndexService {
 		UserInfo userInfo = new UserInfo();
 
 		if (shopDetail != null) { // 已有商城的用户
-			Long totalNews = baseDao.findUniqueBy("select count(*) from News where userName = ?", Long.class, userName);
-			userInfo.setArticleNum(totalNews);
+			
+			userInfo.setArticleNum(newsDao.getAllNews(userName));
 
-			Long totalProcessingOrder = baseDao.findUniqueBy(
-					"select count(*) from Sub where subCheck = ? and  shopName = ?", Long.class,
-					Constants.FALSE_INDICATOR, userName);
-			userInfo.setProcessingOrderNum(totalProcessingOrder);
-
-			Long totalUnReadMessage = baseDao.findUniqueBy(
-					"select count(*) from UserComment where status = ? and toUserName = ?", Long.class, 0, userName);
-
-			userInfo.setUnReadMessageNum(totalUnReadMessage);
+			userInfo.setProcessingOrderNum(subDao.getTotalProcessingOrder(userName));
+			userInfo.setUnReadMessageNum(userCommentDao.getTotalUnReadMessage(userName));
 
 			userInfo.setShopDetail(shopDetail);
 		} else {// 管理员
-			Long userTotalNum = baseDao.findUniqueBy("select count(*) from UserDetail", Long.class);
-			userInfo.setUserTotalNum(userTotalNum);
+			userInfo.setUserTotalNum(userDetailDao.getAllUserCount());
 
-			Long shopTotalNum = baseDao.findUniqueBy("select count(*) from ShopDetail ", Long.class);
-			userInfo.setShopTotalNum(shopTotalNum);
+			userInfo.setShopTotalNum(shopDetailDao.getAllShopCount());
 		}
 
 		return userInfo;
 	}
 
+
+
 	/**
-	 * Sets the base dao.
+	 * Sets the news dao.
 	 * 
-	 * @param baseDao
-	 *            the new base dao
+	 * @param newsDao
+	 *            the new news dao
 	 */
 	@Required
-	public void setBaseDao(BaseDao baseDao) {
-		this.baseDao = baseDao;
+	public void setNewsDao(NewsDao newsDao) {
+		this.newsDao = newsDao;
 	}
+
+
+
+	/**
+	 * Sets the sub dao.
+	 * 
+	 * @param subDao
+	 *            the new sub dao
+	 */
+	@Required
+	public void setSubDao(SubDao subDao) {
+		this.subDao = subDao;
+	}
+
+
+
+	/**
+	 * Sets the user comment dao.
+	 * 
+	 * @param userCommentDao
+	 *            the new user comment dao
+	 */
+	@Required
+	public void setUserCommentDao(UserCommentDao userCommentDao) {
+		this.userCommentDao = userCommentDao;
+	}
+
+
+
+	/**
+	 * Sets the user detail dao.
+	 * 
+	 * @param userDetailDao
+	 *            the new user detail dao
+	 */
+	@Required
+	public void setUserDetailDao(UserDetailDao userDetailDao) {
+		this.userDetailDao = userDetailDao;
+	}
+
+
+
+	/**
+	 * Sets the shop detail dao.
+	 * 
+	 * @param shopDetailDao
+	 *            the new shop detail dao
+	 */
+	@Required
+	public void setShopDetailDao(ShopDetailDao shopDetailDao) {
+		this.shopDetailDao = shopDetailDao;
+	}
+
+
 
 }

@@ -23,6 +23,8 @@ import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.SubDao;
 import com.legendshop.business.service.PayTypeService;
 import com.legendshop.business.service.timer.SubService;
+import com.legendshop.core.dao.support.CriteriaQuery;
+import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.PayType;
 import com.legendshop.model.entity.Sub;
@@ -74,7 +76,7 @@ public class SubServiceImpl implements SubService {
 					sub.setStatus(OrderStatusEnum.SUCCESS.value());
 					sub.setSubCheck(Constants.TRUE_INDICATOR);
 					sub.setUpdateDate(new Date());
-					subDao.update(sub);
+					subDao.updateSub(sub);
 				}
 				subDao.flush();
 			}
@@ -102,7 +104,7 @@ public class SubServiceImpl implements SubService {
 					sub.setStatus(OrderStatusEnum.CLOSE.value());
 					sub.setSubCheck(Constants.TRUE_INDICATOR);
 					sub.setUpdateDate(new Date());
-					subDao.update(sub);
+					subDao.updateSub(sub);
 				}
 				subDao.flush();
 			}
@@ -278,7 +280,7 @@ public class SubServiceImpl implements SubService {
 	/**
 	 * Sets the basket dao.
 	 * 
-	 * @param basketDao
+	 * @param basketDaoImpl
 	 *            the new basket dao
 	 */
 	@Required
@@ -297,10 +299,30 @@ public class SubServiceImpl implements SubService {
 		this.payTypeService = payTypeService;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.service.timer.SubService#getSubBySubNumber(java.lang.String)
+	 */
 	@Override
 	public Sub getSubBySubNumber(String subNumber) {
 		// TODO Auto-generated method stub
 		return subDao.getSubBySubNumber(subNumber);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.service.timer.SubService#updateSub(com.legendshop.model.entity.Sub)
+	 */
+	@Override
+	public void updateSub(Sub sub) {
+		subDao.updateSub(sub);
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.service.timer.SubService#getOrderList(com.legendshop.core.dao.support.CriteriaQuery)
+	 */
+	@Override
+	public PageSupport getOrderList(CriteriaQuery cq) {
+		return subDao.getOrder(cq);
 	}
 
 }

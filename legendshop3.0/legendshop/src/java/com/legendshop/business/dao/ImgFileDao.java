@@ -30,12 +30,17 @@ public interface ImgFileDao extends BaseDao{
 	public abstract List<Indexjpg> getIndexJpeg(final String userName);
 	
 	
+	/**
+	 * Gets the index jpeg json.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @return the index jpeg json
+	 */
 	public abstract JSONArray getIndexJpegJSON(final String userName);
 	
-	
-
 	/**
-	 * 得到产品的描述图片.
+	 * 得到有效的产品的描述图片.
 	 * 
 	 * @param userName
 	 *            the user name
@@ -44,5 +49,61 @@ public interface ImgFileDao extends BaseDao{
 	 * @return the product pics
 	 */
 	public abstract List<ImgFile> getProductPics(final String userName, final Long prodId);
+	
+	
+	/**
+	 * Gets the all product pics.
+	 * 得到所以的产品的描述图片
+	 * @param userName
+	 *            the user name
+	 * @param prodId
+	 *            the prod id
+	 * @return the all product pics
+	 */
+	public abstract List<ImgFile> getAllProductPics(final String userName, final Long prodId);
 
+
+	/**
+	 * Delete img file by id.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	public abstract void deleteImgFileById(Long id);
+
+
+	/**
+	 * Update img file.
+	 * 
+	 * @param imgFile
+	 *            the img file
+	 */
+	public abstract void updateImgFile(ImgFile imgFile);
+	
+	/**
+	 * Update img file online.
+	 * 
+	 * @param fileId
+	 *            the file id
+	 * @return true, if successful
+	 */
+	public boolean updateImgFileOnline(Long fileId);
+
+	/**
+	 * Update img file offline.
+	 * 
+	 * @param fileId
+	 *            the file id
+	 * @return true, if successful
+	 */
+	public boolean updateImgFileOffline(Long fileId);
+
+
+	/**
+	 * Delete img file.
+	 * 
+	 * @param imgFile
+	 *            the img file
+	 */
+	public abstract void deleteImgFile(ImgFile imgFile);
 }

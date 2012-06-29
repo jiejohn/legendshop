@@ -79,7 +79,32 @@ public interface NsortDao extends BaseDao{
 	 */
 	public abstract List<Nsort> getNsortBySortId(final Long sortId);
 	
+	/**
+	 * Gets the navigation nsort.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @return the navigation nsort
+	 */
 	public abstract List<Nsort> getNavigationNsort(String userName);
+
+	/**
+	 * Update nsort.
+	 * 
+	 * @param nsort
+	 *            the nsort
+	 */
+	public abstract void updateNsort(Nsort nsort);
+
+	/**
+	 * Delete nsort by id.
+	 * 
+	 * @param class1
+	 *            the class1
+	 * @param id
+	 *            the id
+	 */
+	public abstract void deleteNsortById(Long id);
 	
 
 }

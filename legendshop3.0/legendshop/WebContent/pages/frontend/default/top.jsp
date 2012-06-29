@@ -36,7 +36,7 @@
 
 	function addMyLeague(userName,shopName) {
 		  if(confirm('<fmt:message key="addLeague"/> '+shopName+' ?')){
-	        CommonService.addMyLeague(userName,shopName,'${shopDetail.sitename}', function(retData){
+	        CommonService.addMyLeague(userName,shopName,'${shopDetail.siteName}', function(retData){
 		       switch(retData){
 		       case 0:
 		    	   alert('<fmt:message key="addLeagueSuccess"/>') ;
@@ -53,10 +53,10 @@
     <link href="<ls:templateResource item='/common/style/style_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
     <link href="<ls:templateResource item='/common/style/global_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
 </lb:shopDetail>
-<title>${shopDetail.sitename}</title>
+<title>${shopDetail.siteName}</title>
 <link rel="icon" href="<ls:templateResource item='/favicon.ico'/>" type="image/x-icon" />
-<meta name="description" content="${shopDetail.storeName},${shopDetail.briefDesc}" />
-<meta name="keywords" content="${shopDetail.storeName},${shopDetail.briefDesc}"/>
+<meta name="description" content="${shopDetail.userName},${shopDetail.briefDesc}" />
+<meta name="keywords" content="${shopDetail.userName},${shopDetail.briefDesc}"/>
 <meta name="keywords" content="LegendShop 网购平台, 网店系统, 商城系统, 商城系统, 电子商务系统, B2C系统, 购物系统, 网上商店系统, 网上交易系统, JAVA网店, JAVA商城, JSP网店, JSP商城, SSH项目, JAVA开源项目"/>
 </head>
 <!--  id="master" -->
@@ -161,7 +161,7 @@
 		</div>
 		<div id="topcatalog">
 			<h2>
-			    <a href='#' onclick="javascript:bookmark('${shopDetail.storeName} - ${shopDetail.sitename}','${DOMAIN_NAME}/shop/${shopDetail.storeName}${applicationScope.WEB_SUFFIX}');">
+			    <a href='#' onclick="javascript:bookmark('${shopDetail.userName} - ${shopDetail.siteName}','${DOMAIN_NAME}/shop/${shopDetail.userName}${applicationScope.WEB_SUFFIX}');">
                     <fmt:message key="favorite"/>
                 </a>
 			</h2>

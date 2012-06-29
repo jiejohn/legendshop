@@ -16,11 +16,11 @@ jQuery.validator.setDefaults({
 	jQuery(document).ready(function() {
 	jQuery("#openShopForm").validate({
 		rules: {
-			"sitename": {
+			"siteName": {
 				required: true,
 				minlength: 2
 			},
-            "ymaddr": {
+            "postAddr": {
 				required: true,
 				minlength: 2
 			},
@@ -40,11 +40,11 @@ jQuery.validator.setDefaults({
 			
 		},
 		messages: {
-            "sitename": {
+            "siteName": {
                required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>',
                minlength: '<fmt:message key="errors.minlength"><fmt:param value=""/><fmt:param value="2"/></fmt:message>'
             },   
-            "ymaddr":{
+            "postAddr":{
                required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>',
                minlength: '<fmt:message key="errors.minlength"><fmt:param value=""/><fmt:param value="2"/></fmt:message>'
             }, 
@@ -94,7 +94,7 @@ jQuery.validator.setDefaults({
                                 <td width="33%"><div align="right">
                                 <font color="#ff0000">*</font><fmt:message key="mall.name"/></div></td>
                                 <td height="27"><div align="left">
-                                    <input name="sitename" id="sitename" class="input"/>
+                                    <input name="siteName" id="siteName" class="input"/>
                                   </div></td>
                               </tr>
                               <tr>

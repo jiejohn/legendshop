@@ -65,7 +65,7 @@ public class MyleagueServiceImpl implements MyleagueService  {
 	 */
     @Override
 	public void delete(Long id) {
-        myleagueDao.deleteById(Myleague.class, id);
+        myleagueDao.deleteMyleagueById(id);
     }
 
     /* (non-Javadoc)
@@ -85,7 +85,7 @@ public class MyleagueServiceImpl implements MyleagueService  {
 	 */
     @Override
 	public void update(Myleague myleague) {
-        myleagueDao.update(myleague);
+        myleagueDao.updateMyleague(myleague);
     }
 
     /* (non-Javadoc)

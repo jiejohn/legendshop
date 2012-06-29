@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.dao.SystemParameterDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
+import com.legendshop.model.entity.SystemParameter;
 
 /**
  * 
@@ -26,6 +27,18 @@ public class SystemParameterDaoImpl extends BaseDaoImpl implements SystemParamet
      
      /** The log. */
      private static Logger log = LoggerFactory.getLogger(SystemParameterDaoImpl.class);
+
+	@Override
+	public void deleteSystemParameterById(String id) {
+		deleteById(SystemParameter.class, id);
+		
+	}
+
+	@Override
+	public void updateSystemParameter(SystemParameter systemParameter) {
+		update(systemParameter);
+		
+	}
      
 	
  }

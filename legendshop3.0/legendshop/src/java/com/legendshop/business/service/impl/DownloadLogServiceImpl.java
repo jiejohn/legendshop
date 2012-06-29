@@ -13,26 +13,22 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.legendshop.business.common.download.DownLoadCallBack;
-import com.legendshop.business.dao.BusinessDao;
 import com.legendshop.business.dao.DownloadLogDao;
+import com.legendshop.business.dao.SubDao;
 import com.legendshop.business.service.DownloadLogService;
 import com.legendshop.model.entity.DownloadLog;
 import com.legendshop.util.DateUtil;
 
 /**
  * 
- * LegendShop 版权所有 2009-2011,并保留所有权利。 ----------------------------------------------------------------------------
- * 提示：在未取得LegendShop商业授权之前，您不能将本软件应用于商业用途，否则LegendShop将保留追究的权力。
- * ---------------------------------------------------------------------------- 官方网站：http://www.legendesign.net
- * ----------------------------------------------------------------------------
+ * 提供系统下载功能
  */
 public class DownloadLogServiceImpl implements DownLoadCallBack, DownloadLogService {
 	
 	/** The download log dao. */
 	private DownloadLogDao downloadLogDao;
 	
-	/** The business dao. */
-	private BusinessDao businessDao;
+	private SubDao subDao;
 	
 	/** The max times. */
 	private Integer maxTimes;
@@ -67,7 +63,7 @@ public class DownloadLogServiceImpl implements DownLoadCallBack, DownloadLogServ
 	 */
 	@Override
 	public boolean isUserOrderProduct(Long prodId, String userName) {
-		return businessDao.isUserOrderProduct(prodId, userName);
+		return subDao.isUserOrderProduct(prodId, userName);
 	}
 
 	/* (non-Javadoc)
@@ -127,17 +123,6 @@ public class DownloadLogServiceImpl implements DownLoadCallBack, DownloadLogServ
 	}
 
 	/**
-	 * Sets the business dao.
-	 * 
-	 * @param businessDao
-	 *            the new business dao
-	 */
-	@Required
-	public void setBusinessDao(BusinessDao businessDao) {
-		this.businessDao = businessDao;
-	}
-
-	/**
 	 * Sets the download log dao.
 	 * 
 	 * @param downloadLogDao
@@ -147,5 +132,10 @@ public class DownloadLogServiceImpl implements DownLoadCallBack, DownloadLogServ
 	public void setDownloadLogDao(DownloadLogDao downloadLogDao) {
 		this.downloadLogDao = downloadLogDao;
 	}
+
+	public void setSubDao(SubDao subDao) {
+		this.subDao = subDao;
+	}
+	
 
 }

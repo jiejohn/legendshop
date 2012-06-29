@@ -25,7 +25,7 @@
     </table>
         <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
         <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
-           商城名称&nbsp;<input type="text" name="storeName" maxlength="50" value="${shopDetail.storeName}" size="30"/>
+           商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${shopDetail.userName}" size="30"/>
            &nbsp;类型&nbsp;	
            <select id="type" name="type">
            <option:optionGroup type="select" required="false" cache="true"
@@ -54,10 +54,10 @@
       <display:column title="顺序" class="orderwidth"><%=offset++%></display:column>
       <c:if test="${'C2C' == applicationScope.BUSINESS_MODE }">
       <display:column title="商城名称">
-      	<a href="${pageContext.request.contextPath}/shop/${item.storeName}${applicationScope.WEB_SUFFIX}">${item.storeName}</a>
+      	<a href="${pageContext.request.contextPath}/shop/${item.userName}${applicationScope.WEB_SUFFIX}">${item.userName}</a>
       </display:column>
       </c:if>
-      <display:column title="网站名称" property="sitename">
+      <display:column title="网站名称" property="siteName">
       </display:column>
       <display:column title="商品数量" property="productNum"  sortable="true" sortName="productNum" style="width:65px"></display:column>
       <display:column title="下线商品" property="offProductNum" sortable="true" sortName="offProductNum" style="width:65px"></display:column> 

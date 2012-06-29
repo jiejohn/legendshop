@@ -7,15 +7,28 @@
  */
 package com.legendshop.business.dao.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.mail.MessagingException;
+
+import org.apache.oro.text.regex.MalformedPatternException;
+import org.hibernate.Hibernate;
+import org.hibernate.type.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.legendshop.business.dao.UserDetailDao;
+import com.legendshop.business.helper.TaskThread;
+import com.legendshop.business.helper.impl.SendMailTask;
 import com.legendshop.business.service.CommonUtil;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.ShopStatusEnum;
@@ -25,10 +38,13 @@ import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.dao.support.SqlQuery;
 import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.randing.RandomStringUtils;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserDetail;
+import com.legendshop.model.entity.UserRole;
 import com.legendshop.spi.constants.RegisterEnum;
+import com.legendshop.spi.constants.RoleEnum;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.MD5Util;
 import com.legendshop.util.ip.IPSeeker;
@@ -46,6 +62,12 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 	
 	/** The common util. */
 	private CommonUtil commonUtil;
+	
+	/** The thread pool executor. */
+	protected ThreadPoolTaskExecutor threadPoolExecutor;
+	
+	/** The java mail sender. */
+	protected JavaMailSenderImpl javaMailSender;
 	
 	/** The REGISTE d_ tag. */
 	private final String REGISTED_TAG = "REGISTED";
@@ -79,7 +101,7 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 			saveShopDetailAndRole(userDetail, shopDetail);
 		} else {
 			// 保存用户角色
-			commonUtil.saveUserRight(this, userDetail.getUserId());
+			commonUtil.saveUserRight(userDetail.getUserId());
 		}
 		save(userDetail);
 	}
@@ -91,7 +113,7 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 	@Override
 	public Integer saveShopDetailAndRole(UserDetail userDetail, ShopDetail shopDetail) {
 		// 保存管理员角色
-		commonUtil.saveAdminRight(this, userDetail.getUserId());
+		commonUtil.saveAdminRight(userDetail.getUserId());
 		// save shopDetail
 		return saveShopDetail(userDetail, shopDetail);
 	}
@@ -103,7 +125,7 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 	public void updateShopDetail(UserDetail userDetail, ShopDetail shopDetail, boolean isAdmin) {
 		if (isAdmin) {
 			// 保存管理员角色
-			commonUtil.saveAdminRight(this, userDetail.getUserId());
+			commonUtil.saveAdminRight(userDetail.getUserId());
 
 			saveShopDetail(userDetail, shopDetail);
 		}
@@ -116,8 +138,8 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 	@Override
 	public Integer saveShopDetail(UserDetail userDetail, ShopDetail shopDetail) {
 		Date date = new Date();
-		shopDetail.setStoreName(userDetail.getUserName());
-		shopDetail.setMaddr(userDetail.getUserAdds());
+		shopDetail.setUserName(userDetail.getUserName());
+		shopDetail.setShopAddr(userDetail.getUserAdds());
 		shopDetail.setModifyTime(date);
 		shopDetail.setUserId(userDetail.getUserId());
 		shopDetail.setAddtime(date);
@@ -125,7 +147,6 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 		shopDetail.setOffProductNum(0);
 		shopDetail.setProductNum(0);
 		shopDetail.setCommNum(0);
-		shopDetail.setWeb(shopDetail.getStoreName());
 		shopDetail.setColorStyle("oneday");
 		if (PropertiesUtil.getObject(ParameterEnum.VALIDATION_ON_OPEN_SHOP, Boolean.class)) {
 			shopDetail.setStatus(ShopStatusEnum.AUDITING.value());
@@ -209,7 +230,7 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 	 */
 	@Override
 	public boolean isShopExist(String shopName) {
-		List list = this.findByHQL("from ShopDetail where storeName = ?", new Object[] { shopName });
+		List list = this.findByHQL("from ShopDetail where userName = ?", new Object[] { shopName });
 		if (AppUtils.isBlank(list)) {
 			return false;
 		}
@@ -324,6 +345,184 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 	@Override
 	public PageSupport getUserDetailList(SqlQuery sqlQuery) {
 		return find(sqlQuery);
+	}
+
+	@Override
+	public String deleteUserDetail(String userId, String userName, String realPicPath, String smallPicPath) {
+
+		List<UserRole> list = findByHQL("from UserRole where id.userId = ?", userId);
+		boolean isAdmin = false;
+		for (UserRole role : list) {
+			// ||role.getId().getRoleId().equals(RoleEnum.ROLE_ADMIN.value())
+			if (role.getId().getRoleId().equals(RoleEnum.ROLE_SUPERVISOR.value())) {
+				isAdmin = true;
+				break;
+			}
+
+		}
+		if (isAdmin) {
+			return "不能删除商家用户或者管理员用户，请先备份好数据和去掉该用户的权限再试！";
+		}
+
+		// 删除basket
+		Integer dbr = exeByHQL("delete from Basket where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除Sub
+		exeByHQL("delete from Sub where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+		// 删除shopDetail
+		exeByHQL("delete from ShopDetail where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除用户商品的介绍图片
+		exeByHQL("delete from ImgFile where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除用户商品的相关商品
+		exeByHQL("delete from RelProduct where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除用户商家联盟
+		exeByHQL("delete from Myleague where userId = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除用户商品
+		exeByHQL("delete from Product where userId = ?", new Object[] { userId }, new Type[] { Hibernate.STRING });
+
+		// 删除用户商品图片目录
+		if (AppUtils.isNotBlank(userName)) {
+			FileProcessor.deleteDirectory(new File(realPicPath + "/" + userName));
+			FileProcessor.deleteDirectory(new File(smallPicPath + "/" + userName));
+		}
+
+		// 删除商品评论
+		exeByHQL("delete from ProductComment where ownerName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除短消息
+		exeByHQL("delete from UserComment where userId = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除商品品牌
+		exeByHQL("delete from Brand where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除商品动态属性
+		exeByHQL("delete from DynamicTemp where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除商品首页广告图片
+		exeByHQL("delete from Indexjpg where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除广告
+		exeByHQL("delete from Advertisement where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+		// 删除热点商品
+		exeByHQL("delete from Hotsearch where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除Log
+		exeByHQL("delete from Logo where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除News
+		exeByHQL("delete from News where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除NewsCategory
+		exeByHQL("delete from NewsCategory where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除NsortBrand
+		exeByHQL("delete from NsortBrand where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除Nsort
+		exeByHQL(
+				"delete from Nsort n where exists (select 1 from Sort s where n.sortId = s.sortId and s.userName = ?)",
+				new Object[] { userName }, new Type[] { Hibernate.STRING });
+
+		// 删除Sort
+		exeByHQL("delete from Sort where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除PayType
+		exeByHQL("delete from PayType where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除公告
+		exeByHQL("delete from Pub where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除友情链接
+		exeByHQL("delete from ExternalLink where userName = ?", new Object[] { userName },
+				new Type[] { Hibernate.STRING });
+
+		// 删除用户角色
+		deleteAll(list);
+		// 删除用户详细信息
+		deleteById(UserDetail.class, userId);
+		// 删除用户基本信息
+		deleteById(User.class, userId);
+
+		log.debug("删除用户 {},  {} 成功", userId, userName);
+		return null;
+	}
+
+	@Override
+	public boolean updatePassword(String userName, String mail, String templateFilePath) throws MalformedPatternException, MessagingException{
+		UserDetail userDetail = findUniqueBy("from UserDetail n where n.userName = ? and n.userMail = ?",
+				UserDetail.class, userName, mail);
+		if (userDetail == null) {
+			return false;
+		}
+		// update password
+		User user = get(User.class, userDetail.getUserId());
+		String newPassword = RandomStringUtils.randomNumeric(10, 6);
+		user.setPassword(MD5Util.Md5Password(user.getName(), newPassword));
+		update(user);
+		// send mail
+		log.info("{} 修改密码，发送通知邮件到 {}", userName, userDetail.getUserMail());
+		// String text = FileProcessor.readFile(new File(filePath));
+		Map<String, String> values = new HashMap<String, String>();
+		values.put("#nickName#", userDetail.getNickName());
+		values.put("#userName#", userDetail.getUserName());
+		values.put("#password#", newPassword);
+		String text = AppUtils.convertTemplate(templateFilePath, values);
+		if (PropertiesUtil.sendMail()) {
+			threadPoolExecutor.execute(new TaskThread(new SendMailTask(javaMailSender, userDetail.getUserMail(), "恭喜您，修改密码成功！", text)));
+		}
+		return true;
+	}
+	
+	/**
+	 * Sets the thread pool executor.
+	 * 
+	 * @param threadPoolExecutor
+	 *            the new thread pool executor
+	 */
+	@Required
+	public void setThreadPoolExecutor(ThreadPoolTaskExecutor threadPoolExecutor) {
+		this.threadPoolExecutor = threadPoolExecutor;
+	}
+	
+	/**
+	 * Sets the java mail sender.
+	 * 
+	 * @param javaMailSender
+	 *            the new java mail sender
+	 */
+	@Required
+	public void setJavaMailSender(JavaMailSenderImpl javaMailSender) {
+		this.javaMailSender = javaMailSender;
+	
+	}
+
+	@Override
+	public Long getAllUserCount() {
+		return findUniqueBy("select count(*) from UserDetail", Long.class);
 	}
 
 }

@@ -126,7 +126,7 @@
 								</td>
 								<td>
 								<c:choose>
-									<c:when test="${userInfo.shopDetail.sitename != null}">${userInfo.shopDetail.sitename}</c:when>
+									<c:when test="${userInfo.shopDetail.siteName != null}">${userInfo.shopDetail.siteName}</c:when>
 									<c:otherwise>
 										您尚未设置商城信息，请<a href="${pageContext.request.contextPath}/admin/shopDetail/load/${userInfo.shopDetail.shopId}${applicationScope.WEB_SUFFIX}">&nbsp;设置</a>
 									</c:otherwise>

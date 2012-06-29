@@ -82,9 +82,9 @@ BODY {
 		<link rel="icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="description"
-			content="${shopDetail.storeName},${shopDetail.briefDesc}" />
+			content="${shopDetail.userName},${shopDetail.briefDesc}" />
 		<meta name="keywords"
-			content="${shopDetail.storeName},${shopDetail.briefDesc}" />
+			content="${shopDetail.userName},${shopDetail.briefDesc}" />
 		<meta name="keywords"
 			content="shop,legend,LegendShop,B2B,B2C,网上商城,商城,电子商务,连锁店" />
 	</head>
@@ -175,8 +175,7 @@ BODY {
 							<td style="vertical-align: top" align="left">
 							<div>
 							<div style="margin-top: 8px;font-size: 13pt">
-							  <a href="${pageContext.request.contextPath}/shop/${record.storeName}${applicationScope.WEB_SUFFIX}" target="_blank">${record.sitename}</a>
-								
+							  <a href="${pageContext.request.contextPath}/shop/${record.userName}${applicationScope.WEB_SUFFIX}" target="_blank">${record.siteName}</a>
 							</div>
 							<div>${record.detailDesc}</div>
 							<div><fmt:message key="shop.contact.method"/> - <fmt:message key="Phone"/>：
@@ -192,8 +191,8 @@ BODY {
 								 </c:if>
 								</c:if>
 							</div>
-							<c:if test="${record.ymaddr != null}">
-								<div><fmt:message key="detail.address"/> - ${record.ymaddr}</div>
+							<c:if test="${record.postAddr != null}">
+								<div><fmt:message key="detail.address"/> - ${record.postAddr}</div>
 							</c:if>
 							
 							

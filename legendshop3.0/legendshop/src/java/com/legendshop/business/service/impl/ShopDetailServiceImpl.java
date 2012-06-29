@@ -7,13 +7,18 @@
  */
 package com.legendshop.business.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.search.facade.ShopDetailSearchFacade;
-import com.legendshop.business.service.CommonUtil;
 import com.legendshop.business.service.ShopDetailService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.core.exception.NotFoundException;
+import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.model.entity.UserDetail;
@@ -23,14 +28,14 @@ import com.legendshop.model.entity.UserDetail;
  */
 public class ShopDetailServiceImpl implements ShopDetailService {
 	
+	/** The log. */
+	private static Logger log = LoggerFactory.getLogger(ShopDetailServiceImpl.class);
+	
 	/** The shop detail dao. */
 	private ShopDetailDao shopDetailDao;
 	
 	/** The user detail dao. */
 	private UserDetailDao userDetailDao;
-	
-	/** The common util. */
-	private CommonUtil commonUtil;
 	
 	/** The shop detail search facade. */
 	private ShopDetailSearchFacade shopDetailSearchFacade;
@@ -38,8 +43,8 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 	/**
 	 * Sets the shop detail dao.
 	 * 
-	 * @param baseDao
-	 *            the new shop detail dao
+	 * @param shopDetailDao
+	 *            the new shopDetailDao
 	 */
 	public void setShopDetailDao(ShopDetailDao shopDetailDao) {
 		this.shopDetailDao = shopDetailDao;
@@ -66,7 +71,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 	 */
 	@Override
 	public void delete(Long id) {
-		shopDetailDao.deleteById(ShopDetail.class, id);
+		shopDetailDao.deleteShopDetailById(id);
 	}
 
 	/* (non-Javadoc)
@@ -74,7 +79,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 	 */
 	@Override
 	public void delete(ShopDetail shopDetail) {
-		shopDetailDao.delete(shopDetail);
+		shopDetailDao.deleteShopDetail(shopDetail);
 	}
 
 	// UserId 一定不能为空
@@ -83,10 +88,8 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 	 */
 	@Override
 	public void save(ShopDetail shopDetail) {
-		shopDetailDao.save(shopDetail);
-		// save right
-		// 保存管理员角色
-		commonUtil.saveAdminRight(shopDetailDao, shopDetail.getUserId());
+		
+		shopDetailDao.saveShopDetail(shopDetail);
 
 		shopDetailSearchFacade.create(shopDetail);
 	}
@@ -102,7 +105,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 	 */
 	@Override
 	public void update(ShopDetail shopDetail) {
-		shopDetailDao.update(shopDetail);
+		shopDetailDao.updateShopDetail(shopDetail);
 	}
 
 	/* (non-Javadoc)
@@ -123,15 +126,6 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 		this.userDetailDao = userDetailDao;
 	}
 
-	/**
-	 * Sets the common util.
-	 * 
-	 * @param commonUtil
-	 *            the new common util
-	 */
-	public void setCommonUtil(CommonUtil commonUtil) {
-		this.commonUtil = commonUtil;
-	}
 
 	/**
 	 * Sets the shop detail search facade.
@@ -146,6 +140,22 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 	@Override
 	public ShopDetail getShopDetailByUserId(String userId) {
 		return shopDetailDao.getShopDetailByUserId(userId);
+	}
+
+	@Override
+	public void updateShopDetail(Product product) {
+		ShopDetail shopdetail = shopDetailDao.getShopDetailForUpdate(product.getUserName());
+		if (shopdetail == null) {
+			throw new NotFoundException("ShopDetail is null, UserName = " + product.getUserName(),EntityCodes.PROD);
+		}
+		shopdetail.setProductNum(shopDetailDao.getProductNum(product.getUserName()));
+		shopdetail.setOffProductNum(shopDetailDao.getOffProductNum(product.getUserName()));
+		shopDetailDao.updateShopDetail(shopdetail);
+	}
+
+	@Override
+	public boolean updateShop(String loginUserName, String userId, ShopDetail shopDetail, Integer status) {
+		return shopDetailDao.updateShop(loginUserName, userId, shopDetail, status);
 	}
 
 

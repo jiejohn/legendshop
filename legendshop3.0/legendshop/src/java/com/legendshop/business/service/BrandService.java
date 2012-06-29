@@ -66,5 +66,18 @@ public interface BrandService {
 	 * @return the data by criteria query
 	 */
 	public abstract PageSupport getDataByCriteriaQuery(CriteriaQuery cq);
+	
+	/**
+	 * Save brand item.
+	 * 
+	 * @param idList
+	 *            the id list
+	 * @param nsortId
+	 *            the nsort id
+	 * @param userName
+	 *            the user name
+	 * @return the string
+	 */
+	public abstract String saveBrandItem(List<String> idList, Long nsortId, String userName);
 
 }

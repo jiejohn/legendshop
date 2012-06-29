@@ -23,13 +23,6 @@ public interface SystemParameterService {
 	 */
 	public abstract void delete(String id);
 
-	/**
-	 * Save.
-	 * 
-	 * @param systemParameter
-	 *            the system parameter
-	 */
-	public abstract void save(SystemParameter systemParameter);
 
 	/**
 	 * Update.

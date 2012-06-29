@@ -43,7 +43,7 @@ public interface LogoService {
 	 * @param id
 	 *            the id
 	 */
-	public abstract void delete(Long id);
+	public abstract void delete(Logo logo);
 
 	/**
 	 * Save.

@@ -7,50 +7,48 @@
  */
 package com.legendshop.business.service;
 
-import com.legendshop.core.dao.BaseDao;
 
+/**
+ * The Interface CommonUtil.
+ */
 public interface CommonUtil {
 
 	// 保存后台管理员角色
+
 	/**
 	 * Save admin right.
 	 * 
-	 * @param baseDaoImpl
-	 *            the base dao
 	 * @param userId
 	 *            the user id
 	 */
-	public abstract void saveAdminRight(BaseDao baseDao, String userId);
+	public abstract void saveAdminRight(String userId);
 
 	// 保存用户角色
+
 	/**
 	 * Save user right.
 	 * 
-	 * @param baseDaoImpl
-	 *            the base dao
 	 * @param userId
 	 *            the user id
 	 */
-	public abstract void saveUserRight(BaseDao baseDao, String userId);
+	public abstract void saveUserRight(String userId);
+
 
 	/**
 	 * Removes the admin right.
 	 * 
-	 * @param baseDaoImpl
-	 *            the base dao
 	 * @param userId
 	 *            the user id
 	 */
-	public abstract void removeAdminRight(BaseDao baseDao, String userId);
+	public abstract void removeAdminRight(String userId);
+
 
 	/**
 	 * Removes the user right.
 	 * 
-	 * @param baseDaoImpl
-	 *            the base dao
 	 * @param userId
 	 *            the user id
 	 */
-	public abstract void removeUserRight(BaseDao baseDao, String userId);
+	public abstract void removeUserRight(String userId);
 
 }

@@ -46,10 +46,41 @@ public interface NewsDao extends BaseDao{
 	/**
 	 * Gets the news.
 	 * 
-	 * @param cq
-	 *            the cq
+	 * @param locale
+	 *            the locale
+	 * @param curPageNO
+	 *            the cur page no
+	 * @param userName
+	 *            the user name
+	 * @param newsCategoryId
+	 *            the news category id
 	 * @return the news
 	 */
 	public abstract PageSupport getNews(Locale locale, String curPageNO,String userName,Long newsCategoryId);
+
+	/**
+	 * Update news.
+	 * 
+	 * @param news
+	 *            the news
+	 */
+	public abstract void updateNews(News news);
+
+	/**
+	 * Delete news by id.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	public abstract void deleteNewsById(Long id);
+
+	/**
+	 * Gets the all news.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @return the all news
+	 */
+	public abstract Long getAllNews(String userName);
 
 }

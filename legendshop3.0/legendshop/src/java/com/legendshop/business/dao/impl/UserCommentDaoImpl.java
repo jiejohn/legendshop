@@ -7,6 +7,8 @@
  */
 package com.legendshop.business.dao.impl;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,5 +65,33 @@ public class UserCommentDaoImpl extends BaseDaoImpl implements UserCommentDao {
 	public void saveOrUpdateUserComment(UserComment comment) {
 		saveOrUpdate(comment);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.UserCommentDao#updateUserComment(java.lang.Long, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean updateUserComment(Long id, String answer, String toUserName) {
+		UserComment comment = get(UserComment.class, id);
+		if (comment != null) {
+			if (!comment.getToUserName().equals(toUserName)) {
+				log.debug("toUserName try to answer comments own to " + comment.getToUserName() + " ,but fail");
+				return false;
+			}
+			comment.setAnswer(answer);
+			comment.setAnswertime(new Date());
+			update(comment);
+			return true;
+		}
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.UserCommentDao#getTotalUnReadMessage(java.lang.String)
+	 */
+	@Override
+	public Long getTotalUnReadMessage(String userName) {
+		return findUniqueBy("select count(*) from UserComment where status = ? and toUserName = ?", Long.class, 0, userName);
+	}
+
 
 }

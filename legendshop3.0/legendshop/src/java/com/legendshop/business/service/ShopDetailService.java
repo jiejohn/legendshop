@@ -10,6 +10,7 @@ package com.legendshop.business.service;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.service.ShopService;
+import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.UserDetail;
 
@@ -81,5 +82,31 @@ public interface ShopDetailService extends ShopService{
 	
 
 	public abstract ShopDetail getShopDetailByUserId(String userId);
+	
+
+	/**
+	 * Update shop detail.
+	 * 
+	 * @param product
+	 *            the product
+	 */
+	public abstract void updateShopDetail(Product product);
+	
+	/**
+	 * 审核商城.
+	 * 
+	 * @param loginUserName
+	 *            the login user name
+	 * @param userId
+	 *            the user id
+	 * @param shopId
+	 *            the shop id
+	 * @param status
+	 *            状态,是否上线1：在线，0下线，-1审核中,-2拒绝,-3关闭（管理员操作）
+	 * @return true, if successful
+	 */
+	public abstract boolean updateShop(String loginUserName, String userId, ShopDetail shopDetail, Integer status);
+
+
 
 }

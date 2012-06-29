@@ -62,7 +62,7 @@ public class NewsCategoryServiceImpl implements NewsCategoryService  {
 	 */
     @Override
 	public void delete(Long id) {
-        newsCategoryDao.deleteById(NewsCategory.class, id);
+        newsCategoryDao.deleteNewsCategoryById(id);
     }
 
     /* (non-Javadoc)
@@ -82,7 +82,7 @@ public class NewsCategoryServiceImpl implements NewsCategoryService  {
 	 */
     @Override
 	public void update(NewsCategory newsCategory) {
-        newsCategoryDao.update(newsCategory);
+        newsCategoryDao.updateNewsCategory(newsCategory);
     }
 
     /* (non-Javadoc)

@@ -36,7 +36,6 @@ import com.legendshop.event.EventContext;
 import com.legendshop.event.EventHome;
 import com.legendshop.event.GenericEvent;
 import com.legendshop.model.entity.UserDetail;
-import com.legendshop.model.entity.UserDetailView;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.sql.ConfigCode;
@@ -208,13 +207,13 @@ public class UserDetailAdminController extends BaseController{
 	 *            the objs
 	 * @return the list
 	 */
-	private List<UserDetailView> convert(List<Object> objs){
+	private List<UserDetail> convert(List<Object> objs){
 		if(AppUtils.isBlank(objs)){
 			return null;
 		}
-		List<UserDetailView> list = new ArrayList<UserDetailView>();		
+		List<UserDetail> list = new ArrayList<UserDetail>();		
 		for (Object obj : objs) {
-			UserDetailView userDetail = new UserDetailView();
+			UserDetail userDetail = new UserDetail();
 			Object[] arrayObj = (Object[])obj;
 			if(arrayObj[0] != null){
 				userDetail.setUserId((String)(arrayObj[0]));

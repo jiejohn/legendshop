@@ -7,6 +7,10 @@
  */
 package com.legendshop.business.service;
 
+import javax.mail.MessagingException;
+
+import org.apache.oro.text.regex.MalformedPatternException;
+
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.dao.support.SqlQuery;
@@ -54,5 +58,41 @@ public interface UserDetailService {
 	 * @return the user detail
 	 */
 	public abstract UserDetail getUserDetail(String userName);
+	
+	
+	/**
+	 * 删除用户,只能删除普通用户 因为没有采用外键，所以要一个一个删除 注意删除无法恢复，慎用.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param userName
+	 *            the user name
+	 * @param realPicPath
+	 *            the real pic path
+	 * @param smallPicPath
+	 *            the small pic path
+	 * @return the string
+	 */
+	public abstract String deleteUserDetail(String userId, String userName, String realPicPath, String smallPicPath);
+	
+	/**
+	 * 重置密码.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @param mail
+	 *            the mail
+	 * @param templateFilePath
+	 *            the template file path
+	 * @return true, if successful
+	 * @throws MalformedPatternException
+	 *             the malformed pattern exception
+	 * @throws MessagingException
+	 *             the messaging exception
+	 */
+
+	public abstract boolean updatePassword(String userName, String mail, String templateFilePath)
+			throws MalformedPatternException, MessagingException;
+
 
 }

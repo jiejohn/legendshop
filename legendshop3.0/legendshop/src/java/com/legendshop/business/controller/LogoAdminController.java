@@ -146,7 +146,7 @@ public class LogoAdminController extends BaseController {
 			return result;
 		}
 		log.info("{}, delete Logo Url {}", logo.getUserName(), logo.getUrl());
-		logoService.delete(id);
+		logoService.delete(logo);
 		String url = RealPathUtil.getBigPicRealPath() + "/" + logo.getBanner();
 		FileProcessor.deleteFile(url);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());

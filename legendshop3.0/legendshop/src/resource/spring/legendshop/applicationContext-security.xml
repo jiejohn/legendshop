@@ -107,8 +107,12 @@
 	
 	<beans:bean id="loginHistoryService" class="com.legendshop.business.service.impl.LoginHistoryServiceImpl">
         <beans:property name="jdbcTemplate" ref="jdbcTemplate"></beans:property>
-        <beans:property name="baseDao" ref="baseDao"></beans:property>
+        <beans:property name="loginHistoryDao" ref="loginHistoryDao"></beans:property>
         <beans:property name="threadPoolExecutor" ref="threadPoolExecutor"></beans:property>
     </beans:bean>
+
+	<beans:bean id="loginHistoryDao" class="com.legendshop.business.dao.impl.LoginHistoryDaoImpl" parent="baseDao">
+	</beans:bean>
+
 
 </beans:beans>

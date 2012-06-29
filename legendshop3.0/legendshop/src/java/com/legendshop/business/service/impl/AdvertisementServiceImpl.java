@@ -56,8 +56,9 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 	 * @see com.legendshop.business.service.AdvertisementService#delete(java.lang.Long)
 	 */
 	@Override
+	@CacheEvict(value = "Advertisement", key="#id")
 	public void delete(Long id) {
-		advertisementDao.deleteById(Advertisement.class, id);
+		advertisementDao.deleteAdvById(id);
 	}
 
 	/* (non-Javadoc)
@@ -78,7 +79,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 	@Override
 	@CacheEvict(value = "Advertisement", key="#advertisement.id")
 	public void update(Advertisement advertisement) {
-		advertisementDao.update(advertisement);
+		advertisementDao.updateAdv(advertisement);
 	}
 
 	/* (non-Javadoc)

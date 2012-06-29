@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.dao.VisitLogDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
+import com.legendshop.model.entity.VisitLog;
 /**
  * 
  * LegendShop 版权所有 2009-2011,并保留所有权利。
@@ -26,6 +27,17 @@ public class VisitLogDaoImpl extends BaseDaoImpl implements VisitLogDao {
      
      /** The log. */
      private static Logger log = LoggerFactory.getLogger(VisitLogDaoImpl.class);
+
+	@Override
+	public void updateVisitLog(VisitLog visitLog) {
+		update(visitLog);
+	}
+
+	@Override
+	public void deleteVisitLogById(Long id) {
+		deleteById(VisitLog.class, id);
+		
+	}
      
 	
  }

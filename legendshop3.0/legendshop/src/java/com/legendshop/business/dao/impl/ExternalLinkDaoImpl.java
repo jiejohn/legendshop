@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.ExternalLinkDao;
@@ -50,6 +51,19 @@ public class ExternalLinkDaoImpl extends BaseDaoImpl implements ExternalLinkDao 
 			list = findByHQL("from ExternalLink where userName = ? order by bs", Constants.COMMON_USER);
 		}
 		return list;
+	}
+
+	@Override
+	@CacheEvict(value = "ExternalLink", key = "#id")
+	public void deleteExternalLinkById(Long id) {
+		deleteById(ExternalLink.class, id);
+	}
+
+	@Override
+	@CacheEvict(value = "ExternalLink", key = "#externalLink.id")
+	public void updateExternalLink(ExternalLink externalLink) {
+		update(externalLink);
+		
 	}
 
 }

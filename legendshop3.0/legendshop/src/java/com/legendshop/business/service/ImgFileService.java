@@ -79,5 +79,23 @@ public interface ImgFileService {
 	 * @return the img file list
 	 */
 	public abstract PageSupport getImgFileList(CriteriaQuery cq);
+	
+	/**
+	 * Img file online.
+	 * 
+	 * @param fileId
+	 *            the file id
+	 * @return true, if successful
+	 */
+	public abstract boolean updateImgFileOnline(Long fileId);
+
+	/**
+	 * Img file offline.
+	 * 
+	 * @param fileId
+	 *            the file id
+	 * @return true, if successful
+	 */
+	public abstract boolean updateImgFileOffline(Long fileId);
 
 }

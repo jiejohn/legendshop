@@ -82,7 +82,7 @@ public class ShopDetailAdminController extends BaseController {
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO,
 			ShopDetail shopDetail) throws Exception {
 		CriteriaQuery cq = new CriteriaQuery(ShopDetail.class, curPageNO, "javascript:pager");
-		hasAllDataFunction(cq, request, "storeName", StringUtils.trim(shopDetail.getStoreName()));
+		hasAllDataFunction(cq, request, "userName", StringUtils.trim(shopDetail.getUserName()));
 
 		if (!CommonServiceUtil.isDataForExport(cq, request)) {// 非导出情况
 			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
@@ -117,7 +117,7 @@ public class ShopDetailAdminController extends BaseController {
 			return update(request, response, shopDetail);
 		} else {
 			// 检查用户权限，只有超级用户可以使用
-			String userName = shopDetail.getStoreName();
+			String userName = shopDetail.getUserName();
 
 			String shopPic = null;
 			String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), userName);
@@ -141,7 +141,6 @@ public class ShopDetailAdminController extends BaseController {
 				shopDetail.setOffProductNum(0);
 				shopDetail.setCommNum(0);
 				shopDetail.setProductNum(0);
-				shopDetail.setWeb(safeHtml.makeSafe(shopDetail.getStoreName()));
 				shopDetail.setType(ShopTypeEnum.BUSINESS.value());
 				shopDetail.setStatus(ShopStatusEnum.ONLINE.value());
 				String subPath = userName + "/shop/";
@@ -202,7 +201,7 @@ public class ShopDetailAdminController extends BaseController {
 	Long id) {
 		ShopDetail shopDetail = shopDetailService.getShopDetailById(id);
 		if (shopDetail != null) {
-			String result = checkPrivilege(request, UserManager.getUsername(request), shopDetail.getStoreName());
+			String result = checkPrivilege(request, UserManager.getUsername(request), shopDetail.getUserName());
 			if(result!=null){
 				return result;
 			}
@@ -245,20 +244,20 @@ public class ShopDetailAdminController extends BaseController {
 		}
 		String originShopPic = shop.getShopPic();
 		String shopPic = null;
-		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), shopDetail.getStoreName());
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), shopDetail.getUserName());
 		if(result!=null){
 			return result;
 		}
 		try {
-			String subPath = shopDetail.getStoreName() + "/shop/";
+			String subPath = shopDetail.getUserName() + "/shop/";
 			SafeHtml safeHtml = new SafeHtml();
-			shop.setSitename(safeHtml.makeSafe(shopDetail.getSitename()));
-			shop.setMaddr(safeHtml.makeSafe(shopDetail.getMaddr()));
-			shop.setMsn(safeHtml.makeSafe(shopDetail.getMsn()));
-			shop.setMname(safeHtml.makeSafe(shopDetail.getMname()));
+			shop.setSiteName(safeHtml.makeSafe(shopDetail.getSiteName()));
+			shop.setShopAddr(safeHtml.makeSafe(shopDetail.getShopAddr()));
+			shop.setBankCard(safeHtml.makeSafe(shopDetail.getBankCard()));
+			shop.setPayee(safeHtml.makeSafe(shopDetail.getPayee()));
 			shop.setCode(safeHtml.makeSafe(shopDetail.getCode()));
-			shop.setYmaddr(safeHtml.makeSafe(shopDetail.getYmaddr()));
-			shop.setYmname(safeHtml.makeSafe(shopDetail.getYmname()));
+			shop.setPostAddr(safeHtml.makeSafe(shopDetail.getPostAddr()));
+			shop.setRecipient(safeHtml.makeSafe(shopDetail.getRecipient()));
 			shop.setColorStyle(shopDetail.getColorStyle());
 			shop.setLangStyle(shopDetail.getLangStyle());
 			shop.setBriefDesc(safeHtml.makeSafe(shopDetail.getBriefDesc()));
@@ -267,6 +266,8 @@ public class ShopDetailAdminController extends BaseController {
 			shop.setProvinceid(shopDetail.getProvinceid());
 			shop.setCityid(shopDetail.getCityid());
 			shop.setAreaid(shopDetail.getAreaid());
+			shop.setFrontType(shopDetail.getFrontType());
+			shop.setEndType(shopDetail.getEndType());
 			if (CommonServiceUtil.haveViewAllDataFunction(request)
 					|| !ShopStatusEnum.AUDITING.value().equals(shop.getStatus())) {
 				if (shopDetail.getStatus() != null) {
@@ -275,7 +276,7 @@ public class ShopDetailAdminController extends BaseController {
 			}
 			if (shopDetail.getFile().getSize() > 0) {
 				shopPic = FileProcessor.uploadFileAndCallback(shopDetail.getFile(), subPath, "so"
-						+ shopDetail.getStoreName());
+						+ shopDetail.getUserName());
 				shop.setShopPic(shopPic);
 			}
 			shopDetailService.update(shop);

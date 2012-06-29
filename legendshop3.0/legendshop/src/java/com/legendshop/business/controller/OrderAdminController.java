@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.page.BackPage;
-import com.legendshop.business.service.OrderService;
 import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
@@ -56,10 +55,6 @@ public class OrderAdminController extends BaseController implements AdminControl
 	
 	/** The LIS t_ query. */
 	public static String LIST_QUERY = "/admin/order/query";
-	
-	/** The order service. */
-	@Autowired
-	private OrderService orderService;
 	
 	/** The sub service. */
 	@Autowired
@@ -105,7 +100,7 @@ public class OrderAdminController extends BaseController implements AdminControl
 				cq.addOrder("desc", "subDate");
 			}
 			cq.add();
-			PageSupport ps = orderService.getOrderList(cq);
+			PageSupport ps = subService.getOrderList(cq);
 			savePage(ps, request);
 			request.setAttribute("subForm", entity);
 			return PathResolver.getPath(request, BackPage.ORDER_LIST_PAGE);

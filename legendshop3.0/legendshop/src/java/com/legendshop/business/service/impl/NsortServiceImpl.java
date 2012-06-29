@@ -84,7 +84,7 @@ public class NsortServiceImpl implements NsortService {
 	 */
     @Override
 	public void delete(Long id) {
-        nsortDao.deleteById(Nsort.class, id);
+        nsortDao.deleteNsortById(id);
     }
 
     /* (non-Javadoc)
@@ -104,7 +104,7 @@ public class NsortServiceImpl implements NsortService {
 	 */
     @Override
 	public void update(Nsort nsort) {
-        nsortDao.update(nsort);
+        nsortDao.updateNsort(nsort);
     }
 
     /* (non-Javadoc)
@@ -134,8 +134,8 @@ public class NsortServiceImpl implements NsortService {
     /**
 	 * Sets the nsort dao.
 	 * 
-	 * @param baseDao
-	 *            the new nsort dao
+	 * @param nsortDao
+	 *            the nsortDao
 	 */
     @Required
     public void setNsortDao(NsortDao nsortDao) {

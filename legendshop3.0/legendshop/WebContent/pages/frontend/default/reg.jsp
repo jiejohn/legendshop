@@ -52,11 +52,11 @@
 				checkEmail1: true
 			},
 			agreement: "required",
-			"shopDetail.sitename": {
+			"shopDetail.siteName": {
 				required: "#openShop:checked",
 				minlength: 2
 			},
-            "shopDetail.ymaddr": {
+            "shopDetail.postAddr": {
 				required: "#openShop:checked",
 				minlength: 2
 			},
@@ -110,11 +110,11 @@
                required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>',
                minlength: '<fmt:message key="errors.minlength"><fmt:param value=""/><fmt:param value="8"/></fmt:message>'
             },
-            "shopDetail.sitename": {
+            "shopDetail.siteName": {
                required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>',
                minlength: '<fmt:message key="errors.minlength"><fmt:param value=""/><fmt:param value="2"/></fmt:message>'
             },   
-            "shopDetail.ymaddr":{
+            "shopDetail.postAddr":{
                required: '<fmt:message key="errors.required"><fmt:param value=""/></fmt:message>',
                minlength: '<fmt:message key="errors.minlength"><fmt:param value=""/><fmt:param value="2"/></fmt:message>'
             }, 
@@ -288,7 +288,7 @@ function isEmail(str){
                                 <td width="33%" height="29"><div align="right">
                                 <font color="#ff0000">*</font><fmt:message key="mall.name"/>：</div></td>
                                 <td width="67%" height="29"><div align="left">
-                                    <input name="shopDetail.sitename" id="sitename" class="input"  maxlength="50"/>
+                                    <input name="shopDetail.siteName" id="siteName" class="input"  maxlength="50"/>
                                   </div></td>
                               </tr>
                               <tr>
@@ -301,7 +301,7 @@ function isEmail(str){
                                 <td height="29"><div align="right">
                                 <font color="#ff0000">*</font><fmt:message key="address"/>：</div></td>
                                 <td height="29"><div align="left"> 
-                                    <input style="WIDTH: 250px;" name="shopDetail.ymaddr" id="ymaddr" size="20" class="input"  maxlength="300"/>
+                                    <input style="WIDTH: 250px;" name="shopDetail.postAddr" id="postAddr" size="20" class="input"  maxlength="300"/>
                                   </div></td>
                               </tr>
                               <tr>

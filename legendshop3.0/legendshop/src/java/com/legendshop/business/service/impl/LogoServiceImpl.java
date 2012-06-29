@@ -57,8 +57,8 @@ public class LogoServiceImpl implements LogoService {
 	 * @see com.legendshop.business.service.LogoService#delete(java.lang.Long)
 	 */
     @Override
-	public void delete(Long id) {
-    	logoDao.deleteById(Logo.class, id);
+	public void delete(Logo logo) {
+    	logoDao.deleteLogo(logo);
     }
 
     /* (non-Javadoc)
@@ -78,7 +78,7 @@ public class LogoServiceImpl implements LogoService {
 	 */
     @Override
 	public void update(Logo logo) {
-    	logoDao.update(logo);
+    	logoDao.updateLogo(logo);
     }
 
     /* (non-Javadoc)

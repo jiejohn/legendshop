@@ -20,7 +20,6 @@ import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.SystemParameter;
-import com.legendshop.util.AppUtils;
 
 /**
  * LegendShop 版权所有 2009-2011,并保留所有权利。
@@ -70,29 +69,16 @@ public class SystemParameterServiceImpl implements SystemParameterService {
 	 */
 	@Override
 	public void delete(String id) {
-		systemParameterDao.deleteById(SystemParameter.class, id);
+		systemParameterDao.deleteSystemParameterById(id);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.SystemParameterService#save(com.legendshop.model.entity.SystemParameter)
-	 */
-	@Override
-	public void save(SystemParameter systemParameter) {
-		SystemParameter orgin = getSystemParameter(systemParameter.getName());
-		if (!AppUtils.isBlank(orgin)) {
-			orgin.setValue(systemParameter.getValue());
-			update(orgin);
-		} else {
-			systemParameterDao.saveOrUpdate(systemParameter);
-		}
-	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.SystemParameterService#update(com.legendshop.model.entity.SystemParameter)
 	 */
 	@Override
 	public void update(SystemParameter systemParameter) {
-		systemParameterDao.update(systemParameter);
+		systemParameterDao.updateSystemParameter(systemParameter);
 	}
 
 	/* (non-Javadoc)

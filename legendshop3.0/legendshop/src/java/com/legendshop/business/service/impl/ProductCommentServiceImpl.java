@@ -58,7 +58,7 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 	 */
 	@Override
 	public void delete(Long id) {
-		productCommentDao.deleteById(ProductComment.class, id);
+		productCommentDao.deleteProductCommentById(id);
 	}
 
 	/* (non-Javadoc)
@@ -78,7 +78,7 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 	 */
 	@Override
 	public void update(ProductComment productComment) {
-		productCommentDao.update(productComment);
+		productCommentDao.updateProductComment(productComment);
 	}
 
 	/* (non-Javadoc)

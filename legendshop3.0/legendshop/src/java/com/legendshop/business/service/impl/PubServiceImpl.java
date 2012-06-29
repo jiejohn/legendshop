@@ -67,7 +67,7 @@ public class PubServiceImpl implements PubService {
 	 */
     @Override
 	public void delete(Long id) {
-        pubDao.deleteById(Pub.class, id);
+        pubDao.deletePubById(id);
     }
 
     /* (non-Javadoc)
@@ -97,7 +97,7 @@ public class PubServiceImpl implements PubService {
 	 */
     @Override
 	public void update(Pub pub) {
-        pubDao.update(pub);
+        pubDao.updatePub(pub);
     }
 
     /* (non-Javadoc)

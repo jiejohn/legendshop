@@ -85,7 +85,7 @@ public class NewsServiceImpl implements NewsService {
 	 */
 	@Override
 	public void delete(Long id) {
-		newsDao.deleteById(News.class, id);
+		newsDao.deleteNewsById(id);
 	}
 
 	/* (non-Javadoc)
@@ -133,7 +133,7 @@ public class NewsServiceImpl implements NewsService {
 	public void update(News news) {
 		preUpdateNews(news);
 		news.setNewsDate(new Date());
-		newsDao.update(news);
+		newsDao.updateNews(news);
 	}
 
 	/* (non-Javadoc)

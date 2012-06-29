@@ -181,19 +181,19 @@ public class LuceneContentCollector implements LuceneResultCollector {
 				shopDetail.setDetailDesc(c);
 			}
 
-			String sitename = shopDetail.getSitename();
+			String siteName = shopDetail.getSiteName();
 			tokenStream = this.settings.analyzer().tokenStream(SearchFields.Indexed.CONTENTS,
-					new StringReader(sitename));
+					new StringReader(siteName));
 
-			fragment = highlighter.getBestFragment(tokenStream, sitename);
+			fragment = highlighter.getBestFragment(tokenStream, siteName);
 			if (fragment != null) {
-				shopDetail.setSitename(fragment);
+				shopDetail.setSiteName(fragment);
 			} else {
-				String c = sitename;
+				String c = siteName;
 				if (c.length() > 100) {
-					c = sitename.substring(0, 100) + "...";
+					c = siteName.substring(0, 100) + "...";
 				}
-				shopDetail.setSitename(c);
+				shopDetail.setSiteName(c);
 			}
 		}
 		if (shopDetails != null && postIds != null && shopDetails.size() < postIds.length) {

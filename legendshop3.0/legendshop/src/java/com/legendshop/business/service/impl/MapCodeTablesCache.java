@@ -15,7 +15,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.legendshop.core.dao.BaseDao;
+import com.legendshop.business.dao.ConstTableDao;
 import com.legendshop.core.tag.TableCache;
 import com.legendshop.model.entity.ConstTable;
 
@@ -34,8 +34,7 @@ public class MapCodeTablesCache implements TableCache {
 	/** The code tables. */
 	private Map<String, Map<String, String>> codeTables = new HashMap<String, Map<String, String>>();
 	
-	/** The base dao. */
-	private BaseDao baseDao;
+	private ConstTableDao constTableDao;
 
 	/**
 	 * Gets the code tables.
@@ -73,7 +72,7 @@ public class MapCodeTablesCache implements TableCache {
 	 */
 	@Override
 	public void initCodeTablesCache() {
-		List<ConstTable> list = loadAllConstTable();
+		List<ConstTable> list = constTableDao.loadAllConstTable();
 		for (ConstTable constTable : list) {
 			String type = constTable.getId().getType();
 			Map<String, String> items = codeTables.get(type);
@@ -87,23 +86,9 @@ public class MapCodeTablesCache implements TableCache {
 		log.info("codeTables size = {}", codeTables.size());
 	}
 
-	/**
-	 * Sets the base dao.
-	 * 
-	 * @param baseDao
-	 *            the new base dao
-	 */
-	public void setBaseDao(BaseDao baseDao) {
-		this.baseDao = baseDao;
-	}
 
-	/**
-	 * Load all const table.
-	 * 
-	 * @return the list
-	 */
-	public List<ConstTable> loadAllConstTable() {
-		return baseDao.findByHQL("from ConstTable c order by c.id.type, c.seq");
+	public void setConstTableDao(ConstTableDao constTableDao) {
+		this.constTableDao = constTableDao;
 	}
 
 }

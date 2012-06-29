@@ -1,10 +1,21 @@
+/*
+ * 
+ * LegendShop 多用户商城系统
+ * 
+ *  版权所有,并保留所有权利。
+ * 
+ */
 package com.legendshop.business.dao;
 
 import java.util.List;
 
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.model.dynamic.Item;
+import com.legendshop.model.entity.Brand;
 
+/**
+ * The Interface BrandDao.
+ */
 public interface BrandDao extends BaseDao{
 
 	/**
@@ -78,5 +89,35 @@ public interface BrandDao extends BaseDao{
 	 * @return the usable product item
 	 */
 	public abstract List<Item> getUsableProductItem(Long prodId, String userName);
+
+
+	/**
+	 * Save brand item.
+	 * 
+	 * @param idList
+	 *            the id list
+	 * @param nsortId
+	 *            the nsort id
+	 * @param userName
+	 *            the user name
+	 * @return the string
+	 */
+	public abstract String saveBrandItem(List<String> idList, Long nsortId, String userName);
+
+	/**
+	 * Delete brand by id.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	public abstract void deleteBrandById(Long id);
+
+	/**
+	 * Update brand.
+	 * 
+	 * @param brand
+	 *            the brand
+	 */
+	public abstract void updateBrand(Brand brand); 
 
 }

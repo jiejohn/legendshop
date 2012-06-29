@@ -10,7 +10,6 @@ package com.legendshop.business.service.dwr;
 import java.util.List;
 import java.util.Map;
 
-import com.legendshop.business.service.AdminService;
 import com.legendshop.model.dynamic.Item;
 import com.legendshop.model.dynamic.Model;
 import com.legendshop.model.entity.Indexjpg;
@@ -126,13 +125,6 @@ public interface DwrCommonService {
 	 */
 	public abstract String imgFileOffline(Long fileId);
 
-	/**
-	 * Sets the admin service.
-	 * 
-	 * @param adminService
-	 *            the new admin service
-	 */
-	public abstract void setAdminService(AdminService adminService);
 
 	/**
 	 * 客户是否存在,Email是否存在 1: 客户已经存在 2：Email已经存在 0: Normal.
@@ -248,11 +240,11 @@ public interface DwrCommonService {
 	 *            the user name
 	 * @param shopName
 	 *            the shop name
-	 * @param sitename
-	 *            the sitename
+	 * @param siteName
+	 *            the siteName
 	 * @return the integer
 	 */
-	public abstract Integer addMyLeague(String userName, String shopName, String sitename);
+	public abstract Integer addMyLeague(String userName, String shopName, String siteName);
 
 	/**
 	 * 回复留言.
@@ -284,7 +276,7 @@ public interface DwrCommonService {
 	 * 
 	 * @param loginUserName
 	 *            the login user name
-	 * @param storeName
+	 * @param userName
 	 *            商城名称
 	 * @param shopId
 	 *            the shop id
@@ -292,7 +284,7 @@ public interface DwrCommonService {
 	 *            状态,是否上线1：在线，0下线，-1审核中,-2拒绝,-3关闭（管理员操作）
 	 * @return the string
 	 */
-	public abstract String auditShop(String loginUserName, String storeName, Long shopId, Integer status);
+	public abstract String auditShop(String loginUserName, String userName, Long shopId, Integer status);
 
 	/**
 	 * Gets the usable brand.

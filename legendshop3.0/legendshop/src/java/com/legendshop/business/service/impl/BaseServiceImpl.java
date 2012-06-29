@@ -14,8 +14,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.LocaleResolver;
 
-import com.legendshop.core.constant.ParameterEnum;
-import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.spi.service.impl.AbstractService;
 
 /**
@@ -49,15 +47,6 @@ public abstract class BaseServiceImpl extends AbstractService {
 		this.javaMailSender = javaMailSender;
 	}
 
-	
-	/**
-	 * Send mail.
-	 * 
-	 * @return true, if successful
-	 */
-	protected boolean sendMail() {
-		return PropertiesUtil.getObject(ParameterEnum.SEND_MAIL, Boolean.class);
-	}
 	
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BaseService#setThreadPoolExecutor(org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor)

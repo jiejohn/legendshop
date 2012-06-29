@@ -7,6 +7,10 @@
  */
 package com.legendshop.business.dao;
 
+import javax.mail.MessagingException;
+
+import org.apache.oro.text.regex.MalformedPatternException;
+
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
@@ -196,5 +200,53 @@ public interface UserDetailDao extends BaseDao{
 	 */
 	public abstract PageSupport getUserDetailList(SqlQuery sqlQuery);
 
+	/**
+	 * Gets the user detail list.
+	 * 
+	 * @param sqlQuery
+	 *            the sql query
+	 * @return the user detail list
+	 */
 	public abstract PageSupport getUserDetailList(HqlQuery sqlQuery);
+	
+	/**
+	 * Delete user detail.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @param userName
+	 *            the user name
+	 * @param realPicPath
+	 *            the real pic path
+	 * @param smallPicPath
+	 *            the small pic path
+	 * @return the string
+	 */
+	public abstract String deleteUserDetail(String userId, String userName, String realPicPath, String smallPicPath);
+
+	/**
+	 * Update password.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @param mail
+	 *            the mail
+	 * @param templateFilePath
+	 *            the template file path
+	 * @return true, if successful
+	 * @throws MalformedPatternException
+	 *             the malformed pattern exception
+	 * @throws MessagingException
+	 *             the messaging exception
+	 */
+	public abstract boolean updatePassword(String userName, String mail, String templateFilePath) throws MalformedPatternException, MessagingException;
+
+	/**
+	 * Gets the all shop count.
+	 * 
+	 * @return the all shop count
+	 */
+	public abstract Long getAllUserCount();
+
+
 }

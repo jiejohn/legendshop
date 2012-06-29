@@ -26,10 +26,9 @@
 		class="com.legendshop.business.service.dwr.impl.DwrCommonServiceImpl">
 		<dwr:remote javascript="CommonService">
 		</dwr:remote>
-		<property name="businessDao" ref="businessDao"></property>
+		<property name="userCommentDao" ref="userCommentDao"></property>
 		<property name="shopDetailDao" ref="shopDetailDao"></property>
 		<property name="userDetailDao" ref="userDetailDao"></property>
-		<property name="adminService" ref="adminService"></property>
 		<property name="payTypeService" ref="payTypeService"></property>
 		<property name="productSearchFacade" ref="productSearchFacade"></property>
 		<property name="basketDao" ref="basketDao"></property>
@@ -39,10 +38,11 @@
 		<property name="productDao" ref="productDao"></property>
 		<property name="subDao" ref="subDao"></property>
 		<property name="localeResolver" ref="localeResolver"></property>
+		<property name="productCommentDao" ref="productCommentDao"></property>
 	</bean>
 	
 	  <bean id="optionService" class="com.legendshop.business.service.dwr.impl.OptionServiceImpl">
 	    <dwr:remote javascript="optionService"/>
-	    <property name="baseDao" ref="baseDao"></property>
+	    <property name="tagLibDao" ref="tagLibDao"></property>
 	  </bean>
 </beans>

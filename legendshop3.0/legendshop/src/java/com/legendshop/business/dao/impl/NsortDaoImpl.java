@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.NsortDao;
@@ -103,9 +104,32 @@ public class NsortDaoImpl extends BaseDaoImpl implements NsortDao {
 		return findByHQL("from Nsort where sortId = ? and parent_nsort_id is null", sortId);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.NsortDao#getNavigationNsort(java.lang.String)
+	 */
 	@Override
 	public List<Nsort> getNavigationNsort(String userName) {
 		return findByHQL("select n from Nsort n,Sort s where n.sortId=s.id and s.userName=? and s.sortType=? and s.navigationMenu=?", userName,ProductTypeEnum.PRODUCT.value(),1);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.NsortDao#updateNsort(com.legendshop.model.entity.Nsort)
+	 */
+	@Override
+	@CacheEvict(value = "Nsort", key = "#nsort.nsortId")
+	public void updateNsort(Nsort nsort) {
+		update(nsort);
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.NsortDao#deleteNsortById(java.lang.Long)
+	 */
+	@Override
+	@CacheEvict(value = "Nsort", key = "#id")
+	public void deleteNsortById(Long id) {
+		delete(Nsort.class, id);
+		
 	}
 
 }

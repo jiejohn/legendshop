@@ -12,6 +12,7 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.NewsDao;
@@ -91,6 +92,25 @@ public class NewsDaoImpl extends BaseDaoImpl implements NewsDao {
 		PageSupport ps = find(cq);
 		ps.setToolBar(locale, Constants.SIMPLE_PAGE_PROVIDER);
 		return ps;
+	}
+
+	@Override
+	@CacheEvict(value = "News", key = "#news.newsId")
+	public void updateNews(News news) {
+		update(news);
+		
+	}
+
+	@Override
+	@CacheEvict(value = "News", key = "#id")
+	public void deleteNewsById(Long id) {
+		deleteById(News.class, id);
+		
+	}
+
+	@Override
+	public Long getAllNews(String userName) {
+		return findUniqueBy("select count(*) from News where userName = ?", Long.class, userName);
 	}
 
 }

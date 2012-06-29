@@ -14,8 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.legendshop.business.dao.TagLibDao;
 import com.legendshop.business.service.dwr.OptionService;
-import com.legendshop.core.dao.BaseDao;
 import com.legendshop.core.exception.ApplicationException;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
@@ -35,9 +35,8 @@ public class OptionServiceImpl implements OptionService{
 	
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(OptionServiceImpl.class);
-	
-	/** The base dao. */
-	private BaseDao baseDao;
+
+	private TagLibDao tagLibDao;
 			
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.dwr.impl.OptionService#getLinkedOptionsByHql(java.lang.String)
@@ -45,7 +44,7 @@ public class OptionServiceImpl implements OptionService{
 	@Override
 	public Map<Object, Object> getLinkedOptionsByHql(String hql) {
 		try {
-			List<Object[]> list = baseDao.findByHQL(hql);
+			List<Object[]> list = tagLibDao.findDataByHQL(hql);
 			Map<Object, Object> options = null;
 			if(!AppUtils.isBlank(list)) {
 				options = new LinkedHashMap<Object, Object>(list.size());
@@ -69,7 +68,7 @@ public class OptionServiceImpl implements OptionService{
 	@Override
 	public Map<Object, Object> getLinkedOptionsBySql(String sql) {
 		try {
-			List<Object[]> list = baseDao.findBySQL(sql);
+			List<Object[]> list = tagLibDao.findDataBySQL(sql);
 			Map<Object, Object> options = null;
 			if(!AppUtils.isBlank(list)) {
 				options = new LinkedHashMap<Object, Object>(list.size());
@@ -88,7 +87,7 @@ public class OptionServiceImpl implements OptionService{
 	}
 
 	@Required
-	public void setBaseDao(BaseDao baseDao) {
-		this.baseDao = baseDao;
+	public void setTagLibDao(TagLibDao tagLibDao) {
+		this.tagLibDao = tagLibDao;
 	}
 }

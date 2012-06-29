@@ -118,4 +118,18 @@ public class AdvertisementDaoImpl extends BaseDaoImpl implements AdvertisementDa
 	public void setMaxNumPerType(Integer maxNumPerType) {
 		this.maxNumPerType = maxNumPerType;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.AdvertisementDao#deleteAdvById(java.lang.Long)
+	 */
+	@Override
+	public void deleteAdvById(Long id) {
+		deleteById(Advertisement.class, id);
+	}
+
+	@Override
+	public void updateAdv(Advertisement advertisement) {
+		update(advertisement);
+		
+	}
 }

@@ -24,8 +24,8 @@ import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.form.BasketForm;
 import com.legendshop.business.service.AdvertisementService;
 import com.legendshop.business.service.BasketService;
-import com.legendshop.business.service.OrderService;
 import com.legendshop.business.service.UserDetailService;
+import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
@@ -55,7 +55,7 @@ public class OrderController extends BaseController {
 	
 	/** The order service. */
 	@Autowired
-	private OrderService orderService;
+	private SubService subService;
 	
 	/** The basket service. */
 	@Autowired
@@ -109,7 +109,7 @@ public class OrderController extends BaseController {
 			cq.eq("subCheck", entity.getSubCheck());
 			cq.addOrder("desc", "subDate");
 			cq.add();
-			PageSupport ps = orderService.getOrderList(cq);
+			PageSupport ps = subService.getOrderList(cq);
 			savePage(ps, request);
 			request.setAttribute("subForm", entity);
 

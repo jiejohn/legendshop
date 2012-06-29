@@ -35,8 +35,8 @@ public class ExternalLinkServiceImpl implements ExternalLinkService {
 	 *            the new base dao
 	 */
     @Required
-    public void setExternalLinkDao(ExternalLinkDao baseDao) {
-        this.externalLinkDao = baseDao;
+    public void setExternalLinkDao(ExternalLinkDao externalLinkDao) {
+        this.externalLinkDao = externalLinkDao;
     }
 
     /* (non-Javadoc)
@@ -72,7 +72,7 @@ public class ExternalLinkServiceImpl implements ExternalLinkService {
 	 */
     @Override
 	public void delete(Long id) {
-        externalLinkDao.deleteById(ExternalLink.class, id);
+        externalLinkDao.deleteExternalLinkById(id);
     }
 
     /* (non-Javadoc)
@@ -100,7 +100,7 @@ public class ExternalLinkServiceImpl implements ExternalLinkService {
 	 */
     @Override
 	public void update(ExternalLink externalLink) {
-        externalLinkDao.update(externalLink);
+        externalLinkDao.updateExternalLink(externalLink);
     }
 
     /* (non-Javadoc)

@@ -76,7 +76,7 @@ public class HotsearchServiceImpl implements HotsearchService {
 	 */
 	@Override
 	public void delete(Long id) {
-		hotsearchDao.deleteById(Hotsearch.class, id);
+		hotsearchDao.deleteHotsearchById(id);
 	}
 
 	/* (non-Javadoc)
@@ -107,7 +107,7 @@ public class HotsearchServiceImpl implements HotsearchService {
 	 */
 	@Override
 	public void update(Hotsearch hotsearch) {
-		hotsearchDao.update(hotsearch);
+		hotsearchDao.updateHotsearch(hotsearch);
 	}
 
 	/* (non-Javadoc)

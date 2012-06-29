@@ -61,4 +61,16 @@ public class PubDaoImpl extends BaseDaoImpl implements PubDao {
 		return list;
 	}
 
+	@Override
+	public void deletePubById(Long id) {
+		deleteById(Pub.class, id);
+		
+	}
+
+	@Override
+	public void updatePub(Pub pub) {
+		update(pub);
+		
+	}
+
 }

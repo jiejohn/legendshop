@@ -12,7 +12,7 @@
 <lb:shopDetail var="shopDetail" />
 <c:choose>
 	<c:when test="${shopDetail != null}">
-		${shopDetail.sitename}
+		${shopDetail.siteName}
 	</c:when>
 	<c:otherwise>
 		LegendShop - Java企业级商城系统
@@ -21,8 +21,8 @@
 </title>
 <link rel="icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="description" content="${shopDetail.storeName},${shopDetail.briefDesc}" />
-<meta name="keywords" content="${shopDetail.storeName},${shopDetail.briefDesc}"/>
+<meta name="description" content="${shopDetail.userName},${shopDetail.briefDesc}" />
+<meta name="keywords" content="${shopDetail.userName},${shopDetail.briefDesc}"/>
 <meta name="keywords" content="LegendShop 网购平台, 网店系统, 商城系统, 商城系统, 电子商务系统, B2C系统, 购物系统, 网上商店系统, 网上交易系统, JAVA网店, JAVA商城, JSP网店, JSP商城, SSH项目, JAVA开源项目"/>
 
 <script>

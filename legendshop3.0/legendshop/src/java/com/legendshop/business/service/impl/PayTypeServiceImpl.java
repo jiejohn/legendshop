@@ -65,7 +65,7 @@ public class PayTypeServiceImpl implements PayTypeService  {
 	 */
     @Override
 	public void delete(Long id) {
-        payTypeDao.deleteById(PayType.class, id);
+        payTypeDao.deletePayTypeById(id);
     }
 
     /* (non-Javadoc)
@@ -81,7 +81,7 @@ public class PayTypeServiceImpl implements PayTypeService  {
 	 */
     @Override
 	public void update(PayType payType) {
-        payTypeDao.update(payType);
+        payTypeDao.updatePayType(payType);
     }
 
     /* (non-Javadoc)

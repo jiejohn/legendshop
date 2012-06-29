@@ -23,47 +23,47 @@ public interface ShopDetailDao extends BaseDao{
 	/**
 	 * Checks if is shop exists.
 	 * 
-	 * @param storeName
+	 * @param userName
 	 *            the store name
 	 * @return the boolean
 	 */
-	public abstract Boolean isShopExists(final String storeName);
+	public abstract Boolean isShopExists(final String userName);
 
 	/**
 	 * Gets the shop detail for update.
 	 * 
-	 * @param storeName
+	 * @param userName
 	 *            the store name
 	 * @return the shop detail for update
 	 */
-	public abstract ShopDetail getShopDetailForUpdate(final String storeName);
+	public abstract ShopDetail getShopDetailForUpdate(final String userName);
 
 	/**
 	 * Gets the shop detail view.
 	 * 
-	 * @param storeName
+	 * @param userName
 	 *            the store name
 	 * @return the shop detail view
 	 */
-	public abstract ShopDetailView getShopDetailView(final String storeName);
+	public abstract ShopDetailView getShopDetailView(final String userName);
 
 	/**
 	 * Gets the simple info shop detail.
 	 * 
-	 * @param storeName
+	 * @param userName
 	 *            the store name
 	 * @return the simple info shop detail
 	 */
-	public abstract ShopDetailView getSimpleInfoShopDetail(final String storeName);
+	public abstract ShopDetailView getSimpleInfoShopDetail(final String userName);
 
 	/**
 	 * Gets the shop detail.
 	 * 
-	 * @param storeName
+	 * @param userName
 	 *            the store name
 	 * @return the shop detail
 	 */
-	public abstract ShopDetail getShopDetail(final String storeName);
+	public abstract ShopDetail getShopDetail(final String userName);
 	
 	/**
 	 * Gets the shop detail.
@@ -77,11 +77,11 @@ public interface ShopDetailDao extends BaseDao{
 	/**
 	 * Checks if is league shop exists.
 	 * 
-	 * @param storeName
+	 * @param userName
 	 *            the store name
 	 * @return the boolean
 	 */
-	public abstract Boolean isLeagueShopExists(final String storeName);
+	public abstract Boolean isLeagueShopExists(final String userName);
 
 	/**
 	 * Canbe league shop.
@@ -89,12 +89,12 @@ public interface ShopDetailDao extends BaseDao{
 	 * @param isShopExists
 	 *            the is shop exists
 	 * @param userName
-	 *            the user name
-	 * @param storeName
 	 *            the store name
+	 * @param friendName
+	 *            the friend name
 	 * @return the boolean
 	 */
-	public abstract Boolean isBeLeagueShop(final boolean isShopExists, final String userName, final String storeName);
+	public abstract Boolean isBeLeagueShop(final boolean isShopExists, final String userName, final String friendName);
 
 	/**
 	 * Find myleague by user name and shop name.
@@ -159,6 +159,76 @@ public interface ShopDetailDao extends BaseDao{
 	public abstract void updateShopDetailWhenProductChange(Product product);
 	
 	
+	/**
+	 * Gets the shop detail by user id.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @return the shop detail by user id
+	 */
 	public abstract ShopDetail getShopDetailByUserId(String userId);
+
+	/**
+	 * Update shop detail.
+	 * 
+	 * @param userName
+	 *            the user name
+	 */
+	public abstract void updateShopDetail(String userName);
+
+	/**
+	 * Update shop.
+	 * 
+	 * @param loginUserName
+	 *            the login user name
+	 * @param userId
+	 *            the user id
+	 * @param shopDetail
+	 *            the shop detail
+	 * @param status
+	 *            the status
+	 * @return true, if successful
+	 */
+	public abstract boolean updateShop(String loginUserName, String userId, ShopDetail shopDetail, Integer status);
+
+	/**
+	 * Save shop detail.
+	 * 
+	 * @param shopDetail
+	 *            the shop detail
+	 */
+	public abstract void saveShopDetail(ShopDetail shopDetail);
+	
+	/**
+	 * Gets the shop detail by shop id.
+	 * 
+	 * @param shopId
+	 *            the shop id
+	 * @return the shop detail by shop id
+	 */
+	public abstract ShopDetail getShopDetailByShopId(final Long shopId);
+
+	/**
+	 * Delete shop detail by id.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	public abstract void deleteShopDetailById(Long id);
+
+	/**
+	 * Delete shop detail.
+	 * 
+	 * @param shopDetail
+	 *            the shop detail
+	 */
+	public abstract void deleteShopDetail(ShopDetail shopDetail);
+
+	/**
+	 * Gets the all shop count.
+	 * 
+	 * @return the all shop count
+	 */
+	public abstract Long getAllShopCount();
 
 }

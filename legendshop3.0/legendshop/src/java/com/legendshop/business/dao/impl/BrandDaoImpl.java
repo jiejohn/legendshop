@@ -15,6 +15,10 @@ import org.slf4j.LoggerFactory;
 import com.legendshop.business.dao.BrandDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.model.dynamic.Item;
+import com.legendshop.model.entity.Brand;
+import com.legendshop.model.entity.NsortBrand;
+import com.legendshop.model.entity.NsortBrandId;
+import com.legendshop.util.AppUtils;
 
 /**
  * 
@@ -93,6 +97,45 @@ public class BrandDaoImpl extends BaseDaoImpl implements BrandDao {
 		return findByHQLLimit(
 				"select new com.legendshop.model.dynamic.Item(b.prodId , b.name) from Product b where not exists ( select n.userName from RelProduct n where b.prodId = n.relProdId and  n.prodId = ?  ) and b.userName = ?",
 				0, 30, new Object[] { prodId, userName });
+	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.BrandDao#saveBrandItem(java.util.List, java.lang.Long, java.lang.String)
+	 */
+	@Override
+	public  String saveBrandItem(List<String> idList, Long nsortId, String userName) {
+		// delete all
+		List<NsortBrand> list = find("from NsortBrand n where n.id.nsortId = ? and userName = ?", nsortId,
+				userName);
+		deleteAll(list);
+		if (AppUtils.isNotBlank(idList)) {
+			for (String brandId : idList) {
+				NsortBrand nb = new NsortBrand();
+				NsortBrandId id = new NsortBrandId();
+				id.setBrandId(Long.valueOf(brandId));
+				id.setNsortId(nsortId);
+				nb.setId(id);
+				nb.setUserName(userName);
+				save(nb);
+			}
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.BrandDao#deleteBrandById(java.lang.Long)
+	 */
+	@Override
+	public void deleteBrandById(Long id) {
+		deleteById(Brand.class, id);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.BrandDao#updateBrand(com.legendshop.model.entity.Brand)
+	 */
+	@Override
+	public void updateBrand(Brand brand) {
+		update(brand);
 	}
 
 }

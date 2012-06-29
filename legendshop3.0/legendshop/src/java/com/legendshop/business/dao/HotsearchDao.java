@@ -1,3 +1,10 @@
+/*
+ * 
+ * LegendShop 多用户商城系统
+ * 
+ *  版权所有,并保留所有权利。
+ * 
+ */
 package com.legendshop.business.dao;
 
 import java.util.List;
@@ -5,6 +12,9 @@ import java.util.List;
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.model.entity.Hotsearch;
 
+/**
+ * The Interface HotsearchDao.
+ */
 public interface HotsearchDao extends BaseDao{
 
 	/**
@@ -26,5 +36,21 @@ public interface HotsearchDao extends BaseDao{
 	 * @return the search
 	 */
 	public abstract List<Hotsearch> getSearch(final String userName, final Long isortId);
+
+	/**
+	 * Delete hotsearch by id.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	public abstract void deleteHotsearchById(Long id);
+
+	/**
+	 * Update hotsearch.
+	 * 
+	 * @param hotsearch
+	 *            the hotsearch
+	 */
+	public abstract void updateHotsearch(Hotsearch hotsearch);
 
 }

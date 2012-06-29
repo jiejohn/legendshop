@@ -35,8 +35,8 @@ public class BrandServiceImpl implements BrandService  {
     /**
 	 * Sets the base dao.
 	 * 
-	 * @param baseDao
-	 *            the new base dao
+	 * @param brandDao
+	 *            the brandDao
 	 */
     @Required
     public void setBrandDao(BrandDao brandDao) {
@@ -64,7 +64,7 @@ public class BrandServiceImpl implements BrandService  {
 	 */
     @Override
 	public void delete(Long id) {
-        brandDao.deleteById(Brand.class, id);
+        brandDao.deleteBrandById(id);
     }
 
     /* (non-Javadoc)
@@ -84,7 +84,7 @@ public class BrandServiceImpl implements BrandService  {
 	 */
     @Override
 	public void update(Brand brand) {
-        brandDao.update(brand);
+        brandDao.updateBrand(brand);
     }
 
     /* (non-Javadoc)
@@ -94,5 +94,12 @@ public class BrandServiceImpl implements BrandService  {
 	public PageSupport getDataByCriteriaQuery(CriteriaQuery cq) {
         return brandDao.find(cq);
     }
+
+	@Override
+	public String saveBrandItem(List<String> idList, Long nsortId, String userName) {
+		
+		return brandDao.saveBrandItem(idList, nsortId, userName);
+
+	}
 }
 

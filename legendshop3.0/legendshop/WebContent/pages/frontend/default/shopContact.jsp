@@ -19,7 +19,7 @@
                                 <td width="110px" height="29"><div align="right">
                                <fmt:message key="mall.name"/>：</div></td>
                                 <td>
-									${user.shopDetail.sitename}
+									${user.shopDetail.siteName}
 								</td>
                               </tr>
                               <tr>
@@ -85,28 +85,28 @@
                                   </div></td>
                               </tr>
                               </c:if>
-                              <c:if test="${user.shopDetail.maddr != null && user.shopDetail.maddr != ''}">
+                              <c:if test="${user.shopDetail.shopAddr != null && user.shopDetail.shopAddr != ''}">
                               <tr> 
                                 <td height="29"><div align="right"><fmt:message key="Address"/>：</div></td>
                                 <td height="29"><div align="left"> 
-                                    ${user.shopDetail.maddr}
+                                    ${user.shopDetail.shopAddr}
                                   </div></td>
                               </tr>
                               </c:if>
-                              <c:if test="${user.shopDetail.msn != null && user.shopDetail.msn != ''}">
+                              <c:if test="${user.shopDetail.bankCard != null && user.shopDetail.bankCard != ''}">
                               <tr> 
                                 <td height="29"><div align="right">银行汇款帐号：</div></td>
                                 <td height="29"><div align="left"> 
-                                    ${user.shopDetail.msn}
+                                    ${user.shopDetail.bankCard}
                                   </div></td>
                               </tr>
                               </c:if>
                               
-                               <c:if test="${user.shopDetail.mname != null && user.shopDetail.mname != ''}">
+                               <c:if test="${user.shopDetail.payee != null && user.shopDetail.payee != ''}">
                               <tr> 
                                 <td height="29"><div align="right">收款人姓名：</div></td>
                                 <td height="29"><div align="left"> 
-                                    ${user.shopDetail.mname}
+                                    ${user.shopDetail.payee}
                                   </div></td>
                               </tr>
                               </c:if>                             
@@ -121,20 +121,20 @@
                               </tr>
                               </c:if>                   
         
-                             <c:if test="${user.shopDetail.ymaddr != null && user.shopDetail.ymaddr != ''}">
+                             <c:if test="${user.shopDetail.postAddr != null && user.shopDetail.postAddr != ''}">
                               <tr> 
                                 <td height="29"><div align="right">汇款地址：</div></td>
                                 <td height="29"><div align="left"> 
-                                    ${user.shopDetail.ymaddr}
+                                    ${user.shopDetail.postAddr}
                                   </div></td>
                               </tr>
                               </c:if>                       
 
-                             <c:if test="${user.shopDetail.ymname != null && user.shopDetail.ymname != ''}">
+                             <c:if test="${user.shopDetail.recipient != null && user.shopDetail.recipient != ''}">
                               <tr> 
                                 <td height="29"><div align="right">邮递接收人：</div></td>
                                 <td height="29"><div align="left"> 
-                                    ${user.shopDetail.ymname}
+                                    ${user.shopDetail.recipient}
                                   </div></td>
                               </tr>
                               </c:if>   
