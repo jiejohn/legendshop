@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="com.legendshop.model.entity.Myfavorite" table="ls_favorite">
         <id name="id" type="java.lang.String">
-            <column name="id" length="32" />
+            <column name="id" />
             <generator class="native" />
         </id>
         <property name="prodId" type="java.lang.Long">
@@ -14,17 +14,17 @@
             </column>
         </property>
         <property name="prodName" type="java.lang.String">
-            <column name="prod_name" length="100">
+            <column name="prod_name">
                 <comment>收藏的商品名称</comment>
             </column>
         </property>
         <property name="addtime" type="java.util.Date">
-            <column name="addtime" length="19">
+            <column name="addtime">
                 <comment>收藏时间</comment>
             </column>
         </property>
         <property name="memo" type="java.lang.String">
-            <column name="memo" length="100">
+            <column name="memo">
                 <comment>收藏原因</comment>
             </column>
         </property>

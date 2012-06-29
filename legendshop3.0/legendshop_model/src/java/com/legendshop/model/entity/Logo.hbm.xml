@@ -12,27 +12,27 @@
             <generator class="native" />
         </id>
         <property name="banner" type="java.lang.String">
-            <column name="banner" length="300">
+            <column name="banner">
                 <comment>标语位置</comment>
             </column>
         </property>
         <property name="url" type="java.lang.String">
-            <column name="url" length="50">
+            <column name="url">
                 <comment>连接地址</comment>
             </column>
         </property>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" length="32">
+            <column name="user_id">
                 <comment>发表人ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50">
+            <column name="user_name">
                 <comment>用户名称,备用</comment>
             </column>
         </property>
         <property name="memo" type="java.lang.String">
-            <column name="memo" length="50">
+            <column name="memo">
                 <comment>用户名称,备用</comment>
             </column>
         </property>

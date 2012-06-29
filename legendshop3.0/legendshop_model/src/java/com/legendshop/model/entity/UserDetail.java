@@ -112,6 +112,10 @@ public class UserDetail implements BaseEntity {
 	
 	/** The default addr id. 默认地址 */
 	private Long defaultAddrId;
+	
+	// 从用户信息表中来
+	/** The enabled. */
+	private String enabled;
 
 	// Constructors
 
@@ -792,16 +796,49 @@ public class UserDetail implements BaseEntity {
 		this.defaultAddrId = defaultAddrId;
 	}
 
+	/**
+	 * Gets the total consume.
+	 * 
+	 * @return the total consume
+	 */
 	public Double getTotalConsume() {
 		return totalConsume;
 	}
 
+	/**
+	 * Sets the total consume.
+	 * 
+	 * @param totalConsume
+	 *            the new total consume
+	 */
 	public void setTotalConsume(Double totalConsume) {
 		this.totalConsume = totalConsume;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.model.entity.BaseEntity#getId()
+	 */
 	public Serializable getId() {
 		return userId;
+	}
+
+	/**
+	 * Gets the enabled.
+	 * 
+	 * @return the enabled
+	 */
+	public String getEnabled() {
+		return enabled;
+	}
+
+	/**
+	 * Sets the enabled.
+	 * 
+	 * @param enabled
+	 *            the new enabled
+	 */
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
 	}
 
 }

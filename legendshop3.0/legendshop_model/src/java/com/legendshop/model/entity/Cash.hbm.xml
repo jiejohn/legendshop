@@ -11,22 +11,22 @@
             <generator class="native" />
         </id>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" not-null="true" length="32">
+            <column name="user_id">
                 <comment>用户ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50" not-null="true">
+            <column name="user_name">
                 <comment>用户名称</comment>
             </column>
         </property>
         <property name="code" type="java.lang.String">
-            <column name="code" length="50" not-null="true">
+            <column name="code">
                 <comment>识别码，系统唯一</comment>
             </column>
         </property>
         <property name="shopId" type="java.lang.String">
-            <column name="shop_id" length="32">
+            <column name="shop_id">
                 <comment>商家ID</comment>
             </column>
         </property>
@@ -36,7 +36,7 @@
             </column>
         </property>
         <property name="partnerId" type="java.lang.String">
-            <column name="partner_id" length="50">
+            <column name="partner_id">
                 <comment>商户ID</comment>
             </column>
         </property>
@@ -56,27 +56,27 @@
             </column>
         </property>
         <property name="status" type="java.lang.String">
-            <column name="status" length="1" not-null="true">
+            <column name="status">
                 <comment>状态，是否使用过</comment>
             </column>
         </property>
         <property name="beginTime" type="java.util.Date">
-            <column name="begin_time" length="0" not-null="true">
+            <column name="begin_time">
                 <comment>有效期开始时间</comment>
             </column>
         </property>
         <property name="endTime" type="java.util.Date">
-            <column name="end_time" length="0">
+            <column name="end_time">
                 <comment>有效期结束时间</comment>
             </column>
         </property>
         <property name="ip" type="java.lang.String">
-            <column name="ip" length="16">
+            <column name="ip">
                 <comment>使用时的IP</comment>
             </column>
         </property>
         <property name="createTime" type="java.util.Date">
-            <column name="create_time" length="0" not-null="true">
+            <column name="create_time">
                 <comment>建立时间</comment>
             </column>
         </property>

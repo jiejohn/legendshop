@@ -8,12 +8,12 @@
      <generator class="native" />
 	</id>
 	 <property name="country" type="java.lang.String">
-            <column name="country" length="100">
+            <column name="country">
                 <comment>获得IP所在国家，如果在中国，直接显示省市</comment>
             </column>
         </property>
         <property name="area" type="java.lang.String">
-            <column name="area" length="100">
+            <column name="area">
                 <comment>获得IP所在区域</comment>
             </column>
         </property>

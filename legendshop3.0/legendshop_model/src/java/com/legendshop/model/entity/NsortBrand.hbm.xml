@@ -13,7 +13,7 @@
             </key-property>
         </composite-id>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50" not-null="true">
+            <column name="user_name">
                 <comment>用户名</comment>
             </column>
         </property>

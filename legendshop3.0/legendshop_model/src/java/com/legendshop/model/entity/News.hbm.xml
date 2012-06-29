@@ -18,22 +18,22 @@
             <column name="sort" />
         </many-to-one>
         <property name="newsTitle" type="java.lang.String">
-            <column name="news_title" length="100">
+            <column name="news_title">
                 <comment>新闻标题</comment>
             </column>
         </property>
         <property name="newsBrief" type="java.lang.String">
-            <column name="news_brief" length="200">
+            <column name="news_brief">
                 <comment>新闻提要</comment>
             </column>
         </property>
         <property name="newsContent" type="java.lang.String">
-            <column name="news_content" length="65535">
+            <column name="news_content">
                 <comment>新闻内容</comment>
             </column>
         </property>
         <property name="newsDate" type="java.util.Date">
-            <column name="news_date" length="19">
+            <column name="news_date">
                 <comment>发表时间</comment>
             </column>
         </property>
@@ -53,12 +53,12 @@
             </column>
         </property>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" length="32">
+            <column name="user_id">
                 <comment>用户ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50">
+            <column name="user_name">
                 <comment>所属用户名称</comment>
             </column>
         </property>

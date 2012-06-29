@@ -14,17 +14,17 @@
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50" not-null="true">
+            <column name="user_name">
                 <comment>用户名称</comment>
             </column>
         </property>
         <property name="nickName" type="java.lang.String">
-            <column name="nick_name" length="50" not-null="true">
+            <column name="nick_name">
                 <comment>昵称</comment>
             </column>
         </property>
         <property name="userMail" type="java.lang.String">
-            <column name="user_mail" length="50">
+            <column name="user_mail">
                 <comment>用户邮件</comment>
             </column>
         </property>
@@ -34,77 +34,77 @@
             </column>
         </property>
         <property name="userTel" type="java.lang.String">
-            <column name="user_tel" length="50">
+            <column name="user_tel">
                 <comment>电话，座机</comment>
             </column>
         </property>
         <property name="userMobile" type="java.lang.String">
-            <column name="user_mobile" length="50">
+            <column name="user_mobile">
                 <comment>手机</comment>
             </column>
         </property>
         <property name="userPostcode" type="java.lang.String">
-            <column name="user_postcode" length="50">
+            <column name="user_postcode">
                 <comment>用户邮编</comment>
             </column>
         </property>
         <property name="msn" type="java.lang.String">
-            <column name="msn" length="50">
-                <comment>msn</comment>
+            <column name="msn">
+                <comment>msn帐号</comment>
             </column>
         </property>
         <property name="qq" type="java.lang.String">
-            <column name="qq" length="50">
+            <column name="qq">
                 <comment>qq号码</comment>
             </column>
         </property>
         <property name="fax" type="java.lang.String">
-            <column name="fax" length="50">
+            <column name="fax">
                 <comment>传真</comment>
             </column>
         </property>
         <property name="modifyTime" type="java.util.Date">
-            <column name="modify_time" length="19" not-null="true">
+            <column name="modify_time">
                 <comment>修改时间</comment>
             </column>
         </property>
         <property name="userRegtime" type="java.util.Date">
-            <column name="user_regtime" length="19">
+            <column name="user_regtime">
                 <comment>注册时间</comment>
             </column>
         </property>
         <property name="userRegip" type="java.lang.String">
-            <column name="user_regip" length="50">
+            <column name="user_regip">
                 <comment>注册IP</comment>
             </column>
         </property>
         <property name="userLasttime" type="java.util.Date">
-            <column name="user_lasttime" length="10">
+            <column name="user_lasttime">
                 <comment>最后登录时间</comment>
             </column>
         </property>
         <property name="userLastip" type="java.lang.String">
-            <column name="user_lastip" length="50">
+            <column name="user_lastip">
                 <comment>最后登录IP</comment>
             </column>
         </property>
         <property name="userMemo" type="java.lang.String">
-            <column name="user_memo" length="500">
+            <column name="user_memo">
                 <comment>备注</comment>
             </column>
         </property>
         <property name="sex" type="java.lang.String">
-            <column name="sex" length="1">
+            <column name="sex">
                 <comment>性别</comment>
             </column>
         </property>
         <property name="birthDate" type="java.lang.String">
-            <column name="birth_date" length="8">
+            <column name="birth_date">
                 <comment>生日</comment>
             </column>
         </property>
         <property name="registerCode" type="java.lang.String">
-            <column name="register_code" length="200">
+            <column name="register_code">
                 <comment>注册时生成的注册码</comment>
             </column>
         </property>

@@ -14,22 +14,22 @@
             </column>
         </property>
         <property name="score" type="java.lang.Long">
-            <column name="score" not-null="true">
+            <column name="score">
                 <comment>用户积分</comment>
             </column>
         </property>
         <property name="scoreType" type="java.lang.String">
-            <column name="score_type" length="1" not-null="true">
+            <column name="score_type">
                 <comment>积分类型</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50" not-null="true">
+            <column name="user_name">
                 <comment>所属用户</comment>
             </column>
         </property>
         <property name="recDate" type="java.util.Date">
-            <column name="rec_date" length="0">
+            <column name="rec_date">
                 <comment>时间</comment>
             </column>
         </property>

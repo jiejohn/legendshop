@@ -6,14 +6,14 @@
     <class name="com.legendshop.model.entity.ConstTable" table="ls_cst_table">
         <composite-id name="id" class="com.legendshop.model.entity.ConstTableId">
             <key-property name="key" type="java.lang.String">
-                <column name="key_value" length="50" />
+                <column name="key_value" />
             </key-property>
             <key-property name="type" type="java.lang.String">
-                <column name="type" length="50" />
+                <column name="type" />
             </key-property>
         </composite-id>
         <property name="value" type="java.lang.String">
-            <column name="value" length="100" />
+            <column name="value" />
         </property>
        <property name="seq" type="java.lang.Integer">
             <column name="seq"/>

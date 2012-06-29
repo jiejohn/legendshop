@@ -14,52 +14,52 @@
             </column>
         </property>
         <property name="prodName" type="java.lang.String">
-            <column name="prod_name" length="2000">
+            <column name="prod_name">
                 <comment>订购产品名称</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50">
+            <column name="user_name">
                 <comment>订购用户名称</comment>
             </column>
         </property>
         <property name="orderName" type="java.lang.String">
-            <column name="order_name" length="50">
+            <column name="order_name">
                 <comment>表单中填写的接收人</comment>
             </column>
         </property>
         <property name="subDate" type="java.util.Date">
-            <column name="sub_date" length="19">
+            <column name="sub_date">
                 <comment>订购时间</comment>
             </column>
         </property>
         <property name="payDate" type="java.util.Date">
-            <column name="pay_date" length="19">
+            <column name="pay_date">
                 <comment>支付时间</comment>
             </column>
         </property>
         <property name="updateDate" type="java.util.Date">
-            <column name="update_date" length="19">
+            <column name="update_date">
                 <comment>更新时间</comment>
             </column>
         </property>
         <property name="subNumber" type="java.lang.String">
-            <column name="sub_number" length="50" not-null="true">
+            <column name="sub_number">
                 <comment>订购流水号</comment>
             </column>
         </property>
         <property name="subType" type="java.lang.String">
-            <column name="sub_type" length="1">
+            <column name="sub_type">
                 <comment>订单类型</comment>
             </column>
         </property>
         <property name="subCheck" type="java.lang.String">
-            <column name="sub_check" length="1">
+            <column name="sub_check">
                 <comment>订购审批状态，Y：审批通过，N：还没有审批</comment>
             </column>
         </property>
         <property name="total" type="java.lang.Double">
-            <column name="total" precision="15" not-null="true">
+            <column name="total" precision="15">
                 <comment>总值</comment>
             </column>
         </property>
@@ -69,12 +69,12 @@
             </column>
         </property>       
         <property name="subMail" type="java.lang.String">
-            <column name="sub_mail" length="50">
+            <column name="sub_mail">
                 <comment>邮箱</comment>
             </column>
         </property>
         <property name="subTel" type="java.lang.String">
-            <column name="sub_tel" length="50">
+            <column name="sub_tel">
                 <comment>电话</comment>
             </column>
         </property>
@@ -87,7 +87,7 @@
             <column name="pay_type_id"/>
         </property>
         <property name="payTypeName" type="java.lang.String">
-            <column name="pay_type_name" length="30">
+            <column name="pay_type_name">
                 <comment>付款方式名称</comment>
             </column>
         </property>
@@ -97,17 +97,17 @@
             </column>
         </property>
         <property name="subPost" type="java.lang.String">
-            <column name="sub_post" length="15">
+            <column name="sub_post">
                 <comment>邮编</comment>
             </column>
         </property>
         <property name="other" type="java.lang.String">
-            <column name="other" length="1024">
+            <column name="other">
                 <comment>其他备注</comment>
             </column>
         </property>
         <property name="shopName" type="java.lang.String">
-            <column name="shop_name" length="50">
+            <column name="shop_name">
                 <comment>店铺名称</comment>
             </column>
         </property>

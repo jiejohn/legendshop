@@ -12,27 +12,27 @@
             <generator class="native" />
         </id>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" not-null="true" length="32">
+            <column name="user_id">
                 <comment>提问人ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50" not-null="true">
+            <column name="user_name">
                 <comment>提问人名称</comment>
             </column>
         </property>
         <property name="prodId" type="java.lang.Long">
-            <column name="prod_id" not-null="true">
+            <column name="prod_id">
                 <comment>产品Id</comment>
             </column>
         </property>
         <property name="shopId" type="java.lang.Long">
-            <column name="shop_id" not-null="true">
+            <column name="shop_id">
                 <comment>商城ID</comment>
             </column>
         </property>
         <property name="type" type="java.lang.String">
-            <column name="type" length="1" not-null="true">
+            <column name="type">
                 <comment>提问类型</comment>
             </column>
         </property>
@@ -47,12 +47,12 @@
             </column>
         </property>
         <property name="createTime" type="java.util.Date">
-            <column name="create_time" length="19" not-null="true">
+            <column name="create_time">
                 <comment>提问时间</comment>
             </column>
         </property>
         <property name="replyTime" type="java.util.Date">
-            <column name="reply_time" length="19">
+            <column name="reply_time">
                 <comment>回复时间</comment>
             </column>
         </property>

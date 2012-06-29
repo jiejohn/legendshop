@@ -97,7 +97,7 @@ public class VisitHistory {
 	 */
 	public void visit(ShopDetailView shopDetail) {
 		VisitItem item = new VisitItem();
-		item.setName(shopDetail.getStoreName());
+		item.setName(shopDetail.getUserName());
 		item.setTitle(shopDetail.getBriefDesc());
 		item.setId(shopDetail.getUserId());
 		item.setDate(new Date());

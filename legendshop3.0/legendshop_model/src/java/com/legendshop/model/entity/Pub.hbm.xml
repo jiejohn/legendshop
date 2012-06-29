@@ -12,27 +12,27 @@
             <generator class="native" />
         </id>
         <property name="title" type="java.lang.String">
-            <column name="title" length="50" not-null="true">
+            <column name="title">
                 <comment>标题</comment>
             </column>
         </property>
         <property name="msg" type="java.lang.String">
-            <column name="msg" not-null="true">
+            <column name="msg">
                 <comment>内容</comment>
             </column>
         </property>
         <property name="date" type="java.util.Date">
-            <column name="rec_date" length="19" not-null="true">
+            <column name="rec_date">
                 <comment>录入时间</comment>
             </column>
         </property>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" length="32" not-null="true">
+            <column name="user_id">
                 <comment>用户ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50">
+            <column name="user_name">
                 <comment>订购用户名称</comment>
             </column>
         </property>

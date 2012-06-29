@@ -8,26 +8,26 @@
 	 <cache usage="read-write"/>
 	  -->
         <id name="id" type="java.lang.String">
-            <column name="ID" length="24" />
+            <column name="id" />
             <generator class="uuid" />
         </id>
         <property name="name" type="java.lang.String">
-            <column name="NAME" length="100" not-null="true" unique="true">
+            <column name="name">
                 <comment>名称</comment>
             </column>
         </property>
         <property name="password" type="java.lang.String">
-            <column name="PASSWORD" length="100" not-null="true">
+            <column name="password">
                 <comment>密码</comment>
             </column>
         </property>
         <property name="enabled" type="java.lang.String">
-            <column name="ENABLED" length="1" not-null="true">
+            <column name="enabled">
                 <comment>状态</comment>
             </column>
         </property>
         <property name="note" type="java.lang.String">
-            <column name="NOTE">
+            <column name="note">
                 <comment>注释</comment>
             </column>
         </property>

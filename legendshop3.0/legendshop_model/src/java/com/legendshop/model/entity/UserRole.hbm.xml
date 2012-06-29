@@ -6,10 +6,10 @@
     <class name="com.legendshop.model.entity.UserRole" table="ls_usr_role">
         <composite-id name="id" class="com.legendshop.model.entity.UserRoleId">
             <key-property name="userId" type="java.lang.String">
-                <column name="user_id" length="32" />
+                <column name="user_id" />
             </key-property>
             <key-property name="roleId" type="java.lang.String">
-                <column name="role_id" length="32" />
+                <column name="role_id" />
             </key-property>
         </composite-id>
     </class>

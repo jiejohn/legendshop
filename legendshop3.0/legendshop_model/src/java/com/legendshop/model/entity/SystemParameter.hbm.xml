@@ -5,31 +5,31 @@
 <hibernate-mapping>
     <class name="com.legendshop.model.entity.SystemParameter" table="ls_sys_param">
         <id name="name" type="java.lang.String">
-            <column name="name" length="100" />
+            <column name="name" />
             <generator class="assigned" />
         </id>
         <property name="value" type="java.lang.String">
-            <column name="value" length="200">
+            <column name="value">
                 <comment>系统配置值</comment>
             </column>
         </property>
         <property name="memo" type="java.lang.String">
-            <column name="memo" length="100" not-null="true">
+            <column name="memo">
                 <comment>配置说明</comment>
             </column>
         </property>
         <property name="type" type="java.lang.String">
-            <column name="type" length="30" not-null="true">
+            <column name="type">
                 <comment>对应JAVA类型</comment>
             </column>
         </property>
         <property name="optional" type="java.lang.String">
-            <column name="optional" length="100">
+            <column name="optional">
                 <comment>如果不填写的默认值</comment>
             </column>
         </property>
         <property name="changeOnline" type="java.lang.String">
-            <column name="change_online" length="1">
+            <column name="change_online">
                 <comment>是否可以线上修改</comment>
             </column>
         </property>

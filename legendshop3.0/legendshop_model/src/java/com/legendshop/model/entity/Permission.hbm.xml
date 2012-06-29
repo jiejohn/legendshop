@@ -6,10 +6,10 @@
     <class name="com.legendshop.model.entity.Permission" table="ls_perm">
         <composite-id name="id" class="com.legendshop.model.entity.PerssionId">
             <key-property name="roleId" type="java.lang.String">
-                <column name="role_id" length="32" />
+                <column name="role_id" />
             </key-property>
             <key-property name="functionId" type="java.lang.String">
-                <column name="function_id" length="32" />
+                <column name="function_id" />
             </key-property>
         </composite-id>
     </class>

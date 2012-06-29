@@ -9,37 +9,37 @@
             <generator class="native" />
         </id>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" not-null="true" length="32" >
+            <column name="user_id" >
                 <comment>用户ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50" not-null="true">
+            <column name="user_name">
                 <comment>用户名称</comment>
             </column>
         </property>
         <property name="shopId" type="java.lang.Long">
-            <column name="shop_id" not-null="true">
+            <column name="shop_id">
                 <comment>商家ID</comment>
             </column>
         </property>
         <property name="partnerId" type="java.lang.Long">
-            <column name="partner_id" not-null="true">
+            <column name="partner_id">
                 <comment>商户ID</comment>
             </column>
         </property>
         <property name="prodId" type="java.lang.Long">
-            <column name="prod_id" not-null="true">
+            <column name="prod_id">
                 <comment>产品ID</comment>
             </column>
         </property>
         <property name="subId" type="java.lang.Long">
-            <column name="sub_id" not-null="true">
+            <column name="sub_id">
                 <comment>订单ID</comment>
             </column>
         </property>
         <property name="type" type="java.lang.String">
-            <column name="type" length="1">
+            <column name="type">
                 <comment>类型</comment>
             </column>
         </property>
@@ -49,52 +49,52 @@
             </column>
         </property>
         <property name="secret" type="java.lang.String">
-            <column name="secret" length="10">
+            <column name="secret">
                 <comment>优惠卷密码</comment>
             </column>
         </property>
         <property name="status" type="java.lang.String">
-            <column name="status" length="1">
+            <column name="status">
                 <comment>状态，是否使用过</comment>
             </column>
         </property>
         <property name="ip" type="java.lang.String">
-            <column name="ip" length="16">
+            <column name="ip">
                 <comment>使用优惠卷时的ip</comment>
             </column>
         </property>
         <property name="smsStatus" type="java.lang.String">
-            <column name="sms_status" length="1">
+            <column name="sms_status">
                 <comment>是否成功发送短信</comment>
             </column>
         </property>
         <property name="smsContent" type="java.lang.String">
-            <column name="sms_content" length="70">
+            <column name="sms_content">
                 <comment>发送的短信内容</comment>
             </column>
         </property>
         <property name="expireTime" type="java.util.Date">
-            <column name="expire_time" length="19" not-null="true">
+            <column name="expire_time">
                 <comment>优惠券过期时间</comment>
             </column>
         </property>
         <property name="consumeTime" type="java.util.Date">
-            <column name="consume_time" length="19">
+            <column name="consume_time">
                 <comment>优惠券使用时间</comment>
             </column>
         </property>
         <property name="createTime" type="java.util.Date">
-            <column name="create_time" length="19" not-null="true">
+            <column name="create_time">
                 <comment>建立时间</comment>
             </column>
         </property>
         <property name="smsTime" type="java.util.Date">
-            <column name="sms_time" length="19">
+            <column name="sms_time">
                 <comment>短信发送时间</comment>
             </column>
         </property>
         <property name="buyId" type="java.lang.Integer">
-            <column name="buy_id" not-null="true">
+            <column name="buy_id">
                 <comment>该项目下的购买次序</comment>
             </column>
         </property>

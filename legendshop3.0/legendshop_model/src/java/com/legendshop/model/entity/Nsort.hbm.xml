@@ -12,7 +12,7 @@
             <generator class="native" />
         </id>
         <property name="nsortName" type="java.lang.String">
-            <column name="nsort_name" length="50">
+            <column name="nsort_name">
                 <comment>商品子类名称</comment>
             </column>
         </property>

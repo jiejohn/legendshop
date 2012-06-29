@@ -8,21 +8,21 @@
 	 <cache usage="read-write"/>
 	  -->
         <id name="id" type="java.lang.Long">
-            <column name="ID" />
+            <column name="id" />
             <generator class="native" />
         </id>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" length="32">
+            <column name="user_id">
                 <comment>用户ID</comment>
             </column>
         </property>
         <property name="friendId" type="java.lang.String">
-            <column name="friend_id" length="24">
+            <column name="friend_id">
                 <comment>好友ID</comment>
             </column>
         </property>
         <property name="friendName" type="java.lang.String">
-            <column name="friend_name" length="100">
+            <column name="friend_name">
                 <comment>好友名称</comment>
             </column>
         </property>
@@ -37,7 +37,7 @@
             </column>
         </property>
         <property name="addtime" type="java.util.Date">
-            <column name="addtime" length="19">
+            <column name="addtime">
                 <comment>添加时间</comment>
             </column>
         </property>

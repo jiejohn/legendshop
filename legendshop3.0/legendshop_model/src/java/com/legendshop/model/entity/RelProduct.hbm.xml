@@ -19,17 +19,17 @@
             </column>
         </property>
         <property name="relProdName" type="java.lang.String">
-            <column name="rel_prod_name" length="100">
+            <column name="rel_prod_name">
                 <comment>相关产品名称</comment>
             </column>
         </property>
         <property name="addtime" type="java.util.Date">
-            <column name="addtime" length="19">
+            <column name="addtime">
                 <comment>添加时间</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50">
+            <column name="user_name">
                 <comment>商品对应的用户</comment>
             </column>
         </property>

@@ -11,17 +11,17 @@
             <generator class="native" />
         </id>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" not-null="true" length="32">
+            <column name="user_id">
                 <comment>用户ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" not-null="true" length="50">
+            <column name="user_name">
                 <comment>用户名称</comment>
             </column>
         </property>
         <property name="name" type="java.lang.String">
-            <column name="name" length="50">
+            <column name="name">
                 <comment>物流公司名称</comment>
             </column>
         </property>
@@ -31,12 +31,12 @@
             </column>
         </property>
         <property name="createTime" type="java.util.Date">
-            <column name="create_time" length="19" not-null="true">
+            <column name="create_time">
                 <comment>建立时间</comment>
             </column>
         </property>
         <property name="modifyTime" type="java.util.Date">
-            <column name="modify_time" length="19" not-null="true">
+            <column name="modify_time">
                 <comment>修改时间</comment>
             </column>
         </property>

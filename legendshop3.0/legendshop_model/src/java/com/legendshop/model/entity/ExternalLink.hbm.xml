@@ -12,17 +12,17 @@
             <generator class="native" />
         </id>
         <property name="url" type="java.lang.String">
-            <column name="url" length="300">
+            <column name="url">
                 <comment>url</comment>
             </column>
         </property>
         <property name="wordlink" type="java.lang.String">
-            <column name="wordlink" length="50">
+            <column name="wordlink">
                 <comment>关键字</comment>
             </column>
         </property>
         <property name="content" type="java.lang.String">
-            <column name="content" length="50">
+            <column name="content">
                 <comment>内容</comment>
             </column>
         </property>
@@ -32,17 +32,17 @@
             </column>
         </property>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" length="32">
+            <column name="user_id">
                 <comment>用户主键</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50">
+            <column name="user_name">
                 <comment>所属用户名</comment>
             </column>
         </property>
         <property name="picture" type="java.lang.String">
-            <column name="picture" length="250">
+            <column name="picture">
                 <comment>链接广告图片</comment>
             </column>
         </property>

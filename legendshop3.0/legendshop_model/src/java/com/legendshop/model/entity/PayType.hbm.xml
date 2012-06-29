@@ -9,33 +9,33 @@
             <generator class="native" />
         </id>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50" not-null="true" />
+            <column name="user_name" />
         </property>
         <property name="payTypeId" type="java.lang.Integer">
-            <column name="pay_type_id" not-null="true" />
+            <column name="pay_type_id" />
         </property>
         <property name="payTypeName" type="java.lang.String">
-            <column name="pay_type_name" length="50">
+            <column name="pay_type_name">
                 <comment>付款方式</comment>
             </column>
         </property>
         <property name="partner" type="java.lang.String">
-            <column name="partner" length="100">
+            <column name="partner">
                 <comment>partner</comment>
             </column>
         </property>
         <property name="validateKey" type="java.lang.String">
-            <column name="validate_key" length="512">
+            <column name="validate_key">
                 <comment>校验码，加密放于数据库</comment>
             </column>
         </property>
         <property name="sellerEmail" type="java.lang.String">
-            <column name="seller_email" length="100">
+            <column name="seller_email">
                 <comment>签约支付宝账号或卖家收款支付宝帐户</comment>
             </column>
         </property>
         <property name="memo" type="java.lang.String">
-            <column name="memo" length="100">
+            <column name="memo">
                 <comment>备注</comment>
             </column>
         </property>

@@ -9,60 +9,60 @@
             <generator class="native" />
         </id>
         <property name="partnerName" type="java.lang.String">
-            <column name="partner_name" length="50" not-null="true">
+            <column name="partner_name">
                 <comment>供应商登录名</comment>
             </column>
         </property>
         <property name="password" type="java.lang.String">
-            <column name="password" length="32" not-null="true">
+            <column name="password">
                 <comment>供应商密码</comment>
             </column>
         </property>
         <property name="title" type="java.lang.String">
-            <column name="title" length="128" not-null="true">
+            <column name="title">
                 <comment>商户名称</comment>
             </column>
         </property>
         <property name="homepage" type="java.lang.String">
-            <column name="homepage" length="128">
+            <column name="homepage">
                 <comment>商户网站主页</comment>
             </column>
         </property>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" length="32" not-null="true" />
+            <column name="user_id" />
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50" not-null="true">
+            <column name="user_name">
                 <comment>用户名称</comment>
             </column>
         </property>
         <property name="shopId" type="java.lang.Long">
-            <column name="shop_id" not-null="true">
+            <column name="shop_id">
                 <comment>所属商家</comment>
             </column>
         </property>
         <property name="bankName" type="java.lang.String">
-            <column name="bank_name" length="128">
+            <column name="bank_name">
                 <comment>商户银行帐户名称</comment>
             </column>
         </property>
         <property name="bankNo" type="java.lang.String">
-            <column name="bank_no" length="128">
+            <column name="bank_no">
                 <comment>商户银行帐户帐号</comment>
             </column>
         </property>
         <property name="bankUser" type="java.lang.String">
-            <column name="bank_user" length="128">
+            <column name="bank_user">
                 <comment>商户银行用户名</comment>
             </column>
         </property>
         <property name="location" type="java.lang.String">
-            <column name="location" not-null="true">
+            <column name="location">
                 <comment>商户所处位置</comment>
             </column>
         </property>
         <property name="contact" type="java.lang.String">
-            <column name="contact" length="32">
+            <column name="contact">
                 <comment>商户联系人</comment>
             </column>
         </property>
@@ -72,22 +72,22 @@
             </column>
         </property>
         <property name="image1" type="java.lang.String">
-            <column name="image1" length="128">
+            <column name="image1">
                 <comment>商户图片1</comment>
             </column>
         </property>
         <property name="image2" type="java.lang.String">
-            <column name="image2" length="128">
+            <column name="image2">
                 <comment>商户图片2</comment>
             </column>
         </property>
         <property name="phone" type="java.lang.String">
-            <column name="phone" length="18">
+            <column name="phone">
                 <comment>商户电话号码</comment>
             </column>
         </property>
         <property name="address" type="java.lang.String">
-            <column name="address" length="128">
+            <column name="address">
                 <comment>商户联系地址</comment>
             </column>
         </property>
@@ -97,47 +97,47 @@
             </column>
         </property>
         <property name="mobile" type="java.lang.String">
-            <column name="mobile" length="12">
+            <column name="mobile">
                 <comment>商户手机号码</comment>
             </column>
         </property>
         <property name="showInfo" type="java.lang.String">
-            <column name="show_info" length="1" not-null="true">
+            <column name="show_info">
                 <comment>商户是否展示相关信息</comment>
             </column>
         </property>
         <property name="status" type="java.lang.String">
-            <column name="status" length="1" not-null="true">
+            <column name="status">
                 <comment>商户状态</comment>
             </column>
         </property>
         <property name="display" type="java.lang.String">
-            <column name="display" length="1" not-null="true">
+            <column name="display">
                 <comment>是否显示首页</comment>
             </column>
         </property>
         <property name="commentGood" type="java.lang.Integer">
-            <column name="comment_good" not-null="true">
+            <column name="comment_good">
                 <comment>对商户评论满意数量</comment>
             </column>
         </property>
         <property name="commentNone" type="java.lang.Integer">
-            <column name="comment_none" not-null="true">
+            <column name="comment_none">
                 <comment>对商户评论一般数量</comment>
             </column>
         </property>
         <property name="commentBad" type="java.lang.Integer">
-            <column name="comment_bad" not-null="true">
+            <column name="comment_bad">
                 <comment>对商户评论失望数量</comment>
             </column>
         </property>
         <property name="modifyTime" type="java.util.Date">
-            <column name="modify_time" length="19" not-null="true">
+            <column name="modify_time">
                 <comment>修改时间</comment>
             </column>
         </property>
         <property name="createTime" type="java.util.Date">
-            <column name="create_time" length="19" not-null="true">
+            <column name="create_time">
                 <comment>建立时间</comment>
             </column>
         </property>

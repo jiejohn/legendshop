@@ -12,7 +12,7 @@
      <generator class="native" />
   </id>
   <property  name="title" type="java.lang.String">
-   <column length="50" name="title" not-null="true">
+   <column name="title">
     <comment>标题</comment>
    </column>
   </property>
@@ -22,7 +22,7 @@
    </column>
   </property>
   <property  name="msg" type="java.lang.String">
-   <column name="msg" not-null="true">
+   <column name="msg">
     <comment>内容</comment>
    </column>
   </property>
@@ -32,12 +32,12 @@
    </column>
   </property>
   <property  name="userId" type="java.lang.String">
-   <column length="32" name="user_id">
+   <column name="user_id">
     <comment>用户ID</comment>
    </column>
   </property>
   <property  name="userName" type="java.lang.String">
-   <column length="50" name="user_name">
+   <column name="user_name">
     <comment>用户名称,备用</comment>
    </column>
   </property>

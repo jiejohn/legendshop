@@ -9,22 +9,22 @@
             <generator class="native" />
         </id>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" length="32" not-null="true">
+            <column name="user_id">
                 <comment>用户ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50" not-null="true">
+            <column name="user_name">
                 <comment>用户名称</comment>
             </column>
         </property>
         <property name="adminId" type="java.lang.String">
-            <column name="admin_id" length="32" not-null="true">
+            <column name="admin_id">
                 <comment>操作管理员ID</comment>
             </column>
         </property>
         <property name="detailId" type="java.lang.String">
-            <column name="detail_id" length="32">
+            <column name="detail_id">
                 <comment>项目编号</comment>
             </column>
         </property>
@@ -34,22 +34,22 @@
             </column>
         </property>
         <property name="direction" type="java.lang.String">
-            <column name="direction" length="1" not-null="true">
+            <column name="direction">
                 <comment>金额流动情况(Credit or Debit)</comment>
             </column>
         </property>
         <property name="money" type="java.lang.Double">
-            <column name="money" precision="15" not-null="true">
+            <column name="money" precision="15">
                 <comment>金额数量</comment>
             </column>
         </property>
         <property name="action" type="java.lang.String">
-            <column name="action" length="16" not-null="true">
+            <column name="action">
                 <comment>金额用途</comment>
             </column>
         </property>
         <property name="createTime" type="java.util.Date">
-            <column name="create_time" not-null="true">
+            <column name="create_time">
                 <comment>金额变动时间</comment>
             </column>
         </property>

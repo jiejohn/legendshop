@@ -24,12 +24,12 @@
             </column>
         </property>
         <property name="modelId" type="java.lang.String">
-            <column name="model_id" length="50">
+            <column name="model_id">
                 <comment>型号</comment>
             </column>
         </property>
         <property name="name" type="java.lang.String">
-            <column name="name" length="120">
+            <column name="name">
                 <comment>商品名称</comment>
             </column>
         </property>
@@ -54,27 +54,27 @@
             </column>
         </property>
         <property name="brief" type="java.lang.String">
-            <column name="brief" length="65535">
+            <column name="brief">
                 <comment>简要描述</comment>
             </column>
         </property>
         <property name="content" type="java.lang.String">
-            <column name="content" length="65535">
+            <column name="content">
                 <comment>详细描述</comment>
             </column>
         </property>
         <property name="views" type="java.lang.Integer">
-            <column name="views" not-null="true">
+            <column name="views">
                 <comment>观看人数</comment>
             </column>
         </property>
         <property name="buys" type="java.lang.Integer">
-            <column name="buys" not-null="true">
+            <column name="buys">
                 <comment>以卖出数</comment>
             </column>
         </property>
         <property name="recDate" type="java.util.Date">
-            <column name="rec_date" length="0">
+            <column name="rec_date">
                 <comment>录入时间</comment>
             </column>
         </property>
@@ -84,7 +84,7 @@
             </column>
         </property>
         <property name="commend" type="java.lang.String">
-            <column name="commend" length="1" />
+            <column name="commend" />
         </property>
         <property name="status" type="java.lang.Integer">
             <column name="status">
@@ -92,25 +92,25 @@
             </column>
         </property>
         <property name="modifyDate" type="java.util.Date">
-            <column name="modify_date" length="0">
+            <column name="modify_date">
                 <comment>修改时间</comment>
             </column>
         </property>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" length="32" />
+            <column name="user_id" />
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50">
+            <column name="user_name">
                 <comment>所属用户名称</comment>
             </column>
         </property>
         <property name="startDate" type="java.util.Date">
-            <column name="start_date" length="0">
+            <column name="start_date">
                 <comment>开始有效时间</comment>
             </column>
         </property>
         <property name="endDate" type="java.util.Date">
-            <column name="end_date" length="0">
+            <column name="end_date">
                 <comment>结束有效时间</comment>
             </column>
         </property>
@@ -120,7 +120,7 @@
             </column>
         </property>
         <property name="prodType" type="java.lang.String">
-            <column name="prod_type" not-null="true">
+            <column name="prod_type">
                 <comment>商品类型，1.普通商品，2团购商品，3打折商品(填写了原价、现价就是打折商品)，4二手商品</comment>
             </column>
         </property>
@@ -130,12 +130,12 @@
             </column>
         </property>
         <property name="attribute" type="java.lang.String">
-            <column name="attribute" length="65535">
+            <column name="attribute">
                 <comment>产品动态属性</comment>
             </column>
         </property>
         <property name="parameter" type="java.lang.String">
-            <column name="parameter" length="65535">
+            <column name="parameter">
                 <comment>产品动态参数</comment>
             </column>
         </property>

@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="com.legendshop.model.entity.ProductComment" table="ls_prod_comm">
         <id name="id" type="java.lang.Long">
-            <column name="ID" />
+            <column name="id" />
             <generator class="native" />
         </id>
         <property name="prodId" type="java.lang.Long">
@@ -14,27 +14,27 @@
             </column>
         </property>
         <property name="ownerName" type="java.lang.String">
-            <column name="owner_Name" length="50" not-null="true">
+            <column name="owner_Name">
                 <comment>商品所有人ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50" not-null="true">
+            <column name="user_name">
                 <comment>点评人ID</comment>
             </column>
         </property>
         <property name="content" type="java.lang.String">
-            <column name="content" length="200" not-null="true">
+            <column name="content">
                 <comment>点评内容</comment>
             </column>
         </property>
         <property name="addtime" type="java.util.Date">
-            <column name="addtime" length="0" not-null="true">
+            <column name="addtime">
                 <comment>添加时间</comment>
             </column>
         </property>
         <property name="postip" type="java.lang.String">
-            <column name="postip" length="16">
+            <column name="postip">
                 <comment>IP来源</comment>
             </column>
         </property>
@@ -44,17 +44,17 @@
             </column>
         </property>
         <property name="replyContent" type="java.lang.String">
-            <column name="reply_content" length="200">
+            <column name="reply_content">
                 <comment>回复内容</comment>
             </column>
         </property>
         <property name="replyName" type="java.lang.String">
-            <column name="reply_name" length="50">
+            <column name="reply_name">
                 <comment>回复人</comment>
             </column>
         </property>
         <property name="replyTime" type="java.util.Date">
-            <column name="reply_time" length="0">
+            <column name="reply_time">
                 <comment>回复时间</comment>
             </column>
         </property>

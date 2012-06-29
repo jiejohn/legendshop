@@ -12,12 +12,12 @@
             <generator class="native" />
         </id>
         <property name="sortName" type="java.lang.String">
-            <column name="sort_name" length="50">
+            <column name="sort_name">
                 <comment>分类名称</comment>
             </column>
         </property>
         <property name="picture" type="java.lang.String">
-            <column name="picture" length="250">
+            <column name="picture">
                 <comment>分类的显示图片</comment>
             </column>
         </property>
@@ -27,17 +27,17 @@
             </column>
         </property>
          <property name="sortType" type="java.lang.String">
-            <column name="sort_type" length="1">
+            <column name="sort_type">
                 <comment>产品分类类型</comment>
             </column>
         </property>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" length="32">
+            <column name="user_id">
                 <comment>用户ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50">
+            <column name="user_name">
                 <comment>用户名称</comment>
             </column>
         </property>

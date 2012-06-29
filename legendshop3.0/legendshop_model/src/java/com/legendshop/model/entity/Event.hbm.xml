@@ -9,32 +9,32 @@
             <generator class="native" />
         </id>
         <property name="userId" type="java.lang.String">
-            <column name="user_id" not-null="true" length="32" >
+            <column name="user_id" >
                 <comment>操作员ID</comment>
             </column>
         </property>
         <property name="userName" type="java.lang.String">
-            <column name="user_name" length="50" not-null="true">
+            <column name="user_name">
                 <comment>操作员名称</comment>
             </column>
         </property>
         <property name="type" type="java.lang.String">
-            <column name="type" length="1">
+            <column name="type">
                 <comment>操作类型</comment>
             </column>
         </property>
         <property name="operation" type="java.lang.String">
-            <column name="operation" length="50">
+            <column name="operation">
                 <comment>操作描述</comment>
             </column>
         </property>
         <property name="relateData" type="java.lang.String">
-            <column name="relate_data" length="65535">
+            <column name="relate_data">
                 <comment>相关数据</comment>
             </column>
         </property>
         <property name="createTime" type="java.util.Date">
-            <column name="create_time" length="19" not-null="true">
+            <column name="create_time">
                 <comment>建立时间</comment>
             </column>
         </property>
