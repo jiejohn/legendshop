@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8"%>
-<%@ include file="/pages/common/common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/common.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
 <%@page import="java.io.File"%>

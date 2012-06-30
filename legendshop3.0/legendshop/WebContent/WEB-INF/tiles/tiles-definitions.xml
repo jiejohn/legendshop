@@ -3,79 +3,79 @@
 <tiles-definitions>
 	
 	<!-- page define -->	
-	<definition name="cash.*"   template="/pages/frontend/{1}/topFrame.jsp">
-		<put-attribute name="main" value="/pages/frontend/{1}/cash.jsp" />
+	<definition name="cash.*"   template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/cash.jsp" />
 	</definition>
 	
-	<definition name="savesub.*"   template="/pages/frontend/{1}/topFrame.jsp">
-		<put-attribute name="main" value="/pages/frontend/{1}/sub.jsp" /> 
+	<definition name="savesub.*"   template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/sub.jsp" /> 
 	</definition>
 	
-	 <definition name="afterOperation.*"  template="/pages/frontend/{1}/topFrame.jsp">
-		<put-attribute name="main"  value="/pages/frontend/{1}/afterOperation.jsp" />
+	 <definition name="afterOperation.*"  template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main"  value="/WEB-INF/pages/frontend/{1}/afterOperation.jsp" />
 	</definition>
 	
-	<definition name="order.*"  template="/pages/frontend/{1}/topFrame.jsp">
-		<put-attribute name="main"  value="/pages/frontend/{1}/order.jsp" />
+	<definition name="order.*"  template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main"  value="/WEB-INF/pages/frontend/{1}/order.jsp" />
 	</definition>
-	<definition name="buy.*" template="/pages/frontend/{1}/topFrame.jsp">
-		<put-attribute name="main" value="/pages/frontend/{1}/buy.jsp" />
+	<definition name="buy.*" template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/buy.jsp" />
 	</definition>	
 	
-	<definition name="openShop.*"  template="/pages/frontend/{1}/topFrame.jsp">
-		<put-attribute name="main"  value="/pages/frontend/{1}/openShop.jsp" />
+	<definition name="openShop.*"  template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main"  value="/WEB-INF/pages/frontend/{1}/openShop.jsp" />
 	</definition>
 	
-	<definition name="productSort.*" template="/pages/frontend/{1}/sort.jsp">
-		<put-attribute name="right" value="/pages/frontend/{1}/right.jsp" />
+	<definition name="productSort.*" template="/WEB-INF/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/right.jsp" />
 	</definition>
 	
-	<definition name="nsort.*" template="/pages/frontend/{1}/sort.jsp">
-		<put-attribute name="right" value="/pages/frontend/{1}/smallsort.jsp" />
+	<definition name="nsort.*" template="/WEB-INF/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/smallsort.jsp" />
 	</definition>
 	
-	<definition name="news.*" template="/pages/frontend/{1}/sort.jsp">
-		<put-attribute name="right" value="/pages/frontend/{1}/news.jsp" />
+	<definition name="news.*" template="/WEB-INF/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/news.jsp" />
 	</definition>
 	
-	<definition name="allNews.*" template="/pages/frontend/{1}/sort.jsp">
-		<put-attribute name="right" value="/pages/frontend/{1}/allnews.jsp" />
+	<definition name="allNews.*" template="/WEB-INF/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/allnews.jsp" />
 	</definition>
 
-	<definition name="userReg.*" template="/pages/frontend/{1}/topFrame.jsp">
-		<put-attribute name="main" value="/pages/frontend/{1}/reg.jsp" />
+	<definition name="userReg.*" template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/reg.jsp" />
 	</definition>	
 	
-	<definition name="reg.*" template="/pages/frontend/{1}/topFrame.jsp">
-		<put-attribute name="main" value="/pages/frontend/{1}/reg.jsp" />
+	<definition name="reg.*" template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/reg.jsp" />
 	</definition>
 	
-	 <definition name="league.*" template="/pages/frontend/{1}/sort.jsp">
-		<put-attribute name="right" value="/pages/frontend/{1}/league.jsp" />
+	 <definition name="league.*" template="/WEB-INF/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/league.jsp" />
 	</definition>
 	
-	<definition name="searchall.*" template="/pages/frontend/{1}/searchTopFrame.jsp">
-		<put-attribute name="main" value="/pages/frontend/{1}/searchall.jsp" />
+	<definition name="searchall.*" template="/WEB-INF/pages/frontend/{1}/searchTopFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/searchall.jsp" />
 	</definition>
 	
-	<definition name="login.*"  template="/pages/frontend/{1}/topFrame.jsp">
-		<put-attribute name="main" value="/pages/frontend/{1}/login.jsp" />
+	<definition name="login.*"  template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/login.jsp" />
 	</definition>	
 	
-	<definition name="myaccount.*" template="/pages/frontend/{1}/topFrame.jsp">
-		<put-attribute name="main" value="/pages/frontend/{1}/updateMyAccount.jsp" />
+	<definition name="myaccount.*" template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/updateMyAccount.jsp" />
 	</definition>
 	
-	<definition name="leaveword.*" template="/pages/frontend/{1}/sort.jsp">
-		<put-attribute name="right" value="/pages/frontend/{1}/leaveword.jsp" />
+	<definition name="leaveword.*" template="/WEB-INF/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/leaveword.jsp" />
 	</definition>
 	
-	<definition name="shopcontact.*"  template="/pages/frontend/{1}/sort.jsp">
-		<put-attribute name="right" value="/pages/frontend/{1}/shopContact.jsp" />
+	<definition name="shopcontact.*"  template="/WEB-INF/pages/frontend/{1}/sort.jsp">
+		<put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/shopContact.jsp" />
 	</definition>
 	
-	 <definition name="loginhint.*" template="/pages/frontend/{1}/sort.jsp">
-        <put-attribute name="right" value="/pages/frontend/{1}/loginHint.jsp" />
+	 <definition name="loginhint.*" template="/WEB-INF/pages/frontend/{1}/sort.jsp">
+        <put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/loginHint.jsp" />
     </definition>
 	
 </tiles-definitions>

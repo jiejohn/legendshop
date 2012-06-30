@@ -10,7 +10,7 @@
     <global-method-security pre-post-annotations="enabled">
     </global-method-security>
     
-    <http realm="LegendShop Realm" access-denied-page="/pages/common/401.jsp"  entry-point-ref="authenticationProcessingFilterEntryPoint">
+    <http realm="LegendShop Realm" access-denied-page="/WEB-INF/pages/common/401.jsp"  entry-point-ref="authenticationProcessingFilterEntryPoint">
 		<remember-me />
 		<intercept-url pattern="/admin/**" access="ROLE_SUPERVISOR,ROLE_ADMIN" />		
 		<intercept-url pattern="/member/**" access="ROLE_SUPERVISOR" />

@@ -4,7 +4,7 @@
 <%@page import="org.springframework.security.core.Authentication"%>
 <%@page import="org.springframework.security.core.context.SecurityContext"%>
 
-<%@include file='/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";

@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/common.jsp"%>
 <html>
   <head>
   <base target="_blank">
