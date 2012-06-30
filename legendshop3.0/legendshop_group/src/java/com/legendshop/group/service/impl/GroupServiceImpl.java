@@ -21,6 +21,7 @@ import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.group.page.GroupFrontPage;
+import com.legendshop.group.page.GroupTilesPage;
 import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.GroupProduct;
 import com.legendshop.model.entity.Partner;
@@ -43,8 +44,9 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 
 	private LocaleResolver localeResolver;
 	
+
 	@Override
-	public String index(HttpServletRequest request, HttpServletResponse response, String curPageNO, String order,
+	public String getIndex(HttpServletRequest request, HttpServletResponse response, String curPageNO, String order,
 			String seq, Product product) {
 
 		String shopName = getShopName(request, response);
@@ -53,6 +55,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 //			System.out.println(s.getSortName());
 //		}
 		
+		//TODO place into service
 		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class), curPageNO);
 		Map<String, String> map = new HashMap<String, String>();
 		if(product != null){
@@ -100,11 +103,14 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 		request.setAttribute("seq", seq);
 		request.setAttribute("groupSortList", groupSortList);
 
-		return PathResolver.getPath(request, GroupFrontPage.INDEX);
+		//return PathResolver.getPath(request, GroupFrontPage.INDEX);
+		//TODO
+		//gindex.red
+		return PathResolver.getPath(request, GroupTilesPage.GINDEX);
 	}
 	
 	@Override
-	public String view(HttpServletRequest request, HttpServletResponse response, Long id) {
+	public String getView(HttpServletRequest request, HttpServletResponse response, Long id) {
 		GroupProduct groupProduct=groupProductService.getGroupProduct(id);
 		if(groupProduct!=null){
 			Long partnerId=groupProduct.getPartnerId();

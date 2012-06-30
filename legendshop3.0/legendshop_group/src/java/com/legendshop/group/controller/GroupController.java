@@ -46,7 +46,7 @@ public class GroupController extends BaseController {
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request, HttpServletResponse response,String curPageNO,String order,String seq,Product product) {
 		log.debug("Index starting calling");
-		return groupService.index(request, response, curPageNO, order, seq, product);
+		return groupService.getIndex(request, response, curPageNO, order, seq, product);
 	}
 	
 	@RequestMapping(value = "/clientServicePanel")
@@ -61,7 +61,7 @@ public class GroupController extends BaseController {
 	@RequestMapping(value = "/view/{id}")
 	public String view(HttpServletRequest request, HttpServletResponse response,@PathVariable Long id) {
 		log.debug("view starting calling");
-		return groupService.view(request, response, id);
+		return groupService.getView(request, response, id);
 	}
 	
 //	@RequestMapping("/sort")

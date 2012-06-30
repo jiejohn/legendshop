@@ -21,7 +21,7 @@ public enum GroupTilesPage implements PageDefinition{
 	VARIABLE(""),
 	
 	/** The Index. */
-	INDEX("index.");
+	GINDEX("gindex.");
 	
 	
 	/** The value. */
