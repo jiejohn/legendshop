@@ -11,7 +11,7 @@
 	                                <table width="100%" cellpadding="1" cellspacing="0">
    									<tr> 
                                       <td width="15" height="22" align="center">
-                                      	<img src="${pageContext.request.contextPath}/img/dot.gif" style="margin-left: 3px">
+                                      	<img src="${pageContext.request.contextPath}/common/images/default/dot.gif" style="margin-left: 3px">
                                       </td>
                                        <td width="98%" align="left" title="${hoton.name}">
                                                         <div class="topnewsfixed" title="${hoton.name}">

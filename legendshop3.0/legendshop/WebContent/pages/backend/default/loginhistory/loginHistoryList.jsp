@@ -6,7 +6,7 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script> 
 <script src="<ls:templateResource item='/plugins/My97DatePicker/WdatePicker.js'/>" type="text/javascript"></script>
-<script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
+<script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
 <html>
 <%Integer offset = (Integer)request.getAttribute("offset");%>
 <head>

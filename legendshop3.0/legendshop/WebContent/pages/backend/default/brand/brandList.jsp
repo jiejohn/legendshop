@@ -10,7 +10,7 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
    <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
-     <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
+     <script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
     <title>商品品牌列表</title>
 </head>
 <body class="bodymargin">
@@ -43,9 +43,9 @@
       </auth:auth>
       <display:column title="备注" property="memo"></display:column>
       <display:column title="操作" media="html" style="width:40px">
-      <a href= "${pageContext.request.contextPath}/admin/brand/update/${item.brandId}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
+      <a href= "${pageContext.request.contextPath}/admin/brand/update/${item.brandId}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "></a>
       <auth:auth ifAnyGranted="F_OPERATOR">
-      	<a href='javascript:deleteById("${item.brandId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
+      	<a href='javascript:deleteById("${item.brandId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "></a>
       </auth:auth>
       </display:column>
     </display:table>
@@ -56,8 +56,8 @@
          <table style="width: 100%; border: 0px"><tr><td align="left">说明：<br>
    1. 商品品牌带有一个品牌图片<br>
    2. 品牌可以挂在商品三级类型上，在用户选择了三级类型之后出现对应的品牌<br>
-   3. <img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "> 修改按钮<br>
-   4. <img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "> 删除按钮，删除品牌，如果删除品牌则不影响其下的商品<br>
+   3. <img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "> 修改按钮<br>
+   4. <img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "> 删除按钮，删除品牌，如果删除品牌则不影响其下的商品<br>
    </td><tr></table> 
    
    <script language="JavaScript" type="text/javascript">

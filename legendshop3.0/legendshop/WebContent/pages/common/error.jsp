@@ -17,7 +17,7 @@
 				<tr>
 					<TD noWrap width="1%" rowSpan=3><a
 						href="${pageContext.request.contextPath}/index${applicationScope.WEB_SUFFIX}"><img
-							src="${pageContext.request.contextPath}/img/legendshop.gif"
+							src="${pageContext.request.contextPath}/common/images/legendshop.gif"
 							width="200px" title="LegendShop" /></a>
 					<TD>&nbsp;</TD>
 				</tr>

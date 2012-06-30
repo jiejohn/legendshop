@@ -6,7 +6,7 @@
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option" %>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
 		<script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
-		<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/default/indexJpgForm.css" />
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
 <style>

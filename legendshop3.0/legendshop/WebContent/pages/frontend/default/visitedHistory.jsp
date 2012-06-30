@@ -2,7 +2,7 @@
 <%@include file='/pages/common/taglib.jsp'%>
 <c:if test="${sessionScope.VisitHistory.visitedProd != null && fn:length(sessionScope.VisitHistory.visitedProd) > 0}">
 <!--[if lt IE 7]>
-    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/overlay-ie6.css" />
+    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/overlay-ie6.css" />
 <![endif]-->
 <table><tr><td>
 <div style="font-weight: bold; font-family:sans-serif; font-size:15px;margin-left: 10px;margin-top: 10px"><fmt:message key="visited.product"/></div>

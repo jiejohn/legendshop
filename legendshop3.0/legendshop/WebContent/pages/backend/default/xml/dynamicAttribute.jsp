@@ -63,8 +63,8 @@
 				<input type='button' value='修改' onclick="modifyTemp()">
 				<br><br>
 				模板名称 <input type="text" value="" id="tempName" name="tempName" size="14" maxlength="50"> 
-				<a href="javascript:addTemp('${DYNAMIC_TYPE}')" title="根据现有配置，创建商品属性模板"><img alt="创建商品属性模板" src="${pageContext.request.contextPath}/img/grid_add.png"></a>
-				<a href="javascript:deleteTemp('${DYNAMIC_TYPE}')" title="删除商品属性模板"><img alt="删除商品属性模板" src="<ls:templateResource item='/img/grid_delete.png'/>"></a>
+				<a href="javascript:addTemp('${DYNAMIC_TYPE}')" title="根据现有配置，创建商品属性模板"><img alt="创建商品属性模板" src="${pageContext.request.contextPath}/common/images/default/grid_add.png"></a>
+				<a href="javascript:deleteTemp('${DYNAMIC_TYPE}')" title="删除商品属性模板"><img alt="删除商品属性模板" src="<ls:templateResource item='/common/images/default/grid_delete.png'/>"></a>
 				<br><br><br><br>
 				<c:choose>
 					<c:when test="${DYNAMIC_TYPE == 1}">创建动态属性： <br>
@@ -83,8 +83,8 @@
 			</tr>
 		</table>
    <table style="width: 100%; border: 0px"><tr><td align="left">说明：<br>
-   1.<img alt="创建商品属性模板" src="${pageContext.request.contextPath}/img/grid_add.png">&nbsp;以“模板名称”为名称，以当前的属性配置作为内容，创建商品属性模板，在属性内容编辑器中则用于创建一个动态属性<br>
-   2.<img alt="删除商品属性模板" src="<ls:templateResource item='/img/grid_delete.png'/>">&nbsp;删除选择模板中选定的商品属性模板,在属性内容编辑器中则用于删除属性或者属性下的选项<br>
+   1.<img alt="创建商品属性模板" src="${pageContext.request.contextPath}/common/images/default/grid_add.png">&nbsp;以“模板名称”为名称，以当前的属性配置作为内容，创建商品属性模板，在属性内容编辑器中则用于创建一个动态属性<br>
+   2.<img alt="删除商品属性模板" src="<ls:templateResource item='/common/images/default/grid_delete.png'/>">&nbsp;删除选择模板中选定的商品属性模板,在属性内容编辑器中则用于删除属性或者属性下的选项<br>
    </td><tr></table> 
 		
 		
@@ -209,10 +209,10 @@
 		}
         
         //var del = "<input id='textButton' name ='textButton' type='button' value='删除参数框' onclick='del(this.parentNode)'/>";
-        var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/img/grid_delete.png'/>' title='删除'/></a>";
-        var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/img/up.gif' title='上移'/></a>";
+        var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/common/images/default/grid_delete.png'/>' title='删除'/></a>";
+        var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/common/images/default/up.gif' title='上移'/></a>";
         
-        var down = "&nbsp;<a href='#' onclick='moveDown(this.parentNode)'><img src='${pageContext.request.contextPath}/img/down.gif' title='下移'/></a>";
+        var down = "&nbsp;<a href='#' onclick='moveDown(this.parentNode)'><img src='${pageContext.request.contextPath}/common/images/default/down.gif' title='下移'/></a>";
         var e = element("div", {"class": "textOptionType","className": "textOptionType"}, [text,value,del, up, down]);
         table.appendChild(element("div",{"class": "modelType","className": "modelType","type": "Text"},[e]));
 	}
@@ -224,13 +224,13 @@
 	}else{
 		text = "下拉列表：<input id='textInput' name ='textInput' type='text'/>";
 	}
-        var add = "<a href='#' onclick='addSelectOption(this.parentNode.parentNode)'><img src='${pageContext.request.contextPath}/img/grid_add.png'/></a>";
+        var add = "<a href='#' onclick='addSelectOption(this.parentNode.parentNode)'><img src='${pageContext.request.contextPath}/common/images/default/grid_add.png'/></a>";
        // var del = "<input id='textButton' name ='textButton' type='button' value='删除选择框' onclick='del(this.parentNode)'/>";
-        var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/img/grid_delete.png'/>' title='删除'/></a>";
+        var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/common/images/default/grid_delete.png'/>' title='删除'/></a>";
         
-        var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/img/up.gif' title='上移'/></a>";
+        var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/common/images/default/up.gif' title='上移'/></a>";
         
-        var down = "&nbsp;<a href='#' onclick='moveDown(this.parentNode)'><img src='${pageContext.request.contextPath}/img/down.gif' title='下移'/></a>";
+        var down = "&nbsp;<a href='#' onclick='moveDown(this.parentNode)'><img src='${pageContext.request.contextPath}/common/images/default/down.gif' title='下移'/></a>";
         
         var e = element("div", {"class": "selectType","className": "selectType"}, [text,add,del, up, down]);
         
@@ -253,7 +253,7 @@
     		  text = "选项&nbsp;<input id='textInput' name ='textInput' type='text'/>";
     		}
 	        
-	        var del = "<input id='textButton' name ='textButton' type='image' src='<ls:templateResource item='/img/grid_delete.png'/>' title='删除' onclick='del(this)'/>";
+	        var del = "<input id='textButton' name ='textButton' type='image' src='<ls:templateResource item='/common/images/default/grid_delete.png'/>' title='删除' onclick='del(this)'/>";
 	        var e = element("div", {"class": "selectOption","className": "selectOption"}, [text,del]);
 	        obj.appendChild(e);
         }
@@ -266,7 +266,7 @@
     		  text = "选项&nbsp;<input id='textInput' name ='textInput' type='text'/>";
     		}
 	        
-	        var del = "<input id='textButton' name ='textButton' type='image' src='<ls:templateResource item='/img/grid_delete.png'/>' title='删除' onclick='del(this)'/>";
+	        var del = "<input id='textButton' name ='textButton' type='image' src='<ls:templateResource item='/common/images/default/grid_delete.png'/>' title='删除' onclick='del(this)'/>";
 	        var e = element("div", {"class": "selectOption","className": "selectOption"}, [text,del]);
 	        return e;
         }
@@ -278,10 +278,10 @@
 		}else{
 		  text = "多选框：<input id='textInput' name ='textInput' type='text'/>";
 		}
-         var add = "<a href='#' onclick='addSelectOption(this.parentNode.parentNode)'><img src='${pageContext.request.contextPath}/img/grid_add.png'/></a>";
-         var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/img/grid_delete.png'/>' title='删除'/></a>";
-         var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/img/up.gif' title='上移'/></a>";
-         var down = "&nbsp;<a href='#' onclick='moveDown(this.parentNode)'><img src='${pageContext.request.contextPath}/img/down.gif' title='下移'/></a>"; 
+         var add = "<a href='#' onclick='addSelectOption(this.parentNode.parentNode)'><img src='${pageContext.request.contextPath}/common/images/default/grid_add.png'/></a>";
+         var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/common/images/default/grid_delete.png'/>' title='删除'/></a>";
+         var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/common/images/default/up.gif' title='上移'/></a>";
+         var down = "&nbsp;<a href='#' onclick='moveDown(this.parentNode)'><img src='${pageContext.request.contextPath}/common/images/default/down.gif' title='下移'/></a>"; 
          var e = element("div", {"class": "CheckBoxType","className": "CheckBoxType"}, [text,add,del,up,down]);
          var e1 = element("div",{"class": "modelType","className": "modelType","type": "CheckBox"},[e]);
          
@@ -301,11 +301,11 @@
 		}else{
 		  text = "单选框：<input id='textInput' name ='textInput' type='text'/>";
 		}
-        var add = "<a href='#' onclick='addSelectOption(this.parentNode.parentNode)'><img src='${pageContext.request.contextPath}/img/grid_add.png'/></a>";
+        var add = "<a href='#' onclick='addSelectOption(this.parentNode.parentNode)'><img src='${pageContext.request.contextPath}/common/images/default/grid_add.png'/></a>";
         //var del = "<input id='textButton' name ='textButton' type='button' value='删除单选框' onclick='del(this.parentNode)'/>";
-         var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/img/grid_delete.png'/>' title='删除'/></a>";  
-         var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/img/up.gif' title='上移'/></a>";
-         var down = "&nbsp;<a href='#' onclick='moveDown(this.parentNode)'><img src='${pageContext.request.contextPath}/img/down.gif' title='下移'/></a>";
+         var del = "<a href='#' onclick='del(this.parentNode)'><img src='<ls:templateResource item='/common/images/default/grid_delete.png'/>' title='删除'/></a>";  
+         var up = "&nbsp;&nbsp;<a href='#' onclick='moveUp(this.parentNode)'><img src='${pageContext.request.contextPath}/common/images/default/up.gif' title='上移'/></a>";
+         var down = "&nbsp;<a href='#' onclick='moveDown(this.parentNode)'><img src='${pageContext.request.contextPath}/common/images/default/down.gif' title='下移'/></a>";
          
         var e = element("div", {"class": "radioType","className": "radioType"}, [text,add,del,up,down]);
         var e1 = element("div",{"class": "modelType","className": "modelType","type": "Radio"},[e]);

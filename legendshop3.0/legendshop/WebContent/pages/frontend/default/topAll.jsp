@@ -10,7 +10,7 @@
 	<lb:shopDetail var="shopDetail" />
 	    <link href="<ls:templateResource item='/common/style/style_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
 	    <link href="<ls:templateResource item='/common/style/global_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
-    <link href="<ls:templateResource item='/common/css/searchall.css'/>" rel="stylesheet" type="text/css" />
+    <link href="<ls:templateResource item='/common/css/default/searchall.css'/>" rel="stylesheet" type="text/css" />
     <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 <title>LegendShop
 <c:choose>
@@ -65,7 +65,7 @@
 <table width="954px" style="border-bottom-width: 1px;border-bottom-color: red;border: 1px">
     <tr>
     <td width="160px">
-    <a href="<ls:url address='/index'/>"><img src="<ls:templateResource item='/img/legendshop.gif'/>" width="160px" title="LegendShop"/></a>
+    <a href="<ls:url address='/index'/>"><img src="<ls:templateResource item='/common/images/legendshop.gif'/>" width="160px" title="LegendShop"/></a>
     </td>
      <td>
 	     <table width="100%">

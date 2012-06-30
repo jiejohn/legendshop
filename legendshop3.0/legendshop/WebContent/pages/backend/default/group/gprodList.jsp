@@ -9,7 +9,7 @@
 <html>
 <head>
      <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
-     <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
+     <script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
 
 	<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
@@ -113,8 +113,8 @@
 		  			<a href='javascript:productTurnOn("${item.prodId}","${item.name}")'><font color="red">上线</font></a>
 		  		</c:otherwise>
 		  	</c:choose>
-		  	 <a href="<ls:url address='/admin/group/product/load/${item.prodId}'/>" title="修改"><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
-		     <a href='javascript:confirmDelete("${item.prodId}","${item.name}")' title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
+		  	 <a href="<ls:url address='/admin/group/product/load/${item.prodId}'/>" title="修改"><img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "></a>
+		     <a href='javascript:confirmDelete("${item.prodId}","${item.name}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "></a>
 	      </display:column>
       </auth:auth>
     </display:table>
@@ -130,8 +130,8 @@
    3. 商品状态，在开始时间和结束时间之内有效，失效后包括下线状态将不会在前台显示，推荐状态为是则在首页精品推荐中出现<br>
    4. 价格、运费、库存量为正数，不填写则不在前台显示，如果填写了库存量为0则无法订购<br>
    5. 库存量在用户下单时会减少，实际库存量在订单成交时减少<br>
-   6. <img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "> 修改按钮<br>
-   7. <img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "> 删除按钮<br>
+   6. <img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "> 修改按钮<br>
+   7. <img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "> 删除按钮<br>
    </td><tr></table> 
    
    <script language="JavaScript" type="text/javascript">

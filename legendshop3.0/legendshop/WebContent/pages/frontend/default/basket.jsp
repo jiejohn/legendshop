@@ -2,13 +2,13 @@
 <%@include file='/pages/common/taglib.jsp'%>
 <%@include file='/pages/common/common.jsp'%>
 <!--[if lt IE 7]>
-    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/overlay-ie6.css" />
+    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/overlay-ie6.css" />
 <![endif]-->
 <script src="${pageContext.request.contextPath}/common/js/jquery.tools.min.js"></script>
-<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/overlay.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/jquery.superbox.css" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/overlay.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/default/jquery.superbox.css" type="text/css" media="all" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/jquery.superbox-min.js"></script>
-<script src="${pageContext.request.contextPath}/common/js/productDetail.js"></script>
+<script src="${pageContext.request.contextPath}/common/js/default/productDetail.js"></script>
 <script type="text/javascript">
 $(function() {
     $("#apple img[rel]").overlay({effect: 'apple'}); 

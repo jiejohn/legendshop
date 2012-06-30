@@ -2,7 +2,7 @@
 <%@include file='/pages/common/taglib.jsp'%>
                               <table width="180" cellspacing="0" cellpadding="0" style="margin-bottom: 5px;margin-right: 5px;">
                                 <tr> 
-                                  <td align="center"><img src="${pageContext.request.contextPath}/img/promo_list_top.gif" width="100%" height="1"></td>
+                                  <td align="center"><img src="${pageContext.request.contextPath}/common/images/default/promo_list_top.gif" width="100%" height="1"></td>
                                 </tr>
                                 <tr><td class="titlebg"><fmt:message key="friend.link"/></td></tr>
                                 <tr> 

@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/pages/common/common.jsp"%>
 <%@ include file="/pages/common/taglib.jsp"%>
-<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/productpics.css" />
+<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/productpics.css" />
 <script type="text/javascript">
 $(function() {
     $("#apple img[rel]").overlay({effect: 'apple'}); 
@@ -41,5 +41,5 @@ $(function() {
      </div>
      <div class="RightBotton" onmousedown="ISL_GoDown()" onmouseup="ISL_StopDown()" onmouseout="ISL_StopDown()"></div>
     </div>
-     <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/productpics.js"></script>
+     <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/default/productpics.js"></script>
  </c:if>

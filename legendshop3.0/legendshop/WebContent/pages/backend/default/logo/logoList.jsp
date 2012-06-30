@@ -10,7 +10,7 @@
 	<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
 	<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 	<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
-	<script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
+	<script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
 	<title>Logo 列表</title>
 </head>
 <body class="bodymargin">
@@ -46,9 +46,9 @@
            		 <display:column title="商城名称" property="userName" sortable="true"></display:column>
              </auth:auth>
             <display:column title="操作" media="html" class="actionwidth">
-                 <a href= "${pageContext.request.contextPath}/admin/logo/load/${item.id}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a> 
+                 <a href= "${pageContext.request.contextPath}/admin/logo/load/${item.id}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "></a> 
                  <auth:auth ifAnyGranted="F_OPERATOR">
-                    <a href='javascript:deleteById("${item.id}")' title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
+                    <a href='javascript:deleteById("${item.id}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "></a>
                  </auth:auth>
             </display:column>
         </display:table>

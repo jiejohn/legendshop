@@ -4,7 +4,7 @@
 <%@include file='/pages/common/taglib.jsp'%>
 <%@include file='/pages/common/common.jsp'%>
 <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/default/indexJpgForm.css" />
 <style type="text/css">
 	.input {FONT-SIZE: 12px; WIDTH: 150px;margin-left: 10px}
 </style>

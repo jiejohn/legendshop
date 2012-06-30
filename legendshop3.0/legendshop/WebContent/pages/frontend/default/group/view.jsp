@@ -2,18 +2,19 @@
 <%@include file='/pages/common/taglib.jsp'%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<%@include file='/pages/common/taglib.jsp'%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <lb:shopDetail var="shopDetail" >
 <title>${shopDetail.siteName}</title>
 </lb:shopDetail>
-<link type="text/css" href="${pageContext.request.contextPath}/css/legend.css" rel="stylesheet"/>
+<link type="text/css" href="<ls:templateResource item='/common/css/red/legend.css'/>" rel="stylesheet"/>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
-	    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/addtocart.css" />
+	    <link rel="stylesheet" type="text/css" media='screen' href="<ls:templateResource item='/common/css/default/addtocart.css'/>" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/jquery1.6.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/menu.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/red/menu.js"></script>
 <script type="text/javascript">
 function lxfEndtime(){
     $(".lxftime").each(function() {

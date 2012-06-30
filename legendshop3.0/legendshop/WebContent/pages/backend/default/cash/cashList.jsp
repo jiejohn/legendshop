@@ -11,7 +11,7 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
     <style type="text/css" media="all">
-       @import url("<ls:templateResource item='/css/screen.css'/>");
+       @import url("<ls:templateResource item='/common/css/default/screen.css'/>");
     </style>
     <title>Cash列表</title>
 </head>
@@ -56,10 +56,10 @@
 
 	    <display:column title="Action" media="html">
 		      <a href="<ls:url address='/admin/cash/load/${item.cashId}'/>" title="修改">
-		     		 <img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/>">
+		     		 <img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/>">
 		      </a>
 		      <a href='javascript:deleteById("${item.cashId}")' title="删除">
-		      		<img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/>">
+		      		<img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/>">
 		      </a>
 	      </display:column>
 	    </display:table>

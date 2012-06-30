@@ -7,9 +7,9 @@
         <title>创建Event</title>
          <script type='text/javascript' src="<ls:templateResource item='/common/js/jquery.js'/>"></script>
          <script type='text/javascript' src="<ls:templateResource item='/common/js/jquery.validate.js'/>" /></script>
-        <link rel="stylesheet" type="text/css" media="screen" href="<ls:templateResource item='/common/css/indexJpgForm.css'/>" />
+        <link rel="stylesheet" type="text/css" media="screen" href="<ls:templateResource item='/common/css/default/indexJpgForm.css'/>" />
         <style type="text/css" media="all">
-          @import url(<ls:templateResource item='/css/screen.css'/>);
+          @import url(<ls:templateResource item='/common/css/default/screen.css'/>);
         </style>
         <script language="javascript">
 		    $.validator.setDefaults({

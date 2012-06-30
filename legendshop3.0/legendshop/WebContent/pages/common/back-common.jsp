@@ -1,6 +1,6 @@
 <link href="${pageContext.request.contextPath}/common/css/css.css" rel="stylesheet" type="text/css" />
      <style type="text/css" media="all">
-       @import url("${pageContext.request.contextPath}/css/screen.css");
+       @import url("${pageContext.request.contextPath}/common/css/default/screen.css");
      </style>
 <jsp:scriptlet> String lClass = "its";
    if( request.getParameter( "class" ) != null ) {

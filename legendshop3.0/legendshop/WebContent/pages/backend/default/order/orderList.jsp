@@ -5,7 +5,7 @@
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
      <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
-     <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
+     <script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
      <script type="text/javascript" src="${pageContext.request.contextPath}/dwr/engine.js" ></script>
 	 <script type="text/javascript" src="${pageContext.request.contextPath}/dwr/util.js" ></script>
 	 <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>

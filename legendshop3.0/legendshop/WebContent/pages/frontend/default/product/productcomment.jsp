@@ -9,8 +9,7 @@
 
 <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/randomimage.js"></script>
 <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" media="screen"
-	href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/default/indexJpgForm.css" />
 <c:if test="${requestScope.productCommentList != null }">
 <table width="100%" class="tables" cellpadding="0" cellspacing="0">
 	<tr>

@@ -7,10 +7,10 @@
 <lb:shopDetail var="shopDetail" >
 <title>${shopDetail.siteName}</title>
 </lb:shopDetail>
-<%-- <link type="text/css" href="${pageContext.request.contextPath}/css/legend.css" rel="stylesheet"/>
+<%-- <link type="text/css" href="<ls:templateResource item='/common/css/red/legend.css'/>" rel="stylesheet"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/jquery1.6.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/menu.js"></script> --%>
-<link href="${pageContext.request.contextPath}/common/css/pager.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/red/menu.js"></script> --%>
+<link href="${pageContext.request.contextPath}/common/css/default/pager.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 
 function pager(curPageNO){

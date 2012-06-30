@@ -4,7 +4,7 @@
 <%@include file='/pages/common/taglib.jsp'%>
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
 <lb:shopDetail var="shopDetail" />
-<link href="${pageContext.request.contextPath}/common/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/common/css/default/header.css" rel="stylesheet" type="text/css" />
 <div id="pagetop">
 	<div id="headertop">
 		<table width="954px" cellspacing="0" cellpadding="0"

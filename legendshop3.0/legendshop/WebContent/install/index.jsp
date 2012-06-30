@@ -35,7 +35,7 @@ request.setAttribute("ServerName",request.getServerName());
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <table width="98%"  align="center" cellpadding="3" cellspacing="0">
   <tr>
-    <td width="87%" height="59" class="line"><img src="../img/legendshop.gif"></td>
+    <td width="87%" height="59" class="line"><img src="../common/images/legendshop.gif"></td>
     <td width="13%" align="right" valign="middle" class="line"><CENTER>
       <span class="STYLE4">LegendShop ${LEGENDSHOP_VERSION}</span>
     </CENTER></td>

@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/pages/common/common.jsp"%>
 <%@ include file="/pages/common/taglib.jsp"%>
-<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/css/prodAttribute.css" />
+<link rel="stylesheet" type="text/css" media='screen' href="<ls:templateResource item='/common/css/default/prodAttribute.css'/> " />
 <table width="100%" id="prodAttributes">
 <c:forEach items="${requestScope.list}" var="model" varStatus="pos">
   <tr>

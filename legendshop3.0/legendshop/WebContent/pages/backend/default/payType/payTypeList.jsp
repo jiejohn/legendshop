@@ -10,7 +10,7 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
    <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
-    <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
+    <script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
     <title>PayType 列表</title>
 </head>
 <body>
@@ -44,9 +44,9 @@
       <display:column title="签约账号" property="sellerEmail"></display:column>
       <display:column title="备注" property="memo"></display:column>
       <display:column title="操作" media="html" style="width:40px">
-      <a href= "${pageContext.request.contextPath}/admin/paytype/load/${item.payId}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
+      <a href= "${pageContext.request.contextPath}/admin/paytype/load/${item.payId}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "></a>
        <auth:auth ifAnyGranted="F_OPERATOR">
-      	<a href='javascript:deleteById("${item.payId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
+      	<a href='javascript:deleteById("${item.payId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "></a>
       </auth:auth>
       </display:column>
     </display:table>
@@ -56,8 +56,8 @@
         </div>
        <table style="width: 100%; border: 0px"><tr><td align="left">说明：<br>
    1. 创建支付方式，每个支付方式只需建立一个，建立之后用户在订购商品时可以选择该支付方式<br>
-   2. <img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "> 修改按钮<br>
-   3. <img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "> 删除按钮<br>
+   2. <img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "> 修改按钮<br>
+   3. <img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "> 删除按钮<br>
    </td><tr></table> 
    <script language="JavaScript" type="text/javascript">
 <!--

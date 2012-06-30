@@ -10,7 +10,7 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
    <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
-    <script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
+    <script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
     <script src="<ls:templateResource item='/plugins/My97DatePicker/WdatePicker.js'/>" type="text/javascript"></script>
     <title>用户访问历史列表</title>
 </head>
@@ -75,7 +75,7 @@
       <%-- 
       <auth:auth ifAllGranted="F_VIEW_ALL_DATA,F_OPERATOR">
 	      <display:column title="操作" media="html" style="width:40px">
-	      <a href='javascript:deleteById("${item.visitId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
+	      <a href='javascript:deleteById("${item.visitId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "></a>
 	      </display:column>
       </auth:auth>
       --%>

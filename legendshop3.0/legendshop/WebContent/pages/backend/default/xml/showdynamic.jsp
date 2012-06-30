@@ -4,5 +4,5 @@
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
         <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
        <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
-        <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/showdynamic.css" />
+        <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/showdynamic.css" />
 	${dynamicProperties}

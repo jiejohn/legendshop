@@ -13,7 +13,7 @@
 						<c:choose>
                           <c:when test="${fn:length(prod.name) > 14}">
                              <td valign="middle"  width="12px">
-                             <img src="${pageContext.request.contextPath}/common/images/number/num_${status.index+1}.gif" height="13px">
+                             <img src="${pageContext.request.contextPath}/common/images/default/number/num_${status.index+1}.gif" height="13px">
                             </td>
                             <td title="${prod.name}"  align="left">
                             <div class="topnewsfixed">
@@ -25,7 +25,7 @@
                           </c:when>
                           <c:otherwise>
                           <td valign="middle" width="12px">
-                             <img src="${pageContext.request.contextPath}/common/images/number/num_${status.index+1}.gif">
+                             <img src="${pageContext.request.contextPath}/common/images/default/number/num_${status.index+1}.gif">
                             </td>
                             <td align="left">
                               <div class="topnewsfixed" >

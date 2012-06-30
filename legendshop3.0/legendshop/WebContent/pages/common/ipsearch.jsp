@@ -64,7 +64,7 @@ function isIP() {
 <table width="954px" style="border-bottom-width: 1px;border-bottom-color: red;border: 1px">
     <tr>
     <td width="160px">
-    <a href="${pageContext.request.contextPath}/index${applicationScope.WEB_SUFFIX}"><img src="${pageContext.request.contextPath}/img/legendshop.gif" width="160px" title="LegendShop"/></a>
+    <a href="${pageContext.request.contextPath}/index${applicationScope.WEB_SUFFIX}"><img src="${pageContext.request.contextPath}/common/images/legendshop.gif" width="160px" title="LegendShop"/></a>
     </td>
      <td>
 	     <table width="100%">

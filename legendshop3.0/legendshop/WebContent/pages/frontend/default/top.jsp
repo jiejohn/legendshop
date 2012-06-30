@@ -10,19 +10,16 @@
   <c:choose>
    <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME == null}">
       <script src="<ls:templateResource item='/common/js/jquery.tools.min.js'/>" type="text/javascript"></script>
-      <link rel="stylesheet" type="text/css" media='screen' href="<ls:templateResource item='/common/css/overlay-minimal.css'/>" />
+      <link rel="stylesheet" type="text/css" media='screen' href="<ls:templateResource item='/common/css/default/overlay-minimal.css'/>" />
    </c:when>
    <c:otherwise>
-     <link rel="stylesheet" href="<ls:templateResource item='/common/css/jquery.superbox.css'/>" type="text/css" media="all" />
+     <link rel="stylesheet" href="<ls:templateResource item='/common/css/default/jquery.superbox.css'/>" type="text/css" media="all" />
 	 <script type="text/javascript" src="<ls:templateResource item='/common/js/jquery.superbox-min.js'/>"></script>
    </c:otherwise>
 </c:choose>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
-<style type="text/css">
-        body {behavior:url("<ls:templateResource item='/common/css/csshover.htc'/>"); }
-</style>
 <script>
  	 function form1_onsubmit() {
       var words = document.getElementById("headerkeywordp");
@@ -70,7 +67,7 @@
 			     <img style="Clear: Both; Border: 0px" src="${pageContext.request.contextPath}/photoserver/photo/${logo.banner}" height="65px" title="${logo.memo}" />
 			 </c:when>
 			 <c:otherwise>
-			     <img src="<ls:templateResource item='/img/legendshop.gif'/>" height="65px" title="LegendShop"/>
+			     <img src="<ls:templateResource item='/common/images/legendshop.gif'/>" height="65px" title="LegendShop"/>
 			 </c:otherwise>
 			</c:choose>
 		  </a>

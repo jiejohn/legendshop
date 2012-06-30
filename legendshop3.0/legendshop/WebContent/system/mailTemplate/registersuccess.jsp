@@ -32,7 +32,7 @@ body div{font-size:12px;}
 <div style="width:700px;margin:0 auto;border-bottom:1px solid #ccc;margin-bottom:30px;">
   <table  cellpadding="0" cellspacing="0" width="700" height="39" style="font:12px Tahoma, Arial, 宋体;">
     <tr>
-      <td width="210"><a target="_blank" href="${DOMAIN_NAME}"><img src="${DOMAIN_NAME}/img/legendshop.gif" width="110" height="39"  alt="LegendShop" border="0"></a></td>
+      <td width="210"><a target="_blank" href="${DOMAIN_NAME}"><img src="${DOMAIN_NAME}/common/images/legendshop.gif" width="110" height="39"  alt="LegendShop" border="0"></a></td>
       <td width="490" align="right" valign="bottom" style="padding-bottom:10px;"><a target="_blank" style="color:#07f;text-decoration:none;font-size:12px;" href="${DOMAIN_NAME}/login${applicationScope.WEB_SUFFIX}">登录</a> | <a target="_blank" style="color:#07f;text-decoration:none;padding-right:5px;font-size:12px;" href="${DOMAIN_NAME}/club">论坛</a></td>
     </tr>
   </table>

@@ -4,7 +4,7 @@
 <%@include file='/pages/common/common.jsp'%>
 <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
 <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/randomimage.js"></script>
-<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/indexJpgForm.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/default/indexJpgForm.css" />
       <c:forEach items="${requestScope.USER_REG_ADV_740}" var="adv">
 		<table width="100%"  cellspacing="0" cellpadding="0" style="margin-bottom: 4px; margin-right: 5px;"  class="picstyle">
 			<tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="100%"/></a></td></tr>

@@ -7,7 +7,7 @@
 <html>
 <head>
 <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
-<script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
+<script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
 <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
 <title>用户消息列表</title>
 </head>
@@ -62,9 +62,9 @@
      </auth:auth>
       <auth:auth ifAnyGranted="F_OPERATOR">
 	      <display:column title="操作" media="html">
-			<a href="javascript:openWindows('${item.id}')" title="回复"><img alt="回复" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
+			<a href="javascript:openWindows('${item.id}')" title="回复"><img alt="回复" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "></a>
 		     <auth:auth ifAnyGranted="F_OPERATOR">
-		        <a href='${pageContext.request.contextPath}/admin/deleteUserComment${applicationScope.WEB_SUFFIX}?id=${item.id}' onclick="return confirmDelete();" title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
+		        <a href='${pageContext.request.contextPath}/admin/deleteUserComment${applicationScope.WEB_SUFFIX}?id=${item.id}' onclick="return confirmDelete();" title="删除"><img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "></a>
 		     </auth:auth>
 	      </display:column>
       </auth:auth>

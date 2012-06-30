@@ -11,7 +11,7 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
     <style type="text/css" media="all">
-       @import url("<ls:templateResource item='/css/screen.css'/>");
+       @import url("<ls:templateResource item='/common/css/default/screen.css'/>");
     </style>
     <title>物流公司列表</title>
 </head>
@@ -49,10 +49,10 @@
       <display:column title="修改时间" property="modifyTime"></display:column> --%>
       <display:column title="操作" media="html">
       <a href="<ls:url address='/admin/deliveryCorp/load/${item.dvyId}'/>" title="修改">
-     		 <img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/>">
+     		 <img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/>">
       </a>
       <a href='javascript:deleteById("${item.dvyId}")' title="删除">
-      		<img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/>">
+      		<img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/>">
       </a>
       </display:column>
     </display:table>

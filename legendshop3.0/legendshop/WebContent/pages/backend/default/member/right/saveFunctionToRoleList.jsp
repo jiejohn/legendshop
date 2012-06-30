@@ -4,7 +4,7 @@
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
 <html:html>
 <head>
-<LINK title=Style href="${pageContext.request.contextPath}/common/css/back_style.css" type=text/css rel=stylesheet>
+<LINK title=Style href="${pageContext.request.contextPath}/common/css/default/back_style.css" type=text/css rel=stylesheet>
 <script language="JavaScript" type="text/javascript">
 <!--
   function confirmDelete()

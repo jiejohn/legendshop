@@ -7,7 +7,7 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <html>
 <head>
-<script src="<ls:templateResource item='/css/alternative.js'/>" type="text/javascript"></script>
+<script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
@@ -65,8 +65,8 @@
       	<a href="${pageContext.request.contextPath}/member/role/functions/${item.id}${applicationScope.WEB_SUFFIX}">权限</a>
       </display:column>
       <display:column title="操作" media="html" style="width:75px">
-      	<a href="${pageContext.request.contextPath}/member/role/update/${item.id}${applicationScope.WEB_SUFFIX}" ><img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/> "></a>
-      	<a href="${pageContext.request.contextPath}/member/role/delete/${item.id}${applicationScope.WEB_SUFFIX}" title="删除"><img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/> "></a>
+      	<a href="${pageContext.request.contextPath}/member/role/update/${item.id}${applicationScope.WEB_SUFFIX}" ><img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "></a>
+      	<a href="${pageContext.request.contextPath}/member/role/delete/${item.id}${applicationScope.WEB_SUFFIX}" title="删除"><img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "></a>
       </display:column>
     </display:table>
         <c:if test="${not empty toolBar}">

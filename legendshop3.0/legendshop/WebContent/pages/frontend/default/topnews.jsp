@@ -3,7 +3,7 @@
 <table width="205px" cellspacing="0" cellpadding="0" style="margin-right: 5px;margin-bottom: 4px;margin-left: 0px;margin-top: 4px" class="tables" >
 	<tr>
 		<td class="titlebg"><fmt:message key="newsCenter"/>
-			 <a href="${pageContext.request.contextPath}/allNews${applicationScope.WEB_SUFFIX}"><img src="${pageContext.request.contextPath}/img/more.gif" width="45px" /></a>
+			 <a href="${pageContext.request.contextPath}/allNews${applicationScope.WEB_SUFFIX}"><img src="${pageContext.request.contextPath}/common/images/default/more.gif" width="45px" /></a>
 		</td>
 	</tr>
 	<tr height="136px">
@@ -13,7 +13,7 @@
 						<c:choose>
                           <c:when test="${fn:length(article.newsTitle) > 20}">
 	                        <div title="${article.newsTitle}">
-	                            <img src="${pageContext.request.contextPath}/img/dot.gif" width="15" height="15" style="margin-left: 3px">
+	                            <img src="${pageContext.request.contextPath}/common/images/default/dot.gif" width="15" height="15" style="margin-left: 3px">
 	                            <a href="${pageContext.request.contextPath}/news/${article.newsId}${applicationScope.WEB_SUFFIX}"><c:choose>
                                 	<c:when test="${article.highLine == 1}"><span style="color:#FF6600">${article.newsTitle}</span></c:when>
                                 	<c:otherwise>${article.newsTitle}</c:otherwise>
@@ -22,7 +22,7 @@
                           </c:when>
 						  <c:otherwise>
 						    <div>
-                                <img src="${pageContext.request.contextPath}/img/dot.gif" width="15" height="15" style="margin-left: 3px">
+                                <img src="${pageContext.request.contextPath}/common/images/default/dot.gif" width="15" height="15" style="margin-left: 3px">
                                 <a href="${pageContext.request.contextPath}/news/${article.newsId}${applicationScope.WEB_SUFFIX}"><c:choose>
                                 	<c:when test="${article.highLine == 1}"><span style="color:#FF6600">${article.newsTitle}</span></c:when>
                                 	<c:otherwise>${article.newsTitle}</c:otherwise>

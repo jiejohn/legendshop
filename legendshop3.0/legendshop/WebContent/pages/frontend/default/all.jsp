@@ -7,7 +7,7 @@
 <%@ taglib uri="http://www.legendesign.net/biz" prefix="lb"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <link href="${pageContext.request.contextPath}/common/css/searchall.css" rel="stylesheet" type="text/css" />
+ <link href="${pageContext.request.contextPath}/common/css/default/searchall.css" rel="stylesheet" type="text/css" />
 <title>
 <lb:shopDetail var="shopDetail" />
 <c:choose>
@@ -71,7 +71,7 @@
     </td></tr>
 	<tr><td>
 	<div align="center" style="margin: 40px">
-	<a href="${pageContext.request.contextPath}/index${applicationScope.WEB_SUFFIX}"><img src="${pageContext.request.contextPath}/img/legendshop.gif" width="240px"/></a>
+	<a href="${pageContext.request.contextPath}/index${applicationScope.WEB_SUFFIX}"><img src="${pageContext.request.contextPath}/common/images/legendshop.gif" width="240px"/></a>
 	</div>
 	</td></tr>
 
