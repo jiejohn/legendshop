@@ -3,8 +3,8 @@
 <%@page import="com.legendshop.central.install.SetupImpl"%>
 <%@page import="com.legendshop.central.install.Setup"%>
 <%@page import="com.legendshop.central.install.DBException"%>
-<%@ include file="/pages/common/common.jsp"%>
-<%@include file='/pages/common/taglib.jsp'%>
+<%@ include file="/WEB-INF/pages/common/common.jsp"%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <%
 	String jdbc_username = request.getParameter("jdbc_username");
 	String jdbc_password = request.getParameter("jdbc_password");
