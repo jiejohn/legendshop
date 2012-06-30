@@ -241,7 +241,7 @@ UL LI UL LI {
 }
 
 #headernav UL LI {
-	BACKGROUND: url(../../img/product/tagleft.gif) no-repeat left bottom; 
+	BACKGROUND: url(../images/default/tagleft.gif) no-repeat left bottom; 
 	FLOAT: left; 
 	MARGIN-RIGHT: 1px; 
 	LIST-STYLE-TYPE: none; 
@@ -251,7 +251,7 @@ UL LI UL LI {
 #headernav UL LI A {
 	PADDING-RIGHT: 10px; 
 	PADDING-LEFT: 10px; 
-	BACKGROUND: url(../../img/product/tagright.gif) no-repeat right bottom; 
+	BACKGROUND: url(../images/default/tagright.gif) no-repeat right bottom; 
 	FLOAT: left; PADDING-BOTTOM: 0px; 
 	COLOR: #666666; LINE-HEIGHT: 23px; 
 	PADDING-TOP: 0px; HEIGHT: 100%; 

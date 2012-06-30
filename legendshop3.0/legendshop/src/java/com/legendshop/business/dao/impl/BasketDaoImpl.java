@@ -223,6 +223,7 @@ public class BasketDaoImpl extends BaseDaoImpl implements BasketDao {
 			b.setAttribute(attribute);
 			b.setCarriage(carriage);
 			b.setBasketDate(new Date());
+			b.setLastUpdateDate(b.getBasketDate());
 			b.setBasketCheck(Constants.FALSE_INDICATOR);
 			b.setShopName(shopName);
 			saveBasket(b);
