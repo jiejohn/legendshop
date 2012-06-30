@@ -104,7 +104,7 @@ public class PageGengrator {
 	private Configuration getConfiguration(ServletContext context) {
 		if (freemarkerCfg == null) {
 			freemarkerCfg = new Configuration();
-			freemarkerCfg.setServletContextForTemplateLoading(context, "/system/template");
+			freemarkerCfg.setServletContextForTemplateLoading(context, "/WEB-INF/template/ftl/default");
 			freemarkerCfg.setEncoding(Locale.getDefault(), "UTF-8");
 			freemarkerCfg.setTemplateUpdateDelay(3600);
 		}

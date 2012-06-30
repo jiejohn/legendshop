@@ -986,7 +986,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (PropertiesUtil.sendMail()) {
 			try {
 				String filePath = request.getSession().getServletContext().getRealPath("/")
-						+ "/system/mailTemplate/registersuccess.jsp";
+						+ "/WEB-INF/template/mail/registersuccess.jsp";
 				// String text = FileProcessor.readFile(new File(filePath));
 				Map<String, String> values = new HashMap<String, String>();
 				values.put("#nickName#", userDetail.getNickName());

@@ -897,7 +897,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 		try {
 			WebContext webContext = WebContextFactory.get();
 			String templateFilePath = webContext.getSession().getServletContext().getRealPath("/")
-					+ "/system/mailTemplate/resetpassmail.jsp";
+					+ "/WEB-INF/template/mail/resetpassmail.jsp";
 			if (userDetailDao.updatePassword(userName, mail, templateFilePath)) {
 				return null;
 			} else {
