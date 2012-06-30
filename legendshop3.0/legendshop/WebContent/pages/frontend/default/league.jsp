@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@include file='/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/overlay.css" />
 <c:forEach items="${requestScope.USER_REG_ADV_740}" var="adv">
 <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 5px" class="picstyle">

@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.fckeditor.net" prefix="FCK" %>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option" %>
-<%@ include file="/pages/common/back-common.jsp"%>
-<%@include file='/pages/common/taglib.jsp'%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <html>
 <head>
         <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
@@ -95,7 +95,7 @@ jQuery("#form1").validate({
 	            </select>
 	           
 	           
-	            还没有商品类型？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/sort/load${applicationScope.WEB_SUFFIX}">商品类型</a>&nbsp;<a href="${pageContext.request.contextPath}/pages/newsCategory/newsCategory.jsp">创建栏目</a>
+	            还没有商品类型？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/sort/load${applicationScope.WEB_SUFFIX}">商品类型</a>&nbsp;<a href="${pageContext.request.contextPath}/WEB-INF/pages/newsCategory/newsCategory.jsp">创建栏目</a>
 	            </td> 
 		</tr>
 		  <tr><td></td>

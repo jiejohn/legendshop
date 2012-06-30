@@ -1,6 +1,6 @@
 <%@ page language="java" isErrorPage="true"  contentType="text/html;charset=UTF-8"%>
-<%@ include file="/pages/common/back-common.jsp"%>
-<%@include file='/pages/common/taglib.jsp'%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <html >
 <head>
      <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>

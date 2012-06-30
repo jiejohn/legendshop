@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file='/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <jsp:include flush="true" page="/top${applicationScope.WEB_SUFFIX}" />
 <meta name="keywords" content="${prod.keyWord}"/>
 <meta name="description" content="${prod.keyWord}"/>

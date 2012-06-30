@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/back-common.jsp"%>
-<%@ include file="/pages/common/taglib.jsp"%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
@@ -35,7 +35,7 @@
 			<input type="submit" value="搜索"/>
 <c:if test="${requestScope.list != null && fn:length(requestScope.list) > 0}">
 <div align="center">
-        <%@ include file="/pages/common/messages.jsp"%>
+        <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="/admin/userComment/query${applicationScope.WEB_SUFFIX}" id="item"
          export="true"  class="${tableclass}" style="width:100%" sort="external">
       <display:column title="顺序"><%=offset++%></display:column>

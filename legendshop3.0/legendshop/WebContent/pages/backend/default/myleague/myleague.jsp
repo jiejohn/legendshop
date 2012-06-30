@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option" %>
-<%@ include file="/pages/common/back-common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <html>
     <head>
         <title>${sessionScope.shopName} 加盟商城</title>

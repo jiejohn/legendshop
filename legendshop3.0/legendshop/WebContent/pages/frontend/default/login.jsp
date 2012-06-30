@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@include file='/pages/common/taglib.jsp'%>
-<%@include file='/pages/common/common.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/common.jsp'%>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">   

@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
 <%@page import="com.legendshop.core.constant.ParameterEnum"%>
-<%@include file='/pages/common/taglib.jsp'%>
-<%@include file='/pages/common/common.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/common.jsp'%>
 <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/default/indexJpgForm.css" />
 <style type="text/css">

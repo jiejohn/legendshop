@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@include file='/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <table width="205px" cellspacing="0" cellpadding="0" style="margin-right: 5px;margin-bottom: 4px;margin-left: 0px;margin-top: 4px" class="tables" >
 	<tr>
 		<td class="titlebg"><fmt:message key="newsCenter"/>

@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
 <%@page import="com.legendshop.core.constant.ParameterEnum"%>
-<%@ include file="/pages/common/back-common.jsp"%>
-<%@ include file="/pages/common/taglib.jsp"%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option" %>
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
@@ -82,7 +82,7 @@
 	
 	
 	<div align="center">
-        <%@ include file="/pages/common/messages.jsp"%>
+        <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="/admin/product/query${applicationScope.WEB_SUFFIX}" id="item"
          export="true"  class="${tableclass}" style="width:100%" sort="external">
       <display:column style="width:70px" title="<input type='checkbox'  id='checkbox' name='checkbox' onClick='javascript:selAll()' />顺序"><input type="checkbox" name="strArray" value="${item.prodId}" arg="${item.name}"/><%=offset++%></display:column>

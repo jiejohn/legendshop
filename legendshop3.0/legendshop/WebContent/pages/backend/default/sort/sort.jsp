@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/back-common.jsp"%>
-<%@ include file="/pages/common/taglib.jsp"%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <html>

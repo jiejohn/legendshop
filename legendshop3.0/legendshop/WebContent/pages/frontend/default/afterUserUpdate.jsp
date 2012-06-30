@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file='/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <table class="tables" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="titlebg"><fmt:message key="operation"/></td>

@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="com.legendshop.business.common.CommonServiceUtil"%>
 <%@page import="com.legendshop.spi.constants.Constants"%>
-<%@include file='/pages/common/taglib.jsp'%>
-<%@include file='/pages/common/common.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/common.jsp'%>
 <%
 	request.getSession().setAttribute(Constants.TOKEN, CommonServiceUtil.generateRandom());
 %>

@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/common.jsp"%>
-<%@ include file="/pages/common/taglib.jsp"%>
+<%@ include file="/WEB-INF/pages/common/common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
   <script language="javascript">
 	function appendProduct(id){

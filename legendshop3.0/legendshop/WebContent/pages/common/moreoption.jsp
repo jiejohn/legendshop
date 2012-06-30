@@ -1,6 +1,6 @@
 <%@ page language="java" isErrorPage="true" contentType="text/html;charset=UTF-8"%>
-<%@ include file="/pages/common/common.jsp"%>
-<%@include file='/pages/common/taglib.jsp'%>
+<%@ include file="/WEB-INF/pages/common/common.jsp"%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <%@include file='localeBundle.jsp'%>
 <table cellSpacing="0" cellPadding="0" width="955px" align="center">
 	<tr>

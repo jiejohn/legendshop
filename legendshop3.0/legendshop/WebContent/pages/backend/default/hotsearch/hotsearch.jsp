@@ -2,7 +2,7 @@
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
-<%@ include file="/pages/common/back-common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <html>
     <head>
         <title>创建热门商品</title>

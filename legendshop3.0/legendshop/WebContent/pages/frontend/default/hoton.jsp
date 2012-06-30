@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@include file='/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <c:if test="${requestScope.hotonList != null}">
 <table width="205px" style="margin-bottom: 4px;margin-right: 5px;" class="tables" cellpadding="0" cellspacing="0">
                       <tr>

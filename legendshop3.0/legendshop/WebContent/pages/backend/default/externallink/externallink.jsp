@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
-<%@ include file="/pages/common/back-common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <html>
     <head>
         <title>创建友情连接</title>

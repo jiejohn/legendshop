@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@include file='/pages/common/taglib.jsp'%>
-<%@include file='/pages/common/common.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/common.jsp'%>
 <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/overlay.css" />
       	<script type="text/javascript">
 		function turnToPage(id) {

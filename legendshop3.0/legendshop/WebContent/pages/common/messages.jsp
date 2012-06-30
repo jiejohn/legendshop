@@ -1,5 +1,5 @@
-<%@ include file="/pages/common/taglib.jsp"%>
-<%@ include file="/pages/common/common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
+<%@ include file="/WEB-INF/pages/common/common.jsp"%>
 <%-- Error Messages --%>
 <c:if test="${not empty springMessages}">
 	<div class="message">

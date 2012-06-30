@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/back-common.jsp"%>
-<%@ include file="/pages/common/taglib.jsp"%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
@@ -23,7 +23,7 @@
 	    </table>
 
 	 <div align="center">
-        <%@ include file="/pages/common/messages.jsp"%>
+        <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
         
     <display:table name="list" id="item" export="true" class="${tableclass}" style="width:100%">
       <display:column style="width:70px" title="顺序"><%=offset++%></display:column>

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@include file='/pages/common/taglib.jsp'%>
-<%@include file='/pages/common/common.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/common.jsp'%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 	<script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>

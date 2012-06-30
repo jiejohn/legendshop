@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/common.jsp"%>
-<%@ include file="/pages/common/taglib.jsp"%>
+<%@ include file="/WEB-INF/pages/common/common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <html:html>
 <head>
 <LINK title=Style href="${pageContext.request.contextPath}/common/css/default/back_style.css" type=text/css rel=stylesheet>

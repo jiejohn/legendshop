@@ -2,8 +2,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-  <%@include file='/pages/common/common.jsp'%>
-  <%@include file='/pages/common/taglib.jsp'%>
+  <%@include file='/WEB-INF/pages/common/common.jsp'%>
+  <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/plugins/theme/gallery/jquery.ad-gallery.css">
   <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/theme/gallery/jquery.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/theme/gallery/jquery.ad-gallery.js"></script>

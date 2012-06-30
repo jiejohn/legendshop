@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file='/pages/common/taglib.jsp'%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/default/indexJpgForm.css" />
 <table class="tables" cellpadding="0" cellspacing="0">
                                      <tr> 
@@ -25,7 +25,7 @@
 										    </c:if>
 										</div>
 										<div style="margin-top: 10px">
-											<jsp:include page="/pages/common/moreoption.jsp"></jsp:include>
+											<jsp:include page="/WEB-INF/pages/common/moreoption.jsp"></jsp:include>
 										</div>
                                       </td>
                                     </tr>

@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@include file='/pages/common/taglib.jsp'%>
-<%@ include file="/pages/common/back-common.jsp"%>
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <html>
     <head>
         <title>回复商品评论</title>

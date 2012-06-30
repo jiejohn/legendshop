@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/taglib.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <html>
 <head>
 <title>${sessionScope.SPRING_SECURITY_LAST_USERNAME} - 后台管理</title>

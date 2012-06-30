@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/common.jsp"%>
-<%@ include file="/pages/common/taglib.jsp"%>
-<%@ include file="/pages/common/back-common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
@@ -42,7 +42,7 @@
 	
 	
 	<div align="center">
-        <%@ include file="/pages/common/messages.jsp"%>
+        <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="${pageContext.request.contextPath}/member/right/query${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
       <display:column title="顺序"><%=offset++%></display:column>
       <display:column title="名称 " property="name" sortable="true"></display:column>

@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
-<%@ include file="/pages/common/taglib.jsp"%>
-<%@ include file="/pages/common/back-common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <html>
 	<head>
 		<title>重新建立索引</title>
@@ -145,7 +145,7 @@ function writeTimeGroup(fieldNamePrefix)
 	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 系统管理  &raquo; <a href="${pageContext.request.contextPath}/system/lucene/query${applicationScope.WEB_SUFFIX}">重建索引</a></td></tr>
 	    </thead>
 	    </table>
-	     <%@ include file="/pages/common/messages.jsp"%>
+	     <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
 			<table  align="center" class="${tableclass}" id="col1">
 				<thead>
 					<tr class="sortable">
