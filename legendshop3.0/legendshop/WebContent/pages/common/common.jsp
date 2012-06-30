@@ -1,2 +1,0 @@
-<link href="${pageContext.request.contextPath}/common/css/css.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/common/css/default/pager.css" rel="stylesheet" type="text/css" />
