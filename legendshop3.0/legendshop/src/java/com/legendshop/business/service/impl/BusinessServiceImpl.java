@@ -177,6 +177,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/** The hotsearch dao. */
 	private HotsearchDao hotsearchDao;
 	
+	/** The myleague dao. */
 	private MyleagueDao myleagueDao;
 	
 
@@ -1322,6 +1323,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setShopDetailDao(com.legendshop.business.dao.ShopDetailDao)
 	 */
+	/**
+	 * Sets the shop detail dao.
+	 * 
+	 * @param shopDetailDao
+	 *            the new shop detail dao
+	 */
 	@Required
 	public void setShopDetailDao(ShopDetailDao shopDetailDao) {
 		this.shopDetailDao = shopDetailDao;
@@ -1329,6 +1336,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setSortDao(com.legendshop.business.dao.SortDao)
+	 */
+	/**
+	 * Sets the sort dao.
+	 * 
+	 * @param sortDao
+	 *            the new sort dao
 	 */
 	@Required
 	public void setSortDao(SortDao sortDao) {
@@ -1338,6 +1351,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setPubDao(com.legendshop.business.dao.PubDao)
 	 */
+	/**
+	 * Sets the pub dao.
+	 * 
+	 * @param pubDao
+	 *            the new pub dao
+	 */
 	@Required
 	public void setPubDao(PubDao pubDao) {
 		this.pubDao = pubDao;
@@ -1345,6 +1364,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setLogoDao(com.legendshop.business.dao.LogoDao)
+	 */
+	/**
+	 * Sets the logo dao.
+	 * 
+	 * @param logoDao
+	 *            the new logo dao
 	 */
 	@Required
 	public void setLogoDao(LogoDao logoDao) {
@@ -1354,6 +1379,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setAdvertisementDao(com.legendshop.business.dao.AdvertisementDao)
 	 */
+	/**
+	 * Sets the advertisement dao.
+	 * 
+	 * @param advertisementDao
+	 *            the new advertisement dao
+	 */
 	@Required
 	public void setAdvertisementDao(AdvertisementDao advertisementDao) {
 		this.advertisementDao = advertisementDao;
@@ -1361,6 +1392,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setNewsDao(com.legendshop.business.dao.NewsDao)
+	 */
+	/**
+	 * Sets the news dao.
+	 * 
+	 * @param newsDao
+	 *            the new news dao
 	 */
 	@Required
 	public void setNewsDao(NewsDao newsDao) {
@@ -1370,6 +1407,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setNsortDao(com.legendshop.business.dao.NsortDao)
 	 */
+	/**
+	 * Sets the nsort dao.
+	 * 
+	 * @param nsortDao
+	 *            the new nsort dao
+	 */
 	@Required
 	public void setNsortDao(NsortDao nsortDao) {
 		this.nsortDao = nsortDao;
@@ -1378,6 +1421,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setExternalLinkDao(com.legendshop.business.dao.ExternalLinkDao)
 	 */
+	/**
+	 * Sets the external link dao.
+	 * 
+	 * @param externalLinkDao
+	 *            the new external link dao
+	 */
 	@Required
 	public void setExternalLinkDao(ExternalLinkDao externalLinkDao) {
 		this.externalLinkDao = externalLinkDao;
@@ -1385,6 +1434,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setUserDetailDao(com.legendshop.business.dao.UserDetailDao)
+	 */
+	/**
+	 * Sets the user detail dao.
+	 * 
+	 * @param userDetailDao
+	 *            the new user detail dao
 	 */
 	@Required
 	public void setUserDetailDao(UserDetailDao userDetailDao) {
@@ -1412,13 +1467,29 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setPayTypeService(com.legendshop.business.service.PayTypeServiceImpl)
 	 */
+	/**
+	 * Sets the pay type service.
+	 * 
+	 * @param payTypeService
+	 *            the new pay type service
+	 */
 	@Required
 	public void setPayTypeService(PayTypeService payTypeService) {
 		this.payTypeService = payTypeService;
 	}
 
 	/**
-	 *  用户用registerCode激活帐号
+	 * 用户用registerCode激活帐号.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param userName
+	 *            the user name
+	 * @param registerCode
+	 *            the register code
+	 * @return the string
 	 */
 	@Override
 	public String updateUserReg(HttpServletRequest request, HttpServletResponse response, String userName,
@@ -1440,6 +1511,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setShopStatusChecker(com.legendshop.business.helper.ShopStatusChecker)
 	 */
+	/**
+	 * Sets the shop status checker.
+	 * 
+	 * @param shopStatusChecker
+	 *            the new shop status checker
+	 */
 	@Required
 	public void setShopStatusChecker(ShopStatusChecker shopStatusChecker) {
 		this.shopStatusChecker = shopStatusChecker;
@@ -1447,6 +1524,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setSearchFacade(com.legendshop.search.SearchFacade)
+	 */
+	/**
+	 * Sets the search facade.
+	 * 
+	 * @param searchFacade
+	 *            the new search facade
 	 */
 	@Required
 	public void setSearchFacade(SearchFacade searchFacade) {
@@ -1497,6 +1580,9 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.service.BusinessService#getSubBySubNumber(java.lang.String)
+	 */
 	@Override
 	public Sub getSubBySubNumber(String subNumber){
 		return subDao.getSubBySubNumber(subNumber);
@@ -1504,6 +1590,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setProductDao(com.legendshop.business.dao.ProductDao)
+	 */
+	/**
+	 * Sets the product dao.
+	 * 
+	 * @param productDao
+	 *            the new product dao
 	 */
 	@Required
 	public void setProductDao(ProductDao productDao) {
@@ -1513,6 +1605,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setImgFileDao(com.legendshop.business.dao.ImgFileDao)
 	 */
+	/**
+	 * Sets the img file dao.
+	 * 
+	 * @param imgFileDao
+	 *            the new img file dao
+	 */
 	@Required
 	public void setImgFileDao(ImgFileDao imgFileDao) {
 		this.imgFileDao = imgFileDao;
@@ -1520,6 +1618,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setBasketDao(com.legendshop.business.dao.BasketDao)
+	 */
+	/**
+	 * Sets the basket dao.
+	 * 
+	 * @param basketDao
+	 *            the new basket dao
 	 */
 	@Required
 	public void setBasketDao(BasketDao basketDao) {
@@ -1529,6 +1633,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setSubDao(com.legendshop.business.dao.SubDao)
 	 */
+	/**
+	 * Sets the sub dao.
+	 * 
+	 * @param subDao
+	 *            the new sub dao
+	 */
 	@Required
 	public void setSubDao(SubDao subDao) {
 		this.subDao = subDao;
@@ -1537,9 +1647,26 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setHotsearchDao(com.legendshop.business.dao.HotsearchDao)
 	 */
+	/**
+	 * Sets the hotsearch dao.
+	 * 
+	 * @param hotsearchDao
+	 *            the new hotsearch dao
+	 */
 	@Required
 	public void setHotsearchDao(HotsearchDao hotsearchDao) {
 		this.hotsearchDao = hotsearchDao;
+	}
+
+	/**
+	 * Sets the myleague dao.
+	 * 
+	 * @param myleagueDao
+	 *            the new myleague dao
+	 */
+	@Required
+	public void setMyleagueDao(MyleagueDao myleagueDao) {
+		this.myleagueDao = myleagueDao;
 	}
 
 

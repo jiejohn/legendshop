@@ -182,6 +182,9 @@
 		<property name="hotsearchDao">
 			<ref bean="hotsearchDao" />
 		</property>
+		<property name="myleagueDao">
+			<ref bean="myleagueDao" />
+		</property>
 	</bean>
 		
     <bean id="newsCategoryDao" class="com.legendshop.business.dao.impl.NewsCategoryDaoImpl" parent="baseDao">
