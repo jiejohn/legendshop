@@ -14,7 +14,7 @@
 						<tr>
 							<td>
 								<a href="${pageContext.request.contextPath}/views/${hotsale.prodId}${applicationScope.WEB_SUFFIX}"> 
-								<img src="${pageContext.request.contextPath}/common/images/default/number/num_${status.index+1}.gif">
+								<img src="${pageContext.request.contextPath}/common/default/images/number/num_${status.index+1}.gif">
 								</a>
 							</td>
 							<td align="left">

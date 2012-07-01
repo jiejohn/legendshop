@@ -9,7 +9,7 @@
 <head>
         <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
-        <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/default/indexJpgForm.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/default/css/indexJpgForm.css" />
 <script type="text/javascript">
 <!--
  function submitForm(){

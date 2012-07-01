@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <%@ include file="top.jsp"%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/default/funcs.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/default/js/funcs.js"></script>
 <div id="bodyer">
 <c:forEach items="${requestScope.INDEX_ADV_TOP}" var="adv">
 <table width="954px" cellpadding="0" cellspacing="0" style="margin-top: 5px" class="picstyle">
@@ -57,7 +57,7 @@
   </tr>
 </table>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/default/couplet.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/default/js/couplet.js"></script>
 <script type="text/javascript">
 <!--
 	var showad = '${not empty COUPLET}' == 'true';
@@ -72,7 +72,7 @@
     window.onload=scallWin;
     
     if(showad){
-	var ClosebuttonHtml = '<div align="right" style="position: absolute;top:0px;right:0px;margin:2px;padding:0px;z-index:2000;"><a href="javascript:void(0)" onclick="hidead()" style="color:black;text-decoration:none;font-size:12px;"><img src="${pageContext.request.contextPath}/common/images/default/close.gif"/></a></div>'
+	var ClosebuttonHtml = '<div align="right" style="position: absolute;top:0px;right:0px;margin:2px;padding:0px;z-index:2000;"><a href="javascript:void(0)" onclick="hidead()" style="color:black;text-decoration:none;font-size:12px;"><img src="${pageContext.request.contextPath}/common/default/images/close.gif"/></a></div>'
 	var AdContentHtml = '<div align="center" style="color:green;font-size:23pt;font-family:黑体;"><a href="${COUPLET.linkUrl}" target="_blank"><img src="${pageContext.request.contextPath}/photoserver/photo/${COUPLET.picUrl}" width="110px" border="0"></a></div>';
 	document.write('<div id="coupletLeftDiv"  style="position: absolute;border: 1px solid #CCCCCC; background-color:#EEEEE2;z-index:1000;width:'+AdDivW+'px;top:-1000px;word-break:break-all;display:none;">'+ClosebuttonHtml+'<div>'+AdContentHtml+'</div></div>');
 	document.write('<div id="coupletRightDiv" style="position: absolute;border: 1px solid #CCCCCC; background-color:#EEEEE2;z-index:1000;width:'+AdDivW+'px;top:-1000px;word-break:break-all;display:none;">'+ClosebuttonHtml+'<div>'+AdContentHtml+'</div></div>');
@@ -107,7 +107,7 @@
                      Switcher[1]['link'] = '${DOMAIN_NAME}' ;
                      var imgorder = "img1";
                      var imgs = document.getElementById(imgorder);
-                     imgs.src = '${pageContext.request.contextPath}/common/images/default/common.jpg';
+                     imgs.src = '${pageContext.request.contextPath}/common/default/images/common.jpg';
                      imgs.alt = '基于J2EE的MVC架构的高性能、独立可配置的多用户商城系统';
                 
                      var linkorder = "imglink1";

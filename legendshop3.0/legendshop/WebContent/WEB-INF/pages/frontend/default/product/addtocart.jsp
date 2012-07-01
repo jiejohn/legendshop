@@ -4,7 +4,7 @@
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
-	    <link rel="stylesheet" type="text/css" media='screen' href="<ls:templateResource item='/common/css/default/addtocart.css'/>" />
+	    <link rel="stylesheet" type="text/css" media='screen' href="<ls:templateResource item='/common/default/css/addtocart.css'/>" />
 <!--[if IE]>
    <style type="text/css">
    .facebox {
@@ -14,7 +14,7 @@
     }
     </style>
 <![endif]-->
-<a href="javascript:showcart(1)"><img  src="${pageContext.request.contextPath}/common/images/default/addtocart.jpg" title='<fmt:message key="add.tocart" />' /></a>&nbsp;
+<a href="javascript:showcart(1)"><img  src="${pageContext.request.contextPath}/common/default/images/addtocart.jpg" title='<fmt:message key="add.tocart" />' /></a>&nbsp;
 <div id="facebox" style="position: absolute; z-index: 9999; top: 260px; left: 430px; display: none;overflow: hidden;">
 	<div>
 		<h2><span id="can_AddToCart"><fmt:message key="add.tocart.seccess"/></span></h2>

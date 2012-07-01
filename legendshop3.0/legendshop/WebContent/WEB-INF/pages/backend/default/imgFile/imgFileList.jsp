@@ -10,10 +10,10 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
    <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
-    <script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
+    <script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
     <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/default/indexJpgForm.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/default/css/indexJpgForm.css" />
     <title>商品图片列表</title>
 </head>
 <body>
@@ -67,7 +67,7 @@
   			<a href='javascript:imgFileOnline("${item.fileId}")'><font color="red">上线</font></a>
   		</c:otherwise>
   	  </c:choose>
-      	<a href='javascript:deleteById("${item.fileId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "></a>
+      	<a href='javascript:deleteById("${item.fileId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/> "></a>
       </auth:auth>
       </display:column>
     </display:table>

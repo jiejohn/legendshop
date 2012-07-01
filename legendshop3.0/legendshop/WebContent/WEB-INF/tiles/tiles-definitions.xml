@@ -77,5 +77,9 @@
 	 <definition name="loginhint.*" template="/WEB-INF/pages/frontend/{1}/sort.jsp">
         <put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/loginHint.jsp" />
     </definition>
+    
+    <definition name="index.*"   template="/WEB-INF/pages/frontend/{1}/indexFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/index.jsp" />
+	</definition>
 	
 </tiles-definitions>

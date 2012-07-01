@@ -41,7 +41,7 @@
 			<td>资源定位器，主要针对css js 图片等资源</td>
 			<td>
 				<style type="text/css">@import url( <ls:templateResource item='/styles/SyntaxHighlighter.css'/> );</style>
-				<br><img src="<ls:templateResource item='/common/images/default/addtocart.jpg'/>" />
+				<br><img src="<ls:templateResource item='/common/default/images/addtocart.jpg'/>" />
 			</td>
 		</tr>
 				<tr>

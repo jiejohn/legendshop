@@ -25,7 +25,6 @@ import org.apache.lucene.search.highlight.Scorer;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 
 import com.legendshop.business.dao.ProductDao;
-import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.core.constant.LuceneIndexerEnum;
 import com.legendshop.model.entity.ProductDetail;
 import com.legendshop.model.entity.ShopDetailView;
@@ -37,6 +36,7 @@ import com.legendshop.search.SearchEntity;
 import com.legendshop.search.SearchFacade;
 import com.legendshop.search.SearchFields;
 import com.legendshop.search.exception.SearchException;
+import com.legendshop.spi.dao.ShopDetailDao;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.ContextServiceLocator;
 

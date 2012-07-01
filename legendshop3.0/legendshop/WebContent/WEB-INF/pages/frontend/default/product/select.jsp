@@ -30,7 +30,7 @@ ul li a:hover{border:2px solid #FF6701;margin:0px;}
 .select a{
 border:2px solid #FF6701;
 margin:0px;
-background:url(/common/images/default/productselected.gif) no-repeat right bottom;
+background:url(/common/default/images/productselected.gif) no-repeat right bottom;
 }
 -->
 </style>

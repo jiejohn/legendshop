@@ -29,19 +29,14 @@ import com.legendshop.business.service.BusinessService;
 import com.legendshop.business.service.LoginService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ConfigPropertiesEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.exception.EntityCodes;
-import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.exception.PermissionException;
-import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.Sub;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
-import com.legendshop.util.FileConfig;
 
 /**
  * 前台主要功能.
@@ -60,41 +55,41 @@ public class BusinessController extends BaseController {
 	private  LoginService loginService;
 
 	
-	/**
-	 * 前台首页.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @return the string
-	 */
-	@RequestMapping("/index")
-	public String index(HttpServletRequest request, HttpServletResponse response) {
-		log.debug("Index starting calling");
-		try {
-			//test
-//			EventHome.publishEvent(new UserRegEvent("testObject"));
-//			EventHome.publishEvent(new SendMailEvent("mail content"));
-			
-			
-			return businessService.getIndex(request, response);
-		} catch (Exception e) {
-			log.error("invoking index", e);
-			if (!PropertiesUtil.isSystemInstalled()) {
-				String version = PropertiesUtil.getProperties(FileConfig.GlobalFile,
-						ConfigPropertiesEnum.LEGENDSHOP_VERSION.name());
-				UserMessages uem = new UserMessages();
-				uem.setTitle("系统还没有安装成功");
-				uem.setDesc("System will be available until install operation is finished!");
-				uem.setCode(ErrorCodes.SYSTEM_UNINSTALLED);
-				uem.addCallBackList("安装系统", "LegendShop " + version, "install");
-				request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-				return "redirect:install/index.jsp";
-			}
-			return PathResolver.getPath(request, FrontPage.FAIL);
-		}
-	}
+//	/**
+//	 * 前台首页.
+//	 * 
+//	 * @param request
+//	 *            the request
+//	 * @param response
+//	 *            the response
+//	 * @return the string
+//	 */
+//	@RequestMapping("/index")
+//	public String index(HttpServletRequest request, HttpServletResponse response) {
+//		log.debug("Index starting calling");
+//		try {
+//			//test
+////			EventHome.publishEvent(new UserRegEvent("testObject"));
+////			EventHome.publishEvent(new SendMailEvent("mail content"));
+//			
+//			
+//			return businessService.getIndex(request, response);
+//		} catch (Exception e) {
+//			log.error("invoking index", e);
+//			if (!PropertiesUtil.isSystemInstalled()) {
+//				String version = PropertiesUtil.getProperties(FileConfig.GlobalFile,
+//						ConfigPropertiesEnum.LEGENDSHOP_VERSION.name());
+//				UserMessages uem = new UserMessages();
+//				uem.setTitle("系统还没有安装成功");
+//				uem.setDesc("System will be available until install operation is finished!");
+//				uem.setCode(ErrorCodes.SYSTEM_UNINSTALLED);
+//				uem.addCallBackList("安装系统", "LegendShop " + version, "install");
+//				request.setAttribute(UserMessages.MESSAGE_KEY, uem);
+//				return "redirect:install/index.jsp";
+//			}
+//			return PathResolver.getPath(request, FrontPage.FAIL);
+//		}
+//	}
 	
 	/**
 	 * Topall.

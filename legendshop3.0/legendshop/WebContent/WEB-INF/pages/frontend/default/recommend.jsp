@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <!--[if lt IE 7]>
-    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/overlay-ie6.css" />
+    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/default/css/overlay-ie6.css" />
 <![endif]-->
 <div class="recommond">
 		<fmt:message key="product.recommend" />

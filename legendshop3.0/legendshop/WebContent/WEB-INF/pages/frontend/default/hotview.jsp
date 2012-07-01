@@ -2,7 +2,7 @@
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <c:if test="${requestScope.hotViewList != null}">
 <!--[if lt IE 7]>
-    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/overlay-ie6.css" />
+    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/default/css/overlay-ie6.css" />
 <![endif]-->
 <div class="tables">
 	<table class="recommond" width="100%" cellpadding="0" cellspacing="0">

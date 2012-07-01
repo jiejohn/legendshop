@@ -13,7 +13,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.legendshop.business.dao.ProductDao;
-import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.business.search.facade.ProductSearchFacade;
 import com.legendshop.core.constant.ProductStatusEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
@@ -21,6 +20,7 @@ import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.DynamicTemp;
 import com.legendshop.model.entity.Product;
+import com.legendshop.spi.dao.ShopDetailDao;
 import com.legendshop.spi.service.ProductService;
 
 /**

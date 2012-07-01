@@ -10,7 +10,7 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
    <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
-    <script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
+    <script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
     <title>系统配置参数列表</title>
 </head>
 <body>
@@ -44,7 +44,7 @@
       	</c:choose>
       </display:column>
       <display:column title="操作" media="html">
-      <a href= "${pageContext.request.contextPath}/system/systemParameter/load/${item.name}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "></a>
+      <a href= "${pageContext.request.contextPath}/system/systemParameter/load/${item.name}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "></a>
       </display:column>
     </display:table>
         <c:if test="${not empty toolBar}">

@@ -21,7 +21,7 @@
   	        <table cellspacing="0" cellpadding="0" width="100%"> 
                                     <tr height="21"> 
                                       <td width="15" align="center" >
-                                      	<img src="${pageContext.request.contextPath}/common/images/default/dot.gif" style="margin-left: 3px">
+                                      	<img src="${pageContext.request.contextPath}/common/default/images/dot.gif" style="margin-left: 3px">
                                       </td>
                                       <td width="124" align="left">
                                       	<a href="${pageContext.request.contextPath}/sort/${sort.sortId}${applicationScope.WEB_SUFFIX}">
@@ -45,12 +45,12 @@
                           <c:choose>
                           <c:when test="${fn:length(nsort.nsortName) > 8}">
                             <td align="left" title="${nsort.nsortName}">
-                                <img src="${pageContext.request.contextPath}/common/images/default/004.gif"><a href="${pageContext.request.contextPath}/nsort/${sort.sortId}-${nsort.nsortId}${applicationScope.WEB_SUFFIX}">${fn:substring(nsort.nsortName,0,8)}..</a>
+                                <img src="${pageContext.request.contextPath}/common/default/images/004.gif"><a href="${pageContext.request.contextPath}/nsort/${sort.sortId}-${nsort.nsortId}${applicationScope.WEB_SUFFIX}">${fn:substring(nsort.nsortName,0,8)}..</a>
                             </td>
                           </c:when>
                           <c:otherwise>
                             <td align="left"">
-                                <img src="${pageContext.request.contextPath}/common/images/default/004.gif"><a href="${pageContext.request.contextPath}/nsort/${sort.sortId}-${nsort.nsortId}${applicationScope.WEB_SUFFIX}">${nsort.nsortName}</a>
+                                <img src="${pageContext.request.contextPath}/common/default/images/004.gif"><a href="${pageContext.request.contextPath}/nsort/${sort.sortId}-${nsort.nsortId}${applicationScope.WEB_SUFFIX}">${nsort.nsortName}</a>
                             </td>
                           </c:otherwise>
                         </c:choose>

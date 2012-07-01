@@ -10,10 +10,10 @@
   <c:choose>
    <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME == null}">
       <script src="<ls:templateResource item='/common/js/jquery.tools.min.js'/>" type="text/javascript"></script>
-      <link rel="stylesheet" type="text/css" media='screen' href="<ls:templateResource item='/common/css/default/overlay-minimal.css'/>" />
+      <link rel="stylesheet" type="text/css" media='screen' href="<ls:templateResource item='/common/default/css/overlay-minimal.css'/>" />
    </c:when>
    <c:otherwise>
-     <link rel="stylesheet" href="<ls:templateResource item='/common/css/default/jquery.superbox.css'/>" type="text/css" media="all" />
+     <link rel="stylesheet" href="<ls:templateResource item='/common/default/css/jquery.superbox.css'/>" type="text/css" media="all" />
 	 <script type="text/javascript" src="<ls:templateResource item='/common/js/jquery.superbox-min.js'/>"></script>
    </c:otherwise>
 </c:choose>

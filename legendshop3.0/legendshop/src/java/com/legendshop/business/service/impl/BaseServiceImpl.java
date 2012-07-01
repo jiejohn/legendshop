@@ -7,14 +7,23 @@
  */
 package com.legendshop.business.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.web.servlet.LocaleResolver;
 
+import com.legendshop.business.common.CommonServiceUtil;
+import com.legendshop.business.dao.AdvertisementDao;
+import com.legendshop.model.entity.Advertisement;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.impl.AbstractService;
+import com.legendshop.util.AppUtils;
 
 /**
  * BaseServiceImpl.
@@ -30,8 +39,7 @@ public abstract class BaseServiceImpl extends AbstractService {
 	/** The thread pool executor. */
 	protected ThreadPoolTaskExecutor threadPoolExecutor;
 	
-	/** The locale resolver. */
-	protected LocaleResolver localeResolver;
+	protected AdvertisementDao advertisementDao;
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BaseService#setJavaMailSender(org.springframework.mail.javamail.JavaMailSenderImpl)
@@ -62,18 +70,27 @@ public abstract class BaseServiceImpl extends AbstractService {
 		this.threadPoolExecutor = threadPoolExecutor;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BaseService#setLocaleResolver(org.springframework.web.servlet.LocaleResolver)
-	 */
-	/**
-	 * Sets the locale resolver.
-	 * 
-	 * @param localeResolver
-	 *            the new locale resolver
-	 */
-	@Required
-	public void setLocaleResolver(LocaleResolver localeResolver) {
-		this.localeResolver = localeResolver;
+
+	public void setAdvertisement(String shopName, HttpServletRequest request) {
+		Map<String, List<Advertisement>> advertisement = advertisementDao.getAdvertisement(shopName);
+		if (!AppUtils.isBlank(advertisement)) {
+			for (String type : advertisement.keySet()) {
+				if (Constants.COUPLET.equals(type)) {
+					List<Advertisement> list = advertisement.get(type);
+					if (AppUtils.isNotBlank(list)) {
+						request.setAttribute(type, list.get(CommonServiceUtil.random(list.size())));
+					}
+				} else {
+					request.setAttribute(type, advertisement.get(type));
+				}
+
+			}
+		}
+	}
+
+
+	public void setAdvertisementDao(AdvertisementDao advertisementDao) {
+		this.advertisementDao = advertisementDao;
 	}
 
 }

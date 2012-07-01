@@ -10,7 +10,6 @@ package com.legendshop.business.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.search.facade.ShopDetailSearchFacade;
 import com.legendshop.business.service.ShopDetailService;
@@ -22,6 +21,7 @@ import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.model.entity.UserDetail;
+import com.legendshop.spi.dao.ShopDetailDao;
 
 /**
  * 商城详细信息服务.

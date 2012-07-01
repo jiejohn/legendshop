@@ -63,9 +63,6 @@ public enum FrontPage  implements PageDefinition{
 	/** The HOTVIEW. */
 	HOTVIEW("/hotview"),
 
-	/** The INDE x_ page. */
-	INDEX_PAGE("/index"),
-
 	/** The ALL. */
 	ALL("/all"),
 

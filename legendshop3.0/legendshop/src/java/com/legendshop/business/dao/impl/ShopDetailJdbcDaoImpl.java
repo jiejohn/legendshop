@@ -19,8 +19,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.model.entity.ShopDetailView;
+import com.legendshop.spi.dao.ShopDetailDao;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.sql.ConfigCode;
 

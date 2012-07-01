@@ -16,12 +16,12 @@
                          <c:choose>
                           <c:when test="${fn:length(pub.title) > 14}">
                             <div title="${pub.title}" align="left">
-                                <img src="${pageContext.request.contextPath}/common/images/default/dot.gif" width="15" height="15" style="margin-left: 3px"><a href="${pub.msg}">${pub.title}</a>
+                                <img src="${pageContext.request.contextPath}/common/default/images/dot.gif" width="15" height="15" style="margin-left: 3px"><a href="${pub.msg}">${pub.title}</a>
                             </div>
                           </c:when>
                           <c:otherwise>
                             <div align="left">
-                                <img src="${pageContext.request.contextPath}/common/images/default/dot.gif" width="15" height="15" style="margin-left: 3px"><a href="${pub.msg}">${pub.title}</a>
+                                <img src="${pageContext.request.contextPath}/common/default/images/dot.gif" width="15" height="15" style="margin-left: 3px"><a href="${pub.msg}">${pub.title}</a>
                             </div>
                           </c:otherwise>
                         </c:choose>  

@@ -8,8 +8,8 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
 	<lb:shopDetail var="shopDetail" />	
 		
-<link rel="stylesheet" type="text/css" media='screen' href="<ls:templateResource item='/common/css/default/productTab.css'/>" />
-<script type="text/javascript" language="javascript" src="<ls:templateResource item='/common/js/default/productTab.js'/>"></script>
+<link rel="stylesheet" type="text/css" media='screen' href="<ls:templateResource item='/common/default/css/productTab.css'/>" />
+<script type="text/javascript" language="javascript" src="<ls:templateResource item='/common/default/js/productTab.js'/>"></script>
 <DIV id="con">
 	<UL id="tags">
 	  <LI class="selectTag">

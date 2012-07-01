@@ -11,9 +11,9 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
 	<script type="text/javascript" language="javascript" src="<ls:templateResource item='/common/js/randomimage.js'/>"></script>
 		
-	<link rel="stylesheet" type="text/css" media="screen" href="<ls:templateResource item='/common/css/default/indexJpgForm.css'/>" />
+	<link rel="stylesheet" type="text/css" media="screen" href="<ls:templateResource item='/common/default/css/indexJpgForm.css'/>" />
 	 <script type="text/javascript" src="<ls:templateResource item='/common/js/jquery.superbox-min.js'/>"></script>
-	 <link rel="stylesheet" href="<ls:templateResource item='/common/css/default/jquery.superbox.css'/>" type="text/css" media="all" />
+	 <link rel="stylesheet" href="<ls:templateResource item='/common/default/css/jquery.superbox.css'/>" type="text/css" media="all" />
 
 	<script type="text/javascript">
 		jQuery(function(){
@@ -82,9 +82,9 @@
             	<table cellpadding="15px"><tr><td><fmt:message key="security.hint"/></td></tr></table>
             
             	<table cellpadding="2px" style="margin-left: 20px" align="left">
-	            	<tr><td align="left"><img src="<ls:templateResource item='/common/images/default/004.gif'/>"/><fmt:message key="not.member.hint"/>,&nbsp;<a href="<ls:url address='/reg'/>"><fmt:message key="regFree"/></a></td></tr>
-	            	<tr><td align="left"><img src="<ls:templateResource item='/common/images/default/004.gif'/>"/><fmt:message key="goto.home"/>&nbsp;<a href="<ls:url address='/index'/>"><fmt:message key="shop.index"/></a></td></tr>
-	            	<tr><td align="left"><img src="<ls:templateResource item='/common/images/default/004.gif'/>"/><fmt:message key="forget.password.hint"/>
+	            	<tr><td align="left"><img src="<ls:templateResource item='/common/default/images/004.gif'/>"/><fmt:message key="not.member.hint"/>,&nbsp;<a href="<ls:url address='/reg'/>"><fmt:message key="regFree"/></a></td></tr>
+	            	<tr><td align="left"><img src="<ls:templateResource item='/common/default/images/004.gif'/>"/><fmt:message key="goto.home"/>&nbsp;<a href="<ls:url address='/index'/>"><fmt:message key="shop.index"/></a></td></tr>
+	            	<tr><td align="left"><img src="<ls:templateResource item='/common/default/images/004.gif'/>"/><fmt:message key="forget.password.hint"/>
 	            	<a href="<ls:url address='/resetpassword'/>" rel="superbox[iframe][330x230]">&nbsp;<fmt:message key="find.my.password"/></a>	   	
 	            	</td>
 	            	</tr>

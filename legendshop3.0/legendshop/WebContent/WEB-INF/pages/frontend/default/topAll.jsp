@@ -10,7 +10,7 @@
 	<lb:shopDetail var="shopDetail" />
 	    <link href="<ls:templateResource item='/common/style/style_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
 	    <link href="<ls:templateResource item='/common/style/global_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
-    <link href="<ls:templateResource item='/common/css/default/searchall.css'/>" rel="stylesheet" type="text/css" />
+    <link href="<ls:templateResource item='/common/default/css/searchall.css'/>" rel="stylesheet" type="text/css" />
     <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 <title>LegendShop
 <c:choose>

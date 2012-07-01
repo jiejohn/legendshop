@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
-<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/css/default/indexJpgForm.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/default/css/indexJpgForm.css" />
 <table class="tables" cellpadding="0" cellspacing="0">
                                      <tr> 
                                       <td class="titlebg">

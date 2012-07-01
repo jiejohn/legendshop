@@ -1,160 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:oxm="http://www.springframework.org/schema/oxm"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
                 http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
-    <!-- Add additional controller beans here -->
-    <bean id="logoService" class="com.legendshop.business.service.impl.LogoServiceImpl">
-        <property name="logoDao" ref="logoDao"></property>
-    </bean>
-    
-    <bean id="logoDao" class="com.legendshop.business.dao.impl.LogoDaoImpl" parent="baseDao" />
-
-    <bean id="shopDetailDao" class="com.legendshop.business.dao.impl.ShopDetailJdbcDaoImpl" parent="baseDao">
-    	<property name="codeTablesCache" ref="codeTablesCache"></property>
-    	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
-    	<property name="commonUtil" ref="commonUtil"></property>
-    </bean>
-    
-    <bean id="basketDao" class="com.legendshop.business.dao.impl.BasketDaoImpl" parent="baseDao">
-   	 	<property name="productDao" ref="productDao"></property>
-     </bean>
-     
-      <bean id="basketService" class="com.legendshop.business.service.impl.BasketServiceImpl">
-   	 	<property name="basketDao" ref="basketDao" />
-   	 	<property name="productDao" ref="productDao" />
-     </bean>
-     
-     <bean id="productDao" class="com.legendshop.business.dao.impl.ProductJdbcDaoImpl" parent="baseDao" >
-     	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
-     </bean>
-     
-      <bean id="productService" class="com.legendshop.business.service.impl.ProductServiceImpl">
-        <property name="productDao" ref="productDao"></property>
-        <property name="shopDetailDao" ref="shopDetailDao"></property>
-        <property name="productSearchFacade" ref="productSearchFacade"></property>
-    </bean>
-
-
-    <bean id="shopDetailService" class="com.legendshop.business.service.impl.ShopDetailServiceImpl">
-        <property name="shopDetailDao" ref="shopDetailDao" />
-        <property name="userDetailDao" ref="userDetailDao" />
-        <property name="shopDetailSearchFacade" ref="shopDetailSearchFacade"></property>
-    </bean>  
-    
-    <bean id="externalLinkDao" class="com.legendshop.business.dao.impl.ExternalLinkDaoImpl" parent="baseDao">
-    </bean>
-
-    <bean id="externalLinkService" class="com.legendshop.business.service.impl.ExternalLinkServiceImpl">
-        <property name="externalLinkDao" ref="externalLinkDao">
-        </property>
-    </bean>
-    <bean id="newsDao" class="com.legendshop.business.dao.impl.NewsDaoImpl" parent="baseDao">
-    </bean>
-
-    <bean id="newsService" class="com.legendshop.business.service.impl.NewsServiceImpl">
-        <property name="newsDao" ref="newsDao">
-        </property>
-    </bean>  
-    
-    <bean id="pubDao" class="com.legendshop.business.dao.impl.PubDaoImpl" parent="baseDao">
-    </bean>
-    
-    <bean id="pubService" class="com.legendshop.business.service.impl.PubServiceImpl">
-        <property name="pubDao" ref="pubDao">
-        </property>
-    </bean>  
-    <bean id="hotsearchDao" class="com.legendshop.business.dao.impl.HotsearchDaoImpl" parent="baseDao">
-    </bean>
-    <bean id="hotsearchService" class="com.legendshop.business.service.impl.HotsearchServiceImpl">
-    	   <property name="hotsearchDao" ref="hotsearchDao" />
-    </bean>   
-    
-    <bean id="advertisementDao" class="com.legendshop.business.dao.impl.AdvertisementDaoImpl" parent="baseDao">
-    	<property name="maxNumPerType" value="3"></property>
-    </bean>
-    
-    <bean id="advertisementService" class="com.legendshop.business.service.impl.AdvertisementServiceImpl">
-        <property name="advertisementDao" ref="advertisementDao">
-        </property>
-    </bean>  
- 
-    <bean id="nsortDao" class="com.legendshop.business.dao.impl.NsortDaoImpl" parent="baseDao">
-    </bean>
-    
-    <bean id="subDao" class="com.legendshop.business.dao.impl.SubDaoImpl" parent="subCommonDao">
-    	<property name="scoreDao" ref="scoreDao"></property>
-    	<property name="basketDao" ref="basketDao"></property>
-    </bean>
-    
-     <bean id="userDetailDao" class="com.legendshop.business.dao.impl.UserDetailDaoImpl" parent="baseDao">
-     	<property name="commonUtil" ref="commonUtil"></property>
-     	 <property name="threadPoolExecutor">
-			<ref bean="threadPoolExecutor" />
-		</property>
-	    <property name="javaMailSender">
-			<ref bean="javaMailSender" />
-		</property>
-    </bean> 
-    
-      <bean id="userDetailService" class="com.legendshop.business.service.impl.UserDetailServiceImpl" parent="baseService">
-        <property name="userDetailDao" ref="userDetailDao">
-        </property>
-    </bean>  
-
-    <bean id="nsortService" class="com.legendshop.business.service.impl.NsortServiceImpl">
-        <property name="nsortDao" ref="nsortDao">
-        </property>
-    </bean>  
-
-    <bean id="myleagueDao" class="com.legendshop.business.dao.impl.MyleagueDaoImpl" parent="baseDao">
+	<!-- Add additional controller beans here -->
+	<bean id="logoService" class="com.legendshop.business.service.impl.LogoServiceImpl">
+		<property name="logoDao" ref="logoDao"></property>
 	</bean>
 
-	<bean id="myleagueService" class="com.legendshop.business.service.impl.MyleagueServiceImpl">
-        <property name="myleagueDao" ref="myleagueDao">
-        </property>
-    </bean>
-    
-    
- <bean id="baseService" class="com.legendshop.business.service.impl.BaseServiceImpl" abstract="true">
- 		<property name="threadPoolExecutor">
+	<bean id="logoDao" class="com.legendshop.business.dao.impl.LogoDaoImpl"
+		parent="baseDao" />
+
+	<bean id="shopDetailDao" class="com.legendshop.business.dao.impl.ShopDetailJdbcDaoImpl"
+		parent="baseDao">
+		<property name="codeTablesCache" ref="codeTablesCache"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		<property name="commonUtil" ref="commonUtil"></property>
+	</bean>
+
+	<bean id="basketDao" class="com.legendshop.business.dao.impl.BasketDaoImpl"
+		parent="baseDao">
+		<property name="productDao" ref="productDao"></property>
+	</bean>
+
+	<bean id="basketService" class="com.legendshop.business.service.impl.BasketServiceImpl">
+		<property name="basketDao" ref="basketDao" />
+		<property name="productDao" ref="productDao" />
+	</bean>
+
+	<bean id="productDao" class="com.legendshop.business.dao.impl.ProductJdbcDaoImpl"
+		parent="baseDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="productService" class="com.legendshop.business.service.impl.ProductServiceImpl">
+		<property name="productDao" ref="productDao"></property>
+		<property name="shopDetailDao" ref="shopDetailDao"></property>
+		<property name="productSearchFacade" ref="productSearchFacade"></property>
+	</bean>
+
+
+	<bean id="shopDetailService"
+		class="com.legendshop.business.service.impl.ShopDetailServiceImpl">
+		<property name="shopDetailDao" ref="shopDetailDao" />
+		<property name="userDetailDao" ref="userDetailDao" />
+		<property name="shopDetailSearchFacade" ref="shopDetailSearchFacade"></property>
+	</bean>
+
+	<bean id="externalLinkDao" class="com.legendshop.business.dao.impl.ExternalLinkDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="externalLinkService"
+		class="com.legendshop.business.service.impl.ExternalLinkServiceImpl">
+		<property name="externalLinkDao" ref="externalLinkDao">
+		</property>
+	</bean>
+	<bean id="newsDao" class="com.legendshop.business.dao.impl.NewsDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="newsService" class="com.legendshop.business.service.impl.NewsServiceImpl">
+		<property name="newsDao" ref="newsDao">
+		</property>
+	</bean>
+
+	<bean id="pubDao" class="com.legendshop.business.dao.impl.PubDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="pubService" class="com.legendshop.business.service.impl.PubServiceImpl">
+		<property name="pubDao" ref="pubDao">
+		</property>
+	</bean>
+	<bean id="hotsearchDao" class="com.legendshop.business.dao.impl.HotsearchDaoImpl"
+		parent="baseDao">
+	</bean>
+	<bean id="hotsearchService"
+		class="com.legendshop.business.service.impl.HotsearchServiceImpl">
+		<property name="hotsearchDao" ref="hotsearchDao" />
+	</bean>
+
+	<bean id="advertisementDao" class="com.legendshop.business.dao.impl.AdvertisementDaoImpl"
+		parent="baseDao">
+		<property name="maxNumPerType" value="3"></property>
+	</bean>
+
+	<bean id="advertisementService"
+		class="com.legendshop.business.service.impl.AdvertisementServiceImpl">
+		<property name="advertisementDao" ref="advertisementDao">
+		</property>
+	</bean>
+
+	<bean id="nsortDao" class="com.legendshop.business.dao.impl.NsortDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="subDao" class="com.legendshop.business.dao.impl.SubDaoImpl"
+		parent="subCommonDao">
+		<property name="scoreDao" ref="scoreDao"></property>
+		<property name="basketDao" ref="basketDao"></property>
+	</bean>
+
+	<bean id="userDetailDao" class="com.legendshop.business.dao.impl.UserDetailDaoImpl"
+		parent="baseDao">
+		<property name="commonUtil" ref="commonUtil"></property>
+		<property name="threadPoolExecutor">
 			<ref bean="threadPoolExecutor" />
 		</property>
-	    <property name="javaMailSender">
+		<property name="javaMailSender">
 			<ref bean="javaMailSender" />
 		</property>
-		<property name="localeResolver">
-			<ref bean="localeResolver" />
+	</bean>
+
+	<bean id="userDetailService"
+		class="com.legendshop.business.service.impl.UserDetailServiceImpl"
+		parent="baseService">
+		<property name="userDetailDao" ref="userDetailDao">
 		</property>
- </bean>
- 
- <bean id="businessService" class="com.legendshop.business.service.impl.BusinessServiceImpl" parent="baseService">
-		<property name="externalLinkDao">
-			<ref bean="externalLinkDao" />
+	</bean>
+
+	<bean id="nsortService" class="com.legendshop.business.service.impl.NsortServiceImpl">
+		<property name="nsortDao" ref="nsortDao">
+		</property>
+	</bean>
+
+	<bean id="myleagueDao" class="com.legendshop.business.dao.impl.MyleagueDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="myleagueService"
+		class="com.legendshop.business.service.impl.MyleagueServiceImpl">
+		<property name="myleagueDao" ref="myleagueDao">
+		</property>
+	</bean>
+
+
+	<bean id="baseService" class="com.legendshop.business.service.impl.BaseServiceImpl"  abstract="true" parent="abstractService">
+		<property name="threadPoolExecutor">
+			<ref bean="threadPoolExecutor" />
+		</property>
+		<property name="javaMailSender">
+			<ref bean="javaMailSender" />
 		</property>
 		<property name="advertisementDao">
 			<ref bean="advertisementDao" />
 		</property>
-		<property name="logoDao">
-			<ref bean="logoDao" />
-		</property>	
-		<property name="newsDao">
-			<ref bean="newsDao" />
-		</property>	
-		<property name="nsortDao">
-			<ref bean="nsortDao" />
-		</property>	
-		<property name="pubDao">
-			<ref bean="pubDao" />
-		</property>	
+	</bean>
+
+	<bean id="abstractService" class="com.legendshop.spi.service.impl.AbstractService"
+		abstract="true">
+		<property name="localeResolver">
+			<ref bean="localeResolver" />
+		</property>
 		<property name="shopDetailDao">
 			<ref bean="shopDetailDao" />
-		</property>	
+		</property>
+	</bean>
+
+	<bean id="businessService"
+		class="com.legendshop.business.service.impl.BusinessServiceImpl"
+		parent="baseService">
+		<property name="externalLinkDao">
+			<ref bean="externalLinkDao" />
+		</property>
+		<property name="logoDao">
+			<ref bean="logoDao" />
+		</property>
+		<property name="newsDao">
+			<ref bean="newsDao" />
+		</property>
+		<property name="nsortDao">
+			<ref bean="nsortDao" />
+		</property>
+		<property name="pubDao">
+			<ref bean="pubDao" />
+		</property>
 		<property name="sortDao">
 			<ref bean="sortDao" />
-		</property>	
+		</property>
 		<property name="userDetailDao">
 			<ref bean="userDetailDao" />
 		</property>
@@ -167,7 +194,7 @@
 		<property name="searchFacade">
 			<ref bean="searchFacade" />
 		</property>
-	   <property name="productDao">
+		<property name="productDao">
 			<ref bean="productDao" />
 		</property>
 		<property name="imgFileDao">
@@ -186,218 +213,257 @@
 			<ref bean="myleagueDao" />
 		</property>
 	</bean>
-		
-    <bean id="newsCategoryDao" class="com.legendshop.business.dao.impl.NewsCategoryDaoImpl" parent="baseDao">
+
+	<bean id="newsCategoryDao" class="com.legendshop.business.dao.impl.NewsCategoryDaoImpl"
+		parent="baseDao">
 	</bean>
 
-	<bean id="newsCategoryService" class="com.legendshop.business.service.impl.NewsCategoryServiceImpl">
-        <property name="newsCategoryDao" ref="newsCategoryDao">
-        </property>
-    </bean>  
-    
-    
-    <bean id="sortDao" class="com.legendshop.business.dao.impl.SortDaoImpl" parent="baseDao">
-	</bean> 
-	
+	<bean id="newsCategoryService"
+		class="com.legendshop.business.service.impl.NewsCategoryServiceImpl">
+		<property name="newsCategoryDao" ref="newsCategoryDao">
+		</property>
+	</bean>
+
+
+	<bean id="sortDao" class="com.legendshop.business.dao.impl.SortDaoImpl"
+		parent="baseDao">
+	</bean>
+
 	<bean id="sortService" class="com.legendshop.business.service.impl.SortServiceImpl">
-        <property name="sortDao" ref="sortDao">
-        </property>
-    </bean>  
-    
-    <bean id="indexService" class="com.legendshop.business.service.impl.IndexServiceImpl">
-        <property name="newsDao" ref="newsDao" />
-        <property name="shopDetailDao" ref="shopDetailDao" />
-        <property name="subDao" ref="subDao" />
-        <property name="userCommentDao" ref="userCommentDao" />
-        <property name="userDetailDao" ref="userDetailDao" />
-    </bean>  
-    
-    <bean id="downloadLogDao" class="com.legendshop.business.dao.impl.DownloadLogDaoImpl" parent="baseDao">
+		<property name="sortDao" ref="sortDao">
+		</property>
 	</bean>
 
-	<bean id="downloadLogService" class="com.legendshop.business.service.impl.DownloadLogServiceImpl">
-        <property name="downloadLogDao" ref="downloadLogDao" />
-        <property name="subDao" ref="subDao" />
-        <property name="interValMinutes"  value="-30" />
-        <property name="maxTimes" value="30" />
-    </bean>
-    
-    <bean id="brandDao" class="com.legendshop.business.dao.impl.BrandDaoImpl" parent="baseDao">
+	<bean id="indexService" class="com.legendshop.business.service.impl.IndexServiceImpl" parent="baseService">
+		<property name="userCommentDao" ref="userCommentDao" />
+		<property name="userDetailDao" ref="userDetailDao" />
+		<property name="newsDao" ref="newsDao" />
+		<property name="externalLinkDao" ref="externalLinkDao" />
+		<property name="productDao" ref="productDao" />
+		<property name="imgFileDao" ref="imgFileDao" />
+		<property name="shopStatusChecker" ref="shopStatusChecker" />
+		<property name="subDao" ref="subDao" />
+		<property name="sortDao" ref="sortDao" />
+		<property name="pubDao" ref="pubDao" />
+		<property name="logoDao" ref="logoDao" />
+	</bean>
+
+	<bean id="downloadLogDao" class="com.legendshop.business.dao.impl.DownloadLogDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="downloadLogService"
+		class="com.legendshop.business.service.impl.DownloadLogServiceImpl">
+		<property name="downloadLogDao" ref="downloadLogDao" />
+		<property name="subDao" ref="subDao" />
+		<property name="interValMinutes" value="-30" />
+		<property name="maxTimes" value="30" />
+	</bean>
+
+	<bean id="brandDao" class="com.legendshop.business.dao.impl.BrandDaoImpl"
+		parent="baseDao">
 	</bean>
 
 	<bean id="brandService" class="com.legendshop.business.service.impl.BrandServiceImpl">
-        <property name="brandDao" ref="brandDao"></property>
-    </bean>  
-   
-    <bean id="imgFileDao" class="com.legendshop.business.dao.impl.ImgFileDaoImpl" parent="baseDao">
+		<property name="brandDao" ref="brandDao"></property>
+	</bean>
+
+	<bean id="imgFileDao" class="com.legendshop.business.dao.impl.ImgFileDaoImpl"
+		parent="baseDao">
 	</bean>
 
 	<bean id="imgFileService" class="com.legendshop.business.service.impl.ImgFileServiceImpl">
-        <property name="imgFileDao" ref="imgFileDao">
-        </property>
-    </bean> 
-    
-	<bean id="payTypeDao" class="com.legendshop.business.dao.impl.PayTypeDaoImpl" parent="baseDao">
+		<property name="imgFileDao" ref="imgFileDao">
+		</property>
+	</bean>
+
+	<bean id="payTypeDao" class="com.legendshop.business.dao.impl.PayTypeDaoImpl"
+		parent="baseDao">
 	</bean>
 
 	<bean id="payTypeService" class="com.legendshop.business.service.impl.PayTypeServiceImpl">
-        <property name="payTypeDao" ref="payTypeDao">
-        </property>
-    </bean>
-        
-    <bean id="systemParameterDao" class="com.legendshop.business.dao.impl.SystemParameterDaoImpl" parent="baseDao">
+		<property name="payTypeDao" ref="payTypeDao">
+		</property>
 	</bean>
 
-	<bean id="systemParameterService" class="com.legendshop.business.service.impl.SystemParameterServiceImpl">
-        <property name="baseDao" ref="systemParameterDao">
-        </property>
-    </bean>  
-    
-    <bean id="startupService" class="com.legendshop.business.service.impl.StartupServiceImpl">
-    	<property name="pluginManager" ref="pluginManager" />
-    </bean>  
-    
-    <bean id="pluginManager" class="com.legendshop.core.plugins.PluginManagerImpl" />
-    
-    <bean id="propertiesUpdater" class="com.legendshop.business.helper.PropertiesUpdaterImpl">
-        <property name="parameterList">
-        	<list>
-        		<value>MAIL_HOST</value>
-        		<value>MAIL_NAME</value>
-        		<value>MAIL_PASSWORD</value>
-        		<value>MAIL_STMP_AUTH</value>
-        		<value>MAIL_STMP_TIMEOUT</value>
-        	</list>
-        </property>
-    </bean> 
-    
-    <bean id="commonUtil" class="com.legendshop.business.service.impl.CommonUtilImpl" >
-    	<property name="commonUtilDao" ref="commonUtilDao"></property>
-    </bean>
-    
-    <bean id="commonUtilDao" class="com.legendshop.business.dao.impl.CommonUtilDaoImpl" parent="baseDao">
+	<bean id="systemParameterDao" class="com.legendshop.business.dao.impl.SystemParameterDaoImpl"
+		parent="baseDao">
 	</bean>
 
-	<bean id="productCommentDao" class="com.legendshop.business.dao.impl.ProductCommentDaoImpl" parent="baseDao">
+	<bean id="systemParameterService"
+		class="com.legendshop.business.service.impl.SystemParameterServiceImpl">
+		<property name="baseDao" ref="systemParameterDao">
+		</property>
 	</bean>
 
-	<bean id="productCommentService" class="com.legendshop.business.service.impl.ProductCommentServiceImpl">
-        <property name="productCommentDao" ref="productCommentDao" />
-    </bean>  
-	
-    <bean id="scoreDao" class="com.legendshop.business.dao.impl.ScoreDaoImpl" parent="subCommonDao">
-        <property name="userDetailDao" ref="userDetailDao"/>
-    	<property name="scorePerMoney" value="0.01"></property>
-    	<property name="moneyPerScore" value="1"></property>
-    </bean>
-    
-    <bean id="subCommonDao" class="com.legendshop.business.dao.impl.SubCommonDaoImpl" parent="baseDao"/>
-    
-    <bean id="scoreService" class="com.legendshop.business.service.impl.ScoreServiceImpl">
-    	<property name="scoreDao" ref="scoreDao"/>
-    </bean>
-    <bean id="paymentService" class="com.legendshop.business.service.impl.PaymentServiceImpl">
-    	<property name="paymentProcessor">
-    		<map>
-    			<!-- 1: 支付宝直接转账/银行转账,2:支付宝担保转账,3:货到付款 -->
-    			<entry key="1" value-ref="aliPayDirectProcessor" />
-    			<entry key="2" value-ref="aliPayDoubleProcessor"/>
-    		</map>
-    	</property>
-    </bean>    
-    <bean id="aliPayDoubleProcessor" class="com.legendshop.business.processor.impl.AliPayDoubleProcessorImpl">
-    	<property name="userDetailDao" ref="userDetailDao" />
-    </bean>  
-    
-    <bean id="aliPayDirectProcessor" class="com.legendshop.business.processor.impl.AliPayDirectProcessorlmpl">
-    	<property name="alipayAccountHelper" ref="alipayAccountHelper" />
-    </bean>  
-    
-    <bean id="alipayAccountHelper" class="com.legendshop.business.helper.AlipayAccountHelper">
-    	<property name="alipayAccounts">
-    		<list>
-    		<!-- 
-    			<bean class="com.legendshop.helper.AlipayAccount">
-    				<property name="account"><value>1111@qq.com</value></property>
-    				<property name="money"><value>0.01</value></property>
-    				<property name="type"><value>2</value></property>
-    			</bean>
-    			 -->
-    		</list>
-    	</property>
-    </bean>      
-    
-      <bean id="indexJpgService" class="com.legendshop.business.service.impl.IndexJpgServiceImpl">
-        <property name="indexJpgDao" ref="indexJpgDao"></property>
-    </bean>
-    
-    <bean id="indexJpgDao" class="com.legendshop.business.dao.impl.IndexJpgDaoImpl" parent="baseDao">
-    </bean>
-    
-       <bean id="userCommentService" class="com.legendshop.business.service.impl.UserCommentServiceImpl">
-        <property name="userCommentDao" ref="userCommentDao"></property>
-    </bean>
-    
-    <bean id="userCommentDao" class="com.legendshop.business.dao.impl.UserCommentDaoImpl" parent="baseDao">
-    </bean>
-        
-    <bean id="visitLogDao" class="com.legendshop.business.dao.impl.VisitLogDaoImpl" parent="baseDao">
-    </bean>
+	<bean id="startupService" class="com.legendshop.business.service.impl.StartupServiceImpl">
+		<property name="pluginManager" ref="pluginManager" />
+	</bean>
 
-	<bean id="visitLogService" class="com.legendshop.business.service.impl.VisitLogServiceImpl">
-        <property name="visitLogDao" ref="visitLogDao" />
-    </bean>  
-    
-    <bean id="deliveryCorpDao" class="com.legendshop.business.dao.impl.DeliveryCorpDaoImpl" parent="baseDao" />
+	<bean id="pluginManager" class="com.legendshop.core.plugins.PluginManagerImpl" />
 
-	<bean id="deliveryCorpService" class="com.legendshop.business.service.impl.DeliveryCorpServiceImpl">
-        <property name="deliveryCorpDao" ref="deliveryCorpDao" />
-    </bean>  
-    
-    <bean id="deliveryTypeDao" class="com.legendshop.business.dao.impl.DeliveryTypeDaoImpl" parent="baseDao" />
+	<bean id="propertiesUpdater" class="com.legendshop.business.helper.PropertiesUpdaterImpl">
+		<property name="parameterList">
+			<list>
+				<value>MAIL_HOST</value>
+				<value>MAIL_NAME</value>
+				<value>MAIL_PASSWORD</value>
+				<value>MAIL_STMP_AUTH</value>
+				<value>MAIL_STMP_TIMEOUT</value>
+			</list>
+		</property>
+	</bean>
 
-	<bean id="deliveryTypeService" class="com.legendshop.business.service.impl.DeliveryTypeServiceImpl">
-        <property name="deliveryTypeDao" ref="deliveryTypeDao" />
-    </bean>  
+	<bean id="commonUtil" class="com.legendshop.business.service.impl.CommonUtilImpl">
+		<property name="commonUtilDao" ref="commonUtilDao"></property>
+	</bean>
 
-    <bean id="partnerDao" class="com.legendshop.business.dao.impl.PartnerDaoImpl" parent="baseDao" />
+	<bean id="commonUtilDao" class="com.legendshop.business.dao.impl.CommonUtilDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="productCommentDao" class="com.legendshop.business.dao.impl.ProductCommentDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="productCommentService"
+		class="com.legendshop.business.service.impl.ProductCommentServiceImpl">
+		<property name="productCommentDao" ref="productCommentDao" />
+	</bean>
+
+	<bean id="scoreDao" class="com.legendshop.business.dao.impl.ScoreDaoImpl"
+		parent="subCommonDao">
+		<property name="userDetailDao" ref="userDetailDao" />
+		<property name="scorePerMoney" value="0.01"></property>
+		<property name="moneyPerScore" value="1"></property>
+	</bean>
+
+	<bean id="subCommonDao" class="com.legendshop.business.dao.impl.SubCommonDaoImpl"
+		parent="baseDao" />
+
+	<bean id="scoreService" class="com.legendshop.business.service.impl.ScoreServiceImpl">
+		<property name="scoreDao" ref="scoreDao" />
+	</bean>
+	<bean id="paymentService" class="com.legendshop.business.service.impl.PaymentServiceImpl">
+		<property name="paymentProcessor">
+			<map>
+				<!-- 1: 支付宝直接转账/银行转账,2:支付宝担保转账,3:货到付款 -->
+				<entry key="1" value-ref="aliPayDirectProcessor" />
+				<entry key="2" value-ref="aliPayDoubleProcessor" />
+			</map>
+		</property>
+	</bean>
+	<bean id="aliPayDoubleProcessor"
+		class="com.legendshop.business.processor.impl.AliPayDoubleProcessorImpl">
+		<property name="userDetailDao" ref="userDetailDao" />
+	</bean>
+
+	<bean id="aliPayDirectProcessor"
+		class="com.legendshop.business.processor.impl.AliPayDirectProcessorlmpl">
+		<property name="alipayAccountHelper" ref="alipayAccountHelper" />
+	</bean>
+
+	<bean id="alipayAccountHelper" class="com.legendshop.business.helper.AlipayAccountHelper">
+		<property name="alipayAccounts">
+			<list>
+				<!-- <bean class="com.legendshop.helper.AlipayAccount"> <property name="account"><value>1111@qq.com</value></property> 
+					<property name="money"><value>0.01</value></property> <property name="type"><value>2</value></property> 
+					</bean> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="indexJpgService"
+		class="com.legendshop.business.service.impl.IndexJpgServiceImpl">
+		<property name="indexJpgDao" ref="indexJpgDao"></property>
+	</bean>
+
+	<bean id="indexJpgDao" class="com.legendshop.business.dao.impl.IndexJpgDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="userCommentService"
+		class="com.legendshop.business.service.impl.UserCommentServiceImpl">
+		<property name="userCommentDao" ref="userCommentDao"></property>
+	</bean>
+
+	<bean id="userCommentDao" class="com.legendshop.business.dao.impl.UserCommentDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="visitLogDao" class="com.legendshop.business.dao.impl.VisitLogDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="visitLogService"
+		class="com.legendshop.business.service.impl.VisitLogServiceImpl">
+		<property name="visitLogDao" ref="visitLogDao" />
+	</bean>
+
+	<bean id="deliveryCorpDao" class="com.legendshop.business.dao.impl.DeliveryCorpDaoImpl"
+		parent="baseDao" />
+
+	<bean id="deliveryCorpService"
+		class="com.legendshop.business.service.impl.DeliveryCorpServiceImpl">
+		<property name="deliveryCorpDao" ref="deliveryCorpDao" />
+	</bean>
+
+	<bean id="deliveryTypeDao" class="com.legendshop.business.dao.impl.DeliveryTypeDaoImpl"
+		parent="baseDao" />
+
+	<bean id="deliveryTypeService"
+		class="com.legendshop.business.service.impl.DeliveryTypeServiceImpl">
+		<property name="deliveryTypeDao" ref="deliveryTypeDao" />
+	</bean>
+
+	<bean id="partnerDao" class="com.legendshop.business.dao.impl.PartnerDaoImpl"
+		parent="baseDao" />
 
 	<bean id="partnerService" class="com.legendshop.business.service.impl.PartnerServiceImpl">
-        <property name="partnerDao" ref="partnerDao" />
-    </bean>  
+		<property name="partnerDao" ref="partnerDao" />
+	</bean>
 
-    <bean id="userAddressDao" class="com.legendshop.business.dao.impl.UserAddressDaoImpl" parent="baseDao" />
+	<bean id="userAddressDao" class="com.legendshop.business.dao.impl.UserAddressDaoImpl"
+		parent="baseDao" />
 
-	<bean id="userAddressService" class="com.legendshop.business.service.impl.UserAddressServiceImpl">
-        <property name="userAddressDao" ref="userAddressDao" />
-    </bean>  
+	<bean id="userAddressService"
+		class="com.legendshop.business.service.impl.UserAddressServiceImpl">
+		<property name="userAddressDao" ref="userAddressDao" />
+	</bean>
 
-    <bean id="askDao" class="com.legendshop.business.dao.impl.AskDaoImpl" parent="baseDao" />
+	<bean id="askDao" class="com.legendshop.business.dao.impl.AskDaoImpl"
+		parent="baseDao" />
 
 	<bean id="askService" class="com.legendshop.business.service.impl.AskServiceImpl">
-        <property name="askDao" ref="askDao" />
-    </bean>  
+		<property name="askDao" ref="askDao" />
+	</bean>
 
-    <bean id="cashDao" class="com.legendshop.business.dao.impl.CashDaoImpl" parent="baseDao" />
+	<bean id="cashDao" class="com.legendshop.business.dao.impl.CashDaoImpl"
+		parent="baseDao" />
 
 	<bean id="cashService" class="com.legendshop.business.service.impl.CashServiceImpl">
-        <property name="cashDao" ref="cashDao" />
-    </bean> 
-    
-    <bean id="cashFlowDao" class="com.legendshop.business.dao.impl.CashFlowDaoImpl" parent="baseDao" />
+		<property name="cashDao" ref="cashDao" />
+	</bean>
 
-	<bean id="cashFlowService" class="com.legendshop.business.service.impl.CashFlowServiceImpl">
-        <property name="cashFlowDao" ref="cashFlowDao" />
-    </bean>  
+	<bean id="cashFlowDao" class="com.legendshop.business.dao.impl.CashFlowDaoImpl"
+		parent="baseDao" />
 
-    <bean id="eventDao" class="com.legendshop.business.dao.impl.EventDaoImpl" parent="baseDao" />
+	<bean id="cashFlowService"
+		class="com.legendshop.business.service.impl.CashFlowServiceImpl">
+		<property name="cashFlowDao" ref="cashFlowDao" />
+	</bean>
+
+	<bean id="eventDao" class="com.legendshop.business.dao.impl.EventDaoImpl"
+		parent="baseDao" />
 
 	<bean id="eventService" class="com.legendshop.business.service.impl.EventServiceImpl">
-        <property name="eventDao" ref="eventDao" />
-    </bean>  
-             
-     <bean id="constTableDao" class="com.legendshop.business.dao.impl.ConstTableDaoImpl" parent="baseDao" />	
-     
-     <bean id="tagLibDao" class="com.legendshop.business.dao.impl.TagLibDaoImpl" parent="baseDao" />	
-     
+		<property name="eventDao" ref="eventDao" />
+	</bean>
+
+	<bean id="constTableDao" class="com.legendshop.business.dao.impl.ConstTableDaoImpl"
+		parent="baseDao" />
+
+	<bean id="tagLibDao" class="com.legendshop.business.dao.impl.TagLibDaoImpl"
+		parent="baseDao" />
+
 </beans>

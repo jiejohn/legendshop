@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
-<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/overlay.css" />
+<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/default/css/overlay.css" />
 <script type="text/javascript">
 		function turnToPage(id) {
 			document.getElementById('nsortId').value= id;
@@ -122,11 +122,11 @@
                                                                 <!-- 
                                                                 <c:if test="${empty userName}">
                                                                 <a href="${pageContext.request.contextPath}/basket${applicationScope.WEB_SUFFIX}?prodId=${prodDetail.prodId}" rel="#overlay">
-                                                                <img src="${pageContext.request.contextPath}/common/images/default/order.gif" align="middle" title="<fmt:message key='order'/>"></a>
+                                                                <img src="${pageContext.request.contextPath}/common/default/images/order.gif" align="middle" title="<fmt:message key='order'/>"></a>
                                                                 </c:if>
                                                                 <c:if test="${not empty userName}">
                                                                 <a href="${pageContext.request.contextPath}/basket${applicationScope.WEB_SUFFIX}?prodId=${prodDetail.prodId}" rel="superbox[iframe][525x420]">
-                                                                <img  src="${pageContext.request.contextPath}/common/images/default/order.gif" align="middle" title="<fmt:message key='order'/>"></a>                                                                 
+                                                                <img  src="${pageContext.request.contextPath}/common/default/images/order.gif" align="middle" title="<fmt:message key='order'/>"></a>                                                                 
                                                                 </c:if>
                                                                  -->
                                                               </c:if>

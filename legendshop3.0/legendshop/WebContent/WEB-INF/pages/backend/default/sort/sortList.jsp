@@ -7,7 +7,7 @@
 <html>
 <head>
      <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
-     <script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
+     <script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
 <title>分类列表</title>
 </head>
 <body class="bodymargin">
@@ -71,9 +71,9 @@
       <c:if test="${item.sortType ne 'G'}">
     	<a href="${pageContext.request.contextPath}/admin/nsort/query${applicationScope.WEB_SUFFIX}?sortId=${item.sortId}">二级类型</a>
       </c:if>
-     <a href="${pageContext.request.contextPath}/admin/sort/update/${item.sortId}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "></a>
+     <a href="${pageContext.request.contextPath}/admin/sort/update/${item.sortId}${applicationScope.WEB_SUFFIX}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "></a>
      <auth:auth ifAnyGranted="F_OPERATOR">
-        <a href='javascript:deleteSort("${item.sortId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "></a>
+        <a href='javascript:deleteSort("${item.sortId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/> "></a>
      </auth:auth>  
       </display:column>
     </display:table>
@@ -84,9 +84,9 @@
      <table style="width: 100%; border: 0px"><tr><td align="left">说明：<br>
    1. 商品类型分为三级，一级商品类型带有一个说明图片，用于页面广告介绍，三级分类下可以挑选对应的商品品牌<br>
    2. 商品可以挂在一级，二级或者三级之上，三个级别有关联关系<br>
-   3. <img alt="创建商品类型" src="${pageContext.request.contextPath}/common/images/default/grid_add.png">&nbsp;创建商品类型，在不同列表中创建不同级别的商品类型<br>
-   4. <img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/> "> 修改按钮，在一级商品类型列表中编辑一级商品类型，其他级别一样<br>
-   5. <img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/> "> 删除按钮，在一级商品类型列表中编辑删除一级商品类型，其他级别一样，删除前确保其下的元素已经删除<br>
+   3. <img alt="创建商品类型" src="${pageContext.request.contextPath}/common/default/images/grid_add.png">&nbsp;创建商品类型，在不同列表中创建不同级别的商品类型<br>
+   4. <img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "> 修改按钮，在一级商品类型列表中编辑一级商品类型，其他级别一样<br>
+   5. <img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/> "> 删除按钮，在一级商品类型列表中编辑删除一级商品类型，其他级别一样，删除前确保其下的元素已经删除<br>
    </td><tr></table> 
    
    <script language="JavaScript" type="text/javascript">

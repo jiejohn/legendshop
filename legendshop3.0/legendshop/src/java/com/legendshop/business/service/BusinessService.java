@@ -20,44 +20,6 @@ import com.legendshop.spi.service.BaseService;
 public interface BusinessService extends BaseService{
 
 	/**
-	 * Index.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @return the string
-	 */
-	public abstract String getIndex(HttpServletRequest request, HttpServletResponse response);
-
-	/**
-	 * Gets the shop detail view from session.
-	 * 
-	 * @param shopName
-	 *            the shop name
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @return the shop detail view
-	 */
-	public abstract ShopDetailView getShopDetailView(String shopName, HttpServletRequest request,
-			HttpServletResponse response);
-
-	/**
-	 * Sets the local by shop detail.
-	 * 
-	 * @param langStyle
-	 *            the lang style
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 */
-	public abstract void setLocalByShopDetail(ShopDetailView shopDetail, HttpServletRequest request,
-			HttpServletResponse response);
-
-	/**
 	 * Top.
 	 * 
 	 * @param request

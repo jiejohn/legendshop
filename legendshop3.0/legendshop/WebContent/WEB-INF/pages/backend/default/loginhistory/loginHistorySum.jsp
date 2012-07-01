@@ -11,7 +11,7 @@
 			Integer offset = (Integer)request.getAttribute("offset");
 	%>
 <head>
-	<script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
+	<script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
 <title>用户登录历史列表次数</title>
 </head>
 <body>

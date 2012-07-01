@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>团购</title>
-<link type="text/css" href="<ls:templateResource item='/common/css/red/legend.css'/>" rel="stylesheet"/>
+<link type="text/css" href="<ls:templateResource item='/common/red/css/legend.css'/>" rel="stylesheet"/>
 </head>
 
 <body>

@@ -17,8 +17,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
-
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -29,7 +27,6 @@ import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.common.page.TilesPage;
-import com.legendshop.business.dao.AdvertisementDao;
 import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.ExternalLinkDao;
 import com.legendshop.business.dao.HotsearchDao;
@@ -40,7 +37,6 @@ import com.legendshop.business.dao.NewsDao;
 import com.legendshop.business.dao.NsortDao;
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.business.dao.PubDao;
-import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.business.dao.SortDao;
 import com.legendshop.business.dao.SubDao;
 import com.legendshop.business.dao.UserDetailDao;
@@ -56,7 +52,6 @@ import com.legendshop.business.service.PayTypeService;
 import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.FunctionEnum;
-import com.legendshop.core.constant.LanguageEnum;
 import com.legendshop.core.constant.LuceneIndexerEnum;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
@@ -83,7 +78,6 @@ import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.ExternalLink;
 import com.legendshop.model.entity.Hotsearch;
 import com.legendshop.model.entity.ImgFile;
-import com.legendshop.model.entity.Indexjpg;
 import com.legendshop.model.entity.News;
 import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Product;
@@ -103,6 +97,7 @@ import com.legendshop.spi.constants.NewsPositionEnum;
 import com.legendshop.spi.constants.OrderStatusEnum;
 import com.legendshop.spi.constants.RegisterEnum;
 import com.legendshop.spi.constants.VisitTypeEnum;
+import com.legendshop.spi.dao.ShopDetailDao;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.BeanHelper;
 import com.legendshop.util.MD5Util;
@@ -126,9 +121,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/** The default int. */
 	private final Long defaultInt = 0l;
 
-	/** The shop detail dao. */
-	private ShopDetailDao shopDetailDao;
-
 	/** The sort dao. */
 	private SortDao sortDao;
 
@@ -137,10 +129,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 	/** The logo dao. */
 	private LogoDao logoDao;
-
-	/** The advertisement dao. */
-	private AdvertisementDao advertisementDao;
-
 	/** The news dao. */
 	private NewsDao newsDao;
 
@@ -181,145 +169,85 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	private MyleagueDao myleagueDao;
 	
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#index(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
-	@Override
-	public String getIndex(HttpServletRequest request, HttpServletResponse response) {
-		String shopName = (String)request.getAttribute(Constants.SHOP_NAME);
-		ShopDetailView shopDetail = getShopDetailView(shopName, request, response); // 得到当前商城
-		if (shopDetail == null) {
-			String defaultShop = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
-			if (AppUtils.isNotBlank(defaultShop)) {
-				// 如果有默认店，则先到默认店去，默认店要先配置好
-				shopName = defaultShop;
-				shopDetail = getShopDetailView(shopName, request, response);
-			} else {
-				if (!PropertiesUtil.isSystemInstalled()) {
-					//return PageLet.INSTALL;
-					throw new BusinessException("system did not installed",EntityCodes.SYSTEM);
-				}
-				return PathResolver.getPath(request, FrontPage.ALL_PAGE);
-			}
-		} else {
-			shopName = shopDetail.getUserName();
-			if (!shopStatusChecker.check(shopDetail, request)) {
-				return PathResolver.getPath(request, FrontPage.FAIL);
-			}
-
-			// 登录历史
-			visit(shopDetail, request);
-		}
-		request.setAttribute("productList", productDao.getCommendProd(shopName, 40));
-		// 最新商品
-		request.setAttribute("newestList", productDao.getNewestProd(shopName, 11));
-		request.setAttribute("adList", externalLinkDao.getExternalLink(shopName));
-
-		request.setAttribute("logo", logoDao.getLogo(shopName));
-		request.setAttribute("sortList", sortDao.getSort(shopName, true));
-		request.setAttribute("pubList", pubDao.getPub(shopName));
-
-		// 普通新闻
-		request.setAttribute("newList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_NEWS, 6));
-		// 顶部新闻
-		request.setAttribute("newsTopList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_TOP, 8));
-		// 分类新闻
-		request.setAttribute("newsSortList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_SORT, 8));
-
-		setAdvertisement(shopName, request);
-		List<Indexjpg> indexJpgList = imgFileDao.getIndexJpeg(shopName);
-		if (!AppUtils.isBlank(indexJpgList)) {
-			request.setAttribute("MaxScreen", indexJpgList.size());
-			JSONArray jsonArray = JSONArray.fromObject(indexJpgList);
-			request.setAttribute("indexJSON", jsonArray);
-		} else {
-			request.setAttribute("MaxScreen", 0);
-		}
-
-		String userName = UserManager.getUsername(request.getSession());
-		boolean shopExists = shopDetailDao.isShopExists(userName);
-		request.setAttribute("shopExists", shopExists);
-		request.setAttribute("canbeLeagueShop", shopDetailDao.isBeLeagueShop(shopExists, userName, shopName));
-
-		// 多线程记录访问历史
-		if (PropertiesUtil.getObject(ParameterEnum.VISIT_LOG_INDEX_ENABLE, Boolean.class)) {
-			VisitLog visitLog = new VisitLog();
-			visitLog.setDate(new Date());
-			visitLog.setIp(request.getRemoteAddr());
-			visitLog.setShopName(shopName);
-			visitLog.setUserName(userName);
-			visitLog.setPage(VisitTypeEnum.INDEX.value());
-			threadPoolExecutor.execute(new TaskThread(new PersistVisitLogTask(visitLog)));
-		} else {
-			log.info("[{}],{} visit index {}", new Object[] { request.getRemoteAddr(), userName, shopName });
-		}
-		return PathResolver.getPath(request,FrontPage.INDEX_PAGE);
-	}
+//	/* (non-Javadoc)
+//	 * @see com.legendshop.business.service.impl.BusinessService#index(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+//	 */
+//	@Override
+//	public String getIndex(HttpServletRequest request, HttpServletResponse response) {
+//		String shopName = (String)request.getAttribute(Constants.SHOP_NAME);
+//		ShopDetailView shopDetail = getShopDetailView(shopName, request, response); // 得到当前商城
+//		if (shopDetail == null) {
+//			String defaultShop = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
+//			if (AppUtils.isNotBlank(defaultShop)) {
+//				// 如果有默认店，则先到默认店去，默认店要先配置好
+//				shopName = defaultShop;
+//				shopDetail = getShopDetailView(shopName, request, response);
+//			} else {
+//				if (!PropertiesUtil.isSystemInstalled()) {
+//					//return PageLet.INSTALL;
+//					throw new BusinessException("system did not installed",EntityCodes.SYSTEM);
+//				}
+//				return PathResolver.getPath(request, FrontPage.ALL_PAGE);
+//			}
+//		} else {
+//			shopName = shopDetail.getUserName();
+//			if (!shopStatusChecker.check(shopDetail, request)) {
+//				return PathResolver.getPath(request, FrontPage.FAIL);
+//			}
+//
+//			// 登录历史
+//			visit(shopDetail, request);
+//		}
+//		request.setAttribute("productList", productDao.getCommendProd(shopName, 40));
+//		// 最新商品
+//		request.setAttribute("newestList", productDao.getNewestProd(shopName, 11));
+//		request.setAttribute("adList", externalLinkDao.getExternalLink(shopName));
+//
+//		request.setAttribute("logo", logoDao.getLogo(shopName));
+//		request.setAttribute("sortList", sortDao.getSort(shopName, true));
+//		request.setAttribute("pubList", pubDao.getPub(shopName));
+//
+//		// 普通新闻
+//		request.setAttribute("newList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_NEWS, 6));
+//		// 顶部新闻
+//		request.setAttribute("newsTopList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_TOP, 8));
+//		// 分类新闻
+//		request.setAttribute("newsSortList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_SORT, 8));
+//
+//		setAdvertisement(shopName, request);
+//		List<Indexjpg> indexJpgList = imgFileDao.getIndexJpeg(shopName);
+//		if (!AppUtils.isBlank(indexJpgList)) {
+//			request.setAttribute("MaxScreen", indexJpgList.size());
+//			JSONArray jsonArray = JSONArray.fromObject(indexJpgList);
+//			request.setAttribute("indexJSON", jsonArray);
+//		} else {
+//			request.setAttribute("MaxScreen", 0);
+//		}
+//
+//		String userName = UserManager.getUsername(request.getSession());
+//		boolean shopExists = shopDetailDao.isShopExists(userName);
+//		request.setAttribute("shopExists", shopExists);
+//		request.setAttribute("canbeLeagueShop", shopDetailDao.isBeLeagueShop(shopExists, userName, shopName));
+//
+//		// 多线程记录访问历史
+//		if (PropertiesUtil.getObject(ParameterEnum.VISIT_LOG_INDEX_ENABLE, Boolean.class)) {
+//			VisitLog visitLog = new VisitLog();
+//			visitLog.setDate(new Date());
+//			visitLog.setIp(request.getRemoteAddr());
+//			visitLog.setShopName(shopName);
+//			visitLog.setUserName(userName);
+//			visitLog.setPage(VisitTypeEnum.INDEX.value());
+//			threadPoolExecutor.execute(new TaskThread(new PersistVisitLogTask(visitLog)));
+//		} else {
+//			log.info("[{}],{} visit index {}", new Object[] { request.getRemoteAddr(), userName, shopName });
+//		}
+//		return PathResolver.getPath(request,FrontPage.INDEX_PAGE);
+//	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#getShopDetailView(java.lang.String, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
-	@Override
-	public ShopDetailView getShopDetailView(String shopName, HttpServletRequest request, HttpServletResponse response) {
-
-		String currentShopName = getShopName(request, response);
-		// inShopDetail = true 表示第二次以上访问该商城，第一次访问时需要设置商城对应的Locale等参数，第二次则不需要
-		if (shopName == null && currentShopName == null) {
-			log.debug("shopName and currentShopName can not both NULL");
-			return null;
-		}
-		boolean inShopDetail = true;
-		if (currentShopName != null) {
-			if (shopName != null && !shopName.equals(currentShopName)) {
-				// 换商城,第一次进入其他商城
-				log.debug("从商城 currentShopName = {} 进入另外一个商城 shopName = {}", currentShopName, shopName);
-				currentShopName = shopName;
-				request.getSession().setAttribute(Constants.SHOP_NAME, currentShopName);
-				inShopDetail = false;
-			}
-		} else {
-			// 表示第一次访问，需要商城初始化
-			log.debug("第一次访问,currentShopName = {}, shopName = {}", currentShopName, shopName);
-			currentShopName = shopName;
-			request.getSession().setAttribute(Constants.SHOP_NAME, currentShopName);
-			inShopDetail = false;
-		}
-
-		ShopDetailView shopDetail = shopDetailDao.getShopDetailView(currentShopName);
-		log.debug("getShopDetailView currentShopName = {}, shopDetail = {}",currentShopName, shopDetail);
-
-		if(!inShopDetail){
-			//log.debug("initing shopDetail and set to session");
-			//request.getSession().setAttribute(Constants.SHOP_DETAIL, shopDetail);
-			setLocalByShopDetail(shopDetail, request, response);
-		}
-		return shopDetail;
-	}
-
-	/**
-	 * Sets the advertisement.
-	 * 
-	 * @param shopName
-	 *            the shop name
-	 * @param request
-	 *            the request
-	 */
-	private void setAdvertisement(String shopName, HttpServletRequest request) {
-		Map<String, List<Advertisement>> advertisement = advertisementDao.getAdvertisement(shopName);
-		if (!AppUtils.isBlank(advertisement)) {
-			for (String type : advertisement.keySet()) {
-				if (Constants.COUPLET.equals(type)) {
-					List<Advertisement> list = advertisement.get(type);
-					if (AppUtils.isNotBlank(list)) {
-						request.setAttribute(type, list.get(CommonServiceUtil.random(list.size())));
-					}
-				} else {
-					request.setAttribute(type, advertisement.get(type));
-				}
-
-			}
-		}
-	}
+	
 
 	/**
 	 * Sets the advertisement.
@@ -356,42 +284,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#setLocalByShopDetail(com.legendshop.model.entity.ShopDetailView, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
-	@Override
-	public void setLocalByShopDetail(ShopDetailView shopDetail, HttpServletRequest request, HttpServletResponse response) {
-		log.debug("setLocalByShopDetail calling");
-		if (shopDetail == null) {
-			return;
-		}
-
-		String langStyle = shopDetail.getLangStyle();
-		// 总配置，如果不是USERCHOICE则无需设置,直接覆盖配置文件即可
-		if (AppUtils.isBlank(langStyle)
-				|| LanguageEnum.USERCHOICE.equals(langStyle) // shop level
-				|| !LanguageEnum.USERCHOICE.equals(request.getSession().getServletContext()
-						.getAttribute(AttributeKeys.LANGUAGE_MODE))) { // system
-																		// level
-			return;
-		}
-
-		String[] language = shopDetail.getLangStyle().split("_");
-		Locale locale = new Locale(language[0], language[1]);
-		// HttpSession session = request.getSession();
-		// if (session.getAttribute(AttributeKeys.LOCALE_KEY) != null) {
-		// session.removeAttribute(AttributeKeys.LOCALE_KEY);
-		// }
-		//
-		// Cookie cookie = new Cookie("LegendShopLanguage", langStyle);
-		// cookie.setPath("/");
-		// cookie.setMaxAge(100000); // -1为永不过期,或者指定过期时间
-		// response.addCookie(cookie);// 在退出登录操作中删除cookie.
-		// session.setAttribute(AttributeKeys.LOCALE_KEY, locale);
-		log.debug("setLocal {}, By ShopDetail {}", locale, shopDetail.getSiteName());
-		localeResolver.setLocale(request, response, locale);
-
-	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#top(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -1329,6 +1221,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 * @param shopDetailDao
 	 *            the new shop detail dao
 	 */
+	@Override
 	@Required
 	public void setShopDetailDao(ShopDetailDao shopDetailDao) {
 		this.shopDetailDao = shopDetailDao;
@@ -1376,19 +1269,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		this.logoDao = logoDao;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#setAdvertisementDao(com.legendshop.business.dao.AdvertisementDao)
-	 */
-	/**
-	 * Sets the advertisement dao.
-	 * 
-	 * @param advertisementDao
-	 *            the new advertisement dao
-	 */
-	@Required
-	public void setAdvertisementDao(AdvertisementDao advertisementDao) {
-		this.advertisementDao = advertisementDao;
-	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setNewsDao(com.legendshop.business.dao.NewsDao)

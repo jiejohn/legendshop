@@ -2,7 +2,7 @@
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <%@include file='/WEB-INF/pages/common/common.jsp'%>
 <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/overlay.css" />
+<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/default/css/overlay.css" />
    <table width="100%" cellspacing="0" cellpadding="0" class="tables">
                 <tr> 
                   <td class="titlebg"><fmt:message key="contact.method"><fmt:param value="${sessionScope.shopName}"/></fmt:message></td>

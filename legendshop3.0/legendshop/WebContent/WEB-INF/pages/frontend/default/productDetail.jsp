@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
-<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/overlay.css" />
+<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/default/css/overlay.css" />
  <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/common/js/jquery.tools.min.js"></script>
-<script src="${pageContext.request.contextPath}/common/js/default/productDetail.js"></script>
+<script src="${pageContext.request.contextPath}/common/default/js/productDetail.js"></script>
 <lb:shopDetail var="shopDetail" />
 <script type="text/javascript">
 function basket(){
@@ -48,7 +48,7 @@ return reg.test(this);
 } 
 </script>
 <!--[if lt IE 7]>
-    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/css/default/overlay-ie6.css" />
+    <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/default/css/overlay-ie6.css" />
 <![endif]-->
 <style>
 <!--
@@ -177,9 +177,9 @@ return reg.test(this);
                                    <c:choose>
                                    	<c:when test="${prod.stocks != null && prod.cash != null && prod.stocks > 0}">
                                    		<a href="javascript:basket()">
-                                   		<img  src="${pageContext.request.contextPath}/common/images/default/buynows.jpg" title='<fmt:message key="order" />' />
+                                   		<img  src="${pageContext.request.contextPath}/common/default/images/buynows.jpg" title='<fmt:message key="order" />' />
                                    	</c:when>
-                                   	<c:otherwise><a href="${pageContext.request.contextPath}/leaveword${applicationScope.WEB_SUFFIX}"> <img  src="${pageContext.request.contextPath}/common/images/default/productless.jpg" title='<fmt:message key="notice.product.less" />' /></a></c:otherwise>
+                                   	<c:otherwise><a href="${pageContext.request.contextPath}/leaveword${applicationScope.WEB_SUFFIX}"> <img  src="${pageContext.request.contextPath}/common/default/images/productless.jpg" title='<fmt:message key="notice.product.less" />' /></a></c:otherwise>
                                    </c:choose>
                                    
                                     </div>

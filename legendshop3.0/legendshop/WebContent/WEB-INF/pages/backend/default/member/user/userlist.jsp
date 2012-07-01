@@ -8,7 +8,7 @@
 <html>
 <head>
 	<title>用户列表</title>
-<script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
+<script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>

@@ -14,7 +14,9 @@
 		<remember-me />
 		<intercept-url pattern="/admin/**" access="ROLE_SUPERVISOR,ROLE_ADMIN" />		
 		<intercept-url pattern="/member/**" access="ROLE_SUPERVISOR" />
+		<!-- 
 		<intercept-url pattern="/system/**" access="ROLE_SUPERVISOR,ROLE_SYSTEM" />
+		 -->
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<custom-filter ref="validateCodeAuthenticationFilter" position="FORM_LOGIN_FILTER" />
 		<custom-filter ref="_logoutFilter" position="LOGOUT_FILTER" />

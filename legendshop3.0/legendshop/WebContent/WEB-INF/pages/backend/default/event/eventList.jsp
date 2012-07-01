@@ -11,7 +11,7 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
     <style type="text/css" media="all">
-       @import url("<ls:templateResource item='/common/css/default/screen.css'/>");
+       @import url("<ls:templateResource item='/common/default/css/screen.css'/>");
     </style>
     <title>Event列表</title>
 </head>
@@ -48,10 +48,10 @@
 
 	    <display:column title="Action" media="html">
 		      <a href="<ls:url address='/admin/event/load/${item.eventId}'/>" title="修改">
-		     		 <img alt="修改" src="<ls:templateResource item='/common/images/default/grid_edit.png'/>">
+		     		 <img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/>">
 		      </a>
 		      <a href='javascript:deleteById("${item.eventId}")' title="删除">
-		      		<img alt="删除" src="<ls:templateResource item='/common/images/default/grid_delete.png'/>">
+		      		<img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/>">
 		      </a>
 	      </display:column>
 	    </display:table>

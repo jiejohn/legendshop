@@ -9,7 +9,7 @@
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
-		<script src="${pageContext.request.contextPath}/common/js/default/productDetail.js"></script>
+		<script src="${pageContext.request.contextPath}/common/default/js/productDetail.js"></script>
 <title>修改价格</title>
 </head>
 <body>

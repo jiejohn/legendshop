@@ -20,7 +20,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 
-import com.legendshop.business.dao.ShopDetailDao;
 import com.legendshop.business.service.CommonUtil;
 import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
@@ -32,6 +31,7 @@ import com.legendshop.model.entity.Myleague;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.ShopDetailView;
+import com.legendshop.spi.dao.ShopDetailDao;
 import com.legendshop.util.AppUtils;
 
 /**

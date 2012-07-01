@@ -14,7 +14,7 @@
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
 		<script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/common/js/top.js" type="text/javascript"></script>
-  		<script src="<ls:templateResource item='/common/js/default/alternative.js'/>" type="text/javascript"></script>
+  		<script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
 <title>LegendShop后台首页</title>
 </head>
 <body  class="bodymargin">

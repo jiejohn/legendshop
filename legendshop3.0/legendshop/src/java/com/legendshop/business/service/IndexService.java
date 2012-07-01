@@ -7,11 +7,27 @@
  */
 package com.legendshop.business.service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.legendshop.model.UserInfo;
 import com.legendshop.model.entity.ShopDetailView;
 
+/**
+ * The Interface IndexService.
+ */
 public interface IndexService {
 
+	/**
+	 * Gets the index.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the index
+	 */
+	public String getIndex(HttpServletRequest request, HttpServletResponse response);
 	/**
 	 * Index admin.
 	 * 
