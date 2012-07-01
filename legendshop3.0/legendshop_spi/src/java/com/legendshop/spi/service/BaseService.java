@@ -10,6 +10,8 @@ package com.legendshop.spi.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.legendshop.model.entity.ShopDetailView;
+
 public interface BaseService {
 
 	/**
@@ -66,5 +68,19 @@ public interface BaseService {
 	 * @return the long
 	 */
 	public abstract Long convertStringToInteger(String id);
+	
+	/**
+	 * Gets the shop detail view from session.
+	 * 
+	 * @param shopName
+	 *            the shop name
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the shop detail view
+	 */
+	public abstract ShopDetailView getShopDetailView(String shopName, HttpServletRequest request,
+			HttpServletResponse response);
 
 }
