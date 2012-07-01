@@ -529,9 +529,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 		PageSupport ps = productDao.getProdDetail(localeResolver.resolveLocale(request), curPageNO, sortId);
 		ps.savePage(request);
-		String path = PathResolver.getPath(request, TilesPage.PRODUCTSORT);
-		System.out.println("path = " + path);
-		return path;
+		return PathResolver.getPath(request, TilesPage.PRODUCTSORT);
 	}
 
 	/* (non-Javadoc)
