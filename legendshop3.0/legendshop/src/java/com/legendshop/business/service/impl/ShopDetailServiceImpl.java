@@ -9,6 +9,7 @@ package com.legendshop.business.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.search.facade.ShopDetailSearchFacade;
@@ -26,7 +27,7 @@ import com.legendshop.spi.dao.ShopDetailDao;
 /**
  * 商城详细信息服务.
  */
-public class ShopDetailServiceImpl implements ShopDetailService {
+public class ShopDetailServiceImpl   extends BaseServiceImpl  implements ShopDetailService {
 	
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(ShopDetailServiceImpl.class);
@@ -46,6 +47,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 	 * @param shopDetailDao
 	 *            the new shopDetailDao
 	 */
+	@Override
 	public void setShopDetailDao(ShopDetailDao shopDetailDao) {
 		this.shopDetailDao = shopDetailDao;
 	}
@@ -95,6 +97,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 	}
 	
 	@Override
+	@Cacheable(value = "ShopDetailView", key="#currentShopName")
 	public ShopDetailView getShopDetailView(String currentShopName) {
 		return shopDetailDao.getShopDetailView(currentShopName);
 	}

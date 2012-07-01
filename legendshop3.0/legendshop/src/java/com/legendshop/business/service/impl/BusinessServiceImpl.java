@@ -529,7 +529,9 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 		PageSupport ps = productDao.getProdDetail(localeResolver.resolveLocale(request), curPageNO, sortId);
 		ps.savePage(request);
-		return PathResolver.getPath(request, TilesPage.PRODUCTSORT);
+		String path = PathResolver.getPath(request, TilesPage.PRODUCTSORT);
+		System.out.println("path = " + path);
+		return path;
 	}
 
 	/* (non-Javadoc)
@@ -1072,15 +1074,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		}
 
 	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#getSimpleInfoShopDetail(java.lang.String)
-	 */
-	@Override
-	public ShopDetailView getSimpleInfoShopDetail(String userName) {
-		return shopDetailDao.getSimpleInfoShopDetail(userName);
-	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#updateAccount(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, com.legendshop.business.action.form.UserForm)
 	 */

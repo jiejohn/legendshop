@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.page.BackPage;
-import com.legendshop.business.service.BusinessService;
 import com.legendshop.business.service.IndexService;
+import com.legendshop.business.service.ShopDetailService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
@@ -47,9 +47,9 @@ public class IndexAdminController extends BaseController {
 	@Autowired
 	private IndexService indexService;
 
-	/** The business service. */
+	
 	@Autowired
-	private BusinessService businessService;
+	private ShopDetailService shopDetailService;
 	
 	/**
 	 * 后台首页，加载用户相关资料并显示.
@@ -64,7 +64,7 @@ public class IndexAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response) {
 		log.debug("adminIndex starting");
 		String userName = UserManager.getUsername(request.getSession());
-		ShopDetailView shopDetail = businessService.getSimpleInfoShopDetail(userName);
+		ShopDetailView shopDetail = shopDetailService.getShopDetailView(userName);
 		UserInfo userInfo = indexService.getAdminIndex(userName, shopDetail);
 		request.setAttribute("userInfo", userInfo);
 		

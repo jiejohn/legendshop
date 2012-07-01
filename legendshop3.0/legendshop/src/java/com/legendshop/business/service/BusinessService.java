@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.legendshop.business.form.SearchForm;
 import com.legendshop.business.form.UserForm;
 import com.legendshop.model.entity.ShopDetail;
-import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.model.entity.Sub;
 import com.legendshop.spi.service.BaseService;
 
@@ -271,15 +270,6 @@ public interface BusinessService extends BaseService{
 	 * @return the string
 	 */
 	public abstract String getMyAccount(HttpServletRequest request, HttpServletResponse response);
-
-	/**
-	 * Gets the simple info shop detail.
-	 * 
-	 * @param userName
-	 *            the user name
-	 * @return the simple info shop detail
-	 */
-	public abstract ShopDetailView getSimpleInfoShopDetail(String userName);
 
 	/**
 	 * 修改我的帐户，用于修改用户信息.

@@ -34,20 +34,17 @@ public class ShopDetailJdbcDaoImpl extends ShopDetailDaoImpl implements ShopDeta
 
 	/** The jdbc template. */
 	private JdbcTemplate jdbcTemplate;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.legendshop.business.dao.impl.ShopDetailDao#getSimpleInfoShopDetail
-	 * (java.lang.String)
+	
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.impl.ShopDetailDao#getShopDetailView(java.lang.String)
 	 */
 	@Override
-	@Cacheable(value="ShopDetailView",key="#userName")
-	public ShopDetailView getSimpleInfoShopDetail(final String userName) {
+	@Cacheable(value = "ShopDetailView", key="#userName")
+	public ShopDetailView getShopDetailView(final String userName) {
 		if (AppUtils.isBlank(userName)) {
 			return null;
 		}
+		log.debug("getSimpleInfoShopDetail userName : {}",userName);
 		List<ShopDetailView> list = null;
 		list = jdbcTemplate.query(ConfigCode.getInstance().getCode("biz.getShopDetailView"), new Object[] { userName },
 				new ShopDetailRowMapper());

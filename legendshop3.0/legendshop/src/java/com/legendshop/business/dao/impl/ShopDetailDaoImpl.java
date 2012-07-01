@@ -23,14 +23,12 @@ import org.springframework.cache.annotation.Caching;
 import com.legendshop.business.service.CommonUtil;
 import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
-import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.tag.TableCache;
 import com.legendshop.model.entity.Myleague;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
-import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.spi.dao.ShopDetailDao;
 import com.legendshop.util.AppUtils;
 
@@ -85,30 +83,7 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 		return shopDetail;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.dao.impl.ShopDetailDao#getShopDetailView(java.lang.String)
-	 */
-	@Override
-	public ShopDetailView getShopDetailView(final String userName) {
-		return getSimpleInfoShopDetail(userName);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.dao.impl.ShopDetailDao#getSimpleInfoShopDetail(java.lang.String)
-	 */
 	
-	/**
-	 * 在子类中采用JDBC实现.
-	 * 
-	 * @param userName
-	 *            the user name
-	 * @return the simple info shop detail
-	 */
-	@Override
-	public ShopDetailView getSimpleInfoShopDetail(final String userName) {
-		throw new BusinessException("NOT Support getSimpleInfoShopDetail", EntityCodes.SHOP);
-	}
-
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#getShopDetail(java.lang.String)
 	 */
