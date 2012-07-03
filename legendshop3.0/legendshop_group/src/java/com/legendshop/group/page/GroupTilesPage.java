@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
-import com.legendshop.spi.constants.Constants;
 
 /**
  * The Enum TilesPage.
@@ -37,7 +36,7 @@ public enum GroupTilesPage implements PageDefinition{
 	
 	@Override
 	public String getValue(HttpServletRequest request, String path) {
-		return PagePathCalculator.calculateTilesPath(path, Constants.DEFAULT_PAGE);
+		return PagePathCalculator.calculateTilesPath(request,path);
 	}
 
 	

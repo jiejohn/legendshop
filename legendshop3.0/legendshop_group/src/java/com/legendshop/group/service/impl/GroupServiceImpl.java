@@ -105,7 +105,6 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 
 		//return PathResolver.getPath(request, GroupFrontPage.INDEX);
 		//TODO
-		//gindex.red
 		return PathResolver.getPath(request, GroupTilesPage.GINDEX);
 	}
 	
