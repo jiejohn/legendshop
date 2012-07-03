@@ -48,15 +48,6 @@ public interface ShopDetailDao extends BaseDao{
 	public abstract ShopDetailView getShopDetailView(final String userName);
 
 	/**
-	 * Gets the simple info shop detail.
-	 * 
-	 * @param userName
-	 *            the store name
-	 * @return the simple info shop detail
-	 */
-	public abstract ShopDetailView getSimpleInfoShopDetail(final String userName);
-
-	/**
 	 * Gets the shop detail.
 	 * 
 	 * @param userName
