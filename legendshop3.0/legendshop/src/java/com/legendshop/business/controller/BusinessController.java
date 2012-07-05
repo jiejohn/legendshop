@@ -174,7 +174,7 @@ public class BusinessController extends BaseController {
 	 *            the response
 	 * @return the string
 	 */
-	@RequestMapping("/top")
+//	@RequestMapping("/top")
 	public String top(HttpServletRequest request, HttpServletResponse response) {
 		return businessService.getTop(request, response);
 	}

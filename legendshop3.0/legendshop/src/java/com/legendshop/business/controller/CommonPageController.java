@@ -10,7 +10,9 @@ package com.legendshop.business.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.service.CommonPageService;
@@ -25,7 +27,8 @@ import com.legendshop.core.constant.PathResolver;
 public class CommonPageController  extends BaseController {
 	
 	/** The locator. */
-	private CommonPageServiceLocator locator;
+	@Autowired
+	private CommonPageServiceLocator commonPageServiceLocator;
 	
 	/**
 	 * Top.
@@ -36,10 +39,10 @@ public class CommonPageController  extends BaseController {
 	 *            the response
 	 * @return the string
 	 */
-	//@RequestMapping("/top")
+	@RequestMapping("/top")
 	public String top(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = getShopName(request, response);
-		CommonPageService commonPageService = locator.getCommonPageService(shopName);
+		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName);
 		return commonPageService.getTop(request, response);
 	}
 	
@@ -66,17 +69,9 @@ public class CommonPageController  extends BaseController {
 	//@RequestMapping("/copy")
 	public String copy(HttpServletRequest request, HttpServletResponse response,String curPageNO,String newsCategory) {
 		String shopName = getShopName(request, response);
-		CommonPageService commonPageService = locator.getCommonPageService(shopName);
+		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName);
 		return commonPageService.getCopy(request, response);
 	}
 
-	/**
-	 * Sets the locator.
-	 * 
-	 * @param locator
-	 *            the new locator
-	 */
-	public void setLocator(CommonPageServiceLocator locator) {
-		this.locator = locator;
-	}
+	
 }

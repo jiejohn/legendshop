@@ -12,11 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.spi.service.impl.AbstractService;
 
 /**
  * The Class AbstractCommonPageService.
  */
-public abstract class AbstractCommonPageService {
+public abstract class AbstractCommonPageService extends AbstractService {
 	
 	/**
 	 * Gets the copy all.

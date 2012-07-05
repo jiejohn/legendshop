@@ -33,7 +33,7 @@ a:active{color:#900;}
 #shortcut .fr li#loginbar{ background:none;}
 #shortcut .fr .fore1{background:none;}
 #shortcut .fr .menu{position:relative;z-index:10;width:89px;padding:3px 0 0;}
-#shortcut .menu dl{width:73px;padding:0 7px; position: absolute;}
+#shortcut .menu dl{width:73px;padding:0 7px;}
 
 #shortcut .menu dt{height:24px;padding:0 12px 1px 10px;line-height:24px;cursor: pointer; background:url(../images/triangle.gif) no-repeat right center;}
 #shortcut .on dt{background:url(../images/triangle2.gif) no-repeat right center;}
@@ -88,7 +88,7 @@ a:active{color:#900;}
 .nav_vbox .extra{padding:5px 8px 5px 18px;height:30px;line-height:30px;overflow:hidden;  }
 .nav_vbox .extra a{ color:#006ad8;}
 
-.nav_vbox .mc{ position:absolute;top:42px;left:0;width:212px;height:490px;padding:3px 3px 3px 0;background:#ececec;  overflow:visible;}
+.nav_vbox .mc{ position:absolute;top:42px;left:0;width:212px;padding:3px 3px 3px 0;background:#ececec;  overflow:visible; display:none;}
 .nav_vbox .item{width:200px;height:32px;border-top:1px solid #FFFDFA;}
 .nav_vbox .fore1{border-top:none;}
 .nav_vbox span{display:block;width:203px;position:absolute;z-index:1;}
@@ -99,7 +99,7 @@ a:active{color:#900;}
 .nav_vbox .item .i-mc{display:none;position:absolute;left:202px;top:3px;width:500px;border:1px solid #c30;background:#fff;overflow:hidden;}
 .nav_vbox .item dt{padding:3px 6px 0 0;font-weight:bold;color:#C00;}
 .nav_vbox .item dd{padding:3px 0 0;overflow:hidden;zoom:1;}
-.nav_vbox .subitem{float:left;width:464px;min-height:370px;padding:0 4px 0 8px;}
+.nav_vbox .subitem{float:left;width:464px;padding:0 4px 0 8px;}
 .nav_vbox .subitem dl{border-top:1px dotted #EED6B7;padding:6px 0;overflow:hidden;zoom:1;}
 .nav_vbox .subitem .fore1{border-top:none;}
 .nav_vbox .subitem dt{float:left;width:54px;line-height:22px;text-align:right;}
@@ -206,6 +206,14 @@ a:active{color:#900;}
 .aligna{ padding:3px 0 2px; line-height:25px; float:left; width:400px; }
 .aligna a{ display:block; float:left; height:18px; line-height:18px; padding:2px 20px 0 10px; background:url(../images/arowalign.jpg) no-repeat right 0 #cedbe8; margin-right:10px;}
 a.aligna_aon{ display:block; float:left; height:18px; line-height:18px; padding:2px 20px 0 10px; background:url(../images/arowaligon.jpg) no-repeat right 0 #cedbe8; margin-right:10px;}
+a.align_desc_off{background:url(../img/group/arowalign.jpg) no-repeat right 0 #cedbe8;}
+a.align_desc_on{background:url(../img/group/arowaligon.jpg) no-repeat right 0 #cedbe8;}
+a.align__off{background:url(../img/group/arowalign.jpg) no-repeat right 0 #cedbe8;}
+a.align__on{background:url(../img/group/arowaligon.jpg) no-repeat right 0 #cedbe8;}
+a.align_asc_off{background:url(../img/group/arowalign2.jpg) no-repeat right 0 #cedbe8;}
+a.align_asc_on{background:url(../img/group/arowaligon2.jpg) no-repeat right 0 #cedbe8;}
+
+
 .t_ss{ float:right; line-height:25px;}
 .t_ss .tss_input{ height:23px; border:1px solid #bfbfbf; background:#f2f2f2; padding:0 5px; line-height:23px;}
 .t_ss *{ float:left; margin-left:5px;}
@@ -216,7 +224,7 @@ a.aligna_aon{ display:block; float:left; height:18px; line-height:18px; padding:
  .list_item{float:left;position:relative;width:372px;height:360px;padding:10px ;margin-bottom:25px;background:#FFF;border:2px #e3e3e3 solid;}
  .odd{float:right;}
  .list_item img{ width:372px;height:225px; }
- .list_item h1{width:372px; font-size:16px; line-height:160%; height:60px; overflow:hidden; font-family:"microsoft yahei", "宋体"; text-indent:0;}
+ .list_item h1{width:372px; font-size:16px; line-height:160%; height:55px; overflow:hidden; font-family:"microsoft yahei", "宋体"; text-indent:0;}
  .list_item .priceit {
     background: #F2F2F2;     
     height: 20px;

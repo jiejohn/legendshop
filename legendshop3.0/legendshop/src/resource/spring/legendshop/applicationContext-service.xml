@@ -466,4 +466,20 @@
 	<bean id="tagLibDao" class="com.legendshop.business.dao.impl.TagLibDaoImpl"
 		parent="baseDao" />
 
+	<bean id="redCommonPageService" class="com.legendshop.business.service.impl.RedCommonPageServiceImpl">
+		<property name="hotsearchService" ref="hotsearchService" />
+		<property name="sortService" ref="sortService" />
+		<property name="nsortService" ref="nsortService" />
+	</bean>
+	<!-- Locator -->
+	<bean id="commonPageServiceLocator" class="com.legendshop.business.service.locator.CommonPageServiceLocator">
+		<property name="shopDetailService" ref="shopDetailService"/>
+		<property name="serviceMap">
+			<map>
+				<entry key="red" value-ref="redCommonPageService"></entry>
+			</map>
+		</property>
+	
+	</bean>
+	
 </beans>
