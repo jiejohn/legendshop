@@ -7,10 +7,14 @@
  */
 package com.legendshop.permission.page;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
+import com.legendshop.util.AppUtils;
 
 /**
  * The Enum FowardPage.
@@ -44,31 +48,36 @@ public enum SecurityFowardPage implements PageDefinition{
 	
 	/** The value. */
 	private final String value;
+	
+	private List<String> templates;
+
+	private SecurityFowardPage(String value, String... template) {
+		this.value = value;
+		if (AppUtils.isNotBlank(template)) {
+			this.templates = new ArrayList<String>();
+			for (String temp : template) {
+				templates.add(temp);
+			}
+		}
+
+	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
 	 */
 	public String getValue(HttpServletRequest request) {
-		return getValue(request,value);
+		return getValue(request,value,templates);
 	}
 	
-	public String getValue(HttpServletRequest request, String path) {
+	public String getValue(HttpServletRequest request, String path, List<String> templates) {
 		return PagePathCalculator.calculateActionPath("forward:", path);
 	}
 
 	
-	/**
-	 * Instantiates a new tiles page.
-	 * 
-	 * @param value
-	 *            the value
-	 */
-	private SecurityFowardPage(String value) {
-		this.value = value;
-	}
-	
 	public String getValue() {
 		return value;
 	}
+
+
 
 }
