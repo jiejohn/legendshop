@@ -466,17 +466,31 @@
 	<bean id="tagLibDao" class="com.legendshop.business.dao.impl.TagLibDaoImpl"
 		parent="baseDao" />
 
-	<bean id="redCommonPageService" class="com.legendshop.business.service.impl.RedCommonPageServiceImpl">
-		<property name="hotsearchService" ref="hotsearchService" />
-		<property name="sortService" ref="sortService" />
-		<property name="nsortService" ref="nsortService" />
+	<bean id="redCommonPageService" class="com.legendshop.business.service.impl.RedCommonPageServiceImpl" parent="abstractCommonPageService" >
+		<property name="hotsearchDao" ref="hotsearchDao" />
+		<property name="nsortDao" ref="nsortDao" />
 	</bean>
+	
+	<bean id="defaultCommonPageService" class="com.legendshop.business.service.impl.DefaultCommonPageServiceImpl" 
+	parent="abstractCommonPageService" />
+
+		
+	<bean id="abstractCommonPageService" class="com.legendshop.business.service.impl.AbstractCommonPageService" 
+	parent="abstractService" abstract="true">
+		<property name="logoDao" ref="logoDao" />
+		<property name="shopStatusChecker" ref="shopStatusChecker" />
+		<property name="newsDao" ref="newsDao" />
+		<property name="sortDao" ref="sortDao" />
+	</bean>
+	
+	
 	<!-- Locator -->
 	<bean id="commonPageServiceLocator" class="com.legendshop.business.service.locator.CommonPageServiceLocator">
 		<property name="shopDetailService" ref="shopDetailService"/>
 		<property name="serviceMap">
 			<map>
-				<entry key="red" value-ref="redCommonPageService"></entry>
+				<entry key="default" value-ref="defaultCommonPageService" />
+				<entry key="red" value-ref="redCommonPageService" />
 			</map>
 		</property>
 	

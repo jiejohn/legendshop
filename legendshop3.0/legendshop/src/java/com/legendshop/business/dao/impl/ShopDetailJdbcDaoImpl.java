@@ -20,14 +20,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.legendshop.model.entity.ShopDetailView;
-import com.legendshop.spi.dao.ShopDetailDao;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.sql.ConfigCode;
 
 /**
  * ShopDetail Jdbc implement.
  */
-public class ShopDetailJdbcDaoImpl extends ShopDetailDaoImpl implements ShopDetailDao {
+public class ShopDetailJdbcDaoImpl extends ShopDetailDaoImpl{
 
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(ShopDetailJdbcDaoImpl.class);

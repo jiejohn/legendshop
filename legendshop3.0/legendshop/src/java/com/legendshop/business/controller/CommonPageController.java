@@ -24,14 +24,14 @@ import com.legendshop.core.constant.PathResolver;
  * The Class CommonPageController.
  */
 @Controller
-public class CommonPageController  extends BaseController {
-	
+public class CommonPageController extends BaseController {
+
 	/** The locator. */
 	@Autowired
 	private CommonPageServiceLocator commonPageServiceLocator;
-	
+
 	/**
-	 * Top.
+	 * Top.页面顶部
 	 * 
 	 * @param request
 	 *            the request
@@ -45,10 +45,19 @@ public class CommonPageController  extends BaseController {
 		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName);
 		return commonPageService.getTop(request, response);
 	}
-	
-	
+
+	@RequestMapping("/home/top")
+	public String homeTop(HttpServletRequest request, HttpServletResponse response) {
+		return PathResolver.getPath(request, FrontPage.HOME_TOP);
+	}
+
+	@RequestMapping("/bottom")
+	public String bottom(HttpServletRequest request, HttpServletResponse response) {
+		return PathResolver.getPath(request, FrontPage.BOTTOM);
+	}
+
 	/**
-	 * Topall.
+	 * Topall. 页面顶部
 	 * 
 	 * @param request
 	 *            the request
@@ -56,22 +65,26 @@ public class CommonPageController  extends BaseController {
 	 *            the response
 	 * @return the string
 	 */
-	//@RequestMapping("/topall")
+	@RequestMapping("/topall")
 	public String topall(HttpServletRequest request, HttpServletResponse response) {
 		return PathResolver.getPath(request, FrontPage.TOPALL);
 	}
-	
-	//@RequestMapping("/copyAll")
-	public String copyAll(HttpServletRequest request, HttpServletResponse response,String curPageNO,String newsCategory) {
-		return null;
-	}
-	
-	//@RequestMapping("/copy")
-	public String copy(HttpServletRequest request, HttpServletResponse response,String curPageNO,String newsCategory) {
+
+	/**
+	 * 页面底部
+	 * 
+	 * @param request
+	 * @param response
+	 * @param curPageNO
+	 * @param newsCategory
+	 * @return
+	 */
+	@RequestMapping("/copyAll")
+	public String copyAll(HttpServletRequest request, HttpServletResponse response, String curPageNO,
+			String newsCategory) {
 		String shopName = getShopName(request, response);
 		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName);
-		return commonPageService.getCopy(request, response);
+		return commonPageService.getCopyAll(request, response);
 	}
 
-	
 }

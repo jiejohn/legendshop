@@ -7,10 +7,14 @@
  */
 package com.legendshop.business.common.page;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
+import com.legendshop.util.AppUtils;
 
 /**
  * The Enum BackPage.
@@ -230,30 +234,35 @@ public enum BackPage implements PageDefinition{
 	/** The value. */
 	private final String value;
 	
-	/**
-	 * Instantiates a new back page.
-	 * 
-	 * @param value
-	 *            the value
-	 */
-	private BackPage(String value) {
+	private List<String> templates;
+	
+
+	private BackPage(String value,String ... template) {
 		this.value = value;
+		if(AppUtils.isNotBlank(template)){
+			this.templates = new ArrayList<String>();
+			for (String temp : template) {
+				templates.add(temp);
+			}
+		}
+		
 	}
+	
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
 	 */
 	@Override
 	public String getValue(HttpServletRequest request) {
-		return getValue(request,value);
+		return getValue(request,value,templates);
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest, java.lang.String)
 	 */
 	@Override
-	public String getValue(HttpServletRequest request, String path) {
-		return PagePathCalculator.calculateBackendPath(request,path);
+	public String getValue(HttpServletRequest request, String path,List<String> templates) {
+		return PagePathCalculator.calculateBackendPath(request,path,templates);
 	}
 
 	@Override

@@ -91,19 +91,19 @@ public class BusinessController extends BaseController {
 //		}
 //	}
 	
-	/**
-	 * Topall.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @return the string
-	 */
-	@RequestMapping("/topall")
-	public String topall(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, FrontPage.TOPALL);
-	}
+//	/**
+//	 * Topall.
+//	 * 
+//	 * @param request
+//	 *            the request
+//	 * @param response
+//	 *            the response
+//	 * @return the string
+//	 */
+//	@RequestMapping("/topall")
+//	public String topall(HttpServletRequest request, HttpServletResponse response) {
+//		return PathResolver.getPath(request, FrontPage.TOPALL);
+//	}
 	
 	/**
 	 * Topsort.
@@ -376,23 +376,23 @@ public class BusinessController extends BaseController {
 		return PathResolver.getPath(request, TilesPage.LEAVEWORD);
 	}
 	
-	/**
-	 * Copy all.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @param curPageNO
-	 *            the cur page no
-	 * @param newsCategory
-	 *            the news category
-	 * @return the string
-	 */
-	@RequestMapping("/copyAll")
-	public String copyAll(HttpServletRequest request, HttpServletResponse response,String curPageNO,String newsCategory) {
-		return businessService.getNewsforCommon(request, response);
-	}
+//	/**
+//	 * Copy all.
+//	 * 
+//	 * @param request
+//	 *            the request
+//	 * @param response
+//	 *            the response
+//	 * @param curPageNO
+//	 *            the cur page no
+//	 * @param newsCategory
+//	 *            the news category
+//	 * @return the string
+//	 */
+//	@RequestMapping("/copyAll")
+//	public String copyAll(HttpServletRequest request, HttpServletResponse response,String curPageNO,String newsCategory) {
+//		return businessService.getNewsforCommon(request, response);
+//	}
 	
 	/**
 	 * Search.

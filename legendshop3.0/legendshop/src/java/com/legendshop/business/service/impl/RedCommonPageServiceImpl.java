@@ -18,26 +18,25 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.ServletRequestUtils;
 
 import com.legendshop.business.common.page.FrontPage;
-import com.legendshop.business.service.CommonPageService;
-import com.legendshop.business.service.HotsearchService;
+import com.legendshop.business.dao.HotsearchDao;
+import com.legendshop.business.dao.NsortDao;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.model.entity.Hotsearch;
 import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Sort;
-import com.legendshop.spi.service.NsortService;
-import com.legendshop.spi.service.SortService;
 
 /**
- * The Class DefaultCommonPageService.
+ * The Class DefaultCommonPageServiceImpl.
  */
-public class RedCommonPageServiceImpl extends AbstractCommonPageService implements CommonPageService {
+public class RedCommonPageServiceImpl extends AbstractCommonPageService {
 
-	private HotsearchService hotsearchService;
+	/** The hotsearch dao. */
+	private HotsearchDao hotsearchDao;
 	
-	private SortService sortService;
+	/** The nsort dao. */
+	private NsortDao nsortDao;
 	
-	private NsortService nsortService;
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.CommonPageService#getTop(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
@@ -46,12 +45,12 @@ public class RedCommonPageServiceImpl extends AbstractCommonPageService implemen
 
 		Long sortId=ServletRequestUtils.getLongParameter(request, "sortId",-1);
 		String shopName = getShopName(request, response);
-		List<Hotsearch> searchList=hotsearchService.getHotsearch(shopName);
+		List<Hotsearch> searchList = hotsearchDao.getHotsearch(shopName);
 		
-		List<Sort> headerSortList = sortService.getSort(shopName, ProductTypeEnum.PRODUCT.value(), 1, null, false);
-		List<Sort> navigationSortList = sortService.getSort(shopName, ProductTypeEnum.PRODUCT.value(), null, 1, false);
+		List<Sort> headerSortList = sortDao.getSort(shopName, ProductTypeEnum.PRODUCT.value(), 1, null, false);
+		List<Sort> navigationSortList = sortDao.getSort(shopName, ProductTypeEnum.PRODUCT.value(), null, 1, false);
 		
-		List<Nsort> nsortList=nsortService.getNavigationNsort(shopName);
+		List<Nsort> nsortList = nsortDao.getNavigationNsort(shopName);
 		
 		Map<Long,List<Nsort>> deputyMap=new HashMap<Long, List<Nsort>>();		
 		Map<Long,List<Nsort>> sTreeMap=new HashMap<Long, List<Nsort>>();
@@ -99,34 +98,25 @@ public class RedCommonPageServiceImpl extends AbstractCommonPageService implemen
 		return PathResolver.getPath(request, FrontPage.TOP);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.CommonPageService#topall(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/**
+	 * Sets the hotsearch dao.
+	 * 
+	 * @param hotsearchDao
+	 *            the new hotsearch dao
 	 */
-	@Override
-	public String topall(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+	public void setHotsearchDao(HotsearchDao hotsearchDao) {
+		this.hotsearchDao = hotsearchDao;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.CommonPageService#getCopy(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/**
+	 * Sets the nsort dao.
+	 * 
+	 * @param nsortDao
+	 *            the new nsort dao
 	 */
-	@Override
-	public String getCopy(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub ->foot
-		return null;
+	public void setNsortDao(NsortDao nsortDao) {
+		this.nsortDao = nsortDao;
 	}
 
-	public void setHotsearchService(HotsearchService hotsearchService) {
-		this.hotsearchService = hotsearchService;
-	}
-
-	public void setSortService(SortService sortService) {
-		this.sortService = sortService;
-	}
-
-	public void setNsortService(NsortService nsortService) {
-		this.nsortService = nsortService;
-	}
 
 }

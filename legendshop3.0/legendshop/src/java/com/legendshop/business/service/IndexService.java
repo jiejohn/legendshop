@@ -12,11 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.legendshop.model.UserInfo;
 import com.legendshop.model.entity.ShopDetailView;
+import com.legendshop.spi.service.BaseService;
 
 /**
  * The Interface IndexService.
  */
-public interface IndexService {
+public interface IndexService extends BaseService {
 
 	/**
 	 * Gets the index.
@@ -28,6 +29,7 @@ public interface IndexService {
 	 * @return the index
 	 */
 	public String getIndex(HttpServletRequest request, HttpServletResponse response);
+
 	/**
 	 * Index admin.
 	 * 
@@ -38,5 +40,16 @@ public interface IndexService {
 	 * @return the user info
 	 */
 	public abstract UserInfo getAdminIndex(String userName, ShopDetailView shopDetail);
+
+	/**
+	 * Gets the home.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the home
+	 */
+	public String getHome(HttpServletRequest request, HttpServletResponse response);
 
 }

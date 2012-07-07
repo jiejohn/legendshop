@@ -27,28 +27,6 @@ public interface CommonPageService {
 	public String getTop(HttpServletRequest request, HttpServletResponse response);
 	
 	/**
-	 * Topall. 顶部
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @return the string
-	 */
-	public String topall(HttpServletRequest request, HttpServletResponse response);
-	
-	/**
-	 * Gets the copy. 底部
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @return the copy
-	 */
-	public String getCopy(HttpServletRequest request, HttpServletResponse response);
-	
-	/**
 	 * Gets the copy all. 底部
 	 * 
 	 * @param request

@@ -18,7 +18,6 @@ import com.legendshop.business.dao.HotsearchDao;
 import com.legendshop.business.service.HotsearchService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.PermissionException;
 import com.legendshop.model.entity.Hotsearch;
@@ -47,7 +46,7 @@ public class HotsearchServiceImpl implements HotsearchService {
 	 */
 	@Override
 	public List<Hotsearch> getHotsearch(String userName) {
-		return hotsearchDao.findByHQL("from Hotsearch where userName = ?", new Object[] { userName });
+		return hotsearchDao.getHotsearch(userName);
 	}
 
 	/* (non-Javadoc)
@@ -63,12 +62,7 @@ public class HotsearchServiceImpl implements HotsearchService {
 	 */
 	@Override
 	public Hotsearch getHotsearchByIdAndName(Integer id, String userName) {
-		Hotsearch hotsearch = hotsearchDao.findUniqueBy("from Hotsearch where id = ? and userName = ?",
-				Hotsearch.class, id, userName);
-		if (hotsearch == null) {
-			throw new BusinessException("no Hotsearch record",EntityCodes.PROD);
-		}
-		return hotsearch;
+		return hotsearchDao.getHotsearchByIdAndName(id, userName);
 	}
 
 	/* (non-Javadoc)
@@ -83,7 +77,7 @@ public class HotsearchServiceImpl implements HotsearchService {
 	 * @see com.legendshop.business.service.HotsearchService#save(com.legendshop.model.entity.Hotsearch, java.lang.String, boolean)
 	 */
 	@Override
-	public Long save(Hotsearch hotsearch, String userName, boolean viewAllDataFunction) {
+	public Long saveHotsearch(Hotsearch hotsearch, String userName, boolean viewAllDataFunction) {
 		if (!AppUtils.isBlank(hotsearch.getId())) {
 			Hotsearch entity = hotsearchDao.get(Hotsearch.class, hotsearch.getId());
 			if (entity != null) {
@@ -94,7 +88,7 @@ public class HotsearchServiceImpl implements HotsearchService {
 				entity.setMsg(hotsearch.getMsg());
 				entity.setTitle(hotsearch.getTitle());
 				entity.setSort(hotsearch.getSort());
-				update(entity);
+				updateHotsearch(entity);
 				return hotsearch.getId();
 			}
 			return null;
@@ -106,7 +100,7 @@ public class HotsearchServiceImpl implements HotsearchService {
 	 * @see com.legendshop.business.service.HotsearchService#update(com.legendshop.model.entity.Hotsearch)
 	 */
 	@Override
-	public void update(Hotsearch hotsearch) {
+	public void updateHotsearch(Hotsearch hotsearch) {
 		hotsearchDao.updateHotsearch(hotsearch);
 	}
 
@@ -122,8 +116,8 @@ public class HotsearchServiceImpl implements HotsearchService {
 	 * @see com.legendshop.business.service.HotsearchService#getSearch(java.lang.String, java.lang.Long)
 	 */
 	@Override
-	public List<Hotsearch> getSearch(String userName, Long sortId) {
-		return hotsearchDao.getSearch(userName, sortId);
+	public List<Hotsearch> getHotsearch(String userName, Long sortId) {
+		return hotsearchDao.getHotsearch(userName, sortId);
 	}
 	
 	/**

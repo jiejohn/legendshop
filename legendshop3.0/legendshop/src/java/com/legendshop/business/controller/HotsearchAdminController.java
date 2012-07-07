@@ -93,7 +93,7 @@ public class HotsearchAdminController extends BaseController {
 		hotsearch.setUserId(UserManager.getUserId(request.getSession()));
 		hotsearch.setUserName(name);
 		hotsearch.setDate(new Date());
-		hotsearchService.save(hotsearch, name, CommonServiceUtil.haveViewAllDataFunction(request));
+		hotsearchService.saveHotsearch(hotsearch, name, CommonServiceUtil.haveViewAllDataFunction(request));
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
 		return PathResolver.getPath(request, FowardPage.HOT_LIST_QUERY);
 	}
@@ -169,7 +169,7 @@ public class HotsearchAdminController extends BaseController {
 		log.info("{} update Hotsearch Title{}", origin.getUserName(), origin.getTitle());
 		hotsearch.setUserId(origin.getUserId());
 		hotsearch.setUserName(origin.getUserName());
-		hotsearchService.update(hotsearch);
+		hotsearchService.updateHotsearch(hotsearch);
 		return PathResolver.getPath(request, FowardPage.HOT_LIST_QUERY);
 	}
 	

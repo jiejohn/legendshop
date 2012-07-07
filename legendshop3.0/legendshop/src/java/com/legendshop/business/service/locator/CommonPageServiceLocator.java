@@ -11,7 +11,8 @@ import java.util.Map;
 
 import com.legendshop.business.service.CommonPageService;
 import com.legendshop.business.service.ShopDetailService;
-import com.legendshop.model.entity.ShopDetailView;
+import com.legendshop.core.helper.ThreadLocalContext;
+import com.legendshop.spi.constants.TemplateEnum;
 
 /**
  * The Class CommonPageServiceLocator.
@@ -30,9 +31,12 @@ public class CommonPageServiceLocator {
 	 * @return the common page service
 	 */
 	public CommonPageService getCommonPageService(String shopName){
-		ShopDetailView shopDetail = shopDetailService.getShopDetailView(shopName);
-		String template = shopDetail.getFrontType();
-		return serviceMap.get(template);
+		String template = ThreadLocalContext.getFrontType(shopName, null);
+		CommonPageService service = serviceMap.get(template);
+		if(service == null){
+			service = serviceMap.get(TemplateEnum.DEFAULT);
+		}
+		return service;
 	}
 	
 	/**

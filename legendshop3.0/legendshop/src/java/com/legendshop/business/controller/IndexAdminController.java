@@ -25,6 +25,7 @@ import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.event.CoreEventId;
+import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.event.EventContext;
 import com.legendshop.event.EventHome;
 import com.legendshop.event.GenericEvent;
@@ -64,7 +65,7 @@ public class IndexAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response) {
 		log.debug("adminIndex starting");
 		String userName = UserManager.getUsername(request.getSession());
-		ShopDetailView shopDetail = shopDetailService.getShopDetailView(userName);
+		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(userName);
 		UserInfo userInfo = indexService.getAdminIndex(userName, shopDetail);
 		request.setAttribute("userInfo", userInfo);
 		

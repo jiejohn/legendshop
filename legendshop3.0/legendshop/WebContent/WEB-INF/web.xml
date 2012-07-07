@@ -15,6 +15,11 @@
    <param-value>UTF-8</param-value>
   </init-param>
  </filter>
+ 
+ <filter>
+ 	  <filter-name>legendFilter</filter-name>
+ 	   <filter-class>com.legendshop.core.helper.LegendFilter</filter-class>
+ </filter>
  <!-- 
  <filter>
 	<filter-name>openSessionInViewFilter</filter-name>
@@ -58,6 +63,12 @@
   <filter-name>encodingFilter</filter-name>
   <url-pattern>*.htm</url-pattern>
  </filter-mapping> 
+  <filter-mapping>
+  
+  <filter-name>legendFilter</filter-name>
+  <url-pattern>*.htm</url-pattern>
+ </filter-mapping>
+ 
  <!-- 
  <filter-mapping>
 		<filter-name>openSessionInViewFilter</filter-name>

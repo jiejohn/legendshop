@@ -17,6 +17,7 @@ import com.legendshop.model.entity.Hotsearch;
  */
 public interface HotsearchDao extends BaseDao{
 
+
 	/**
 	 * Gets the search.
 	 * 
@@ -24,7 +25,7 @@ public interface HotsearchDao extends BaseDao{
 	 *            the shop name
 	 * @return the search
 	 */
-	public abstract List<Hotsearch> getSearch(String shopName);
+	public abstract List<Hotsearch> getHotsearch(String shopName);
 
 	/**
 	 * Gets the search.
@@ -35,7 +36,7 @@ public interface HotsearchDao extends BaseDao{
 	 *            the isort id
 	 * @return the search
 	 */
-	public abstract List<Hotsearch> getSearch(final String userName, final Long isortId);
+	public abstract List<Hotsearch> getHotsearch(final String userName, final Long isortId);
 
 	/**
 	 * Delete hotsearch by id.
@@ -52,5 +53,17 @@ public interface HotsearchDao extends BaseDao{
 	 *            the hotsearch
 	 */
 	public abstract void updateHotsearch(Hotsearch hotsearch);
+	
+	
+	/**
+	 * Gets the hotsearch by id and name.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param userName
+	 *            the user name
+	 * @return the hotsearch by id and name
+	 */
+	public Hotsearch getHotsearchByIdAndName(Integer id, String userName);
 
 }

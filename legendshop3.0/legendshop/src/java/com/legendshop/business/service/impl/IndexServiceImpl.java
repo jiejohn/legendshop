@@ -197,6 +197,15 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 	}
 
 
+	@Override
+	public String getHome(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		return null;
+	}
+
+	
+	
 
 	/**
 	 * Sets the news dao.
@@ -287,6 +296,8 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 	public void setLogoDao(LogoDao logoDao) {
 		this.logoDao = logoDao;
 	}
+
+
 
 
 

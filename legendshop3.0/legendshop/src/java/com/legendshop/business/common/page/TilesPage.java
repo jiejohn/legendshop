@@ -7,20 +7,25 @@
  */
 package com.legendshop.business.common.page;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
+import com.legendshop.spi.constants.TemplateEnum;
+import com.legendshop.util.AppUtils;
 
 /**
  * The Enum TilesPage.
  */
-public enum TilesPage implements PageDefinition{
+public enum TilesPage implements PageDefinition {
 	/** The VARIABLE. 可变路径 */
 	VARIABLE(""),
-	
+
 	/** The INDEX page. */
-	INDEX_PAGE("index."),
+	INDEX_PAGE("index.",TemplateEnum.DEFAULT,TemplateEnum.RED),
 
 	/** The N o_ login. */
 	NO_LOGIN("loginhint."),
@@ -74,36 +79,47 @@ public enum TilesPage implements PageDefinition{
 	ORDER("order."),
 
 	/** The OPENSHOP. */
-	OPENSHOP("openShop.");
-	
-	
+	OPENSHOP("openShop."),
+
+	/**
+	 * C2C home page
+	 */
+	HOME("home.",TemplateEnum.RED)
+
+	;
+
 	/** The value. */
 	private final String value;
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
+	private List<String> templates;
+
+	private TilesPage(String value, String... template) {
+		this.value = value;
+		if (AppUtils.isNotBlank(template)) {
+			this.templates = new ArrayList<String>();
+			for (String temp : template) {
+				templates.add(temp);
+			}
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http
+	 * .HttpServletRequest)
 	 */
 	@Override
 	public String getValue(HttpServletRequest request) {
-		return getValue(request,value);
-	}
-	
-	@Override
-	public String getValue(HttpServletRequest request, String path) {
-		return PagePathCalculator.calculateTilesPath(request,path);
+		return getValue(request, value, templates);
 	}
 
-	
-	/**
-	 * Instantiates a new tiles page.
-	 * 
-	 * @param value
-	 *            the value
-	 */
-	private TilesPage(String value) {
-		this.value = value;
+	@Override
+	public String getValue(HttpServletRequest request, String path, List<String> templates) {
+		return PagePathCalculator.calculateTilesPath(request, path, templates);
 	}
-	
 
 	@Override
 	public String getValue() {

@@ -56,7 +56,7 @@ public interface HotsearchService {
 	 *            the view all data function
 	 * @return the long
 	 */
-	public abstract Long save(Hotsearch hotsearch, String userName, boolean viewAllDataFunction);
+	public abstract Long saveHotsearch(Hotsearch hotsearch, String userName, boolean viewAllDataFunction);
 
 	/**
 	 * Update.
@@ -64,7 +64,7 @@ public interface HotsearchService {
 	 * @param hotsearch
 	 *            the hotsearch
 	 */
-	public abstract void update(Hotsearch hotsearch);
+	public abstract void updateHotsearch(Hotsearch hotsearch);
 
 	/**
 	 * Gets the data by criteria query.
@@ -84,6 +84,6 @@ public interface HotsearchService {
 	 *            the sort id
 	 * @return the search
 	 */
-	public abstract List<Hotsearch> getSearch(String userName, Long sortId);
+	public abstract List<Hotsearch> getHotsearch(String userName, Long sortId);
 
 }

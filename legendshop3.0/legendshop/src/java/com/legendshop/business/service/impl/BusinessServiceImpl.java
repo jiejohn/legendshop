@@ -515,7 +515,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		setShopName(request, response, sort.getUserName());
 		setAdvertisement(sort.getUserName(), request);
 		// 热门搜索
-		List<Hotsearch> searchList = hotsearchDao.getSearch(sort.getUserName(), sortId);
+		List<Hotsearch> searchList = hotsearchDao.getHotsearch(sort.getUserName(), sortId);
 		if (!AppUtils.isBlank(searchList)) {
 			request.setAttribute("searchList", searchList);
 		}

@@ -16,6 +16,8 @@ import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.HotsearchDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
+import com.legendshop.core.exception.BusinessException;
+import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.model.entity.Hotsearch;
 
 /**
@@ -34,13 +36,14 @@ public class HotsearchDaoImpl extends BaseDaoImpl implements HotsearchDao {
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(HotsearchDaoImpl.class);
 
+
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.HotsearchDao#getSearch(java.lang.String)
 	 */
 	@Override
-	public List<Hotsearch> getSearch(String shopName) {
-		log.debug("getSearch, shopName = {}", shopName);
-		return findByHQL("from Hotsearch where userName = ? order by Id DESC", new Object[] { shopName });
+	public List<Hotsearch> getHotsearch(String userName) {
+		log.debug("getHotsearch, userName = {}", userName);
+		return findByHQL("from Hotsearch where userName = ?", new Object[] { userName });
 	}
 
 	/* (non-Javadoc)
@@ -48,10 +51,13 @@ public class HotsearchDaoImpl extends BaseDaoImpl implements HotsearchDao {
 	 */
 	@Override
 	@Cacheable(value="HotsearchList",key="#userName + #isortId")
-	public List<Hotsearch> getSearch(final String userName, final Long isortId) {
+	public List<Hotsearch> getHotsearch(final String userName, final Long isortId) {
 		return findByHQL("from Hotsearch where userName = ?  and sort = ?", userName, isortId);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.HotsearchDao#deleteHotsearchById(java.lang.Long)
+	 */
 	@Override
 	@CacheEvict(value = "Hotsearch", key = "#id")
 	public void deleteHotsearchById(Long id) {
@@ -59,11 +65,27 @@ public class HotsearchDaoImpl extends BaseDaoImpl implements HotsearchDao {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.HotsearchDao#updateHotsearch(com.legendshop.model.entity.Hotsearch)
+	 */
 	@Override
 	@CacheEvict(value = "Hotsearch", key = "#hotsearch.id")
 	public void updateHotsearch(Hotsearch hotsearch) {
 		update(hotsearch);
 		
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.dao.HotsearchDao#getHotsearchByIdAndName(java.lang.Integer, java.lang.String)
+	 */
+	@Override
+	public Hotsearch getHotsearchByIdAndName(Integer id, String userName){
+		Hotsearch hotsearch = findUniqueBy("from Hotsearch where id = ? and userName = ?",
+				Hotsearch.class, id, userName);
+		if (hotsearch == null) {
+			throw new BusinessException("no Hotsearch record",EntityCodes.PROD);
+		}
+		return hotsearch;
 	}
 
 }
