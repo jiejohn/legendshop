@@ -92,7 +92,7 @@
 					    </auth:auth>
 					   </c:when>
 					   <c:otherwise>
-					     	<a href="<ls:url address='/login'/>"><fmt:message key="login"/></a>
+					     	<a href="<ls:url address='/admin/login'/>"><fmt:message key="login"/></a>
 				   </c:otherwise>
 	    		</c:choose>
 		     

@@ -18,7 +18,7 @@
 	%>
 	   <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a>&raquo;用户[${bean.name }]权限列表 </td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a>&raquo;用户[${bean.name }]权限列表 </td></tr>
 	    </thead>
 	    </table>
 

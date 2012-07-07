@@ -32,10 +32,10 @@
 			}
 			int offset=((Integer)request.getAttribute("offset")).intValue();
 	%>
-<form action="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}">
+<form action="${pageContext.request.contextPath}/admin/member/role/query${applicationScope.WEB_SUFFIX}">
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}">角色管理</a> </td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/member/role/query${applicationScope.WEB_SUFFIX}">角色管理</a> </td></tr>
 	    </thead>
 	    </table>
 <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
@@ -46,13 +46,13 @@
 				  <option:optionGroup type="select" required="true" cache="true"  beanName="ENABLED" selectedValue="${bean.enabled}"/>
 	            </select>
 			<input type="submit" value="搜索"/>
-			<input type="button" value="创建角色" onclick='window.location="${pageContext.request.contextPath}/member/role/load${applicationScope.WEB_SUFFIX}"'/>
+			<input type="button" value="创建角色" onclick='window.location="${pageContext.request.contextPath}/admin/member/role/load${applicationScope.WEB_SUFFIX}"'/>
 			&nbsp;&nbsp;
 </form>	
 
 	 <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
-    <display:table name="list" requestURI="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
+    <display:table name="list" requestURI="${pageContext.request.contextPath}/admin/member/role/query${applicationScope.WEB_SUFFIX}" id="item" export="true" class="${tableclass}" style="width:100%">
       <display:column title="顺序"><%=offset++%></display:column>
       <display:column title="名称 " property="name" sortable="true"></display:column>
       <display:column title="角色名称 " property="roleType"></display:column>
@@ -62,11 +62,11 @@
       </display:column>
       <display:column title="备注" property="note"></display:column>
       <display:column title="对应权限">
-      	<a href="${pageContext.request.contextPath}/member/role/functions/${item.id}${applicationScope.WEB_SUFFIX}">权限</a>
+      	<a href="${pageContext.request.contextPath}/admin/member/role/functions/${item.id}${applicationScope.WEB_SUFFIX}">权限</a>
       </display:column>
       <display:column title="操作" media="html" style="width:75px">
-      	<a href="${pageContext.request.contextPath}/member/role/update/${item.id}${applicationScope.WEB_SUFFIX}" ><img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "></a>
-      	<a href="${pageContext.request.contextPath}/member/role/delete/${item.id}${applicationScope.WEB_SUFFIX}" title="删除"><img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/> "></a>
+      	<a href="${pageContext.request.contextPath}/admin/member/role/update/${item.id}${applicationScope.WEB_SUFFIX}" ><img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "></a>
+      	<a href="${pageContext.request.contextPath}/admin/member/role/delete/${item.id}${applicationScope.WEB_SUFFIX}" title="删除"><img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/> "></a>
       </display:column>
     </display:table>
         <c:if test="${not empty toolBar}">

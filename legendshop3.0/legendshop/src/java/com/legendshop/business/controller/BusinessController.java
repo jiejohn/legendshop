@@ -500,7 +500,7 @@ public class BusinessController extends BaseController {
 	 *            the response
 	 * @return the string
 	 */
-	@RequestMapping("/login")
+	@RequestMapping("/admin/login")
 	public String login(HttpServletRequest request, HttpServletResponse response) {
 		return PathResolver.getPath(request, TilesPage.LOGIN);
 	}

@@ -85,7 +85,7 @@ function isIP() {
 					    </auth:auth>
 					   </c:when>
 					   <c:otherwise>
-					     	<a href="${pageContext.request.contextPath}/login${applicationScope.WEB_SUFFIX}"><fmt:message key="login"/></a>
+					     	<a href="${pageContext.request.contextPath}/admin/login${applicationScope.WEB_SUFFIX}"><fmt:message key="login"/></a>
 				   </c:otherwise>
 	    		</c:choose>
 		     
@@ -122,7 +122,7 @@ function isIP() {
       <LI><A href="${pageContext.request.contextPath}/all${applicationScope.WEB_SUFFIX}">高级搜索</A> - 搜索各种商城和商品，或者到商城首页 </LI>
       <LI><A href="${pageContext.request.contextPath}/index${applicationScope.WEB_SUFFIX}">首页</A> -  到当前商城首页 </LI>
       <LI><A href="${pageContext.request.contextPath}/reg${applicationScope.WEB_SUFFIX}">注册</A> - 注册一个用户或者商家</LI>
-      <LI><A href="${pageContext.request.contextPath}/login${applicationScope.WEB_SUFFIX}">登录</A> - 登录系统</LI>
+      <LI><A href="${pageContext.request.contextPath}/admin/login${applicationScope.WEB_SUFFIX}">登录</A> - 登录系统</LI>
       <LI><A href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club">论坛</A> - 买家和卖家的经验交流基地</LI>
       <LI><A href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/jforum.page?module=posts&action=insert&forum_id=4">我要投诉</A> - 到论坛上投诉 </LI>
    </UL>

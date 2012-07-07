@@ -48,11 +48,11 @@
 </script>
 </head>
 <body>
-      <form  action="${pageContext.request.contextPath}/member/user/updatePassword${applicationScope.WEB_SUFFIX}" id="form1" method="post">
+      <form  action="${pageContext.request.contextPath}/admin/member/user/updatePassword${applicationScope.WEB_SUFFIX}" id="form1" method="post">
       
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a> &raquo; 修改用户</td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a> &raquo; 修改用户</td></tr>
 	    </thead>
 	    </table>
       
@@ -104,7 +104,7 @@
     				<auth:auth ifAnyGranted="F_OPERATOR"><input type="submit" value="提交" /></auth:auth>
                    	<input type="reset" value="重置" />
                    	<input type="button" value="返回"
-                       onclick="window.location='${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}'" />
+                       onclick="window.location='${pageContext.request.contextPath}/admin/member/user/query${applicationScope.WEB_SUFFIX}'" />
                </div>
            </td>
        </tr>

@@ -47,10 +47,10 @@
 </script>
 </head>
 <body>
-      <form  action="${pageContext.request.contextPath}/member/role/save${applicationScope.WEB_SUFFIX}" id="form1" method="post">      
+      <form  action="${pageContext.request.contextPath}/admin/member/role/save${applicationScope.WEB_SUFFIX}" id="form1" method="post">      
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/role/query${applicationScope.WEB_SUFFIX}">角色管理</a> &raquo; 
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/member/role/query${applicationScope.WEB_SUFFIX}">角色管理</a> &raquo; 
 	    			<c:choose>
 	                	<c:when test="${not empty bean}">修改角色</c:when>
 	                	<c:otherwise>创建角色</c:otherwise>
@@ -126,7 +126,7 @@
     				<auth:auth ifAnyGranted="F_OPERATOR"><input type="submit" value="提交" /></auth:auth>
                    	<input type="reset" value="重置" />
                    	<input type="button" value="返回"
-                       onclick="window.location='${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}'" />
+                       onclick="window.location='${pageContext.request.contextPath}/admin/member/user/query${applicationScope.WEB_SUFFIX}'" />
                </div>
            </td>
        </tr>

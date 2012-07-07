@@ -81,7 +81,7 @@
   -->
  <filter-mapping>
   <filter-name>springSecurityFilterChain</filter-name>
-  <url-pattern>/*</url-pattern>
+  <url-pattern>/admin/*</url-pattern>
  </filter-mapping>
  <filter-mapping>
   <filter-name>HiddenHttpMethodFilter</filter-name>

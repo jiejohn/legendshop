@@ -54,7 +54,7 @@
 	else
 	{
 	 if( confirmDelete()){
-     document.forms[0].action="${pageContext.request.contextPath}/member/role/deletePermissionByRoleId${applicationScope.WEB_SUFFIX}";  
+     document.forms[0].action="${pageContext.request.contextPath}/admin/member/role/deletePermissionByRoleId${applicationScope.WEB_SUFFIX}";  
      document.forms[0].submit(); 
      return true ;
      }else{
@@ -73,11 +73,11 @@
 			int offset=1;
 	%>
 
-	<form action="${pageContext.request.contextPath}/member/role/deletePermissionByRoleId${applicationScope.WEB_SUFFIX}" id="form1" method="post">
+	<form action="${pageContext.request.contextPath}/admin/member/role/deletePermissionByRoleId${applicationScope.WEB_SUFFIX}" id="form1" method="post">
 	
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="<ls:url address="/member/role/query"/>">角色管理</a>&raquo;角色[${bean.name }]对应的权限列表 </td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="<ls:url address="/admin/member/role/query"/>">角色管理</a>&raquo;角色[${bean.name }]对应的权限列表 </td></tr>
     </thead>
     </table>
 	<input type="hidden" name="roleId" value="${bean.id }"> 
@@ -90,7 +90,7 @@
       <display:column title="权限名称 " property="protectFunction" sortable="true"></display:column>
       <display:column title="备注" property="note"></display:column>
     </display:table>
-    <input type="button" value="增加权限" onclick="window.location='<ls:url address="/member/role/otherFunctions/${bean.id}"/>'"/> &nbsp;
+    <input type="button" value="增加权限" onclick="window.location='<ls:url address="/admin/member/role/otherFunctions/${bean.id}"/>'"/> &nbsp;
 	<input type="submit" value="删除" onclick="return deleteAction();"/>
 </div>
   </form>

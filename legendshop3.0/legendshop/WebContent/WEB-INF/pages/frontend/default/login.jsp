@@ -33,7 +33,7 @@
                   <td class="titlebg"><font style="font-size: 1.4em"><fmt:message key="login"/></font></td>
                 </tr>
 	<tr><td><center>
-			<form name="loginform" action="${pageContext.request.contextPath}/j_spring_security_check" method="POST"  onsubmit="return checkRandNum();">
+			<form name="loginform" action="${pageContext.request.contextPath}/admin/j_spring_security_check" method="POST"  onsubmit="return checkRandNum();">
 			<input type="hidden" id="rand" name="rand"/>
 			<input type="hidden" id="cannonull" name="cannonull" value='<fmt:message key="randomimage.errors.required"/>'/>
 			<input type="hidden" id="charactors4" name="charactors4" value='<ls:i18n key="randomimage.charactors.required" length="6"/>'/>

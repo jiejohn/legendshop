@@ -17,7 +17,7 @@
 
 	   <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href='<ls:url address="/member/right/query"/>'>权限管理</a>&raquo;拥有[${bean.name }]权限的角色列表 </td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href='<ls:url address="/admin/member/right/query"/>'>权限管理</a>&raquo;拥有[${bean.name }]权限的角色列表 </td></tr>
 	    </thead>
 	    </table>
 	    

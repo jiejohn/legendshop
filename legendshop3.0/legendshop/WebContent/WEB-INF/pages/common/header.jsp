@@ -63,7 +63,7 @@ $(document).ready(function() {
    </c:when>
    <c:otherwise>
 			<li id="loginbar"  class="ld">欢迎来到LengedShop！
-			<span><a href="<ls:url address='/login'/>">[<fmt:message key="login"/>]</a> 
+			<span><a href="<ls:url address='/admin/login'/>">[<fmt:message key="login"/>]</a> 
 			<a class="link-regist" href="<ls:url address='/reg'/>">[<fmt:message key="regFree"/>]</a></span></li>
    </c:otherwise>
 </c:choose>

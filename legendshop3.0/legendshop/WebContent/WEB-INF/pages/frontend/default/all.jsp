@@ -55,7 +55,7 @@
 					    </auth:auth>
 					   </c:when>
 					   <c:otherwise>
-					     	<a href="${pageContext.request.contextPath}/login${applicationScope.WEB_SUFFIX}"><fmt:message key="login"/></a>
+					     	<a href="${pageContext.request.contextPath}/admin/login${applicationScope.WEB_SUFFIX}"><fmt:message key="login"/></a>
 				   </c:otherwise>
 	    		</c:choose>
 	    		<a href="${pageContext.request.contextPath}/reg${applicationScope.WEB_SUFFIX}"><fmt:message key="register.title"/></a> 

@@ -15,7 +15,7 @@
 <div align="center">
   <table width="386" height="185" >
     <tr>
-      <td width="380" height="181"><html:form  action="/member/right/updateRoleById${applicationScope.WEB_SUFFIX}">
+      <td width="380" height="181"><html:form  action="/admin/member/right/updateRoleById${applicationScope.WEB_SUFFIX}">
         <table width="380"  align="center" bordercolor="#66CCFF" class="tableBorder" style="border-collapse:collapse " >
          
 		  <tr>

@@ -18,7 +18,7 @@
   </tr>
   <tr> 
     <td height="80px"  align="left" style="margin-left: 80px;">
-     <ls:i18n key="nologin.hint" login="<ls:url address='/login'/>" reg="<ls:url address='/reg'/>"/> 
+     <ls:i18n key="nologin.hint" login="<ls:url address='/admin/login'/>" reg="<ls:url address='/reg'/>"/> 
       </td>
   </tr>
 </table>

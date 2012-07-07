@@ -65,10 +65,10 @@
 
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a>&raquo;增加用户[${bean.name }]角色</td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/member/user/query${applicationScope.WEB_SUFFIX}">权限用户管理</a>&raquo;增加用户[${bean.name }]角色</td></tr>
     </thead>
     </table>
-<form action="<ls:url address='/member/user/saveRoleToUser'/>" id="form1" name="form1">
+<form action="<ls:url address='/admin/member/user/saveRoleToUser'/>" id="form1" name="form1">
 <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}">
 <input type="hidden" name="userId" value="${bean.id }">
 	 <div align="center">

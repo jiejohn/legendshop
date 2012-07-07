@@ -29,7 +29,7 @@
 	%>
 <br>
 <br>
-	<html:form action="/member/right/listFunction${applicationScope.WEB_SUFFIX}">
+	<html:form action="/admin/member/right/listFunction${applicationScope.WEB_SUFFIX}">
     <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
 			<div align="center">
 			&nbsp; 根据权限名称查找 ：
@@ -64,7 +64,7 @@
     角色
         </html:link></td>
     <td align="center" class="forumRow"><html:link href="findFunctionById${applicationScope.WEB_SUFFIX}" paramId="id" paramName="function" paramProperty="id">修改</html:link> </td>
-    <td align="center" class="forumRow"><html:link page="/member/right/deleteFunctionById${applicationScope.WEB_SUFFIX}" paramId="id" paramName="function" paramProperty="id" onclick="return confirmDelete();">删除</html:link> </td>
+    <td align="center" class="forumRow"><html:link page="/admin/member/right/deleteFunctionById${applicationScope.WEB_SUFFIX}" paramId="id" paramName="function" paramProperty="id" onclick="return confirmDelete();">删除</html:link> </td>
   </tr>
   </logic:present>
   </logic:iterate>
@@ -78,7 +78,7 @@
 	</div>
 <div align="center">
 <P> 点击此处
-  <html:link page="/member/right/saveFunction.jsp">增加权限</html:link>
+  <html:link page="/admin/member/right/saveFunction.jsp">增加权限</html:link>
 </div>
   
 </body>

@@ -10,10 +10,12 @@
     <global-method-security pre-post-annotations="enabled">
     </global-method-security>
     
+    <http pattern="/admin/login${WEB_SUFFIX}" security="none"/>  
+    
     <http realm="LegendShop Realm" access-denied-page="/WEB-INF/pages/common/401.jsp"  entry-point-ref="authenticationProcessingFilterEntryPoint">
 		<remember-me />
+		<intercept-url pattern="/admin/member/**" access="ROLE_SUPERVISOR" />
 		<intercept-url pattern="/admin/**" access="ROLE_SUPERVISOR,ROLE_ADMIN" />		
-		<intercept-url pattern="/member/**" access="ROLE_SUPERVISOR" />
 		<!-- 
 		<intercept-url pattern="/system/**" access="ROLE_SUPERVISOR,ROLE_SYSTEM" />
 		 -->
@@ -27,7 +29,7 @@
     
     <beans:bean id="authenticationProcessingFilterEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-		<beans:property name="loginFormUrl" value="/login${WEB_SUFFIX}"></beans:property>
+		<beans:property name="loginFormUrl" value="/admin/login${WEB_SUFFIX}"></beans:property>
 	</beans:bean>
  
   <beans:bean id="_logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
@@ -44,7 +46,7 @@
 	
 	<beans:bean id="validateCodeAuthenticationFilter"
 		class="com.legendshop.business.service.ValidateCodeUsernamePasswordAuthenticationFilter">
-		<beans:property name="filterProcessesUrl" value="/j_spring_security_check"></beans:property>
+		<beans:property name="filterProcessesUrl" value="/admin/j_spring_security_check"></beans:property>
 		<beans:property name="authenticationSuccessHandler"
 			ref="loginLogAuthenticationSuccessHandler"></beans:property>
 		<beans:property name="authenticationFailureHandler"
@@ -69,7 +71,7 @@
 	
 	<beans:bean id="simpleUrlAuthenticationFailureHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-		<beans:property name="defaultFailureUrl" value="/login${WEB_SUFFIX}?error=true"></beans:property>
+		<beans:property name="defaultFailureUrl" value="/admin/login${WEB_SUFFIX}?error=true"></beans:property>
 	</beans:bean>
 
 	<!-- 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->

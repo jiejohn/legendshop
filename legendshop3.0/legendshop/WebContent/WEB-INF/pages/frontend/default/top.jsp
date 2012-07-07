@@ -109,7 +109,7 @@
 	<a href="${pageContext.request.contextPath}/logout.jsp" target="_parent">[<fmt:message key="logout"/>]</a>
    </c:when>
    <c:otherwise>
-  	<a href="<ls:url address='/login'/>">[<fmt:message key="login"/>]</a>
+  	<a href="<ls:url address='/admin/login'/>">[<fmt:message key="login"/>]</a>
    </c:otherwise>
 </c:choose>
 <a href="<ls:url address='/reg'/>" class="n2">[<fmt:message key="regFree"/>]</a>
