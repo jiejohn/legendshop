@@ -50,7 +50,7 @@ import com.legendshop.util.StringUtil;
  * RoleController.
  */
 @Controller
-@RequestMapping("/member/role")
+@RequestMapping("/admin/member/role")
 public class RoleController extends BaseController implements AdminController<Role, String> {
 
 	/** The log. */

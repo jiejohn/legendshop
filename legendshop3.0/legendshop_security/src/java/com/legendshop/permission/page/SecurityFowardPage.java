@@ -24,25 +24,25 @@ public enum SecurityFowardPage implements PageDefinition{
 	VARIABLE(""),
 	
 	/** The FUNCTIO n_ lis t_ query. */
-	FUNCTION_LIST_QUERY("/member/right/listFunction"),
+	FUNCTION_LIST_QUERY("/admin/member/right/listFunction"),
 
 	/** The FIN d_ functio n_ b y_ role. */
-	FIND_FUNCTION_BY_ROLE("/member/role/functions"),
+	FIND_FUNCTION_BY_ROLE("/admin/member/role/functions"),
 
 	/** The FIN d_ al l_ role. */
-	FIND_ALL_ROLE("/member/right/findAllRole"), 
+	FIND_ALL_ROLE("/admin/member/right/findAllRole"), 
 	
 	/** The FIN d_ rol e_ b y_ user. */
-	FIND_ROLE_BY_USER("/member/user/findRoleByUser"),
+	FIND_ROLE_BY_USER("/admin/member/user/findRoleByUser"),
 
 	/** The FIN d_ use r_ roles. */
-	FIND_USER_ROLES("/member/user/roles"),
+	FIND_USER_ROLES("/admin/member/user/roles"),
 
 	/** The AL l_ role. */
-	ALL_ROLE("/member/role/query"),
+	ALL_ROLE("/admin/member/role/query"),
 	
 	/** The USER s_ list. */
-	USERS_LIST("/member/user/query")
+	USERS_LIST("/admin/member/user/query")
 	;
 	
 	

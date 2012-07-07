@@ -53,7 +53,7 @@ import com.legendshop.util.StringUtil;
  * UserController.
  */
 @Controller
-@RequestMapping("/member/user")
+@RequestMapping("/admin/member/user")
 public class UserController extends BaseController implements AdminController<User, String>{
 
 	/** The log. */

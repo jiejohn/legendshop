@@ -52,7 +52,7 @@ import com.legendshop.util.StringUtil;
  * FunctionController.
  */
 @Controller
-@RequestMapping("/member/right")
+@RequestMapping("/admin/member/right")
 public class FunctionController extends BaseController implements AdminController<Function, String> {
 
 	/** The log. */
