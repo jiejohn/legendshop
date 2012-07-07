@@ -51,9 +51,6 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 
 		String shopName = getShopName(request, response);
 		List<Sort> groupSortList=sortService.getSort(shopName, ProductTypeEnum.GROUP.value(),null , null, false);
-//		for(Sort s:groupSortList){
-//			System.out.println(s.getSortName());
-//		}
 		
 		//TODO place into service
 		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class), curPageNO);
@@ -151,6 +148,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 		this.partnerService = partnerService;
 	}
 
+	@Override
 	public void setLocaleResolver(LocaleResolver localeResolver) {
 		this.localeResolver = localeResolver;
 	}

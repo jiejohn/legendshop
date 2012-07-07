@@ -22,11 +22,8 @@ import com.legendshop.core.constant.PathResolver;
 import com.legendshop.group.page.GroupFrontPage;
 import com.legendshop.model.entity.Product;
 import com.legendshop.spi.constants.NewsPositionEnum;
-import com.legendshop.spi.service.GroupProductService;
 import com.legendshop.spi.service.GroupService;
 import com.legendshop.spi.service.NewsService;
-import com.legendshop.spi.service.PartnerService;
-import com.legendshop.spi.service.SortService;
 
 /**
  * The Class GroupController.
