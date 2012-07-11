@@ -40,7 +40,7 @@
 	    <beans:bean class="com.legendshop.business.helper.SecurityContextLogoutHandlerImpl" />
 	   </beans:list>
 	  </beans:constructor-arg>
-	  <beans:property name="filterProcessesUrl" value="/logout.jsp"/>
+	  <beans:property name="filterProcessesUrl" value="/admin/logout"/>
  </beans:bean>
  
 	

@@ -592,7 +592,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 				return PathResolver.getPath(request,"/group/view/" + prodId, FowardPage.VARIABLE);
 			}
 			if (!Constants.ONLINE.equals(prod.getStatus())) {
-				throw new NotFoundException("Product does not online.",EntityCodes.PROD);
+				throw new NotFoundException("Product " + prod.getName() + " does not online.",EntityCodes.PROD);
 			}
 			// 查看商品的说明图片
 			List<ImgFile> prodPics = imgFileDao.getProductPics(prod.getUserName(), prodId);

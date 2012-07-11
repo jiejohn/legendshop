@@ -106,7 +106,7 @@
    <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
   <span><b>${sessionScope.SPRING_SECURITY_LAST_USERNAME}</b></span>
    	<a href="<ls:url address='/myaccount'/>")>[<fmt:message key="myaccount"/>]</a>
-	<a href="${pageContext.request.contextPath}/logout.jsp" target="_parent">[<fmt:message key="logout"/>]</a>
+	<a href="${pageContext.request.contextPath}/admin/logout" target="_parent">[<fmt:message key="logout"/>]</a>
    </c:when>
    <c:otherwise>
   	<a href="<ls:url address='/admin/login'/>">[<fmt:message key="login"/>]</a>

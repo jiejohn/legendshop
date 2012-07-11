@@ -57,7 +57,7 @@ $(document).ready(function() {
 			<li id="loginbar"  class="ld">${sessionScope.SPRING_SECURITY_LAST_USERNAME}			
 			<span>
 			<a href="<ls:url address='/myaccount'/>")>[<fmt:message key="myaccount"/>]</a> 
-			<a href="${pageContext.request.contextPath}/logout.jsp" target="_parent">[<fmt:message key="logout"/>]</a>
+			<a href="${pageContext.request.contextPath}/admin/logout" target="_parent">[<fmt:message key="logout"/>]</a>
 			</span></li>
    
    </c:when>

@@ -46,7 +46,7 @@
 					  <span style="color: red; font-weight: bold;">${sessionScope.SPRING_SECURITY_LAST_USERNAME}</span>
 					   	<a href="${pageContext.request.contextPath}/myaccount${applicationScope.WEB_SUFFIX}")><fmt:message key="myaccount"/></a>
 					   	<a href="${pageContext.request.contextPath}/order${applicationScope.WEB_SUFFIX}")><fmt:message key="myorder"/></a>
-						<a href="${pageContext.request.contextPath}/logout.jsp" target="_parent"><fmt:message key="logout"/></a>
+						<a href="${pageContext.request.contextPath}/admin/logout" target="_parent"><fmt:message key="logout"/></a>
        			        <auth:auth ifAnyGranted="F_ADMIN">
        			          <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
        			                <a href="${pageContext.request.contextPath}/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}${applicationScope.WEB_SUFFIX}"><fmt:message key="myShop"/></a>

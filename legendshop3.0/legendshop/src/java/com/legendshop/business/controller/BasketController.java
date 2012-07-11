@@ -21,6 +21,9 @@ import com.legendshop.business.service.BasketService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.exception.BusinessException;
+import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.spi.constants.Constants;
 
 /**
@@ -64,7 +67,11 @@ public class BasketController extends BaseController {
 	 * @return the basket
 	 */
 	private String getBasket(HttpServletRequest request, HttpServletResponse response, Long prodId) {
+		
 		String userName = UserManager.getUsername(request);
+		if(prodId == null){
+			throw new BusinessException("product id can not be null, userName =  " + userName, EntityCodes.BASKET);
+		}
 		String addtoCart = request.getParameter("addtoCart");
 		String count = request.getParameter("count");
 		if (count == null) {
@@ -78,11 +85,15 @@ public class BasketController extends BaseController {
 			if ("added".equals(addtoCart)) {// 如果是采用购物车订购的话直接进入付款页面
 				destView = "/basket/load/";
 			}
-			//request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + destView + prodId + Constants.WEB_SUFFIX);
+			destView = "/basket/load/";
+			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + destView + prodId + Constants.WEB_SUFFIX);
 			return PathResolver.getPath(request, TilesPage.NO_LOGIN);
 		}
 		String shopName = getShopName(request, response);
-		basketService.saveToCart(prodId, addtoCart, shopName, prodattr, userName,  Integer.valueOf(count));
+		if(prodId != null){
+			basketService.saveToCart(prodId, addtoCart, shopName, prodattr, userName,  Integer.valueOf(count));
+		}
+		
 		return PathResolver.getPath(request, TilesPage.PAGE_CASH);
 	}
 	
