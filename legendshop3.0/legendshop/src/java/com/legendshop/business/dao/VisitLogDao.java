@@ -30,5 +30,23 @@ public interface VisitLogDao extends BaseDao{
 	 *            the id
 	 */
 	void deleteVisitLogById(Long id);
+	
+	/**
+	 * Gets the visited index log.
+	 * 
+	 * @param visitLog
+	 *            the visit log
+	 * @return the visited index log
+	 */
+	VisitLog getVisitedIndexLog(VisitLog visitLog);
+	
+	/**
+	 * Gets the visited prod log.
+	 * 
+	 * @param visitLog
+	 *            the visit log
+	 * @return the visited prod log
+	 */
+	VisitLog getVisitedProdLog(VisitLog visitLog);
 
 }

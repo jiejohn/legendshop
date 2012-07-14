@@ -47,9 +47,20 @@
 		</property>
 	</bean>
 	
-	<bean id="sendMailProcessor" class="com.legendshop.business.event.listener.SendMailProcessor" parent="threadProcessor">
+	<bean class="com.legendshop.event.EventListenerImpl">
+		<property name="eventId" value="VISIT_LOG" />
+		<property name="processors">
+			<list>
+				<bean class="com.legendshop.business.processor.event.VisitLogProcessor"  parent="threadProcessor">
+					<property name="visitLogDao" ref="visitLogDao"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>	
+	
+	
+	<bean id="sendMailProcessor" class="com.legendshop.business.processor.event.SendMailProcessor" parent="threadProcessor" >
 	</bean>
 	
-		<bean id="userRegProcessor" class="com.legendshop.business.event.listener.UserRegProcessor">
-	</bean>
+	<bean id="userRegProcessor" class="com.legendshop.business.processor.event.UserRegProcessor"  />
 </beans>

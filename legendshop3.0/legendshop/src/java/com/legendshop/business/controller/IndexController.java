@@ -16,15 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.service.IndexService;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ConfigPropertiesEnum;
-import com.legendshop.core.constant.PathResolver;
-import com.legendshop.core.exception.ErrorCodes;
+import com.legendshop.core.exception.BusinessException;
+import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.model.UserMessages;
-import com.legendshop.util.FileConfig;
 
 /**
  * The Class GroupController.
@@ -40,7 +36,7 @@ public class IndexController extends BaseController {
 	/**
 	 * 前台首页.
 	 * 
-	 * @param request
+	 * @param request  
 	 *            the request
 	 * @param response
 	 *            the response
@@ -50,26 +46,14 @@ public class IndexController extends BaseController {
 	public String index(HttpServletRequest request, HttpServletResponse response) {
 		log.debug("Index starting calling");
 		try {
-			//test
-//			EventHome.publishEvent(new UserRegEvent("testObject"));
-//			EventHome.publishEvent(new SendMailEvent("mail content"));
-			
-			
 			return indexService.getIndex(request, response);
 		} catch (Exception e) {
 			log.error("invoking index", e);
 			if (!PropertiesUtil.isSystemInstalled()) {
-				String version = PropertiesUtil.getProperties(FileConfig.GlobalFile,
-						ConfigPropertiesEnum.LEGENDSHOP_VERSION.name());
-				UserMessages uem = new UserMessages();
-				uem.setTitle("系统还没有安装成功");
-				uem.setDesc("System will be available until install operation is finished!");
-				uem.setCode(ErrorCodes.SYSTEM_UNINSTALLED);
-				uem.addCallBackList("安装系统", "LegendShop " + version, "install");
-				request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-				return "redirect:install/index.jsp";
+				// redirect to the install page
+				redirectToInstallPage(request);
 			}
-			return PathResolver.getPath(request, FrontPage.FAIL);
+			throw new BusinessException("/index", EntityCodes.SYSTEM);
 		}
 	}
 

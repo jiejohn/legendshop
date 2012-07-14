@@ -41,11 +41,11 @@ import com.legendshop.business.dao.SortDao;
 import com.legendshop.business.dao.SubDao;
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.event.EventId;
+import com.legendshop.business.event.impl.VisitLogEvent;
 import com.legendshop.business.form.MemberForm;
 import com.legendshop.business.form.SearchForm;
 import com.legendshop.business.form.UserForm;
 import com.legendshop.business.helper.TaskThread;
-import com.legendshop.business.helper.impl.PersistVisitLogTask;
 import com.legendshop.business.helper.impl.SendMailTask;
 import com.legendshop.business.service.BusinessService;
 import com.legendshop.business.service.PayTypeService;
@@ -88,7 +88,6 @@ import com.legendshop.model.entity.Sort;
 import com.legendshop.model.entity.Sub;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserDetail;
-import com.legendshop.model.entity.VisitLog;
 import com.legendshop.search.SearchArgs;
 import com.legendshop.search.SearchFacade;
 import com.legendshop.search.SearchResult;
@@ -636,15 +635,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			visit(prod, request);
 			// 多线程记录访问历史
 			if (PropertiesUtil.getObject(ParameterEnum.VISIT_LOG_ENABLE, Boolean.class)) {
-				VisitLog visitLog = new VisitLog();
-				visitLog.setDate(new Date());
-				visitLog.setIp(request.getRemoteAddr());
-				visitLog.setShopName(prod.getUserName());
-				visitLog.setProductName(prod.getName());
-				visitLog.setUserName(userName);
-				visitLog.setProductId(String.valueOf(prod.getProdId()));
-				visitLog.setPage(VisitTypeEnum.HW.value());
-				threadPoolExecutor.execute(new TaskThread(new PersistVisitLogTask(visitLog)));
+				EventHome.publishEvent(new VisitLogEvent(request.getRemoteAddr(),prod.getUserName(),userName,prod.getProdId(),prod.getName(),VisitTypeEnum.HW.value()));
 			}
 			return PathResolver.getPath(request, FrontPage.VIEWS);
 		} else {

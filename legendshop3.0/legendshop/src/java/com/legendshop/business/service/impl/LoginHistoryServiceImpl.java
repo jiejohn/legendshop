@@ -104,7 +104,11 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
 				loginHistory.setCountry(IPSeeker.getInstance().getCountry(ip));
 				loginHistory.setUserName(userName);
 				loginHistoryDao.save(loginHistory);
-				jdbcTemplate.update(ConfigCode.getInstance().getCode("login.updateUserDetail"), new Object[] {
+				String sql = ConfigCode.getInstance().getCode("login.updateUserDetail");
+				if(log.isDebugEnabled()){
+					log.debug("execute run sql {}, Ip {}, Time {}, UserName {} ", new Object[]{sql,loginHistory.getIp(), loginHistory.getTime(), loginHistory.getUserName()});
+				}
+				jdbcTemplate.update(sql, new Object[] {
 						loginHistory.getIp(), loginHistory.getTime(), loginHistory.getUserName() });
 
 			} catch (Exception e) {

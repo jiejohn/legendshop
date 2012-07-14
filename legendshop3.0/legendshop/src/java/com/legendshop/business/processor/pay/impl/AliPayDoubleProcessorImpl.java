@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.processor.impl;
+package com.legendshop.business.processor.pay.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Required;
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.payment.alipay.AlipayService;
 import com.legendshop.business.payment.alipay.config.AlipayConfig;
-import com.legendshop.business.processor.PaymentProcessor;
+import com.legendshop.business.processor.pay.PaymentProcessor;
 import com.legendshop.model.entity.PayType;
 import com.legendshop.model.entity.UserDetail;
 
@@ -33,7 +33,7 @@ import com.legendshop.model.entity.UserDetail;
 public class AliPayDoubleProcessorImpl implements PaymentProcessor {
 	
 	/** The user detail dao. */
-	private UserDetailDao userDetailDaoImpl;
+	private UserDetailDao userDetailDao;
 
 	/**
 	 * Payto.
@@ -56,6 +56,7 @@ public class AliPayDoubleProcessorImpl implements PaymentProcessor {
 	 *            the ip
 	 * @return the string
 	 */
+	@Override
 	public String payto(String shopName, String userName, Integer payTypeId, String out_trade_no, String subject,
 			String body, String price, String ip) {
 		// 必填参数//
@@ -80,7 +81,7 @@ public class AliPayDoubleProcessorImpl implements PaymentProcessor {
 		// 买家收货信息（推荐作为必填）
 		// 该功能作用在于买家已经在商户网站的下单流程中填过一次收货信息，而不需要买家在支付宝的付款流程中再次填写收货信息。
 		// 若要使用该功能，请至少保证receive_name、receive_address有值
-		UserDetail userDetail = userDetailDaoImpl.getUserDetail(userName);
+		UserDetail userDetail = userDetailDao.getUserDetail(userName);
 
 		String receive_name = userDetail.getNickName(); // 收货人姓名，如：张三
 		String receive_address = userDetail.getUserAdds(); // 收货人地址，如：XX省XXX市XXX区XXX路XXX小区XXX栋XXX单元XXX号
@@ -126,7 +127,7 @@ public class AliPayDoubleProcessorImpl implements PaymentProcessor {
 	 *            the new user detail dao
 	 */
 	@Required
-	public void setUserDetailDao(UserDetailDao userDetailDaoImpl) {
-		this.userDetailDaoImpl = userDetailDaoImpl;
+	public void setUserDetailDao(UserDetailDao userDetailDao) {
+		this.userDetailDao = userDetailDao;
 	}
 }

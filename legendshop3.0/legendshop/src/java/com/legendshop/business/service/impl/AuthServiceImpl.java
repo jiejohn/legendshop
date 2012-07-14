@@ -9,13 +9,9 @@ package com.legendshop.business.service.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +20,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -39,6 +35,8 @@ import com.legendshop.model.entity.UserEntity;
 import com.legendshop.util.AppUtils;
 
 /**
+ * 权限管理服务类
+ * 
  * LegendShop 版权所有 2009-2011,并保留所有权利。
  * 
  * 官方网站：http://www.legendesign.net
@@ -52,27 +50,64 @@ public class AuthServiceImpl implements  AuthService {
 	/** The jdbc template. */
 	private JdbcTemplate jdbcTemplate;
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#loadUserByUsername(java.lang.String)
-	 */
 	/**
-	 * 从数据库中查找该用户User以及所拥有的role.
+	 * 从数据库中查找该用户User以及所拥有的角色和权限.
+	 * 
+	 * @param username
+	 *            the username
+	 * @return the user details
+	 * @throws UsernameNotFoundException
+	 *             the username not found exception
+	 * @throws DataAccessException
+	 *             the data access exception
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
-		log.debug("loadUserByUsername calling {}", username);
-		UserEntity user = getUserByName(username);
+		
+		//获取用户信息
+		UserEntity user = findUserByName(username);
+		if (log.isDebugEnabled()) {
+			log.debug("getUserByName calling with name {}, result {}", username, user);
+		}
 		if (AppUtils.isBlank(user)) {
 			return null;
 		}
-		Collection<GrantedAuthority> roles = getAuthoritiesByUsernameQuery(user);
+		//获取角色信息
+		Collection<GrantedAuthority> roles = findRolesByUser(user.getId());
 		if (AppUtils.isBlank(roles)) {
 			throw new UsernameNotFoundException("User has no GrantedAuthority");
 		}
-		Collection<GrantedFunction> functoins = getFunctionByUsernameQuery(user);
+		
+		//获取权限信息
+		Collection<GrantedFunction> functoins = findFunctionsByUser(user.getId());
 		User minuser = new UserDetail(username, user.getPassword(), getBoolean(user.getEnabled()), true, true, true,
 				roles, functoins, user.getId());
 		return minuser;
+	}
+
+	/**
+	 * 
+	 * 拿到角色集合对应的权限集合
+	 *
+	 */
+	@Override
+	@Cacheable(value="GrantedFunction")
+	public Collection<GrantedFunction> getFunctionsByRoles(Collection<? extends GrantedAuthority> roles) {
+		log.debug("getFunctionsByRoles calling {}" , roles);
+		if (null == roles) {
+			throw new IllegalArgumentException("Granted Roles cannot be null");
+		}
+		Collection<GrantedFunction> grantedFunctions = new HashSet<GrantedFunction>();
+		for (GrantedAuthority grantedAuthority : roles) {
+			Role role = getGrantedAuthority(grantedAuthority.getAuthority());
+			if (role != null) {
+				List<Function> functions = role.getFunctions();
+				for (Function function : functions) {
+					grantedFunctions.add(new GrantedFunctionImpl(function.getName()));
+				}
+			}
+		}
+		return grantedFunctions;
 	}
 
 	/**
@@ -86,69 +121,7 @@ public class AuthServiceImpl implements  AuthService {
 		return "1".endsWith(b) ? true : false;
 	}
 
-	// 得到该用户的角色
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#getAuthoritiesByUsernameQuery(com.legendshop.model.entity.UserEntity)
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public Collection<GrantedAuthority> getAuthoritiesByUsernameQuery(UserEntity user) throws DataAccessException {
-		Collection<GrantedAuthority> grantedAuthoritys = new ArrayList<GrantedAuthority>();
-		if (user != null) {
 
-			List roles = user.getRoles();
-			Iterator it = roles.iterator();
-			while (it.hasNext()) {
-				GrantedAuthorityImpl gai = new GrantedAuthorityImpl(((Role) it.next()).getName());
-				grantedAuthoritys.add(gai);
-			}
-		}
-		log.debug("{} have roles number {}", user.getName(), grantedAuthoritys.size());
-		return grantedAuthoritys;
-	}
-
-	// 得到该用户的权限
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#getFunctionByUsernameQuery(com.legendshop.model.entity.UserEntity)
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public Collection<GrantedFunction> getFunctionByUsernameQuery(UserEntity user) throws DataAccessException {
-		Collection<GrantedFunction> grantedFunctions = new ArrayList<GrantedFunction>();
-		if (user != null) {
-			log.debug("{} have functions number {}", user.getName(), grantedFunctions.size());
-			List functions = user.getFunctions();
-			Iterator it = functions.iterator();
-			while (it.hasNext()) {
-				GrantedFunctionImpl gfi = new GrantedFunctionImpl(((Function) it.next()).getName());
-				grantedFunctions.add(gfi);
-			}
-		}
-
-		return grantedFunctions;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#getUserByName(java.lang.String)
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public UserEntity getUserByName(String name) {
-		if (log.isDebugEnabled()) {
-			log.debug("getUserByName calling, name {}", name);
-		}
-
-		UserEntity user = findUserByName(name);
-		if (user != null) {
-			// 查找有该权限的角色和权限
-			user.setRoles(findRolesByUser(user));
-			user.setFunctions(findFunctionsByUser(user));
-		}
-		if (log.isDebugEnabled()) {
-			log.debug("getUserByName calling with param {}, result {}", name, user);
-		}
-		return user;
-	}
 
 	/**
 	 * Find functions by user.
@@ -157,36 +130,28 @@ public class AuthServiceImpl implements  AuthService {
 	 *            the user
 	 * @return the list
 	 */
-	private List<Function> findFunctionsByUser(UserEntity user) {
-		log.debug("findFunctionsByUser calling, username {}" , user.getName());
-		return jdbcTemplate
-				.query(
-						"select f.* from ls_usr_role ur ,ls_role r,ls_perm p, ls_func f where ur.user_id= ? and ur.role_id=r.id and r.id=p.role_id and p.function_id=f.id",
-						new Object[] { user.getId() }, new RowMapper<Function>() {
+	private List<GrantedFunction> findFunctionsByUser(String userId) {
+		String sql = "select f.name from ls_usr_role ur ,ls_role r,ls_perm p, ls_func f where r.enabled = '1' and ur.user_id= ? and ur.role_id=r.id and r.id=p.role_id and p.function_id=f.id";
+		log.debug("findFunctionsByUser,run sql {}, userId {}" ,sql, userId);
+		return jdbcTemplate.query(sql,new Object[] { userId }, new RowMapper<GrantedFunction>() {
 							@Override
-							public Function mapRow(ResultSet rs, int index) throws SQLException {
-								Function function = new Function();
-								function.setId(rs.getString("id"));
-								function.setName(rs.getString("name"));
-								function.setNote(rs.getString("note"));
-								function.setProtectFunction(rs.getString("protect_function"));
-								function.setUrl(rs.getString("url"));
-								return function;
+							public GrantedFunction mapRow(ResultSet rs, int index) throws SQLException {
+								return new GrantedFunctionImpl(rs.getString("name"));
 							}
 						});
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#findUserByName(java.lang.String)
+
+	/**
+	 * 找到用户
 	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public UserEntity findUserByName(String name) {
-		log.debug("findUserByName calling, name {}" , name);
-		return (UserEntity) jdbcTemplate.queryForObject("select * from ls_user where name = ?", new Object[] { name },
-				new RowMapper() {
+	private UserEntity findUserByName(String name) {
+		String sql = "select * from ls_user where enabled = '1' and name = ?";
+		log.debug("findUserByName, run sql {}, name {}" , sql,name);
+		return jdbcTemplate.queryForObject(sql, new Object[] { name },
+				new RowMapper<UserEntity>() {
 					@Override
-					public Object mapRow(ResultSet rs, int index) throws SQLException {
+					public UserEntity mapRow(ResultSet rs, int index) throws SQLException {
 						UserEntity user = new UserEntity();
 						user.setEnabled(rs.getString("enabled"));
 						user.setId(rs.getString("id"));
@@ -198,94 +163,27 @@ public class AuthServiceImpl implements  AuthService {
 				});
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#findRolesByUser(com.legendshop.model.entity.UserEntity)
+	/**
+	 * 根据用户ID取得对应的角色
 	 */
-	@Override
-	public List<Role> findRolesByUser(UserEntity user) {
-		log.debug("findRolesByUser calling,user name {}" , user.getName());
-		return jdbcTemplate.query("select r.* from ls_usr_role ur ,ls_role r where ur.user_id= ? and ur.role_id=r.id",
-				new Object[] { user.getId() }, new RowMapper<Role>() {
+	private List<GrantedAuthority> findRolesByUser(String userId) {
+		String sql = "select distinct r.name from ls_usr_role ur ,ls_role r where r.enabled ='1' and ur.user_id= ? and ur.role_id=r.id";
+		log.debug("findRolesByUser,run sql {}, userId {}" , sql,userId);
+		return jdbcTemplate.query(sql,new Object[] {userId }, new RowMapper<GrantedAuthority>() {
 					@Override
-					public Role mapRow(ResultSet rs, int index) throws SQLException {
-						Role role = new Role();
-						role.setEnabled(rs.getString("enabled"));
-						role.setId(rs.getString("id"));
-						role.setName(rs.getString("name"));
-						role.setNote(rs.getString("note"));
-						role.setRoleType(rs.getString("role_type"));
-						return role;
+					public GrantedAuthority mapRow(ResultSet rs, int index) throws SQLException {
+						return new SimpleGrantedAuthority(rs.getString("name"));
 					}
 				});
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.security.SecurityManager#loadUrlAuthorities()
-	 */
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#getUrlAuthorities()
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public Map<String, String> getUrlAuthorities() {
-		Map<String, String> urlAuthorities = new HashMap<String, String>();
-		// urlAuthorities = jdbcTemplate.queryForMap("select * from leg_function");
-		return urlAuthorities;
-	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.security.FunctionService#getFunctionsByRoles(java.util.Collection)
-	 */
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#getFunctionsByRoles(java.util.Collection)
-	 */
-	@Override
-	@Cacheable(value="GrantedFunction")
-	public Collection<GrantedFunction> getFunctionsByRoles(Collection<? extends GrantedAuthority> roles) {
-		log.debug("getFunctionsByRoles calling {}" , roles);
-		if (null == roles) {
-			throw new IllegalArgumentException("Granted Roles cannot be null");
-		}
-		Collection<GrantedFunction> grantedFunctions = new HashSet<GrantedFunction>();
-		for (GrantedAuthority grantedAuthority : roles) {
-			Role role = getgrantedAuthority(grantedAuthority.getAuthority());
-			if (role != null) {
-				List<Function> functions = role.getFunctions();
-				for (Function function : functions) {
-					grantedFunctions.add(new GrantedFunctionImpl(function.getName()));
-				}
-			}
-		}
-		return grantedFunctions;
-	}
+	
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.security.FunctionService#getFunctionsByUser(com.legendshop.model.entity.UserEntity)
+	/**
+	 * 根据角色名拿到角色对象，包括角色对应的权限
 	 */
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#getFunctionsByUser(com.legendshop.model.entity.UserEntity)
-	 */
-	@Override
-	public Collection<GrantedFunction> getFunctionsByUser(UserEntity user) {
-		log.debug("getFunctionsByUser calling {}" , user);
-		if (null == user)
-			throw new IllegalArgumentException("User Entity cannot be null");
-		Collection<GrantedFunction> grantedFunctions = new HashSet<GrantedFunction>();
-		List<Function> functions = user.getFunctions();
-		for (Iterator<Function> it = functions.iterator(); it.hasNext();) {
-			Function function = it.next();
-			GrantedFunction grantedFunction = new GrantedFunctionImpl(function.getName());
-			grantedFunctions.add(grantedFunction);
-		}
-		return grantedFunctions;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#getgrantedAuthority(java.lang.String)
-	 */
-
-	@Override
-	public Role getgrantedAuthority(String authority) {
+	private Role getGrantedAuthority(String authority) {
 		log.debug("getgrantedAuthority calling {}" , authority);
 		List<Role> roles = findRoleByName(authority);
 		if (AppUtils.isBlank(roles)) {
@@ -302,13 +200,13 @@ public class AuthServiceImpl implements  AuthService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#findRoleByName(java.lang.String)
+	/**
+	 * 根据用户名拿到对应的角色
 	 */
-	@Override
-	public List<Role> findRoleByName(String authority) {
-		log.debug("findRoleByName calling {}" , authority);
-		return jdbcTemplate.query("select * from ls_role where name = ?", new Object[] { authority },
+	private List<Role> findRoleByName(String authority) {
+		String sql = "select * from ls_role where enabled = '1' and name = ?";
+		log.debug("findRoleByName run sql {}, authority {}" , authority);
+		return jdbcTemplate.query(sql, new Object[] { authority },
 				new RowMapper<Role>() {
 					@Override
 					public Role mapRow(ResultSet rs, int index) throws SQLException {
@@ -322,15 +220,15 @@ public class AuthServiceImpl implements  AuthService {
 					}
 				});
 	}
+	
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.AuthService#findFunctionsByRole(com.legendshop.model.entity.Role)
+	/**
+	 * 根据角色拿到对应的权限
 	 */
-	@Override
-	public List<Function> findFunctionsByRole(Role role) {
-	    log.debug("findFunctionsByRole calling {}" , role);
-		return jdbcTemplate.query("select f.* from ls_perm p ,ls_func f where p.role_id= ? and p.function_id=f.id",
-				new Object[] { role.getId() }, new RowMapper<Function>() {
+	private List<Function> findFunctionsByRole(Role role) {
+		String sql = "select f.* from ls_perm p ,ls_func f where p.role_id= ? and p.function_id=f.id";
+	    log.debug("findFunctionsByRole,run sql {}, role {}" ,sql,role.getName());
+		return jdbcTemplate.query(sql,new Object[] { role.getId() }, new RowMapper<Function>() {
 					@Override
 					public Function mapRow(ResultSet rs, int index) throws SQLException {
 						Function function = new Function();

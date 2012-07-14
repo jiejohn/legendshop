@@ -25,8 +25,13 @@
 	<aop:config>
 		<aop:advisor id="managerTx" advice-ref="txAdvice"
 			pointcut="execution(* *..service.*.*(..))" order="1" />
+			
 		<aop:advisor id="newManagerTx" advice-ref="txNewAdvice"
 			pointcut="execution(* *..newservice.*.*(..))" order="2" />
+			
+		<aop:advisor id="processorTx" advice-ref="txAdvice"
+			pointcut="execution(* *..processor.*.*(..))" order="3" />
+			
 		<!--  
         <aop:aspect id="profilingAspect" ref="profiler">
             <aop:pointcut id="serviceMethodWithReturnValue" expression="execution(* *..service.*.*(..))"/>

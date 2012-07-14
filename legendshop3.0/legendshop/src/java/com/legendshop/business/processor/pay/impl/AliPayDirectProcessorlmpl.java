@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.processor.impl;
+package com.legendshop.business.processor.pay.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Required;
 import com.legendshop.business.helper.AlipayAccountHelper;
 import com.legendshop.business.payment.alipay.AlipayService;
 import com.legendshop.business.payment.alipay.config.AlipayConfig;
-import com.legendshop.business.processor.PaymentProcessor;
+import com.legendshop.business.processor.pay.PaymentProcessor;
 import com.legendshop.model.entity.PayType;
 import com.legendshop.util.AppUtils;
 

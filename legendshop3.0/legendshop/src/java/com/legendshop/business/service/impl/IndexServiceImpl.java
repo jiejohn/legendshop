@@ -8,7 +8,6 @@
 package com.legendshop.business.service.impl;
 
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +31,7 @@ import com.legendshop.business.dao.SortDao;
 import com.legendshop.business.dao.SubDao;
 import com.legendshop.business.dao.UserCommentDao;
 import com.legendshop.business.dao.UserDetailDao;
-import com.legendshop.business.helper.TaskThread;
-import com.legendshop.business.helper.impl.PersistVisitLogTask;
+import com.legendshop.business.event.impl.VisitLogEvent;
 import com.legendshop.business.service.IndexService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.ParameterEnum;
@@ -42,13 +40,12 @@ import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ShopStatusChecker;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.UserInfo;
 import com.legendshop.model.entity.Indexjpg;
 import com.legendshop.model.entity.ShopDetailView;
-import com.legendshop.model.entity.VisitLog;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.constants.NewsPositionEnum;
-import com.legendshop.spi.constants.VisitTypeEnum;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -158,15 +155,11 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 
 		// 多线程记录访问历史
 		if (PropertiesUtil.getObject(ParameterEnum.VISIT_LOG_INDEX_ENABLE, Boolean.class)) {
-			VisitLog visitLog = new VisitLog();
-			visitLog.setDate(new Date());
-			visitLog.setIp(request.getRemoteAddr());
-			visitLog.setShopName(shopName);
-			visitLog.setUserName(userName);
-			visitLog.setPage(VisitTypeEnum.INDEX.value());
-			threadPoolExecutor.execute(new TaskThread(new PersistVisitLogTask(visitLog)));
+			EventHome.publishEvent(new VisitLogEvent(request.getRemoteAddr(),shopName,userName));
 		} else {
-			log.info("[{}],{} visit index {}", new Object[] { request.getRemoteAddr(), userName, shopName });
+			if(log.isInfoEnabled()){
+				log.info("[{}],{} visit index {}", new Object[] { request.getRemoteAddr(), userName, shopName });
+			}
 		}
 		return PathResolver.getPath(request,TilesPage.INDEX_PAGE);
 	}

@@ -5,7 +5,7 @@
  *  版权所有,并保留所有权利。
  * 
  */
-package com.legendshop.business.processor;
+package com.legendshop.business.processor.pay;
 
 /**
  * LegendShop 版权所有 2009-2011,并保留所有权利。

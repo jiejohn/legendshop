@@ -1,4 +1,4 @@
-package com.legendshop.business.event.listener;
+package com.legendshop.business.processor.event;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

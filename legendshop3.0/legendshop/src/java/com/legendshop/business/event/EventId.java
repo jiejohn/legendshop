@@ -25,6 +25,8 @@ public enum EventId implements BaseEventId {
 	
 	PROD_CHANGE_EVENT("PROD_CHANGE"),
 	
+	VISIT_LOG_EVENT("VISIT_LOG"),
+	
 	
 	//是否可以增加商店
 	CAN_ADD_SHOPDETAIL_EVENT("CAN_ADD_SHOPDETAIL")

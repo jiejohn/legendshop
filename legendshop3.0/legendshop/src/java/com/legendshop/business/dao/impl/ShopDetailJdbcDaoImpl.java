@@ -45,7 +45,9 @@ public class ShopDetailJdbcDaoImpl extends ShopDetailDaoImpl{
 		}
 		log.debug("getSimpleInfoShopDetail userName : {}",userName);
 		List<ShopDetailView> list = null;
-		list = jdbcTemplate.query(ConfigCode.getInstance().getCode("biz.getShopDetailView"), new Object[] { userName },
+		String sql = ConfigCode.getInstance().getCode("biz.getShopDetailView");
+		log.debug("getShopDetailView run sql {}, userName {} ",sql,userName);
+		list = jdbcTemplate.query(sql, new Object[] { userName },
 				new ShopDetailRowMapper());
 		if (AppUtils.isNotBlank(list)) {
 			return list.get(0);
@@ -75,6 +77,9 @@ public class ShopDetailJdbcDaoImpl extends ShopDetailDaoImpl{
 		}
 		sb.setLength(sb.length() - 1);
 		sb.append(")");
+		if(log.isDebugEnabled()){
+			log.debug("getShopDetailView run sql {}, postIdList {} ",sb.toString(),postIdList.toArray());
+		}
 		return jdbcTemplate.query(sb.toString(), postIdList.toArray(), new ShopDetailRowMapper());
 	}
 

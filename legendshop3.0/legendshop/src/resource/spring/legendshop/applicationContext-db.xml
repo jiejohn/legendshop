@@ -180,8 +180,5 @@
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
-		<property name="cacheQueries">
-			<value>false</value>
-		</property>
 	</bean>
 </beans>

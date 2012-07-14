@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -28,10 +29,11 @@ import com.legendshop.util.sql.ConfigCode;
  */
 public class ProductJdbcDaoImpl extends ProductDaoImpl {
 	
-	/** The jdbc template. */
-	private JdbcTemplate jdbcTemplate;
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(ProductJdbcDaoImpl.class);
+	
+	/** The jdbc template. */
+	private JdbcTemplate jdbcTemplate;
 
 
 	/* (non-Javadoc)
@@ -41,7 +43,9 @@ public class ProductJdbcDaoImpl extends ProductDaoImpl {
 	@Cacheable(value="ProductDetail", key="#prodId")
 	public ProductDetail getProdDetail(final Long prodId) {
 		List<ProductDetail> list= null;
-		list = jdbcTemplate.query(ConfigCode.getInstance().getCode("biz.getProdDetail"),new Object[] { prodId }, new ProductDetailRowMapper());
+		String sql = ConfigCode.getInstance().getCode("biz.getProdDetail");
+		log.debug("getProdDetail run sql {}, prodId = {}",sql, prodId);
+		list = jdbcTemplate.query(sql,new Object[] { prodId }, new ProductDetailRowMapper());
 		if(AppUtils.isBlank(list)){
 			return null;
 		}
@@ -54,10 +58,10 @@ public class ProductJdbcDaoImpl extends ProductDaoImpl {
 	@Override
 	public List<ProductDetail> getProdDetail(Long[] prodId) {
 		List<Long> postIdList = new ArrayList<Long>();
-		StringBuffer sb = new StringBuffer(ConfigCode.getInstance().getCode("biz.getProdDetailList"));
+		StringBuffer sql = new StringBuffer(ConfigCode.getInstance().getCode("biz.getProdDetailList"));
 		for (int i = 0; i < prodId.length; i++) {
 			if (prodId[i] != null) {
-				sb.append("?,");
+				sql.append("?,");
 				postIdList.add(prodId[i]);
 			}
 		}
@@ -65,9 +69,13 @@ public class ProductJdbcDaoImpl extends ProductDaoImpl {
 			return new ArrayList<ProductDetail>();
 		}
 		
-		sb.setLength(sb.length() - 1);
-		sb.append(")");
-		return jdbcTemplate.query(sb.toString(),postIdList.toArray(), new ProductDetailRowMapper());
+		sql.setLength(sql.length() - 1);
+		sql.append(")");
+		if(log.isDebugEnabled()){
+			log.debug("getProdDetail run sql {}, param {}",sql.toString(),postIdList.toArray());
+		}
+		
+		return jdbcTemplate.query(sql.toString(),postIdList.toArray(), new ProductDetailRowMapper());
 	}
 
 	
@@ -125,6 +133,7 @@ public class ProductJdbcDaoImpl extends ProductDaoImpl {
 	 * @param jdbcTemplate
 	 *            the new jdbc template
 	 */
+	@Required
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
