@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.service.VisitLogService;
-import com.legendshop.event.ThreadProcessor;
+import com.legendshop.event.processor.ThreadProcessor;
 import com.legendshop.model.entity.VisitLog;
 
 /**

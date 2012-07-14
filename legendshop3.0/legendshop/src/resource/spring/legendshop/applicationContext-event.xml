@@ -13,7 +13,7 @@
                 http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd" default-lazy-init="true">
     
     <!-- event definition -->
-    <bean id="threadProcessor" class="com.legendshop.event.ThreadProcessor">
+    <bean id="threadProcessor" class="com.legendshop.event.processor.ThreadProcessor">
     	<property name="taskExecutor" ref="threadPoolExecutor"></property>
     </bean>
     

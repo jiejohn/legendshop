@@ -3,7 +3,7 @@ package com.legendshop.business.process.event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.legendshop.event.ThreadProcessor;
+import com.legendshop.event.processor.ThreadProcessor;
 
 public class SendMailProcessor extends ThreadProcessor<String>{
 	private final Logger log = LoggerFactory.getLogger(SendMailProcessor.class);
