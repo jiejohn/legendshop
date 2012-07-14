@@ -7,6 +7,7 @@
  */
 package com.legendshop.business.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.legendshop.business.dao.VisitLogDao;
@@ -14,7 +15,9 @@ import com.legendshop.business.service.VisitLogService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.VisitLog;
+import com.legendshop.spi.constants.VisitTypeEnum;
 import com.legendshop.util.AppUtils;
+import com.legendshop.util.ip.IPSeeker;
 
 /**
  * 
@@ -91,5 +94,33 @@ public class VisitLogServiceImpl implements VisitLogService  {
 	public PageSupport getVisitLogList(CriteriaQuery cq) {
         return visitLogDao.find(cq);
     }
+
+	@Override
+	public void process(VisitLog visitLog) {
+		visitLog.setArea(IPSeeker.getInstance().getArea(visitLog.getIp()));
+		visitLog.setCountry(IPSeeker.getInstance().getCountry(visitLog.getIp()));
+		VisitLog origin = null;
+		if (VisitTypeEnum.INDEX.value().equals(visitLog.getPage())) {
+			origin = visitLogDao.getVisitedIndexLog(visitLog);
+		} else {
+			origin = visitLogDao.getVisitedProdLog(visitLog);
+		}
+		if (origin != null) {
+			Integer num = origin.getVisitNum();
+			if (num == null) {
+				num = 1;
+			} else {
+				num++;
+			}
+			origin.setVisitNum(num);
+			origin.setDate(new Date());
+			visitLogDao.updateVisitLog(origin);
+		} else {
+			visitLog.setVisitNum(1);
+			visitLogDao.save(visitLog);
+
+		}
+		
+	}
 }
 

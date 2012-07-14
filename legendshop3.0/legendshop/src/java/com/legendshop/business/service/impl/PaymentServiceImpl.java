@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.legendshop.business.processor.pay.PaymentProcessor;
+import com.legendshop.business.process.pay.PaymentProcessor;
 import com.legendshop.business.service.PaymentService;
 
 /**
