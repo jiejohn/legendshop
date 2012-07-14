@@ -354,12 +354,12 @@
 		</property>
 	</bean>
 	<bean id="aliPayDoubleProcessor"
-		class="com.legendshop.business.processor.pay.impl.AliPayDoubleProcessorImpl">
+		class="com.legendshop.business.process.pay.impl.AliPayDoubleProcessorImpl">
 		<property name="userDetailDao" ref="userDetailDao" />
 	</bean>
 
 	<bean id="aliPayDirectProcessor"
-		class="com.legendshop.business.processor.pay.impl.AliPayDirectProcessorlmpl">
+		class="com.legendshop.business.process.pay.impl.AliPayDirectProcessorlmpl">
 		<property name="alipayAccountHelper" ref="alipayAccountHelper" />
 	</bean>
 
