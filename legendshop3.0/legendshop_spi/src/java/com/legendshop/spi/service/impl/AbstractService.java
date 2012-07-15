@@ -70,7 +70,6 @@ public abstract class AbstractService  implements BaseService{
 		}
 
 		ShopDetailView shopDetail = shopDetailDao.getShopDetailView(currentShopName);
-		log.debug("getShopDetailView currentShopName = {}, shopDetail = {}",currentShopName, shopDetail);
 
 		if(!inShopDetail){
 			//log.debug("initing shopDetail and set to session");
