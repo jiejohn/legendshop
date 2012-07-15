@@ -227,7 +227,11 @@ public enum BackPage implements PageDefinition{
 	/** The DELIVERYTYP e_ edi t_ page. */
 	PARTNER_EDIT_PAGE("/partner/partner"),
 	
-	PARTNER_CHANGE_PASSWORD_PAGE("/partner/partnerChangePassword"),
+	PARTNER_CHANGE_PASSWORD_PAGE("/partner/partnerChangePassword"), 
+	
+	TAG_LIST("/tag/tagList"),
+	
+	TAG("/tag/tag"),
 	
 	;
 	

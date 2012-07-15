@@ -496,4 +496,21 @@
 	
 	</bean>
 	
+	
+    <bean id="tagDao" class="com.legendshop.business.dao.impl.TagDaoImpl" parent="baseDao" />
+
+	<bean id="tagService" class="com.legendshop.business.service.impl.TagServiceImpl">
+        <property name="tagDao" ref="tagDao" />
+    </bean>  
+
+
+    <bean id="tagMapDao" class="com.legendshop.business.dao.impl.TagMapDaoImpl" parent="baseDao" />
+
+	<bean id="tagMapService" class="com.legendshop.business.service.impl.TagMapServiceImpl">
+        <property name="tagMapDao" ref="tagMapDao" />
+    </bean>  
+
+
+	
+	
 </beans>

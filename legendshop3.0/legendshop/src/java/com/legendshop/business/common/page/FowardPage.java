@@ -97,7 +97,9 @@ public enum FowardPage implements PageDefinition{
 	
 	DELIVERYTYPE_LIST_QUERY("/admin/deliveryType/query"),
 	
-	PARTNER_LIST_QUERY("/admin/partner/query");
+	PARTNER_LIST_QUERY("/admin/partner/query"),
+	
+	TAG("/admin/tag/query");
 	
 	
 	/** The value. */
