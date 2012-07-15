@@ -8,15 +8,12 @@
 			<attribute name="owner.project.facets" value="jst.utility"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_23">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_jcf"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_util"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/legendshop_lib"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_model"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_lib"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_central3.0.3.jar"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_core3.0.3.jar"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_jcf3.0.3.jar"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_util3.0.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
