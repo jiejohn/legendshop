@@ -7,8 +7,6 @@
  */
 package com.legendshop.model.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * LegendShop 版权所有 2009-2011,并保留所有权利。
@@ -41,11 +39,6 @@ public class UserEntity  implements BaseEntity {
      /** The note. */
      private String note;
      
-     /** The roles. */
-     private List<Role> roles = new ArrayList<Role>();
-     
-     /** The functions. */
-     private List<Function> functions = new ArrayList<Function>();
 	
 	/**
 	 * Gets the id.
@@ -161,43 +154,5 @@ public class UserEntity  implements BaseEntity {
 		this.note = note;
 	}
 	
-	/**
-	 * Gets the roles.
-	 * 
-	 * @return the roles
-	 */
-	public List<Role> getRoles() {
-		return roles;
-	}
-	
-	/**
-	 * Sets the roles.
-	 * 
-	 * @param roles
-	 *            the new roles
-	 */
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-	
-	/**
-	 * Gets the functions.
-	 * 
-	 * @return the functions
-	 */
-	public List<Function> getFunctions() {
-		return functions;
-	}
-	
-	/**
-	 * Sets the functions.
-	 * 
-	 * @param functions
-	 *            the new functions
-	 */
-	public void setFunctions(List<Function> functions) {
-		this.functions = functions;
-	}
-
 
 }
