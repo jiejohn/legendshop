@@ -7,8 +7,6 @@
  */
 package com.legendshop.spi.service.impl;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,8 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.LocaleResolver;
 
-import com.legendshop.core.AttributeKeys;
-import com.legendshop.core.constant.LanguageEnum;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.ProductDetail;
@@ -41,88 +37,7 @@ public abstract class AbstractService  implements BaseService{
 	/** The locale resolver. */
 	protected LocaleResolver localeResolver;
 	
-	/* (non-Javadoc)
-	 * @see com.legendshop.spi.service.BaseService#getShopDetailView(java.lang.String, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
-	public ShopDetailView getShopDetailView(String shopName, HttpServletRequest request, HttpServletResponse response) {
-
-		String currentShopName = getShopName(request, response);
-		// inShopDetail = true 表示第二次以上访问该商城，第一次访问时需要设置商城对应的Locale等参数，第二次则不需要
-		if (shopName == null && currentShopName == null) {
-			log.debug("shopName and currentShopName can not both NULL");
-			return null;
-		}
-		boolean inShopDetail = true;
-		if (currentShopName != null) {
-			if (shopName != null && !shopName.equals(currentShopName)) {
-				// 换商城,第一次进入其他商城
-				log.debug("从商城 currentShopName = {} 进入另外一个商城 shopName = {}", currentShopName, shopName);
-				currentShopName = shopName;
-				request.getSession().setAttribute(Constants.SHOP_NAME, currentShopName);
-				inShopDetail = false;
-			}
-		} else {
-			// 表示第一次访问，需要商城初始化
-			log.debug("第一次访问,currentShopName = {}, shopName = {}", currentShopName, shopName);
-			currentShopName = shopName;
-			request.getSession().setAttribute(Constants.SHOP_NAME, currentShopName);
-			inShopDetail = false;
-		}
-
-		ShopDetailView shopDetail = shopDetailDao.getShopDetailView(currentShopName);
-
-		if(!inShopDetail){
-			//log.debug("initing shopDetail and set to session");
-			//request.getSession().setAttribute(Constants.SHOP_DETAIL, shopDetail);
-			setLocalByShopDetail(shopDetail, request, response);
-		}
-		return shopDetail;
-	}
 	
-
-	/**
-	 * Sets the local by shop detail.
-	 * 
-	 * @param shopDetail
-	 *            the shop detail
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 */
-	private void setLocalByShopDetail(ShopDetailView shopDetail, HttpServletRequest request, HttpServletResponse response) {
-		log.debug("setLocalByShopDetail calling");
-		if (shopDetail == null) {
-			return;
-		}
-
-		String langStyle = shopDetail.getLangStyle();
-		// 总配置，如果不是USERCHOICE则无需设置,直接覆盖配置文件即可
-		if (AppUtils.isBlank(langStyle)
-				|| LanguageEnum.USERCHOICE.equals(langStyle) // shop level
-				|| !LanguageEnum.USERCHOICE.equals(request.getSession().getServletContext()
-						.getAttribute(AttributeKeys.LANGUAGE_MODE))) { // system
-																		// level
-			return;
-		}
-
-		String[] language = shopDetail.getLangStyle().split("_");
-		Locale locale = new Locale(language[0], language[1]);
-		// HttpSession session = request.getSession();
-		// if (session.getAttribute(AttributeKeys.LOCALE_KEY) != null) {
-		// session.removeAttribute(AttributeKeys.LOCALE_KEY);
-		// }
-		//
-		// Cookie cookie = new Cookie("LegendShopLanguage", langStyle);
-		// cookie.setPath("/");
-		// cookie.setMaxAge(100000); // -1为永不过期,或者指定过期时间
-		// response.addCookie(cookie);// 在退出登录操作中删除cookie.
-		// session.setAttribute(AttributeKeys.LOCALE_KEY, locale);
-		log.debug("setLocal {}, By ShopDetail {}", locale, shopDetail.getSiteName());
-		localeResolver.setLocale(request, response, locale);
-
-	}
-
 	
 	
 	/* (non-Javadoc)
@@ -226,7 +141,7 @@ public abstract class AbstractService  implements BaseService{
 	 * @param request
 	 *            the request
 	 */
-	public void visit(ShopDetailView shopDetail, HttpServletRequest request) {
+	public void updateVisitHistory(ShopDetailView shopDetail, HttpServletRequest request) {
 		VisitHistory visitHistory = (VisitHistory) request.getSession().getAttribute(Constants.VISIT_HISTORY);
 		if (visitHistory == null) {
 			visitHistory = new VisitHistory();
