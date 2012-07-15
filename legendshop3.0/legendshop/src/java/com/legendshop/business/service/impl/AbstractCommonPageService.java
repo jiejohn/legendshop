@@ -17,7 +17,6 @@ import com.legendshop.business.dao.SortDao;
 import com.legendshop.business.service.CommonPageService;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.core.helper.ShopStatusChecker;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.constants.NewsPositionEnum;
 import com.legendshop.spi.service.impl.AbstractService;
@@ -31,9 +30,6 @@ public abstract class AbstractCommonPageService extends AbstractService implemen
 	
 	/** The news dao. */
 	protected NewsDao newsDao;
-	
-	/** The shop status checker. */
-	protected ShopStatusChecker shopStatusChecker;
 	
 	/** The sort dao. */
 	protected SortDao sortDao;
@@ -69,17 +65,6 @@ public abstract class AbstractCommonPageService extends AbstractService implemen
 	 */
 	public void setNewsDao(NewsDao newsDao) {
 		this.newsDao = newsDao;
-	}
-
-
-	/**
-	 * Sets the shop status checker.
-	 * 
-	 * @param shopStatusChecker
-	 *            the new shop status checker
-	 */
-	public void setShopStatusChecker(ShopStatusChecker shopStatusChecker) {
-		this.shopStatusChecker = shopStatusChecker;
 	}
 
 

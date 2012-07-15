@@ -188,9 +188,6 @@
 		<property name="payTypeService">
 			<ref bean="payTypeService" />
 		</property>
-		<property name="shopStatusChecker">
-			<ref bean="shopStatusChecker" />
-		</property>
 		<property name="searchFacade">
 			<ref bean="searchFacade" />
 		</property>
@@ -241,7 +238,6 @@
 		<property name="externalLinkDao" ref="externalLinkDao" />
 		<property name="productDao" ref="productDao" />
 		<property name="imgFileDao" ref="imgFileDao" />
-		<property name="shopStatusChecker" ref="shopStatusChecker" />
 		<property name="subDao" ref="subDao" />
 		<property name="sortDao" ref="sortDao" />
 		<property name="pubDao" ref="pubDao" />
@@ -478,7 +474,6 @@
 	<bean id="abstractCommonPageService" class="com.legendshop.business.service.impl.AbstractCommonPageService" 
 	parent="abstractService" abstract="true">
 		<property name="logoDao" ref="logoDao" />
-		<property name="shopStatusChecker" ref="shopStatusChecker" />
 		<property name="newsDao" ref="newsDao" />
 		<property name="sortDao" ref="sortDao" />
 	</bean>

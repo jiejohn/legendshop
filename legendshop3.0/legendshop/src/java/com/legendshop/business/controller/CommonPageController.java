@@ -42,7 +42,7 @@ public class CommonPageController extends BaseController {
 	@RequestMapping("/top")
 	public String top(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = getShopName(request, response);
-		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName);
+		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName,request,response);
 		return commonPageService.getTop(request, response);
 	}
 
@@ -83,7 +83,7 @@ public class CommonPageController extends BaseController {
 	public String copyAll(HttpServletRequest request, HttpServletResponse response, String curPageNO,
 			String newsCategory) {
 		String shopName = getShopName(request, response);
-		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName);
+		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName,request,response);
 		return commonPageService.getCopyAll(request, response);
 	}
 

@@ -9,6 +9,9 @@ package com.legendshop.business.service.locator;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.legendshop.business.service.CommonPageService;
 import com.legendshop.business.service.ShopDetailService;
 import com.legendshop.core.helper.ThreadLocalContext;
@@ -30,8 +33,8 @@ public class CommonPageServiceLocator {
 	 *            the template
 	 * @return the common page service
 	 */
-	public CommonPageService getCommonPageService(String shopName){
-		String template = ThreadLocalContext.getFrontType(shopName, null);
+	public CommonPageService getCommonPageService(String shopName, HttpServletRequest request, HttpServletResponse response){
+		String template = ThreadLocalContext.getFrontType(shopName, null,request,response);
 		CommonPageService service = serviceMap.get(template);
 		if(service == null){
 			service = serviceMap.get(TemplateEnum.DEFAULT);

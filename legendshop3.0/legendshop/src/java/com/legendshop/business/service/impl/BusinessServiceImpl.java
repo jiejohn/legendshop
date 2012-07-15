@@ -67,7 +67,7 @@ import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
-import com.legendshop.core.helper.ShopStatusChecker;
+import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.core.page.PagerUtil;
 import com.legendshop.event.EventContext;
 import com.legendshop.event.EventHome;
@@ -154,9 +154,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 	/** The basket dao. */
 	private BasketDao basketDao;
-
-	/** The shop status checker. */
-	private ShopStatusChecker shopStatusChecker;
 
 	/** The sub dao. */
 	private SubDao subDao;
@@ -291,13 +288,11 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	public String getTop(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = getShopName(request, response);
 		String userName = UserManager.getUsername(request.getSession());
-		ShopDetailView shopDetail = getShopDetailView(shopName, request, response);
+		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(shopName, request, response);
 		if (shopDetail == null) {
 			return PathResolver.getPath(request, FrontPage.TOPALL);
 		}
-		if (!shopStatusChecker.check(shopDetail, request)) {
-			return PathResolver.getPath(request, FrontPage.FAIL);
-		}
+
 		// set Locale
 		//setLocalByShopDetail(shopDetail, request, response);
 
@@ -599,14 +594,11 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 				request.setAttribute("prodPics", prodPics);
 			}
 			// 商家详细说明
-			ShopDetailView shopDetail = getShopDetailView(prod.getUserName(), request, response);
+			ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(prod.getUserName(), request, response);
+			
 			if (shopDetail == null) {
 				return PathResolver.getPath(request, FrontPage.TOPALL);
-			} else {
-				if (!shopStatusChecker.check(shopDetail, request)) {
-					return PathResolver.getPath(request, FrontPage.FAIL);
-				}
-			}
+			} 
 			// 相关商品
 			List<Product> releationProds = productDao.getReleationProd(prod.getUserName(), prod.getProdId(), 30);
 			if (!AppUtils.isBlank(releationProds)) {
@@ -1371,19 +1363,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		return PathResolver.getPath(request, TilesPage.AFTER_OPERATION);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#setShopStatusChecker(com.legendshop.business.helper.ShopStatusChecker)
-	 */
-	/**
-	 * Sets the shop status checker.
-	 * 
-	 * @param shopStatusChecker
-	 *            the new shop status checker
-	 */
-	@Required
-	public void setShopStatusChecker(ShopStatusChecker shopStatusChecker) {
-		this.shopStatusChecker = shopStatusChecker;
-	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setSearchFacade(com.legendshop.search.SearchFacade)

@@ -65,7 +65,7 @@ public class IndexAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response) {
 		log.debug("adminIndex starting");
 		String userName = UserManager.getUsername(request.getSession());
-		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(userName);
+		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(userName,request,response);
 		UserInfo userInfo = indexService.getAdminIndex(userName, shopDetail);
 		request.setAttribute("userInfo", userInfo);
 		

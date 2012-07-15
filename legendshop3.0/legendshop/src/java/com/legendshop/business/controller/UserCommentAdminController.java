@@ -36,6 +36,7 @@ import com.legendshop.core.exception.AuthorizationException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
+import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.model.entity.UserComment;
 import com.legendshop.spi.constants.CommentTypeEnum;
 import com.legendshop.util.AppUtils;
@@ -115,7 +116,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 			return result;
 		}
 		String shopName = getShopName(request, response);
-		businessService.getShopDetailView(shopName, request, response);
+		ThreadLocalContext.getShopDetailView(shopName, request, response);
 		comment.setAddtime(new Date());
 		comment.setCommentType(CommentTypeEnum.COMMONTALK.value());
 		comment.setPostip(request.getRemoteAddr());

@@ -42,7 +42,7 @@ public interface IndexService extends BaseService {
 	public abstract UserInfo getAdminIndex(String userName, ShopDetailView shopDetail);
 
 	/**
-	 * Gets the home.
+	 * Gets the home page.
 	 * 
 	 * @param request
 	 *            the request

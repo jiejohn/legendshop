@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.spi.constants.NewsPositionEnum;
 
@@ -29,13 +30,11 @@ public class DefaultCommonPageServiceImpl extends AbstractCommonPageService {
 	public String getTop(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = getShopName(request, response);
 		String userName = UserManager.getUsername(request.getSession());
-		ShopDetailView shopDetail = getShopDetailView(shopName, request, response);
+		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(shopName, request, response);
 		if (shopDetail == null) {
 			return PathResolver.getPath(request, FrontPage.TOPALL);
 		}
-		if (!shopStatusChecker.check(shopDetail, request)) {
-			return PathResolver.getPath(request, FrontPage.FAIL);
-		}
+
 		// set Locale
 		//setLocalByShopDetail(shopDetail, request, response);
 

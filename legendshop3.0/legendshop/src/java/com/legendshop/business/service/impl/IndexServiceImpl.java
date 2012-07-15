@@ -7,7 +7,6 @@
  */
 package com.legendshop.business.service.impl;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.dao.ExternalLinkDao;
 import com.legendshop.business.dao.ImgFileDao;
@@ -36,10 +34,10 @@ import com.legendshop.business.service.IndexService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
-import com.legendshop.core.exception.BusinessException;
+import com.legendshop.core.exception.ApplicationException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.core.helper.ShopStatusChecker;
+import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.event.EventHome;
 import com.legendshop.model.UserInfo;
 import com.legendshop.model.entity.Indexjpg;
@@ -53,23 +51,20 @@ import com.legendshop.util.AppUtils;
  */
 public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 
-
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(IndexServiceImpl.class);
 
-
 	/** The user comment dao. */
 	private UserCommentDao userCommentDao;
-	
+
 	/** The user detail dao. */
 	private UserDetailDao userDetailDao;
-	
+
 	/** The news dao. */
 	private NewsDao newsDao;
 
 	/** The external link dao. */
 	private ExternalLinkDao externalLinkDao;
-
 
 	/** The product dao. */
 	private ProductDao productDao;
@@ -77,11 +72,8 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 	/** The img file dao. */
 	private ImgFileDao imgFileDao;
 
-	/** The shop status checker. */
-	private ShopStatusChecker shopStatusChecker;
-
 	/** The sub dao. */
-	private SubDao subDao;	
+	private SubDao subDao;
 
 	/** The sort dao. */
 	private SortDao sortDao;
@@ -91,37 +83,19 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 
 	/** The logo dao. */
 	private LogoDao logoDao;
-	
-	
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#index(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BusinessService#index(javax.servlet
+	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	public String getIndex(HttpServletRequest request, HttpServletResponse response) {
-		String shopName = (String)request.getAttribute(Constants.SHOP_NAME);
-		ShopDetailView shopDetail = getShopDetailView(shopName, request, response); // 得到当前商城
-		if (shopDetail == null) {
-			String defaultShop = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
-			if (AppUtils.isNotBlank(defaultShop)) {
-				// 如果有默认店，则先到默认店去，默认店要先配置好
-				shopName = defaultShop;
-				shopDetail = getShopDetailView(shopName, request, response);
-			} else {
-				if (!PropertiesUtil.isSystemInstalled()) {
-					//return PageLet.INSTALL;
-					throw new BusinessException("system did not installed",EntityCodes.SYSTEM);
-				}
-				return PathResolver.getPath(request, FrontPage.ALL_PAGE);
-			}
-		} else {
-			shopName = shopDetail.getUserName();
-			if (!shopStatusChecker.check(shopDetail, request)) {
-				return PathResolver.getPath(request, FrontPage.FAIL);
-			}
 
-			// 登录历史
-			visit(shopDetail, request);
-		}
+		String shopName = extractAndCheckShopDetail(request, response);
+
 		request.setAttribute("productList", productDao.getCommendProd(shopName, 40));
 		// 最新商品
 		request.setAttribute("newestList", productDao.getNewestProd(shopName, 11));
@@ -153,27 +127,23 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 		request.setAttribute("shopExists", shopExists);
 		request.setAttribute("canbeLeagueShop", shopDetailDao.isBeLeagueShop(shopExists, userName, shopName));
 
-		// 多线程记录访问历史
-		if (PropertiesUtil.getObject(ParameterEnum.VISIT_LOG_INDEX_ENABLE, Boolean.class)) {
-			EventHome.publishEvent(new VisitLogEvent(request.getRemoteAddr(),shopName,userName));
-		} else {
-			if(log.isInfoEnabled()){
-				log.info("[{}],{} visit index {}", new Object[] { request.getRemoteAddr(), userName, shopName });
-			}
-		}
-		return PathResolver.getPath(request,TilesPage.INDEX_PAGE);
+		logUserAccess(request, shopName, userName);
+		return PathResolver.getPath(request, TilesPage.INDEX_PAGE);
 	}
 
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.IndexService#indexAdmin(java.lang.String, com.legendshop.model.entity.ShopDetailView)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.IndexService#indexAdmin(java.lang.String,
+	 * com.legendshop.model.entity.ShopDetailView)
 	 */
 	@Override
 	public UserInfo getAdminIndex(String userName, ShopDetailView shopDetail) {
 		UserInfo userInfo = new UserInfo();
 
 		if (shopDetail != null) { // 已有商城的用户
-			
+
 			userInfo.setArticleNum(newsDao.getAllNews(userName));
 
 			userInfo.setProcessingOrderNum(subDao.getTotalProcessingOrder(userName));
@@ -189,16 +159,108 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 		return userInfo;
 	}
 
-
 	@Override
 	public String getHome(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-		return null;
+		String shopName = extractAndCheckShopDetail(request, response);
+
+		// 设置产品分类
+		request.setAttribute("sortList", sortDao.getSort(shopName, true));
+
+		// 设置幻灯片广告
+		List<Indexjpg> indexJpgList = imgFileDao.getIndexJpeg(shopName);
+		if (!AppUtils.isBlank(indexJpgList)) {
+			request.setAttribute("MaxScreen", indexJpgList.size());
+			JSONArray jsonArray = JSONArray.fromObject(indexJpgList);
+			request.setAttribute("indexJSON", jsonArray);
+		} else {
+			request.setAttribute("MaxScreen", 0);
+		}
+
+		// 设置商城公告
+		request.setAttribute("pubList", pubDao.getPub(shopName));
+
+		// 最新商品
+		request.setAttribute("newestList", productDao.getNewestProd(shopName, 4));
+
+		// 设置内容块(Tag)
+
+		// TODO
+		// //设置友情链接
+		// request.setAttribute("adList",
+		// externalLinkDao.getExternalLink(shopName));
+
+		// boolean shopExists = shopDetailDao.isShopExists(userName);
+		// request.setAttribute("shopExists", shopExists);
+		// request.setAttribute("canbeLeagueShop",
+		// shopDetailDao.isBeLeagueShop(shopExists, userName, shopName));
+
+		String userName = UserManager.getUsername(request.getSession());
+		logUserAccess(request, shopName, userName);
+
+		return PathResolver.getPath(request, TilesPage.HOME);
 	}
 
-	
-	
+	/**
+	 * @param request
+	 * @param shopName
+	 * @param userName
+	 */
+	private void logUserAccess(HttpServletRequest request, String shopName, String userName) {
+		// 多线程记录访问历史
+		if (PropertiesUtil.getObject(ParameterEnum.VISIT_LOG_INDEX_ENABLE, Boolean.class)) {
+			EventHome.publishEvent(new VisitLogEvent(request.getRemoteAddr(), shopName, userName));
+		} else {
+			if (log.isInfoEnabled()) {
+				log.info("[{}],{} visit index {}", new Object[] { request.getRemoteAddr(), userName, shopName });
+			}
+		}
+	}
+
+	/**
+	 * @param request
+	 * @param response
+	 * @param shopName
+	 * @return
+	 */
+	private String extractAndCheckShopDetail(HttpServletRequest request, HttpServletResponse response) {
+		String shopName = (String) request.getAttribute(Constants.SHOP_NAME);
+		ShopDetailView shopDetail =  ThreadLocalContext.getShopDetailView(shopName, request, response);  // 得到当前商城
+		
+		if (shopDetail == null) {
+			String defaultShop = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
+
+			if (AppUtils.isBlank(defaultShop)) {
+				throw new NotInstalledException();
+			}
+
+			// 如果有默认店，则先到默认店去，默认店要先配置好
+			shopName = defaultShop;
+			shopDetail = ThreadLocalContext.getShopDetailView(shopName, request, response); 
+
+		} else {
+			shopName = shopDetail.getUserName();
+			// 更新用户访问历史
+			updateVisitHistory(shopDetail, request);
+		}
+		return shopName;
+	}
+
+	class NotInstalledException extends ApplicationException {
+		/**
+		 * serialVersionUID
+		 */
+		private static final long serialVersionUID = 1780530219363637894L;
+
+		public NotInstalledException() {
+			this(null, null);
+		}
+
+		public NotInstalledException(String message, String code) {
+			super("System is not installed", EntityCodes.SYSTEM);
+		}
+	}
+
+
 
 	/**
 	 * Sets the news dao.
@@ -211,8 +273,6 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 		this.newsDao = newsDao;
 	}
 
-
-
 	/**
 	 * Sets the sub dao.
 	 * 
@@ -223,8 +283,6 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 	public void setSubDao(SubDao subDao) {
 		this.subDao = subDao;
 	}
-
-
 
 	/**
 	 * Sets the user comment dao.
@@ -237,8 +295,6 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 		this.userCommentDao = userCommentDao;
 	}
 
-
-
 	/**
 	 * Sets the user detail dao.
 	 * 
@@ -250,29 +306,20 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 		this.userDetailDao = userDetailDao;
 	}
 
-
 	public UserCommentDao getUserCommentDao() {
 		return userCommentDao;
 	}
-
 
 	public void setExternalLinkDao(ExternalLinkDao externalLinkDao) {
 		this.externalLinkDao = externalLinkDao;
 	}
 
-
 	public void setProductDao(ProductDao productDao) {
 		this.productDao = productDao;
 	}
 
-
 	public void setImgFileDao(ImgFileDao imgFileDao) {
 		this.imgFileDao = imgFileDao;
-	}
-
-
-	public void setShopStatusChecker(ShopStatusChecker shopStatusChecker) {
-		this.shopStatusChecker = shopStatusChecker;
 	}
 
 
@@ -280,18 +327,12 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 		this.sortDao = sortDao;
 	}
 
-
 	public void setPubDao(PubDao pubDao) {
 		this.pubDao = pubDao;
 	}
 
-
 	public void setLogoDao(LogoDao logoDao) {
 		this.logoDao = logoDao;
 	}
-
-
-
-
 
 }
