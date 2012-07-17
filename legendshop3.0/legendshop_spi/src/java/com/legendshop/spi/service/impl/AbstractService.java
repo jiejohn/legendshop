@@ -32,6 +32,7 @@ public abstract class AbstractService  implements BaseService{
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(AbstractService.class);
 	
+	/** The shop detail dao. */
 	protected ShopDetailDao shopDetailDao;
 	
 	/** The locale resolver. */
@@ -53,11 +54,12 @@ public abstract class AbstractService  implements BaseService{
 		return obj;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BaseService#getShopName(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/**
+	 * get current shopName
+	 * if null then return default shop name as current shop name
 	 */
 	
-	public String getShopName(HttpServletRequest request, HttpServletResponse response) {
+	public String getCurrentShopName(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = (String) getSessionAttribute(request, Constants.SHOP_NAME);
 		if(AppUtils.isBlank(shopName)){
 			String defaultShopName =  PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
@@ -85,7 +87,7 @@ public abstract class AbstractService  implements BaseService{
 	
 	public void setShopName(HttpServletRequest request, HttpServletResponse response, String shopName) {
 		// Session
-		String name = getShopName(request,response);
+		String name = getCurrentShopName(request,response);
 		if(name == null  || !name.equals(shopName)){
 			setSessionAttribute(request, Constants.SHOP_NAME, shopName);
 		}
@@ -151,11 +153,23 @@ public abstract class AbstractService  implements BaseService{
 	}
 
 
+	/**
+	 * Sets the shop detail dao.
+	 * 
+	 * @param shopDetailDao
+	 *            the new shop detail dao
+	 */
 	public void setShopDetailDao(ShopDetailDao shopDetailDao) {
 		this.shopDetailDao = shopDetailDao;
 	}
 
 
+	/**
+	 * Sets the locale resolver.
+	 * 
+	 * @param localeResolver
+	 *            the new locale resolver
+	 */
 	public void setLocaleResolver(LocaleResolver localeResolver) {
 		this.localeResolver = localeResolver;
 	}

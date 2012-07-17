@@ -32,7 +32,7 @@ public interface BaseService {
 	 *            the response
 	 * @return the shop name
 	 */
-	public abstract String getShopName(HttpServletRequest request, HttpServletResponse response);
+	public abstract String getCurrentShopName(HttpServletRequest request, HttpServletResponse response);
 
 	/**
 	 * Sets the session attribute.
