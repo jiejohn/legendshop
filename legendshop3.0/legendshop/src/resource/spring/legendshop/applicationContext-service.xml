@@ -44,7 +44,7 @@
 
 
 	<bean id="shopDetailService"
-		class="com.legendshop.business.service.impl.ShopDetailServiceImpl">
+		class="com.legendshop.business.service.impl.ShopDetailServiceImpl" parent="baseService">
 		<property name="shopDetailDao" ref="shopDetailDao" />
 		<property name="userDetailDao" ref="userDetailDao" />
 		<property name="shopDetailSearchFacade" ref="shopDetailSearchFacade"></property>
