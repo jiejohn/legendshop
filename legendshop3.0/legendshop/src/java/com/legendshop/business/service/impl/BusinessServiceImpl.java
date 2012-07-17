@@ -286,7 +286,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public String getTop(HttpServletRequest request, HttpServletResponse response) {
-		String shopName = getShopName(request, response);
+		String shopName = getCurrentShopName(request, response);
 		String userName = UserManager.getUsername(request.getSession());
 		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(shopName, request, response);
 		if (shopDetail == null) {
@@ -316,7 +316,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public String getTopSort(HttpServletRequest request, HttpServletResponse response) {
-		String shopName = getShopName(request, response);
+		String shopName = getCurrentShopName(request, response);
 		request.setAttribute("sortList", sortDao.getSort(shopName, true));
 		return PathResolver.getPath(request, FrontPage.TOPSORT);
 	}
@@ -327,7 +327,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public String getTopnews(HttpServletRequest request, HttpServletResponse response) {
-		String name = getShopName(request, response);
+		String name = getCurrentShopName(request, response);
 
 		String topsortnews = request.getParameter("topsortnews");
 		if ((topsortnews != null)) {
@@ -370,7 +370,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			// Qbc查找方式
 			CriteriaQuery cq = new CriteriaQuery(Product.class, searchForm.getCurPageNOTop());
 			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class) * 2);
-			cq.eq("userName", getShopName(request, response));
+			cq.eq("userName", getCurrentShopName(request, response));
 			Criterion c = null;
 			if (!AppUtils.isBlank(searchForm.getKeyword())) {
 				String[] keywords = AppUtils.searchByKeyword(searchForm.getKeyword());
@@ -694,7 +694,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			}
 
 		}
-		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_740, request);
+		setOneAdvertisement(getCurrentShopName(request, response), Constants.USER_REG_ADV_740, request);
 		return PathResolver.getPath(request, TilesPage.NEWS);
 	}
 
@@ -707,12 +707,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if(curPageNO == null){
 			curPageNO = "1";
 		}
-		String shopName = getShopName(request, response);
+		String shopName = getCurrentShopName(request, response);
 
 		PageSupport ps = newsDao.getNews(localeResolver.resolveLocale(request), curPageNO,shopName,newsCategoryId);
 		ps.savePage(request);
 		request.setAttribute("newsCategoryId", newsCategoryId);
-		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_740, request);
+		setOneAdvertisement(shopName, Constants.USER_REG_ADV_740, request);
 		return PathResolver.getPath(request, TilesPage.ALL_NEWS);
 	}
 
@@ -746,7 +746,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public String getHotSale(HttpServletRequest request, HttpServletResponse response) {
-		String name = getShopName(request, response);
+		String name = getCurrentShopName(request, response);
 		List<Product> hotsaleList = productDao.gethotsale(name);
 		if (!AppUtils.isBlank(hotsaleList)) {
 			request.setAttribute("hotsaleList", hotsaleList);
@@ -759,7 +759,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public String getFriendlink(HttpServletRequest request, HttpServletResponse response) {
-		String name = getShopName(request, response);
+		String name = getCurrentShopName(request, response);
 		List<ExternalLink> adList = externalLinkDao.getExternalLink(name);
 		if (!AppUtils.isBlank(adList)) {
 			request.setAttribute("adList", adList);
@@ -785,7 +785,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public String getHotView(HttpServletRequest request, HttpServletResponse response) {
-		String shopName = getShopName(request, response);
+		String shopName = getCurrentShopName(request, response);
 		List<Product> hotViewList = productDao.getHotViewProd(shopName, 10);
 		if (AppUtils.isNotBlank(hotViewList)) {
 			request.setAttribute("hotViewList", hotViewList);
@@ -898,7 +898,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public String saveUserReg(HttpServletRequest request, HttpServletResponse response) {
-		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_950, request);
+		setOneAdvertisement(getCurrentShopName(request, response), Constants.USER_REG_ADV_950, request);
 		
 		EventContext eventContext = new EventContext(request);
 		EventHome.publishEvent(new GenericEvent(eventContext,EventId.CAN_ADD_SHOPDETAIL_EVENT));
@@ -1030,7 +1030,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		
 		request.setAttribute("totalProcessingOrder", subDao.getTotalProcessingOrder(userName));
 		request.setAttribute("totalBasketByuserName", basketDao.getTotalBasketByuserName(userName));
-		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_740, request);
+		setOneAdvertisement(getCurrentShopName(request, response), Constants.USER_REG_ADV_740, request);
 		return PathResolver.getPath(request, TilesPage.MYACCOUNT);
 	}
 
@@ -1182,7 +1182,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (ps.hasMutilPage()) {
 			request.setAttribute("toolBar", ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
 		}
-		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_740, request);
+		setOneAdvertisement(getCurrentShopName(request, response), Constants.USER_REG_ADV_740, request);
 		return PathResolver.getPath(request, TilesPage.LEAGUE);
 	}
 
@@ -1308,7 +1308,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	public String getShopcontact(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = request.getParameter("shop");
 		if (shopName == null) {
-			shopName = getShopName(request, response);
+			shopName = getCurrentShopName(request, response);
 		}
 		if (shopName == null) {
 			return PathResolver.getPath(request, TilesPage.SEARCHALL);

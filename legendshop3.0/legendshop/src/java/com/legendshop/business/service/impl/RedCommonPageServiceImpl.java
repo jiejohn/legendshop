@@ -44,7 +44,7 @@ public class RedCommonPageServiceImpl extends AbstractCommonPageService {
 	public String getTop(HttpServletRequest request, HttpServletResponse response) {
 
 		Long sortId=ServletRequestUtils.getLongParameter(request, "sortId",-1);
-		String shopName = getShopName(request, response);
+		String shopName = getCurrentShopName(request, response);
 		List<Hotsearch> searchList = hotsearchDao.getHotsearch(shopName);
 		
 		List<Sort> headerSortList = sortDao.getSort(shopName, ProductTypeEnum.PRODUCT.value(), 1, null, false);

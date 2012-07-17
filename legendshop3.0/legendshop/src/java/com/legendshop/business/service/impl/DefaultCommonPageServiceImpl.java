@@ -28,7 +28,7 @@ public class DefaultCommonPageServiceImpl extends AbstractCommonPageService {
 	 */
 	@Override
 	public String getTop(HttpServletRequest request, HttpServletResponse response) {
-		String shopName = getShopName(request, response);
+		String shopName = getCurrentShopName(request, response);
 		String userName = UserManager.getUsername(request.getSession());
 		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(shopName, request, response);
 		if (shopDetail == null) {
