@@ -49,7 +49,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 	public String getIndex(HttpServletRequest request, HttpServletResponse response, String curPageNO, String order,
 			String seq, Product product) {
 
-		String shopName = getShopName(request, response);
+		String shopName = getCurrentShopName(request, response);
 		List<Sort> groupSortList=sortService.getSort(shopName, ProductTypeEnum.GROUP.value(),null , null, false);
 		
 		//TODO place into service
