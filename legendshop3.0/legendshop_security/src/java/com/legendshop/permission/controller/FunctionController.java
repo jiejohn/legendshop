@@ -96,7 +96,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		logger.debug("deleteFunctionById result  = " + result);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, SecurityFowardPage.FUNCTION_LIST_QUERY);
+		return PathResolver.getPath(SecurityFowardPage.FUNCTION_LIST_QUERY);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		stateChecker.check(state, request);
 		request.setAttribute("function", function);
 
-		return PathResolver.getPath(request, SecurityBackPage.UPDATE_FUNCTION);
+		return PathResolver.getPath(SecurityBackPage.UPDATE_FUNCTION);
 	}
 
 	/**
@@ -142,8 +142,8 @@ public class FunctionController extends BaseController implements AdminControlle
 		request.setAttribute("list", list);
 		request.setAttribute("role", role);
 
-		//return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
-		return PathResolver.getPath(request,SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		//return PathResolver.getPath(SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getNativeValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		ps.savePage(request);
 		request.setAttribute("role", role);
 
-		return PathResolver.getPath(request, SecurityBackPage.FIND_OTHER_FUNCTION_LIST);
+		return PathResolver.getPath(SecurityBackPage.FIND_OTHER_FUNCTION_LIST);
 	}
 
 	/**
@@ -230,7 +230,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		
 
 
-		return PathResolver.getPath(request, SecurityBackPage.FUNCTION_LIST);
+		return PathResolver.getPath(SecurityBackPage.FUNCTION_LIST);
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		String id = rightDelegate.saveFunction(functionForm.getFunction(), state);
 		logger.info("success saveFunction,id = " + id);
 		stateChecker.check(state, request);
-		return PathResolver.getPath(request, SecurityFowardPage.FUNCTION_LIST_QUERY);
+		return PathResolver.getPath(SecurityFowardPage.FUNCTION_LIST_QUERY);
 	}
 
 	/**
@@ -283,8 +283,8 @@ public class FunctionController extends BaseController implements AdminControlle
 		rightDelegate.saveFunctionsToRole(permissions, state);
 		stateChecker.check(state, request);
 
-		//return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
-		return PathResolver.getPath(request,SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		//return PathResolver.getPath(SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getNativeValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 	/**
@@ -304,7 +304,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		State state = new StateImpl();
 		rightDelegate.updateFunction(functionForm.getFunction(), state);
 		stateChecker.check(state, request);
-		return PathResolver.getPath(request, SecurityFowardPage.FUNCTION_LIST_QUERY);
+		return PathResolver.getPath(SecurityFowardPage.FUNCTION_LIST_QUERY);
 	}
 
 	// ////////////////////////////Role Controller
@@ -341,7 +341,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		rightDelegate.deleteFunctionsFromRole(permissions, state);
 		stateChecker.check(state, request);
 		request.setAttribute("roleId", roleId);
-		return PathResolver.getPath(request,SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getNativeValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 	/**
@@ -363,7 +363,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		stateChecker.check(state, request);
 		request.setAttribute("role", role);
 
-		return PathResolver.getPath(request, SecurityFowardPage.FIND_ALL_ROLE);
+		return PathResolver.getPath(SecurityFowardPage.FIND_ALL_ROLE);
 	}
 
 	/**
@@ -385,7 +385,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		rightDelegate.deleteRoleById(id, state);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, SecurityFowardPage.FIND_ALL_ROLE);
+		return PathResolver.getPath(SecurityFowardPage.FIND_ALL_ROLE);
 	}
 
 	/**
@@ -431,7 +431,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		ps.setToolBar(localeResolver.resolveLocale(request));
 		ps.savePage(request);
 		
-		return PathResolver.getPath(request, SecurityBackPage.ROLE_LIST);
+		return PathResolver.getPath(SecurityBackPage.ROLE_LIST);
 	}
 
 	/**
@@ -457,7 +457,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		request.setAttribute("list", list);
 		request.setAttribute("function", function);
 
-		return PathResolver.getPath(request, SecurityBackPage.FIND_ROLE_BY_FUNCTION);
+		return PathResolver.getPath(SecurityBackPage.FIND_ROLE_BY_FUNCTION);
 	}
 
 	/**
@@ -479,7 +479,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		logger.info("success saveRole,id = " + id);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, SecurityFowardPage.FIND_ALL_ROLE);
+		return PathResolver.getPath(SecurityFowardPage.FIND_ALL_ROLE);
 	}
 
 	/**
@@ -500,7 +500,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		rightDelegate.updateRole(roleForm.getRole(), state);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, SecurityFowardPage.FIND_ALL_ROLE);
+		return PathResolver.getPath(SecurityFowardPage.FIND_ALL_ROLE);
 	}
 
 	
@@ -514,14 +514,14 @@ public class FunctionController extends BaseController implements AdminControlle
 		if (!result) {
 			stateChecker.check(state, request);
 		}
-		return PathResolver.getPath(request, SecurityFowardPage.FUNCTION_LIST_QUERY);
+		return PathResolver.getPath(SecurityFowardPage.FUNCTION_LIST_QUERY);
 	}
 
 	
 	@RequestMapping("/load")
 	public String load(HttpServletRequest request, HttpServletResponse arg1) {
 
-		return PathResolver.getPath(request, SecurityBackPage.UPDATE_FUNCTION);
+		return PathResolver.getPath(SecurityBackPage.UPDATE_FUNCTION);
 	}
 
 	
@@ -549,7 +549,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		request.setAttribute("bean", function);
 		savePage(ps, request);
 
-		return PathResolver.getPath(request, SecurityBackPage.FUNCTION_LIST);
+		return PathResolver.getPath(SecurityBackPage.FUNCTION_LIST);
 	}
 
 	
@@ -564,7 +564,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		}
 		logger.info("success saveFunction,id = " + id);
 		stateChecker.check(state, request);
-		return PathResolver.getPath(request, SecurityFowardPage.FUNCTION_LIST_QUERY);
+		return PathResolver.getPath(SecurityFowardPage.FUNCTION_LIST_QUERY);
 	}
 
 	
@@ -576,7 +576,7 @@ public class FunctionController extends BaseController implements AdminControlle
 		stateChecker.check(state, request);
 		request.setAttribute("bean", function);
 
-		return PathResolver.getPath(request, SecurityBackPage.UPDATE_FUNCTION);
+		return PathResolver.getPath(SecurityBackPage.UPDATE_FUNCTION);
 	}
 	
 	@RequestMapping(value = "/roles/{id}")
@@ -591,6 +591,6 @@ public class FunctionController extends BaseController implements AdminControlle
 		request.setAttribute("list", list);
 		request.setAttribute("bean", function);
 
-		return PathResolver.getPath(request, SecurityBackPage.FIND_ROLE_BY_FUNCTION);
+		return PathResolver.getPath(SecurityBackPage.FIND_ROLE_BY_FUNCTION);
 	}
 }

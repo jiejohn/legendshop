@@ -10,8 +10,6 @@ package com.legendshop.permission.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
 import com.legendshop.util.AppUtils;
@@ -65,19 +63,15 @@ public enum SecurityFowardPage implements PageDefinition{
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
 	 */
-	public String getValue(HttpServletRequest request) {
-		return getValue(request,value,templates);
+	public String getValue() {
+		return getValue(value,templates);
 	}
 	
-	public String getValue(HttpServletRequest request, String path, List<String> templates) {
+	public String getValue(String path, List<String> templates) {
 		return PagePathCalculator.calculateActionPath("forward:", path);
 	}
-
-	
-	public String getValue() {
+	public String getNativeValue() {
 		return value;
 	}
-
-
 
 }

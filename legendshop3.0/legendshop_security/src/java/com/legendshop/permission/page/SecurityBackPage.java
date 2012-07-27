@@ -10,8 +10,6 @@ package com.legendshop.permission.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
 import com.legendshop.util.AppUtils;
@@ -92,8 +90,8 @@ public enum SecurityBackPage implements PageDefinition {
 	 * com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http
 	 * .HttpServletRequest)
 	 */
-	public String getValue(HttpServletRequest request) {
-		return getValue(request, value, templates);
+	public String getValue() {
+		return getValue(value, templates);
 	}
 
 	/*
@@ -103,11 +101,10 @@ public enum SecurityBackPage implements PageDefinition {
 	 * com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http
 	 * .HttpServletRequest, java.lang.String)
 	 */
-	public String getValue(HttpServletRequest request, String path, List<String> templates) {
-		return PagePathCalculator.calculateBackendPath(request, path, templates);
+	public String getValue(String path, List<String> templates) {
+		return PagePathCalculator.calculateBackendPath(path, templates);
 	}
-
-	public String getValue() {
+	public String getNativeValue() {
 		return value;
 	}
 }

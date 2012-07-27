@@ -81,7 +81,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		rightDelegate.deleteRoleById(id, state);
 		stateChecker.check(state, request);
 
-		return PathResolver.getPath(request, SecurityFowardPage.ALL_ROLE);
+		return PathResolver.getPath(SecurityFowardPage.ALL_ROLE);
 	}
 
 	/* (non-Javadoc)
@@ -90,7 +90,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 	
 	@RequestMapping("/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, SecurityBackPage.SAVE_ROLE);
+		return PathResolver.getPath(SecurityBackPage.SAVE_ROLE);
 	}
 
 	/* (non-Javadoc)
@@ -127,7 +127,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 
 		savePage(ps, request);
 
-		return PathResolver.getPath(request, SecurityBackPage.ROLE_LIST);
+		return PathResolver.getPath(SecurityBackPage.ROLE_LIST);
 	}
 
 	/* (non-Javadoc)
@@ -151,7 +151,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 			logger.info("success saveRole,id = " + id);
 			stateChecker.check(state, request);
 
-			return PathResolver.getPath(request, SecurityFowardPage.ALL_ROLE);
+			return PathResolver.getPath(SecurityFowardPage.ALL_ROLE);
 	}
 
 	/* (non-Javadoc)
@@ -166,7 +166,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		stateChecker.check(state, request);
 		request.setAttribute("bean", role);
 
-		return PathResolver.getPath(request, SecurityBackPage.SAVE_ROLE);
+		return PathResolver.getPath(SecurityBackPage.SAVE_ROLE);
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		request.setAttribute("list", list);
 		request.setAttribute("bean", role);
 
-		return PathResolver.getPath(request, SecurityBackPage.ROLE_FUNCTION);
+		return PathResolver.getPath(SecurityBackPage.ROLE_FUNCTION);
 	}
 	
 	/**
@@ -222,7 +222,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		savePage(ps, request);
 		request.setAttribute("bean", role);
 
-		return PathResolver.getPath(request, SecurityBackPage.FIND_OTHER_FUNCTION_LIST);
+		return PathResolver.getPath(SecurityBackPage.FIND_OTHER_FUNCTION_LIST);
 	}
 	
 	/**
@@ -254,7 +254,7 @@ public class RoleController extends BaseController implements AdminController<Ro
 		State state = new StateImpl();
 		rightDelegate.saveFunctionsToRole(permissions, state);
 		stateChecker.check(state, request);
-		return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+		return PathResolver.getPath(SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getNativeValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 	
 	/**
@@ -287,8 +287,8 @@ public class RoleController extends BaseController implements AdminController<Ro
 		State state = new StateImpl();
 		rightDelegate.deleteFunctionsFromRole(permissions, state);
 		stateChecker.check(state, request);
- 		//return PathResolver.getPath(request, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
- 		return PathResolver.getPath(request,SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+ 		//return PathResolver.getPath(SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
+ 		return PathResolver.getPath(SecurityFowardPage.FIND_FUNCTION_BY_ROLE.getNativeValue() + "/" + roleId, SecurityFowardPage.FIND_FUNCTION_BY_ROLE);
 	}
 
 
