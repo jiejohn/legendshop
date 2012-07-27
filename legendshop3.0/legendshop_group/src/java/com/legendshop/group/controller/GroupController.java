@@ -50,7 +50,7 @@ public class GroupController extends BaseController {
 	public String clientServicePannel(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = getShopName(request, response);
 		request.setAttribute("groupNewsTopList", newsService.getNews(shopName, NewsPositionEnum.NEWS_GROUP_TOP, 10));
-		return PathResolver.getPath(request, GroupFrontPage.CLIENT_SERVICE_PANEL);
+		return PathResolver.getPath(GroupFrontPage.CLIENT_SERVICE_PANEL);
 	}
 	
 	
@@ -72,13 +72,13 @@ public class GroupController extends BaseController {
 		log.debug("question starting calling");
 		String shopName = getShopName(request, response);
 		request.setAttribute("groupNewsBottomList", newsService.getNews(shopName, NewsPositionEnum.NEWS_GROUP_BOTTOM, 10));
-		return PathResolver.getPath(request, GroupFrontPage.QUESTION_PANEL);
+		return PathResolver.getPath(GroupFrontPage.QUESTION_PANEL);
 	}
 	
 	@RequestMapping("/question")
 	public String question(HttpServletRequest request, HttpServletResponse response) {
 		log.debug("question starting calling");
-		return PathResolver.getPath(request, GroupFrontPage.QUESTION);
+		return PathResolver.getPath(GroupFrontPage.QUESTION);
 	}
 	
 

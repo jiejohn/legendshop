@@ -49,7 +49,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 	public String getIndex(HttpServletRequest request, HttpServletResponse response, String curPageNO, String order,
 			String seq, Product product) {
 
-		String shopName = getCurrentShopName(request, response);
+		String shopName = getCurrentShopName();
 		List<Sort> groupSortList=sortService.getSort(shopName, ProductTypeEnum.GROUP.value(),null , null, false);
 		
 		//TODO place into service
@@ -100,9 +100,9 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 		request.setAttribute("seq", seq);
 		request.setAttribute("groupSortList", groupSortList);
 
-		//return PathResolver.getPath(request, GroupFrontPage.INDEX);
+		//return PathResolver.getPath(GroupFrontPage.INDEX);
 		//TODO
-		return PathResolver.getPath(request, GroupTilesPage.GINDEX);
+		return PathResolver.getPath(GroupTilesPage.GINDEX);
 	}
 	
 	@Override
@@ -115,7 +115,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 				request.setAttribute("partner", partner);
 			}
 			request.setAttribute("groupProduct", groupProduct);
-			return PathResolver.getPath(request, GroupFrontPage.VIEW);
+			return PathResolver.getPath(GroupFrontPage.VIEW);
 		}else{
 			UserMessages uem = new UserMessages();
 			Locale locale = localeResolver.resolveLocale(request);
@@ -123,7 +123,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 			uem.setDesc(ResourceBundleHelper.getString(locale, "product.status.check"));
 			uem.setCode(ErrorCodes.PRODUCT_NO_FOUND);
 			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-			return PathResolver.getPath(request, CommonPage.ERROR_PAGE);
+			return PathResolver.getPath(CommonPage.ERROR_PAGE);
 		}
 
 	}

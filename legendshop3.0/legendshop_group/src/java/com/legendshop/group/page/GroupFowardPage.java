@@ -10,8 +10,6 @@ package com.legendshop.group.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
 import com.legendshop.util.AppUtils;
@@ -61,23 +59,21 @@ public enum GroupFowardPage implements PageDefinition{
 	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
 	 */
 	@Override
-	public String getValue(HttpServletRequest request) {
-		return getValue(request,value,templates);
+	public String getValue() {
+		return getValue(value,templates);
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest, java.lang.String)
 	 */
 	@Override
-	public String getValue(HttpServletRequest request, String path,List<String> templates) {
+	public String getValue(String path,List<String> templates) {
 		return PagePathCalculator.calculateActionPath("forward:", path);
 	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PageDefinition#getValue()
-	 */
+	
 	@Override
-	public String getValue() {
+	public String getNativeValue() {
 		return value;
 	}
+
 }

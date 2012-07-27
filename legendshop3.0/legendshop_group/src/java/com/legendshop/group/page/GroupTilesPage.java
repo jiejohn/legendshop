@@ -10,8 +10,6 @@ package com.legendshop.group.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
 import com.legendshop.spi.constants.TemplateEnum;
@@ -37,14 +35,14 @@ public enum GroupTilesPage implements PageDefinition{
 	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
 	 */
 	@Override
-	public String getValue(HttpServletRequest request) { 
-		return getValue(request,value,templates);
+	public String getValue() { 
+		return getValue(value,templates);
 	}
 	
 	
 	@Override
-	public String getValue(HttpServletRequest request, String path,List<String> templates) {
-		return PagePathCalculator.calculateTilesPath(request,path,templates);
+	public String getValue(String path,List<String> templates) {
+		return PagePathCalculator.calculateTilesPath(path,templates);
 	}
 
 	
@@ -64,10 +62,8 @@ public enum GroupTilesPage implements PageDefinition{
 		}
 		
 	}
-	
-
 	@Override
-	public String getValue() {
+	public String getNativeValue() {
 		return value;
 	}
 }

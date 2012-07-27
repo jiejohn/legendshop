@@ -113,7 +113,7 @@ public class GroupProductController extends BaseController{
 				savePage(ps, request);
 				request.setAttribute("prod", product);
 				
-				return PathResolver.getPath(request, GroupBackPage.PROD_LIST_PAGE);
+				return PathResolver.getPath(GroupBackPage.PROD_LIST_PAGE);
 	}
 	
 	private void fillParameter(HqlQuery hql,Map<String, String> map,String key,Object value){
@@ -127,7 +127,7 @@ public class GroupProductController extends BaseController{
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, GroupProduct entity) {
 		String name = UserManager.getUsername(request);
-		String result = checkLogin(request,name);
+		String result = checkLogin(name);
 		if(result != null){
 			return result;
 		}
@@ -189,13 +189,13 @@ public class GroupProductController extends BaseController{
 		}
 
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, GroupFowardPage.PROD_LIST_QUERY);
+		return PathResolver.getPath(GroupFowardPage.PROD_LIST_QUERY);
 	}
 
 	
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, GroupBackPage.PROD_EDIT_PAGE);
+		return PathResolver.getPath(GroupBackPage.PROD_EDIT_PAGE);
 	}
 	
 	/**
@@ -218,7 +218,7 @@ public class GroupProductController extends BaseController{
 			return result;
 		}
 		request.setAttribute("prod", product);
-		return PathResolver.getPath(request, GroupBackPage.PROD_EDIT_PAGE);
+		return PathResolver.getPath(GroupBackPage.PROD_EDIT_PAGE);
 	}
 
 	 
