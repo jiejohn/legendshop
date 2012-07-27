@@ -88,7 +88,7 @@ public class IndexJpgAdminController extends BaseController {
 		PageSupport ps = indexJpgService.getIndexJpg(cq);
 		savePage(ps, request);
 		request.setAttribute("indexJpg", indexjpg);
-		return PathResolver.getPath(request, BackPage.IJPG_LIST_PAGE);
+		return PathResolver.getPath(BackPage.IJPG_LIST_PAGE);
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class IndexJpgAdminController extends BaseController {
 			throw new BusinessException(e, "save Indexjpg error", EntityCodes.IMG,ErrorCodes.BUSINESS_ERROR);
 		}
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.IJPG_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.IJPG_LIST_QUERY);
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class IndexJpgAdminController extends BaseController {
 			UserMessages uem = new UserMessages();
 			uem.setTitle("系统设置不能上传多于" + maxNum + "张图片");
 			uem.setCode(ErrorCodes.MAX_INDEX_JPG_ERROR);
-			uem.addCallBackList("重新上传", "",  PathResolver.getPath(request, BackPage.IJPG_EDIT_PAGE));
+			uem.addCallBackList("重新上传", "",  PathResolver.getPath(BackPage.IJPG_EDIT_PAGE));
 			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
 			result =  handleException(request, uem);
 		}
@@ -243,7 +243,7 @@ public class IndexJpgAdminController extends BaseController {
 		indexJpgService.deleteIndexJpg(indexjpg);
 		FileProcessor.deleteFile(RealPathUtil.getBigPicRealPath() + "/" + indexjpg.getImg());
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.IJPG_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.IJPG_LIST_QUERY);
 	}
 
 	/**
@@ -257,7 +257,7 @@ public class IndexJpgAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return  PathResolver.getPath(request, BackPage.IJPG_EDIT_PAGE);
+		return  PathResolver.getPath(BackPage.IJPG_EDIT_PAGE);
 	}
 
 	/**
@@ -282,7 +282,7 @@ public class IndexJpgAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("index", indexjpg);
-		return  PathResolver.getPath(request, BackPage.IJPG_EDIT_PAGE);
+		return  PathResolver.getPath(BackPage.IJPG_EDIT_PAGE);
 	}
 
 }

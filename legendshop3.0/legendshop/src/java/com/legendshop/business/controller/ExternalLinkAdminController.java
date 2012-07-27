@@ -80,7 +80,7 @@ public class ExternalLinkAdminController extends BaseController {
 		PageSupport ps = externalLinkService.getDataByCriteriaQuery(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", externalLink);
-		return PathResolver.getPath(request, BackPage.LINK_LIST_PAGE);
+		return PathResolver.getPath(BackPage.LINK_LIST_PAGE);
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class ExternalLinkAdminController extends BaseController {
 		}
 
 		saveMessage(request, ResourceBundleHelper.getString("operation.successful"));
-		return PathResolver.getPath(request, FowardPage.LINK_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.LINK_LIST_QUERY);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class ExternalLinkAdminController extends BaseController {
 		}
 
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, FowardPage.LINK_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.LINK_LIST_QUERY);
 	}
 
 	/**
@@ -192,12 +192,12 @@ public class ExternalLinkAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("bean", externalLink);
-		return PathResolver.getPath(request, BackPage.LINK_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.LINK_EDIT_PAGE);
 	}
 	
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.LINK_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.LINK_EDIT_PAGE);
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class ExternalLinkAdminController extends BaseController {
 		externalLink.setUserName(origin.getUserName());
 		log.info("{} update ExternalLink Url{}", origin.getUserName(), externalLink.getUrl());
 		externalLinkService.update(externalLink);
-		return PathResolver.getPath(request, FowardPage.LINK_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.LINK_LIST_QUERY);
 	}
 
 }

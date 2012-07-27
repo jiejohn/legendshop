@@ -61,7 +61,7 @@ public class DeliveryCorpController extends BaseController implements AdminContr
         PageSupport ps = deliveryCorpService.getDeliveryCorp(cq);
         savePage(ps, request);
         request.setAttribute("deliveryCorp", deliveryCorp);
-        return PathResolver.getPath(request, BackPage.DELIVERYCORP_LIST_PAGE);
+        return PathResolver.getPath(BackPage.DELIVERYCORP_LIST_PAGE);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class DeliveryCorpController extends BaseController implements AdminContr
     	
         deliveryCorpService.saveDeliveryCorp(dc);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
-        return PathResolver.getPath(request, FowardPage.DELIVERYCORP_LIST_QUERY);
+        return PathResolver.getPath(FowardPage.DELIVERYCORP_LIST_QUERY);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class DeliveryCorpController extends BaseController implements AdminContr
  		}
         deliveryCorpService.deleteDeliveryCorp(deliveryCorp);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("entity.deleted"));
-        return PathResolver.getPath(request, FowardPage.DELIVERYCORP_LIST_QUERY);
+        return PathResolver.getPath(FowardPage.DELIVERYCORP_LIST_QUERY);
     }
 
     @RequestMapping(value = "/load/{id}")
@@ -108,13 +108,13 @@ public class DeliveryCorpController extends BaseController implements AdminContr
 			return result;
 		}
         request.setAttribute("deliveryCorp", deliveryCorp);
-        return PathResolver.getPath(request, BackPage.DELIVERYCORP_EDIT_PAGE);
+        return PathResolver.getPath(BackPage.DELIVERYCORP_EDIT_PAGE);
     }
     
 	@Override
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.DELIVERYCORP_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.DELIVERYCORP_EDIT_PAGE);
 	}
 
     @Override
@@ -126,7 +126,7 @@ public class DeliveryCorpController extends BaseController implements AdminContr
 			return result;
 		}
 		request.setAttribute("deliveryCorp", deliveryCorp);
-		return PathResolver.getPath(request, FowardPage.DELIVERYCORP_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.DELIVERYCORP_LIST_QUERY);
     }
 
 }

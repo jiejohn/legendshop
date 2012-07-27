@@ -86,7 +86,7 @@ public class OrderController extends BaseController {
 
 		if (userName == null) {
 			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + "/order"+Constants.WEB_SUFFIX);
-			return PathResolver.getPath(request, TilesPage.NO_LOGIN);
+			return PathResolver.getPath(TilesPage.NO_LOGIN);
 		} 
 		if(entity!=null && entity.getSubCheck() == null){
 			entity.setSubCheck(Constants.FALSE_INDICATOR);
@@ -114,7 +114,7 @@ public class OrderController extends BaseController {
 			request.setAttribute("subForm", entity);
 
 
-		return PathResolver.getPath(request, TilesPage.ORDER);
+		return PathResolver.getPath(TilesPage.ORDER);
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class OrderController extends BaseController {
 		String userName = UserManager.getUsername(request.getSession());
 		if (userName == null) {
 			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + "/buy"+ Constants.WEB_SUFFIX);
-			return PathResolver.getPath(request, TilesPage.NO_LOGIN);
+			return PathResolver.getPath(TilesPage.NO_LOGIN);
 		}
 		if ("buy".equals(basket.getAction())) {
 			String shopName = getShopName(request, response);
@@ -146,7 +146,7 @@ public class OrderController extends BaseController {
 			request.getSession().setAttribute(Constants.BASKET_HW_COUNT, count);
 		}
 		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_950, request);
-		return PathResolver.getPath(request, TilesPage.BUY);
+		return PathResolver.getPath(TilesPage.BUY);
 	}
 	
 	
@@ -163,7 +163,7 @@ public class OrderController extends BaseController {
 	public String clear(HttpServletRequest request, HttpServletResponse response) {
 		String userName = UserManager.getUsername(request);
 		if (AppUtils.isBlank(userName)) {
-			return PathResolver.getPath(request, TilesPage.NO_LOGIN);
+			return PathResolver.getPath(TilesPage.NO_LOGIN);
 		}
 		String basketId = request.getParameter("basketId");
 		if (basketId == null) {
@@ -177,7 +177,7 @@ public class OrderController extends BaseController {
 			}
 
 		}
-		return PathResolver.getPath(request, TilesPage.BUY);
+		return PathResolver.getPath(TilesPage.BUY);
 	}
 	
 	/**
@@ -198,7 +198,7 @@ public class OrderController extends BaseController {
 			request.setAttribute("totalcash", totalcash);
 		}
 
-		return PathResolver.getPath(request, FrontPage.BOUGHT);
+		return PathResolver.getPath(FrontPage.BOUGHT);
 	}
 	
 	/**
@@ -220,7 +220,7 @@ public class OrderController extends BaseController {
 		}
 		String userName = UserManager.getUsername(request);
 		if (AppUtils.isBlank(userName)) {
-			return PathResolver.getPath(request, TilesPage.NO_LOGIN);
+			return PathResolver.getPath(TilesPage.NO_LOGIN);
 		}
 
 		UserDetail member = userDetailService.getUserDetail(userName);
@@ -228,7 +228,7 @@ public class OrderController extends BaseController {
 			request.setAttribute("member", member);
 		}
 		setSessionAttribute(request, Constants.SHOP_NAME, getShopName(request, response));
-		return PathResolver.getPath(request, FrontPage.CASH_SAVE);
+		return PathResolver.getPath(FrontPage.CASH_SAVE);
 		
 	}
 	

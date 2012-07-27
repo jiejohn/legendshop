@@ -103,7 +103,7 @@ public class OrderAdminController extends BaseController implements AdminControl
 			PageSupport ps = subService.getOrderList(cq);
 			savePage(ps, request);
 			request.setAttribute("subForm", entity);
-			return PathResolver.getPath(request, BackPage.ORDER_LIST_PAGE);
+			return PathResolver.getPath(BackPage.ORDER_LIST_PAGE);
 
 	}
 
@@ -163,7 +163,7 @@ public class OrderAdminController extends BaseController implements AdminControl
 			request.setAttribute("baskets", baskets);
 			request.setAttribute("totalcash", totalcash);
 		}
-		return PathResolver.getPath(request, BackPage.ORDERDETAIL);
+		return PathResolver.getPath(BackPage.ORDERDETAIL);
 	}
 
 	/* (non-Javadoc)
@@ -179,7 +179,7 @@ public class OrderAdminController extends BaseController implements AdminControl
 	@RequestMapping(value = "/modifyPrice")
 	public String modifyPrice(HttpServletRequest request, HttpServletResponse response, Long id) {
 		// TODO Auto-generated method stub
-		return PathResolver.getPath(request, BackPage.MODIFYPRICE);
+		return PathResolver.getPath(BackPage.MODIFYPRICE);
 	}
 	
 

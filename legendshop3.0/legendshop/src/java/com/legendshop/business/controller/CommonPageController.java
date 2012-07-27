@@ -42,18 +42,18 @@ public class CommonPageController extends BaseController {
 	@RequestMapping("/top")
 	public String top(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = getShopName(request, response);
-		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName,request,response);
+		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName);
 		return commonPageService.getTop(request, response);
 	}
 
 	@RequestMapping("/home/top")
 	public String homeTop(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, FrontPage.HOME_TOP);
+		return PathResolver.getPath(FrontPage.HOME_TOP);
 	}
 
 	@RequestMapping("/bottom")
 	public String bottom(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, FrontPage.BOTTOM);
+		return PathResolver.getPath(FrontPage.BOTTOM);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class CommonPageController extends BaseController {
 	 */
 	@RequestMapping("/topall")
 	public String topall(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, FrontPage.TOPALL);
+		return PathResolver.getPath(FrontPage.TOPALL);
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class CommonPageController extends BaseController {
 	public String copyAll(HttpServletRequest request, HttpServletResponse response, String curPageNO,
 			String newsCategory) {
 		String shopName = getShopName(request, response);
-		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName,request,response);
+		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName);
 		return commonPageService.getCopyAll(request, response);
 	}
 

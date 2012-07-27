@@ -87,14 +87,14 @@ public class BasketController extends BaseController {
 			}
 			destView = "/basket/load/";
 			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + destView + prodId + Constants.WEB_SUFFIX);
-			return PathResolver.getPath(request, TilesPage.NO_LOGIN);
+			return PathResolver.getPath(TilesPage.NO_LOGIN);
 		}
 		String shopName = getShopName(request, response);
 		if(prodId != null){
 			basketService.saveToCart(prodId, addtoCart, shopName, prodattr, userName,  Integer.valueOf(count));
 		}
 		
-		return PathResolver.getPath(request, TilesPage.PAGE_CASH);
+		return PathResolver.getPath(TilesPage.PAGE_CASH);
 	}
 	
 	/**

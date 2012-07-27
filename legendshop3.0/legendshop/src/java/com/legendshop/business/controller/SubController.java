@@ -66,7 +66,7 @@ public class SubController extends BaseController {
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, SubForm sub) {
 		String userName = UserManager.getUsername(request);
-		String result = checkLogin(request,userName);
+		String result = checkLogin(userName);
 		if(result != null){
 			return result;
 		}
@@ -88,9 +88,9 @@ public class SubController extends BaseController {
 			uem.addCallBackList(ResourceBundleHelper.getString(locale, "myorder"),
 					ResourceBundleHelper.getString(locale, "Query.Order.Status"), "order.do");
 			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
-			return PathResolver.getPath(request, FrontPage.ERROR_PAGE);
+			return PathResolver.getPath(FrontPage.ERROR_PAGE);
 		}
-		return PathResolver.getPath(request, TilesPage.PAGE_SUB);
+		return PathResolver.getPath(TilesPage.PAGE_SUB);
 	}
 
 }

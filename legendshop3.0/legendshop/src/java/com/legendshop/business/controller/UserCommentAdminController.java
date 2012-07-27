@@ -101,7 +101,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 		request.setAttribute("status", status);
 		request.setAttribute("userName", userName);
 		request.setAttribute("bean", userComment);
-		return PathResolver.getPath(request, BackPage.USER_COMM_LIST_PAGE);
+		return PathResolver.getPath(BackPage.USER_COMM_LIST_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -116,14 +116,14 @@ public class UserCommentAdminController extends BaseController implements AdminC
 			return result;
 		}
 		String shopName = getShopName(request, response);
-		ThreadLocalContext.getShopDetailView(shopName, request, response);
+		ThreadLocalContext.getShopDetailView(shopName);
 		comment.setAddtime(new Date());
 		comment.setCommentType(CommentTypeEnum.COMMONTALK.value());
 		comment.setPostip(request.getRemoteAddr());
 		comment.setToUserName(shopName);
 		comment.setStatus(CommentTypeEnum.COMMENT_UN_READ.value());
 		userCommentService.saveOrUpdateUserComment(comment);
-		return PathResolver.getPath(request, TilesPage.AFTER_OPERATION);
+		return PathResolver.getPath(TilesPage.AFTER_OPERATION);
 	}
 
 	/* (non-Javadoc)
@@ -142,7 +142,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 				userComment.getToUserName() });
 		userCommentService.delete(userComment);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, FowardPage.USER_COMM_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.USER_COMM_LIST_QUERY);
 	}
 
 	/* (non-Javadoc)
@@ -151,7 +151,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 	@Override
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.USER_COMM_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.USER_COMM_EDIT_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -171,7 +171,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 			return result;
 		}
 		request.setAttribute("comment", comment);
-		return PathResolver.getPath(request, BackPage.USER_COMM_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.USER_COMM_EDIT_PAGE);
 	}
 
 }

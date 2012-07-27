@@ -54,7 +54,7 @@ public class LuceneController extends BaseController {
 	 */
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO) {
-		return PathResolver.getPath(request, BackPage.LUCENE_PAGE);
+		return PathResolver.getPath(BackPage.LUCENE_PAGE);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class LuceneController extends BaseController {
 		luceneReindexer.startBackgroundProcess(args, recreate);
 		luceneReindexer.list();
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, BackPage.LUCENE_PAGE);
+		return PathResolver.getPath(BackPage.LUCENE_PAGE);
 	}
 
 	/**

@@ -74,7 +74,7 @@ public class SystemParameterController extends BaseController {
 		PageSupport ps = systemParameterService.getSystemParameterList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", systemParameter);
-		return PathResolver.getPath(request, BackPage.PARAM_LIST_PAGE);
+		return PathResolver.getPath(BackPage.PARAM_LIST_PAGE);
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class SystemParameterController extends BaseController {
 		} else {
 			saveMessage(request, ResourceBundleHelper.getErrorString());
 		}
-		return PathResolver.getPath(request, FowardPage.PARAM_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.PARAM_LIST_QUERY);
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class SystemParameterController extends BaseController {
 
 		// systemParameterService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getErrorString());
-		return PathResolver.getPath(request, FowardPage.PARAM_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.PARAM_LIST_QUERY);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class SystemParameterController extends BaseController {
 	String id) {
 		SystemParameter systemParameter = systemParameterService.getSystemParameter(id);
 		request.setAttribute("bean", systemParameter);
-		return PathResolver.getPath(request, BackPage.PARAM_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.PARAM_EDIT_PAGE);
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class SystemParameterController extends BaseController {
 	@RequestMapping(value = "/update")
 	public String update(HttpServletRequest request,@PathVariable SystemParameter systemParameter) {
 		systemParameterService.update(systemParameter);
-		return PathResolver.getPath(request, FowardPage.PARAM_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.PARAM_LIST_QUERY);
 	}
 
 }

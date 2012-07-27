@@ -88,7 +88,7 @@ public class ImgFileAdminController extends BaseController {
 		PageSupport ps = imgFileService.getImgFileList(cq);
 		savePage(ps, request);
 		request.setAttribute("productId", productId);
-		return PathResolver.getPath(request, BackPage.IMG_LIST_PAGE);
+		return PathResolver.getPath(BackPage.IMG_LIST_PAGE);
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class ImgFileAdminController extends BaseController {
 			saveMessage(request, ResourceBundleHelper.getSucessfulString());
 		}
 		request.setAttribute("productId", imgFile.getProductId());
-		return PathResolver.getPath(request, FowardPage.IMG_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.IMG_LIST_QUERY);
 
 	}
 
@@ -141,7 +141,7 @@ public class ImgFileAdminController extends BaseController {
 		FileProcessor.deleteFile(url);
 		request.setAttribute("productId", imgFile.getProductId());
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.IMG_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.IMG_LIST_QUERY);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class ImgFileAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		ImgFile imgFile = imgFileService.getImgFileById(id);
 		request.setAttribute("bean", imgFile);
-		return PathResolver.getPath(request, BackPage.IMG_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.IMG_EDIT_PAGE);
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class ImgFileAdminController extends BaseController {
 	@RequestMapping(value = "/update")
 	public String update(HttpServletRequest request,@PathVariable ImgFile imgFile) {
 		imgFileService.update(imgFile);
-		return PathResolver.getPath(request, FowardPage.IMG_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.IMG_LIST_QUERY);
 	}
 
 }

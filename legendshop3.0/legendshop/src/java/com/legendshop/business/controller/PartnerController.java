@@ -65,7 +65,7 @@ public class PartnerController extends BaseController implements AdminController
         PageSupport ps = partnerService.getPartner(cq);
         savePage(ps, request);
         request.setAttribute("partner", partner);
-        return PathResolver.getPath(request, BackPage.PARTNER_LIST_PAGE);
+        return PathResolver.getPath(BackPage.PARTNER_LIST_PAGE);
     }
 
     @RequestMapping(value = "/save")
@@ -156,7 +156,7 @@ public class PartnerController extends BaseController implements AdminController
     	
         partnerService.savePartner(p);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
-        return PathResolver.getPath(request, FowardPage.PARTNER_LIST_QUERY);
+        return PathResolver.getPath(FowardPage.PARTNER_LIST_QUERY);
     }
 
 
@@ -170,7 +170,7 @@ public class PartnerController extends BaseController implements AdminController
 		}
 		partnerService.deletePartner(partner);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("entity.deleted"));
-        return PathResolver.getPath(request, FowardPage.PARTNER_LIST_QUERY);
+        return PathResolver.getPath(FowardPage.PARTNER_LIST_QUERY);
     }
 
     @RequestMapping(value = "/load/{id}")
@@ -182,12 +182,12 @@ public class PartnerController extends BaseController implements AdminController
 			return result;
 		}
         request.setAttribute("partner", partner);
-        return PathResolver.getPath(request, BackPage.PARTNER_EDIT_PAGE);
+        return PathResolver.getPath(BackPage.PARTNER_EDIT_PAGE);
     }
     
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-        return PathResolver.getPath(request, BackPage.PARTNER_EDIT_PAGE);
+        return PathResolver.getPath(BackPage.PARTNER_EDIT_PAGE);
 	}
 
     @RequestMapping(value = "/update")
@@ -198,7 +198,7 @@ public class PartnerController extends BaseController implements AdminController
 			return result;
 		}
 		request.setAttribute("partner", partner);
-        return PathResolver.getPath(request, FowardPage.PARTNER_LIST_QUERY);
+        return PathResolver.getPath(FowardPage.PARTNER_LIST_QUERY);
     }
     @RequestMapping(value = "/changePassword/{id}")
     public String changePassword(HttpServletRequest request, HttpServletResponse response, @PathVariable
@@ -209,7 +209,7 @@ public class PartnerController extends BaseController implements AdminController
 			return result;
 		}
         request.setAttribute("partner", partner);
-        return PathResolver.getPath(request, BackPage.PARTNER_CHANGE_PASSWORD_PAGE);
+        return PathResolver.getPath(BackPage.PARTNER_CHANGE_PASSWORD_PAGE);
     }
 
 
@@ -225,7 +225,7 @@ public class PartnerController extends BaseController implements AdminController
     	
         partnerService.savePartner(p);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
-        return PathResolver.getPath(request, FowardPage.PARTNER_LIST_QUERY);
+        return PathResolver.getPath(FowardPage.PARTNER_LIST_QUERY);
     }    
     
 

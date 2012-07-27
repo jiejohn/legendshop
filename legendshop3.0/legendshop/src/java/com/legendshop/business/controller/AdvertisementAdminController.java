@@ -78,7 +78,7 @@ public class AdvertisementAdminController extends BaseController {
 		PageSupport ps = advertisementService.getDataByCriteriaQuery(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", advertisement);
-		return PathResolver.getPath(request, BackPage.ADV_LIST_PAGE);
+		return PathResolver.getPath(BackPage.ADV_LIST_PAGE);
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class AdvertisementAdminController extends BaseController {
 			advertisementService.save(advertisement);
 		}
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.ADV_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.ADV_LIST_QUERY);
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class AdvertisementAdminController extends BaseController {
 		String url = RealPathUtil.getBigPicRealPath() + "/" + advertisement.getPicUrl();
 		FileProcessor.deleteFile(url);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, FowardPage.ADV_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.ADV_LIST_QUERY);
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class AdvertisementAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("bean", advertisement);
-		return PathResolver.getPath(request, BackPage.ADV_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.ADV_EDIT_PAGE);
 		
 	}
 	
@@ -199,7 +199,7 @@ public class AdvertisementAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.ADV_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.ADV_EDIT_PAGE);
 		
 	}
 
@@ -225,7 +225,7 @@ public class AdvertisementAdminController extends BaseController {
 		advertisement.setUserId(origin.getUserId());
 		advertisement.setUserName(origin.getUserName());
 		advertisementService.update(advertisement);
-		return PathResolver.getPath(request, FowardPage.ADV_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.ADV_LIST_QUERY);
 	}
 
 }

@@ -103,7 +103,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 		}
 		savePage(ps, request);
 		request.setAttribute("bean", nsort);
-		return PathResolver.getPath(request, BackPage.NSORT_LIST_PAGE);
+		return PathResolver.getPath(BackPage.NSORT_LIST_PAGE);
 	}
 
 	/*
@@ -131,7 +131,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 			request.setAttribute("bean", bean);
 		}
 		
-		return PathResolver.getPath(request, FowardPage.NSORT_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.NSORT_LIST_QUERY);
 	}
 
 	/*
@@ -159,7 +159,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 		}
 		nsortService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, FowardPage.NSORT_LIST_QUERY) + "?sortId=" + nsort.getSortId();
+		return PathResolver.getPath(FowardPage.NSORT_LIST_QUERY) + "?sortId=" + nsort.getSortId();
 	}
 
 	/*
@@ -186,7 +186,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 
 		request.setAttribute("bean", nsort);
 		
-		return PathResolver.getPath(request, BackPage.NSORT_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.NSORT_EDIT_PAGE);
 	}
 
 	/*
@@ -200,13 +200,13 @@ public class NsortAdminController extends BaseController implements AdminControl
 	@RequestMapping(value = "/update/{id}")
 	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		checkNullable("nsort Id", id);
-		String result = checkLogin(request,UserManager.getUsername(request));
+		String result = checkLogin(UserManager.getUsername(request));
 		if(result != null){
 			return result;
 		}
 		Nsort nsort = nsortService.getNsortById(id);
 		request.setAttribute("bean", nsort);
-		return PathResolver.getPath(request, BackPage.NSORT_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.NSORT_EDIT_PAGE);
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 	@RequestMapping(value = "/appendBrand/{id}")
 	public String appendBrand(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		request.setAttribute("nsortId", id);
-		return PathResolver.getPath(request, BackPage.NSORT_APPENDBRAND_PAGE);
+		return PathResolver.getPath(BackPage.NSORT_APPENDBRAND_PAGE);
 	}
 
 }

@@ -9,8 +9,6 @@ package com.legendshop.business.common.page;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
 
@@ -109,12 +107,12 @@ public enum FowardPage implements PageDefinition{
 	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
 	 */
 	@Override
-	public String getValue(HttpServletRequest request) {
-		return getValue(request,value,null);
+	public String getValue() {
+		return getValue(value,null);
 	}
 	
 	@Override
-	public String getValue(HttpServletRequest request, String path,List<String> templates) {
+	public String getValue( String path,List<String> templates) {
 		return PagePathCalculator.calculateActionPath("forward:", path);
 	}
 
@@ -130,10 +128,7 @@ public enum FowardPage implements PageDefinition{
 	}
 
 	@Override
-	public String getValue() {
+	public String getNativeValue() {
 		return value;
 	}
-	
-
-
 }

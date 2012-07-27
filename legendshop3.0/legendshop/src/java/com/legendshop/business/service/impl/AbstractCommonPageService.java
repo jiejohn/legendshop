@@ -53,7 +53,7 @@ public abstract class AbstractCommonPageService extends AbstractService implemen
 			shopName = Constants.COMMON_USER;
 		}
 		request.setAttribute("newsBottomList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_BOTTOM, 8));
-		return PathResolver.getPath(request, FrontPage.COPY_ALL);
+		return PathResolver.getPath(FrontPage.COPY_ALL);
 	}
 
 

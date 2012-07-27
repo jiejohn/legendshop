@@ -76,7 +76,7 @@ public class PaymentController extends BaseController {
 		log.debug("payment result = {}", payment_result);
 		// System.out.println("payment_result = " + payment_result);
 		request.setAttribute("payment_result", payment_result);
-		return PathResolver.getPath(request, BackPage.PAY_PAGE);
+		return PathResolver.getPath(BackPage.PAY_PAGE);
 	}
 
 	/**

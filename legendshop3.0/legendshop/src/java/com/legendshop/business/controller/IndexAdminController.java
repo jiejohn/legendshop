@@ -65,7 +65,7 @@ public class IndexAdminController extends BaseController {
 	public String load(HttpServletRequest request, HttpServletResponse response) {
 		log.debug("adminIndex starting");
 		String userName = UserManager.getUsername(request.getSession());
-		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(userName,request,response);
+		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(userName);
 		UserInfo userInfo = indexService.getAdminIndex(userName, shopDetail);
 		request.setAttribute("userInfo", userInfo);
 		
@@ -76,12 +76,12 @@ public class IndexAdminController extends BaseController {
 			request.setAttribute("needUpgrade", true);
 		}
 		
-		return PathResolver.getPath(request, BackPage.DASH_BOARD);
+		return PathResolver.getPath(BackPage.DASH_BOARD);
 	}
 	
 	@RequestMapping("/admin/index")
 	public String home(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.ADMIN_HOME);
+		return PathResolver.getPath(BackPage.ADMIN_HOME);
 	}
 	
 	@RequestMapping("/admin/menu/{id}")
@@ -90,13 +90,13 @@ public class IndexAdminController extends BaseController {
 		if(id != null && id != 0){
 			path = ADMIN_MENU + id;
 		}
-		return PathResolver.getPath(request,path,BackPage.VARIABLE);
+		return PathResolver.getPath(path,BackPage.VARIABLE);
 	}
 	
 	
 	@RequestMapping("/admin/top")
 	public String top(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.ADMIN_TOP);
+		return PathResolver.getPath(BackPage.ADMIN_TOP);
 	}
 	
 }

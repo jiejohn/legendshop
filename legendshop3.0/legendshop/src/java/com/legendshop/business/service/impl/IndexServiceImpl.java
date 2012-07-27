@@ -128,7 +128,7 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 		request.setAttribute("canbeLeagueShop", shopDetailDao.isBeLeagueShop(shopExists, userName, shopName));
 
 		logUserAccess(request, shopName, userName);
-		return PathResolver.getPath(request, TilesPage.INDEX_PAGE);
+		return PathResolver.getPath(TilesPage.INDEX_PAGE);
 	}
 
 	/*
@@ -197,7 +197,7 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 		String userName = UserManager.getUsername(request.getSession());
 		logUserAccess(request, shopName, userName);
 
-		return PathResolver.getPath(request, TilesPage.HOME);
+		return PathResolver.getPath(TilesPage.HOME);
 	}
 
 	/**
@@ -224,7 +224,10 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 	 */
 	private String extractAndCheckShopDetail(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = (String) request.getAttribute(Constants.SHOP_NAME);
-		ShopDetailView shopDetail =  ThreadLocalContext.getShopDetailView(shopName, request, response);  // 得到当前商城
+		if(shopName == null){
+			shopName = getCurrentShopName();
+		}
+		ShopDetailView shopDetail =  ThreadLocalContext.getShopDetailView(shopName);  // 得到当前商城
 		
 		if (shopDetail == null) {
 			String defaultShop = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
@@ -235,10 +238,10 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 
 			// 如果有默认店，则先到默认店去，默认店要先配置好
 			shopName = defaultShop;
-			shopDetail = ThreadLocalContext.getShopDetailView(shopName, request, response); 
+			shopDetail = ThreadLocalContext.getShopDetailView(shopName); 
 
 		} else {
-			shopName = shopDetail.getUserName();
+			//shopName = shopDetail.getUserName();
 			// 更新用户访问历史
 			updateVisitHistory(shopDetail, request);
 		}

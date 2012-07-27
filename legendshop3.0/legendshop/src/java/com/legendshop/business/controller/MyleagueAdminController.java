@@ -89,7 +89,7 @@ public class MyleagueAdminController extends BaseController {
 		PageSupport ps = myleagueService.getMyleagueList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", myleague);
-		return PathResolver.getPath(request, BackPage.LEAGUE_LIST_PAGE);
+		return PathResolver.getPath(BackPage.LEAGUE_LIST_PAGE);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class MyleagueAdminController extends BaseController {
 	public String save(HttpServletRequest request, HttpServletResponse response, Myleague myleague) {
 		myleagueService.save(myleague);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.LEAGUE_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.LEAGUE_LIST_QUERY);
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class MyleagueAdminController extends BaseController {
 	Long id) {
 		myleagueService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, FowardPage.LEAGUE_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.LEAGUE_LIST_QUERY);
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class MyleagueAdminController extends BaseController {
 	Long id) {
 		Myleague myleague = myleagueService.getMyleagueById(id);
 		request.setAttribute("bean", myleague);
-		return PathResolver.getPath(request, BackPage.LEAGUE_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.LEAGUE_EDIT_PAGE);
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class MyleagueAdminController extends BaseController {
 		origin.setFriendName(myleague.getFriendName());
 		myleagueService.update(origin);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.LEAGUE_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.LEAGUE_LIST_QUERY);
 	}
 
 }

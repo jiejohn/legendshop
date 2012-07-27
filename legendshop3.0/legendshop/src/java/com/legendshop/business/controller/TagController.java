@@ -55,7 +55,7 @@ public class TagController extends BaseController implements AdminController<Tag
         PageSupport ps = tagService.getTag(cq);
         savePage(ps, request);
         request.setAttribute("tag", tag);
-        return PathResolver.getPath(request,BackPage.TAG_LIST);
+        return PathResolver.getPath(BackPage.TAG_LIST);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class TagController extends BaseController implements AdminController<Tag
 		}
 		tagService.deleteTag(tag);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("entity.deleted"));
-        return PathResolver.getPath(request,FowardPage.TAG);
+        return PathResolver.getPath(FowardPage.TAG);
         
     }
 
@@ -90,13 +90,13 @@ public class TagController extends BaseController implements AdminController<Tag
 			return result;
 		}
         request.setAttribute("#entityClassInstance", tag);
-        return PathResolver.getPath(request,BackPage.TAG);
+        return PathResolver.getPath(BackPage.TAG);
     }
     
 	@Override
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		 return PathResolver.getPath(request,BackPage.TAG);
+		 return PathResolver.getPath(BackPage.TAG);
 	}
 
     @Override
@@ -108,7 +108,7 @@ public class TagController extends BaseController implements AdminController<Tag
 			return result;
 		}
 		request.setAttribute("tag", tag);
-		return PathResolver.getPath(request,FowardPage.TAG);
+		return PathResolver.getPath(FowardPage.TAG);
     }
 
 }

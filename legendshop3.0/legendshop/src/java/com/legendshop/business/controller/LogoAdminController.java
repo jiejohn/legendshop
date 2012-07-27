@@ -74,7 +74,7 @@ public class LogoAdminController extends BaseController {
 		PageSupport ps = logoService.getLogoList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", logo);
-		return PathResolver.getPath(request, BackPage.LOGO_LIST_PAGE);
+		return PathResolver.getPath(BackPage.LOGO_LIST_PAGE);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class LogoAdminController extends BaseController {
 			logoService.save(logo);
 		}
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.LOGO_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.LOGO_LIST_QUERY);
 	}
 
 	/**
@@ -150,7 +150,7 @@ public class LogoAdminController extends BaseController {
 		String url = RealPathUtil.getBigPicRealPath() + "/" + logo.getBanner();
 		FileProcessor.deleteFile(url);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, FowardPage.LOGO_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.LOGO_LIST_QUERY);
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class LogoAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("bean", logo);
-		return PathResolver.getPath(request, BackPage.LOGO_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.LOGO_EDIT_PAGE);
 	}
 	
 	/**
@@ -187,7 +187,7 @@ public class LogoAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.LOGO_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.LOGO_EDIT_PAGE);
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class LogoAdminController extends BaseController {
 		logo.setUserId(origin.getUserId());
 		logo.setUserName(origin.getUserName());
 		logoService.update(logo);
-		return PathResolver.getPath(request, FowardPage.LOGO_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.LOGO_LIST_QUERY);
 	}
 
 }

@@ -107,7 +107,7 @@ public class ProductCommentAdminController extends BaseController {
 		PageSupport ps = productCommentService.getProductCommentList(hql);
 		savePage(ps, request);
 		request.setAttribute("bean", productComment);
-		return PathResolver.getPath(request, BackPage.PROD_COMM_LIST_PAGE);
+		return PathResolver.getPath(BackPage.PROD_COMM_LIST_PAGE);
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class ProductCommentAdminController extends BaseController {
 		comment.setReplyTime(new Date());
 		productCommentService.update(comment);
 		saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
-		return PathResolver.getPath(request, FowardPage.PROD_COMM_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.PROD_COMM_LIST_QUERY);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class ProductCommentAdminController extends BaseController {
 				productComment.getAddtime(), username });
 		productCommentService.delete(id);
 		saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("entity.deleted"));
-		return PathResolver.getPath(request, FowardPage.PROD_COMM_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.PROD_COMM_LIST_QUERY);
 	}
 
 	/**
@@ -194,7 +194,7 @@ public class ProductCommentAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("bean", productComment);
-		return PathResolver.getPath(request, BackPage.PROD_COMM_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.PROD_COMM_EDIT_PAGE);
 	}
 
 	/**
@@ -207,7 +207,7 @@ public class ProductCommentAdminController extends BaseController {
 	@RequestMapping(value = "/update")
 	public String update(HttpServletRequest request,@PathVariable ProductComment productComment) {
 		productCommentService.update(productComment);
-		return PathResolver.getPath(request, FowardPage.PROD_COMM_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.PROD_COMM_LIST_QUERY);
 	}
 
 }

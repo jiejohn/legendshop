@@ -73,7 +73,7 @@ public class HotsearchAdminController extends BaseController {
 		PageSupport ps = hotsearchService.getDataByCriteriaQuery(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", hotsearch);
-		return PathResolver.getPath(request, BackPage.HOT_LIST_PAGE);
+		return PathResolver.getPath(BackPage.HOT_LIST_PAGE);
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class HotsearchAdminController extends BaseController {
 		hotsearch.setDate(new Date());
 		hotsearchService.saveHotsearch(hotsearch, name, CommonServiceUtil.haveViewAllDataFunction(request));
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.HOT_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.HOT_LIST_QUERY);
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class HotsearchAdminController extends BaseController {
 				hotsearch.getMsg() });
 		hotsearchService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, FowardPage.HOT_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.HOT_LIST_QUERY);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class HotsearchAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("bean", hotsearch);
-		return PathResolver.getPath(request, BackPage.HOT_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.HOT_EDIT_PAGE);
 	}
 
 	/**
@@ -170,7 +170,7 @@ public class HotsearchAdminController extends BaseController {
 		hotsearch.setUserId(origin.getUserId());
 		hotsearch.setUserName(origin.getUserName());
 		hotsearchService.updateHotsearch(hotsearch);
-		return PathResolver.getPath(request, FowardPage.HOT_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.HOT_LIST_QUERY);
 	}
 	
 	/**
@@ -184,7 +184,7 @@ public class HotsearchAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return  PathResolver.getPath(request, BackPage.HOT_EDIT_PAGE);
+		return  PathResolver.getPath(BackPage.HOT_EDIT_PAGE);
 	}
 
 }

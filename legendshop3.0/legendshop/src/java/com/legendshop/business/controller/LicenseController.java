@@ -44,7 +44,7 @@ public class LicenseController extends BaseController {
 	 */
 	@RequestMapping("/upgrade")
 	public String upgrade(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.UPGRADE_PAGE);
+		return PathResolver.getPath(BackPage.UPGRADE_PAGE);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class LicenseController extends BaseController {
 			request.setAttribute("postUpgrade", true);
 		}
 		
-		return PathResolver.getPath(request, BackPage.UPGRADE_PAGE);
+		return PathResolver.getPath(BackPage.UPGRADE_PAGE);
 	}
 
 }

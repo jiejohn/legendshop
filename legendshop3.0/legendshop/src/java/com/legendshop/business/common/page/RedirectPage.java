@@ -10,8 +10,6 @@ package com.legendshop.business.common.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
 import com.legendshop.util.AppUtils;
@@ -45,12 +43,12 @@ public enum RedirectPage implements PageDefinition{
 	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
 	 */
 	@Override
-	public String getValue(HttpServletRequest request) {
-		return getValue(request,value,templates);
+	public String getValue() {
+		return getValue(value,templates);
 	}
 	
 	@Override
-	public String getValue(HttpServletRequest request, String path,List<String> templates) {
+	public String getValue(String path,List<String> templates) {
 		return PagePathCalculator.calculateActionPath("redirect:", path);
 	}
 
@@ -64,10 +62,8 @@ public enum RedirectPage implements PageDefinition{
 	private RedirectPage(String value) {
 		this.value = value;
 	}
-
-
 	@Override
-	public String getValue() {
+	public String getNativeValue() {
 		return value;
 	}
 }

@@ -82,7 +82,7 @@ public class PayTypeAdminController extends BaseController {
 		PageSupport ps = payTypeService.getPayTypeList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", payType);
-		return PathResolver.getPath(request, BackPage.PAY_TYPE_LIST_PAGE);
+		return PathResolver.getPath(BackPage.PAY_TYPE_LIST_PAGE);
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class PayTypeAdminController extends BaseController {
 		}
 		payTypeService.save(payType);
 		saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
-		return PathResolver.getPath(request, FowardPage.PAY_TYPE_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.PAY_TYPE_LIST_QUERY);
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class PayTypeAdminController extends BaseController {
 	Long id) {
 		payTypeService.delete(id);
 		saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("entity.deleted"));
-		return PathResolver.getPath(request, FowardPage.PAY_TYPE_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.PAY_TYPE_LIST_QUERY);
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class PayTypeAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("bean", payType);
-		return PathResolver.getPath(request, BackPage.PAY_TYPE_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.PAY_TYPE_EDIT_PAGE);
 	}
 	
 	/**
@@ -172,7 +172,7 @@ public class PayTypeAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.PAY_TYPE_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.PAY_TYPE_EDIT_PAGE);
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class PayTypeAdminController extends BaseController {
 		} catch (DataIntegrityViolationException e) {
 			throw new BusinessException(e, "你已经创建一个叫 “" + payType.getPayTypeName() + "” 的支付方式");
 		}
-		return PathResolver.getPath(request, FowardPage.PAY_TYPE_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.PAY_TYPE_LIST_QUERY);
 	}
 
 }

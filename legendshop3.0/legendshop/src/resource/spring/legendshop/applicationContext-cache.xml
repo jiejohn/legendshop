@@ -9,7 +9,7 @@
 	
 	<bean id="cacheManager" class="com.legendshop.core.cache.EhCacheCacheManager" 
 		p:cache-manager-ref="ehcacheFactory" 
-		p:supportQueryCache="true"/>
+		p:supportQueryCache="true" p:removeAllEntries="false"/>
 	
 	<!-- Ehcache library setup -->
 	<bean id="ehcacheFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:config-location="classpath:ehcache.xml" />

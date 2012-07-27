@@ -28,11 +28,11 @@ public class DefaultCommonPageServiceImpl extends AbstractCommonPageService {
 	 */
 	@Override
 	public String getTop(HttpServletRequest request, HttpServletResponse response) {
-		String shopName = getCurrentShopName(request, response);
+		String shopName = getCurrentShopName();
 		String userName = UserManager.getUsername(request.getSession());
-		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(shopName, request, response);
+		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(shopName);
 		if (shopDetail == null) {
-			return PathResolver.getPath(request, FrontPage.TOPALL);
+			return PathResolver.getPath(FrontPage.TOPALL);
 		}
 
 		// set Locale
@@ -50,7 +50,7 @@ public class DefaultCommonPageServiceImpl extends AbstractCommonPageService {
 		boolean shopExists = shopDetailDao.isShopExists(userName);
 		request.setAttribute("shopExists", shopExists);
 		request.setAttribute("canbeLeagueShop", shopDetailDao.isBeLeagueShop(shopExists, userName, shopName));
-		return PathResolver.getPath(request, FrontPage.TOP);
+		return PathResolver.getPath(FrontPage.TOP);
 	}
 
 

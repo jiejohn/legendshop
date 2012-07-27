@@ -124,7 +124,7 @@ public class UserDetailAdminController extends BaseController{
 			request.setAttribute("haveShop", haveShop);
 			savePage(ps, request);
 
-		return PathResolver.getPath(request, BackPage.USER_DETAIL_LIST_PAGE);
+		return PathResolver.getPath(BackPage.USER_DETAIL_LIST_PAGE);
 	}
 	
 	/**
@@ -197,7 +197,7 @@ public class UserDetailAdminController extends BaseController{
 			request.setAttribute("haveShop", haveShop);
 			savePage(ps, request);
 
-		return PathResolver.getPath(request, BackPage.USER_DETAIL_LIST_PAGE);
+		return PathResolver.getPath(BackPage.USER_DETAIL_LIST_PAGE);
 	}
 
 	/**

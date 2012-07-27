@@ -122,7 +122,7 @@ public class NewsAdminController extends BaseController {
 		PageSupport ps = newsService.getNewsList(hql);
 		ps.savePage(request);
 		request.setAttribute("bean", news);
-		return PathResolver.getPath(request, BackPage.NEWS_LIST_PAGE);
+		return PathResolver.getPath(BackPage.NEWS_LIST_PAGE);
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class NewsAdminController extends BaseController {
 		// }
 		newsService.save(news);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.NEWS_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.NEWS_LIST_QUERY);
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class NewsAdminController extends BaseController {
 		log.info("{},delete News Title{}", news.getUserName(), news.getNewsTitle());
 		newsService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, FowardPage.NEWS_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.NEWS_LIST_QUERY);
 	}
 
 	/**
@@ -219,13 +219,13 @@ public class NewsAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("news", news);
-		return PathResolver.getPath(request, BackPage.NEWS_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.NEWS_EDIT_PAGE);
 	}
 
 	
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.NEWS_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.NEWS_EDIT_PAGE);
 	}
 	
 	/**
@@ -253,6 +253,6 @@ public class NewsAdminController extends BaseController {
 		// }
 		newsService.update(news);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.NEWS_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.NEWS_LIST_QUERY);
 	}
 }

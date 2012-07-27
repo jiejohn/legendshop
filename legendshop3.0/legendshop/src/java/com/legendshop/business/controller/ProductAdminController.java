@@ -107,7 +107,7 @@ public class ProductAdminController extends BaseController {
 		PageSupport ps = productService.getProductList(cq);
 		savePage(ps, request);
 		request.setAttribute("prod", product);
-		return PathResolver.getPath(request, BackPage.PROD_LIST_PAGE);
+		return PathResolver.getPath(BackPage.PROD_LIST_PAGE);
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class ProductAdminController extends BaseController {
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, Product product) {
 		String name = UserManager.getUsername(request);
-		String result = checkLogin(request,name);
+		String result = checkLogin(name);
 		if(result != null){
 			return result;
 		}
@@ -186,10 +186,10 @@ public class ProductAdminController extends BaseController {
 		String nextAction = request.getParameter("nextAction");
 		if (nextAction != null && nextAction.equals("next")) {
 			request.setAttribute("productId", product.getProdId());
-			return PathResolver.getPath(request, FowardPage.IMG_LIST_QUERY);
+			return PathResolver.getPath(FowardPage.IMG_LIST_QUERY);
 		} else {
 			saveMessage(request, ResourceBundleHelper.getSucessfulString());
-			return PathResolver.getPath(request, FowardPage.PROD_LIST_QUERY);
+			return PathResolver.getPath(FowardPage.PROD_LIST_QUERY);
 		}
 	}
 
@@ -221,7 +221,7 @@ public class ProductAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.PROD_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.PROD_EDIT_PAGE);
 	}
 
 	/**
@@ -238,7 +238,7 @@ public class ProductAdminController extends BaseController {
 	@RequestMapping(value = "/append/{prodId}")
 	public String append (HttpServletRequest request, HttpServletResponse response,@PathVariable Long prodId) {
 		 request.setAttribute("prodId",prodId) ;
-		return PathResolver.getPath(request, BackPage.APPEND_PRODUCT);
+		return PathResolver.getPath(BackPage.APPEND_PRODUCT);
 	}
 	
 	/**
@@ -252,7 +252,7 @@ public class ProductAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/createsetp")
 	public String createsetp (HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.CREATEP_RODUCT_STEP);
+		return PathResolver.getPath(BackPage.CREATEP_RODUCT_STEP);
 	}
 	
 
@@ -276,7 +276,7 @@ public class ProductAdminController extends BaseController {
 			return result;
 		}
 		request.setAttribute("prod", product);
-		return PathResolver.getPath(request, BackPage.PROD_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.PROD_EDIT_PAGE);
 	}
 
 }

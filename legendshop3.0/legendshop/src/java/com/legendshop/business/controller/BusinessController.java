@@ -87,7 +87,7 @@ public class BusinessController extends BaseController {
 //				request.setAttribute(UserMessages.MESSAGE_KEY, uem);
 //				return "redirect:install/index.jsp";
 //			}
-//			return PathResolver.getPath(request, FrontPage.FAIL);
+//			return PathResolver.getPath(FrontPage.FAIL);
 //		}
 //	}
 	
@@ -102,7 +102,7 @@ public class BusinessController extends BaseController {
 //	 */
 //	@RequestMapping("/topall")
 //	public String topall(HttpServletRequest request, HttpServletResponse response) {
-//		return PathResolver.getPath(request, FrontPage.TOPALL);
+//		return PathResolver.getPath(FrontPage.TOPALL);
 //	}
 	
 	/**
@@ -196,7 +196,7 @@ public class BusinessController extends BaseController {
 	public String nsort(HttpServletRequest request, HttpServletResponse response,@PathVariable Long sortId,@PathVariable Long nsortId) {
 		if (nsortId == null|| sortId == null) {
 			log.error("sortId or nsortId is null! ");
-			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
+			return PathResolver.getPath(FowardPage.INDEX_QUERY);
 		}
 		return businessService.getSecSort(request, response,sortId,nsortId,null);
 	}
@@ -220,7 +220,7 @@ public class BusinessController extends BaseController {
 	public String nsort(HttpServletRequest request, HttpServletResponse response,Long sortId, Long nsortId,Long subNsortId) {
 		if (nsortId == null|| sortId == null) {
 			log.error("sortId or nsortId is null! ");
-			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
+			return PathResolver.getPath(FowardPage.INDEX_QUERY);
 		}
 		return businessService.getSecSort(request, response,sortId,nsortId,subNsortId);
 	}
@@ -255,7 +255,7 @@ public class BusinessController extends BaseController {
 	public String orderDetail(HttpServletRequest request, HttpServletResponse response ,@PathVariable String subNumber) {
 		String userName = UserManager.getUsername(request);
 		if (AppUtils.isBlank(userName)) {
-			return PathResolver.getPath(request, TilesPage.LOGIN);
+			return PathResolver.getPath(TilesPage.LOGIN);
 		}
 	
 		Sub sub = businessService.getSubBySubNumber(subNumber);
@@ -373,7 +373,7 @@ public class BusinessController extends BaseController {
 	 */
 	@RequestMapping("/leaveword")
 	public String leaveword(HttpServletRequest request, HttpServletResponse response,String ipAddress) {
-		return PathResolver.getPath(request, TilesPage.LEAVEWORD);
+		return PathResolver.getPath(TilesPage.LEAVEWORD);
 	}
 	
 //	/**
@@ -449,7 +449,7 @@ public class BusinessController extends BaseController {
 	public String cash(HttpServletRequest request, HttpServletResponse response) {
 		// 加入token
 		//request.getSession().setAttribute(Constants.TOKEN, CommonServiceUtil.generateRandom()); // 生成随机数并保存到token
-		return PathResolver.getPath(request, TilesPage.PAGE_CASH);
+		return PathResolver.getPath(TilesPage.PAGE_CASH);
 	}
 	
 	/**
@@ -502,7 +502,7 @@ public class BusinessController extends BaseController {
 	 */
 	@RequestMapping("/admin/login")
 	public String login(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, TilesPage.LOGIN);
+		return PathResolver.getPath(TilesPage.LOGIN);
 	}
 	
 	/**
@@ -530,7 +530,7 @@ public class BusinessController extends BaseController {
 	 */
 	@RequestMapping("/all")
 	public String all(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, FrontPage.ALL);
+		return PathResolver.getPath(FrontPage.ALL);
 	}
 	
 	/**
@@ -578,7 +578,7 @@ public class BusinessController extends BaseController {
 		// 用户需要登录
 		String userName = UserManager.getUsername(request);
 		if (AppUtils.isBlank(userName)) {
-			return PathResolver.getPath(request, TilesPage.NO_LOGIN);
+			return PathResolver.getPath(TilesPage.NO_LOGIN);
 		}
 		return businessService.saveShop(request, response,shopDetail);
 	}	
@@ -670,7 +670,7 @@ public class BusinessController extends BaseController {
 	@RequestMapping("/shop/{shopName}")
 	public String shop(HttpServletRequest request, HttpServletResponse response, String curPageNO, @PathVariable String shopName) {
 		request.setAttribute(Constants.SHOP_NAME, shopName);
-		return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
+		return PathResolver.getPath(FowardPage.INDEX_QUERY);
 	}
 	
 	/**
@@ -684,7 +684,7 @@ public class BusinessController extends BaseController {
 	 */
 	@RequestMapping("/afterOperation")
 	public String afterOperation(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, TilesPage.AFTER_OPERATION);
+		return PathResolver.getPath(TilesPage.AFTER_OPERATION);
 	}
 	
 	/**
@@ -703,7 +703,7 @@ public class BusinessController extends BaseController {
 	@RequestMapping("/productGallery/{prodId}")
 	public String productGallery(HttpServletRequest request, HttpServletResponse response, @PathVariable Long prodId) throws Exception {
 		if (AppUtils.isBlank(prodId)) {
-			return PathResolver.getPath(request, FowardPage.INDEX_QUERY);
+			return PathResolver.getPath(FowardPage.INDEX_QUERY);
 		}
 		return businessService.getProductGallery(request, response,prodId);
 	}
@@ -721,12 +721,12 @@ public class BusinessController extends BaseController {
 	 */
 	@RequestMapping("/resetpassword")
 	public String resetpassword(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return PathResolver.getPath(request, FrontPage.RESETPASSWORD);
+		return PathResolver.getPath(FrontPage.RESETPASSWORD);
 	}
 	
 	@RequestMapping("/openShop")
 	public String openShop(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return PathResolver.getPath(request, TilesPage.OPENSHOP);
+		return PathResolver.getPath(TilesPage.OPENSHOP);
 	}
 	
 	

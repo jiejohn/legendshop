@@ -84,7 +84,7 @@ public class SortAdminController extends BaseController implements AdminControll
 			PageSupport ps =sortService.getSortList(cq);
 			savePage(ps, request);
 			request.setAttribute("sort", sort);
-		return PathResolver.getPath(request, BackPage.SORT_LIST_PAGE);
+		return PathResolver.getPath(BackPage.SORT_LIST_PAGE);
 	}
 	
 	
@@ -138,7 +138,7 @@ public class SortAdminController extends BaseController implements AdminControll
 			throw new BusinessException(e,  "save sort error",EntityCodes.SORT,ErrorCodes.BUSINESS_ERROR);
 		}
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.SORT_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.SORT_LIST_QUERY);
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class SortAdminController extends BaseController implements AdminControll
 		sortService.delete(sort);
 		FileProcessor.deleteFile(RealPathUtil.getBigPicRealPath() + "/" + sort.getPicture());
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, FowardPage.SORT_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.SORT_LIST_QUERY);
 	}
 
 	/* (non-Javadoc)
@@ -201,7 +201,7 @@ public class SortAdminController extends BaseController implements AdminControll
 	@Override
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.SORT_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.SORT_EDIT_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -217,7 +217,7 @@ public class SortAdminController extends BaseController implements AdminControll
 			return result;
 		}
 		request.setAttribute("sort", sort);
-		return PathResolver.getPath(request, BackPage.SORT_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.SORT_EDIT_PAGE);
 	}
 
 }

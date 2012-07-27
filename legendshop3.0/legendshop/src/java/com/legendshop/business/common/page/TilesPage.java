@@ -10,8 +10,6 @@ package com.legendshop.business.common.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
 import com.legendshop.spi.constants.TemplateEnum;
@@ -112,17 +110,16 @@ public enum TilesPage implements PageDefinition {
 	 * .HttpServletRequest)
 	 */
 	@Override
-	public String getValue(HttpServletRequest request) {
-		return getValue(request, value, templates);
-	}
-
-	@Override
-	public String getValue(HttpServletRequest request, String path, List<String> templates) {
-		return PagePathCalculator.calculateTilesPath(request, path, templates);
-	}
-
-	@Override
 	public String getValue() {
+		return getValue(value, templates);
+	}
+
+	@Override
+	public String getValue(String path, List<String> templates) {
+		return PagePathCalculator.calculateTilesPath(path, templates);
+	}
+	@Override
+	public String getNativeValue() {
 		return value;
 	}
 }

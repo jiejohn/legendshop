@@ -9,9 +9,6 @@ package com.legendshop.business.service.impl;
 
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
@@ -25,6 +22,7 @@ import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
+import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.ShopDetailView;
@@ -108,9 +106,9 @@ public class ShopDetailServiceImpl   extends BaseServiceImpl  implements ShopDet
 
 
 	@Override
-	public ShopDetailView getShopDetailView(String newShopName, HttpServletRequest request, HttpServletResponse response) {
+	public ShopDetailView getShopDetailView(String newShopName) {
 		
-		String currentShopName = getCurrentShopName(request, response);
+		String currentShopName = getCurrentShopName();
 		//currentShopName will no be null, it at least to be default shop
 		if (newShopName == null && currentShopName == null) {
 			log.debug("shopName and currentShopName can not both NULL");
@@ -124,28 +122,29 @@ public class ShopDetailServiceImpl   extends BaseServiceImpl  implements ShopDet
 				// 换商城,第一次进入其他商城
 				log.debug("从商城  {} 进入另外一个商城  {}", currentShopName, newShopName);
 				currentShopName = newShopName;
-				request.getSession().setAttribute(Constants.SHOP_NAME, currentShopName);
+				ThreadLocalContext.setSessionValue(Constants.SHOP_NAME, currentShopName);
 			}
 		}else{
 			// 表示第一次访问，需要商城初始化
-			if(currentShopName != request.getSession().getAttribute(Constants.SHOP_NAME)){
+			
+			if(currentShopName != ThreadLocalContext.getSessionValue(Constants.SHOP_NAME)){
 				log.debug("第一次访问商城 {}, shopName {}", currentShopName, newShopName);
-				request.getSession().setAttribute(Constants.SHOP_NAME, currentShopName);
+				ThreadLocalContext.setSessionValue(Constants.SHOP_NAME, currentShopName);
 			}
 		}
 
-		ShopDetailView shopDetail = getShopDetailView(currentShopName);
+		ShopDetailView shopDetail = getShopDetail(currentShopName);
 		if(shopDetail == null){
 			log.debug("currentShopName {} does not exists ", currentShopName);
 			return null;
 		}
 		
-		setLocalByShopDetail(shopDetail, request, response);
+		setLocalByShopDetail(shopDetail);
 		return shopDetail;
 	}
 	
 	@Cacheable(value = "ShopDetailView", key="#currentShopName")
-	private ShopDetailView getShopDetailView(String currentShopName){
+	private ShopDetailView getShopDetail(String currentShopName){
 		return shopDetailDao.getShopDetailView(currentShopName);
 	}
 
@@ -160,29 +159,30 @@ public class ShopDetailServiceImpl   extends BaseServiceImpl  implements ShopDet
 	 * @param response
 	 *            the response
 	 */
-	private void setLocalByShopDetail(ShopDetailView shopDetail, HttpServletRequest request, HttpServletResponse response) {
+	private void setLocalByShopDetail(ShopDetailView shopDetail) {
 		if (shopDetail == null) {
 			return;
 		}
 		
 		String langStyle = shopDetail.getLangStyle();
-		log.debug("setLocalByShopDetail call with langStyle {}",langStyle);
+		
+		
 		// 总配置，如果不是USERCHOICE则无需设置,直接覆盖配置文件即可
 		if (AppUtils.isBlank(langStyle)
 				|| LanguageEnum.USERCHOICE.equals(langStyle) // shop level
-				|| !LanguageEnum.USERCHOICE.equals(request.getSession().getServletContext()
+				|| !LanguageEnum.USERCHOICE.equals(ThreadLocalContext.getRequest().getSession().getServletContext()
 						.getAttribute(AttributeKeys.LANGUAGE_MODE))) { // system
 																		// level
 			return;
 		}
-		String sessionLangStyle = (String)request.getSession().getAttribute("SESSION_LANGSTYLE");
+		String sessionLangStyle = (String)ThreadLocalContext.getSessionValue("SESSION_LANGSTYLE");
+		
 		
 		if(langStyle == sessionLangStyle){
 			return;
 		}
-			
-		request.getSession().setAttribute("SESSION_LANGSTYLE", langStyle);
-		
+		log.debug("{} setLocalByShopDetail with langStyle {}",shopDetail.getSiteName(),langStyle);
+		ThreadLocalContext.setSessionValue("SESSION_LANGSTYLE", langStyle);
 		
 		String[] language = shopDetail.getLangStyle().split("_");
 		Locale locale = new Locale(language[0], language[1]);
@@ -197,9 +197,7 @@ public class ShopDetailServiceImpl   extends BaseServiceImpl  implements ShopDet
 		// response.addCookie(cookie);// 在退出登录操作中删除cookie.
 		// session.setAttribute(AttributeKeys.LOCALE_KEY, locale);
 		log.debug("setLocal {}, By ShopDetail {}", locale, shopDetail.getSiteName());
-		if(response != null){
-			localeResolver.setLocale(request, response, locale);
-		}
+		localeResolver.setLocale(ThreadLocalContext.getRequest(), ThreadLocalContext.getResponse(), locale);
 	}
 
 	/* (non-Javadoc)

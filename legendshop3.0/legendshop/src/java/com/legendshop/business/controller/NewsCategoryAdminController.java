@@ -81,7 +81,7 @@ public class NewsCategoryAdminController extends BaseController {
 		PageSupport ps = newsCategoryService.getNewsCategoryList(cq);
 		ps.savePage(request);
 		request.setAttribute("bean", newsCategory);
-		return PathResolver.getPath(request, BackPage.NEWSCAT_LIST_PAGE);
+		return PathResolver.getPath(BackPage.NEWSCAT_LIST_PAGE);
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class NewsCategoryAdminController extends BaseController {
 		newsCategory.setUserName(UserManager.getUsername(request.getSession()));
 		newsCategoryService.save(newsCategory);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
-		return PathResolver.getPath(request, FowardPage.NEWSCAT_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.NEWSCAT_LIST_QUERY);
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class NewsCategoryAdminController extends BaseController {
 	Long id) {
 		newsCategoryService.delete(id);
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
-		return PathResolver.getPath(request, FowardPage.NEWSCAT_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.NEWSCAT_LIST_QUERY);
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class NewsCategoryAdminController extends BaseController {
 	Long id) {
 		NewsCategory newsCategory = newsCategoryService.getNewsCategoryById(id);
 		request.setAttribute("bean", newsCategory);
-		return PathResolver.getPath(request, BackPage.NEWSCAT_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.NEWSCAT_EDIT_PAGE);
 	}
 	
 	/**
@@ -154,7 +154,7 @@ public class NewsCategoryAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.NEWSCAT_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.NEWSCAT_EDIT_PAGE);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class NewsCategoryAdminController extends BaseController {
 	@RequestMapping(value = "/update")
 	public String update(HttpServletRequest request,@PathVariable NewsCategory newsCategory) {
 		newsCategoryService.update(newsCategory);
-		return PathResolver.getPath(request, FowardPage.NEWSCAT_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.NEWSCAT_LIST_QUERY);
 	}
 
 }

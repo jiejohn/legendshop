@@ -79,7 +79,7 @@ public class XmlController extends BaseController {
 			request.setAttribute("list", modelList);
 
 		}
-		return PathResolver.getPath(request, BackPage.SHOW_DYNAMIC_ATTRIBUTE);
+		return PathResolver.getPath(BackPage.SHOW_DYNAMIC_ATTRIBUTE);
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class XmlController extends BaseController {
 			request.setAttribute("dynamicProperties", "<table class='goodsAttributeTable'>"
 					+ helper.gerenateHTML(modelList) + "</table>");
 		}
-		return PathResolver.getPath(request, BackPage.SHOW_DYNAMIC);
+		return PathResolver.getPath(BackPage.SHOW_DYNAMIC);
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class XmlController extends BaseController {
 	 */
 	@RequestMapping(value = "/dynamic/save")
 	public String save(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, FowardPage.DYNAMIC_QUERY);
+		return PathResolver.getPath(FowardPage.DYNAMIC_QUERY);
 		
 	}
 
@@ -152,7 +152,7 @@ public class XmlController extends BaseController {
 			}
 		}
 		request.setAttribute("DYNAMIC_TYPE", 1);
-		return PathResolver.getPath(request, BackPage.DYNAMIC_ATTRIBUTE);
+		return PathResolver.getPath(BackPage.DYNAMIC_ATTRIBUTE);
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class XmlController extends BaseController {
 			}
 		}
 		request.setAttribute("DYNAMIC_TYPE", 2);
-		return PathResolver.getPath(request, BackPage.DYNAMIC_ATTRIBUTE);
+		return PathResolver.getPath(BackPage.DYNAMIC_ATTRIBUTE);
 	}
 
 }

@@ -44,7 +44,7 @@ public class RedCommonPageServiceImpl extends AbstractCommonPageService {
 	public String getTop(HttpServletRequest request, HttpServletResponse response) {
 
 		Long sortId=ServletRequestUtils.getLongParameter(request, "sortId",-1);
-		String shopName = getCurrentShopName(request, response);
+		String shopName = getCurrentShopName();
 		List<Hotsearch> searchList = hotsearchDao.getHotsearch(shopName);
 		
 		List<Sort> headerSortList = sortDao.getSort(shopName, ProductTypeEnum.PRODUCT.value(), 1, null, false);
@@ -95,7 +95,7 @@ public class RedCommonPageServiceImpl extends AbstractCommonPageService {
 		request.setAttribute("navigationSortList", navigationSortList);
 		request.setAttribute("currentSortId", sortId);
 
-		return PathResolver.getPath(request, FrontPage.TOP);
+		return PathResolver.getPath(FrontPage.TOP);
 	}
 
 	/**

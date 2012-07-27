@@ -61,7 +61,7 @@ public class DeliveryTypeController extends BaseController implements AdminContr
         PageSupport ps = deliveryTypeService.getDeliveryType(cq);
         savePage(ps, request);
         request.setAttribute("deliveryType", deliveryType);
-        return PathResolver.getPath(request, BackPage.DELIVERYTYPE_LIST_PAGE);
+        return PathResolver.getPath(BackPage.DELIVERYTYPE_LIST_PAGE);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class DeliveryTypeController extends BaseController implements AdminContr
     	
         deliveryTypeService.saveDeliveryType(dt);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
-        return PathResolver.getPath(request, FowardPage.DELIVERYTYPE_LIST_QUERY);
+        return PathResolver.getPath(FowardPage.DELIVERYTYPE_LIST_QUERY);
     }
     
 
@@ -99,7 +99,7 @@ public class DeliveryTypeController extends BaseController implements AdminContr
 		}
 		deliveryTypeService.deleteDeliveryType(deliveryType);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("entity.deleted"));
-        return PathResolver.getPath(request, FowardPage.DELIVERYTYPE_LIST_QUERY);
+        return PathResolver.getPath(FowardPage.DELIVERYTYPE_LIST_QUERY);
     }
 
     @RequestMapping(value = "/load/{id}")
@@ -111,13 +111,13 @@ public class DeliveryTypeController extends BaseController implements AdminContr
 			return result;
 		}
         request.setAttribute("deliveryType", deliveryType);
-        return PathResolver.getPath(request, BackPage.DELIVERYTYPE_EDIT_PAGE);
+        return PathResolver.getPath(BackPage.DELIVERYTYPE_EDIT_PAGE);
     }
     
 	@Override
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return PathResolver.getPath(request, BackPage.DELIVERYTYPE_EDIT_PAGE);
+		return PathResolver.getPath(BackPage.DELIVERYTYPE_EDIT_PAGE);
 	}
 
     @Override
@@ -129,7 +129,7 @@ public class DeliveryTypeController extends BaseController implements AdminContr
 			return result;
 		}
 		request.setAttribute("deliveryType", deliveryType);
-		return PathResolver.getPath(request, FowardPage.DELIVERYTYPE_LIST_QUERY);
+		return PathResolver.getPath(FowardPage.DELIVERYTYPE_LIST_QUERY);
     }
 
 }
