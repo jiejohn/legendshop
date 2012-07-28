@@ -104,7 +104,12 @@ public enum SecurityBackPage implements PageDefinition {
 	public String getValue(String path, List<String> templates) {
 		return PagePathCalculator.calculateBackendPath(path, templates);
 	}
+
 	public String getNativeValue() {
 		return value;
+	}
+
+	public List<String> getTemplates() {
+		return this.templates;
 	}
 }

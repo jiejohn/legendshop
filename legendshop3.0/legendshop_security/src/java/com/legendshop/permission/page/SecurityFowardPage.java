@@ -74,4 +74,7 @@ public enum SecurityFowardPage implements PageDefinition{
 		return value;
 	}
 
+	public List<String> getTemplates() {
+		return this.templates;
+	}
 }

@@ -17,8 +17,8 @@ import com.legendshop.util.AppUtils;
 /**
  * The Enum BackPage.
  */
-public enum GroupBackPage implements PageDefinition{
-	
+public enum GroupBackPage implements PageDefinition {
+
 	/** The VARIABLE. 可变路径 */
 	VARIABLE(""),
 	/** The UPDAT e_ function. */
@@ -26,45 +26,56 @@ public enum GroupBackPage implements PageDefinition{
 
 	/** The PRO d_ edi t_ page. */
 	PROD_EDIT_PAGE("/group/gprod"),
-	
+
 	;
-	
-	
+
 	/** The value. */
 	private final String value;
-	
-	private List<String> templates;
-	
 
-	private GroupBackPage(String value,String ... template) {
+	private List<String> templates;
+
+	private GroupBackPage(String value, String... template) {
 		this.value = value;
-		if(AppUtils.isNotBlank(template)){
+		if (AppUtils.isNotBlank(template)) {
 			this.templates = new ArrayList<String>();
 			for (String temp : template) {
 				templates.add(temp);
 			}
 		}
-		
+
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http
+	 * .HttpServletRequest)
 	 */
 	@Override
 	public String getValue() {
-		return getValue(value,templates);
+		return getValue(value, templates);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest, java.lang.String)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http
+	 * .HttpServletRequest, java.lang.String)
 	 */
 	@Override
-	public String getValue(String path,List<String> templates) {
-		return PagePathCalculator.calculateBackendPath(path,templates);
+	public String getValue(String path, List<String> templates) {
+		return PagePathCalculator.calculateBackendPath(path, templates);
 	}
+
 	@Override
 	public String getNativeValue() {
 		return value;
 	}
 
+	@Override
+	public List<String> getTemplates() {
+		return this.templates;
+	}
 }
