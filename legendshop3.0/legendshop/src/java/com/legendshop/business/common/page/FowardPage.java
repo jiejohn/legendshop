@@ -15,7 +15,7 @@ import com.legendshop.core.constant.PagePathCalculator;
 /**
  * The Enum FowardPage.
  */
-public enum FowardPage implements PageDefinition{
+public enum FowardPage implements PageDefinition {
 	/** The VARIABLE. 可变路径 */
 	VARIABLE(""),
 	/** The INDE x_ query. */
@@ -65,7 +65,7 @@ public enum FowardPage implements PageDefinition{
 
 	/** The SOR t_ lis t_ query. */
 	SORT_LIST_QUERY("/admin/sort/query"),
-	
+
 	/** The SOR t_ lis t_ query. */
 	GSORT_LIST_QUERY("/admin/gsort/query"),
 
@@ -81,42 +81,43 @@ public enum FowardPage implements PageDefinition{
 	/** The VLO g_ lis t_ query. */
 	VLOG_LIST_QUERY("/admin/visitLog/query"),
 
-	
 	/** The USE r_ detai l_ lis t_ query. */
 	USER_DETAIL_LIST_QUERY("/admin/userDetail/query"),
-	
+
 	/** The PU b_ lis t_ query. */
 	PUB_LIST_QUERY("/admin/pub/query"),
 
 	/** The DYNAMI c_ query. */
 	DYNAMIC_QUERY("/dynamic/query"),
-	
-	DELIVERYCORP_LIST_QUERY("/admin/deliveryCorp/query"), 
-	
+
+	DELIVERYCORP_LIST_QUERY("/admin/deliveryCorp/query"),
+
 	DELIVERYTYPE_LIST_QUERY("/admin/deliveryType/query"),
-	
+
 	PARTNER_LIST_QUERY("/admin/partner/query"),
-	
+
 	TAG("/admin/tag/query");
-	
-	
+
 	/** The value. */
 	private final String value;
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http.HttpServletRequest)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.core.constant.PageDefinition#getValue(javax.servlet.http
+	 * .HttpServletRequest)
 	 */
 	@Override
 	public String getValue() {
-		return getValue(value,null);
+		return getValue(value, null);
 	}
-	
+
 	@Override
-	public String getValue( String path,List<String> templates) {
+	public String getValue(String path, List<String> templates) {
 		return PagePathCalculator.calculateActionPath("forward:", path);
 	}
 
-	
 	/**
 	 * Instantiates a new tiles page.
 	 * 
@@ -130,5 +131,10 @@ public enum FowardPage implements PageDefinition{
 	@Override
 	public String getNativeValue() {
 		return value;
+	}
+
+	@Override
+	public List<String> getTemplates() {
+		return null;
 	}
 }

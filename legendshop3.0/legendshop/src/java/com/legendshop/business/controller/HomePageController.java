@@ -15,11 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.legendshop.business.service.IndexService;
+import com.legendshop.business.common.page.TilesPage;
+import com.legendshop.business.service.HomeService;
+import com.legendshop.business.service.locator.GenericServiceLocator;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.helper.ThreadLocalContext;
 
 /**
  * To define the C2C index page.
@@ -33,7 +36,7 @@ public class HomePageController extends BaseController {
 	private final Logger logger = LoggerFactory.getLogger(HomePageController.class);
 
 	@Autowired
-	private IndexService indexService;
+	private GenericServiceLocator<HomeService> homeServiceLocator;
 
 	/**
 	 * 前台首页.
@@ -47,9 +50,10 @@ public class HomePageController extends BaseController {
 	@RequestMapping("/home")
 	public String home(HttpServletRequest request, HttpServletResponse response) {
 
-		logger.debug("Index starting calling");
+		logger.debug("Start to call home...");
 		try {
-			return indexService.getHome(request, response);
+			String shopName = ThreadLocalContext.getCurrentShopName();
+			return homeServiceLocator.getConcreteService(shopName,TilesPage.HOME).getHome(request, response);
 		} catch (Exception e) {
 			logger.error("invoking index", e);
 			if (!PropertiesUtil.isSystemInstalled()) {
@@ -58,6 +62,10 @@ public class HomePageController extends BaseController {
 			}
 			throw new BusinessException("/index", EntityCodes.SYSTEM);
 		}
+	}
+
+	public void setHomeServiceLocator(GenericServiceLocator<HomeService> homeServiceLocator) {
+		this.homeServiceLocator = homeServiceLocator;
 	}
 
 }

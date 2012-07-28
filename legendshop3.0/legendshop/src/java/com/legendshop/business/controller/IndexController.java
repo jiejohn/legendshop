@@ -29,14 +29,14 @@ import com.legendshop.core.helper.PropertiesUtil;
 public class IndexController extends BaseController {
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(IndexController.class);
-		
+
 	@Autowired
 	private IndexService indexService;
 
 	/**
 	 * 前台首页.
 	 * 
-	 * @param request  
+	 * @param request
 	 *            the request
 	 * @param response
 	 *            the response

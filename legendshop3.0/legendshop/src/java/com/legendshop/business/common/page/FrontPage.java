@@ -131,5 +131,8 @@ public enum FrontPage implements PageDefinition {
 		return value;
 	}
 
-
+	@Override
+	public List<String> getTemplates() {
+		return this.templates;
+	}
 }

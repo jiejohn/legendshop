@@ -66,4 +66,9 @@ public enum RedirectPage implements PageDefinition{
 	public String getNativeValue() {
 		return value;
 	}
+	
+	@Override
+	public List<String> getTemplates() {
+		return this.templates;
+	}
 }

@@ -41,15 +41,4 @@ public interface IndexService extends BaseService {
 	 */
 	public abstract UserInfo getAdminIndex(String userName, ShopDetailView shopDetail);
 
-	/**
-	 * Gets the home page.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @return the home
-	 */
-	public String getHome(HttpServletRequest request, HttpServletResponse response);
-
 }
