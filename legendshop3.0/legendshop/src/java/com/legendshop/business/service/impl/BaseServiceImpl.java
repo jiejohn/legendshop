@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,13 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.dao.AdvertisementDao;
+import com.legendshop.business.event.impl.VisitLogEvent;
+import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.helper.ThreadLocalContext;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.Advertisement;
+import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.impl.AbstractService;
 import com.legendshop.util.AppUtils;
@@ -29,20 +36,24 @@ import com.legendshop.util.AppUtils;
  * BaseServiceImpl.
  */
 public abstract class BaseServiceImpl extends AbstractService {
-	
+
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(BaseServiceImpl.class);
-	
+
 	/** The java mail sender. */
 	protected JavaMailSenderImpl javaMailSender;
-	
+
 	/** The thread pool executor. */
 	protected ThreadPoolTaskExecutor threadPoolExecutor;
-	
+
 	protected AdvertisementDao advertisementDao;
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BaseService#setJavaMailSender(org.springframework.mail.javamail.JavaMailSenderImpl)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BaseService#setJavaMailSender(org
+	 * .springframework.mail.javamail.JavaMailSenderImpl)
 	 */
 	/**
 	 * Sets the java mail sender.
@@ -55,9 +66,12 @@ public abstract class BaseServiceImpl extends AbstractService {
 		this.javaMailSender = javaMailSender;
 	}
 
-	
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BaseService#setThreadPoolExecutor(org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BaseService#setThreadPoolExecutor
+	 * (org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor)
 	 */
 	/**
 	 * Sets the thread pool executor.
@@ -69,7 +83,6 @@ public abstract class BaseServiceImpl extends AbstractService {
 	public void setThreadPoolExecutor(ThreadPoolTaskExecutor threadPoolExecutor) {
 		this.threadPoolExecutor = threadPoolExecutor;
 	}
-
 
 	public void setAdvertisement(String shopName, HttpServletRequest request) {
 		Map<String, List<Advertisement>> advertisement = advertisementDao.getAdvertisement(shopName);
@@ -88,6 +101,54 @@ public abstract class BaseServiceImpl extends AbstractService {
 		}
 	}
 
+	/**
+	 * @param request
+	 * @param shopName
+	 * @param userName
+	 */
+	protected void logUserAccess(HttpServletRequest request, String shopName, String userName) {
+		// 多线程记录访问历史
+		if (PropertiesUtil.getObject(ParameterEnum.VISIT_LOG_INDEX_ENABLE, Boolean.class)) {
+			EventHome.publishEvent(new VisitLogEvent(request.getRemoteAddr(), shopName, userName));
+		} else {
+			if (log.isInfoEnabled()) {
+				log.info("[{}],{} visit index {}", new Object[] { request.getRemoteAddr(), userName, shopName });
+			}
+		}
+	}
+
+	/**
+	 * It's only suitable for index and home page.
+	 * 
+	 * @param request
+	 * @param response
+	 * @param shopName
+	 * @return
+	 */
+	protected String checkAndGetShopName(HttpServletRequest request, HttpServletResponse response) {
+		String shopName = (String) request.getAttribute(Constants.SHOP_NAME);
+		if (shopName == null) {
+			shopName = getCurrentShopName();
+		}
+		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(shopName); // 得到当前商城
+
+		if (shopDetail == null) {
+			String defaultShop = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
+
+			if (AppUtils.isBlank(defaultShop)) {
+				throw new RuntimeException("Can't find default shop name");
+			}
+
+			// 如果有默认店，则先到默认店去，默认店要先配置好
+			shopName = defaultShop;
+			shopDetail = ThreadLocalContext.getShopDetailView(shopName);
+
+		} else {
+			// 更新用户访问历史
+			updateVisitHistory(shopDetail, request);
+		}
+		return shopName;
+	}
 
 	public void setAdvertisementDao(AdvertisementDao advertisementDao) {
 		this.advertisementDao = advertisementDao;
