@@ -29,23 +29,24 @@ import com.legendshop.util.AppUtils;
 /**
  * The Class AbstractService.
  */
-public abstract class AbstractService  implements BaseService{
+public abstract class AbstractService implements BaseService {
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(AbstractService.class);
-	
+
 	/** The shop detail dao. */
 	protected ShopDetailDao shopDetailDao;
-	
+
 	/** The locale resolver. */
 	protected LocaleResolver localeResolver;
-	
-	
-	
-	
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BaseService#getSessionAttribute(javax.servlet.http.HttpServletRequest, java.lang.String)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BaseService#getSessionAttribute(
+	 * javax.servlet.http.HttpServletRequest, java.lang.String)
 	 */
-	
+
 	public Object getSessionAttribute(HttpServletRequest request, String name) {
 		Object obj = null;
 		HttpSession session = request.getSession();
@@ -56,26 +57,31 @@ public abstract class AbstractService  implements BaseService{
 	}
 
 	/**
-	 * get current shopName
-	 * if null then return default shop name as current shop name
+	 * get current shopName if null then return default shop name as current
+	 * shop name
 	 */
-	
+
 	public String getCurrentShopName() {
 		HttpServletRequest request = ThreadLocalContext.getRequest();
 		String shopName = (String) getSessionAttribute(request, Constants.SHOP_NAME);
-		if(AppUtils.isBlank(shopName)){
-			String defaultShopName =  PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
+		if (AppUtils.isBlank(shopName)) {
+			String defaultShopName = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
 			setSessionAttribute(request, Constants.SHOP_NAME, defaultShopName);
 			return defaultShopName;
-		}else{
+		} else {
 			return shopName;
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BaseService#setSessionAttribute(javax.servlet.http.HttpServletRequest, java.lang.String, java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BaseService#setSessionAttribute(
+	 * javax.servlet.http.HttpServletRequest, java.lang.String,
+	 * java.lang.Object)
 	 */
-	
+
 	public void setSessionAttribute(HttpServletRequest request, String name, Object obj) {
 		HttpSession session = request.getSession();
 		if (session != null) {
@@ -83,17 +89,22 @@ public abstract class AbstractService  implements BaseService{
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BaseService#setShopName(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BaseService#setShopName(javax.servlet
+	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse,
+	 * java.lang.String)
 	 */
-	
+
 	public void setShopName(HttpServletRequest request, HttpServletResponse response, String shopName) {
 		// Session
 		String name = getCurrentShopName();
-		if(name == null  || !name.equals(shopName)){
+		if (name == null || !name.equals(shopName)) {
 			setSessionAttribute(request, Constants.SHOP_NAME, shopName);
 		}
-	
+
 		// Cookie
 		// Cookie cookie = new Cookie(Constants.SHOP_NAME, shopName);
 		// //生命周期
@@ -102,10 +113,14 @@ public abstract class AbstractService  implements BaseService{
 		// response.addCookie(cookie);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BaseService#convertStringToInteger(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BaseService#convertStringToInteger
+	 * (java.lang.String)
 	 */
-	
+
 	public Long convertStringToInteger(String id) {
 		try {
 			Long result = Long.valueOf(id);
@@ -154,7 +169,6 @@ public abstract class AbstractService  implements BaseService{
 		request.getSession().setAttribute(Constants.VISIT_HISTORY, visitHistory);
 	}
 
-
 	/**
 	 * Sets the shop detail dao.
 	 * 
@@ -164,7 +178,6 @@ public abstract class AbstractService  implements BaseService{
 	public void setShopDetailDao(ShopDetailDao shopDetailDao) {
 		this.shopDetailDao = shopDetailDao;
 	}
-
 
 	/**
 	 * Sets the locale resolver.
