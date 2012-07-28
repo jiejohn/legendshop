@@ -17,6 +17,7 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.model.entity.ProductDetail;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.model.visit.VisitHistory;
@@ -59,7 +60,8 @@ public abstract class AbstractService  implements BaseService{
 	 * if null then return default shop name as current shop name
 	 */
 	
-	public String getCurrentShopName(HttpServletRequest request, HttpServletResponse response) {
+	public String getCurrentShopName() {
+		HttpServletRequest request = ThreadLocalContext.getRequest();
 		String shopName = (String) getSessionAttribute(request, Constants.SHOP_NAME);
 		if(AppUtils.isBlank(shopName)){
 			String defaultShopName =  PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
@@ -87,7 +89,7 @@ public abstract class AbstractService  implements BaseService{
 	
 	public void setShopName(HttpServletRequest request, HttpServletResponse response, String shopName) {
 		// Session
-		String name = getCurrentShopName(request,response);
+		String name = getCurrentShopName();
 		if(name == null  || !name.equals(shopName)){
 			setSessionAttribute(request, Constants.SHOP_NAME, shopName);
 		}

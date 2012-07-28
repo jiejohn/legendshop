@@ -24,15 +24,9 @@ public interface BaseService {
 	public abstract Object getSessionAttribute(HttpServletRequest request, String name);
 
 	/**
-	 * Gets the shop name.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @return the shop name
+	 * 得到当前商城名称
 	 */
-	public abstract String getCurrentShopName(HttpServletRequest request, HttpServletResponse response);
+	public abstract String getCurrentShopName();
 
 	/**
 	 * Sets the session attribute.
