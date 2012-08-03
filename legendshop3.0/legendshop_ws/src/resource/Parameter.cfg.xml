@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataAccessLayer>
+	<MappingFiles>
+	    <!-- xml配置 -->
+		<Mapping resource="xml/config.xml" />
+		<!-- 消息发送者 -->
+		<Mapping resource="xml/sender.xml" />
+		<!-- 接收者 -->
+		<Mapping resource="xml/receiver.xml" />
+	</MappingFiles>
+</DataAccessLayer>
