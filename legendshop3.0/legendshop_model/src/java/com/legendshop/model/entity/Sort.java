@@ -8,7 +8,6 @@
 package com.legendshop.model.entity;
 
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -48,19 +47,8 @@ public class Sort extends UploadFile implements BaseEntity {
 	private Integer navigationMenu;
 	
 	/** 按seq字段排序. */
-	Set<Nsort> nsort = new TreeSet<Nsort>(new Comparator<Nsort>() {
-		public int compare(Nsort o1, Nsort o2) {
-			if (o1 == null || o2 == null || o1.getSeq() == null || o2.getSeq() == null) {
-				return -1;
-			} else if (o1.getSeq() < o2.getSeq()) {
-				return -1;
-			} else if (o1.getSeq() == o2.getSeq()) {
-				return 0;
-			} else {
-				return 1;
-			}
-		}
-	});
+	Set<Nsort> nsort = new TreeSet<Nsort>(new NsortComparator());
+	
 
 	// Constructors
 
