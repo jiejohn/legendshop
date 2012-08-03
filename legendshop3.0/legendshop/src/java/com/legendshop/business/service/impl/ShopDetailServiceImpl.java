@@ -178,7 +178,7 @@ public class ShopDetailServiceImpl   extends BaseServiceImpl  implements ShopDet
 		String sessionLangStyle = (String)ThreadLocalContext.getSessionValue("SESSION_LANGSTYLE");
 		
 		
-		if(langStyle == sessionLangStyle){
+		if(langStyle != null && langStyle.equals(sessionLangStyle)){
 			return;
 		}
 		log.debug("{} setLocalByShopDetail with langStyle {}",shopDetail.getSiteName(),langStyle);

@@ -20,12 +20,12 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.legendshop.business.service.AuthService;
+import com.legendshop.core.security.GrantedAuthorityImpl;
 import com.legendshop.core.security.GrantedFunction;
 import com.legendshop.core.security.GrantedFunctionImpl;
 import com.legendshop.core.security.model.UserDetail;
@@ -172,7 +172,7 @@ public class AuthServiceImpl implements  AuthService {
 		return jdbcTemplate.query(sql,new Object[] {userId }, new RowMapper<GrantedAuthority>() {
 					@Override
 					public GrantedAuthority mapRow(ResultSet rs, int index) throws SQLException {
-						return new SimpleGrantedAuthority(rs.getString("name"));
+						return new GrantedAuthorityImpl(rs.getString("name"));
 					}
 				});
 	}
