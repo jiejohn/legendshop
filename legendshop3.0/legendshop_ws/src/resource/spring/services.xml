@@ -60,7 +60,9 @@
 			</bean>
 			<jaxws:endpoint id="subServiceEndPoint" implementor="#subService" address="/subService"/>	
 			
-			<bean id="productService" class="com.legendshop.ws.service.impl.ProductServiceImpl"/>
+			<bean id="productService" class="com.legendshop.ws.service.impl.ProductServiceImpl">
+				<property name="productDao" ref="productDao"></property>
+			</bean>
 			<jaxws:endpoint id="productServiceEndPoint" implementor="#productService" address="/productService"/>	
 			
 	    <!--  

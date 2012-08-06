@@ -3,9 +3,6 @@
 	<name>legendshop_ws</name>
 	<comment></comment>
 	<projects>
-		<project>legendshop_jcf</project>
-		<project>legendshop_util</project>
-		<project>legendshop_core</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

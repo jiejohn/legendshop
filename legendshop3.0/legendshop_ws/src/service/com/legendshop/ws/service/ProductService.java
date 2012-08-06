@@ -14,6 +14,7 @@ import com.legendshop.ws.model.Product;
 
 /**
  * The Interface ProductService.
+ * 导入商品
  */
 @WebService(targetNamespace = "http://product.service.ws.legendshop.com", name = "productService")
 public interface ProductService {

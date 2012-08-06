@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd"
 	default-autowire="byName" default-lazy-init="true">
 
- 	<import resource="services.xml" />
-		<!-- 属性文件读入 -->
+	<import resource="services.xml" />
+	<import resource="applicationContext-aop.xml" />
+	<!-- 属性文件读入 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -19,82 +19,88 @@
 			</list>
 		</property>
 	</bean>
-	
- 	 <bean id="dataSource" class="com.legendshop.core.datasource.RefreshableDataSource">
-			<property name="dataSource" ref="c3p0DataSource"></property>
-		</bean>
- 	
- <bean id="c3p0DataSource"  
-    class="com.mchange.v2.c3p0.ComboPooledDataSource"  
-    destroy-method="close">  
-    <property name="driverClass" value="${jdbc.driverClassName}"></property>  
-    <property name="jdbcUrl" value="${jdbc.url}"></property>  
-    <property name="user" value="${jdbc.username}"></property>  
-    <property name="password" value="${jdbc.password}"></property>  
-    <property name="acquireIncrement" value="${jdbc.acquireIncrement}"></property>  
-    <property name="initialPoolSize" value="${jdbc.initialPoolSize}"></property>  
-    <property name="maxIdleTime" value="${jdbc.maxIdleTime}"></property>  
-    <property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>  
-    <property name="minPoolSize" value="${jdbc.minPoolSize}"></property>  
-    <property name="acquireRetryDelay" value="1000"></property>  
-    <property name="acquireRetryAttempts" value="60"></property>  
-    <property name="breakAfterAcquireFailure" value="false"></property>  
-</bean> 
 
-	<bean id="jdbcTemplate"
-		class="org.springframework.jdbc.core.JdbcTemplate">
+	<bean id="dataSource" class="com.legendshop.core.datasource.RefreshableDataSource">
+		<property name="dataSource" ref="c3p0DataSource"></property>
+	</bean>
+
+	<bean id="c3p0DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<property name="acquireIncrement" value="${jdbc.acquireIncrement}"></property>
+		<property name="initialPoolSize" value="${jdbc.initialPoolSize}"></property>
+		<property name="maxIdleTime" value="${jdbc.maxIdleTime}"></property>
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
+		<property name="minPoolSize" value="${jdbc.minPoolSize}"></property>
+		<property name="acquireRetryDelay" value="1000"></property>
+		<property name="acquireRetryAttempts" value="60"></property>
+		<property name="breakAfterAcquireFailure" value="false"></property>
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 	</bean>
-	
-	<!-- 
-		<bean id="transactionManager" 
-		class="org.springframework.transaction.jta.JtaTransactionManager"/>
-	-->
-	<bean id="dataSourceTransactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource">
-			<ref local="dataSource" />
+			<ref bean="dataSource" />
 		</property>
-	</bean>
-
-
-	<bean id="baseTransactionProxy"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
-		abstract="true" lazy-init="true">
-		<property name="transactionManager"
-			ref="dataSourceTransactionManager" />
-		<property name="transactionAttributes">
+		<property name="hibernateProperties">
 			<props>
-				<prop key="save*">
-					PROPAGATION_REQUIRED,-JCFException,+GoOnException
-				</prop>
-				<prop key="delete*">
-					PROPAGATION_REQUIRED,-JCFException,+GoOnException
-				</prop>
-				<prop key="update*">
-					PROPAGATION_REQUIRED,-JCFException,+GoOnException
-				</prop>
-				<prop key="find*">
-					PROPAGATION_REQUIRED,-JCFException,+GoOnException,readOnly
-				</prop>
-				<prop key="execute*">
-					PROPAGATION_REQUIRED,-JCFException,+GoOnException
-				</prop>
+				<prop key="hibernate.dialect">${DB_DIALECT}</prop>
+				<prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
+				<prop key="hibernate.show_sql">${SHOW_SQL}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
 			</props>
 		</property>
+		<!-- oracle CLOB 处理 <property name="lobHandler"> <ref bean="oracleLobHandler" 
+			/> </property> -->
+		<property name="mappingLocations">
+			<list>
+				<value>classpath*:/com/legendshop/ws/model/**/*.hbm.xml</value>
+			</list>
+		</property>
+
 	</bean>
-		
-	<!-- ThreadPool Executor -->   
-    <bean id="threadPoolExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">   
-        <!-- <property name="threadFactory" ref="threadFactory" /> -->   
-        <property name="corePoolSize" value="20" />   
-        <property name="maxPoolSize" value="100"/>   
-        <property name="queueCapacity" value="500"/>   
-        <property name="keepAliveSeconds" value="0"/>   
-        <property name="rejectedExecutionHandler">   
-            <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy"/>   
-        </property>
-	</bean>  
+
+	<bean id="baseDao" class="com.legendshop.core.dao.impl.BaseDaoImpl"
+		abstract="true">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="productDao" class="com.legendshop.ws.dao.ProductDaoImpl"
+		parent="baseDao">
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- ThreadPool Executor -->
+	<bean id="threadPoolExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<!-- <property name="threadFactory" ref="threadFactory" /> -->
+		<property name="corePoolSize" value="20" />
+		<property name="maxPoolSize" value="100" />
+		<property name="queueCapacity" value="500" />
+		<property name="keepAliveSeconds" value="0" />
+		<property name="rejectedExecutionHandler">
+			<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+		</property>
+	</bean>
 </beans>

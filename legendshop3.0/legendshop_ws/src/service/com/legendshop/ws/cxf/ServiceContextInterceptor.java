@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 /**
  * 在WebService调用前执行，从请求中取出客户端信息(如IP地址),初始化{@link ServiceContext}对象.
  * 
- * @author elvis
  */
 public class ServiceContextInterceptor extends AbstractPhaseInterceptor<Message> {
 	
@@ -34,6 +33,13 @@ public class ServiceContextInterceptor extends AbstractPhaseInterceptor<Message>
 	 */
     public ServiceContextInterceptor(){
         super(Phase.PRE_INVOKE);
+    }
+    
+    /* (non-Javadoc)
+     * @see org.apache.cxf.phase.AbstractPhaseInterceptor#handleFault(org.apache.cxf.message.Message)
+     */
+    @Override
+	public void handleFault(Message message) {
     }
     
     /* (non-Javadoc)
@@ -56,13 +62,6 @@ public class ServiceContextInterceptor extends AbstractPhaseInterceptor<Message>
 			throw new Fault(e);
 		}
 	}
-    
-    /* (non-Javadoc)
-     * @see org.apache.cxf.phase.AbstractPhaseInterceptor#handleFault(org.apache.cxf.message.Message)
-     */
-    @Override
-	public void handleFault(Message message) {
-    }
     
     /**
 	 * 验证IP是否合法.
