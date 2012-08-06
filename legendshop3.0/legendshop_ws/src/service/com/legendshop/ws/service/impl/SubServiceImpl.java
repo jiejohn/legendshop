@@ -27,6 +27,7 @@ public class SubServiceImpl implements SubService{
 	@Override
 	public String exportOrderService(Sub sub) {
 		System.out.println("exportOrderService calling");
+		System.out.println("sub ProdName = " + sub.getProdName() +", UserName = " + sub.getUserName());
 		return "exportOrderService";
 	}
 

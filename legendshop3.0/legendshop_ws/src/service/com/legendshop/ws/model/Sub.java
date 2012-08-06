@@ -10,9 +10,14 @@ package com.legendshop.ws.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+
 /**
  * 订单对象.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Sub implements Serializable {
 
 	/** The Constant serialVersionUID. */
@@ -34,12 +39,15 @@ public class Sub implements Serializable {
 	private String orderName;
 
 	/** The sub date. */
+	@XmlElement(type = Date.class) 
 	private Date subDate; // 下订单的时间
 
 	/** The pay date. */
+	@XmlElement(type = Date.class) 
 	private Date payDate; // 支付的时间
 
 	/** The update date. */
+	@XmlElement(type = Date.class) 
 	private Date updateDate; // 更新时间
 
 	/** The sub number. */
