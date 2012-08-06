@@ -13,10 +13,13 @@
                 http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd" default-lazy-init="true">
     
     <!-- event definition -->
+    
+    <!-- 异步线程处理器 -->
     <bean id="threadProcessor" class="com.legendshop.event.processor.ThreadProcessor">
     	<property name="taskExecutor" ref="threadPoolExecutor"></property>
     </bean>
     
+    <!-- 用户注册事件 //TODO-->
 	<bean class="com.legendshop.event.EventListenerImpl">
 		<property name="eventId" value="USER_REG" />
 		<property name="processors">
@@ -27,6 +30,7 @@
 		<property name="order" value="103"></property>
 	</bean>
 	
+	<!-- 用户注册事件 TODO -->
 	<bean class="com.legendshop.event.EventListenerImpl">
 		<property name="eventId" value="USER_REG" />
 		<property name="processors">
@@ -37,6 +41,7 @@
 		<property name="order" value="102"></property>
 	</bean>
 	
+	<!-- 发送邮件事件 //TODO -->
 	<bean class="com.legendshop.event.EventListenerImpl">
 		<property name="eventId" value="SEND_MAIL" />
 		<property name="processors">
@@ -47,6 +52,7 @@
 		</property>
 	</bean>
 	
+	<!-- 浏览历史事件，需要异步处理 -->
 	<bean class="com.legendshop.event.EventListenerImpl">
 		<property name="eventId" value="VISIT_LOG" />
 		<property name="processors">
@@ -58,9 +64,21 @@
 		</property>
 	</bean>	
 	
+	<!-- 保存订单事件 -->
+	<bean class="com.legendshop.event.EventListenerImpl">
+		<property name="eventId" value="ORDER_SAVE" />
+		<property name="processors">
+			<list>
+				<bean class="com.legendshop.business.process.event.OrderSaveProcessor" >
+				</bean>
+			</list>
+		</property>
+	</bean>	
 	
+	<!-- 发送邮件处理器 -->
 	<bean id="sendMailProcessor" class="com.legendshop.business.process.event.SendMailProcessor" parent="threadProcessor" >
 	</bean>
 	
+	<!-- 用户注册处理器 -->
 	<bean id="userRegProcessor" class="com.legendshop.business.process.event.UserRegProcessor"  />
 </beans>

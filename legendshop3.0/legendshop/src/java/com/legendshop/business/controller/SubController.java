@@ -53,7 +53,7 @@ public class SubController extends BaseController {
 	private UserDetailService userDetailService;
 
 	/**
-	 * Save.
+	 * 用户下订单.
 	 * 
 	 * @param request
 	 *            the request

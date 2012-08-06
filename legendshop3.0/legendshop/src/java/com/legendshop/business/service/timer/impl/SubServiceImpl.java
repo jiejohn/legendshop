@@ -21,10 +21,12 @@ import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.SubForm;
 import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.SubDao;
+import com.legendshop.business.event.impl.OrderSaveEvent;
 import com.legendshop.business.service.PayTypeService;
 import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.PayType;
 import com.legendshop.model.entity.Sub;
@@ -231,6 +233,10 @@ public class SubServiceImpl implements SubService {
 				subDao.saveSub(bo);
 				bo.setBasket(baskets);
 				bo.setPayType(payTypeList);
+				
+				//触发下订单事件
+				EventHome.publishEvent(new OrderSaveEvent(bo));
+				
 				subList.add(bo);
 			}
 		}
