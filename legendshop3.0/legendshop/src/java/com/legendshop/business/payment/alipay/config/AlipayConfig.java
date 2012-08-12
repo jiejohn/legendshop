@@ -55,7 +55,7 @@ public class AlipayConfig {
 
 	// 网站商品的展示地址，不允许加?id=123这类自定义参数
 	/** The show_url. */
-	public static String show_url = PropertiesUtil.getDomainName() + "/order.do";
+	public static String show_url = PropertiesUtil.getDomainName() + "/p/order.htm";
 
 	// 收款方名称，如：公司名称、网站名称、收款人姓名等
 	// public static String mainname = "收款方名称";

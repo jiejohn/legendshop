@@ -23,7 +23,7 @@ public enum TilesPage implements PageDefinition {
 	VARIABLE(""),
 
 	/** The INDEX page. */
-	INDEX_PAGE("index.",TemplateEnum.DEFAULT,TemplateEnum.RED),
+	INDEX_PAGE("index.", TemplateEnum.DEFAULT, TemplateEnum.RED),
 
 	/** The N o_ login. */
 	NO_LOGIN("loginhint."),
@@ -82,9 +82,11 @@ public enum TilesPage implements PageDefinition {
 	/**
 	 * C2C home page
 	 */
-	HOME("home.",TemplateEnum.RED)
+	HOME("home.", TemplateEnum.RED),
 
-	;
+	
+	/** The User Center main page. */
+	USER_CENTER_MAIN("usercenter.", TemplateEnum.RED);
 
 	/** The value. */
 	private final String value;
@@ -118,11 +120,12 @@ public enum TilesPage implements PageDefinition {
 	public String getValue(String path, List<String> templates) {
 		return PagePathCalculator.calculateTilesPath(path, templates);
 	}
+
 	@Override
 	public String getNativeValue() {
 		return value;
 	}
-	
+
 	@Override
 	public List<String> getTemplates() {
 		return this.templates;

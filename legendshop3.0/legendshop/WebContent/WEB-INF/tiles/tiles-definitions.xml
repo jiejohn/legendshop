@@ -84,7 +84,11 @@
 
 	<definition name="home.*" template="/WEB-INF/pages/frontend/{1}/home/indexFrame.jsp">
 		<put-attribute name="top" value="/WEB-INF/pages/frontend/{1}/home/top.jsp" />
-		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/home/main.jsp" />				
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/home/main.jsp" />
+	</definition>
+
+	<definition name="usercenter.*" template="/WEB-INF/pages/frontend/{1}/indexFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/usercenter.jsp" />
 	</definition>
 
 </tiles-definitions>

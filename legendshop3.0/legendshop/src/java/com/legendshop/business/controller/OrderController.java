@@ -41,6 +41,7 @@ import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 
 @Controller
+@RequestMapping("/p")
 public class OrderController extends BaseController {
 	
 	/** The log. */
@@ -85,7 +86,7 @@ public class OrderController extends BaseController {
 		String userName = UserManager.getUsername(request);
 
 		if (userName == null) {
-			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + "/order"+Constants.WEB_SUFFIX);
+			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + "/p/order"+Constants.WEB_SUFFIX);
 			return PathResolver.getPath(TilesPage.NO_LOGIN);
 		} 
 		if(entity!=null && entity.getSubCheck() == null){
