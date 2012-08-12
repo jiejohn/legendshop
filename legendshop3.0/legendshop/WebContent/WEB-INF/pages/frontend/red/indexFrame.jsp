@@ -41,7 +41,7 @@ function changeOrder(order,seq){
 
 <tiles2:insertAttribute name="main" ignore="true" />
 
-<jsp:include page="/common/foot${applicationScope.WEB_SUFFIX}"/>
+<jsp:include page="/bottom${applicationScope.WEB_SUFFIX}"/>
  
 </body>
 </html>

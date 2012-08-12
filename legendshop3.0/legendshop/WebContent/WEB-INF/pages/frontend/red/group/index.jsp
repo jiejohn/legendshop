@@ -35,7 +35,7 @@ function changeOrder(order,seq){
 
 <body>
 
-<jsp:include page="/common/top${applicationScope.WEB_SUFFIX}">
+<jsp:include page="/top${applicationScope.WEB_SUFFIX}">
 	<jsp:param name="sortId" value="-1" />
 </jsp:include>
 
@@ -148,7 +148,7 @@ function changeOrder(order,seq){
  </div>
 <!----两栏end---->
 
-<jsp:include page="/common/foot${applicationScope.WEB_SUFFIX}"/>
+<jsp:include page="/bottom${applicationScope.WEB_SUFFIX}"/>
  
 </body>
 </html>

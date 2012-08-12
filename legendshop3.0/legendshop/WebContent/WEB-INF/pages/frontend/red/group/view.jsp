@@ -91,7 +91,7 @@ $(function(){
 
 <body>
 
-<jsp:include page="/common/top${applicationScope.WEB_SUFFIX}">
+<jsp:include page="/top${applicationScope.WEB_SUFFIX}">
 	<jsp:param name="sortId" value="-1" />
 </jsp:include>
 <!----地址---->
