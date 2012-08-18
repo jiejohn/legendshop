@@ -49,14 +49,14 @@ import com.legendshop.permission.service.RightDelegate;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.StringUtil;
 /**
- * FunctionController.
+ * FunctionAdminController.
  */
 @Controller
 @RequestMapping("/admin/member/right")
-public class FunctionController extends BaseController implements AdminController<Function, String> {
+public class FunctionAdminController extends BaseController implements AdminController<Function, String> {
 
 	/** The log. */
-	private final Logger log = LoggerFactory.getLogger(FunctionController.class);
+	private final Logger log = LoggerFactory.getLogger(FunctionAdminController.class);
 
 	/** The basket service. */
 	@Autowired

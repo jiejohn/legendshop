@@ -50,14 +50,14 @@ import com.legendshop.util.AppUtils;
 import com.legendshop.util.StringUtil;
 
 /**
- * UserController.
+ * UserAdminController.
  */
 @Controller
 @RequestMapping("/admin/member/user")
-public class UserController extends BaseController implements AdminController<User, String>{
+public class UserAdminController extends BaseController implements AdminController<User, String>{
 
 	/** The log. */
-	private final Logger log = LoggerFactory.getLogger(UserController.class);
+	private final Logger log = LoggerFactory.getLogger(UserAdminController.class);
 
 	/** The basket service. */
 	@Autowired

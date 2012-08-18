@@ -47,14 +47,14 @@ import com.legendshop.util.AppUtils;
 import com.legendshop.util.StringUtil;
 
 /**
- * RoleController.
+ * RoleAdminController.
  */
 @Controller
 @RequestMapping("/admin/member/role")
-public class RoleController extends BaseController implements AdminController<Role, String> {
+public class RoleAdminController extends BaseController implements AdminController<Role, String> {
 
 	/** The log. */
-	private final Logger log = LoggerFactory.getLogger(RoleController.class);
+	private final Logger log = LoggerFactory.getLogger(RoleAdminController.class);
 
 	/** The basket service. */
 	@Autowired
