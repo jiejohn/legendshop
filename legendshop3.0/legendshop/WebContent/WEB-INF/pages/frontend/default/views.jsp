@@ -43,4 +43,4 @@
   </tr>
 </table>
 </div>
-<%@ include file="copy.jsp"%>
+<jsp:include page="/bottom${applicationScope.WEB_SUFFIX}"/>

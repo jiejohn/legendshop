@@ -8,7 +8,7 @@
     </tr>
     <tr>
       <td valign="top">
-      	<%@ include file="copy.jsp"%></td>
+      <jsp:include page="/bottom${applicationScope.WEB_SUFFIX}"/></td>
     </tr>
 </table>
 </div>

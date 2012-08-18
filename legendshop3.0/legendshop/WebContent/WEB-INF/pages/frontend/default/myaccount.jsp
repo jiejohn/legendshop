@@ -13,7 +13,7 @@
     </tr>
     <tr> 
       <td valign="top" colspan="2">
-      	<%@ include file="copy.jsp"%></td>
+      	<jsp:include page="/bottom${applicationScope.WEB_SUFFIX}"/></td>
     </tr>
 </table>
 </div>
