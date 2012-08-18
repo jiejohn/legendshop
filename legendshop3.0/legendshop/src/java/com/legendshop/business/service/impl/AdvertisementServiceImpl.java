@@ -10,10 +10,8 @@ package com.legendshop.business.service.impl;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.cache.annotation.CacheEvict;
 
-import com.legendshop.business.dao.AdvertisementDao;
 import com.legendshop.business.service.AdvertisementService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
@@ -23,10 +21,7 @@ import com.legendshop.util.AppUtils;
 /**
  * 广告服务.
  */
-public class AdvertisementServiceImpl implements AdvertisementService {
-	
-	/** The advertisement dao. */
-	private AdvertisementDao advertisementDao;
+public class AdvertisementServiceImpl extends BaseServiceImpl implements AdvertisementService {
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.AdvertisementService#findAdvertisement(java.lang.String)
@@ -98,16 +93,6 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 		return advertisementDao.getOneAdvertisement(shopName, key);
 	}
 	
-	/**
-	 * Sets the advertisement dao.
-	 * 
-	 * @param advertisementDao
-	 *            the new advertisement dao
-	 */
-	@Required
-	public void setAdvertisementDao(AdvertisementDao advertisementDao) {
-		this.advertisementDao = advertisementDao;
-	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.AdvertisementService#getAdvertisement(java.lang.String)

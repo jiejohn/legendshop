@@ -75,11 +75,11 @@ public interface ProductDao extends BaseDao{
     /**
      * Gets the hotsale.
      *
-     * @param name
-     *            the name
+     * @param shopName
+     *            the shopName
      * @return the hotsale
      */
-    public abstract List<Product> gethotsale(final String name);
+    public abstract List<Product> gethotsale(final String shopName);
 
     /**
      * Gets the prod detail.

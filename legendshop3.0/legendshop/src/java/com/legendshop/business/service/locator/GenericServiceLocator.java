@@ -31,7 +31,7 @@ public class GenericServiceLocator<T> {
 	 * @return the common page service
 	 */
 	public T getConcreteService(String shopName,PageDefinition page) {
-		String template = ThreadLocalContext.getFrontType(shopName, page.getTemplates());
+		String template = ThreadLocalContext.getFrontType(page.getTemplates());
 		T service = serviceMap.get(template);
 		if (service == null) {
 			service = serviceMap.get(TemplateEnum.DEFAULT);

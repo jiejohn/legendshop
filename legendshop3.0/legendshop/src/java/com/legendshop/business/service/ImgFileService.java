@@ -97,5 +97,16 @@ public interface ImgFileService {
 	 * @return true, if successful
 	 */
 	public abstract boolean updateImgFileOffline(Long fileId);
+	
+	/**
+	 * 得到有效的产品的描述图片.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @param prodId
+	 *            the prod id
+	 * @return the product pics
+	 */
+	public abstract List<ImgFile> getProductPics(final String userName, final Long prodId);
 
 }

@@ -50,8 +50,8 @@ public enum FrontPage implements PageDefinition {
 	/** The VIEWS. */
 	VIEWS("/views"),
 
-	/** The COP y_ all. */
-	COPY_ALL("/copyAll"),
+	/** The COPY Page. */
+	COPY("/copy"),
 
 	/** The HOTON. */
 	HOTON("/hoton"),

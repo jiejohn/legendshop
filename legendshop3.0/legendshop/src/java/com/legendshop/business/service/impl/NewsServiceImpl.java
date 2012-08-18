@@ -9,6 +9,7 @@ package com.legendshop.business.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.legendshop.business.dao.NewsDao;
 import com.legendshop.core.dao.support.CriteriaQuery;
@@ -32,7 +33,7 @@ import com.legendshop.util.AppUtils;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class NewsServiceImpl implements NewsService {
+public class NewsServiceImpl extends BaseServiceImpl implements NewsService {
 	
 	/** The base dao. */
 	private NewsDao newsDao;
@@ -155,5 +156,10 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	public List<News> getNews(String shopName, NewsPositionEnum newsPositionEnum, Integer num) {
 		return newsDao.getNews(shopName, newsPositionEnum, num);
+	}
+
+	@Override
+	public PageSupport getNews(Locale locale, String curPageNO, String shopName, Long newsCategoryId) {
+		return newsDao.getNews(locale, curPageNO, shopName, newsCategoryId);
 	}
 }

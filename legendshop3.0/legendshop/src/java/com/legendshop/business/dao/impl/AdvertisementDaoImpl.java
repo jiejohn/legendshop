@@ -18,9 +18,9 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.dao.AdvertisementDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.model.entity.Advertisement;
+import com.legendshop.spi.dao.AdvertisementDao;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.sql.ConfigCode;
 

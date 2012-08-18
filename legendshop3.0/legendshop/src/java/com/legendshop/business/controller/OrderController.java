@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.CommonServiceUtil;
@@ -32,8 +33,10 @@ import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.core.exception.NotFoundException;
+import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.model.entity.Advertisement;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.Sub;
 import com.legendshop.model.entity.UserDetail;
@@ -92,7 +95,7 @@ public class OrderController extends BaseController {
 		if(entity!=null && entity.getSubCheck() == null){
 			entity.setSubCheck(Constants.FALSE_INDICATOR);
 		}
-		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_950, request);
+		advertisementService.getAndSetOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_950);
 		String subNumber = entity.getSubNumber();
 		if (AppUtils.isNotBlank(subNumber)) {
 			subNumber = subNumber.trim();
@@ -132,10 +135,10 @@ public class OrderController extends BaseController {
 	@RequestMapping("/buy")
 	public String update(HttpServletRequest request, HttpServletResponse response, BasketForm basket) {
 		String userName = UserManager.getUsername(request.getSession());
-		if (userName == null) {
-			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + "/buy"+ Constants.WEB_SUFFIX);
-			return PathResolver.getPath(TilesPage.NO_LOGIN);
-		}
+//		if (userName == null) {
+//			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + "/buy"+ Constants.WEB_SUFFIX);
+//			return PathResolver.getPath(TilesPage.NO_LOGIN);
+//		}
 		if ("buy".equals(basket.getAction())) {
 			String shopName = getShopName(request, response);
 			Integer count = basket.getCount();
@@ -146,7 +149,7 @@ public class OrderController extends BaseController {
 					.getAttribute() == null ? "" : basket.getAttribute(), basket.getProdName(), basket.getCash(), basket.getCarriage());
 			request.getSession().setAttribute(Constants.BASKET_HW_COUNT, count);
 		}
-		setOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_950, request);
+		advertisementService.getAndSetOneAdvertisement(getShopName(request, response), Constants.USER_REG_ADV_950);
 		return PathResolver.getPath(TilesPage.BUY);
 	}
 	
@@ -233,27 +236,52 @@ public class OrderController extends BaseController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	// 只是得到一个广告
 	/**
-	 * Sets the one advertisement.
+	 * Order detail.
 	 * 
-	 * @param shopName
-	 *            the shop name
-	 * @param key
-	 *            the key
 	 * @param request
 	 *            the request
+	 * @param response
+	 *            the response
+	 * @param subNumber
+	 *            the sub number
+	 * @return the string
 	 */
-	private void setOneAdvertisement(String shopName, String key, HttpServletRequest request) {
-		List<Advertisement> advertisement = advertisementService.getOneAdvertisement(shopName, key);
-		if (!AppUtils.isBlank(advertisement)) {
-			request.setAttribute(key, advertisement);
+	@RequestMapping("/orderDetail/{subNumber}")
+	public String orderDetail(HttpServletRequest request, HttpServletResponse response ,@PathVariable String subNumber) {
+		String userName = UserManager.getUsername(request);
+		if (AppUtils.isBlank(userName)) {
+			return PathResolver.getPath(TilesPage.LOGIN);
 		}
+	
+		Sub sub = subService.getSubBySubNumber(subNumber);
+		if(sub == null){
+			throw new NotFoundException("sub not found with userName: " + userName,EntityCodes.SUB);
+		}
+		
+		if (!userName.equals(sub.getUserName()) && !userName.equals(sub.getShopName())) {
+			if (!CommonServiceUtil.haveViewAllDataFunction(request)) {
+				throw new PermissionException("can not modify others order detail!",EntityCodes.SUB);
+			}
+		}
+		return subService.getOrderDetail(request, sub,userName,subNumber);
+	}	
+	
+	/**
+	 * Cash.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the string
+	 */
+	@RequestMapping("/cash")
+	public String cash(HttpServletRequest request, HttpServletResponse response) {
+		// 加入token
+		//request.getSession().setAttribute(Constants.TOKEN, CommonServiceUtil.generateRandom()); // 生成随机数并保存到token
+		return PathResolver.getPath(TilesPage.PAGE_CASH);
 	}
+	
 
 }

@@ -9,31 +9,55 @@ package com.legendshop.business.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.cache.annotation.Cacheable;
 
+import com.legendshop.business.common.page.FrontPage;
+import com.legendshop.business.dao.ImgFileDao;
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.business.search.facade.ProductSearchFacade;
+import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.constant.ProductStatusEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.core.exception.ErrorCodes;
+import com.legendshop.core.exception.NotFoundException;
+import com.legendshop.core.helper.ResourceBundleHelper;
+import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.DynamicTemp;
+import com.legendshop.model.entity.ImgFile;
 import com.legendshop.model.entity.Product;
+import com.legendshop.model.entity.ProductDetail;
+import com.legendshop.model.entity.RelProduct;
+import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.dao.ShopDetailDao;
 import com.legendshop.spi.service.ProductService;
+import com.legendshop.util.AppUtils;
 
 /**
  * 产品服务.
  */
-public class ProductServiceImpl implements ProductService {
-
+public class ProductServiceImpl extends BaseServiceImpl implements ProductService {
+	/** The log. */
+	private final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
+	
 	/** 产品Dao. */
 	private ProductDao productDao;
 
 	/** 商城Dao. */
 	private ShopDetailDao shopDetailDao;
 
+	private ImgFileDao imgFileDao;
+	
 	/** 产品LunceFacade. */
 	private ProductSearchFacade productSearchFacade;
 	
@@ -54,6 +78,7 @@ public class ProductServiceImpl implements ProductService {
 	 * @param shopDetailDao
 	 *            the new shop detail dao
 	 */
+	@Override
 	@Required
 	public void setShopDetailDao(ShopDetailDao shopDetailDao) {
 		this.shopDetailDao = shopDetailDao;
@@ -96,6 +121,7 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return productDao.getProduct(prodId);
 	}
+	
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.ProductService#updateProduct(com.legendshop.model.entity.Product)
@@ -152,11 +178,42 @@ public class ProductServiceImpl implements ProductService {
 		return prodId;
 	}
 	
+	@Override
+	public String getProductGallery(HttpServletRequest request,
+			HttpServletResponse response,Long prodId) {
+		ProductDetail prod = productDao.getProdDetail(prodId);
+		if (prod != null) {
+			if (!Constants.ONLINE.equals(prod.getStatus())) {
+				throw new NotFoundException("Product does not online.",EntityCodes.PROD);
+			}
+			request.setAttribute("prod", prod);
+			// 查看商品的说明图片
+			List<ImgFile> prodPics = imgFileDao.getProductPics(prod.getUserName(), prodId);
+			if (AppUtils.isNotBlank(prodPics)) {
+				request.setAttribute("prodPics", prodPics);
+			}
+			return PathResolver.getPath(FrontPage.PROD_PIC_GALLERY);
+		} else {
+			UserMessages uem = new UserMessages();
+			Locale locale = localeResolver.resolveLocale(request);
+			uem.setTitle(ResourceBundleHelper.getString(locale, "product.not.found"));
+			uem.setDesc(ResourceBundleHelper.getString(locale, "product.status.check"));
+			uem.setCode(ErrorCodes.PRODUCT_NO_FOUND);
+			request.setAttribute(UserMessages.MESSAGE_KEY, uem);
+			return PathResolver.getPath(FrontPage.FAIL);
+		}
+	}
+	
 	// 商品动态属性
 	@Override
 	public String getAttributeprodAttribute(Long prodId) {
 		return productDao.findUniqueBy("select prod.attribute from Product prod where prod.prodId = ?", String.class, prodId);
 	}
+	
+    @Override
+	public List<Product> getHotSale(String shopName){
+    	return productDao.gethotsale(shopName);
+    }
 
 	/**
 	 * 确保该产品属于指定用户
@@ -215,6 +272,47 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void updateProd(Product product) {
 		productDao.updateProduct(product);
+	}
+
+	@Override
+	public ProductDetail getProdDetail(Long prodId) {
+		return productDao.getProdDetail(prodId);
+	}
+
+	@Override
+	public List<Product> getReleationProd(String shopName, Long prodId, int total) {
+		return productDao.getReleationProd(shopName, prodId, total);
+	}
+
+	@Override
+	public List<RelProduct> getReleationProd(Long prodId, String userName) {
+		return productDao.getReleationProd(prodId, userName);
+	}
+
+	@Override
+	public void updateProdViews(Long prodId) {
+		productDao.updateProdViews(prodId);
+		
+	}
+
+	@Override
+	public List<Product> getHotOn(String sortId) {
+		return productDao.getHotOn(sortId);
+	}
+
+	@Override
+	public List<Product> getHotViewProd(String shopName, int maxNum) {
+		return productDao.getHotViewProd(shopName, maxNum);
+	}
+
+	@Override
+	@Cacheable(value = "ProductList", condition = "T(Integer).parseInt(#curPageNO) < 3")
+	public PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId) {
+		return productDao.getProdDetail(locale, curPageNO, sortId);
+	}
+
+	public void setImgFileDao(ImgFileDao imgFileDao) {
+		this.imgFileDao = imgFileDao;
 	}
 
 }

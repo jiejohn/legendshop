@@ -104,6 +104,11 @@ public class BasketServiceImpl implements BasketService {
 		return basketDao.getBasketByuserName(userName);
 	}
 
+	@Override
+	public Long getTotalBasketByuserName(String userName) {
+		return basketDao.getTotalBasketByuserName(userName);
+	}
+
 
 
 }

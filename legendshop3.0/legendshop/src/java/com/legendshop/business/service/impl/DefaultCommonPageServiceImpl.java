@@ -18,27 +18,26 @@ import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.spi.constants.NewsPositionEnum;
 
 /**
- * The Class DefaultCommonPageServiceImpl.
+ * 默认模板的顶部数据收集器
  */
 public class DefaultCommonPageServiceImpl extends AbstractCommonPageService {
 	
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.CommonPageService#getTop(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/**
+	 * 默认模板的顶部数据
 	 */
 	@Override
 	public String getTop(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = getCurrentShopName();
 		String userName = UserManager.getUsername(request.getSession());
 		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(shopName);
+		
 		if (shopDetail == null) {
 			return PathResolver.getPath(FrontPage.TOPALL);
 		}
-
-		// set Locale
-		//setLocalByShopDetail(shopDetail, request, response);
-
+		//Logo
 		request.setAttribute("logo", logoDao.getLogo(shopName));
+		//产品分类
 		request.setAttribute("sortList", sortDao.getSort(shopName, true));
 
 		// 顶部新闻
@@ -46,10 +45,14 @@ public class DefaultCommonPageServiceImpl extends AbstractCommonPageService {
 
 		// 分类新闻
 		request.setAttribute("newsSortList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_SORT, 8));
-
+		//是否是商家
 		boolean shopExists = shopDetailDao.isShopExists(userName);
 		request.setAttribute("shopExists", shopExists);
+		
+		//是否可以做为联盟商城
 		request.setAttribute("canbeLeagueShop", shopDetailDao.isBeLeagueShop(shopExists, userName, shopName));
+		
+		//返回页面
 		return PathResolver.getPath(FrontPage.TOP);
 	}
 

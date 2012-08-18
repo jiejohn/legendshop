@@ -81,5 +81,15 @@ public interface BasketService {
 	 * @return the basket byuser name
 	 */
 	public abstract List<Basket> getBasketByuserName(String userName);
+	
+	// 得到有效订单总数
+	/**
+	 * Gets the total basket byuser name.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @return the total basket byuser name
+	 */
+	public abstract Long getTotalBasketByuserName(String userName);
 
 }

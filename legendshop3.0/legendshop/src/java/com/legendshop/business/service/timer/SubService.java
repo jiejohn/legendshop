@@ -9,6 +9,8 @@ package com.legendshop.business.service.timer;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.legendshop.business.common.SubForm;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
@@ -79,4 +81,13 @@ public interface SubService {
 	 * @return the order list
 	 */
 	public PageSupport getOrderList(CriteriaQuery cq);
+	
+	public String getOrderDetail(HttpServletRequest request, Sub sub,String userName, String subNumber);
+	
+	/**
+	 * get all pending order
+	 * @param userName
+	 * @return
+	 */
+	public abstract Long getTotalProcessingOrder(String userName);
 }

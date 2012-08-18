@@ -13,8 +13,9 @@ import java.util.Map;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.Advertisement;
+import com.legendshop.spi.service.BaseService;
 
-public interface AdvertisementService {
+public interface AdvertisementService extends BaseService{
 
 	/**
 	 * List.

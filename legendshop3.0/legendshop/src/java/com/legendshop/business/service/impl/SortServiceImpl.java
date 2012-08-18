@@ -9,13 +9,24 @@ package com.legendshop.business.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.legendshop.business.common.page.TilesPage;
+import com.legendshop.business.dao.NsortDao;
+import com.legendshop.business.dao.ProductDao;
 import com.legendshop.business.dao.SortDao;
+import com.legendshop.core.UserManager;
+import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Sort;
 import com.legendshop.spi.service.SortService;
 import com.legendshop.util.AppUtils;
@@ -24,10 +35,17 @@ import com.legendshop.util.AppUtils;
 /**
  * 产品分类服务.
  */
-public class SortServiceImpl implements SortService  {
+public class SortServiceImpl extends BaseServiceImpl implements SortService  {
     
+	/** The log. */
+	private final Logger log = LoggerFactory.getLogger(SortServiceImpl.class);
+	
     /** The sort dao. */
     private SortDao sortDao;
+    
+    private NsortDao nsortDao;
+    
+    private ProductDao productDao;
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.SortService#querySortList(java.lang.String)
@@ -131,7 +149,58 @@ public class SortServiceImpl implements SortService  {
 	public List<Sort> getSort(String name, String sortType, Integer headerMenu, Integer navigationMenu, boolean loadAll) {		
 		return sortDao.getSort(name, sortType, headerMenu, navigationMenu, loadAll);
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.legendshop.business.service.impl.BusinessService#nsort(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
+	@Override
+	public String getSecSort(HttpServletRequest request, HttpServletResponse response,Long sortId,Long nsortId,Long subNsortId) {
+		String curPageNO = request.getParameter("curPageNO");
+		if(curPageNO == null){
+			curPageNO = "1";
+		}
+		String userName = UserManager.getUsername(request);
+		log.info("{},{},{},{},{},nsort", new Object[] { request.getRemoteAddr(), userName == null ? "" : userName,
+				getCurrentShopName(), sortId, nsortId });
+		Sort sort = sortDao.getSort(sortId);
+		if (sort != null) {
+			setShopName(request, response, sort.getUserName());
+			getAndSetAdvertisement(sort.getUserName());
+			request.setAttribute("sort", sort);
+		}
+		Nsort nsort = nsortDao.getNsort(nsortId);
+		if ((nsort != null) && !AppUtils.isBlank(nsort.getSubSort())) {
+			request.setAttribute("hasSubSort", true);
+		}
+		if (subNsortId != null) {
+			Nsort subNsort = nsortDao.getNsort(subNsortId);
+			request.setAttribute("subNsort", subNsort);
+			if (subNsort != null) {
+				request.setAttribute("CurrentSubNsortId", subNsort.getNsortId());
+			}
+		}
 
+		List<Nsort> nsortList = nsortDao.getNsortList(sortId);
+		request.setAttribute("nsort", nsort);
+
+		request.setAttribute("nsortList", nsortDao.getOthorNsort(nsortList));
+		request.setAttribute("subNsortList", nsortDao.getOthorSubNsort(nsortId, nsortList));
+		if (nsort != null) {
+			request.setAttribute("CurrentNsortId", nsort.getNsortId());
+		}
+		PageSupport ps = productDao.getProdDetail(localeResolver.resolveLocale(request), curPageNO,  sortId, nsortId, subNsortId);
+		ps.savePage(request);
+		
+		return PathResolver.getPath(TilesPage.NSORT);
+	}
+
+	public void setNsortDao(NsortDao nsortDao) {
+		this.nsortDao = nsortDao;
+	}
+
+	public void setProductDao(ProductDao productDao) {
+		this.productDao = productDao;
+	}
 
 }
 

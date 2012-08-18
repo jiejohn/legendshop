@@ -13,7 +13,7 @@ import com.legendshop.core.dao.BaseDao;
 import com.legendshop.model.entity.Pub;
 
 /**
- * The Interface PubDao.
+ * 公告Dao
  */
 public interface PubDao extends BaseDao{
 

@@ -41,7 +41,7 @@ public class SecurityContextLogoutHandlerImpl extends
 		cookie.setMaxAge(0); // -1为永不过期,或者指定过期时间
 		response.addCookie( cookie );//在退出登录操作中删除cookie.
 		
-		request.getSession().invalidate();
+		//request.getSession().invalidate();
 		super.logout(request, response, authentication);
 	}
 

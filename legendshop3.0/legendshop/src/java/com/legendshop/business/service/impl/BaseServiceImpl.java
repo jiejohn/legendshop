@@ -7,9 +7,6 @@
  */
 package com.legendshop.business.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,14 +16,11 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.dao.AdvertisementDao;
 import com.legendshop.business.event.impl.VisitLogEvent;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.event.EventHome;
-import com.legendshop.model.entity.Advertisement;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.impl.AbstractService;
@@ -38,15 +32,13 @@ import com.legendshop.util.AppUtils;
 public abstract class BaseServiceImpl extends AbstractService {
 
 	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(BaseServiceImpl.class);
+	private final Logger log = LoggerFactory.getLogger(BaseServiceImpl.class);
 
 	/** The java mail sender. */
 	protected JavaMailSenderImpl javaMailSender;
 
 	/** The thread pool executor. */
 	protected ThreadPoolTaskExecutor threadPoolExecutor;
-
-	protected AdvertisementDao advertisementDao;
 
 	/*
 	 * (non-Javadoc)
@@ -84,22 +76,6 @@ public abstract class BaseServiceImpl extends AbstractService {
 		this.threadPoolExecutor = threadPoolExecutor;
 	}
 
-	public void setAdvertisement(String shopName, HttpServletRequest request) {
-		Map<String, List<Advertisement>> advertisement = advertisementDao.getAdvertisement(shopName);
-		if (!AppUtils.isBlank(advertisement)) {
-			for (String type : advertisement.keySet()) {
-				if (Constants.COUPLET.equals(type)) {
-					List<Advertisement> list = advertisement.get(type);
-					if (AppUtils.isNotBlank(list)) {
-						request.setAttribute(type, list.get(CommonServiceUtil.random(list.size())));
-					}
-				} else {
-					request.setAttribute(type, advertisement.get(type));
-				}
-
-			}
-		}
-	}
 
 	/**
 	 * @param request
@@ -143,15 +119,14 @@ public abstract class BaseServiceImpl extends AbstractService {
 			shopName = defaultShop;
 			shopDetail = ThreadLocalContext.getShopDetailView(shopName);
 
-		} else {
+		} 
+		
+		if(shopDetail != null) {
 			// 更新用户访问历史
 			updateVisitHistory(shopDetail, request);
 		}
 		return shopName;
 	}
 
-	public void setAdvertisementDao(AdvertisementDao advertisementDao) {
-		this.advertisementDao = advertisementDao;
-	}
 
 }

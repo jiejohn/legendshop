@@ -35,6 +35,6 @@ public interface CommonPageService {
 	 *            the response
 	 * @return the copy all
 	 */
-	public String getCopyAll(HttpServletRequest request, HttpServletResponse response);
+	public String getCopy(HttpServletRequest request, HttpServletResponse response);
 	
 }

@@ -22,6 +22,7 @@ import com.legendshop.business.dao.SortDao;
 import com.legendshop.business.service.HomeService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.model.entity.Indexjpg;
 
 /**
@@ -47,7 +48,7 @@ public class HomeServiceImpl extends BaseServiceImpl implements HomeService {
 
 	@Override
 	public String getHome(HttpServletRequest request, HttpServletResponse response) {
-		String shopName = checkAndGetShopName(request, response);
+		String shopName = ThreadLocalContext.getCurrentShopName();
 
 		// 设置产品分类
 		request.setAttribute("sortList", sortDao.getSort(shopName, true));

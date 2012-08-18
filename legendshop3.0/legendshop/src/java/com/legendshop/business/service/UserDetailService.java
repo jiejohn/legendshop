@@ -8,18 +8,23 @@
 package com.legendshop.business.service;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.oro.text.regex.MalformedPatternException;
 
+import com.legendshop.business.form.UserForm;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.dao.support.SqlQuery;
+import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.UserDetail;
+import com.legendshop.spi.service.BaseService;
 
 /**
  * The Interface UserDetailService.
  */
-public interface UserDetailService {
+public interface UserDetailService extends BaseService{
 
 
 	/**
@@ -93,6 +98,53 @@ public interface UserDetailService {
 
 	public abstract boolean updatePassword(String userName, String mail, String templateFilePath)
 			throws MalformedPatternException, MessagingException;
+
+	/**
+	 * 修改我的帐户，用于修改用户信息.
+	 * 
+	 * @param mapping
+	 *            the mapping
+	 * @param actionForm
+	 *            the action form
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the action forward
+	 * @throws Exception
+	 *             the exception
+	 */
+	public abstract String updateAccount(HttpServletRequest request, HttpServletResponse response, UserForm form);
+	
+	/**
+	 * User reg.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param form
+	 *            the form
+	 * @return the string
+	 */
+	public abstract String saveUserReg(HttpServletRequest request, HttpServletResponse response, UserForm form);
+	
+	/**
+	 * Adds the shop.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param shopDetail
+	 *            the shop detail
+	 * @return the string
+	 */
+	public abstract String saveShop(HttpServletRequest request, HttpServletResponse response, ShopDetail shopDetail);
+	
+	
+	public abstract String updateUserReg(HttpServletRequest request, HttpServletResponse response, String userName,
+			String registerCode) ;
 
 
 }

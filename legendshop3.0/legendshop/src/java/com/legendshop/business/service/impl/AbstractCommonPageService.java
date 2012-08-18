@@ -46,14 +46,14 @@ public abstract class AbstractCommonPageService extends AbstractService implemen
 	 * @return the copy all
 	 */
 	@Override
-	public String getCopyAll(HttpServletRequest request, HttpServletResponse response){
+	public String getCopy(HttpServletRequest request, HttpServletResponse response){
 		// 采用公用帐号的信息
 		String shopName = PropertiesUtil.getDefaultShopName();
 		if (AppUtils.isBlank(shopName)) {
 			shopName = Constants.COMMON_USER;
 		}
 		request.setAttribute("newsBottomList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_BOTTOM, 8));
-		return PathResolver.getPath(FrontPage.COPY_ALL);
+		return PathResolver.getPath(FrontPage.COPY);
 	}
 
 

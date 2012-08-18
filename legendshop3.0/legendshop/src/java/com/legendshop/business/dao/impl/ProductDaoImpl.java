@@ -113,12 +113,12 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 */
 	@Override
 	@Cacheable(value = "ProductList")
-	public List<Product> gethotsale(final String name) {
-		if (name == null) {
+	public List<Product> gethotsale(final String shopName) {
+		if (shopName == null) {
 			return null;
 		}
 		Date date = new Date();
-		return findByHQLLimit(ConfigCode.getInstance().getCode("biz.gethotsale"), 0, 6, name, date, date);
+		return findByHQLLimit(ConfigCode.getInstance().getCode("biz.gethotsale"), 0, 6, shopName, date, date);
 	}
 
 	/*
@@ -152,7 +152,6 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * .core.dao.support.HqlQuery)
 	 */
 	@Override
-	@Cacheable(value = "ProductList", condition = "T(Integer).parseInt(#curPageNO) < 3")
 	public PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId) {
 		// HQL查找方式
 		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class), curPageNO);

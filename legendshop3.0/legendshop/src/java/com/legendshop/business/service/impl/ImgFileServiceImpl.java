@@ -121,4 +121,9 @@ public class ImgFileServiceImpl implements ImgFileService {
 		return imgFileDao.updateImgFileOffline(fileId);
 	}
 
+	@Override
+	public List<ImgFile> getProductPics(String userName, Long prodId) {
+		return imgFileDao.getProductPics(userName, prodId);
+	}
+
 }

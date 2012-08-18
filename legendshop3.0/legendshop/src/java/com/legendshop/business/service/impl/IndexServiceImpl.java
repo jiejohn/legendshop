@@ -10,7 +10,6 @@ package com.legendshop.business.service.impl;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
@@ -18,20 +17,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.dao.ExternalLinkDao;
 import com.legendshop.business.dao.ImgFileDao;
-import com.legendshop.business.dao.LogoDao;
 import com.legendshop.business.dao.NewsDao;
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.business.dao.PubDao;
-import com.legendshop.business.dao.SortDao;
 import com.legendshop.business.dao.SubDao;
 import com.legendshop.business.dao.UserCommentDao;
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.service.IndexService;
 import com.legendshop.core.UserManager;
-import com.legendshop.core.constant.PathResolver;
 import com.legendshop.model.UserInfo;
 import com.legendshop.model.entity.Indexjpg;
 import com.legendshop.model.entity.ShopDetailView;
@@ -67,14 +62,9 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 	/** The sub dao. */
 	private SubDao subDao;
 
-	/** The sort dao. */
-	private SortDao sortDao;
-
 	/** The pub dao. */
 	private PubDao pubDao;
 
-	/** The logo dao. */
-	private LogoDao logoDao;
 
 	/*
 	 * (non-Javadoc)
@@ -84,27 +74,19 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	public String getIndex(HttpServletRequest request, HttpServletResponse response) {
+	public void getIndex(HttpServletRequest request, ShopDetailView shopDetail) {
 
-		String shopName = checkAndGetShopName(request, response);
+		String shopName = shopDetail.getUserName();
 
-		request.setAttribute("productList", productDao.getCommendProd(shopName, 40));
+		request.setAttribute("commendProdList", productDao.getCommendProd(shopName, 40));
 		// 最新商品
-		request.setAttribute("newestList", productDao.getNewestProd(shopName, 11));
-		request.setAttribute("adList", externalLinkDao.getExternalLink(shopName));
+		request.setAttribute("newestProdList", productDao.getNewestProd(shopName, 11));
 
-		request.setAttribute("logo", logoDao.getLogo(shopName));
-		request.setAttribute("sortList", sortDao.getSort(shopName, true));
 		request.setAttribute("pubList", pubDao.getPub(shopName));
-
+		getAndSetAdvertisement(shopName);
 		// 普通新闻
 		request.setAttribute("newList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_NEWS, 6));
-		// 顶部新闻
-		request.setAttribute("newsTopList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_TOP, 8));
-		// 分类新闻
-		request.setAttribute("newsSortList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_SORT, 8));
 
-		setAdvertisement(shopName, request);
 		List<Indexjpg> indexJpgList = imgFileDao.getIndexJpeg(shopName);
 		if (!AppUtils.isBlank(indexJpgList)) {
 			request.setAttribute("MaxScreen", indexJpgList.size());
@@ -114,13 +96,10 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 			request.setAttribute("MaxScreen", 0);
 		}
 
+		request.setAttribute("externalLinkList", externalLinkDao.getExternalLink(shopName));
+		
 		String userName = UserManager.getUsername(request.getSession());
-		boolean shopExists = shopDetailDao.isShopExists(userName);
-		request.setAttribute("shopExists", shopExists);
-		request.setAttribute("canbeLeagueShop", shopDetailDao.isBeLeagueShop(shopExists, userName, shopName));
-
 		logUserAccess(request, shopName, userName);
-		return PathResolver.getPath(TilesPage.INDEX_PAGE);
 	}
 
 	/*
@@ -213,16 +192,10 @@ public class IndexServiceImpl extends BaseServiceImpl implements IndexService {
 		this.imgFileDao = imgFileDao;
 	}
 
-	public void setSortDao(SortDao sortDao) {
-		this.sortDao = sortDao;
-	}
 
 	public void setPubDao(PubDao pubDao) {
 		this.pubDao = pubDao;
 	}
 
-	public void setLogoDao(LogoDao logoDao) {
-		this.logoDao = logoDao;
-	}
 
 }

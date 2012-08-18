@@ -14,13 +14,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.legendshop.business.common.page.FowardPage;
+import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.service.IndexService;
 import com.legendshop.core.base.BaseController;
+import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.helper.ThreadLocalContext;
+import com.legendshop.model.entity.ShopDetailView;
+import com.legendshop.spi.constants.Constants;
+import com.legendshop.util.AppUtils;
 
 /**
  * The Class GroupController.
@@ -46,15 +54,52 @@ public class IndexController extends BaseController {
 	public String index(HttpServletRequest request, HttpServletResponse response) {
 		log.debug("Index starting calling");
 		try {
-			return indexService.getIndex(request, response);
+			String shopName = getShopname(request);
+			ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(shopName);
+			indexService.getIndex(request, shopDetail);
+			return PathResolver.getPath(TilesPage.INDEX_PAGE);
 		} catch (Exception e) {
 			log.error("invoking index", e);
 			if (!PropertiesUtil.isSystemInstalled()) {
 				// redirect to the install page
 				redirectToInstallPage(request);
 			}
-			throw new BusinessException("/index", EntityCodes.SYSTEM);
+			throw new BusinessException("index page error", EntityCodes.SYSTEM);
 		}
 	}
+
+	/**
+	 * Shop.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param curPageNO
+	 *            the cur page no
+	 * @param shopName
+	 *            the shop name
+	 * @return the string
+	 */
+	@RequestMapping("/shop/{shopName}")
+	public String shop(HttpServletRequest request, HttpServletResponse response, String curPageNO, @PathVariable String shopName) {
+		request.setAttribute(Constants.SHOP_NAME, shopName);
+		return PathResolver.getPath(FowardPage.INDEX_QUERY);
+	}
+	
+	
+	/**
+	 * @param request
+	 * @return
+	 */
+	private String getShopname(HttpServletRequest request) {
+		String shopName = (String)request.getAttribute(Constants.SHOP_NAME);
+		if(AppUtils.isBlank(shopName)){
+			shopName = ThreadLocalContext.getCurrentShopName();
+		}
+		return shopName;
+	}
+	
+	
 
 }

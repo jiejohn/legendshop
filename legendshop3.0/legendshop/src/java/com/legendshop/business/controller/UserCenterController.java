@@ -26,13 +26,12 @@ import com.legendshop.core.constant.PathResolver;
  */
 
 @Controller
-@RequestMapping("/p")
 public class UserCenterController extends BaseController {
 
 	/** The log. */
 	private final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
-	@RequestMapping("/usercenter")
+	@RequestMapping("/p/usercenter")
 	public String toUserCenterPage(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			// TODO

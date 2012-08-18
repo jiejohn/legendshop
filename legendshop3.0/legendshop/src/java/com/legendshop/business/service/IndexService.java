@@ -8,7 +8,6 @@
 package com.legendshop.business.service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.legendshop.model.UserInfo;
 import com.legendshop.model.entity.ShopDetailView;
@@ -19,16 +18,17 @@ import com.legendshop.spi.service.BaseService;
  */
 public interface IndexService extends BaseService {
 
+
 	/**
 	 * Gets the index.
 	 * 
 	 * @param request
 	 *            the request
-	 * @param response
-	 *            the response
+	 * @param shopDetail
+	 *            the shop detail
 	 * @return the index
 	 */
-	public String getIndex(HttpServletRequest request, HttpServletResponse response);
+	public void getIndex(HttpServletRequest request, ShopDetailView shopDetail);
 
 	/**
 	 * Index admin.

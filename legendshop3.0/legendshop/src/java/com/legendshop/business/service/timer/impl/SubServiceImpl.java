@@ -13,23 +13,31 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.SubForm;
+import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.SubDao;
+import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.event.impl.OrderSaveEvent;
+import com.legendshop.business.form.MemberForm;
 import com.legendshop.business.service.PayTypeService;
+import com.legendshop.business.service.impl.BaseServiceImpl;
 import com.legendshop.business.service.timer.SubService;
+import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.PayType;
 import com.legendshop.model.entity.Sub;
+import com.legendshop.model.entity.UserDetail;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.constants.OrderStatusEnum;
 import com.legendshop.spi.constants.PayTypeEnum;
@@ -39,7 +47,7 @@ import com.legendshop.util.AppUtils;
 /**
  * 订单服务实现.
  */
-public class SubServiceImpl implements SubService {
+public class SubServiceImpl extends BaseServiceImpl implements SubService {
 	
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(SubServiceImpl.class);
@@ -52,6 +60,8 @@ public class SubServiceImpl implements SubService {
 	
 	/** The pay type service. */
 	private PayTypeService payTypeService;
+	
+	private UserDetailDao userDetailDao;
 
 	/** The commit inteval. */
 	private Integer commitInteval = 100;
@@ -310,8 +320,42 @@ public class SubServiceImpl implements SubService {
 	 */
 	@Override
 	public Sub getSubBySubNumber(String subNumber) {
-		// TODO Auto-generated method stub
 		return subDao.getSubBySubNumber(subNumber);
+	}
+	
+	@Override
+	public String getOrderDetail(HttpServletRequest request, Sub sub,String userName, String subNumber) {
+		List<Sub> subList = new ArrayList<Sub>();
+
+		MemberForm form = new MemberForm();
+		form.setUserAdds(sub.getSubAdds());
+		form.setUserPostcode(sub.getSubPost());
+		form.setOrderName(sub.getUserName());
+		form.setOther(sub.getOther());
+		form.setUserTel(sub.getSubTel());
+		form.setPayTypeName(sub.getPayTypeName());
+		request.setAttribute("member", form);
+
+		List<Basket> baskets = subDao.getBasketBySubNumber(subNumber);
+		if (!AppUtils.isBlank(baskets)) {// 每一个订单最少应该有一个商品
+			sub.setBasket(baskets);
+			sub.setPayType(payTypeService.getPayTypeList(sub.getShopName()));
+			subList.add(sub);
+			request.setAttribute("baskets", baskets);
+			request.setAttribute("subList", subList);
+		}
+		if (OrderStatusEnum.UNPAY.value().equals(sub.getStatus())) {
+			UserDetail userdetail = userDetailDao.getUserDetail(userName);
+			if (userdetail != null) {
+				if (userdetail.getScore() == null) {
+					userdetail.setScore(0l);
+				}
+				request.setAttribute("availableScore", userdetail.getScore());
+			}
+		} else {
+			request.setAttribute("availableScore", 0l);
+		}
+		return PathResolver.getPath(TilesPage.PAGE_SUB);
 	}
 
 	/* (non-Javadoc)
@@ -329,6 +373,15 @@ public class SubServiceImpl implements SubService {
 	@Override
 	public PageSupport getOrderList(CriteriaQuery cq) {
 		return subDao.getOrder(cq);
+	}
+
+	public void setUserDetailDao(UserDetailDao userDetailDao) {
+		this.userDetailDao = userDetailDao;
+	}
+
+	@Override
+	public Long getTotalProcessingOrder(String userName) {
+		return subDao.getTotalProcessingOrder(userName);
 	}
 
 }

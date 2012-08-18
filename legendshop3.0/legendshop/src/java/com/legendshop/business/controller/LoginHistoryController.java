@@ -36,7 +36,7 @@ import com.legendshop.util.sql.ConfigCode;
  * 用户产品评论.
  */
 @Controller
-@RequestMapping("/admin/loginHistory")
+@RequestMapping("/p/loginHistory")
 public class LoginHistoryController extends BaseController{ 
 	
 	/** The log. */

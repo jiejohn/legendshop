@@ -55,6 +55,20 @@ public class CommonPageController extends BaseController {
 	public String bottom(HttpServletRequest request, HttpServletResponse response) {
 		return PathResolver.getPath(FrontPage.BOTTOM);
 	}
+	
+	/**
+	 * All.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the string
+	 */
+	@RequestMapping("/all")
+	public String all(HttpServletRequest request, HttpServletResponse response) {
+		return PathResolver.getPath(FrontPage.ALL);
+	}
 
 	/**
 	 * Topall. 页面顶部
@@ -79,13 +93,13 @@ public class CommonPageController extends BaseController {
 	 * @param newsCategory
 	 * @return
 	 */
-	@RequestMapping("/copyAll")
+	@RequestMapping("/copy")
 	public String copyAll(HttpServletRequest request, HttpServletResponse response, String curPageNO,
 			String newsCategory) {
 		String shopName = getShopName(request, response);
 		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(shopName,
-				FrontPage.COPY_ALL);
-		return commonPageService.getCopyAll(request, response);
+				FrontPage.COPY);
+		return commonPageService.getCopy(request, response);
 	}
 
 }
