@@ -33,7 +33,7 @@ body div{font-size:12px;}
   <table  cellpadding="0" cellspacing="0" width="700" height="39" style="font:12px Tahoma, Arial, 宋体;">
     <tr>
       <td width="210"><a target="_blank" href="${DOMAIN_NAME}"><img src="${DOMAIN_NAME}/common/images/legendshop.gif" width="110" height="39"  alt="LegendShop"></a></td>
-      <td width="490" align="right" valign="bottom" style="padding-bottom:10px;"><a target="_blank" style="color:#07f;text-decoration:none;font-size:12px;" href="${DOMAIN_NAME}/admin/login${applicationScope.WEB_SUFFIX}">登录</a> | <a target="_blank" style="color:#07f;text-decoration:none;padding-right:5px;font-size:12px;" href="${DOMAIN_NAME}/club">论坛</a></td>
+      <td width="490" align="right" valign="bottom" style="padding-bottom:10px;"><a target="_blank" style="color:#07f;text-decoration:none;font-size:12px;" href="${DOMAIN_NAME}/p/login${applicationScope.WEB_SUFFIX}">登录</a> | <a target="_blank" style="color:#07f;text-decoration:none;padding-right:5px;font-size:12px;" href="${DOMAIN_NAME}/club">论坛</a></td>
     </tr>
   </table>
 </div>
@@ -51,7 +51,7 @@ body div{font-size:12px;}
       	密码：#password#
       	</strong>
     	</div>
-	    <p>请登录<a href="${DOMAIN_NAME}/admin/login${applicationScope.WEB_SUFFIX}">系统</a>, 完善您的个人资料。</p>
+	    <p>请登录<a href="${DOMAIN_NAME}/p/login${applicationScope.WEB_SUFFIX}">系统</a>, 完善您的个人资料。</p>
 		</div>
 
 
