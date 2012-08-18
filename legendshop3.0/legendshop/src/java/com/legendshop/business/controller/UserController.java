@@ -43,7 +43,7 @@ import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 
 /**
- * 产品分类控制器。.
+ * 用户控制器。.
  */
 @Controller
 public class UserController extends BaseController{

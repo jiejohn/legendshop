@@ -84,9 +84,28 @@ public enum TilesPage implements PageDefinition {
 	 */
 	HOME("home.", TemplateEnum.RED),
 
-	
 	/** The User Center main page. */
-	USER_CENTER_MAIN("usercenter.", TemplateEnum.RED);
+	USER_CENTER_MAIN("usercenter.", TemplateEnum.RED),
+
+	/**
+	 * The favorite main page.
+	 */
+	MY_FAVOURITE_MAIN("favourite.", TemplateEnum.RED),
+
+	/**
+	 * The inBox message page
+	 */
+	SITE_MESSAGE_INBOX("inbox.", TemplateEnum.RED),
+
+	/**
+	 * The outBox message page
+	 */
+	SITE_MESSAGE_OUTBOX("outbox.", TemplateEnum.RED),
+
+	/**
+	 * All products sort
+	 */
+	ALL_PRODUCT_SORT("allProductSort", TemplateEnum.RED);
 
 	/** The value. */
 	private final String value;

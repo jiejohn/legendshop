@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ include file="/WEB-INF/pages/common/common.jsp"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
-<html>
-<head>
 		<script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/default/css/indexJpgForm.css" />
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
@@ -198,9 +196,6 @@ function isEmail(str){
  }	
 </script>
 
-
-</head>
-<body>
 <c:forEach items="${requestScope.USER_REG_ADV_950}" var="adv">
 <table class="picstyle" cellpadding="0" cellspacing="0" style="margin-bottom: 5px">
   <tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="950px" /></a></td>
@@ -361,5 +356,3 @@ function isEmail(str){
                     </table></td>
                 </tr>
               </table>
-             </body>
-           </html>

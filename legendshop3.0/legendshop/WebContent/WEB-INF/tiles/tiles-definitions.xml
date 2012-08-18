@@ -42,11 +42,8 @@
 		<put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/allnews.jsp" />
 	</definition>
 
-	<definition name="userReg.*" template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
-		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/reg.jsp" />
-	</definition>
 
-	<definition name="reg.*" template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+	<definition name="reg.*" template="/WEB-INF/pages/frontend/{1}/simpleFrame.jsp">
 		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/reg.jsp" />
 	</definition>
 
@@ -58,7 +55,7 @@
 		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/searchall.jsp" />
 	</definition>
 
-	<definition name="login.*" template="/WEB-INF/pages/frontend/{1}/topFrame.jsp">
+	<definition name="login.*" template="/WEB-INF/pages/frontend/{1}/simpleFrame.jsp">
 		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/login.jsp" />
 	</definition>
 
@@ -89,6 +86,18 @@
 
 	<definition name="usercenter.*" template="/WEB-INF/pages/frontend/{1}/indexFrame.jsp">
 		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/usercenter.jsp" />
+	</definition>
+
+	<definition name="favourite.*" template="/WEB-INF/pages/frontend/{1}/indexFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/myfavorite.jsp" />
+	</definition>
+
+	<definition name="inbox.*" template="/WEB-INF/pages/frontend/{1}/indexFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/inbox.jsp" />
+	</definition>
+
+	<definition name="outbox.*" template="/WEB-INF/pages/frontend/{1}/indexFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/outbox.jsp" />
 	</definition>
 
 </tiles-definitions>

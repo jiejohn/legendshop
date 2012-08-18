@@ -12,25 +12,26 @@
 
 	<div class="uctit m10">
 		<h3 class="focus">
-			<a href="/usercenter.htm">会员中心首页</a>
+		
+			<a href="<ls:url address='/p/usercenter'/>">会员中心首页</a>
 		</h3>
 		<h3>
-			<a href="/p/order.htm">我的订单</a>
+			<a href="<ls:url address='/p/order'/>">我的订单</a>
 		</h3>
 		<h3>
-			<a href="/p/buy.htm">我的购物车</a>
+			<a href="<ls:url address='/p/buy'/>">我的购物车</a>
 		</h3>
 		<h3>
-			<a href="/p/favourite">我的收藏</a>
+			<a href="<ls:url address='/p/favourite'/>">我的收藏</a>
 		</h3>
 		<h3>
-			<a href="/p/myaccount.htm">个人信息</a>
+			<a href="<ls:url address='/p/myaccount'/>">个人信息</a>
 		</h3>
 		<h3 class="open last">
 			我的消息
 			<ul>
-				<li><a href="/p/outbox.htm">发件箱</a></li>
-				<li><a href="/p/inbox.htm">收件箱</a></li>
+				<li><a href="<ls:url address='/p/outbox'/>">发件箱</a></li>
+				<li><a href="<ls:url address='/p/inbox'/>">收件箱</a></li>
 			</ul>
 		</h3>
 	</div>

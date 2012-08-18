@@ -2,7 +2,7 @@
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <!----地址---->
  <div class="w addr">
-   <span><a href="#">首页</a></span>&gt;<span><a href="#">会员中心</a></span>&gt;<span><a href="#">我的消息</a></span>&gt;<span>收件箱</span>
+   <span><a href="#">首页</a></span>&gt;<span><a href="#">会员中心</a></span>&gt;<span><a href="#">我的消息</a></span>&gt;<span>发件箱</span>
  </div>
 <!----地址end---->
 
@@ -18,7 +18,7 @@
      
          <div class="pagetab ">
                  <ul>           
-                    <li class="on"><span><a href="#">收件箱</a></span></li>                  
+                    <li class="on"><span><a href="#">发件箱</a></span></li>                  
                    <li><span><a href="new_mes.html">发消息</a></span></li>      
                  </ul>       
          </div>

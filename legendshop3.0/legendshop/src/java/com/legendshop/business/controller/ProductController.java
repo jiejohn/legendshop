@@ -244,4 +244,8 @@ public class ProductController extends BaseController{
 		}
 		return productService.getProductGallery(request, response,prodId);
 	}
+	
+	
+	
+	
 }
