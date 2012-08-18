@@ -9,6 +9,9 @@ package com.legendshop.spi.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.Sort;
@@ -16,7 +19,7 @@ import com.legendshop.model.entity.Sort;
 /**
  * The Interface SortService.
  */
-public interface SortService {
+public interface SortService extends BaseService{
 
 	/**
 	 * Query sort list.
@@ -103,5 +106,22 @@ public interface SortService {
 	public abstract List<Sort> getSort(String name, String sortType, boolean loadAll);
 	
 	public abstract List<Sort> getSort(String name, String sortType,Integer headerMenu,Integer navigationMenu, boolean loadAll);
-
+	
+	/**
+	 * Nsort.
+	 * 
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param sortId
+	 *            the sort id
+	 * @param nsortId
+	 *            the nsort id
+	 * @param subNsortId
+	 *            the sub nsort id
+	 * @return the string
+	 */
+	public abstract String getSecSort(HttpServletRequest request, HttpServletResponse response,Long sortId,Long nsortId,Long subNsortId);
+	
 }

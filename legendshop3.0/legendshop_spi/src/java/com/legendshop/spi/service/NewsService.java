@@ -8,6 +8,7 @@
 package com.legendshop.spi.service;
 
 import java.util.List;
+import java.util.Locale;
 
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
@@ -18,7 +19,7 @@ import com.legendshop.spi.constants.NewsPositionEnum;
 /**
  * The Interface NewsService.
  */
-public interface NewsService {
+public interface NewsService extends BaseService{
 
 	/**
 	 * List.
@@ -104,5 +105,7 @@ public interface NewsService {
 	 * @return the news
 	 */
 	public abstract List<News> getNews(final String shopName, final NewsPositionEnum newsPositionEnum,final Integer num);
+
+	public abstract PageSupport getNews(Locale resolveLocale, String curPageNO, String shopName, Long newsCategoryId);
 
 }

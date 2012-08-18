@@ -66,9 +66,6 @@ public class Constants implements AttributeKeys {
 	/** The Constant HW_TEMPLATE_PARAMETER. */
 	public static final Short HW_TEMPLATE_PARAMETER = 2;
 
-	/** The Constant VISIT_HISTORY. */
-	public static final String VISIT_HISTORY = "VisitHistory";
-
 	/** The Constant ORDER_STATUS. */
 	public static final String ORDER_STATUS = "ORDER_STATUS";
 

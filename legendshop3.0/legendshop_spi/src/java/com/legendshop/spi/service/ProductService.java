@@ -8,14 +8,20 @@
 package com.legendshop.spi.service;
 
 import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.DynamicTemp;
 import com.legendshop.model.entity.Product;
+import com.legendshop.model.entity.ProductDetail;
+import com.legendshop.model.entity.RelProduct;
 
-public interface ProductService {
+public interface ProductService extends BaseService{
 
 	/**
 	 * Find product.
@@ -192,6 +198,78 @@ public interface ProductService {
 	 *            the product
 	 */
 	public abstract void updateProd(Product product);
+	
+    /**
+     * Gets the prod detail.
+     *
+     * @param prodId
+     *            the prod id
+     * @return the prod detail
+     */
+    public abstract ProductDetail getProdDetail(final Long prodId);
+    
+    /**
+     * Gets the releation prod.
+     *
+     * @param shopName
+     *            the shop name
+     * @param prodId
+     *            the prod id
+     * @param total
+     *            the total
+     * @return the releation prod
+     */
+    public abstract List<Product> getReleationProd(final String shopName, final Long prodId, final int total);
+    
+    
+    /**
+	 * Gets the releation prod.
+	 * 
+	 * @param prodId
+	 *            the prod id
+	 * @param userName
+	 *            the user name
+	 * @return the releation prod
+	 */
+    public abstract List<RelProduct> getReleationProd(Long prodId, String userName);
+    
 
+    // 更新商品查看数
+    /**
+     * Update prod views.
+     *
+     * @param prodId
+     *            the prod id
+     */
+    public abstract void updateProdViews(Long prodId);
+    
+    /**
+     * hot sell product
+     * @param shopName
+     * @return
+     */
+    public List<Product> getHotSale(String shopName);
+    
+    public List<Product> getHotOn(String sortId);
+
+	public abstract List<Product> getHotViewProd(String shopName, int maxNum);
+	
+    public abstract PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId);
+    
+	/**
+	 * Product gallery.
+	 * 
+	 * @param mapping
+	 *            the mapping
+	 * @param actionForm
+	 *            the action form
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the action forward
+	 */
+	public abstract String getProductGallery(HttpServletRequest request, HttpServletResponse response, Long prodId);
+	
 
 }

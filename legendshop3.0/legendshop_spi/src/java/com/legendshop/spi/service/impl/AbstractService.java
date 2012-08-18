@@ -7,6 +7,10 @@
  */
 package com.legendshop.spi.service.impl;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,13 +19,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.LocaleResolver;
 
-import com.legendshop.core.constant.ParameterEnum;
-import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ThreadLocalContext;
-import com.legendshop.model.entity.ProductDetail;
+import com.legendshop.model.entity.Advertisement;
 import com.legendshop.model.entity.ShopDetailView;
 import com.legendshop.model.visit.VisitHistory;
 import com.legendshop.spi.constants.Constants;
+import com.legendshop.spi.dao.AdvertisementDao;
 import com.legendshop.spi.dao.ShopDetailDao;
 import com.legendshop.spi.service.BaseService;
 import com.legendshop.util.AppUtils;
@@ -38,6 +41,9 @@ public abstract class AbstractService implements BaseService {
 
 	/** The locale resolver. */
 	protected LocaleResolver localeResolver;
+	
+
+	protected AdvertisementDao advertisementDao;
 
 	/*
 	 * (non-Javadoc)
@@ -62,15 +68,7 @@ public abstract class AbstractService implements BaseService {
 	 */
 
 	public String getCurrentShopName() {
-		HttpServletRequest request = ThreadLocalContext.getRequest();
-		String shopName = (String) getSessionAttribute(request, Constants.SHOP_NAME);
-		if (AppUtils.isBlank(shopName)) {
-			String defaultShopName = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
-			setSessionAttribute(request, Constants.SHOP_NAME, defaultShopName);
-			return defaultShopName;
-		} else {
-			return shopName;
-		}
+		return ThreadLocalContext.getCurrentShopName();
 	}
 
 	/*
@@ -135,22 +133,6 @@ public abstract class AbstractService implements BaseService {
 		}
 	}
 
-	/**
-	 * Visit.
-	 * 
-	 * @param prod
-	 *            the prod
-	 * @param request
-	 *            the request
-	 */
-	protected void visit(ProductDetail prod, HttpServletRequest request) {
-		VisitHistory visitHistory = (VisitHistory) request.getSession().getAttribute(Constants.VISIT_HISTORY);
-		if (visitHistory == null) {
-			visitHistory = new VisitHistory();
-		}
-		visitHistory.visit(prod);
-		request.getSession().setAttribute(Constants.VISIT_HISTORY, visitHistory);
-	}
 
 	/**
 	 * Visit.
@@ -167,6 +149,51 @@ public abstract class AbstractService implements BaseService {
 		}
 		visitHistory.visit(shopDetail);
 		request.getSession().setAttribute(Constants.VISIT_HISTORY, visitHistory);
+	}
+	
+	/**
+	 * 设置广告
+	 * @param shopName
+	 */
+	public void getAndSetAdvertisement(String shopName) {
+		Map<String, List<Advertisement>> advertisement = advertisementDao.getAdvertisement(shopName);
+		if (!AppUtils.isBlank(advertisement)) {
+			for (String type : advertisement.keySet()) {
+				if (Constants.COUPLET.equals(type)) {
+					List<Advertisement> list = advertisement.get(type);
+					if (AppUtils.isNotBlank(list)) {
+						ThreadLocalContext.getRequest().setAttribute(type, list.get(random(list.size())));
+					}
+				} else {
+					ThreadLocalContext.getRequest().setAttribute(type, advertisement.get(type));
+				}
+
+			}
+		}
+	}
+	
+	// 只是得到一个广告
+	/**
+	 * Sets the one advertisement.
+	 * 
+	 * @param shopName
+	 *            the shop name
+	 * @param key
+	 *            the key
+	 * @param request
+	 *            the request
+	 */
+	public void getAndSetOneAdvertisement(String shopName, String key) {
+		List<Advertisement> advertisement = advertisementDao.getOneAdvertisement(shopName, key);
+		if (!AppUtils.isBlank(advertisement)) {
+			ThreadLocalContext.getRequest().setAttribute(key, advertisement);
+		}
+	}
+	
+	
+	protected int random(int count) {
+		Random random = new Random();
+		return random.nextInt(count);
 	}
 
 	/**
@@ -188,4 +215,9 @@ public abstract class AbstractService implements BaseService {
 	public void setLocaleResolver(LocaleResolver localeResolver) {
 		this.localeResolver = localeResolver;
 	}
+	
+	public void setAdvertisementDao(AdvertisementDao advertisementDao) {
+		this.advertisementDao = advertisementDao;
+	}
+
 }

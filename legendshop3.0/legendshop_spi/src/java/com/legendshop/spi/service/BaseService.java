@@ -61,5 +61,18 @@ public interface BaseService {
 	 */
 	public abstract Long convertStringToInteger(String id);
 	
+	/**
+	 * 设置广告
+	 * @param shopName
+	 */
+	public abstract void getAndSetAdvertisement(String shopName);
+	
+	/**
+	 * get one Adv
+	 * @param shopName
+	 * @param key
+	 */
+	public void getAndSetOneAdvertisement(String shopName, String key);
+	
 
 }
