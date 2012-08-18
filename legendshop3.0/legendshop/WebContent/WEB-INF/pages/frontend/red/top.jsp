@@ -42,12 +42,12 @@ function searchSubmit(){
       <p class="shoplist">
       
 	  <c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
-      <a href="<ls:url address='/myaccount'/>">
+      <a href="<ls:url address='/p/myaccount'/>">
       <img src="${pageContext.request.contextPath}/img/group/geren.gif" width="142" height="46" /> 
       </a>
       </c:if>
       &nbsp;       
-      <a href="<ls:url address='/buy'/>">
+      <a href="<ls:url address='/p/buy'/>">
       <img src="${pageContext.request.contextPath}/img/group/shoplist.gif" width="156" height="47" />
       </a>
       </p>

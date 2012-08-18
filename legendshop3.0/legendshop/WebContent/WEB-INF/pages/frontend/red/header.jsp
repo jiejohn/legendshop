@@ -56,14 +56,14 @@ $(document).ready(function() {
    
 			<li id="loginbar"  class="ld">${sessionScope.SPRING_SECURITY_LAST_USERNAME}			
 			<span>
-			<a href="<ls:url address='/myaccount'/>")>[<fmt:message key="myaccount"/>]</a> 
-			<a href="${pageContext.request.contextPath}/admin/logout" target="_parent">[<fmt:message key="logout"/>]</a>
+			<a href="<ls:url address='/p/myaccount'/>")>[<fmt:message key="myaccount"/>]</a> 
+			<a href="${pageContext.request.contextPath}/p/logout" target="_parent">[<fmt:message key="logout"/>]</a>
 			</span></li>
    
    </c:when>
    <c:otherwise>
 			<li id="loginbar"  class="ld">欢迎来到LengedShop！
-			<span><a href="<ls:url address='/admin/login'/>">[<fmt:message key="login"/>]</a> 
+			<span><a href="<ls:url address='/p/login'/>">[<fmt:message key="login"/>]</a> 
 			<a class="link-regist" href="<ls:url address='/reg'/>">[<fmt:message key="regFree"/>]</a></span></li>
    </c:otherwise>
 </c:choose>
@@ -71,7 +71,7 @@ $(document).ready(function() {
 			
 			<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
 			<li ><a href="<ls:url address='/leaveword'/>"><fmt:message key="leaveword"/></a></li>
-			<li ><a href="<ls:url address='/order'/>">我的订单</a></li>
+			<li ><a href="<ls:url address='/p/order'/>">我的订单</a></li>
 	        </c:if>
 	        <li><a href="<ls:url address='/allNews'/>"><fmt:message key="newsCenter"/></a></li>
 <%-- 	        <li class="menu">
