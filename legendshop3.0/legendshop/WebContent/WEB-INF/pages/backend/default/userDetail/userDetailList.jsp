@@ -68,7 +68,7 @@
       <auth:auth ifAnyGranted="F_OPERATOR">
 	      <display:column title="操作" media="html" style="width:75px">
 	      <auth:auth ifAnyGranted="F_SECUREST">
-	         <a href='${pageContext.request.contextPath}/myaccount${applicationScope.WEB_SUFFIX}?userName=${item.userName}' target="_blank" title="查看用户${item.userName}信息"><img alt="查看用户${item.userName}信息" src="${pageContext.request.contextPath}/common/default/images/ind_left_login.gif"></a>
+	         <a href='${pageContext.request.contextPath}/p/myaccount${applicationScope.WEB_SUFFIX}?userName=${item.userName}' target="_blank" title="查看用户${item.userName}信息"><img alt="查看用户${item.userName}信息" src="${pageContext.request.contextPath}/common/default/images/ind_left_login.gif"></a>
 	      </auth:auth>
 	      <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
 	      <c:choose>

@@ -155,7 +155,7 @@
        </td>
         <td>
            <p><input type="text" name="userName" id="userName" value="${shopDetail.userName == null ? param.userName : shopDetail.userName}" size="50" readonly="readonly"/>
-           <a href="${pageContext.request.contextPath}/myaccount${applicationScope.WEB_SUFFIX}" target="_blank">我的账号</a></p>
+           <a href="${pageContext.request.contextPath}/p/myaccount${applicationScope.WEB_SUFFIX}" target="_blank">我的账号</a></p>
         </td>
       </tr>
      <tr>

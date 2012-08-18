@@ -58,6 +58,7 @@
 		<property name="commitInteval" value="100" />
 		<property name="expireDate" value="-5" />
 		<property name="subDao" ref="subDao" />
+		<property name="shopDetailDao" ref="shopDetailDao" />
 		<property name="payTypeService" ref="payTypeService" />
 	</bean>
 	<!-- 5/10 * * * * ? -->

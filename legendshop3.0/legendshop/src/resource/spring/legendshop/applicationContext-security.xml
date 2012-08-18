@@ -10,13 +10,14 @@
     <global-method-security pre-post-annotations="enabled">
     </global-method-security>
     
-    <http pattern="/admin/login${WEB_SUFFIX}" security="none"/>  
+    <http pattern="/p/login${WEB_SUFFIX}" security="none"/>  
     
     <http realm="LegendShop Realm" access-denied-page="/WEB-INF/pages/common/401.jsp"  entry-point-ref="authenticationProcessingFilterEntryPoint">
 		<remember-me />
+		<intercept-url pattern="/p/**" access="ROLE_ADMIN,ROLE_USER" />
 		<intercept-url pattern="/admin/member/**" access="ROLE_SUPERVISOR" />
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />	
-		<intercept-url pattern="/p/**" access="ROLE_ADMIN,ROLE_USER" />	
+			
 		<!-- 
 		<intercept-url pattern="/system/**" access="ROLE_SUPERVISOR,ROLE_SYSTEM" />
 		 -->
@@ -30,18 +31,17 @@
     
     <beans:bean id="authenticationProcessingFilterEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-		<beans:property name="loginFormUrl" value="/admin/login${WEB_SUFFIX}"></beans:property>
+		<beans:property name="loginFormUrl" value="/p/login${WEB_SUFFIX}"></beans:property>
 	</beans:bean>
  
   <beans:bean id="_logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
 	  <beans:constructor-arg index="0" value="/" />
 	  <beans:constructor-arg index="1">
 	   <beans:list>
-	    <beans:bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
 	    <beans:bean class="com.legendshop.business.helper.SecurityContextLogoutHandlerImpl" />
 	   </beans:list>
 	  </beans:constructor-arg>
-	  <beans:property name="filterProcessesUrl" value="/admin/logout"/>
+	  <beans:property name="filterProcessesUrl" value="/p/logout"/>
  </beans:bean>
  
 	
@@ -72,7 +72,7 @@
 	
 	<beans:bean id="simpleUrlAuthenticationFailureHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-		<beans:property name="defaultFailureUrl" value="/admin/login${WEB_SUFFIX}?error=true"></beans:property>
+		<beans:property name="defaultFailureUrl" value="/p/login${WEB_SUFFIX}?error=true"></beans:property>
 	</beans:bean>
 
 	<!-- 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->

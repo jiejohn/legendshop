@@ -31,17 +31,19 @@
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
 
-	<bean id="productService" class="com.legendshop.business.service.impl.ProductServiceImpl">
-		<property name="productDao" ref="productDao"></property>
-		<property name="shopDetailDao" ref="shopDetailDao"></property>
-		<property name="productSearchFacade" ref="productSearchFacade"></property>
+	<bean id="productService" class="com.legendshop.business.service.impl.ProductServiceImpl" parent="baseService">
+		<property name="productDao" ref="productDao" />
+		<property name="shopDetailDao" ref="shopDetailDao" />
+		<property name="imgFileDao" ref="imgFileDao" />
+		<property name="productSearchFacade" ref="productSearchFacade" />
 	</bean>
 
 
 	<bean id="shopDetailService" class="com.legendshop.business.service.impl.ShopDetailServiceImpl" parent="baseService">
 		<property name="shopDetailDao" ref="shopDetailDao" />
 		<property name="userDetailDao" ref="userDetailDao" />
-		<property name="shopDetailSearchFacade" ref="shopDetailSearchFacade"></property>
+		<property name="shopDetailSearchFacade" ref="shopDetailSearchFacade" />
+		<property name="shopStatusChecker" ref="shopStatusChecker" />
 	</bean>
 
 	<bean id="externalLinkDao" class="com.legendshop.business.dao.impl.ExternalLinkDaoImpl" parent="baseDao">
@@ -54,7 +56,7 @@
 	<bean id="newsDao" class="com.legendshop.business.dao.impl.NewsDaoImpl" parent="baseDao">
 	</bean>
 
-	<bean id="newsService" class="com.legendshop.business.service.impl.NewsServiceImpl">
+	<bean id="newsService" class="com.legendshop.business.service.impl.NewsServiceImpl" parent="baseService">
 		<property name="newsDao" ref="newsDao">
 		</property>
 	</bean>
@@ -76,10 +78,7 @@
 		<property name="maxNumPerType" value="3"></property>
 	</bean>
 
-	<bean id="advertisementService" class="com.legendshop.business.service.impl.AdvertisementServiceImpl">
-		<property name="advertisementDao" ref="advertisementDao">
-		</property>
-	</bean>
+	<bean id="advertisementService" class="com.legendshop.business.service.impl.AdvertisementServiceImpl" parent="baseService" />
 
 	<bean id="nsortDao" class="com.legendshop.business.dao.impl.NsortDaoImpl" parent="baseDao">
 	</bean>
@@ -125,9 +124,6 @@
 		<property name="javaMailSender">
 			<ref bean="javaMailSender" />
 		</property>
-		<property name="advertisementDao">
-			<ref bean="advertisementDao" />
-		</property>
 	</bean>
 
 	<bean id="abstractService" class="com.legendshop.spi.service.impl.AbstractService" abstract="true">
@@ -137,14 +133,14 @@
 		<property name="shopDetailDao">
 			<ref bean="shopDetailDao" />
 		</property>
+		<property name="advertisementDao">
+			<ref bean="advertisementDao" />
+		</property>
 	</bean>
 
 	<bean id="businessService" class="com.legendshop.business.service.impl.BusinessServiceImpl" parent="baseService">
 		<property name="externalLinkDao">
 			<ref bean="externalLinkDao" />
-		</property>
-		<property name="logoDao">
-			<ref bean="logoDao" />
 		</property>
 		<property name="newsDao">
 			<ref bean="newsDao" />
@@ -152,35 +148,14 @@
 		<property name="nsortDao">
 			<ref bean="nsortDao" />
 		</property>
-		<property name="pubDao">
-			<ref bean="pubDao" />
-		</property>
 		<property name="sortDao">
 			<ref bean="sortDao" />
-		</property>
-		<property name="userDetailDao">
-			<ref bean="userDetailDao" />
-		</property>
-		<property name="payTypeService">
-			<ref bean="payTypeService" />
 		</property>
 		<property name="searchFacade">
 			<ref bean="searchFacade" />
 		</property>
 		<property name="productDao">
 			<ref bean="productDao" />
-		</property>
-		<property name="imgFileDao">
-			<ref bean="imgFileDao" />
-		</property>
-		<property name="basketDao">
-			<ref bean="basketDao" />
-		</property>
-		<property name="subDao">
-			<ref bean="subDao" />
-		</property>
-		<property name="hotsearchDao">
-			<ref bean="hotsearchDao" />
 		</property>
 		<property name="myleagueDao">
 			<ref bean="myleagueDao" />
@@ -199,9 +174,10 @@
 	<bean id="sortDao" class="com.legendshop.business.dao.impl.SortDaoImpl" parent="baseDao">
 	</bean>
 
-	<bean id="sortService" class="com.legendshop.business.service.impl.SortServiceImpl">
-		<property name="sortDao" ref="sortDao">
-		</property>
+	<bean id="sortService" class="com.legendshop.business.service.impl.SortServiceImpl" parent="baseService">
+		<property name="sortDao" ref="sortDao" />
+		<property name="nsortDao" ref="nsortDao" />
+		<property name="productDao" ref="productDao" />
 	</bean>
 
 	<bean id="indexService" class="com.legendshop.business.service.impl.IndexServiceImpl" parent="baseService">
@@ -212,9 +188,7 @@
 		<property name="productDao" ref="productDao" />
 		<property name="imgFileDao" ref="imgFileDao" />
 		<property name="subDao" ref="subDao" />
-		<property name="sortDao" ref="sortDao" />
 		<property name="pubDao" ref="pubDao" />
-		<property name="logoDao" ref="logoDao" />
 	</bean>
 
 	<bean id="downloadLogDao" class="com.legendshop.business.dao.impl.DownloadLogDaoImpl" parent="baseDao">

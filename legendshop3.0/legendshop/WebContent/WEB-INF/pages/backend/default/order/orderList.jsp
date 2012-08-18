@@ -58,7 +58,7 @@
          export="true"  class="${tableclass}" style="width:100%" sort="external">
       <display:column title="顺序" style="width:40px"><%=offset++%></display:column>
       <display:column title="订单号" sortable="true" sortName="subNumber">
-		<a href='${pageContext.request.contextPath}/orderDetail/${item.subNumber}${applicationScope.WEB_SUFFIX}' target="_blank">${item.subNumber}</a>
+		<a href='${pageContext.request.contextPath}/p/orderDetail/${item.subNumber}${applicationScope.WEB_SUFFIX}' target="_blank">${item.subNumber}</a>
       </display:column>
       <display:column title="价格" sortable="true" sortName="total">
       	<b><fmt:formatNumber type="currency" value="${item.total}" pattern="${CURRENCY_PATTERN}"/></b>
