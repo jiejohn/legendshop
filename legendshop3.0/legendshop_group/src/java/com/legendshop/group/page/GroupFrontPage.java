@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.legendshop.core.constant.PageDefinition;
 import com.legendshop.core.constant.PagePathCalculator;
+import com.legendshop.spi.constants.TemplateEnum;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -22,19 +23,19 @@ public enum GroupFrontPage implements PageDefinition {
 	VARIABLE(""),
 
 	/** The INDEX. */
-	INDEX("/group/index"),
+	INDEX("/group/index",TemplateEnum.RED),
 
 	/** The VIEWS. */
-	VIEW("/group/view"),
+	VIEW("/group/view",TemplateEnum.RED),
 
 	/** The CLIEN t_ servic e_ panel. */
-	CLIENT_SERVICE_PANEL("/group/clientServicePanel"),
+	CLIENT_SERVICE_PANEL("/group/clientServicePanel",TemplateEnum.RED),
 
 	/** The QUESTION. */
-	QUESTION("/group/question"),
+	QUESTION("/group/question",TemplateEnum.RED),
 
 	/** The QUESTIO n_ panel. */
-	QUESTION_PANEL("/group/questionPanel");
+	QUESTION_PANEL("/group/questionPanel",TemplateEnum.RED);
 
 	/** The value. */
 	private final String value;
