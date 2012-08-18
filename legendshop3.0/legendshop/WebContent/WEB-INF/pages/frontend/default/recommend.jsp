@@ -7,7 +7,7 @@
 		<fmt:message key="product.recommend" />
 	<table width="100%" cellpadding="0" cellspacing="10">
 		<tr>
-			<c:forEach items="${requestScope.productList}" var="prod" varStatus="status">
+			<c:forEach items="${requestScope.commendProdList}" var="prod" varStatus="status">
 				<td width="20%" align="center" style="font-weight: normal;color: #666666">
 						<div>
 							<a href="${pageContext.request.contextPath}/views/${prod.prodId}${applicationScope.WEB_SUFFIX}" ><img

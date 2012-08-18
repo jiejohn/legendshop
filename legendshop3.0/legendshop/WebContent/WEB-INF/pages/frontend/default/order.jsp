@@ -26,7 +26,7 @@
 	</c:forEach>
 	
 	<table class="tables" width="100%" cellpadding="0" cellspacing="0">
-	<form action="${pageContext.request.contextPath}/order${applicationScope.WEB_SUFFIX}" id="orderForm" name="orderForm" method="post">
+	<form action="${pageContext.request.contextPath}/p/order${applicationScope.WEB_SUFFIX}" id="orderForm" name="orderForm" method="post">
       <tr>
         <td class="titlebgnormal" align="left" valign="middle">&nbsp;
          <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}"/>
@@ -63,7 +63,7 @@
 	<c:forEach items="${requestScope.list}" var="order" varStatus="status">
       <tr>
         <td height="25">&nbsp;<%=offset++%>&nbsp;</td>
-        <td height="25"><a href='${pageContext.request.contextPath}/orderDetail/${order.subNumber}${applicationScope.WEB_SUFFIX}' target="_blank">${order.subNumber}</a></td>
+        <td height="25"><a href='${pageContext.request.contextPath}/p/orderDetail/${order.subNumber}${applicationScope.WEB_SUFFIX}' target="_blank">${order.subNumber}</a></td>
         <td height="25"><b><fmt:formatNumber type="currency" value="${order.total}" pattern="${CURRENCY_PATTERN}"/></b></td>
         <td height="25">${order.prodName}</td>
         <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
@@ -76,7 +76,7 @@
         </td>
         <td height="25" align="center">
         <c:if test="${order.status == 1 or order.status == 7}">
-        <a href='${pageContext.request.contextPath}/orderDetail/${order.subNumber}${applicationScope.WEB_SUFFIX}' target="_blank"><fmt:message key="payment.hint"/></a> 
+        <a href='${pageContext.request.contextPath}/p/orderDetail/${order.subNumber}${applicationScope.WEB_SUFFIX}' target="_blank"><fmt:message key="payment.hint"/></a> 
         </c:if>
        
          <c:if test="${order.status == 3}"> <!-- 3:卖家已经发货 -->

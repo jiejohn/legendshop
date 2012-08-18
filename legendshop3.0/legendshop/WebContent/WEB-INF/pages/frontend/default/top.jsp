@@ -94,9 +94,9 @@
 	     <li><a href="<ls:url address='/admin/index'/>"><b><fmt:message key="system.management"/></b></a></li>
        </auth:auth>
       	<li><a href="<ls:url address='/leaveword'/>"><fmt:message key="leaveword"/></a></li>
-		<li><a href="<ls:url address='/order'/>"><fmt:message key="myorder"/></a></li>
+		<li><a href="<ls:url address='/p/order'/>"><fmt:message key="myorder"/></a></li>
 	</c:if>
-		<li class="navCartSum"><a href="<ls:url address='/buy'/>"><fmt:message key="shopingCar"/></a></li>	
+		<li class="navCartSum"><a href="<ls:url address='/p/buy'/>"><fmt:message key="shopingCar"/></a></li>	
 		<li class="hl"><a href="<ls:url address='/allNews'/>"><fmt:message key="newsCenter"/></a></li>
 	</ul>
 	</div>
@@ -105,11 +105,11 @@
  <c:choose>
    <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
   <span><b>${sessionScope.SPRING_SECURITY_LAST_USERNAME}</b></span>
-   	<a href="<ls:url address='/myaccount'/>")>[<fmt:message key="myaccount"/>]</a>
-	<a href="${pageContext.request.contextPath}/admin/logout" target="_parent">[<fmt:message key="logout"/>]</a>
+   	<a href="<ls:url address='/p/myaccount'/>")>[<fmt:message key="myaccount"/>]</a>
+	<a href="${pageContext.request.contextPath}/p/logout" target="_parent">[<fmt:message key="logout"/>]</a>
    </c:when>
    <c:otherwise>
-  	<a href="<ls:url address='/admin/login'/>">[<fmt:message key="login"/>]</a>
+  	<a href="<ls:url address='/p/login'/>">[<fmt:message key="login"/>]</a>
    </c:otherwise>
 </c:choose>
 <a href="<ls:url address='/reg'/>" class="n2">[<fmt:message key="regFree"/>]</a>

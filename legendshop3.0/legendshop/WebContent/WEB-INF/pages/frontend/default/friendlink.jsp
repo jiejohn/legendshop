@@ -6,11 +6,10 @@
                                 </tr>
                                 <tr><td class="titlebg"><fmt:message key="friend.link"/></td></tr>
                                 <tr> 
-                                  <td bgcolor="#ECECEC"> <p style="line-height:150%" align=center> 
-                                     
-      <c:forEach items="${requestScope.adList}" var="ad">
-      	<a href="${ad.url}" target=_blank>${ad.wordlink}</a><br>
-      </c:forEach>
+                                  <td bgcolor="#ECECEC"> <p style="line-height:150%" align=center>                          
+								      <c:forEach items="${requestScope.externalLinkList}" var="el">
+								      	<a href="${el.url}" target=_blank>${el.wordlink}</a><br>
+								      </c:forEach>
                                     </p></td>
                                 </tr>
                               </table>

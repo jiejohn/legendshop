@@ -12,8 +12,8 @@
     <td class="titlebg"><fmt:message key="cash.bar"/></td>
   </tr>
   <tr> 
-     <td><jsp:include flush="true" page="/bought${applicationScope.WEB_SUFFIX}"></jsp:include></td>
+     <td><jsp:include flush="true" page="/p/bought${applicationScope.WEB_SUFFIX}"></jsp:include></td>
   </tr>
-  <tr><td><jsp:include flush="true" page="/cashsave${applicationScope.WEB_SUFFIX}"></jsp:include></td></tr>
+  <tr><td><jsp:include flush="true" page="/p/cashsave${applicationScope.WEB_SUFFIX}"></jsp:include></td></tr>
 </table>
 </c:if>

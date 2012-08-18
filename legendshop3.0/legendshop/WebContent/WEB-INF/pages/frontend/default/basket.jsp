@@ -163,7 +163,7 @@ function basket(){
   <tr> 
     <td class="titlebg"><fmt:message key="product.subscribed.list"/></td>
   </tr>
-  <tr><td><jsp:include flush="true" page="/bought${applicationScope.WEB_SUFFIX}" /></td></tr>
+  <tr><td><jsp:include flush="true" page="/p/bought${applicationScope.WEB_SUFFIX}" /></td></tr>
 </table>
   </form>
 </c:if>

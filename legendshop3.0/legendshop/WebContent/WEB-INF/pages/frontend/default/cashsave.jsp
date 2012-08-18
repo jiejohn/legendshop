@@ -118,7 +118,7 @@ jQuery.validator.setDefaults({
                                     </td>
                                     <td height="25">
                                     <input maxlength="200" style="WIDTH: 300px" class="input" type="text" name="userAdds" value="${member.userAdds}">
-                                    <a href="${pageContext.request.contextPath}/myaccount${applicationScope.WEB_SUFFIX}" target="_blank"><fmt:message key="modify.address"/></a>
+                                    <a href="${pageContext.request.contextPath}/p/myaccount${applicationScope.WEB_SUFFIX}" target="_blank"><fmt:message key="modify.address"/></a>
                                     </td>
                                   </tr>
                                   <tr>

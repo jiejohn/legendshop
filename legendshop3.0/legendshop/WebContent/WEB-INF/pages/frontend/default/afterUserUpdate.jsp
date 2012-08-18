@@ -19,7 +19,7 @@
                                       <td> 
                                         <div align="center"> 
                                         <c:if test="${OK==null}">
-                                          <a href="${pageContext.request.contextPath}/myaccount${applicationScope.WEB_SUFFIX}">
+                                          <a href="${pageContext.request.contextPath}/p/myaccount${applicationScope.WEB_SUFFIX}">
                                              <SPAN class="afterOperate"><fmt:message key="operation.error"/></SPAN>
                                           </a>
                                         </c:if>

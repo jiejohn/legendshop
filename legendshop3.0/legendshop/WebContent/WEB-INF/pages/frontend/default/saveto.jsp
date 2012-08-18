@@ -177,7 +177,7 @@
 			alert('<fmt:message key="purchase.finished"/>');
 			<!-- 7： 货到付款  -->
 			updateSubStatus(subId,7);
-			window.location="${pageContext.request.contextPath}/order${applicationScope.WEB_SUFFIX}";
+			window.location="${pageContext.request.contextPath}/p/order${applicationScope.WEB_SUFFIX}";
 		}
 		
 	}
@@ -204,7 +204,7 @@
 		if(confirm('<fmt:message key="shop.hot.product"><fmt:param value="' +scoreCash + '"/></fmt:message>')){
 		  CommonService.userScore(subId,score, function(retData){
 			//alert(retData.userScore +"  " + retData.subTotal);
-			window.location.href ='/orderDetail/'+subNumber+"${applicationScope.WEB_SUFFIX}";
+			window.location.href ='/p/orderDetail/'+subNumber+"${applicationScope.WEB_SUFFIX}";
 	    }) ;
 			
 		}

@@ -9,7 +9,6 @@
 	<tr align="center" height="105">
 		<td width="100%">
 			<table width="100%">
-				<c:if test="${productList != null}">
 					<c:forEach items="${requestScope.hotsaleList}" var="hotsale" varStatus="status">
 						<tr>
 							<td>
@@ -25,7 +24,6 @@
 							</td>
 						</tr>
 					</c:forEach>
-				</c:if>
 			</table>
 		</td>
 	</tr>

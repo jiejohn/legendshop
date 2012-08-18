@@ -44,9 +44,9 @@
 	    		 <c:choose>
 					 <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
 					  <span style="color: red; font-weight: bold;">${sessionScope.SPRING_SECURITY_LAST_USERNAME}</span>
-					   	<a href="${pageContext.request.contextPath}/myaccount${applicationScope.WEB_SUFFIX}")><fmt:message key="myaccount"/></a>
-					   	<a href="${pageContext.request.contextPath}/order${applicationScope.WEB_SUFFIX}")><fmt:message key="myorder"/></a>
-						<a href="${pageContext.request.contextPath}/admin/logout" target="_parent"><fmt:message key="logout"/></a>
+					   	<a href="${pageContext.request.contextPath}/p/myaccount${applicationScope.WEB_SUFFIX}")><fmt:message key="myaccount"/></a>
+					   	<a href="${pageContext.request.contextPath}/p/order${applicationScope.WEB_SUFFIX}")><fmt:message key="myorder"/></a>
+						<a href="${pageContext.request.contextPath}/p/logout" target="_parent"><fmt:message key="logout"/></a>
        			        <auth:auth ifAnyGranted="F_ADMIN">
        			          <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
        			                <a href="${pageContext.request.contextPath}/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}${applicationScope.WEB_SUFFIX}"><fmt:message key="myShop"/></a>
@@ -55,7 +55,7 @@
 					    </auth:auth>
 					   </c:when>
 					   <c:otherwise>
-					     	<a href="${pageContext.request.contextPath}/admin/login${applicationScope.WEB_SUFFIX}"><fmt:message key="login"/></a>
+					     	<a href="${pageContext.request.contextPath}/p/login${applicationScope.WEB_SUFFIX}"><fmt:message key="login"/></a>
 				   </c:otherwise>
 	    		</c:choose>
 	    		<a href="${pageContext.request.contextPath}/reg${applicationScope.WEB_SUFFIX}"><fmt:message key="register.title"/></a> 
@@ -109,7 +109,7 @@
 </table>
 </c:if>
 <br><br><br><br><br><br>
-<jsp:include page="/copyAll${applicationScope.WEB_SUFFIX}" flush="true"/>
+<jsp:include page="/copy${applicationScope.WEB_SUFFIX}"/>
 </center>
 
 

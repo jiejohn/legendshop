@@ -80,7 +80,7 @@
 						</div>
 					</td>
 					<td>
-						<a href="${pageContext.request.contextPath}/clear${applicationScope.WEB_SUFFIX}?basketId=${basket.basketId}"
+						<a href="${pageContext.request.contextPath}/p/clear${applicationScope.WEB_SUFFIX}?basketId=${basket.basketId}"
 							title='<fmt:message key="product.name.delete"/>'><fmt:message key="delete"/></a>
 					</td>
 				</tr>
@@ -102,15 +102,15 @@
 				<tr>
 					<td colspan="8">
 						<div style="margin: 3px">
-							<a href="${pageContext.request.contextPath}/buy${applicationScope.WEB_SUFFIX}" onMouseOver="btnMouseOver('mbtn0')"
+							<a href="${pageContext.request.contextPath}/p/buy${applicationScope.WEB_SUFFIX}" onMouseOver="btnMouseOver('mbtn0')"
 								onMouseOut="btnMouseOut('mbtn0')"
 								onMouseDown="btnMouseDown('mbtn0')"> <img name="mbtn0" />
 							</a>
-							<a href="${pageContext.request.contextPath}/clear${applicationScope.WEB_SUFFIX}" onMouseOver="btnMouseOver('mbtn1')"
+							<a href="${pageContext.request.contextPath}/p/clear${applicationScope.WEB_SUFFIX}" onMouseOver="btnMouseOver('mbtn1')"
 								onMouseOut="btnMouseOut('mbtn1')"
 								onMouseDown="btnMouseDown('mbtn1')"> <img name="mbtn1" />
 							</a>
-							<a href="${pageContext.request.contextPath}/cash${applicationScope.WEB_SUFFIX}" onMouseOver="btnMouseOver('mbtn2')"
+							<a href="${pageContext.request.contextPath}/p/cash${applicationScope.WEB_SUFFIX}" onMouseOver="btnMouseOver('mbtn2')"
 								onMouseOut="btnMouseOut('mbtn2')"
 								onMouseDown="btnMouseDown('mbtn2')"> <img name="mbtn2" />
 							</a>

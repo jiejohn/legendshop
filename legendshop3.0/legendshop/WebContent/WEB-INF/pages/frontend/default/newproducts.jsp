@@ -7,8 +7,8 @@
 	<tr align="center" height="260px">
 		<td width="200px" valign="top">
 			<table cellspacing="2" cellpadding="0" width="98%" border="0">
-				<c:if test="${newestList != null}">
-					<c:forEach items="${requestScope.newestList}" var="prod" varStatus="status">
+				<c:if test="${newestProdList != null}">
+					<c:forEach items="${requestScope.newestProdList}" var="prod" varStatus="status">
 						<tr align="left" valign="top">
 						<c:choose>
                           <c:when test="${fn:length(prod.name) > 14}">

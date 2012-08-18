@@ -204,7 +204,7 @@
 		if(confirm('<fmt:message key="score.use.confirm"><fmt:param value="' +scoreCash + '"/></fmt:message>')){
 		  CommonService.userScore(subId,score, function(retData){
 			//alert(retData.userScore +"  " + retData.subTotal);
-			window.location.href ='/orderDetail/'+subNumber+"${applicationScope.WEB_SUFFIX}";
+			window.location.href ='/p/orderDetail/'+subNumber+"${applicationScope.WEB_SUFFIX}";
 	    }) ;
 			
 		}

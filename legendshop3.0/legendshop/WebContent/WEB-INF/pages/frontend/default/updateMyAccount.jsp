@@ -137,8 +137,8 @@
 </c:forEach>
 <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 5px" class="tables">
 <tr >
-	<td class="myaccount"><fmt:message key="order.processing"/></td><td>${totalProcessingOrder}&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/order${applicationScope.WEB_SUFFIX}">[<fmt:message key="Query.Order.Status"/>]</a></td>
-	<td class="myaccount"><fmt:message key="product.subscribed.list"/></a></td><td>${totalBasketByuserName}&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/buy${applicationScope.WEB_SUFFIX}">[<fmt:message key="shopingCar"/>]</a></td>
+	<td class="myaccount"><fmt:message key="order.processing"/></td><td>${totalProcessingOrder}&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/p/order${applicationScope.WEB_SUFFIX}">[<fmt:message key="Query.Order.Status"/>]</a></td>
+	<td class="myaccount"><fmt:message key="product.subscribed.list"/></a></td><td>${totalBasketByuserName}&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/p/buy${applicationScope.WEB_SUFFIX}">[<fmt:message key="shopingCar"/>]</a></td>
 		<td class="myaccount">
 		<%if(PropertiesUtil.getObject(ParameterEnum.USE_SCORE, Boolean.class)){ %>
 			<fmt:message key="score.total"/>
