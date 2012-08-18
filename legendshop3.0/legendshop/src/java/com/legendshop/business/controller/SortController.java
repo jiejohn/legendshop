@@ -189,7 +189,8 @@ public class SortController extends BaseController{
 
 		PageSupport ps = productService.getProdDetail(localeResolver.resolveLocale(request), curPageNO, sortId);
 		ps.savePage(request);
-		return PathResolver.getPath(TilesPage.PRODUCTSORT);
+		String result = PathResolver.getPath(TilesPage.PRODUCTSORT);
+		return result;
 	}
 	
 }
