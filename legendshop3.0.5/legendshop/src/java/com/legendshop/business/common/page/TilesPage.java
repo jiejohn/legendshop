@@ -106,9 +106,29 @@ public enum TilesPage implements PageDefinition {
 	SITE_MESSAGE_OUTBOX("outbox.", TemplateEnum.RED),
 
 	/**
-	 * All products sort
+	 * All products sort page
 	 */
-	ALL_PRODUCT_SORT("allProductSort", TemplateEnum.RED);
+	ALL_PRODUCT_SORT("allProductSort.", TemplateEnum.RED),
+
+	/**
+	 * All brands page
+	 */
+	ALL_BRAND("allBrand.", TemplateEnum.RED),
+
+	/**
+	 * Customer leave message page
+	 */
+	LEAVE_MSG("leaveMsg.", TemplateEnum.RED),
+
+	/**
+	 * The shop search page
+	 */
+	SHOP_SEARCH("shopSearch.", TemplateEnum.RED),
+
+	/**
+	 * The warning message page
+	 */
+	WARNING("warning.", TemplateEnum.RED) ;
 
 	/** The value. */
 	private final String value;

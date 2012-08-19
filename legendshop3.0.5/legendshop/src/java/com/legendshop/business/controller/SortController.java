@@ -43,22 +43,23 @@ import com.legendshop.util.AppUtils;
  * 产品分类控制器。.
  */
 @Controller
-public class SortController extends BaseController{
-	
+public class SortController extends BaseController {
+
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(SortController.class);
-	
+
 	@Autowired
 	private SortService sortService;
-	
+
 	@Autowired
 	private NsortService nsortService;
 
 	@Autowired
 	private HotsearchService hotsearchService;
-	
+
 	@Autowired
 	private ProductService productService;
+
 	/**
 	 * Topsort.
 	 * 
@@ -73,7 +74,7 @@ public class SortController extends BaseController{
 		request.setAttribute("sortList", sortService.getSort(getShopName(request, response), true));
 		return PathResolver.getPath(FrontPage.TOPSORT);
 	}
-	
+
 	/**
 	 * Nsort.
 	 * 
@@ -88,14 +89,15 @@ public class SortController extends BaseController{
 	 * @return the string
 	 */
 	@RequestMapping("/nsort/{sortId}-{nsortId}")
-	public String nsort(HttpServletRequest request, HttpServletResponse response,@PathVariable Long sortId,@PathVariable Long nsortId) {
-		if (nsortId == null|| sortId == null) {
+	public String nsort(HttpServletRequest request, HttpServletResponse response, @PathVariable Long sortId,
+			@PathVariable Long nsortId) {
+		if (nsortId == null || sortId == null) {
 			log.error("sortId or nsortId is null! ");
 			return PathResolver.getPath(FowardPage.INDEX_QUERY);
 		}
-		return sortService.getSecSort(request, response,sortId,nsortId,null);
+		return sortService.getSecSort(request, response, sortId, nsortId, null);
 	}
-	
+
 	/**
 	 * Nsort.
 	 * 
@@ -112,14 +114,15 @@ public class SortController extends BaseController{
 	 * @return the string
 	 */
 	@RequestMapping("/nsort")
-	public String nsort(HttpServletRequest request, HttpServletResponse response,Long sortId, Long nsortId,Long subNsortId) {
-		if (nsortId == null|| sortId == null) {
+	public String nsort(HttpServletRequest request, HttpServletResponse response, Long sortId, Long nsortId,
+			Long subNsortId) {
+		if (nsortId == null || sortId == null) {
 			log.error("sortId or nsortId is null! ");
 			return PathResolver.getPath(FowardPage.INDEX_QUERY);
 		}
-		return sortService.getSecSort(request, response,sortId,nsortId,subNsortId);
+		return sortService.getSecSort(request, response, sortId, nsortId, subNsortId);
 	}
-	
+
 	/**
 	 * Sort.
 	 * 
@@ -134,7 +137,8 @@ public class SortController extends BaseController{
 	 * @return the string
 	 */
 	@RequestMapping("/sort/{sortId}")
-	public String sort(HttpServletRequest request, HttpServletResponse response, String curPageNO, @PathVariable Long sortId ) {
+	public String sort(HttpServletRequest request, HttpServletResponse response, String curPageNO,
+			@PathVariable Long sortId) {
 		return parseSort(request, curPageNO, sortId);
 	}
 
@@ -152,9 +156,10 @@ public class SortController extends BaseController{
 	 * @return the string
 	 */
 	@RequestMapping("/sort")
-	public String sortById(HttpServletRequest request, HttpServletResponse response, String curPageNO,Long sortId ) {
+	public String sortById(HttpServletRequest request, HttpServletResponse response, String curPageNO, Long sortId) {
 		return parseSort(request, curPageNO, sortId);
 	}
+
 	/**
 	 * @param request
 	 * @param curPageNO
@@ -162,7 +167,7 @@ public class SortController extends BaseController{
 	 * @return
 	 */
 	private String parseSort(HttpServletRequest request, String curPageNO, Long sortId) {
-		if(curPageNO == null){
+		if (curPageNO == null) {
 			curPageNO = "1";
 		}
 		if (sortId == null) {
@@ -192,5 +197,13 @@ public class SortController extends BaseController{
 		String result = PathResolver.getPath(TilesPage.PRODUCTSORT);
 		return result;
 	}
-	
+
+	@RequestMapping("/allproductsort")
+	public String toAllProductSorts(HttpServletRequest request, HttpServletResponse response, String curPageNO,
+			Long sortId) {
+		// TODO
+
+		return PathResolver.getPath(TilesPage.ALL_PRODUCT_SORT);
+	}
+
 }

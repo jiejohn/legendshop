@@ -34,11 +34,11 @@
 		<put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/smallsort.jsp" />
 	</definition>
 
-	<definition name="news.*" template="/WEB-INF/pages/frontend/{1}/sort.jsp">
+	<definition name="news.*" template="/WEB-INF/pages/frontend/{1}/newsFrame.jsp">
 		<put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/news.jsp" />
 	</definition>
 
-	<definition name="allNews.*" template="/WEB-INF/pages/frontend/{1}/sort.jsp">
+	<definition name="allNews.*" template="/WEB-INF/pages/frontend/{1}/newsFrame.jsp">
 		<put-attribute name="right" value="/WEB-INF/pages/frontend/{1}/allnews.jsp" />
 	</definition>
 
@@ -102,6 +102,31 @@
 
 	<definition name="outbox.*" template="/WEB-INF/pages/frontend/{1}/indexFrame.jsp">
 		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/outbox.jsp" />
+	</definition>
+
+	<definition name="allProductSort.*" template="/WEB-INF/pages/frontend/{1}/home/indexFrame.jsp">
+		<put-attribute name="top" value="/WEB-INF/pages/frontend/{1}/home/top.jsp" />
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/productsorts.jsp" />
+	</definition>
+
+	<definition name="allBrand.*" template="/WEB-INF/pages/frontend/{1}/home/indexFrame.jsp">
+		<put-attribute name="top" value="/WEB-INF/pages/frontend/{1}/home/top.jsp" />
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/brands.jsp" />
+	</definition>
+
+	<definition name="leaveMsg.*" template="/WEB-INF/pages/frontend/{1}/home/indexFrame.jsp">
+		<put-attribute name="top" value="/WEB-INF/pages/frontend/{1}/home/top.jsp" />
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/leavemsg.jsp" />
+	</definition>
+
+	<definition name="shopSearch.*" template="/WEB-INF/pages/frontend/{1}/home/indexFrame.jsp">
+		<put-attribute name="top" value="/WEB-INF/pages/frontend/{1}/home/top.jsp" />
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/shopsearch.jsp" />
+	</definition>
+
+	<definition name="warning.*" template="/WEB-INF/pages/frontend/{1}/home/indexFrame.jsp">
+		<put-attribute name="top" value="/WEB-INF/pages/frontend/{1}/home/top.jsp" />
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/warning.jsp" />
 	</definition>
 
 </tiles-definitions>
