@@ -1,0 +1,1 @@
+legendshop_model:  项目实体类和Hibernate的xml配置文件。
