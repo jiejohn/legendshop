@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:simple="http://cxf.apache.org/simple"
+	xmlns:soap="http://cxf.apache.org/bindings/soap"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xsi:schemaLocation="
+	  http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+	  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	  http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd
+	  http://cxf.apache.org/simple http://cxf.apache.org/schemas/simple.xsd
+	  http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<!-- ######## CXF Service Engine 配置 ######## -->
+	
+		<!-- CXF 全局 Input Interceptor，用于初始化ServiceContext对象 -->
+		<bean id="ServiceContextInterceptor" class="com.legendshop.ws.cxf.ServiceContextInterceptor"/>
+		
+		<bean id="LoggingInterceptor" class="com.legendshop.ws.cxf.LoggingInterceptor"/>
+		
+		<!-- CXF Bus 配置-->
+		<cxf:bus>
+			<cxf:inInterceptors>	 
+				<ref bean="ServiceContextInterceptor"/>				
+			</cxf:inInterceptors>
+			<!-- 
+		 <cxf:features>
+		  日志记录 
+            <cxf:logging/>
+         </cxf:features>
+      -->
+		</cxf:bus>
+
+		
+	<!-- 
+    <bean id="org.apache.cxf.management.InstrumentationManager"
+          class="org.apache.cxf.management.jmx.InstrumentationManagerImpl">
+      <property name="bus" ref="cxf" />
+      <property name="enabled" value="true"/>
+      <property name="threaded" value="false"/>
+      <property name="daemon" value="false"/>
+      <property name="JMXServiceURL"
+                value="service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi" />
+    </bean>
+    
+     <bean id="org.apache.cxf.management.counters.CounterRepository"
+          class="org.apache.cxf.management.counters.CounterRepository">
+      <property name="bus" ref="cxf" />
+    </bean>
+     -->
+    
+	<!-- ######## 下面是Web Service 配置 ######## -->
+ 
+			<bean id="subService" class="com.legendshop.ws.service.impl.SubServiceImpl">
+			</bean>
+			<jaxws:endpoint id="subServiceEndPoint" implementor="#subService" address="/subService"/>	
+			
+			<bean id="productService" class="com.legendshop.ws.service.impl.ProductServiceImpl">
+				<property name="productDao" ref="productDao"></property>
+			</bean>
+			<jaxws:endpoint id="productServiceEndPoint" implementor="#productService" address="/productService"/>	
+			
+	    <!--  
+			<bean id="soap_headers" class="bingo.mcs.service.header.HeaderTesterImpl"/>
+			<jaxws:endpoint id="soapHeadersEndPoint" implementor="#soap_headers" address="/soap_header">	
+			    <jaxws:features>
+            		<bean class="org.apache.cxf.feature.LoggingFeature"/>
+        		</jaxws:features>
+			</jaxws:endpoint>		
+			-->
+</beans>
