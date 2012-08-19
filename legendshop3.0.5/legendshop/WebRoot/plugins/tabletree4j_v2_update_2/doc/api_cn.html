@@ -1,0 +1,543 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TableTree4j Version2 API Documentation</title>
+<style>
+
+	.bigtitle{
+		font-family:Arial;
+		font-weight:bold;
+		font-size:22px;
+		margin-bottom:10px;
+	}
+	.footer{
+		font-family:Arial;
+		font-weight:bold;
+		font-size:12px;
+		color:#747474;
+	}
+
+	.title{
+		padding-left:10px;
+		font-family:Arial;
+		/*font-weight:bold;*/
+		font-size:18px;
+		color:#747474;
+	}
+	.content{
+		font-family:Arial;
+	}
+	.contentdetail{
+		padding-left:2px;
+		padding-right:2px;
+	}
+
+	.littletitle{
+		margin-top:10px;
+		font-size:14px;
+		font-weight:bold;
+		background-color:#f5f5f5;
+		border:1px solid #f5f5f5;
+		color:#acac59;
+		font-style:italic;
+	}
+	.littlecontent .innerlittletitle{
+		font-size:15px;
+		font-weight:normal;
+		color:#0000ff;
+	}
+	.littlecontent .innerlittlecontent{
+		font-weight:normal;
+		margin-bottom:5px;
+	}
+	.littlecontent{
+		padding-top:10px;
+		padding-bottom:10px;
+		font-size:14px;
+		font-weight:normal;
+		border:1px solid #f5f5f5;
+		color:#7b7b7b;
+		padding-left:20px;
+		padding-right:10px;
+	}
+	.clickbtn{
+		cursor:pointer;
+	}
+
+</style>
+<script>
+
+	function toggleDiv(btnObj,divId){
+		var divObj=document.getElementById(divId);
+		var displayValue=divObj.style.display;
+		if(displayValue=='none'){
+			btnObj.src="minus.gif";
+			divObj.style.display=""
+		}else{
+			btnObj.src="plus.gif";
+			divObj.style.display="none";
+		}
+	}
+
+</script>
+</head>
+<body>
+
+	<div id="header" style="height:60px;">
+	<div style="float:left;width:100%;">
+	<div style="float:left;width:24%;height:60px;"><img src="../tabletree4j.png"/></div>
+	<div style="float:right;width:74%;height:60px;">
+	<div class="title" style="padding-top:35px;text-align:right;color:#828282;">API Documentation 1.0</div>
+	</div>
+	</div>
+	<div style="float:left;width:100%;height:1px;border-bottom:1px solid #c8c8c8;"></div>
+	</div>
+
+
+	<div id="content" class="content" style="margin-top:20px">
+
+	<div class="bigtitle">Class 说明</div>
+
+
+		<span class="title">Core4j.toolbox.TableTree4j</span>
+		<div class="contentdetail littletitle"><img src="plus.gif" class="clickbtn" onclick="toggleDiv(this,'t4j-configerObject-c')" align="absmiddle">ConfigerObject</div>
+		<div id="t4j-configerObject-c" class="contentdetail littlecontent" style="display:none;">
+	<div class="innerlittletitle">string:id</div>
+	<div class="innerlittlecontent">string类型,可选参数,默认为随机字符串,表格树的id,也是生成dom table对象的id.</div>
+
+	<div class="innerlittletitle">boolean:isSortColumnReversal</div>
+	<div class="innerlittlecontent">布尔类型,可选参数,默认为false,针对sortByColumnIndex方法,对某列使用排序的时候,是否初始默认为反向.</div>
+
+	<div class="innerlittletitle">string:scriptRootPath</div>
+	<div class="innerlittlecontent">string类型,可选参数,默认为自动获取,tabletree js所在根目录,一般不是改了tabletree js的文件名或者多个js文件同名,不需要设置.</div>
+
+	<div class="innerlittletitle">string:themeName</div>
+	<div class="innerlittlecontent">string类型,可选参数,默认为'default',tabletree使用的外观,该参数与'theme/'路径下的文件夹名一致,所以如果要增加theme外观,可在theme目录下新建自定义的外观文件夹,具体实现可以参看里面已有的外观文件夹.</div>
+
+	<div class="innerlittletitle">string:cookiesSplitString</div>
+	<div class="innerlittlecontent">string类型,可选参数,默认为'#T#',tabletree所用到cookies保存展开节点的id值之间的分隔符,一般不需要设置.</div>
+
+	<div class="innerlittletitle">string:treeMode</div>
+	<div class="innerlittlecontent">string类型,可选参数,默认为'menu',tabletree的模式,只有'menu'和'gird'两种,'menu'为单列无边框的菜单模式,'gird'为多列有边框的表格模式,实际上你可通过覆盖css属性的方法重新定义tabletree的显示样式.</div>
+
+	<div class="innerlittletitle">string:renderTo</div>
+	<div class="innerlittlecontent">string类型,可选参数,tabletree创建到dom元素的id,默认创建到dom body对象下</div>
+
+	<div class="innerlittletitle">[object]:columns</div>
+	<div class="innerlittlecontent">
+对象数组类型,必须参数,定义tabletree每一列的信息,每列的对象包括以下属性:<br/>
+<span >{isNodeClick:,dataIndex:,width:,renderFunction:,canSort:,isDefalutSort:}</span><br/>
+<span style="color:#ffad5b;font-style:italic;">isNodeClick</span>:布尔类型,可选参数,是否为树结构所在列,至少有一列要设置为true;<br/>
+<span style="color:#ffad5b;font-style:italic;">dataIndex</span>:string类型,必须参数,渲染列每一行数据对象的属性名;<br/>
+<span style="color:#ffad5b;font-style:italic;">width</span>:string类型,可选参数,设置列的宽度;<br/>
+<span style="color:#ffad5b;font-style:italic;">renderFunction</span>:function类型,可选参数,渲染列每一行的函数,其接收的参数为一个包含多个属性信息的对象.
+<div style="padding-left:30px">
+{dataValue:,node:,tabletreeObj:,rowObj:,rowIndex:,container:,columnIndex:}<br/>
+<span style="color:#ff86c2;font-style:italic;">dataValue</span>:数据的值;<br/>
+<span style="color:#ff86c2;font-style:italic;">node</span>:对应的节点Core4j.toolbox.TableTreeNode对象;<br/>
+<span style="color:#ff86c2;font-style:italic;">tabletreeObj</span>:当前的tabletree对象;<br/>
+<span style="color:#ff86c2;font-style:italic;">rowObj</span>:dom的TR对象;<br/>
+<span style="color:#ff86c2;font-style:italic;">rowIndex</span>:int型,当前行的索引;<br/>
+<span style="color:#ff86c2;font-style:italic;">container</span>:dom的元素对象,renderFunction渲染结果最后包含在该元素下;<br/>
+<span style="color:#ff86c2;font-style:italic;">columnIndex</span>:int型,当前列索引.<br/>
+</div>
+<span style="color:#ffad5b;font-style:italic;">canSort</span>:布尔类型,可选参数,但前列是否可以被排序;<br/>
+<span style="color:#ffad5b;font-style:italic;">isDefalutSort</span>:布尔类型,可选参数,如果但前列可以被排序,是否是默认的排序列.
+</div>
+
+	<div class="innerlittletitle">[Core4j.toolbox.TableTreeHF]:headers</div>
+	<div class="innerlittlecontent">Core4j.toolbox.TableTreeHF对象数组类型,可选参数,定义多个header,每个header相当于一行,TableTreeHF对象包括以下属性:<br/>
+{columns:[{dataIndex:,tdAttributeNames:,tdAttributeValueObject:}],dataObject,trAttributeNames:,trAttributeValueObject:}<br/>
+<span style="color:#ffad5b;font-style:italic;">columns</span>:对象数组类型,必须参数,定义header的每一列信息,每列的对象包括以下属性:<br/>
+<div style="padding-left:30px">
+	{dataIndex:,tdAttributeNames:,tdAttributeValueObject:}<br/>
+	<span style="color:#ff86c2;font-style:italic;">dataIndex</span>:string类型,必须参数,渲染列所在行的单元格数据对象的属性名;<br/>
+	<span style="color:#ff86c2;font-style:italic;">tdAttributeNames</span>:字符串数组类型,可选参数,为列所在行的单元格添加属性名(多个);<br/>
+	<span style="color:#ff86c2;font-style:italic;">tdAttributeValueObject</span>:字符串数组类型,可选参数,,为列所在行的单元格添加属性名对应的值(多个).<br/>
+</div>
+<span style="color:#ffad5b;font-style:italic;">dataObject</span>:header绑定的数据对象;<br/>
+<span style="color:#ffad5b;font-style:italic;">trAttributeNames</span>:字符串数组类型,可选参数,为header所在行添加属性名(多个);<br/>
+<span style="color:#ffad5b;font-style:italic;">trAttributeValueObject</span>:字符串数组类型,可选参数,,header所在行添加属性名对应的值(多个).
+	</div>
+
+	<div class="innerlittletitle">[Core4j.toolbox.TableTreeHF]:footers</div>
+	<div class="innerlittlecontent">Core4j.toolbox.TableTreeHF对象数组类型,可选参数,定义多个footer,每个footer相当于一行,定义方式如同上面的header一样.</div>
+
+
+	<div class="innerlittletitle">int:cookieTime</div>
+	<div class="innerlittlecontent">int型,可选参数,默认值为30*24*60*60*1000毫秒(30日),tabletree中使用cookies的生存时间,单位为毫秒.</div>
+
+	<div class="innerlittletitle">boolean:floatRight</div>
+	<div class="innerlittlecontent">布尔类型,可选参数,默认值为false,tabletree中所有列的内容从右到左显示.</div>
+
+	<div class="innerlittletitle">boolean:useCookie</div>
+	<div class="innerlittlecontent">布尔类型,可选参数,默认值为false,tabletree是否使用cooike保存已经展开的节点.</div>
+
+	<div class="innerlittletitle">boolean:useIcon</div>
+	<div class="innerlittlecontent">布尔类型,可选参数,默认值为true,tabletree是否显示节点图标.</div>
+
+	<div class="innerlittletitle">boolean:useLine</div>
+	<div class="innerlittlecontent">布尔类型,可选参数,默认值为true,tabletree是否显示节点的树状结构线.</div>
+
+	<div class="innerlittletitle">boolean:useOrder</div>
+	<div class="innerlittlecontent">布尔类型,可选参数,默认值为true,tabletree是否根据节点设定的order值排序.</div>
+
+	<div class="innerlittletitle">string:selectMode</div>
+	<div class="innerlittlecontent">string类型,可选参数,默认值为'muti',tabletree的行选择模式,有3种,分别为'muti'多选(按下ctrl进行多选),'single'单选,'none'不能选择行.</div>
+
+	<div class="innerlittletitle">[object]:plugins</div>
+	<div class="innerlittlecontent">对象数组类型,可选参数,对tabletree进行扩展的plugin对象,这些对象必须实现一个initTableTree4jPlugin(tabletreeObj)方法,tabletree初始化的时候会先加载这些plugin,并调用它们的
+	initTableTree4jPlugin方法对plugin进行初始化.</div>
+
+	<div class="innerlittletitle">[function]:onExpandNodeEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当展开节点的时候激活这些事件function,传入的参数有(展开的节点对象,tabletree对象):(Core4j.toolbox.TableTreeNode:node,Core4j.toolbox.TableTree4j:tree).</div>
+
+	<div class="innerlittletitle">[function]:onCollapseNodeEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当关闭节点的时候激活这些事件function,传入的参数有(关闭的节点对象,tabletree对象):(Core4j.toolbox.TableTreeNode:node,Core4j.toolbox.TableTree4j:tree).</div>
+
+	<div class="innerlittletitle">[function]:onBeforeAddNodeEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当执行addNode方法的前激活这些事件function,传入的参数有(添加的节点对象,tabletree对象):(Core4j.toolbox.TableTreeNode:node,Core4j.toolbox.TableTree4j:tree).</div>
+
+	<div class="innerlittletitle">[function]:onAfterAddNodeEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当执行addNode方法的后激活这些事件function,传入的参数有(添加的节点对象,tabletree对象):(Core4j.toolbox.TableTreeNode:node,Core4j.toolbox.TableTree4j:tree).</div>
+
+	<div class="innerlittletitle">[function]:onBeforeRemoveNodeEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当执行removeNode方法的前激活这些事件function,传入的参数有(删除的节点对象,tabletree对象):(Core4j.toolbox.TableTreeNode:node,Core4j.toolbox.TableTree4j:tree).</div>
+
+	<div class="innerlittletitle">[function]:onAfterRemoveNodeEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当执行removeNode方法的后激活这些事件function,传入的参数有(删除的节点对象,tabletree对象):(Core4j.toolbox.TableTreeNode:node,Core4j.toolbox.TableTree4j:tree).</div>
+
+	<div class="innerlittletitle">[function]:onBeforeRemoveNodeChildsEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当执行removeNodeChilds方法的前激活这些事件function,传入的参数有(删除所有子节点的父节点对象,tabletree对象):(Core4j.toolbox.TableTreeNode:node,Core4j.toolbox.TableTree4j:tree).</div>
+
+	<div class="innerlittletitle">[function]:onAfterRemoveNodeChildsEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当执行removeNodeChilds方法的后激活这些事件function,传入的参数有(删除所有子节点的父节点对象,tabletree对象):(Core4j.toolbox.TableTreeNode:node,Core4j.toolbox.TableTree4j:tree).</div>
+
+	<div class="innerlittletitle">[function]:onBuildTreeAddNodeEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当执行构建tabletree一个个添加初始化时传入的节点时激活这些事件function,传入的参数有(添加的节点对象,tabletree对象):(Core4j.toolbox.TableTreeNode:node,Core4j.toolbox.TableTree4j:tree).</div>
+
+
+	<div class="innerlittletitle">[function]:onBeforeBuildEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当执行构建tabletree前激活这些事件function,传入的参数有(tabletree对象):(Core4j.toolbox.TableTree4j:tree).</div>
+
+
+	<div class="innerlittletitle">[function]:onAfterBuildEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当执行构建tabletree后激活这些事件function,传入的参数有(tabletree对象):(Core4j.toolbox.TableTree4j:tree).</div>
+
+	<div class="innerlittletitle">[function]:onBeforeLoadingAddNodesEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当使用loadingAddNodes方法为某个节点添加一个或多个子节点前激活这些事件function,传入的参数有(子节点对象数组,父节点对象,tabletree对象):([Core4j.toolbox.TableTreeNode]:childs,Core4j.toolbox.TableTreeNode:pnode,Core4j.toolbox.TableTree4j:tree).</div>
+
+	<div class="innerlittletitle">[function]:onAfterLoadingAddNodesEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,当使用loadingAddNodes方法为某个节点添加一个或多个子节点前激活这些事件function,传入的参数有(子节点对象数组,父节点对象,tabletree对象):([Core4j.toolbox.TableTreeNode]:childs,Core4j.toolbox.TableTreeNode:pnode,Core4j.toolbox.TableTree4j:tree).</div>
+
+	<div class="innerlittletitle">[function]:onSelectNodeEvents</div>
+	<div class="innerlittlecontent">function数组类型,可选参数,选择节点时激活这些事件function,传入的参数有(本次选择的节点数组,已经选中的所有节点数组,tabletree对象):([Core4j.toolbox.TableTreeNode]:selectnodes,[Core4j.toolbox.TableTreeNode]:allSelectnodes,Core4j.toolbox.TableTree4j:tree).</div>
+	</div>
+
+
+		<div class="contentdetail littletitle"><img src="plus.gif" class="clickbtn" onclick="toggleDiv(this,'t4j-properties-c')" align="absmiddle">Properties</div>
+		<div id="t4j-properties-c" class="contentdetail littlecontent" style="display:none;">
+	<div class="innerlittletitle">string:version</div>
+	<div class="innerlittlecontent">string类型,tabletree的版本号.</div>
+	<div class="innerlittletitle">string:id</div>
+	<div class="innerlittlecontent">string类型,tabletree的id,也是对应table的dom的id.</div>
+	<div class="innerlittletitle">element TABLE:tableObject</div>
+	<div class="innerlittlecontent">dom element object类型,tabletree对应的dom table element.</div>
+	<div class="innerlittletitle">[Core4j.toolbox.TableTreeNode]:rootNodes</div>
+	<div class="innerlittlecontent">Core4j.toolbox.TableTreeNode对象数组类型,tabletree的根节点对象数组.</div>
+
+	<div class="innerlittletitle">object:sortColumn</div>
+	<div class="innerlittlecontent">column对象类型,tabletree当前排序的column.</div>
+
+	<div class="innerlittletitle">int:sortColumnIndex</div>
+	<div class="innerlittlecontent">int型,tabletree当前排序的column的index.</div>
+
+	<div class="innerlittletitle">boolean:isSortColumnReversal</div>
+	<div class="innerlittlecontent">布尔类型,tabletree当前是否对列反向排序.</div>
+
+	<div class="innerlittletitle">string:scriptRootPath</div>
+	<div class="innerlittlecontent">string类型,tabletree js所在的根目录路径.</div>
+
+	<div class="innerlittletitle">string:themeName</div>
+	<div class="innerlittlecontent">string类型,tabletree 使用的外观theme的名(theme/目录下的文件夹名).</div>
+
+	<div class="innerlittletitle">string:cookiesSplitString</div>
+	<div class="innerlittlecontent">string类型,tabletree 所用到cookies保存展开节点的id值之间的分隔符.</div>
+
+	<div class="innerlittletitle">string:treeMode</div>
+	<div class="innerlittlecontent">string类型,tabletree的显示模式,见ConfigerObject内的说明.</div>
+
+	<div class="innerlittletitle">string:renderTo</div>
+	<div class="innerlittlecontent">string类型,tabletree创建到dom元素的id,见ConfigerObject内的说明.</div>
+
+	<div class="innerlittletitle">[object]:columns</div>
+	<div class="innerlittlecontent">对象数组类型,定义tabletree每一列的信息,见ConfigerObject内的说明.</div>
+
+	<div class="innerlittletitle">[Core4j.toolbox.TableTreeHF]:headers</div>
+	<div class="innerlittlecontent">对象数组类型,tabletree的header,见ConfigerObject内的说明.</div>
+
+	<div class="innerlittletitle">[Core4j.toolbox.TableTreeHF]:footers</div>
+	<div class="innerlittlecontent">对象数组类型,tabletree的header,见ConfigerObject内的说明.</div>
+	<div class="innerlittletitle">int:cookieTime</div>
+	<div class="innerlittlecontent">int型,tabletree使用的cookie生存时间.</div>
+	<div class="innerlittletitle">object:eventsType</div>
+	<div class="innerlittlecontent">object型,tabletree的eventsType对象内有所有的event名称.</div>
+	<div class="innerlittletitle">[object]:plugins</div>
+	<div class="innerlittlecontent">对象数组类型,tabletree的所有plugin,见ConfigerObject内的说明.</div>
+		</div>
+
+		<div class="contentdetail littletitle"><img src="plus.gif" class="clickbtn" onclick="toggleDiv(this,'t4j-method-c')" align="absmiddle">Method</div>
+		<div id="t4j-method-c" class="contentdetail littlecontent" style="display:none;">
+	<div class="innerlittletitle">removeEvents(string:eventType) void</div>
+	<div class="innerlittlecontent">删除某个类型的所有事件监听方法.</div>
+	<div class="innerlittletitle">addEvent(string:eventType,function:eventFunction) void</div>
+	<div class="innerlittlecontent">为某个类型的事件增加监听方法.</div>
+	<div class="innerlittletitle">removeEventByIndex(string:enentType,int:index) void</div>
+	<div class="innerlittlecontent">删除某个类型的事件监听方法中的第index个.</div>
+	<div class="innerlittletitle">setSelectMode(string:mode) void</div>
+	<div class="innerlittlecontent">设置树节点的选择模式 ,mode有3种值,分别为'muti'多选(按下ctrl进行多选),'single'单选,'none'不能选择行.</div>
+	<div class="innerlittletitle">getSelectMode() return string:mode</div>
+	<div class="innerlittlecontent">返回当前树节点的选择模式.</div>
+	<div class="innerlittletitle">addselectNodes([Core4j.toolbox.TableTreeNode]:nodes) void</div>
+	<div class="innerlittlecontent">将多个节点设置为选中状态.</div>
+	<div class="innerlittletitle">setSelectNode(Core4j.toolbox.TableTreeNode:node) void</div>
+	<div class="innerlittlecontent">设置选中某个节点.</div>
+	<div class="innerlittletitle">disSelectNode(Core4j.toolbox.TableTreeNode:node) void</div>
+	<div class="innerlittlecontent">取消选中某个节点.</div>
+	<div class="innerlittletitle">getSelectNodes() return [Core4j.toolbox.TableTreeNode]:selectNodes</div>
+	<div class="innerlittlecontent">获得当前选中的所有节点.</div>
+	<div class="innerlittletitle">clearSelects() void</div>
+	<div class="innerlittlecontent">取消选中的所有节点.</div>
+	<div class="innerlittletitle">changeTheme(string:themeName) void</div>
+	<div class="innerlittlecontent">更改外观,在根目录中的theme文件夹下,每个文件夹为一套外观,这里的themeName为文件夹的名称,如果要定制自己的theme,可参考其中的文件夹实现.</div>
+	<div class="innerlittletitle">setUseCookie(boolean:isUse) void</div>
+	<div class="innerlittlecontent">设置是否使用cookie记忆展开的nodes.</div>
+	<div class="innerlittletitle">isUseCookie() return boolean:useCookie</div>
+	<div class="innerlittlecontent">返回是否使用了cookie记忆展开节点.</div>
+	<div class="innerlittletitle">setUseIcon(boolean:isUse) void</div>
+	<div class="innerlittlecontent">设置是否显示节点图标.</div>
+	<div class="innerlittletitle">isUseIcon() return boolean:useIcon</div>
+	<div class="innerlittlecontent">返回是否显示节点图标.</div>
+	<div class="innerlittletitle">setUseLine(boolean:isUse) void</div>
+	<div class="innerlittlecontent">设置是否显示树状结构线.</div>
+	<div class="innerlittletitle">isUseLine() return boolean:useLine</div>
+	<div class="innerlittlecontent">返回是否显示树状结构线.</div>
+	<div class="innerlittletitle">setFloatRight(boolean:isFloatRight) void</div>
+	<div class="innerlittlecontent">设置是否从右到左显示.</div>
+	<div class="innerlittletitle">isFloatRight() return boolean:floatRight</div>
+	<div class="innerlittlecontent">返回是否从右到左显示.</div>
+	<div class="innerlittletitle">getThemeRoot() return string themeRootPath</div>
+	<div class="innerlittlecontent">返回当前的theme外观所在的根目录.</div>
+	<div class="innerlittletitle">sortByColumnIndex(int:index) void</div>
+	<div class="innerlittlecontent">根据第index列的数据排序.</div>
+	<div class="innerlittletitle">sortByNodeOrder() void</div>
+	<div class="innerlittlecontent">根据节点设置的order排序.</div>
+	<div class="innerlittletitle">reFreshTableTreeView() void</div>
+	<div class="innerlittlecontent">刷新tabletree.</div>
+	<div class="innerlittletitle">rebuildTreeByNodes([Core4j.toolbox.TableTreeNode]:nodes,boolean:isJsondata) void</div>
+	<div class="innerlittlecontent">根据传入的节点重新构建tabletree,isJsondata参数说明 nodes是否是json数据,可选参数.</div>
+	<div class="innerlittletitle">build([Core4j.toolbox.TableTreeNode]:nodes,boolean:isJsondata) void</div>
+	<div class="innerlittlecontent">根据传入的节点构建tabletree,isJsondata参数说明 nodes是否是json数据,可选参数.</div>
+	<div class="innerlittletitle">startLoadingNode(Core4j.toolbox.TableTreeNode:node,string:iconUrl,boolean:isHideLoadingIcon) void</div>
+	<div class="innerlittlecontent">当使用loadingAddNodes方法为某个父节点装载子节点前调用此方法,参数iconUrl是自定义loading的图标(不设置则使用默认),可选参数,参数isHideLoadingIcon设置是否显示loading图标,默认为显示,可选参数.</div>
+	<div class="innerlittletitle">endLoadingNode(Core4j.toolbox.TableTreeNode:node) void</div>
+	<div class="innerlittlecontent">当使用loadingAddNodes方法为某个父节点装载子节点,完成装载直接点后调用此方法,可以根据父节点装载节点的情况刷新父节点的图标和按钮.</div>
+	<div class="innerlittletitle">toggleNodeById(string:nodeId,boolean:isExpandNode) void</div>
+	<div class="innerlittlecontent">根据节点id展开或关闭节点,参数isExpandNode设置是否只是展开,设置为true的话只能展开,设置为false的话只能关闭,不设置的话每次调用该函数根据当前节点状态展开或者关闭,可选参数.</div>
+	<div class="innerlittletitle">toggleNode(Core4j.toolbox.TableTreeNode:node,boolean:isExpandNode) void</div>
+	<div class="innerlittlecontent">根据节点对象展开或关闭节点,参数isExpandNode设置是否只是展开,设置为true的话只能展开,设置为false的话只能关闭,不设置的话每次调用该函数根据当前节点状态展开或者关闭,可选参数.</div>
+	<div class="innerlittletitle">loadingAddNodes([Core4j.toolbox.TableTreeNode]:nodes,string:pNodeid) void</div>
+	<div class="innerlittlecontent">根据父节点id为其装载子节点,pNodeid不能为空.</div>
+	<div class="innerlittletitle">addNode(Core4j.toolbox.TableTreeNode:tableTreeNode,string:pNodeid) void</div>
+	<div class="innerlittlecontent">根据父节点id为其添加一个子节点,pNodeid如果为空,则将该子节点添加到根节点对象数组内.</div>
+	<div class="innerlittletitle">removeNode(string:id) void</div>
+	<div class="innerlittlecontent">根据节点id删除一个节点及其所有子节点.</div>
+	<div class="innerlittletitle">removeNodeChilds(string:nodeId) void</div>
+	<div class="innerlittlecontent">根据节点id删除其所有子节点.</div>
+	<div class="innerlittletitle">getNodeById(string:id) void</div>
+	<div class="innerlittlecontent">根据节点id获得节点对象.</div>
+	<div class="innerlittletitle">addHeader(Core4j.toolbox.TableTreeHF:tabletreeHF) void</div>
+	<div class="innerlittlecontent">根据tabletreeHF对象为tabletree添加一个header.</div>
+	<div class="innerlittletitle">addFooter(Core4j.toolbox.TableTreeHF:tabletreeHF) void</div>
+	<div class="innerlittlecontent">根据tabletreeHF对象为tabletree添加一个footer.</div>
+	<div class="innerlittletitle">removeHeader(int:index,Core4j.toolbox.TableTreeHF:tabletreeHF) void</div>
+	<div class="innerlittlecontent">根据header对象数组的索引index,或者tabletreeHF对象删除一个header,两个参数必须有一个不为空.</div>
+	<div class="innerlittletitle">removeFooter(int:index,Core4j.toolbox.TableTreeHF:tabletreeHF) void</div>
+	<div class="innerlittlecontent">根据footer对象数组的索引index,或者tabletreeHF对象删除一个footer,两个参数必须有一个不为空.</div>
+	<div class="innerlittletitle">removeAllHeader() void</div>
+	<div class="innerlittlecontent">删除所有header.</div>
+	<div class="innerlittletitle">removeAllFooter() void</div>
+	<div class="innerlittlecontent">删除所有footer.</div>
+	<div class="innerlittletitle">setNodeAsUnload(string:id) void</div>
+	<div class="innerlittlecontent">将某个节点设置为unload</div>	
+		</div>
+
+
+		<br/><br/>
+		<span class="title">Core4j.toolbox.TableTreeNode</span>
+		<div class="contentdetail littletitle"><img src="plus.gif" class="clickbtn" onclick="toggleDiv(this,'ttn-configerObject-c')" align="absmiddle">ConfigerObject</div>
+		<div id="ttn-configerObject-c" class="contentdetail littlecontent" style="display:none;">
+	<div class="innerlittletitle">string:id</div>
+	<div class="innerlittlecontent">string类型,必须参数,节点的id,也是生成dom table的tr对象的id.</div>
+	<div class="innerlittletitle">string:pid</div>
+	<div class="innerlittlecontent">string类型,可选参数,父节点的id,如果为空,则该节点为根节点.</div>
+	<div class="innerlittletitle">string:icon</div>
+	<div class="innerlittlecontent">string类型,可选参数,自定义节点的图标路径,默认为根据theme外观定义的图标.</div>
+	<div class="innerlittletitle">string:iconOpen</div>
+	<div class="innerlittlecontent">string类型,可选参数,自定义节点展开时的图标路径,默认为根据theme外观定义的图标.</div>
+	<div class="innerlittletitle">string:iconLoading</div>
+	<div class="innerlittlecontent">string类型,可选参数,自定义节点loading时的图标路径,默认为根据theme外观定义的图标.</div>
+	<div class="innerlittletitle">object:userObject</div>
+	<div class="innerlittlecontent">object类型,可选参数,保存在节点node中的自定义对象.</div>
+	<div class="innerlittletitle">object:dataObject</div>
+	<div class="innerlittlecontent">object类型,必须参数,绑定节点(即table一行)的数据对象,该对象为当前行的每一列定义的dataIndex提供数据.</div>
+	<div class="innerlittletitle">int:order</div>
+	<div class="innerlittlecontent">int类型,可选参数,节点在同一父节点下的排序.</div>
+	<div class="innerlittletitle">boolean:isLeaf</div>
+	<div class="innerlittlecontent">布尔类型,可选参数,节点是否是叶节点,即无子节点,不设置的话会在节点初始化的时候根据节点是否存在子节点赋值,默认值为true,如果设置为false,节点的isLoad属性只要是false,该节点都会显示为一个可被展开的节点.</div>
+	<div class="innerlittletitle">boolean:isLoad</div>
+	<div class="innerlittlecontent">布尔类型,可选参数,节点是否已经加载子节点,默认值为false.</div>
+	<div class="innerlittletitle">boolean:isOpen</div>
+	<div class="innerlittlecontent">布尔类型,可选参数,节点是否默认就展开,默认值为false.</div>
+	<div class="innerlittletitle">boolean:canSelect</div>
+	<div class="innerlittlecontent">布尔类型,可选参数,节点是否可以被选中,默认值为true.</div>
+		</div>
+
+
+		<div class="contentdetail littletitle"><img src="plus.gif" class="clickbtn" onclick="toggleDiv(this,'ttn-properties-c')" align="absmiddle">Properties</div>
+		<div id="ttn-properties-c" class="contentdetail littlecontent" style="display:none;">
+	<div class="innerlittletitle">string:id</div>
+	<div class="innerlittlecontent">string类型,节点的id,也是生成dom table的tr对象的id.</div>
+	<div class="innerlittletitle">string:pid</div>
+	<div class="innerlittlecontent">string类型,父节点的id,如果为空,则该节点为根节点.</div>
+	<div class="innerlittletitle">string:icon</div>
+	<div class="innerlittlecontent">string类型,自定义节点的图标路径.</div>
+	<div class="innerlittletitle">string:iconOpen</div>
+	<div class="innerlittlecontent">string类型,自定义节点展开时的图标路径.</div>
+	<div class="innerlittletitle">string:iconLoading</div>
+	<div class="innerlittlecontent">string类型,自定义节点loading时的图标路径.</div>
+	<div class="innerlittletitle">object:userObject</div>
+	<div class="innerlittlecontent">object类型,保存在节点node中的自定义对象.</div>
+	<div class="innerlittletitle">int:order</div>
+	<div class="innerlittlecontent">int类型,节点在同一父节点下的排序.</div>
+	<div class="innerlittletitle">boolean:isLeaf</div>
+	<div class="innerlittlecontent">布尔类型,节点是否是叶节点,即无子节点.</div>
+	<div class="innerlittletitle">boolean:isLoad</div>
+	<div class="innerlittlecontent">布尔类型,节点是否已经加载子节点.</div>
+	<div class="innerlittletitle">boolean:isOpen</div>
+	<div class="innerlittlecontent">布尔类型,节点是否展开.</div>
+	<div class="innerlittletitle">boolean:isLoading</div>
+	<div class="innerlittlecontent">布尔类型,节点是否正处于加载子节点的状态.</div>
+	<div class="innerlittletitle">boolean:canSelect</div>
+	<div class="innerlittlecontent">布尔类型,节点是否可以被选中.</div>
+	<div class="innerlittletitle">element TR:rowObj</div>
+	<div class="innerlittlecontent">dom element对象类型,节点对应的行即tr element对象.</div>
+	<div class="innerlittletitle">element DIV:marginDivObj</div>
+	<div class="innerlittlecontent">dom element对象类型,节点对应的占位div element对象.</div>
+	<div class="innerlittletitle">element DIV:iconDivObj</div>
+	<div class="innerlittlecontent">dom element对象类型,节点对应的图标div element对象.</div>
+	<div class="innerlittletitle">element DIV:clickDivObj</div>
+	<div class="innerlittlecontent">dom element对象类型,节点对应的按钮div element对象.</div>
+	<div class="innerlittletitle">Core4j.toolbox.TableTreeNode:pNode</div>
+	<div class="innerlittlecontent">Core4j.toolbox.TableTreeNode对象类型,节点的父节点对象.</div>
+	<div class="innerlittletitle">[Core4j.toolbox.TableTreeNode]:childs</div>
+	<div class="innerlittlecontent">Core4j.toolbox.TableTreeNode对象数组类型,节点的所有子节点对象.</div>
+	<div class="innerlittletitle">int:level</div>
+	<div class="innerlittlecontent">int类型,节点的层次.</div>
+	<div class="innerlittletitle">string:visible</div>
+	<div class="innerlittlecontent">string类型,节点是否可见,'none'为不可见,''为可见.</div>
+	<div class="innerlittletitle">boolean:isRoot</div>
+	<div class="innerlittlecontent">布尔类型,节点是否为根节点.</div>
+	<div class="innerlittletitle">boolean:isLastNode</div>
+	<div class="innerlittlecontent">布尔类型,节点是否为当前父节点的最后一个子节点.</div>
+
+	</div>
+
+		<br/><br/>
+		<span class="title">Core4j.toolbox.TableTreeHF</span>
+		<div class="contentdetail littletitle"><img src="plus.gif" class="clickbtn" onclick="toggleDiv(this,'tthf-configerObject-c')"  align="absmiddle">ConfigerObject</div>
+		<div id="tthf-configerObject-c" class="contentdetail littlecontent" style="display:none;">
+	<div class="innerlittletitle">[object]:columns</div>
+	<div class="innerlittlecontent">
+		对象数组类型,必须参数,定义header的每一列信息,每列的对象包括以下属性:<br/>
+		{dataIndex:,renderFunction:,tdAttributeNames:,tdAttributeValueObject:}<br/>
+	<span style="color:#ffad5b;font-style:italic;">dataIndex</span>:string类型,必须参数,渲染列所在行的单元格数据对象的属性名;<br/>
+	<span style="color:#ffad5b;font-style:italic;">renderFunction</span>:function类型,可选参数,渲染列所在行的每个单元格的函数,其接收的参数为一个包含多个属性信息的对象;<br/>
+<div style="padding-left:30px">
+	<span style="color:#ff86c2;font-style:italic;">dataValue</span>:数据的值;<br/>
+	<span style="color:#ff86c2;font-style:italic;">tabletreeHF</span>:Core4j.toolbox.TableTreeHF对象;<br/>
+	<span style="color:#ff86c2;font-style:italic;">tabletreeObj</span>:当前的tabletree对象;<br/>
+	<span style="color:#ff86c2;font-style:italic;">columnIndex</span>:int型,当前列索引.<br/>
+</div>
+	<span style="color:#ffad5b;font-style:italic;">tdAttributeNames</span>:字符串数组类型,可选参数,为列所在行的单元格添加属性名(多个);<br/>
+	<span style="color:#ffad5b;font-style:italic;">tdAttributeValueObject</span>:字符串数组类型,可选参数,为列所在行的单元格添加属性名对应的值(多个).<br/>
+	</div>
+
+	<div class="innerlittletitle">[string]:trAttributeNames</div>
+	<div class="innerlittlecontent">字符串数组类型,可选参数,为header或footer所在行添加属性名(多个).</div>
+
+	<div class="innerlittletitle">object:trAttributeValueObject</div>
+	<div class="innerlittlecontent">字符串数组类型,可选参数,为header或footer所在行添加属性名对应的值(多个).</div>
+
+	<div class="innerlittletitle">object:dataObject</div>
+	<div class="innerlittlecontent">header或footer绑定的数据对象.</div>
+
+	</div>
+
+		<div class="contentdetail littletitle"><img src="plus.gif" class="clickbtn" onclick="toggleDiv(this,'tthf-properties-c')"  align="absmiddle">Properties</div>
+		<div id="tthf-properties-c" class="contentdetail littlecontent" style="display:none;">
+	<div class="innerlittletitle">[object]:columns</div>
+	<div class="innerlittlecontent">column对象数组类型,详细请见configerObject的输入参数.</div>
+	<div class="innerlittletitle">[string]:trAttributeNames</div>
+	<div class="innerlittlecontent">字符串数组类型,header或footer所在行添加属性名(多个).</div>
+	<div class="innerlittletitle">object:trAttributeValueObject</div>
+	<div class="innerlittlecontent">字符串数组类型,header或footer所在行添加属性名对应的值(多个).</div>
+	<div class="innerlittletitle">object:dataObject</div>
+	<div class="innerlittlecontent">header或footer绑定的数据对象.</div>
+	<div class="innerlittletitle">element TR:rowObj</div>
+	<div class="innerlittlecontent">dom element对象类型,header或footer对应的行tr element对象.</div>
+		</div>
+
+<br/><br/>
+	<div class="bigtitle">Css 说明</div>
+	<div class="littlecontent" style="border-width:0px;padding-left:10px;" ><div class="innerlittlecontent" >
+		必须引入根目录下的tabletree4j.css,如果要修改tabletree的边框颜色和粗细,间隔等,可以通过覆盖tabletree4j.css中的style实现;<br/>
+		另外js还会根据你选择的theme自动引入根目录下theme/[你设置的theme]/css/theme.css 文件,里面定义了行高,图标的宽度高度等等,
+		你可以通过覆盖你当前theme的style实现你想要的样式,也可以参考theme下的目录,实现自己的theme.
+	</div></div>
+
+
+	</div>
+
+<br/><br/>
+	<div class="bigtitle">目录结构和文件引入</div>
+	<div class="littlecontent" style="border-width:0px;padding-left:10px;" >
+	<div class="innerlittlecontent" style="font-family:Arial;">
+		<span class="title" style="padding-left:2px;">目录结构</span><br/>
+		<span style="color:#ffad5b;font-style:italic;">demo/</span>: 存放所有的demo<br/>
+		<span style="color:#ffad5b;font-style:italic;">doc/</span>: 存放组件的文档说明<br/>
+		<span style="color:#ffad5b;font-style:italic;">src/</span>: 存放组件未经压缩的原始js代码<br/>
+		<span style="color:#ffad5b;font-style:italic;">theme/</span>: 存放组件的外观样式包<br/>
+		<span style="color:#ffad5b;font-style:italic;">plugin/</span>: 存放组件的plugin js文件<br/>
+		* 根目录下的TableTree4j.js和Core4j.js是经过压缩的js代码<br/>
+		* 根目录下的TableTree4j-debug.js和Core4j-debug.js是未经压缩的原始js代码,方便调试,测试的时候可引入这两个,正式应该使用经过压缩的js<br/><br/>
+
+	<span class="title" style="padding-left:2px;">文件引入</span><br/>
+	依次分别引入根目录下的<br/>
+		Core4j.js<br/>
+		tabletree4j.css<br/>
+		TableTree4j.js<br/>
+	</div></div>
+
+
+	</div>
+
+	<div id="footer" class="footer" align="center"><br/>
+TABLETREE4J VESION 2 API Documentation<br/>
+license apache licence V2.0<br/>
+2010 LKE Technology Lab<br/>
+Email:<a href="mailto:lannerk@qq.com">lannerk@qq.com</a><br/><br/>
+	</div>
+</body>
+</html>

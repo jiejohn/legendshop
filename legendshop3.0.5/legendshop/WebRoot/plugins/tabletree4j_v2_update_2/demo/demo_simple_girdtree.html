@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script language="JavaScript" src="../Core4j.js"></script>
+<link rel="StyleSheet" href="../tabletree4j.css" type="text/css" />
+<script language="JavaScript" src="../TableTree4j.js"></script>
+
+<title>tabletree4j version 2 demo</title>
+<style>
+
+	.bigtitle{
+		font-family:Arial;
+		font-weight:bold;
+		font-size:22px;
+		margin-bottom:10px;
+	}
+	.footer{
+		font-family:Arial;
+		font-weight:bold;
+		font-size:12px;
+		color:#747474;
+	}
+
+	.title{
+		padding-left:10px;
+		font-family:Arial;
+		/*font-weight:bold;*/
+		font-size:18px;
+		color:#747474;
+	}
+
+	.fromtitle{
+		background-color:#f5f5f5;
+		text-align:center;
+		font-family:Arial;
+		color:#acac59;
+		padding-top:5px;
+		padding-bottom:5px;
+	}
+
+	.fromcontent{
+		font-family:Arial;
+		padding-right:5px;
+		padding-bottom:10px;
+		padding-top:10px;
+	}
+
+	.content{
+		font-family:Arial;
+	}
+	.clickbtn{
+		cursor:pointer;
+	}
+	.headerbg{
+		background:#328aa4 url(img/tr_back.gif) repeat-x;color:#fff;
+		height:27px;
+		font-family:"Arial";
+	}
+	.headerbg td{
+		text-align:center;
+	}
+
+
+	.tabletree4j-gird td{
+	height:27px;
+	}
+
+	.arrow-tt-node-content{
+		text-align:center;
+		width:100%;
+	}
+	.circle-tt-node-content{
+		text-align:center;
+		width:100%;
+	}
+	.default-tt-node-content{
+		text-align:center;
+		width:100%;
+	}
+</style>
+</head>
+<body >
+	<div id="header" style="height:60px;">
+	<div style="float:left;width:100%;">
+	<div style="float:left;width:24%;height:60px;"><img src="../tabletree4j.png"/></div>
+	<div style="float:right;width:74%;height:60px;">
+	<div class="title" style="padding-top:35px;text-align:right;color:#828282;">Demo - Simple gird tree</div>
+	</div>
+	</div>
+
+
+	<div style="float:left;width:100%;height:1px;border-bottom:1px solid #c8c8c8;"></div>
+	</div>
+
+<div class="content" style="margin-top:20px;background-image:url(img/bgFWCc.jpg);padding-top:32px;height:106px;">
+	<div style="float:left;width:49%"><img src="img/wc2010logo.png" /></div><div  align="center"  style="float:right;padding-top:60px;width:49%;"><img src="img/wc2010_title.png" /></div>
+</div>
+
+
+
+
+<div style="margin-top:5px;float:left;width:18%">
+<div style="width:100%;border:1px solid #c8c8c8;">
+<div class="fromtitle" style="">Style Select</div>
+<div class="fromcontent">
+	<table style="border:0px" width="100%">
+		<tr>
+			<td align="center">
+			<button onclick="changeStyle('arrow')">Arrow</button>
+			<button onclick="changeStyle('circle')">Circle</button>
+			<button onclick="changeStyle('default')">Default</button>
+			<!--
+			<button onclick="setunload()">setunload</button>
+			-->
+			</td>
+		</tr>
+	</table>
+	</div>
+</div>
+
+<div style="width:100%;border:1px solid #c8c8c8;margin-top:10px">
+<div class="fromtitle" style="">Sort Function</div>
+<div class="fromcontent">
+	<table style="border:0px" width="100%">
+		<tr>
+			<td align="center">
+			<button onclick="sortTree(0)">Sort By Date</button>
+			<button onclick="sortTree(1)">Sort By Match</button>
+			<button onclick="sortTree(2)">Sort By Venue</button>
+			<button onclick="sortTree(3)">Sort By Result</button>
+			<button onclick="sortTree(null)">Sort By Order</button>
+			</td>
+		</tr>
+	</table>
+	</div>
+</div>
+
+
+<div style="width:100%;border:1px solid #c8c8c8;margin-top:10px">
+<div class="fromtitle" style="">Add A Group</div>
+<div class="fromcontent">
+	<table style="border:0px" width="100%">
+		<tr>
+			<td align="right" width="30%">ID:</td><td width="70%" align="right" ><input id="gid" style="width:90%;margin-left:10px;"/></td>
+		</tr>
+		<tr>
+			<td align="right">Name:</td><td align="right" ><input id="gname" style="width:90%;margin-left:10px;"/></td>
+		</tr>
+		<tr>
+			<td align="right" width="25%">Order:</td><td width="75%" align="right" ><input id="gorder" style="width:90%;margin-left:10px;"/></td>
+		</tr>
+		<tr>
+			<td align="right" colspan="2">
+			<button id="gbtn" onclick="addGroup()">Submit</button>
+			</td>
+		</tr>
+	</table>
+	</div>
+</div>
+
+<div style="width:100%;border:1px solid #c8c8c8;margin-top:10px">
+<div class="fromtitle" style="">Add A Match</div>
+<div class="fromcontent">
+	<table style="border:0px" width="100%">
+		<tr>
+			<td align="right" width="30%">ID:</td><td width="70%" align="right" ><input id="mid" style="width:90%;margin-left:10px;"/></td>
+		</tr>
+		<tr>
+			<td align="right">Match:</td><td align="right" ><input id="mteam" style="width:90%;margin-left:10px;"/></td>
+		</tr>
+		<tr>
+			<td align="right">Date:</td><td align="right" ><input id="mdate" style="width:90%;margin-left:10px;"/></td>
+		</tr>
+		<tr>
+			<td align="right">Venue:</td><td align="right" ><input id="mvenue" style="width:90%;margin-left:10px;"/></td>
+		</tr>
+		<tr>
+			<td align="right">Result:</td><td align="right" ><input id="mres" style="width:90%;margin-left:10px;"/></td>
+		</tr>
+		<tr>
+			<td align="right" colspan="2">
+			<button id="mbtn" onclick="addMatch()">Submit</button>
+			</td>
+		</tr>
+	</table>
+	</div>
+</div>
+</div>
+
+
+<div id="worldcupgird" class="content" style="margin-top:5px;float:left;width:81%;margin-left:1%"></div>
+<script language="javascript">
+
+dummyJsonData= function(){
+
+this.jsonFIFAHeaders=[{
+		  	columns:[
+			{dataIndex:'datetime'},
+			{dataIndex:'match'},
+			{dataIndex:'venue'},
+			{dataIndex:'result'},
+			{dataIndex:'operate'}
+			],
+			dataObject:{match:'Match',datetime:'Date-Time',result:'Result',venue:'Venue',operate:'Operate'},
+			trAttributeNames:['classStyle','style'],
+			trAttributeValueObject:{classStyle:'headerbg',style:''}
+		  }/*	,
+		  	  {
+		  	columns:[
+				{dataIndex:'title4',
+				tdAttributeNames:['colSpan','id'],
+				tdAttributeValueObject:{colSpan:2,id:'sdfsdf'}
+				},
+				{dataIndex:'title5'}
+			],
+		  	dataObject:{title4:'title4',title5:'title5'},
+			trAttributeNames:['classStyle','style'],
+			trAttributeValueObject:{classStyle:'headerbg',style:''}
+		  }*/
+
+		];
+
+this.jsoninitNodes=[
+		  {id:'group_a',order:1,dataObject:{match:'Group A'},userObject:{isGroup:true}},
+		  {id:'match_1',pid:'group_a',dataObject:{match:'South Africa - Mexico',datetime:'11/06 16:00',result:'1:1 (0:0)',venue:'Johannesburg - JSC'}},
+		  {id:'match_2',pid:'group_a',dataObject:{match:'Uruguay - France',datetime:'11/06 20:30',result:'0:0',venue:'Cape Town'}},
+		  {id:'match_17',pid:'group_a',dataObject:{match:'South Africa - Uruguay',datetime:'16/06 20:30',result:'Background',venue:'Tshwane/Pretoria'}},
+		  {id:'match_18',pid:'group_a',dataObject:{match:'France - Mexico',datetime:'17/06 20:30',result:'Background',venue:'Polokwane'}},
+		  {id:'match_33',pid:'group_a',dataObject:{match:'Mexico - Uruguay',datetime:'22/06 16:00',result:'Background',venue:'Rustenburg'}},
+		  {id:'match_34',pid:'group_a',dataObject:{match:'France - South Africa',datetime:'22/06 16:00',result:'Background',venue:'Mangaung/Bloemfontein'}},
+
+		  {id:'group_b',order:2,isLeaf:false,dataObject:{match:'Group B'},userObject:{isGroup:true,jsonName:'jsonNodes_B'}},
+		  {id:'group_c',order:3,isLeaf:false,dataObject:{match:'Group C'},userObject:{isGroup:true,jsonName:'jsonNodes_C'}},
+		  {id:'group_d',order:4,isLeaf:false,dataObject:{match:'Group D'},userObject:{isGroup:true,jsonName:'jsonNodes_D'}}
+		  /*{id:'group_e',isLeaf:false,dataObject:{match:'Group E'},userObject:{isGroup:true,jsonName:'jsonNodes_D'}}
+		  {id:'group_f',isLeaf:false,dataObject:{match:'Group F'}},
+		  {id:'group_g',isLeaf:false,dataObject:{match:'Group G'}},
+		  {id:'group_h',isLeaf:false,dataObject:{match:'Group H'}}*/
+		];
+
+this.jsonNodes_B=[
+		  {id:'match_3',pid:'group_b',dataObject:{match:'Argentina - Nigeria',datetime:'12/06 16:00',result:'Live',venue:'Johannesburg - JEP'}},
+		  {id:'match_4',pid:'group_b',dataObject:{match:'Korea Republic - Greece',datetime:'12/06 13:30',result:'2:0 (1:0)',venue:'Nelson Mandela Bay/Port Elizabeth'}},
+		  {id:'match_19',pid:'group_b',dataObject:{match:'Greece - Nigeria',datetime:'17/06 16:00',result:'Background',venue:'Mangaung/Bloemfontein'}},
+		  {id:'match_20',pid:'group_b',dataObject:{match:'Argentina - Korea Republic',datetime:'17/06 13:30',result:'Background',venue:'Johannesburg - JSC'}},
+		  {id:'match_35',pid:'group_b',dataObject:{match:'Nigeria - Korea Republic',datetime:'22/06 20:30',result:'Background',venue:'Durban'}},
+		  {id:'match_36',pid:'group_b',dataObject:{match:'Greece - Argentina',datetime:'22/06 20:30',result:'Background',venue:'Polokwane'}}
+		];
+
+this.jsonNodes_C=[
+		  {id:'match_5',pid:'group_c',dataObject:{match:'England - USA',datetime:'12/06 20:30',result:'Preview',venue:'Rustenburg'}},
+		  {id:'match_6',pid:'group_c',dataObject:{match:'Algeria - Slovenia',datetime:'13/06 13:30',result:'Preview',venue:'Polokwane'}},
+		  {id:'match_22',pid:'group_c',dataObject:{match:'Slovenia - USA',datetime:'18/06 16:00',result:'Background',venue:'Johannesburg - JEP'}},
+		  {id:'match_23',pid:'group_c',dataObject:{match:'England - Algeria',datetime:'18/06 20:30',result:'Background',venue:'Cape Town'}},
+		  {id:'match_37',pid:'group_c',dataObject:{match:'Slovenia - England',datetime:'23/06 16:00',result:'Background',venue:'Nelson Mandela Bay/Port Elizabeth'}},
+		  {id:'match_38',pid:'group_c',dataObject:{match:'USA - Algeria',datetime:'23/06 16:00',result:'Background',venue:'Tshwane/Pretoria'}}
+		];
+this.jsonNodes_D=[
+		  {id:'match_7',pid:'group_d',dataObject:{match:'Germany - Australia',datetime:'13/06 20:30',result:'Preview',venue:'Durban'}},
+		  {id:'match_8',pid:'group_d',dataObject:{match:'Serbia - Ghana',datetime:'13/06 16:00',result:'Background',venue:'Tshwane/Pretoria'}},
+		  {id:'match_21',pid:'group_d',dataObject:{match:'Germany - Serbia',datetime:'18/06 13:30',result:'Background',venue:'Nelson Mandela Bay/Port Elizabeth'}},
+		  {id:'match_24',pid:'group_d',dataObject:{match:'Ghana - Australia',datetime:'19/06 16:00',result:'Background',venue:'Rustenburg'}},
+		  {id:'match_39',pid:'group_d',dataObject:{match:'Ghana - Germany',datetime:'23/06 20:30',result:'Background',venue:'Johannesburg - JSC'}},
+		  {id:'match_40',pid:'group_d',dataObject:{match:'Australia - Serbia',datetime:'23/06 20:30',result:'Background',venue:'Nelspruit'}}
+		];
+
+}
+
+//ExpandNodeEvent
+function fifaExpandNodeEvent(node, tree){
+	if (node.isLoad == false) {
+		tree.startLoadingNode(node);
+		alert("This alert is show you the node loading...");
+
+		//you logic,you can call ajax here , when call success ,use function 'endLoadingNode(node)' to init the loading node;
+
+		//example for my dummy data logic
+		var userObject=node.userObject;
+		if(userObject!=null){
+			var jsonName=userObject.jsonName;
+			if(jsonName!=null){
+				var jsonNodes=eval('new dummyJsonData().'+jsonName);
+				if(jsonNodes!=null){
+					tree.loadingAddNodes(jsonNodes,node.id);
+				}
+			}
+		}
+		/////////////////////////////////
+
+		tree.endLoadingNode(node);
+	}
+}
+
+//infoObj {dataValue:,node:,tabletreeObj:,rowObj:,rowIndex:,container:,columnIndex:}
+function operateRenderFunction(infoObj){
+	var value=infoObj.dataValue;
+	var node=infoObj.node;
+	var tree=infoObj.tabletreeObj;
+	var aElobj=Core4j.Domhelper.createElement("a",{
+	attributeNames:['href'],
+	valueObject:{href:'#'}
+	});
+	Core4j.Domhelper.addEventToEl(aElobj,Core4j.Domhelper.ElEventType.CLICK,function(){
+		//alert(tree.tableObject.getAttribute("class"));
+		//alert("id is ["+value+"] node level is["+node.level+"] islastNode["+node.isLastNode+"]");
+		if(node.childs!=null&&node.childs.length>0){
+			if(window.confirm("The node[id:"+node.id+"] has childs,are you sure to delete?")){
+				tree.removeNode(node.id);
+			}
+		}else{
+			if(!node.isLeaf&&node.isLoad==false){
+				if(window.confirm("The node[id:"+node.id+"] is unload,maybe has childs,are you sure to delete?")){
+				tree.removeNode(node.id);
+				}
+			}else{
+				if(window.confirm("Are you sure to delete the node[id:"+node.id+"]?")){
+				tree.removeNode(node.id);
+				}
+			}
+
+		}
+	});
+	aElobj.innerHTML="Remove";
+	return aElobj;
+}
+
+///////////////////////////////////////////////////////////
+
+//the flow of build tabletree
+
+//create and config tabletree object
+var fifaGirdTree=new Core4j.toolbox.TableTree4j({
+	columns:[
+			{dataIndex:'datetime',width:'15%'},
+			{isNodeClick:true,dataIndex:'match',width:'30%'},
+			{dataIndex:'venue',width:'30%',renderFunction:null},
+			{dataIndex:'result',width:'15%',canSort:true},
+			{width:'10%',canSort:false,renderFunction:operateRenderFunction}
+			],
+	treeMode:'gird',
+	renderTo:'worldcupgird',
+	useLine:true,
+	useIcon:true,
+	id:'myworldcupgirdtree',
+	useCookie:false,
+	onExpandNodeEvents:[fifaExpandNodeEvent],
+	headers:new dummyJsonData().jsonFIFAHeaders,
+	//footers:jsonfooters,
+	themeName:'arrow',
+	selectMode:'single'
+	//floatRight:true
+});
+
+//build tree by nodes
+fifaGirdTree.build(new dummyJsonData().jsoninitNodes,true);
+
+////////////////////////////////////////////////////////////////
+
+function sortTree(index){
+	if(index==null){
+		fifaGirdTree.getNodeById();
+	}else{
+		fifaGirdTree.sortByColumnIndex(index);
+	}
+}
+
+function changeStyle(theme){
+	fifaGirdTree.changeTheme(theme);
+}
+
+function addGroup(){
+		var gid=document.getElementById("gid").value;
+			if(gid!=null&&gid!=''){
+				var addnode=fifaGirdTree.getNodeById(gid);
+				if(addnode==null){
+					var gname=document.getElementById("gname").value;
+					var gorder=document.getElementById("gorder").value;
+					gorder=parseInt(gorder);
+					if(gname==null||gname==''){
+						alert("The name of group is required!");
+						return null;
+					}
+					if(isNaN(gorder)){
+						gorder=0;
+					}
+					//{id:'group_b',order:2,isLeaf:false,dataObject:{match:'Group B'},userObject:{isGroup:true,jsonName:'jsonNodes_B'}},
+					addnode=new Core4j.toolbox.TableTreeNode({
+						id:gid,
+						order:gorder,
+						isLeaf:false,
+						isLoad:true,
+						dataObject:{match:gname},
+						userObject:{isGroup:true}
+					});
+					//add one node
+					fifaGirdTree.addNode(addnode);
+				}else{
+					alert("The id of group is exist!")
+				}
+			}else{
+				alert("The id of group is required!")
+			}
+}
+function addMatch(){
+	var sllectNodes=fifaGirdTree.getSelectNodes();
+	var alertMsg="Please select a group."
+	if(sllectNodes==null||sllectNodes.length==0){
+		alert(alertMsg);
+	}else{
+		var pnode=sllectNodes[0];
+		if(pnode.userObject!=null&&pnode.userObject.isGroup==true){
+			var mid=document.getElementById("mid").value;
+			if(mid!=null&&mid!=''){
+				var addnode=fifaGirdTree.getNodeById(mid);
+				if(addnode==null){
+					var mteam=document.getElementById("mteam").value||'';
+					var mdate=document.getElementById("mdate").value||'';
+					var mvenue=document.getElementById("mvenue").value||'';
+					var mres=document.getElementById("mres").value||'';
+					//{id:'match_3',pid:'group_b',dataObject:{match:'Argentina - Nigeria',datetime:'12/06 16:00',result:'Live',venue:'Johannesburg - JEP'}}
+					addnode=new Core4j.toolbox.TableTreeNode({
+						id:mid,
+						dataObject:{match:mteam,datetime:mdate,result:mres,venue:mvenue}
+					});
+					//add one node
+					fifaGirdTree.addNode(addnode,pnode.id);
+				}else{
+					alert("The id of match is exist!")
+				}
+			}else{
+				alert("The id of match is required!")
+			}
+		}else{
+			alert(alertMsg);
+		}
+	}
+}
+/*
+function setunload(){
+	var sllectNodes=fifaGirdTree.getSelectNodes();
+	var alertMsg="Please select a node."
+	if(sllectNodes==null||sllectNodes.length==0){
+		alert(alertMsg);
+	}else{
+		var node=sllectNodes[0];
+		fifaGirdTree.setNodeAsUnload(node.id);
+	}
+}
+*/
+</script>
+
+
+	<div id="footer" class="footer" align="center" style="float:left;width:100%"><br/>
+TABLETREE4J VESION 2 Demo<br/>
+license apache licence V2.0<br/>
+2010 LKE Technology Lab<br/>
+Email:<a href="mailto:lannerk@qq.com">lannerk@qq.com</a><br/><br/>
+	</div>
+</body>
+</html>
