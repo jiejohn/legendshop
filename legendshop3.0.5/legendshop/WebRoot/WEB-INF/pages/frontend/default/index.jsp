@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/default/js/funcs.js"></script>
 <div id="bodyer">
 <c:forEach items="${requestScope.INDEX_ADV_TOP}" var="adv">
 <table width="954px" cellpadding="0" cellspacing="0" style="margin-top: 5px" class="picstyle">

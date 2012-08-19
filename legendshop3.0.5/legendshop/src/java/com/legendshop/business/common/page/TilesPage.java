@@ -78,6 +78,9 @@ public enum TilesPage implements PageDefinition {
 
 	/** The OPENSHOP. */
 	OPENSHOP("openShop."),
+	
+	/** The VIEWS. */
+	VIEWS("views."),
 
 	/**
 	 * C2C home page

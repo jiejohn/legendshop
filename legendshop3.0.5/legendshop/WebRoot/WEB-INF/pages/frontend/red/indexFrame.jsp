@@ -30,18 +30,12 @@ function changeOrder(order,seq){
 
 
 </script>
-
 </head>
-
 <body>
-
 <jsp:include flush="true" page="/top${applicationScope.WEB_SUFFIX}">
 	<jsp:param name="sortId" value="-1" />
 </jsp:include>
-
 <tiles2:insertAttribute name="main" ignore="true" />
-
 <jsp:include page="/bottom${applicationScope.WEB_SUFFIX}"/>
- 
 </body>
 </html>

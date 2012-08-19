@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.common.page.FrontPage;
+import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.event.impl.VisitLogEvent;
 import com.legendshop.business.service.ImgFileService;
 import com.legendshop.core.UserManager;
@@ -130,7 +131,7 @@ public class ProductController extends BaseController{
 			if (PropertiesUtil.getObject(ParameterEnum.VISIT_LOG_ENABLE, Boolean.class)) {
 				EventHome.publishEvent(new VisitLogEvent(request.getRemoteAddr(),prod.getUserName(),userName,prod.getProdId(),prod.getName(),VisitTypeEnum.HW.value()));
 			}
-			return PathResolver.getPath(FrontPage.VIEWS);
+			return PathResolver.getPath(TilesPage.VIEWS);
 		} else {
 			UserMessages uem = new UserMessages();
 			Locale locale = localeResolver.resolveLocale(request);

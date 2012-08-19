@@ -47,9 +47,6 @@ public enum FrontPage implements PageDefinition {
 	/** The TOPNEWS. */
 	TOPNEWS("/topnews"),
 
-	/** The VIEWS. */
-	VIEWS("/views"),
-
 	/** The COPY Page. */
 	COPY("/copy"),
 

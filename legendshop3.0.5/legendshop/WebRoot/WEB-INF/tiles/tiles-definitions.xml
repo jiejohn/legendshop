@@ -78,6 +78,10 @@
 	<definition name="index.*" template="/WEB-INF/pages/frontend/{1}/indexFrame.jsp">
 		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/index.jsp" />
 	</definition>
+	
+	<definition name="views.*" template="/WEB-INF/pages/frontend/{1}/indexFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/views.jsp" />
+	</definition>
 
 	<definition name="home.*" template="/WEB-INF/pages/frontend/{1}/home/indexFrame.jsp">
 		<put-attribute name="top" value="/WEB-INF/pages/frontend/{1}/home/top.jsp" />
