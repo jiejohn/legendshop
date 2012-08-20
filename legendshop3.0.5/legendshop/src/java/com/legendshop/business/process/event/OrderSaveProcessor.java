@@ -42,7 +42,7 @@ public class OrderSaveProcessor extends BaseProcessor<Sub>{
 		com.legendshop.ws.service.sub.Sub wsSub = new com.legendshop.ws.service.sub.Sub();
 		wsSub.setProdName(sub.getProdName());
 		
-		client.exportOrderService(wsSub);
+		//client.exportOrderService(wsSub);
 	}
 
 
