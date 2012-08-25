@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<import resource="legendshop/applicationContext-aop.xml" />
+	<import resource="legendshop/applicationContext-db.xml" />
+	<import resource="legendshop/applicationContext-quartz.xml" />
+	<import resource="legendshop/applicationContext-security.xml" />
+	<import resource="legendshop/applicationContext-util.xml" />
+	<import resource="legendshop/applicationContext-cache.xml" />
+	<import resource="legendshop/applicationContext-dwr.xml" />
+	<import resource="legendshop/applicationContext-search.xml" />
+	<import resource="legendshop/applicationContext-service.xml" />
+	<import resource="legendshop/applicationContext-event.xml" />
+	
+	<!-- 权限管理部分 -->
+	<import resource="legendshop/security/applicationContext-command.xml" />
+	<import resource="legendshop/security/applicationContext-dao.xml" />
+	<import resource="legendshop/security/applicationContext-processor.xml" />
+	<import resource="legendshop/security/applicationContext-service.xml" />
+	
+	<!-- 插件部分 -->
+	<import resource="classpath*:/spring/legendshop/plugins/**/*-plugins.xml" />
+</beans>
+   
