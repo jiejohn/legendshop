@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+           
+    <global-method-security pre-post-annotations="enabled">
+    </global-method-security>
+    
+    <http pattern="/p/login" security="none"/>  
+    
+    <http use-expressions="true"  access-denied-page="/common/jsp/401.jsp"  entry-point-ref="authenticationProcessingFilterEntryPoint">
+		<intercept-url pattern="/p/**" access="isAuthenticated()" />
+		<intercept-url pattern="/admin/member/**" access="hasRole('ROLE_SUPERVISOR')" />
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />	
+		<intercept-url pattern="/plugins/system/**" access="hasRole('ROLE_SYSTEM')" />
+		<intercept-url pattern="/**" access="permitAll" />
+		<custom-filter ref="validateCodeAuthenticationFilter" position="FORM_LOGIN_FILTER" />
+		<logout invalidate-session="true" logout-success-url="/index" logout-url="/p/logout" delete-cookies="jforumUserInfo"/>
+		<!-- 
+		<custom-filter ref="_logoutFilter" position="LOGOUT_FILTER" />
+		 -->
+		 <session-management invalid-session-url="/common/jsp/401.jsp">
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        </session-management>
+    </http>
+    
+    <beans:bean id="authenticationProcessingFilterEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/p/login"></beans:property>
+	</beans:bean>
+<!-- 
+  <beans:bean id="_logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+	  <beans:constructor-arg index="0" value="/" />
+	  <beans:constructor-arg index="1">
+	   <beans:list>
+	    <beans:bean class="com.legendshop.business.helper.SecurityContextLogoutHandlerImpl" />
+	   </beans:list>
+	  </beans:constructor-arg>
+	  <beans:property name="filterProcessesUrl" value="/p/logout"/>
+ </beans:bean>
+	 -->
+	<beans:bean id="validateCodeAuthenticationFilter"
+		class="com.legendshop.business.service.ValidateCodeUsernamePasswordAuthenticationFilter">
+		<beans:property name="filterProcessesUrl" value="/admin/j_spring_security_check"></beans:property>
+		<beans:property name="authenticationSuccessHandler"
+			ref="loginLogAuthenticationSuccessHandler"></beans:property>
+		<beans:property name="authenticationFailureHandler"
+			ref="simpleUrlAuthenticationFailureHandler"></beans:property>
+		<beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
+		<beans:property name="loginHistoryService" ref="loginHistoryService"></beans:property>
+		<beans:property name="basketDao" ref="basketDao"></beans:property>
+		<beans:property name="supportSSO" value="false"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="loginService" class="com.legendshop.business.newservice.LoginServiceImpl" parent="validateCodeAuthenticationFilter">
+	</beans:bean>
+	
+	<beans:bean id="loginLogAuthenticationSuccessHandler"
+		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+		<beans:property name="defaultTargetUrl" value="/index"></beans:property>
+		<beans:property name="redirectStrategy" ref="originUrlRedirectStrategy"></beans:property>
+	</beans:bean>
+
+	<beans:bean id="originUrlRedirectStrategy" class="com.legendshop.core.security.OriginUrlRedirectStrategy">
+	</beans:bean>
+	
+	<beans:bean id="simpleUrlAuthenticationFailureHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<beans:property name="defaultFailureUrl" value="/p/login?error=true"></beans:property>
+	</beans:bean>
+
+	<!-- 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="authService">
+			<!--   如果用户的密码采用加密的话，可以加点“盐”
+				<password-encoder hash="md5" />
+			-->
+			  <password-encoder ref="passwordEncoder">
+			    <salt-source user-property="username"/>
+			  </password-encoder>
+			  
+		</authentication-provider>
+	</authentication-manager>
+	
+		<!-- 使用Md5算法加密 -->
+	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" >
+		<beans:property name="encodeHashAsBase64" value="false"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="authService" class="com.legendshop.business.service.impl.AuthServiceImpl">
+		<beans:property name="jdbcTemplate" ref="jdbcTemplate" />
+    </beans:bean>
+
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+	<beans:bean id="accessDecisionManager"
+		class="org.springframework.security.access.vote.AffirmativeBased">
+		<beans:property name="allowIfAllAbstainDecisions" value="false" />
+		<beans:property name="decisionVoters">
+			<beans:list>
+				<beans:bean class="org.springframework.security.access.vote.RoleVoter" />
+				<beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	
+	<beans:bean id="loginHistoryService" class="com.legendshop.business.service.impl.LoginHistoryServiceImpl">
+        <beans:property name="jdbcTemplate" ref="jdbcTemplate"></beans:property>
+        <beans:property name="loginHistoryDao" ref="loginHistoryDao"></beans:property>
+        <beans:property name="threadPoolExecutor" ref="threadPoolExecutor"></beans:property>
+    </beans:bean>
+
+	<beans:bean id="loginHistoryDao" class="com.legendshop.business.dao.impl.LoginHistoryDaoImpl" parent="baseDao">
+	</beans:bean>
+
+
+</beans:beans>
