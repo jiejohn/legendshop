@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     %> 
     </table>
     <br>
-      <b>session参数</b><br>
+      <b>session参数</b> <%=session.getId() %><br>
     <% 
     Enumeration sessionContent = session.getAttributeNames();
     %>
