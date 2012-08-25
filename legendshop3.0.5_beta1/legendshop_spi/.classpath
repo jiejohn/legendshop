@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/resource"/>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_lib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_model"/>
+	<classpathentry kind="lib" path="/legendshop_lib/jeelib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="/legendshop_lib/jeelib/servlet-api.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/legendshop_central"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/legendshop_core"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/legendshop_search"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/legendshop_util"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
