@@ -10,7 +10,7 @@
     
     <http pattern="/p/login" security="none"/>  
     
-    <http use-expressions="true"  access-denied-page="/common/jsp/401.jsp"  entry-point-ref="authenticationProcessingFilterEntryPoint">
+    <http use-expressions="true"  access-denied-page="/p/login"  entry-point-ref="authenticationProcessingFilterEntryPoint">
 		<intercept-url pattern="/p/**" access="isAuthenticated()" />
 		<intercept-url pattern="/admin/member/**" access="hasRole('ROLE_SUPERVISOR')" />
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />	
@@ -21,7 +21,7 @@
 		<!-- 
 		<custom-filter ref="_logoutFilter" position="LOGOUT_FILTER" />
 		 -->
-		 <session-management invalid-session-url="/common/jsp/401.jsp">
+		 <session-management invalid-session-url="/p/login">
             <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
         </session-management>
     </http>
