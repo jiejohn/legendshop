@@ -4,16 +4,15 @@
 	<div class="uc_minb">
 		<div class="dback">
 			<h3>
-				<span>GLN1357</span>欢迎您！
+				<span><lb:currentUser /></span>，欢迎您！
 			</h3>
 			<p>会员等级：普通会员</p>
 		</div>
 	</div>
-
 	<div class="uctit m10">
 		<h3 class="focus">
 		
-			<a href="<ls:url address='/p/usercenter'/>">会员中心首页</a>
+			<a href="<ls:url address='/p/usercenter'/>">个人中心首页</a>
 		</h3>
 		<h3>
 			<a href="<ls:url address='/p/order'/>">我的订单</a>

@@ -2,8 +2,8 @@
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <!----地址---->
 <div class="w addr">
-	<span><a href="#">首页</a></span>&gt;<span><a href="#">电脑办公</a></span>&gt;<span><a
-		href="#">电脑整机</a></span>&gt;<span>笔记本</span>
+	<span><a href="#">首页</a></span>&gt;<span><a href="#">个人中心</a></span>&gt;<span><a
+		href="#">个人中心首页</a></span>&gt;<span>&nbsp;</span>
 </div>
 <!----地址end---->
 
@@ -31,7 +31,7 @@
 			<div id="i-userinfo">
 				<div class="username">
 					<div id="userinfodisp" class="fl ftx-03">
-						<strong>gln13571357</strong>,欢迎您！上一次登录时间：2012-04-15 12:14:51
+						<div class="rank r3">&nbsp;</div>您上一次登录的时间：2012-04-15 12:14:51
 					</div>
 					<div id="jdTask" class="extra"></div>
 				</div>
@@ -163,15 +163,16 @@
 						<th width="14%">操作</th>
 					</tr>
 
+<c:forEach items="${requestScope.list}" var="order" varStatus="status">
 					<tr>
-						<td><a href="#" target="_blank">158861817</a></td>
+						<td><a href='${pageContext.request.contextPath}/p/orderDetail/${order.subNumber}' target="_blank">${order.subNumber}</a></td>
 						<td><div class="img-list">
 								<a target="_blank" href="#"><img
 									title="TP-LINK TL-WR841N  300M无线路由器（蓝色）"
 									src="../images/a173ba1c-84b2-4270-a3ee-0ddaf4b95484.jpg"></a>
-							</div></td>
+							</div>${order.prodName}</td>
 						<td>lf</td>
-						<td>￥258.00<br>货到付款
+						<td><fmt:formatNumber type="currency" value="${order.total}" pattern="${CURRENCY_PATTERN}"/><br>货到付款
 						</td>
 						<td><span class="ftx-03">2012-02-23 <br /> 11:10:00
 						</span></td>
@@ -197,7 +198,7 @@
 							target="_blank" href="#">晒单</a>|<a target="_blank" href="#">评价</a><a
 							target="_blank" href="#" class="btn-again">还要买</a></td>
 					</tr>
-
+</c:forEach>
 				</tbody>
 			</table>
 
