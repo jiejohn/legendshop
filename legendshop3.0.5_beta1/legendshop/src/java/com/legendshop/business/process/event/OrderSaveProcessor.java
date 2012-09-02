@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.legendshop.event.processor.BaseProcessor;
 import com.legendshop.model.entity.Sub;
-import com.legendshop.ws.service.client.SubService_Client;
+//import com.legendshop.ws.service.client.SubService_Client;
 
 /**
  * 下订单时触发的处理器
@@ -37,10 +37,10 @@ public class OrderSaveProcessor extends BaseProcessor<Sub>{
 	@Override
 	public void process(Sub sub) { 
 		log.info("UserRegProcessor process calling, task= " + sub);
-		System.out.println("UserRegProcessor process calling, task= 111111111111111" + sub);
-		SubService_Client client = new SubService_Client();
-		com.legendshop.ws.service.sub.Sub wsSub = new com.legendshop.ws.service.sub.Sub();
-		wsSub.setProdName(sub.getProdName());
+//		System.out.println("UserRegProcessor process calling, task= 111111111111111" + sub);
+//		SubService_Client client = new SubService_Client();
+//		com.legendshop.ws.service.sub.Sub wsSub = new com.legendshop.ws.service.sub.Sub();
+//		wsSub.setProdName(sub.getProdName());
 		
 		//client.exportOrderService(wsSub);
 	}
