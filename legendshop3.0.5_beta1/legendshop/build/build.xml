@@ -67,7 +67,7 @@
 	<!-- 检查环境 -->
 	<target name="check-env">
 		<echo>检查JDK版本为6.0</echo>
-		<fail message="Must Set the JAVA_HOME to JDK5.0">
+		<fail message="Must Set the JAVA_HOME to JDK6.0">
 			<condition>
 				<not>
 					<equals arg1="${ant.java.version}" arg2="1.6" />
