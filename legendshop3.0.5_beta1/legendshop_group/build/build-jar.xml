@@ -1,7 +1,8 @@
-<project name="group"  basedir="." default="build-jar">
+<project name="core"  basedir="." default="build-jar">
 	<property file="application.properties" />
 	
 	<property file="../../legendshop_lib/build/build.properties" />
+
 	<!--
     <target name="callingTarget" depends="build">
             <antcall target="jar-jocky">
@@ -9,17 +10,190 @@
             </antcall>
      </target>
 	-->
-	<target name="build-jar">
-		    <subant target="build">
-		   	 	<file file="../jocky_build.xml"/>
-		    </subant>
-		    <subant target="jar-jocky">
-		    	<property name="app.name" value="${app.name}"/>
-		    	<property name="jocky.bin" value="${jocky.bin}"/>
-		    	<property name="resource.dir" value="${resource.dir}"/>
-		    	<property name="src.dir" value="${src.dir}"/>
-		   	 	<file file="../../legendshop_lib/build/build.xml"/>
-		    </subant>
+	<target name="build-jar" depends="jar">
+		<copy todir="${release.dir}" preservelastmodified="true">
+			<fileset dir="${dist.dir}" includes="${app.name}.jar" />
+		</copy>
 	</target>
+	
+    	<property name="legendshop_central.location" value="../../legendshop_central"/>
+	    <property name="legendshop_core.location" value="../../legendshop_core"/>
+	    <property name="legendshop_lib.location" value="../../legendshop_lib"/>
+	    <property name="legendshop_model.location" value="../../legendshop_model"/>
+	    <property name="legendshop_spi.location" value="../../legendshop_spi"/>
+	    <property name="legendshop_util.location" value="../../legendshop_util"/>
+	    <path id="project.classpath">
+	        <path refid="mainproject.classpath"/>
+	        <path refid="legendshop_central.classpath"/>
+	        <path refid="legendshop_core.classpath"/>
+	        <path refid="legendshop_lib.classpath"/>
+	        <path refid="legendshop_model.classpath"/>
+	        <path refid="legendshop_spi.classpath"/>
+	        <path refid="legendshop_util.classpath"/>
+	    </path>
+	    <path id="mainproject.classpath">
+	        <pathelement location="bin"/>
+	        <pathelement location="${legendshop_lib.location}/jeelib/servlet-api.jar"/>
+	    </path>
+	    <path id="legendshop_central.classpath">
+	        <pathelement location="${legendshop_central.location}/bin"/>
+	        <pathelement location="${legendshop_lib.location}/jeelib/servlet-api.jar"/>
+	    </path>
+	    <path id="legendshop_core.classpath">
+	        <pathelement location="${legendshop_core.location}/bin"/>
+	        <pathelement location="${legendshop_lib.location}/jeelib/jsp-api.jar"/>
+	        <pathelement location="${legendshop_lib.location}/jeelib/servlet-api.jar"/>
+	    </path>
+	    <path id="legendshop_lib.classpath">
+	        <pathelement location="${legendshop_lib.location}/bin"/>
+	        <pathelement location="${legendshop_lib.location}/lib/activation-1.1.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/antlr-2.7.7.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/aopalliance.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/asm.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/aspectjweaver.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/bsf-2.3.0.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/bsh-2.0b4.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/c3p0-0.9.2-pre2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/cglib-2.2.0.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/commons-beanutils-1.8.0.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/commons-digester-1.8.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/commons-fileupload-1.2.1.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/commons-httpclient-3.1.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/commons-lang-2.3.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/commons-logging-1.1.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/commons-validator-1.3.1.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/commons.codec-1.3.0.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/commons.collections-3.2.1.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/commons.io-1.4.0.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/displaytag-1.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/displaytag-export-poi-1.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/dom4j-1.6.1.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/dwr.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/ehcache-1.6.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/ezmorph-1.0.6.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/freemarker.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/hibernate3.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/htmlparser-1.5.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/IKAnalyzer3.2.5Stable.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/imageinfo-1.9.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/itext-1.3.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/iTextAsian.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/jarjar-0.6.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/java-core-2.6.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/javassist-3.9.0.GA.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/jaxen-1.1-beta-4.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/jcaptcha-1.0-all.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/jdom-1.0.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/json-lib-2.3-jdk15.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/jstl-1.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/jta.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/log4j-1.2.15.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/lucene-analyzers-3.0.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/lucene-core-3.0.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/lucene-highlighter-3.0.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/lucene-memory-3.0.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/mail.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/mchange-commons-java-0.2.1.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/mysql-connector-java-5.0.8-bin.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.aop-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.asm-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.aspects-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.beans-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.context-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.context.support-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.core-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.expression-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.jdbc-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.orm-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.transaction-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.web-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/org.springframework.web.servlet-3.1.0.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/oro-2.0.8.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/poi-3.2-FINAL.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/slf4j-all-log4j12-1.4.3.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/spring-security-config-3.1.2.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/spring-security-core-3.1.2.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/spring-security-web-3.1.2.RELEASE.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/spymemcached-2.8.1.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/standard-1.0.6.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/tiles-api-2.2.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/tiles-core-2.2.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/tiles-freemarker-2.2.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/tiles-jsp-2.2.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/tiles-servlet-2.2.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/tiles-template-2.2.2.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/xerces-2.8.1.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/xpp3_min-1.1.3.4.O.jar"/>
+	        <pathelement location="${legendshop_lib.location}/lib/xstream-1.2.1.jar"/>
+	    </path>
+	    <path id="legendshop_model.classpath">
+	        <pathelement location="${legendshop_model.location}/bin"/>
+	    </path>
+	    <path id="legendshop_spi.classpath">
+	        <pathelement location="${legendshop_spi.location}/bin"/>
+	        <pathelement location="${legendshop_lib.location}/jeelib/jsp-api.jar"/>
+	        <pathelement location="${legendshop_lib.location}/jeelib/servlet-api.jar"/>
+	    </path>
+	    <path id="legendshop_util.classpath">
+	        <pathelement location="${legendshop_util.location}/bin"/>
+	        <pathelement location="${legendshop_lib.location}/jeelib/servlet-api.jar"/>
+	        <pathelement location="${legendshop_lib.location}/ejblib/ejb.jar"/>
+	        <pathelement location="${legendshop_lib.location}/ejblib/jms.jar"/>
+	    </path>
+	
+	<!-- 系统初始化 -->
+		<target name="init" depends="clean">
+			<echo>系统初始化,建立相应的目录</echo>
+			<!-- Create the time stamp -->
+			<tstamp />
+			<!-- Create the build directory structure used by compile -->
+			<mkdir dir="${class.dir}" />
+			<mkdir dir="${dist.dir}" />
+		</target>
+
+		<!-- 清除文件 -->
+		<target name="clean" description="Deletes the build and distribution directories">
+			<delete dir="${class.dir}" />
+			<mkdir dir="${dist.dir}" />
+		</target>
+
+		<!-- 检查环境 -->
+		<target name="check-env">
+			<echo>检查JDK版本为6.0</echo>
+			<fail message="Must Set the JAVA_HOME to JDK6.0">
+				<condition>
+					<not>
+						<equals arg1="${ant.java.version}" arg2="1.6" />
+					</not>
+				</condition>
+			</fail>
+		</target>
+		<!--   编译系统并拷贝相应的属性文件 -->
+		<target name="compile" depends="init" description="mkdir and compile file into class.dir">
+			<echo>从${src.dir}编译代码到目录${class.dir}并拷贝相关的属性文件</echo>
+			<javac srcdir="${src.dir}" destdir="${class.dir}" encoding="utf-8" debug="on" source="1.6">
+				<classpath refid="project.classpath" />
+			</javac>
+			<!-- 拷贝代码目录下的属性文件 -->
+			<copy todir="${class.dir}" preservelastmodified="true">
+				<fileset dir="${src.dir}" includes="${config_file.type}" />
+			</copy>
+			<!-- 拷贝resource目录下的属性文件 -->
+			<copy todir="${class.dir}" preservelastmodified="true">
+				<fileset dir="${resource.dir}" includes="**/*" />
+			</copy>
+		</target>
+
+		<!--编译客户端包  -->
+		<target name="jar" depends="compile" description="--> tarapp_client">
+			<echo>编译客户端jar包：${app.name} </echo>
+			<jar destfile="${dist.dir}/${app.name}.jar">
+				<fileset dir="${class.dir}" includes="com/legendshop/**/*.class" excludes="**/test/**/*.class" />
+				<fileset dir="${src.dir}" includes="${config_file.type}" />
+				<fileset dir="${resource.dir}" includes="**/*" />
+			</jar>
+		</target>
+
+	
 </project>
 
