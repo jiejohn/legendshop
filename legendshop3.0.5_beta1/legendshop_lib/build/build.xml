@@ -37,7 +37,7 @@
 		</target>
 
 	<!-- 系统初始化 -->
-	<target name="init" depends="check-env">
+	<target name="init">
 		<echo>系统初始化,建立相应的目录</echo>
 		<!-- Create the time stamp -->
 		<tstamp />
