@@ -23,7 +23,6 @@ import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.event.EventId;
 import com.legendshop.business.form.UserForm;
 import com.legendshop.business.service.BasketService;
-import com.legendshop.business.service.LoginService;
 import com.legendshop.business.service.UserDetailService;
 import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.UserManager;
@@ -41,6 +40,7 @@ import com.legendshop.event.GenericEvent;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.UserDetail;
 import com.legendshop.spi.constants.Constants;
+import com.legendshop.spi.service.LoginService;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -191,9 +191,7 @@ public class UserController extends BaseController{
 		String result =  userDetailService.saveUserReg(request, response,userForm);
 		//用户注册即登录
 		if(loginService!=null){
-			Authentication authentication = loginService.onAuthentication(request, response, userForm.getName(), userForm.getPassword());
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			request.getSession().setAttribute(Constants.SPRING_SECURITY_CONTEXT, SecurityContextHolder.getContext());
+			 loginService.onAuthentication(request, response, userForm.getName(), userForm.getPassword());
 		}
 		return result;
 	}

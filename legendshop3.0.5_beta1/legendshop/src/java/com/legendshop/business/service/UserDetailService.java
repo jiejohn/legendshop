@@ -146,5 +146,32 @@ public interface UserDetailService extends BaseService{
 	public abstract String updateUserReg(HttpServletRequest request, HttpServletResponse response, String userName,
 			String registerCode) ;
 
+	/**
+	 * 客户是否存在 true: 客户已经存在 false: 客户不存在.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @return true, if is user exist
+	 */
+	public abstract boolean isUserExist(String userName);
+
+	/**
+	 * Email是否存在 true: Email已经存在 false: Email不存在.
+	 * 
+	 * @param email
+	 *            the email
+	 * @return true, if is email exist
+	 */
+	public abstract boolean isEmailExist(String email);
+
+	// 店名是否存在
+	/**
+	 * Checks if is shop exist.
+	 * 
+	 * @param shopName
+	 *            the shop name
+	 * @return true, if is shop exist
+	 */
+	public abstract boolean isShopExist(String shopName);
 
 }

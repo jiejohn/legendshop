@@ -406,4 +406,19 @@ public class UserDetailServiceImpl  extends BaseServiceImpl  implements UserDeta
 		return result;
 	}
 
+	@Override
+	public boolean isUserExist(String userName) {
+		return userDetailDao.isUserExist(userName);
+	}
+
+	@Override
+	public boolean isEmailExist(String email) {
+		return userDetailDao.isEmailExist(email);
+	}
+
+	@Override
+	public boolean isShopExist(String shopName) {
+		return userDetailDao.isShopExist(shopName);
+	}
+
 }

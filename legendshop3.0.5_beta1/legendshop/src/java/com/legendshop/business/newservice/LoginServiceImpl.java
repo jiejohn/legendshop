@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.legendshop.business.service.ValidateCodeUsernamePasswordAuthenticationFilter;
+import com.legendshop.spi.constants.Constants;
 
 /**
  * 用户登录服务
@@ -29,7 +31,10 @@ public class LoginServiceImpl extends ValidateCodeUsernamePasswordAuthentication
 	public Authentication onAuthentication(HttpServletRequest request, HttpServletResponse response, String username,
 			String password) {
 		log.debug("userName {} register and login",username);
-		return super.onAuthentication(request, response, username, password);
+		Authentication authentication = super.onAuthentication(request, response, username, password);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		request.getSession().setAttribute(Constants.SPRING_SECURITY_CONTEXT, SecurityContextHolder.getContext());
+		return authentication;
 	}
 
 }

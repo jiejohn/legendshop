@@ -29,6 +29,7 @@ import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.randing.CaptchaServiceSingleton;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.spi.constants.Constants;
+import com.legendshop.spi.service.LoginService;
 
 /**
  * 带验证码校验功能的用户名、密码认证过滤器
