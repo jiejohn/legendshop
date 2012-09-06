@@ -78,7 +78,9 @@
 				<password-encoder hash="md5" />
 			-->
 			  <password-encoder ref="passwordEncoder">
+
 			    <salt-source user-property="username"/>
+		
 			  </password-encoder>
 			  
 		</authentication-provider>
@@ -88,6 +90,9 @@
 	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" >
 		<beans:property name="encodeHashAsBase64" value="false"></beans:property>
 	</beans:bean>
+	<!-- 
+	<beans:bean id="ssoPasswordEncoder" class="com.legendshop.core.sso.SSOPasswordEncoder" />
+	 -->
 	
 	<beans:bean id="authService" class="com.legendshop.business.service.impl.AuthServiceImpl">
 		<beans:property name="jdbcTemplate" ref="jdbcTemplate" />
