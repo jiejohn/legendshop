@@ -47,11 +47,12 @@ public class CookiesSSOHandler implements Handler {
 					form.setUserName(loginedUserName);
 					form.setEnabled("1");
 					form.setPassword(loginedUserName);
+					form.setNickName(loginedUserName);
 					form.setUserMail(loginedUserName + "@legendshop.cn");
 					userDetailService.saveUserReg(request, response, form);
 				}
 				
-				loginService.onAuthentication(request, response, loginedUserName, "root");
+				loginService.onAuthentication(request, response, loginedUserName, loginedUserName);
 				
 			}else if(requiresLogout(loginedUserName,userName)){
 				logout(request,response); 

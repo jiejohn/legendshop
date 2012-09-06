@@ -8,6 +8,7 @@
 package com.legendshop.business.helper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.FilterChain;
@@ -19,9 +20,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.legendshop.business.helper.impl.CookiesSSOHandler;
 import com.legendshop.core.exception.ApplicationException;
 import com.legendshop.core.exception.EntityCodes;
-import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.util.ContextServiceLocator;
 
 /**
@@ -50,7 +51,6 @@ public class LegendFilter extends OncePerRequestFilter{
 			}
 			chain.doFilter(request, response);
 		} catch (Exception e) {
-			ThreadLocalContext.clean();
 			throw new ApplicationException(e, "LegendFilter Fail", EntityCodes.SYSTEM);
 		}
 		
@@ -91,11 +91,15 @@ public class LegendFilter extends OncePerRequestFilter{
 		
 	}
 
-	private List<Handler> getHandlers(){
-		if(handlers == null){
-			handlers = (List)ContextServiceLocator.getInstance().getBean("handlers");
+	@Override
+	protected void initFilterBean() throws ServletException {
+		System.out.println("LegendFilter initFilterBean");
+		handlers = new ArrayList<Handler>();
+		if (ContextServiceLocator.getInstance().containsBean("cookiesSSOHandler")) {
+			CookiesSSOHandler handler = (CookiesSSOHandler) ContextServiceLocator.getInstance().getBean(
+					"cookiesSSOHandler");
+			handlers.add(handler);
 		}
-		return handlers;
 	}
 	
 }
