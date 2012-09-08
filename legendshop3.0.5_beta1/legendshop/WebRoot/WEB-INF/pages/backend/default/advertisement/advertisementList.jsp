@@ -49,7 +49,7 @@
 		          <display:column title="商城名称" property="userName"  sortable="true"></display:column>
               </auth:auth>
               <display:column title="图片">
-		      		<a href="${pageContext.request.contextPath}/photoserver/photo/${item.picUrl}" target="_blank"><img src="${pageContext.request.contextPath}/common/default/images/filter_search.png"></a></a>
+		      		<a href="<ls:photo item='${item.picUrl}'/>" target="_blank"><img src="${pageContext.request.contextPath}/common/default/images/filter_search.png"></a></a>
 		      </display:column>
 		      <display:column title="操作" media="html" class="actionwidth">
 		      <a href= "${pageContext.request.contextPath}/admin/advertisement/load/${item.id}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "></a>

@@ -354,7 +354,7 @@
       	<td><div align="right">商城图片</div></td>
       	<td><p><input type="file" name="file" id="file"/><br>
 			<c:if test="${shopDetail.shopPic != null}">
-              <img src="${pageContext.request.contextPath}/photoserver/photo/${shopDetail.shopPic}" height="150" width="200"/> &nbsp;&nbsp;&nbsp;
+              <img src="<ls:photo item='${shopDetail.shopPic}'/>" height="150" width="200"/> &nbsp;&nbsp;&nbsp;
              </c:if>
 						</p></td>
       </tr>
@@ -372,10 +372,10 @@
               身份证： ${shopDetail.idCardNum}<br><br>
             </c:if>
             <c:if test="${shopDetail.idCardPic != null}">
-              身份证照片： <img src="${pageContext.request.contextPath}/photoserver/photo/${shopDetail.idCardPic }" height="150" width="200"/> &nbsp;&nbsp;&nbsp;
+              身份证照片： <img src="<ls:photo item='${shopDetail.idCardPic}'/>" height="150" width="200"/> &nbsp;&nbsp;&nbsp;
               </c:if>
               <c:if test="${shopDetail.trafficPic != null}">
-             营业执照照片： <img src="${pageContext.request.contextPath}/photoserver/photo/${shopDetail.trafficPic }" height="150" width="200"/><br>
+             营业执照照片： <img src="<ls:photo item='${shopDetail.trafficPic}'/>" height="150" width="200"/><br>
              </c:if>
            </p>
         </td>

@@ -2,6 +2,7 @@
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
 <%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <html>
 	<head>
 		<title>创建 Logo</title>
@@ -106,8 +107,8 @@
 						</td>
 						<td>
 
-								<a href="${pageContext.request.contextPath}/photoserver/photo/${bean.banner}" target="_blank"> <img
-									src="${pageContext.request.contextPath}/photoserver/photo/${bean.banner}" width="170" height="44"/>
+								<a href="<ls:photo item='${bean.banner}'/>" target="_blank"> <img
+									src="<ls:photo item='${bean.banner}'/>" width="170" height="44"/>
 							</a>
 
 						</td>

@@ -7,14 +7,14 @@
       <td valign="top" align="left">
       <c:forEach items="${requestScope.SORT_ADV_TOP}" var="adv">
 		<table width="205px"  cellspacing="0" cellpadding="0" style="margin-bottom: 4px; margin-right: 5px;"  class="picstyle">
-			<tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="100%"/></a></td></tr>
+			<tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="100%"/></a></td></tr>
 		 </table>
 		</c:forEach>
          <jsp:include page="/topnews?topsortnews=1" flush="true"/>
          
        <c:forEach items="${requestScope.SORT_ADV_MID1}" var="adv">
 		<table width="205px" cellpadding="0" cellspacing="0" style="margin-bottom: 4px; margin-right: 5px;" class="picstyle">
-			<tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="100%"/></a></td></tr>
+			<tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="100%"/></a></td></tr>
 		 </table>
 		</c:forEach>        
          
@@ -22,13 +22,13 @@
          
        <c:forEach items="${requestScope.SORT_ADV_MID2}" var="adv">
 		<table width="205px" cellpadding="0" cellspacing="0" style="margin-bottom: 4px; margin-right: 5px;" class="picstyle">
-			<tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="100%"/></a></td></tr>
+			<tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="100%"/></a></td></tr>
 		 </table>
 		</c:forEach>    
         <jsp:include page="/hoton?sortId=${sort.sortId}" flush="true"/>
         <c:forEach items="${requestScope.SORT_ADV_BOTTOM}" var="adv">
 			<table width="205px" cellpadding="0" cellspacing="0" style="margin-bottom:4px; margin-right: 5px;" class="picstyle">
-				<tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="100%"/></a></td></tr>
+				<tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="100%"/></a></td></tr>
 			</table>
 	    </c:forEach>
         </td>

@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/default/css/overlay.css" />
 <c:forEach items="${requestScope.USER_REG_ADV_740}" var="adv">
 <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 5px" class="picstyle">
-<tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="740px"/></a></td></tr>
+<tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="740px"/></a></td></tr>
  </table>
 </c:forEach>
 	<table class="tables" cellpadding="0" cellspacing="0">
@@ -24,7 +24,7 @@
                                                             <td align="center" >
                                                             <div id="apple">
                                                              <a href="${pageContext.request.contextPath}/shop/${league.friendId}">
-                                                                    <img src="${pageContext.request.contextPath}/photoserver/photo/${league.banner}" 
+                                                                    <img src="<ls:photo item='${league.banner}'/>" 
                                                                         height="65px" style="margin: 2px" title="${league.province}/${league.city}/${league.area}/${league.friendId}">
                                                              </a>
                                                             </div>

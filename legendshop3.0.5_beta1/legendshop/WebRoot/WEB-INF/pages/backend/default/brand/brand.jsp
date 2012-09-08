@@ -99,8 +99,8 @@
 						</td>
 						<td>
 
-								<a href="${pageContext.request.contextPath}/photoserver/photo/${bean.brandPic}" target="_blank"> <img
-									src="${pageContext.request.contextPath}/photoserver/photo/${bean.brandPic}" height="65"/>
+								<a href="<ls:photo item='${bean.brandPic}'/>" target="_blank"> <img
+									src="<ls:photo item='${bean.brandPic}'/>" height="65"/>
 							</a>
 
 						</td>

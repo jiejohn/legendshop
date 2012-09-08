@@ -16,7 +16,7 @@
 	    <tr>
                <c:choose>
                     <c:when test="${sort.picture !=null}">
-                      <td><img src="${pageContext.request.contextPath}/photoserver/photo/${sort.picture}" width="740px" height="240px" class="banner"></a>
+                      <td><img src="<ls:photo item='${sort.picture}'/>" width="740px" height="240px" class="banner"></a>
                       </td>
                     </c:when>
                     <c:otherwise>
@@ -101,7 +101,7 @@
                                                             <td align="center" >
                                                             <div id="apple">
                                                                 <a href="${pageContext.request.contextPath}/views/${prodDetail.prodId}">
-                                                                    <img src="${pageContext.request.contextPath}/photoserver/images/${prodDetail.pic}" width="160px"
+                                                                    <img src="<ls:images item='${prodDetail.pic}'/>" width="160px"
                                                                         height="118px" style="margin: 2px" ></a>
                                                             </div>
                                                             </td>

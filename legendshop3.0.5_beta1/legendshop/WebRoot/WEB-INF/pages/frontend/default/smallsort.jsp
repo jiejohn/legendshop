@@ -23,7 +23,7 @@
                     <tr> 
                       <td>
 						<a target="_blank" href="${pageContext.request.contextPath}/sort/${sort.sortId}">
-						<img src="${pageContext.request.contextPath}/photoserver/photo/${sort.picture}" width="740px" class="banner" height="180px"></a>
+						<img src="<ls:photo item='${sort.picture}'/>" width="740px" class="banner" height="180px"></a>
 					  </td>
                     </tr>
         <tr> 
@@ -116,7 +116,7 @@
 															<td rowspan="3" align="center" width="50%">
 															<div id="apple">
 																<a href="${pageContext.request.contextPath}/views/${prodDetail.prodId}">
-																	<img src="${pageContext.request.contextPath}/photoserver/images/${prodDetail.pic}" width="142px"
+																	<img src="<ls:images item='${prodDetail.pic}'/>" width="142px"
 																		height="105px" style="margin: 5px" ></a></div>
 															</td>
 														</tr>

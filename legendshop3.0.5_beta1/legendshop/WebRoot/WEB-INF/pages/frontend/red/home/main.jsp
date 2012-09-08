@@ -189,7 +189,7 @@
 	<div class="indexflash">
 		<c:forEach items="${indexJpgList}" var="slideAdv" begin="0" end="0">
 			<a href="${slideAdv.link}" title="${slideAdv.title}"><img
-				src="<ls:templateResource item='/photoserver/images/${slideAdv.img}'/>"
+				src="<ls:images item='${slideAdv.img}'/>"
 				alt="${slideAdv.alt}" width="650" height="335"> </a>
 		</c:forEach>
 		<div class="fla_num">

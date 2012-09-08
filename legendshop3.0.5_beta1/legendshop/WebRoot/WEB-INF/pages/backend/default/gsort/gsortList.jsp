@@ -37,7 +37,7 @@
       <display:column title="顺序" class="orderwidth"><%=offset++%></display:column>
       <display:column title="名称" property="sortName" sortable="true" sortName="sortName"></display:column>
       <display:column title="次序" property="seq" sortable="true" sortName="seq"></display:column>
-      <display:column title="图片" style="width:300px" media="html"><a href="${pageContext.request.contextPath}/photoserver/photo/${item.picture}" target="_blank"><img src="${pageContext.request.contextPath}/photoserver/photo/${item.picture}" height="60" width="300"/></a></display:column>
+      <display:column title="图片" style="width:300px" media="html"><a href="<ls:photo item='${item.picture}'/>" target="_blank"><img src="<ls:photo item='${item.picture}'/>" height="60" width="300"/></a></display:column>
       <auth:auth ifAnyGranted="F_VIEW_ALL_DATA"><display:column title="商城名称" property="userName" sortable="true" sortName="userName"></display:column></auth:auth>
       <display:column title="操作" media="html" style="width:100px">
     <a href="${pageContext.request.contextPath}/admin/nsort/query?sortId=${item.sortId}">二级类型</a>

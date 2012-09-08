@@ -15,13 +15,13 @@
 					<c:choose>
 						<c:when test="${fn:length(prod.name) > 9}">
 						<span>
-							<a href="${pageContext.request.contextPath}/views/${prod.id}" ><img src="${pageContext.request.contextPath}/photoserver/images/${prod.pic}" title="${prod.name}" id="prodvisited"></a></span><br>${fn:substring(prod.name,0,9)}...<br>
+							<a href="${pageContext.request.contextPath}/views/${prod.id}" ><img src="<ls:images item='${prod.pic}'/>" title="${prod.name}" id="prodvisited"></a></span><br>${fn:substring(prod.name,0,9)}...<br>
 									
 						</c:when>
 						<c:otherwise>
 						<span >
 							<a href="${pageContext.request.contextPath}/views/${prod.id}"><img
-									src="${pageContext.request.contextPath}/photoserver/images/${prod.pic}" id="prodvisited"></a></span><br>${prod.name}<br>
+									src="<ls:images item='${prod.pic}'/>" id="prodvisited"></a></span><br>${prod.name}<br>
 									
 						</c:otherwise>
 					</c:choose>

@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
@@ -98,7 +97,7 @@ $(function(){
 <!----地址end-
  <div class="w banner1"><img src="${pageContext.request.contextPath}/img/group/banner1.gif" width="1216" height="128" /></div>
 <c:forEach items="${requestScope.INDEX_ADV_TOP}" var="adv">
- <div class="w banner1"><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" width="1216" height="128" /></a></div>
+ <div class="w banner1"><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" width="1216" height="128" /></a></div>
 </c:forEach>
 --->
 <!----两栏---->
@@ -159,7 +158,7 @@ $(function(){
             </div>
             
             <div class="side">
-                <div class="deal-buy-cover-img"><img src="${pageContext.request.contextPath}/photoserver/photo/${groupProduct.product.pic}" width="440"></div>
+                <div class="deal-buy-cover-img"><img src="<ls:photo item='${groupProduct.product.pic}'/>" width="440"></div>
             </div>
             <div class="clear"></div>
             

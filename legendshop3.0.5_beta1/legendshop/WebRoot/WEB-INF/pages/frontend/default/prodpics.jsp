@@ -8,16 +8,16 @@ $(function() {
 });
 </script>
                               <div id="apple">
-                                <img src="${pageContext.request.contextPath}/photoserver/images/${prod.pic}" width="256px" height="188px"  style="margin-right: 10px" rel="#${prod.prodId}"/>
+                                <img src="<ls:images item='${prod.pic}'/>" width="256px" height="188px"  style="margin-right: 10px" rel="#${prod.prodId}"/>
                                 </div>
                                 <div class="apple_overlay" id="${prod.prodId}">
-							    		<img src="${pageContext.request.contextPath}/photoserver/photo/${prod.pic}" width="640px" height="470px"/>
+							    		<img src="<ls:photo item='${prod.pic}'/>" width="640px" height="470px"/>
 							            <div class="details">
 							                <h2>${prod.name}</h2>
 							            </div>
 							     </div>
 							     <!-- 
-							      <a href="${pageContext.request.contextPath}/photoserver/photo/${prod.pic}" target="_blank"> [<fmt:message key="view.big.picture"/>]</a>
+							      <a href="<ls:photo item='${prod.pic}'/>" target="_blank"> [<fmt:message key="view.big.picture"/>]</a>
 							       -->
 							       
 <c:if test="${requestScope.prodPics != null && fn:length(requestScope.prodPics) > 0}">
@@ -30,7 +30,7 @@ $(function() {
         <!-- 图片列表 begin -->
         <c:forEach items="${requestScope.prodPics}" var="pics">
          <div class="pic">
-          	<a href="${pageContext.request.contextPath}/productGallery/${prod.prodId}" target="_blank"><img src="${pageContext.request.contextPath}/photoserver/images/${pics.filePath}" width="65" height="50" /></a>
+          	<a href="${pageContext.request.contextPath}/productGallery/${prod.prodId}" target="_blank"><img src="<ls:images item='${pics.filePath}'/>" width="65" height="50" /></a>
          </div>
          </c:forEach>
         <!-- 图片列表 end -->

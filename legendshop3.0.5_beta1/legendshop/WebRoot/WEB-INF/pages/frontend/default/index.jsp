@@ -4,7 +4,7 @@
 <div id="bodyer">
 <c:forEach items="${requestScope.INDEX_ADV_TOP}" var="adv">
 <table width="954px" cellpadding="0" cellspacing="0" style="margin-top: 5px" class="picstyle">
-  <tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="100%"/></a></td></tr>
+  <tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="100%"/></a></td></tr>
  </table>
 </c:forEach>
 <table width="950px" cellspacing="0" cellpadding="0" align="center" style="margin-top: 4px">
@@ -33,7 +33,7 @@
 </table>
 <c:forEach items="${requestScope.INDEX_ADV_MID}" var="adv">
 <table width="954px" cellpadding="0" cellspacing="0" style="margin-bottom: 4px" class="picstyle">
-<tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="100%"/></a></td></tr>
+<tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="100%"/></a></td></tr>
  </table>
 </c:forEach>
 <table width="954px" cellspacing="0" cellpadding="0" style="margin-bottom: 5px" class="tables">
@@ -45,7 +45,7 @@
 </table>
 <c:forEach items="${requestScope.INDEX_ADV_BOTTOM}" var="adv">
 <table width="954px" cellpadding="0" cellspacing="0" style="margin-top: 5px" class="picstyle">
-<tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="100%"/></a></td></tr>
+<tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="100%"/></a></td></tr>
  </table>
 </c:forEach>
 </div>
@@ -66,7 +66,7 @@
     
     if(showad){
 	var ClosebuttonHtml = '<div align="right" style="position: absolute;top:0px;right:0px;margin:2px;padding:0px;z-index:2000;"><a href="javascript:void(0)" onclick="hidead()" style="color:black;text-decoration:none;font-size:12px;"><img src="${pageContext.request.contextPath}/common/default/images/close.gif"/></a></div>'
-	var AdContentHtml = '<div align="center" style="color:green;font-size:23pt;font-family:黑体;"><a href="${COUPLET.linkUrl}" target="_blank"><img src="${pageContext.request.contextPath}/photoserver/photo/${COUPLET.picUrl}" width="110px" border="0"></a></div>';
+	var AdContentHtml = '<div align="center" style="color:green;font-size:23pt;font-family:黑体;"><a href="${COUPLET.linkUrl}" target="_blank"><img src="<ls:photo item='${COUPLET.picUrl}'/>" width="110px" border="0"></a></div>';
 	document.write('<div id="coupletLeftDiv"  style="position: absolute;border: 1px solid #CCCCCC; background-color:#EEEEE2;z-index:1000;width:'+AdDivW+'px;top:-1000px;word-break:break-all;display:none;">'+ClosebuttonHtml+'<div>'+AdContentHtml+'</div></div>');
 	document.write('<div id="coupletRightDiv" style="position: absolute;border: 1px solid #CCCCCC; background-color:#EEEEE2;z-index:1000;width:'+AdDivW+'px;top:-1000px;word-break:break-all;display:none;">'+ClosebuttonHtml+'<div>'+AdContentHtml+'</div></div>');
 	}

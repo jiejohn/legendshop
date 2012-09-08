@@ -3,7 +3,7 @@
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
     <c:forEach items="${requestScope.USER_REG_ADV_740}" var="adv">
 	<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 5px;" class="picstyle">
-		<tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="100%"/></a></td></tr>
+		<tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="100%"/></a></td></tr>
 	 </table>
 	</c:forEach>
 <table width="746px" cellpadding="0" cellspacing="0"

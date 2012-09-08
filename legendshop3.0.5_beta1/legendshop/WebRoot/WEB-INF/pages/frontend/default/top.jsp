@@ -64,7 +64,7 @@
 			<a href="${logo.url}">
 			<c:choose>
 			 <c:when test="${logo.id != -1}">
-			     <img style="Clear: Both; Border: 0px" src="${pageContext.request.contextPath}/photoserver/photo/${logo.banner}" height="65px" title="${logo.memo}" />
+			     <img style="Clear: Both; Border: 0px" src="<ls:photo item='${logo.banner}'/>" height="65px" title="${logo.memo}" />
 			 </c:when>
 			 <c:otherwise>
 			     <img src="<ls:templateResource item='/common/images/legendshop.gif'/>" height="65px" title="LegendShop"/>

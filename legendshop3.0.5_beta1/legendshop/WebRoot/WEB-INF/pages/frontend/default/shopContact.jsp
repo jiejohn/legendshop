@@ -11,7 +11,7 @@
                   <td> <table width="100%" cellspacing="1" cellpadding="0" height="100%">
                       <tr>
                       <c:if test="${user.shopDetail.shopPic != null}">
-                      <td valign="top" width="300px"><div id="apple" style="margin: 5px"><img src="${pageContext.request.contextPath}/photoserver/photo/${user.shopDetail.shopPic}" width="300"/></div></td>
+                      <td valign="top" width="300px"><div id="apple" style="margin: 5px"><img src="<ls:photo item='${user.shopDetail.shopPic}'/>" width="300"/></div></td>
                       </c:if>
                         <td align="left" valign="top">
                             <table width="100%" align="center" cellpadding="0" cellspacing="0" style="margin-bottom: 6;margin-top: 9px">

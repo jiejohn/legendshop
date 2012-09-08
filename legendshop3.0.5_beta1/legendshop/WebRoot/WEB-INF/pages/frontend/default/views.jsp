@@ -9,7 +9,7 @@
      <!-- adv -->
     <c:forEach items="${requestScope.PROD_ADV_TOP}" var="adv">
 	<table width="205px" cellpadding="0" cellspacing="0" style="margin-bottom: 4px; margin-right: 5px;" class="picstyle">
-		<tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="100%"/></a></td></tr>
+		<tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="100%"/></a></td></tr>
 	 </table>
 	</c:forEach>
 			<!-- topnews -->
@@ -17,7 +17,7 @@
             <!-- adv -->
          <c:forEach items="${requestScope.PROD_ADV_MID1}" var="adv1">
 			<table width="205px" cellpadding="0" cellspacing="0" style="margin-bottom: 4px; margin-right: 5px;" class="picstyle">
-			  <tr><td><a href="${adv1.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv1.picUrl}" title="${adv1.title}" width="100%"/></a></td></tr>
+			  <tr><td><a href="${adv1.linkUrl}"><img src="<ls:photo item='${adv1.picUrl}'/>" title="${adv1.title}" width="100%"/></a></td></tr>
 			 </table>
 			</c:forEach> 
             <!-- topsort -->
@@ -25,7 +25,7 @@
              <!-- adv -->
               <c:forEach items="${requestScope.PROD_ADV_MID2}" var="adv2">
 				<table width="205px" cellpadding="0" cellspacing="0" style="margin-bottom: 4px; margin-right: 5px;" class="picstyle">
-				  <tr><td><a href="${adv2.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv2.picUrl}" title="${adv2.title}" width="100%"/></a></td></tr>
+				  <tr><td><a href="${adv2.linkUrl}"><img src="<ls:photo item='${adv2.picUrl}'/>" title="${adv2.title}" width="100%"/></a></td></tr>
 				 </table>
 			</c:forEach> 
              <!-- hot product -->
@@ -33,7 +33,7 @@
              <!-- adv -->
            <c:forEach items="${requestScope.PROD_ADV_BOTTOM}" var="adv3">
 			<table width="205px" cellpadding="0" cellspacing="0" style="margin-bottom: 4px; margin-right: 5px;" class="picstyle">
-			 <tr><td><a href="${adv3.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv3.picUrl}" title="${adv3.title}" width="100%"/></a></td></tr>
+			 <tr><td><a href="${adv3.linkUrl}"><img src="<ls:photo item='${adv3.picUrl}'/>" title="${adv3.title}" width="100%"/></a></td></tr>
 			 </table>
 			</c:forEach> 
  

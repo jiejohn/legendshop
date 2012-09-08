@@ -44,8 +44,8 @@
     <display:table name="list" requestURI="/admin/imgFile/query" id="item"
          export="false" class="${tableclass}" style="width:100%">
       <display:column title="顺序"><%=offset++%></display:column>
-      <display:column title="文件"><a href="${pageContext.request.contextPath}/photoserver/photo/${item.filePath}" target="_blank">
-      <img src="${pageContext.request.contextPath}/photoserver/photo/${item.filePath}" height="110px" width="150px"/></a>
+      <display:column title="文件"><a href="<ls:photo item='${item.filePath}'/>" target="_blank">
+      <img src="<ls:photo item='${item.filePath}'/>" height="110px" width="150px"/></a>
       </display:column>
       <display:column title="文件类型" property="fileType"></display:column>
       <display:column title="文件大小" property="fileSize"></display:column>

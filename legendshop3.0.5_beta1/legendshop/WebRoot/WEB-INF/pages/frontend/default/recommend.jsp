@@ -11,7 +11,7 @@
 				<td width="20%" align="center" style="font-weight: normal;color: #666666">
 						<div>
 							<a href="${pageContext.request.contextPath}/views/${prod.prodId}" ><img
-									src="${pageContext.request.contextPath}/photoserver/images/${prod.pic}" width="165px" height="120px"
+									src="<ls:images item='${prod.pic}'/>" width="165px" height="120px"
 									title="${prod.name}" id="pic"></a></div>
 						<div class="topnewsfixed" title="${prod.name}">${prod.name}</div>
 					<c:if test="${not empty prod.cash}">

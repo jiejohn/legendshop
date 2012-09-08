@@ -47,7 +47,7 @@ function changeOrder(order,seq){
  <div class="w banner1">
  <c:forEach items="${requestScope.INDEX_ADV_TOP}" var="adv">
 <table width="1216px" cellpadding="0" cellspacing="0" style="margin-top: 5px" class="picstyle">
-  <tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="100%"/></a></td></tr>
+  <tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="100%"/></a></td></tr>
  </table>
 </c:forEach>
  </div>
@@ -110,7 +110,7 @@ function changeOrder(order,seq){
           	<c:otherwise>${item.name}</c:otherwise>
           </c:choose>
           </a></h1>
-          <div class="cover"><a href="<ls:url address='/group/view/${item.prodId}'/>"><img src="${pageContext.request.contextPath}/photoserver/photo/${item.pic}" width="372" height="225" /></a></div>
+          <div class="cover"><a href="<ls:url address='/group/view/${item.prodId}'/>"><img src="<ls:photo item='${item.pic}'/>" width="372" height="225" /></a></div>
           
           <div class="priceit">
                         <span><font>${item.buys }</font>人已购买</span>

@@ -13,7 +13,7 @@
       		<a href="${el.url}" target=_blank title="${el.content}">
       		<c:choose>
       			<c:when test="${el.picture != null}">
-      			<img src="${pageContext.request.contextPath}/photoserver/photo/${el.picture}" title="${el.wordlink}" width="88px" height="31px"/><br>${el.wordlink}
+      			<img src="<ls:photo item='${el.picture}'/>" title="${el.wordlink}" width="88px" height="31px"/><br>${el.wordlink}
       			</c:when>
       			<c:otherwise>${el.wordlink}</c:otherwise>
       		</c:choose>

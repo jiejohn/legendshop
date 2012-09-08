@@ -196,7 +196,7 @@ function isEmail(str){
 
 <c:forEach items="${requestScope.USER_REG_ADV_950}" var="adv">
 <table class="picstyle" cellpadding="0" cellspacing="0" style="margin-bottom: 5px">
-  <tr><td><a href="${adv.linkUrl}"><img src="${pageContext.request.contextPath}/photoserver/photo/${adv.picUrl}" title="${adv.title}" width="950px" /></a></td>
+  <tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="950px" /></a></td>
   </tr>
  </table>
 </c:forEach>

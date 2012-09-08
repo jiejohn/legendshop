@@ -40,7 +40,7 @@
         <display:table name="list" requestURI="/admin/logo/query" id="item"
             export="true" class="${tableclass}" style="width:100%">
             <display:column title="顺序" class="orderwidth"><%=offset++%></display:column>
-            <display:column title="图片"><img src="${pageContext.request.contextPath}/photoserver/photo/${item.banner}" height="65px" width="180px"/></display:column>           
+            <display:column title="图片"><img src="<ls:photo item='${item.banner}'/>" height="65px" width="180px"/></display:column>           
             <display:column title="链接地址"><a href="${item.url}" target="_blank">${item.url}</a></display:column>
             <display:column title="备注" property="memo"></display:column>
              <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">

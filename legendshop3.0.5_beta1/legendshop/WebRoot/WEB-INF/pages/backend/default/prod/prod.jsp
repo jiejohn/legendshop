@@ -205,8 +205,8 @@
 		</div></td>
       <td width="25%" rowspan="9" align="center" valign="middle" style="margin: 0px">
       	<c:choose>
-      		<c:when test="${prod.pic!=null}"><a href="${pageContext.request.contextPath}/photoserver/photo/${prod.pic}" target="_blank">
-      		<img src="${pageContext.request.contextPath}/photoserver/photo/${prod.pic}" height="235px" width="320px"/></a>
+      		<c:when test="${prod.pic!=null}"><a href="<ls:photo item='${prod.pic}'/>" target="_blank">
+      		<img src="<ls:photo item='${prod.pic}'/>" height="235px" width="320px"/></a>
       		</c:when>
       		<c:otherwise>请上传商品图片</c:otherwise>
       	</c:choose>

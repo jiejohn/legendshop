@@ -123,7 +123,7 @@ BODY {
 					<table cellpadding="2">
 						<tr>
 							<td>
-                              <img src="${pageContext.request.contextPath}/photoserver/images/${record.pic}" width="120px" height="100px"  style="margin-right: 3px"/>				
+                              <img src="<ls:images item='${record.pic}'/>" width="120px" height="100px"  style="margin-right: 3px"/>				
 							</td>
 							<td style="vertical-align: top"><div>
 							<div style="margin-top: 8px;font-size: 13pt">

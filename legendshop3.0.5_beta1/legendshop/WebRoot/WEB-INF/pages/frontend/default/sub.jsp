@@ -48,7 +48,7 @@
         	  		 	<c:forEach items="${sub.basket}" var="basket">
         	  		 		<tr>
         	  		 			<td>
-        	  		 				<img src="${pageContext.request.contextPath}/photoserver/images/${basket.pic}" width="102px" height="75px" style="border-collapse: collapse;margin: 1px;border: 1px solid #CCCCCC;"/>
+        	  		 				<img src="<ls:images item='${basket.pic}'/>" width="102px" height="75px" style="border-collapse: collapse;margin: 1px;border: 1px solid #CCCCCC;"/>
         	  		 				</td>
         	  		 			<td><a target="_blank" href="${pageContext.request.contextPath}/views/${basket.prodId}"><font color="#FF0000">${basket.prodName}</font></a></td>
         	  		 			<td>${basket.basketCount}</td>

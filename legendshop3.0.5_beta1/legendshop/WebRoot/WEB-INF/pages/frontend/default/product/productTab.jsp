@@ -49,14 +49,14 @@
 						<c:when test="${fn:length(prod.name) > 30}">
 						<span>
 							<a href="<ls:url address='/views/${prod.prodId}'/>" >
-							<img src="<ls:templateResource item='/photoserver/images/${prod.pic}'/>" width="150px" height="110px"
+							<img src="<ls:images item='${prod.pic}'/>" width="150px" height="110px"
 									title="${prod.name}" id="pic"></a></span><br>${fn:substring(prod.name,0,30)}...<br>
 									
 						</c:when>
 						<c:otherwise>
 						<span>
 				     <a href="<ls:url address='/views'/>">
-				     <img src="<ls:templateResource item='/photoserver/images/${prod.pic}'/>" width="150px" height="110px" id="pic"></a>
+				     <img src="<ls:images item='${prod.pic}'/>" width="150px" height="110px" id="pic"></a>
 				     </span><br>${prod.name}<br>
 						</c:otherwise>
 					</c:choose>

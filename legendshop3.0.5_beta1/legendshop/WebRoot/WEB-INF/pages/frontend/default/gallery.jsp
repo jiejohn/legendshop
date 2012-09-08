@@ -75,8 +75,8 @@
         <div class="ad-thumbs">
           <ul class="ad-thumb-list">
           <c:forEach items="${requestScope.prodPics}" var="pic"  varStatus="status">
-            <li><a href="${pageContext.request.contextPath}/photoserver/photo/${pic.filePath}">
-                <img src="${pageContext.request.contextPath}/photoserver/images/${pic.filePath}" class="image${status.index+1}" width="108px" height="80px">
+            <li><a href="<ls:photo item='${pic.filePath}'/>">
+                <img src="<ls:photo item='${pic.filePath}'/>" class="image${status.index+1}" width="108px" height="80px">
               </a></li>
           </c:forEach>
           </ul>

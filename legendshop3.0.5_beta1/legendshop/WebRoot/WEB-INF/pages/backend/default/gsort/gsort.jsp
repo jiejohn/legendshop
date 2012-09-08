@@ -80,8 +80,8 @@
     <td  ><div align="center">原有图片</div></td>
       <td >
       <c:if test="${sort.picture!=null}">
-      	<a href="${pageContext.request.contextPath}/photoserver/photo/${sort.picture}" target="_blank">
-      	<img src="${pageContext.request.contextPath}/photoserver/photo/${sort.picture}" height="60" width="300"/></a>
+      	<a href="<ls:photo item='${sort.picture}'/>" target="_blank">
+      	<img src="<ls:photo item='${sort.picture}'/>" height="60" width="300"/></a>
       	</c:if>
       </td>
     </tr>

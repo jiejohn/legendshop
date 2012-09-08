@@ -36,7 +36,7 @@
       <display:column title="说明文字" property="alt"></display:column>
       <display:column title="标题" property="title"></display:column>
       <display:column title="小标题" property="stitle"></display:column>
-      <display:column title="图片"><a href="${pageContext.request.contextPath}/photoserver/photo/${item.img}" target="_blank"><img src="${pageContext.request.contextPath}/common/default/images/filter_search.png"></a></display:column>
+      <display:column title="图片"><a href="<ls:photo item='${item.img}'/>" target="_blank"><img src="${pageContext.request.contextPath}/common/default/images/filter_search.png"></a></display:column>
       <display:column title="链接">
       	    	<a href="${item.link}" target="_blank"><img src="${pageContext.request.contextPath}/common/default/images/grid_refresh.png" title="图片"></a>
     	        <a href="${pageContext.request.contextPath}/${item.titleLink}" target="_blank"><img src="${pageContext.request.contextPath}/common/default/images/grid_refresh.png" title="文字"></a>

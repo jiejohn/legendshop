@@ -39,7 +39,7 @@
       <display:column title="顺序" class="orderwidth"><%=offset++%></display:column>
       <display:column title="图片">
       	<c:if test="${item.picture != null}">
-      	<img src="${pageContext.request.contextPath}/photoserver/photo/${item.picture}" height="31px" width="81px"/>
+      	<img src="<ls:photo item='${item.picture}'/>" height="31px" width="81px"/>
       	</c:if>
       </display:column>
       <display:column title="链接地址"><a href="${item.url}" target="_blank">${item.url}</a></display:column>

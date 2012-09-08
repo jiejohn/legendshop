@@ -123,8 +123,8 @@ $.validator.setDefaults({
     <td ><div align="right">原有图片</div></td>
       <td>
       <c:if test="${index.img!=null}">
-      	<a href="${pageContext.request.contextPath}/photoserver/photo/${index.img}" target="_blank">
-      	<img src="${pageContext.request.contextPath}/photoserver/photo/${index.img}" height="145" width="265"/></a>
+      	<a href="<ls:photo item='${index.img}'/>" target="_blank">
+      	<img src="<ls:photo item='${index.img}'/>" height="145" width="265"/></a>
       	</c:if>
       </td>
     </tr>

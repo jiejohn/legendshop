@@ -201,7 +201,7 @@
            <p>
            
      		<c:if test="${not empty partner.image}">
-     		<img width="300px" src="${pageContext.request.contextPath}/photoserver/photo/${partner.image}"/><br/>
+     		<img width="300px" src="<ls:photo item='${partner.image}'/>"/><br/>
      		</c:if>
            <input type="file" name="imageFile" id="file" size="50"/></p>
            <input type="hidden" name="image" id="image" value="${partner.image}" />
@@ -214,7 +214,7 @@
         <td>
            <p>
      		<c:if test="${not empty partner.image1}">
-     		<img width="300px" src="${pageContext.request.contextPath}/photoserver/photo/${partner.image1}"/><br/>
+     		<img width="300px" src="<ls:photo item='${partner.image1}'/>"/><br/>
      		</c:if>
            <input type="file" name="imageFile1" id="file" size="50"/></p>
            <input type="hidden" name="image1" id="image1" value="${partner.image1}" />
@@ -227,7 +227,7 @@
         <td>
            <p>
      		<c:if test="${not empty partner.image2}">
-     		<img width="300px" src="${pageContext.request.contextPath}/photoserver/photo/${partner.image2}"/><br/>
+     		<img width="300px" src="<ls:photo item='${partner.image2}'/>"/><br/>
      		</c:if>
            <input type="file" name="imageFile2" id="file" size="50"/></p>
            <input type="hidden" name="image2" id="image2" value="${partner.image2}" />
