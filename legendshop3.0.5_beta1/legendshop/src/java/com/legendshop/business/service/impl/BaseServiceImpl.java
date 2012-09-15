@@ -93,40 +93,4 @@ public abstract class BaseServiceImpl extends AbstractService {
 		}
 	}
 
-	/**
-	 * It's only suitable for index and home page.
-	 * 
-	 * @param request
-	 * @param response
-	 * @param shopName
-	 * @return
-	 */
-	protected String checkAndGetShopName(HttpServletRequest request, HttpServletResponse response) {
-		String shopName = (String) request.getAttribute(Constants.SHOP_NAME);
-		if (shopName == null) {
-			shopName = ThreadLocalContext.getCurrentShopName(request, response);
-		}
-		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(request,response,shopName); // 得到当前商城
-
-		if (shopDetail == null) {
-			String defaultShop = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
-
-			if (AppUtils.isBlank(defaultShop)) {
-				throw new RuntimeException("Can't find default shop name");
-			}
-
-			// 如果有默认店，则先到默认店去，默认店要先配置好
-			shopName = defaultShop;
-			shopDetail = ThreadLocalContext.getShopDetailView(request,response,shopName);
-
-		} 
-		
-		if(shopDetail != null) {
-			// 更新用户访问历史
-			updateVisitHistory(shopDetail, request);
-		}
-		return shopName;
-	}
-
-
 }
