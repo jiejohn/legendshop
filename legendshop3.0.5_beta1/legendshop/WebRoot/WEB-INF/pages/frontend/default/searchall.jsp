@@ -213,30 +213,7 @@ BODY {
 						</c:choose>
 
 					</td>
-					<td width="255px" valign="top" align="left">
-					<c:if test="${sessionScope.VisitHistory.visitedShop != null && fn:length(sessionScope.VisitHistory.visitedShop) > 0 && 'C2C' == applicationScope.BUSINESS_MODE}">
-					<table width="100%" style="margin-bottom: 4px;margin-right: 5px;" class="tables" cellpadding="0" cellspacing="0">
-					    <tr><td class="titlebg"><fmt:message key="visited.mall"/></td></tr>
-						<tr><td align="left">
-							  <c:forEach items="${sessionScope.VisitHistory.visitedShop}" var="visitedShop" varStatus="status">
-							  <div style="margin: 2px;"><a href="${pageContext.request.contextPath}/shop/${visitedShop.name}" title="${visitedShop.title}" target="_blank">${visitedShop.name}</a></div>
-							  </c:forEach>
-						</td></tr>
-					</table>
-					</c:if>
-					<br/>
-					<c:if test="${sessionScope.VisitHistory.visitedProd != null && fn:length(sessionScope.VisitHistory.visitedProd) > 0}">
-					<table  width="100%" style="margin-bottom: 4px;margin-right: 5px;" class="tables" cellpadding="0" cellspacing="0">
-					    <tr><td class="titlebg"><fmt:message key="visited.product"/></td></tr>
-						<tr><td align="left">
-							  <c:forEach items="${sessionScope.VisitHistory.visitedProd}" var="visitProd" varStatus="status">
-							  <div style="margin: 2px;"><a href="${pageContext.request.contextPath}/views/${visitProd.id}" title="${visitProd.title}" target="_blank">${visitProd.name}</a></div>
-							  </c:forEach>
-						</td></tr>
-						<tr><td></td></tr>
-					</table>
-					</c:if>
-					</td>
+					<td width="255px" valign="top" align="left"><jsp:include flush="true" page="/visitedShop" /></td>
 				</tr>
 			</table>
 		</center>

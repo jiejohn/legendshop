@@ -22,6 +22,7 @@ import com.legendshop.business.service.BusinessService;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
 
+// TODO: Auto-generated Javadoc
 /**
  * 前台主要功能.
  */
@@ -86,15 +87,9 @@ public class BusinessController extends BaseController {
 	
 	/**
 	 * Searchall.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @param keyword
-	 *            the keyword
-	 * @param entityType
-	 *            the entity type
+	 *
+	 * @param request the request
+	 * @param response the response
 	 * @return the string
 	 */
 	@RequestMapping("/searchall")
@@ -139,7 +134,22 @@ public class BusinessController extends BaseController {
 		return businessService.getFriendlink(request, response);
 	}
 	
-
+	/**
+	 * Visited history.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the string
+	 */
+	@RequestMapping("/visitedProd")
+	public String visitedProd(HttpServletRequest request, HttpServletResponse response) {
+		return businessService.getVisitedProd(request, response);
+	}
+	
+	@RequestMapping("/visitedShop")
+	public String visitedShop(HttpServletRequest request, HttpServletResponse response) {
+		return businessService.getVisitedShop(request, response);
+	}
 
 	/**
 	 * After operation.

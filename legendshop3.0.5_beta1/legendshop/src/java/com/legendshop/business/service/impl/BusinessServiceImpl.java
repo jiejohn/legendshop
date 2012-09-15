@@ -7,6 +7,7 @@
  */
 package com.legendshop.business.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,10 +37,13 @@ import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ThreadLocalContext;
+import com.legendshop.core.helper.VisitHistoryHelper;
 import com.legendshop.core.page.PagerUtil;
 import com.legendshop.model.entity.ExternalLink;
 import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Product;
+import com.legendshop.model.entity.ProductDetail;
+import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.Sort;
 import com.legendshop.search.SearchArgs;
 import com.legendshop.search.SearchFacade;
@@ -84,7 +88,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 
 	/** The myleague dao. */
 	private MyleagueDao myleagueDao;
-	
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#search(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, com.legendshop.business.action.form.SearchForm)
@@ -287,6 +290,27 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		return PathResolver.getPath(request,response,TilesPage.LEAGUE);
 	}
 
+	@Override
+	public String getVisitedProd(HttpServletRequest request, HttpServletResponse response) {
+		List<Object> prodIds = VisitHistoryHelper.getVisitedProd(request);
+		List<ProductDetail> products = new ArrayList<ProductDetail>();
+		for (Object prodId : prodIds) {
+			products.add(productDao.getProdDetail((Long)prodId));
+		}
+		request.setAttribute("visitedProd", products);
+		return PathResolver.getPath(request,response,FrontPage.VISITED_PROD);
+	}
+
+	@Override
+	public String getVisitedShop(HttpServletRequest request, HttpServletResponse response) {
+		List<Object> shopIds = VisitHistoryHelper.getVisitedShopDetail(request);
+		List<ShopDetail> shopDetails = new ArrayList<ShopDetail>();
+		for (Object userName : shopIds) {
+			shopDetails.add(shopDetailDao.getShopDetail((String)userName));
+		}
+		request.setAttribute("visitedShop", shopDetails);
+		return PathResolver.getPath(request,response,FrontPage.VISITED_SHOP);
+	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.impl.BusinessService#setShopDetailDao(com.legendshop.business.dao.ShopDetailDao)

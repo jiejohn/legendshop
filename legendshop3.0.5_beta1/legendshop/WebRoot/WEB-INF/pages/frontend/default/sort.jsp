@@ -32,7 +32,7 @@
 			</table>
 	    </c:forEach>
         </td>
-      <td valign="top" width="744px"><tiles2:insertAttribute name="right" ignore="true" /> <%@ include file="visitedHistory.jsp"%></td>
+      <td valign="top" width="744px"><tiles2:insertAttribute name="right" ignore="true" /><jsp:include flush="true" page="/visitedProd" /></td>
     </tr>
     <tr> 
       <td valign="top" colspan="2">

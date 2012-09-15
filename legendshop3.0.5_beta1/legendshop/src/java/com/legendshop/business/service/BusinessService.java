@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.legendshop.business.form.SearchForm;
 import com.legendshop.spi.service.BaseService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface BusinessService.
+ */
 public interface BusinessService extends BaseService{
 
 	/**
@@ -83,14 +87,32 @@ public interface BusinessService extends BaseService{
 
 
 	/**
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
+	 * Gets the newsfor common.
+	 *
+	 * @param request the request
+	 * @param response the response
 	 * @return the string
 	 */
 	public abstract String getNewsforCommon(HttpServletRequest request, HttpServletResponse response);
+
+
+	/**
+	 * Visited prod.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the string
+	 */
+	public abstract String getVisitedProd(HttpServletRequest request, HttpServletResponse response);
+
+	/**
+	 * Visited shop.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the string
+	 */
+	public abstract String getVisitedShop(HttpServletRequest request, HttpServletResponse response);
 
 
 

@@ -91,7 +91,15 @@ public enum FrontPage implements PageDefinition {
 	/**
 	 * the common bottom page
 	 */
-	BOTTOM("/bottom");
+	BOTTOM("/bottom"), 
+	
+	//产品查看历史
+	VISITED_PROD("/visitedProd"), 
+	
+	//商铺产看历史
+	VISITED_SHOP("/visitedShop");
+	
+	
 	/** The value. */
 	private final String value;
 	

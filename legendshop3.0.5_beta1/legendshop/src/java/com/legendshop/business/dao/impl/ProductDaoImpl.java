@@ -166,17 +166,6 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 		return ps;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.legendshop.business.dao.impl.ProductDao#getProdById(java.lang.Long)
-	 */
-	@Override
-	public Product getProdById(Long prodId) {
-		return get(Product.class, prodId);
-	}
-
 	// 热门商品
 	/*
 	 * (non-Javadoc)

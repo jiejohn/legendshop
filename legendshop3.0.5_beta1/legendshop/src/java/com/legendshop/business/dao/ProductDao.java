@@ -139,15 +139,6 @@ public interface ProductDao extends BaseDao{
      */
     public abstract List<ProductDetail> getProdDetail(final Long[] prodId);
 
-    /**
-     * Gets the prod by id.
-     *
-     * @param prodId
-     *            the prod id
-     * @return the prod by id
-     */
-    public abstract Product getProdById(Long prodId);
-
     // 热门商品
     /**
      * Gets the hot on.

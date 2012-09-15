@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
-<c:if test="${sessionScope.VisitHistory.visitedProd != null && fn:length(sessionScope.VisitHistory.visitedProd) > 0}">
+<c:if test="${visitedProd != null && fn:length(visitedProd) > 0}">
 <!--[if lt IE 7]>
     <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/default/css/overlay-ie6.css" />
 <![endif]-->
@@ -10,7 +10,7 @@
 
 	<table cellpadding="0" cellspacing="10">
 		<tr align="left">
-			<c:forEach items="${sessionScope.VisitHistory.visitedProd}" var="prod" varStatus="status">
+			<c:forEach items="${visitedProd}" var="prod" varStatus="status">
 				<td align="left">
 					<c:choose>
 						<c:when test="${fn:length(prod.name) > 9}">

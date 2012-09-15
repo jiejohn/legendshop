@@ -36,6 +36,7 @@ import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.core.helper.ThreadLocalContext;
+import com.legendshop.core.helper.VisitHistoryHelper;
 import com.legendshop.event.EventHome;
 import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.ImgFile;
@@ -126,7 +127,8 @@ public class ProductController extends BaseController{
 			}
 
 			// 记录登录历史
-			visit(prod, request);
+			//visit(prod, request);
+			VisitHistoryHelper.visit(prod, request, response);
 			// 多线程记录访问历史
 			if (PropertiesUtil.getObject(ParameterEnum.VISIT_LOG_ENABLE, Boolean.class)) {
 				EventHome.publishEvent(new VisitLogEvent(request.getRemoteAddr(),prod.getUserName(),userName,prod.getProdId(),prod.getName(),VisitTypeEnum.HW.value()));
@@ -151,6 +153,7 @@ public class ProductController extends BaseController{
 	 * @param request
 	 *            the request
 	 */
+	@Deprecated
 	private void visit(ProductDetail prod, HttpServletRequest request) {
 		VisitHistory visitHistory = (VisitHistory) request.getSession().getAttribute(Constants.VISIT_HISTORY);
 		if (visitHistory == null) {
