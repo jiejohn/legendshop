@@ -4,6 +4,10 @@ table.its thead tr {
 
 }
 
+table.its  tr td{
+    padding: 3px 3px ;
+}
+
 /**
 table.its {
 	color: #666666;

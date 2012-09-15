@@ -15,8 +15,15 @@
 
 		<script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/common/js/top.js" type="text/javascript"></script>
-  		<script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
-<title>LegendShop后台首页</title>
+  		<script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>  		
+  	  
+  	
+  		<script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/artDialog.js'/>"></script>
+  		<script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/plugins/iframeTools.js'/>"></script>  		  		
+<link  href="<ls:templateResource item='/plugins/artDialog/skins/green.css' />"  rel="stylesheet"   type="text/css"/>    
+
+<title>LegendShop后台首页</title> 
+
 </head>
 <body  class="bodymargin">
     <table class="${tableclass}" style="width: 100%;">
@@ -99,7 +106,7 @@
 										<c:if test="${applicationScope.LEGENSHOP_LICENSE != null && applicationScope.LEGENSHOP_LICENSE.expireDate != null && '' != applicationScope.LEGENSHOP_LICENSE.expireDate}">
 											, 有效期至：${applicationScope.LEGENSHOP_LICENSE.expireDate}
 										</c:if>
-										<a href='javascript:openScript("${pageContext.request.contextPath}/admin/license/upgrade","320","150")'>[升级]</a>
+										<a href='javascript:dashboard.upgradeProduct();'>[升级]</a>
 									</c:if>
 								</td>
 							</tr>
@@ -320,6 +327,14 @@
 });
   highlightTableRows("col1");  
   highlightTableRows("col2");  
+    
+  var dashboard={
+       upgradeProduct:function(){      
+           var url="${pageContext.request.contextPath}/admin/license/upgrade";
+		   var options={id:"upgradeProduct",title:"升级商城系统",width:350,height:200,lock:false,closeFn: function(){} };
+		    art.dialog.open(url,options);
+       }
+  };
   
 </script>
 </body>
