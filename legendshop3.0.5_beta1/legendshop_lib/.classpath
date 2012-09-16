@@ -81,5 +81,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/xerces-2.8.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/xpp3_min-1.1.3.4.O.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/xstream-1.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="cas-client/cas-client-core-3.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="cas-client/spring-security-cas-client-3.0.7.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
