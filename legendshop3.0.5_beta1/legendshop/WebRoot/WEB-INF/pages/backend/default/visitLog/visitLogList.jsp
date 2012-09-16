@@ -59,9 +59,9 @@
       <display:column title="地区" property="area" sortable="true" sortName="area"></display:column>
       	<display:column title="商城名" property="shopName" sortable="true" sortName="shopName"></display:column>
       </auth:auth>
-      <display:column title="商品名" sortable="true" autolink="${pageContext.request.contextPath}/views/${item.productId}" sortName="productName">
+      <display:column title="商品名" >
       	<c:if test="${item.productName != null}">
-      		${item.productName}
+      		<a href="${pageContext.request.contextPath}/views/${item.productId}"  target="_blank">${item.productName}</a>
       	</c:if>
       </display:column>
       <display:column title="页面">

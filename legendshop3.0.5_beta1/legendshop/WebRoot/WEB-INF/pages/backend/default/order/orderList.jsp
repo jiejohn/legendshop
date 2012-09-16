@@ -10,6 +10,11 @@
 	 <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
 	 <script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
 	 <script src="${pageContext.request.contextPath}/common/js/top.js" type="text/javascript"></script>
+	 
+	   <script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/artDialog.js'/>"></script>
+  		<script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/plugins/iframeTools.js'/>"></script>  		  		
+       <link  href="<ls:templateResource item='/plugins/artDialog/skins/aero.css' />"  rel="stylesheet"   type="text/css"/>    
+       
      <style type="text/css" media="all">
 		 .selected {
 			margin: 0px;
@@ -21,19 +26,18 @@
 <%
  Integer offset = (Integer) request.getAttribute("offset");
 %>
-    <table class="${tableclass}" style="width: 100%">
+    <table class="${tableclass}" style="width: 100%;">
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/order/query">订单管理</a></td></tr>
-    </thead>
-    </table>
-<table style="width:100%" class="${tableclass}"> 
-<thead>
-      <tr>
-        <td class="titlebg" align="left" width="100%">
-         <form action="${pageContext.request.contextPath}/admin/order/query" id="processedOrderForm" name="processedOrderForm" method="post">&nbsp;
-         <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}"/> 
-        <a href="javascript:void(0)" onclick="changetab(1);" id="processingbutton" name="processingbutton">处理中的订单</a>
+    <tr><td>
+                 <a href="javascript:void(0)" onclick="changetab(1);" id="processingbutton" name="processingbutton">处理中的订单</a>
         <a href="javascript:void(0)" onclick="changetab(2);" id="processedbutton" name="processedbutton"><span>已成交订单</span></a>
+    </td></tr>
+    </thead>
+     <tbody><tr><td>
+     <form action="${pageContext.request.contextPath}/admin/order/query" id="processedOrderForm" name="processedOrderForm" method="post" style="margin: 0px"> &nbsp;
+              <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}"/> 
+ <div align="left" style="padding: 3px">
        			<input type="hidden" name="subCheck" id="subCheck" value="N"/>
                &nbsp; 订单号&nbsp;<input type="text" name="subNumber" id="subNumber" value="${subForm.subNumber}" size="30" maxlength="30"/>
                &nbsp; 买家&nbsp;<input type="text" name="userName" id="userName" value="${subForm.userName}"/>
@@ -47,9 +51,10 @@
 			     </select>
         <input type="submit" value="搜索" class="s"/>
            </form>
-        </td>
-      </tr>
-        </thead>
+ </div>
+ </td></tr></tbody>
+    </table>
+<table style="width:100%" class="${tableclass}"> 
       <tr>
         <td valign="top">
    <div align="center">
@@ -64,11 +69,7 @@
       	<b><fmt:formatNumber type="currency" value="${item.total}" pattern="${CURRENCY_PATTERN}"/></b>
       </display:column>
       <display:column title="商品" property="prodName" sortable="true" sortName="prodName"></display:column>
-      <display:column title="买家帐号" sortable="true" sortName="userName">${item.userName}</display:column>
-      <display:column title="日期" sortable="true" sortName="subDate">
-      	<fmt:formatDate value="${item.subDate}" pattern="yyyy-MM-dd HH:mm"/>
-      </display:column>
-      <display:column title="付款方式" property="payTypeName" sortable="true" sortName="payTypeName"></display:column>
+      <display:column title="买家帐号" sortable="true" sortName="userName" style="width: 80px">${item.userName}</display:column>
        <display:column title="状态" sortable="true" sortName="status">
        	       <option:optionGroup type="label" required="true" cache="true"
 	                beanName="ORDER_STATUS" selectedValue="${item.status}"/>
@@ -81,7 +82,7 @@
      
       <auth:auth ifAnyGranted="F_OPERATOR">
 	     <display:column title="操作" media="html" style="width:110px">
-        <a href="javascript:void(0)" onclick='javascript:openbag("${item.subNumber}","${item.userName}")'>详情</a>
+       <a href='javascript:orderList.orderDetail("${item.subNumber}");'>详情</a>
       <c:if test="${subForm.subCheck == 'N'}">
         <c:if test="${item.status == 1}"> <!-- 1: 等待买家付款 -->
         	<a href="javascript:void(0)" onclick='javascript:openScript("${pageContext.request.contextPath}/admin/order/modifyPrice?total=${item.total}&subId=${item.subId}&subNumber=${item.subNumber}","330","150")'>修改</a>
@@ -160,7 +161,7 @@ function deleteSub(subId,subNumber) {
 }
 
   function openbag(subNumber,userName) {
-   	window.open("${pageContext.request.contextPath}/admin/order/loadBySubnumber/" + subNumber+ '', "","height=500,width=720,left=190,top=0,resizable=yes,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no");
+   	window.open("${pageContext.request.contextPath}/admin/order/loadBySubnumber/" + subNumber+ '', "","height=200,width=710,left=190,top=0,resizable=yes,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no");
    } 
    
    function pager(curPageNO){
@@ -179,8 +180,18 @@ function deleteSub(subId,subNumber) {
 			document.getElementById('processedbutton').className='';
 			document.getElementById("subCheck").value= 'N';
 		}
-	}
-	
+		
+  }
+
+	var orderList={
+       orderDetail:function(subNumber){ 
+           var url="${pageContext.request.contextPath}/admin/order/loadBySubnumber/" + subNumber;
+		    var options={id:"orderDetail",title:"订单详情",width:720,height:480,lock:false,closeFn: function(){} };
+		    art.dialog.open(url,options);
+       }
+         };
+         
+         
 	onloadSetup();
 	highlightTableRows("item");  
 </script>
