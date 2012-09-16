@@ -21,8 +21,6 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.model.entity.Advertisement;
-import com.legendshop.model.entity.ShopDetailView;
-import com.legendshop.model.visit.VisitHistory;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.dao.AdvertisementDao;
 import com.legendshop.spi.dao.ShopDetailDao;
@@ -124,23 +122,6 @@ public abstract class AbstractService implements BaseService {
 		}
 	}
 
-
-	/**
-	 * Visit.
-	 * 
-	 * @param shopDetail
-	 *            the shop detail
-	 * @param request
-	 *            the request
-	 */
-	public void updateVisitHistory(ShopDetailView shopDetail, HttpServletRequest request) {
-		VisitHistory visitHistory = (VisitHistory) request.getSession().getAttribute(Constants.VISIT_HISTORY);
-		if (visitHistory == null) {
-			visitHistory = new VisitHistory();
-		}
-		visitHistory.visit(shopDetail);
-		request.getSession().setAttribute(Constants.VISIT_HISTORY, visitHistory);
-	}
 	
 	/**
 	 * 设置广告
