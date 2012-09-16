@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- Ticket Registry implemented in JVM -->
+	<bean id="ticketRegistry" class="org.jasig.cas.ticket.registry.DefaultTicketRegistry" />
+
+	<!-- Ticket Registry implemented via Memcached 
+	<bean id="ticketRegistry" class="com.newsoft.cas.distribute.MemCachedTicketRegistry">
+		<constructor-arg index="0">
+			<list>
+				<value>${memcached.url.n1}</value>
+				<value>${memcached.url.n2}</value>
+			</list>
+		</constructor-arg> -->
+		<!-- the timeout value for TicketGrantingTickets in seconds 
+		<constructor-arg index="1" type="int" value="21600" />-->
+		<!-- the timeout value for Service Tickets in seconds 
+		<constructor-arg index="2" type="int" value="300" />
+	</bean>
+	-->
+
+	<!--Quartz -->
+	<!-- TICKET REGISTRY CLEANER -->
+	<bean id="ticketRegistryCleaner"
+		class="org.jasig.cas.ticket.registry.support.DefaultTicketRegistryCleaner"
+		p:ticketRegistry-ref="ticketRegistry" />
+
+	<bean id="jobDetailTicketRegistryCleaner"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="ticketRegistryCleaner" p:targetMethod="clean" />
+
+	<bean id="triggerJobDetailTicketRegistryCleaner" class="org.springframework.scheduling.quartz.SimpleTriggerBean"
+		p:jobDetail-ref="jobDetailTicketRegistryCleaner" p:startDelay="20000"
+		p:repeatInterval="5000000" />
+
+	<bean id="scheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref local="triggerJobDetailTicketRegistryCleaner" />
+				<ref local="triggerJobDetailRegisteredServicesCacheRenewer" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Define a registered service reloader for performance tuning, cache 
+		the services for several minutes -->
+	<bean id="registeredServicesCacheRenewer" class="com.legendshop.cas.job.RegisteredServicesCacheRenewer"
+		p:servicesManager-ref="servicesManager" />
+
+	<bean id="jobDetailRegisteredServicesCacheRenewer"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="registeredServicesCacheRenewer" p:targetMethod="refresh" />
+
+	<bean id="triggerJobDetailRegisteredServicesCacheRenewer" class="org.springframework.scheduling.quartz.SimpleTriggerBean"
+		p:jobDetail-ref="jobDetailRegisteredServicesCacheRenewer"
+		p:startDelay="20000" p:repeatInterval="120000" />
+
+</beans>
