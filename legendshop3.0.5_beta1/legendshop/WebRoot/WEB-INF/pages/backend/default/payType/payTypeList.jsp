@@ -21,13 +21,18 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/paytype/query">支付管理</a></td></tr>
     </thead>
-    </table>
-        <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
            <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
            	用户名&nbsp;<input type="text" name="userName" maxlength="50" value="${bean.userName}" /> 
            	<input type="submit" value="搜索"/>
          </auth:auth>
-            <input type="button" value="创建支付方式" onclick='window.location="${pageContext.request.contextPath}/admin/paytype/load"'/>
+   <input type="button" value="创建支付方式" onclick='window.location="${pageContext.request.contextPath}/admin/paytype/load"'/>
+ </div>
+ </td></tr></tbody>
+    </table>
+        
     </form>
     <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
@@ -41,7 +46,6 @@
       <display:column title="合作身份者ID(Partner)" property="partner"></display:column>
       <display:column title="安全检验码" property="validateKey"></display:column>
       <display:column title="签约账号" property="sellerEmail"></display:column>
-      <display:column title="备注" property="memo"></display:column>
       <display:column title="操作" media="html" style="width:40px">
       <a href= "${pageContext.request.contextPath}/admin/paytype/load/${item.payId}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "></a>
        <auth:auth ifAnyGranted="F_OPERATOR">

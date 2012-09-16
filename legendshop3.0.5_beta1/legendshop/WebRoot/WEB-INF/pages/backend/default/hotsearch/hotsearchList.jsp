@@ -22,8 +22,9 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="<ls:url address='/admin/hotsearch/query'/>">热门商品管理</a></td></tr>
     </thead>
-    </table>
-        <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+ <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
 	            标题
 	            <input type="text" name="title" maxlength="50" value="${bean.title}" />
 	           分类
@@ -37,6 +38,9 @@
          </auth:auth>
          <input type="submit" value="搜索"/>
          <input type="button" value="创建热门商品" onclick='window.location="${pageContext.request.contextPath}/admin/hotsearch/load"'/>
+ </div>
+ </td></tr></tbody>
+    </table>
     </form>
     <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

@@ -21,8 +21,9 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/shopDetail/query">商城管理</a></td></tr>
     </thead>
-    </table>
-        <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+  <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
         <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
            商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${shopDetail.userName}" size="30"/>
            &nbsp;类型&nbsp;	
@@ -45,6 +46,10 @@
             <input type="button" value="创建商城" onclick='window.location="${pageContext.request.contextPath}/admin/shopDetail/load"'/>
             </c:if>
             </auth:auth>
+ </div>
+ </td></tr></tbody>
+    </table>
+      
     </form>
     <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
@@ -58,29 +63,9 @@
       </c:if>
       <display:column title="网站名称" property="siteName">
       </display:column>
-      <display:column title="商品数量" property="productNum"  sortable="true" sortName="productNum" style="width:65px"></display:column>
-      <display:column title="下线商品" property="offProductNum" sortable="true" sortName="offProductNum" style="width:65px"></display:column> 
-
-      <display:column title="类型" sortable="true" sortName="type" style="width:40px">
-		  <option:optionGroup type="label" required="false" cache="true"
-	                beanName="SHOP_TYPE" selectedValue="${item.type}"/>
-      </display:column>
-      <%--
-      <display:column title="语言" style="width:55px">
-				  <option:optionGroup type="label" required="false" cache="true"
-	                beanName="LANG_STYLE" selectedValue="${item.langStyle}" defaultDisp=""/>
-	   </display:column>  
-	      --%>          
-	  <display:column title="风格" style="width:70px">
-				  <option:optionGroup type="label" required="false" cache="true"
-	                beanName="COLOR_STYLE" selectedValue="${item.colorStyle}" defaultDisp=""/>
-	  </display:column>
-	
-	  <auth:auth ifAllGranted="F_VIEW_ALL_DATA">
-		  <display:column title="创建国家" property="createCountryCode" />		  
-		  <display:column title="地区"  property="createAreaCode" />		  
-     </auth:auth>
-      <display:column title="状态" style="width:30px">
+      <display:column title="商品数量" property="productNum"  sortable="true" sortName="productNum" style="width:70px"></display:column>
+      <display:column title="下线商品" property="offProductNum" sortable="true" sortName="offProductNum" style="width:70px"></display:column> 
+      <display:column title="状态" style="width:40px">
       <font color="red">
 				  <option:optionGroup type="label" required="false" cache="true"
 	                beanName="SHOP_STATUS" selectedValue="${item.status}" defaultDisp=""/></font>

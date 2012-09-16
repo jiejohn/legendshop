@@ -18,8 +18,9 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/indexjpg/query">首页Flash图片管理</a></td></tr>
     </thead>
-    </table>
-    <form id="form1" action="${pageContext.request.contextPath}/admin/indexjpg/query">
+     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+<form id="form1" action="${pageContext.request.contextPath}/admin/indexjpg/query">
 	        <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}">
 			<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
 			商城名称
@@ -28,6 +29,9 @@
 			</auth:auth>
 			<input type="button" value="创建首页图片" onclick='window.location="${pageContext.request.contextPath}/admin/indexjpg/load"'/>
 	</form>
+ </div>
+ </td></tr></tbody>
+    </table>
 	<div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="/admin/indexjpg/query" id="item"

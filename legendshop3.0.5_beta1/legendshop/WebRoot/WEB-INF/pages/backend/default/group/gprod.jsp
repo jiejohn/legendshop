@@ -134,7 +134,7 @@
   
 </script>
 </head>
-<body>
+<body class="bodymargin">
 <form action="<ls:url address='/admin/group/product/save'/>"  id="saveProdForm" name="saveProdForm" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
     <input type="hidden" value="next" id="nextAction" name="nextAction"/>
     <input type="hidden" id="prodId" name="product.prodId" value="${prod.product.prodId}">

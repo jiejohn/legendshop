@@ -18,7 +18,8 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/loginHistory/query">用户登录历史</a></td></tr>
     </thead>
-    </table>
+     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
 <form action="${pageContext.request.contextPath}/admin/loginHistory/query" id="form1">
 <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}">
 			&nbsp;用户名称
@@ -30,6 +31,10 @@
 			<input type="submit" value="搜索" />
 	</div>
 </form>
+ </div>
+ </td></tr></tbody>
+    </table>
+
 	<div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="/admin/loginHistory/query"  id="item"

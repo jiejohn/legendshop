@@ -21,8 +21,8 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/news/query">新闻管理</a></td></tr>
     </thead>
-    </table>
-    <div align="left" style="padding: 5px">
+     <tbody><tr><td>
+<div align="left" style="padding: 3px">
         <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
 	            标题
 	            <input type="text" name="newsTitle" maxlength="50" size="30" value="${bean.newsTitle}"/>
@@ -31,7 +31,7 @@
                  商城 
                <input type="text" name="userName" maxlength="50" value="${bean.userName}" />
         </auth:auth>
-	</div><div align="left" style="padding: 5px">
+	</div><div align="left" style="padding: 3px">
             新闻类型
 	           <select id="position" name="position">
 				  <option:optionGroup type="select" required="false" cache="true"
@@ -58,6 +58,9 @@
             <input type="button" value="创建新闻" onclick='window.location="${pageContext.request.contextPath}/admin/news/load"'/>
             <input type="button" value="创建新闻栏目" onclick='window.location="${pageContext.request.contextPath}/admin/newsCategory/load"'/>
             </div>
+ </td></tr></tbody>
+    </table>
+    
     </form>
     <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

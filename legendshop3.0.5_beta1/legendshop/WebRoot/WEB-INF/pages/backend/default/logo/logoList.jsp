@@ -23,8 +23,9 @@
 	    <thead>
 	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/logo/query">Logo管理</a></td></tr>
 	    </thead>
-	    </table>
-		<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+	     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
 		<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
 			商城名称&nbsp;
 			<input type="text" name="userName" maxlength="50"
@@ -34,6 +35,9 @@
 		<c:if test="${fn:length(list) == 0}">
 			<input type="button" value="创建首页Logo" onclick='window.location="${pageContext.request.contextPath}/admin/logo/load"'/>
 		</c:if>
+ </div>
+ </td></tr></tbody>
+	    </table>
 	</form>
 	<div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

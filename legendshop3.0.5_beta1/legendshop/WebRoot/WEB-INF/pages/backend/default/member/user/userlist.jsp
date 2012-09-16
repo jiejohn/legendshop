@@ -30,19 +30,17 @@
 //-->
 </script>
 </head>
-
 <body>
 	<%
 			int offset=((Integer)request.getAttribute("offset")).intValue();
 	%>	
 	<form action="<ls:url address='/admin/member/user/query'/>" id="form1" method="post">
-	
         <table class="${tableclass}" style="width: 100%">
 	    <thead>
 	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="<ls:url address='/admin/member/user/query'/>">用户管理</a> </td></tr>
 	    </thead>
-	    </table>
-      
+	     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
     <input type="hidden" id="curPageNO" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
 			&nbsp; 用户名
 			<input type="text" name="name" maxlength="50" value="${bean.name }" />
@@ -54,6 +52,9 @@
 			<!--
 			<input type="button" value="创建用户" onclick='window.location="<ls:url address='/admin/member/user/load'/>"'/>
 			  -->
+ </div>
+ </td></tr></tbody>
+	    </table>
 	</form>
 	 <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

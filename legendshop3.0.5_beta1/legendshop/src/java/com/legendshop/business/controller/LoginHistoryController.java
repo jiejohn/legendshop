@@ -33,10 +33,10 @@ import com.legendshop.util.AppUtils;
 import com.legendshop.util.sql.ConfigCode;
 
 /**
- * 用户产品评论.
+ * 登录历史
  */
 @Controller
-@RequestMapping("/p/loginHistory")
+@RequestMapping("/admin/loginHistory")
 public class LoginHistoryController extends BaseController{ 
 	
 	/** The log. */

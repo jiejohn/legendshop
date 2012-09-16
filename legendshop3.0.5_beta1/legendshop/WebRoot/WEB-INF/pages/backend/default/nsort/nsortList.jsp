@@ -23,14 +23,17 @@
     	<a href="${pageContext.request.contextPath}/admin/sort/query">类型管理</a> &raquo; 
     	<a href="${pageContext.request.contextPath}/admin/nsort/query?sortId=${param.sortId}">二级商品类型管理</a></td></tr>
     </thead>
-    </table>
-        <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+ <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
         <input type="hidden" id="sortId" name="sortId" value="${bean.sortId}" />
         二级类型
             <input type="text" name="name" maxlength="50" value="${name}" />
             <input type="submit" value="搜索"/>
             <input type="button" value="创建二级商品类型" onclick='window.location="${pageContext.request.contextPath}/admin/nsort/load?sortId=${bean.sortId}"'/>
-            <br>
+ </div>
+ </td></tr></tbody>
+    </table>
     </form>
 
     <div align="center">

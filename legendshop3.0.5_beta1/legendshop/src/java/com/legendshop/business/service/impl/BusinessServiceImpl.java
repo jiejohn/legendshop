@@ -89,8 +89,13 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	/** The myleague dao. */
 	private MyleagueDao myleagueDao;
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#search(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, com.legendshop.business.action.form.SearchForm)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BusinessService#search(javax.servlet
+	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse,
+	 * com.legendshop.business.action.form.SearchForm)
 	 */
 	@Override
 	public String search(HttpServletRequest request, HttpServletResponse response, SearchForm searchForm) {
@@ -99,7 +104,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		// 1、关键字不能为空
 		if (AppUtils.isBlank(searchForm.getKeyword())) {
 			log.error("search keyword can't be null!");
-			return PathResolver.getPath(request,response,FowardPage.INDEX_QUERY);
+			return PathResolver.getPath(request, response, FowardPage.INDEX_QUERY);
 		}
 		// 2、查找对应的Sort,defaultValue=0表示没有选择类型
 		if (!AppUtils.isBlank(searchForm.getSortId()) && !defaultInt.equals(searchForm.getSortId())) {
@@ -150,21 +155,27 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			request.setAttribute("prodDetailList", ps.getResultList());
 			request.setAttribute("searchForm", searchForm);
 			if (ps.hasMutilPage()) {
-				request.setAttribute("toolBar", ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
+				request.setAttribute("toolBar",
+						ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
 			}
 		} catch (Exception e) {
 			log.error("getProdDetail", e);
-			return PathResolver.getPath(request,response,FowardPage.INDEX_QUERY);
+			return PathResolver.getPath(request, response, FowardPage.INDEX_QUERY);
 		}
-		return PathResolver.getPath(request,response,TilesPage.PRODUCTSORT);
+		return PathResolver.getPath(request, response, TilesPage.PRODUCTSORT);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#searchall(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BusinessService#searchall(javax.
+	 * servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse,
+	 * java.lang.String, java.lang.String)
 	 */
 	@Override
 	public String searchall(HttpServletRequest request, HttpServletResponse response, String keyword, Integer entityType) {
-		if(entityType == null){
+		if (entityType == null) {
 			entityType = 0;
 		}
 
@@ -177,7 +188,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		}
 		log.debug("search by keyword {}", keyword);
 		if (AppUtils.isBlank(keyword)) {
-			return PathResolver.getPath(request,response,FrontPage.ALL);
+			return PathResolver.getPath(request, response, FrontPage.ALL);
 		}
 		int curPageNO = PagerUtil.getCurPageNO(curPageNOStr);// 当前页
 		SearchArgs args = new SearchArgs();
@@ -232,15 +243,19 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			request.setAttribute("offset", new Integer(ps.getOffset() + 1));
 			request.setAttribute("searchResult", ps.getResultList());
 			if (ps.hasMutilPage()) {
-				request.setAttribute("toolBar", ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
+				request.setAttribute("toolBar",
+						ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
 			}
 		}
-		return PathResolver.getPath(request,response,TilesPage.SEARCHALL);
+		return PathResolver.getPath(request, response, TilesPage.SEARCHALL);
 	}
 
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#friendlink(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BusinessService#friendlink(javax
+	 * .servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	public String getFriendlink(HttpServletRequest request, HttpServletResponse response) {
@@ -249,13 +264,16 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (!AppUtils.isBlank(adList)) {
 			request.setAttribute("adList", adList);
 		}
-		return PathResolver.getPath(request,response,FrontPage.FRIENDLINK);
+		return PathResolver.getPath(request, response, FrontPage.FRIENDLINK);
 	}
 
-
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#ipsearch(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BusinessService#ipsearch(javax.servlet
+	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse,
+	 * java.lang.String)
 	 */
 	@Override
 	public String getIpAddress(HttpServletRequest request, HttpServletResponse response, String ipAddress) {
@@ -266,11 +284,15 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		}
 		request.setAttribute("ipAddress", ipAddress);
 		request.setAttribute("address", address);
-		return PathResolver.getPath(request,response,FrontPage.IPSEARCH);
+		return PathResolver.getPath(request, response, FrontPage.IPSEARCH);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#league(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BusinessService#league(javax.servlet
+	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	public String getLeague(HttpServletRequest request, HttpServletResponse response) {
@@ -284,36 +306,59 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
 		request.setAttribute("leagues", ps.getResultList());
 		if (ps.hasMutilPage()) {
-			request.setAttribute("toolBar", ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
+			request.setAttribute("toolBar",
+					ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
 		}
-		getAndSetOneAdvertisement(request,response,ThreadLocalContext.getCurrentShopName(request, response), Constants.USER_REG_ADV_740);
-		return PathResolver.getPath(request,response,TilesPage.LEAGUE);
+		getAndSetOneAdvertisement(request, response, ThreadLocalContext.getCurrentShopName(request, response),
+				Constants.USER_REG_ADV_740);
+		return PathResolver.getPath(request, response, TilesPage.LEAGUE);
 	}
 
+	/**
+	 * 产品查看历史
+	 */
 	@Override
 	public String getVisitedProd(HttpServletRequest request, HttpServletResponse response) {
+		visitedProd(request, response);
+		return PathResolver.getPath(request, response, FrontPage.VISITED_PROD);
+	}
+
+	/**
+	 *  产品查看历史
+	 */
+	private void visitedProd(HttpServletRequest request, HttpServletResponse response) {
 		List<Object> prodIds = VisitHistoryHelper.getVisitedProd(request);
 		List<ProductDetail> products = new ArrayList<ProductDetail>();
 		for (Object prodId : prodIds) {
-			products.add(productDao.getProdDetail((Long)prodId));
+			products.add(productDao.getProdDetail(Long.parseLong(prodId.toString())));
 		}
 		request.setAttribute("visitedProd", products);
-		return PathResolver.getPath(request,response,FrontPage.VISITED_PROD);
 	}
 
+	/**
+	 * 包括：
+	 * 1. 商城查看历史
+	 * 2.  产品查看历史
+	 */
 	@Override
 	public String getVisitedShop(HttpServletRequest request, HttpServletResponse response) {
 		List<Object> shopIds = VisitHistoryHelper.getVisitedShopDetail(request);
 		List<ShopDetail> shopDetails = new ArrayList<ShopDetail>();
 		for (Object userName : shopIds) {
-			shopDetails.add(shopDetailDao.getShopDetail((String)userName));
+			shopDetails.add(shopDetailDao.getShopDetail((String) userName));
 		}
 		request.setAttribute("visitedShop", shopDetails);
-		return PathResolver.getPath(request,response,FrontPage.VISITED_SHOP);
+
+		visitedProd(request, response);
+		return PathResolver.getPath(request, response, FrontPage.VISITED_SHOP);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#setShopDetailDao(com.legendshop.business.dao.ShopDetailDao)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BusinessService#setShopDetailDao
+	 * (com.legendshop.business.dao.ShopDetailDao)
 	 */
 	/**
 	 * Sets the shop detail dao.
@@ -327,8 +372,11 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		this.shopDetailDao = shopDetailDao;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#setSortDao(com.legendshop.business.dao.SortDao)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.legendshop.business.service.impl.BusinessService#setSortDao(com.
+	 * legendshop.business.dao.SortDao)
 	 */
 	/**
 	 * Sets the sort dao.
@@ -352,8 +400,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		this.newsDao = newsDao;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#setNsortDao(com.legendshop.business.dao.NsortDao)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BusinessService#setNsortDao(com.
+	 * legendshop.business.dao.NsortDao)
 	 */
 	/**
 	 * Sets the nsort dao.
@@ -366,8 +418,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		this.nsortDao = nsortDao;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#setExternalLinkDao(com.legendshop.business.dao.ExternalLinkDao)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BusinessService#setExternalLinkDao
+	 * (com.legendshop.business.dao.ExternalLinkDao)
 	 */
 	/**
 	 * Sets the external link dao.
@@ -380,7 +436,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		this.externalLinkDao = externalLinkDao;
 	}
 
-
 	/**
 	 * Sets the search facade.
 	 * 
@@ -392,9 +447,12 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		this.searchFacade = searchFacade;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.impl.BusinessService#copyAll(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.legendshop.business.service.impl.BusinessService#copyAll(javax.servlet
+	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	public String getNewsforCommon(HttpServletRequest request, HttpServletResponse response) {
@@ -404,7 +462,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			shopName = Constants.COMMON_USER;
 		}
 		request.setAttribute("newsBottomList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_BOTTOM, 8));
-		return PathResolver.getPath(request,response,FrontPage.COPY);
+		return PathResolver.getPath(request, response, FrontPage.COPY);
 	}
 
 	/**
@@ -418,7 +476,6 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		this.productDao = productDao;
 	}
 
-
 	/**
 	 * Sets the myleague dao.
 	 * 
@@ -429,6 +486,5 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	public void setMyleagueDao(MyleagueDao myleagueDao) {
 		this.myleagueDao = myleagueDao;
 	}
-
 
 }

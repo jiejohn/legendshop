@@ -23,13 +23,17 @@
 	    <thead>
 	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/myleague/query">加盟商城管理</a></td></tr>
 	    </thead>
-	    </table>
-	         <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">&nbsp;商城
+	     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+ <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">&nbsp;商城
                <input type="text" name="userId" maxlength="50" value="${bean.userId}" />
              </auth:auth>
             <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />加盟商城
             <input type="text" name="friendId" maxlength="50" value="${bean.friendId}" />
 	        <input type="submit" value="搜索"/>
+ </div>
+ </td></tr></tbody>
+	    </table>
     </form>
     <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

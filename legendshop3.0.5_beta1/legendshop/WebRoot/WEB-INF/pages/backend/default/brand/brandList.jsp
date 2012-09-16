@@ -20,15 +20,19 @@
 	    <thead>
 	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/brand/query">品牌管理</a></td></tr>
 	    </thead>
-	    </table>
-        <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+	    <tbody><tr><td>
+	    <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+        <div align="left" style="padding: 3px">
         <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
             商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${bean.userName}" />
             <input type="submit" value="搜索"/>
             </auth:auth>
             <input type="button" value="创建商品品牌" onclick='window.location="${pageContext.request.contextPath}/admin/brand/load"'/>
             <input type="button" value="返回商品列表" onclick='window.location="<ls:url address='/admin/product/query'/>"'/>
-            <br>
+            </div>
+	    </td></tr></tbody>
+	    </table>
+        
     </form>
     <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

@@ -191,6 +191,7 @@ public class UserAdminController extends BaseController implements AdminControll
 	 *            the response
 	 * @return the action forward
 	 */
+	@Deprecated
 	@RequestMapping("/preupdateStatus")
 	public String preupdateStatus(HttpServletRequest request,
 			HttpServletResponse response) {

@@ -20,12 +20,17 @@
 	    <thead>
 	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 系统管理  &raquo; <a href="${pageContext.request.contextPath}/system/systemParameter/query">系统参数配置管理</a></td></tr>
 	    </thead>
-	    </table>
-    <form action="${pageContext.request.contextPath}/system/systemParameter/query" id="form1" method="post">
+	     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+<form action="${pageContext.request.contextPath}/system/systemParameter/query" id="form1" method="post">
         <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
            &nbsp; 参数名称&nbsp;<input type="text" name="name" id="name" maxlength="50" size="50" value="${bean.name}" />
             <input type="submit" value="搜索"/>
     </form>
+ </div>
+ </td></tr></tbody>
+	    </table>
+    
     <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="/system/systemParameter/query" id="item"

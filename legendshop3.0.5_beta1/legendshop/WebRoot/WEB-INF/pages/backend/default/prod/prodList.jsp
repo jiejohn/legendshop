@@ -16,7 +16,7 @@
 		<script src="<ls:templateResource item='/common/js/linked-select.js'/>" type="text/javascript"></script>
 		<script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
 
-<title>类型列表</title>
+<title>产品列表</title>
 </head>
 <body class="bodymargin">
 <%
@@ -25,18 +25,19 @@
 <form action="<ls:url address='/admin/product/query'/>" id="form1" method="post">
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><th style="font-weight: normal;"><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理 &raquo; <a href="<ls:url address='/admin/product/query'/>">商品管理</a></th></tr>
+    	<tr><td style="font-weight: normal;"><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理 &raquo; <a href="<ls:url address='/admin/product/query'/>">商品管理</a></td></tr>
     </thead>
     <tbody>
     	<tr><td>
     	    <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}"/>
-			<div align="left" style="padding: 5px;">
+			<div align="left" style="padding: 3px;">
 		    <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
                商城名称&nbsp;
             <input type="text" name="userName" maxlength="50" value="${prod.userName}" size="15"/>
             </auth:auth>
 			<auth:auth ifNotGranted="F_VIEW_ALL_DATA">
-			商品类型&nbsp;<select id="sortId" name="sortId" onChange="changeNsort(this.value)">
+			  商品类型&nbsp;
+			 <select id="sortId" name="sortId" onChange="changeNsort(this.value)">
 			<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null && sessionScope.SPRING_SECURITY_LAST_USERNAME !=''}">
 	            <option:optionGroup type="select" required="false" cache="fasle"
 	                defaultDisp="-- 一级类型 --" 
@@ -56,8 +57,8 @@
                     param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
         </select>    
         </auth:auth>  
-        </div><div align="left" style="padding: 5px">
-			商品名称
+        </div><div align="left" style="padding: 3px">
+			商品名称&nbsp;
 			<input type="text" name="name" id="name" maxlength="50" value="${prod.name}" size="32"/>
 			推荐
 			<select id="commend" name="commend">
@@ -77,9 +78,7 @@
     	</td></tr>
     </tbody>
     </table>
-	</form>	
-	
-	
+	</form>
 	<div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="/admin/product/query" id="item"

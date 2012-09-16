@@ -18,9 +18,11 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/sort/query">类型管理</a></td></tr>
     </thead>
-    </table>
-    <form id="form1" action="${pageContext.request.contextPath}/admin/sort/query">
+    <tbody>
+    	<tr><td>
+    	 <form id="form1" action="${pageContext.request.contextPath}/admin/sort/query">
 		<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}">
+		<div align="left" style="padding: 3px">
 			&nbsp; 类型名称
 			<input type="text" name="sortName"  id="sortName" maxlength="50" value="${sort.sortName}" />
 			<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
@@ -32,6 +34,8 @@
 	      <option:optionGroup type="select" required="false" cache="true"
 	                beanName="PRODUCT_TYPE" selectedValue="${sort.sortType}" />
 	        </select>	
+	        </div>
+	        <div align="left" style="padding: 3px">
 			&nbsp; Header菜单			
 	      <select id="headerMenu" name="headerMenu">
 	      <option:optionGroup type="select" required="false" cache="true"
@@ -45,7 +49,12 @@
 			<input type="submit" value="搜索"/>
 			<input type="button" value="创建商品类型" onclick='window.location="${pageContext.request.contextPath}/admin/sort/load"'/>
 			<input type="button" value="返回商品列表" onclick='window.location="<ls:url address='/admin/product/query'/>"'/>
+			</div>
 			</form>
+    	</td></tr>
+    </tbody>
+    </table>
+   
   <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="/admin/sort/query" id="item"

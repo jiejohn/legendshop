@@ -57,7 +57,6 @@
     </table>
   <table class="${tableclass}" style="width: 100%" id="col1" >
      <thead>
-
                     <tr class="sortable">
                         <th colspan="2">
                             <div align="center">

@@ -22,8 +22,8 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/visitLog/query">浏览历史</a></td></tr>
     </thead>
-    </table>
-    <div align="left" style="padding: 5px">
+     <tbody><tr><td>
+<div align="left" style="padding: 3px">
         <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
         <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
          &nbsp; 商城 <input type="text" name="shopName" maxlength="50" value="${bean.shopName}" />
@@ -32,7 +32,7 @@
 			 <input readonly="readonly"  name="startTime" id="startTime" class="Wdate" type="text" onClick="WdatePicker()" value='<fmt:formatDate value="${bean.startTime}" pattern="yyyy-MM-dd"/>' />
 			&nbsp;结束
 			 <input readonly="readonly" name="endTime" id="endTime" class="Wdate" type="text" onClick="WdatePicker()" value='<fmt:formatDate value="${bean.endTime}" pattern="yyyy-MM-dd"/>' />
-            </div><div align="left" style="padding: 5px">
+            </div><div align="left" style="padding: 3px">
             用户名&nbsp;<input type="text" name="userName" maxlength="50" value="${bean.userName}" />
            
             &nbsp;页面
@@ -44,6 +44,8 @@
 	        <input type="text" name="productName" maxlength="50" value="${bean.productName}" />
             <input type="submit" value="搜索"/>
             </div>
+ </td></tr></tbody>
+    </table>
     </form>
     <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

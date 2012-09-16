@@ -31,11 +31,11 @@
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 首页管理</td></tr>
     </thead>
     </table>
-     <div align="center">
-			<table style="border: 0px;">
+     <div align="center" >
+			<table style="border: 0px;" style="width: 100%;"> 
 				<tr>
 					<td>
-						<table align="center" class="${tableclass}" id="col1">
+						<table align="center" class="${tableclass}" id="col1" style="width: 100%;">
 							<thead>
 								<tr class="sortable">
 									<th colspan="2">
@@ -116,7 +116,7 @@
 				</tr>
 				<tr>
 					<td>
-						<table align="center" class="${tableclass}" id="col2"  style="padding: 0px;width: 80%">
+						<table align="center" class="${tableclass}" id="col2"  style="padding: 0px;width: 100%">
 							<thead>
 								<tr class="sortable">
 									<th colspan="2">

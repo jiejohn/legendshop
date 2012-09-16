@@ -73,9 +73,6 @@
 <form action="${pageContext.request.contextPath}/admin/member/role/saveFunctionsToRole" id="form1" name="form1">
     <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>"> 
     <input type="hidden" name="roleId" value="${bean.id }"> 
-    
-    
-    
 	 <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
         

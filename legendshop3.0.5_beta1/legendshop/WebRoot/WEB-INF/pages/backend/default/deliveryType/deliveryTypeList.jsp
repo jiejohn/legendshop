@@ -26,15 +26,18 @@
 			    	</td>
 		    	</tr>
 		    </thead>
-	    </table>
-        <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+		     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
         	<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
             	商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${deliveryType.userName}" />
             </auth:auth>
             	配送方式&nbsp;<input type="text" name="name" maxlength="50" value="${deliveryType.name}" />
             <input type="submit" value="搜索"/>
             <input type="button" value="创建配送方式" onclick='window.location="<ls:url address='/admin/deliveryType/load'/>"'/>
-            <br>
+ </div>
+ </td></tr></tbody>
+	    </table>
     </form>
     <div align="center">
           <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

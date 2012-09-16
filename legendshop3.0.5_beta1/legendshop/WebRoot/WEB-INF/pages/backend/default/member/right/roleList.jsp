@@ -38,7 +38,8 @@
 	    <thead>
 	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/member/role/query">角色管理</a> </td></tr>
 	    </thead>
-	    </table>
+	     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
 <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
 			&nbsp; 名称 ：
 			<input type="text" name="name" maxlength="50" value="${bean.name }" />
@@ -48,7 +49,9 @@
 	            </select>
 			<input type="submit" value="搜索"/>
 			<input type="button" value="创建角色" onclick='window.location="${pageContext.request.contextPath}/admin/member/role/load"'/>
-			&nbsp;&nbsp;
+ </div>
+ </td></tr></tbody>
+	    </table>
 </form>	
 
 	 <div align="center">

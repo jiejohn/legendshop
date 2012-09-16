@@ -17,8 +17,9 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 团购管理  &raquo; <a href="${pageContext.request.contextPath}/admin/gsort/query">团购分类</a></td></tr>
     </thead>
-    </table>
-    <form id="form1" action="${pageContext.request.contextPath}/admin/gsort/query">
+     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+<form id="form1" action="${pageContext.request.contextPath}/admin/gsort/query">
 		<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}">
 			&nbsp; 类型名称
 			<input type="text" name="sortName"  id="sortName" maxlength="50" value="${sort.sortName}" />
@@ -30,6 +31,9 @@
 			<input type="button" value="创建商品类型" onclick='window.location="${pageContext.request.contextPath}/admin/gsort/load"'/>
 			<input type="button" value="返回商品列表" onclick='window.location="<ls:url address='/admin/product/query'/>"'/>
 			</form>
+ </div>
+ </td></tr></tbody>
+    </table>
   <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="/admin/gsort/query" id="item"

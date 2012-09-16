@@ -21,8 +21,9 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/newsCategory/query">栏目管理</a></td></tr>
     </thead>
-    </table>
-        <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+ <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
         	栏目名称
 	            <input type="text" name="newsCategoryName" maxlength="50" value="${bean.newsCategoryName}" />
 	     状态
@@ -37,6 +38,9 @@
                <input type="submit" value="搜索"/>
             <input type="button" value="创建栏目" onclick='window.location="${pageContext.request.contextPath}/admin/newsCategory/load"'/>
             <input type="button" value="新闻列表" onclick='window.location="${pageContext.request.contextPath}/admin/news/query"'/>
+ </div>
+ </td></tr></tbody>
+    </table>
     </form>
     <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

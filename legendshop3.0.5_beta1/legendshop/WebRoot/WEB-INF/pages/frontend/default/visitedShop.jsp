@@ -5,7 +5,7 @@
 					    <tr><td class="titlebg"><fmt:message key="visited.mall"/></td></tr>
 						<tr><td align="left">
 							  <c:forEach items="${visitedShop}" var="visitedShop" varStatus="status">
-							  <div style="margin: 2px;"><a href="${pageContext.request.contextPath}/shop/${visitedShop.name}" title="${visitedShop.title}" target="_blank">${visitedShop.name}</a></div>
+							  <div style="margin: 2px;"><a href="${pageContext.request.contextPath}/shop/${visitedShop.siteName}"   target="_blank">${visitedShop.siteName}</a></div>
 							  </c:forEach>
 						</td></tr>
 					</table>
@@ -16,7 +16,7 @@
 					    <tr><td class="titlebg"><fmt:message key="visited.product"/></td></tr>
 						<tr><td align="left">
 							  <c:forEach items="${visitedProd}" var="visitProd" varStatus="status">
-							  <div style="margin: 2px;"><a href="${pageContext.request.contextPath}/views/${visitProd.id}" title="${visitProd.title}" target="_blank">${visitProd.name}</a></div>
+							  <div style="margin: 2px;"><a href="${pageContext.request.contextPath}/views/${visitProd.prodId}" title="${visitProd.keyWord}" target="_blank">${visitProd.name}</a></div>
 							  </c:forEach>
 						</td></tr>
 						<tr><td></td></tr>

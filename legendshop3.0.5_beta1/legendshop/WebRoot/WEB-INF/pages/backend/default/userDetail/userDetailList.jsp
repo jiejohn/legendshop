@@ -6,9 +6,9 @@
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
 <html>
 <head>
-  		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+		 <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
 		<script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
 <title>用户详细信息列表</title>
 </head>
@@ -18,7 +18,8 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/system/userDetail/query">用户信息管理</a></td></tr>
     </thead>
-    </table>
+    <tbody><tr><td>
+ <div align="left" style="padding: 3px">
 <form action="${pageContext.request.contextPath}/system/userDetail/query" id="form1" name="form1">
 <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}">
 			&nbsp;用户名
@@ -41,6 +42,9 @@
 			</select>
 			<input type="submit" value="搜索"/>
 </form>
+ </div>
+ </td></tr></tbody>
+    </table>
 
 <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

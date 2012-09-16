@@ -20,7 +20,8 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/loginHistory/sum">用户登录次数历史列表</a></td></tr>
     </thead>
-    </table>
+     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
 <form action="${pageContext.request.contextPath}/admin/loginHistory/sum" id="form1">
 <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}">
 			&nbsp;用户名称
@@ -31,6 +32,10 @@
 			<input readonly="readonly" name="endTime" id="endTime" class="Wdate" type="text" onClick="WdatePicker()" value='<fmt:formatDate value="${login.endTime}" pattern="yyyy-MM-dd"/>' />
 			<input type="submit" value="搜索" /> 
 </form>
+ </div>
+ </td></tr></tbody>
+    </table>
+
 <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="/admin/loginHistory/sum" id="item"

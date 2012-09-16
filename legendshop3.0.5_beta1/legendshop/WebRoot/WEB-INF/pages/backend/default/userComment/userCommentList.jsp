@@ -20,8 +20,9 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/userComment/query?status=0">消息管理</a></td></tr>
     </thead>
-    </table>
-		<input type="hidden" name="curPageNO" id="curPageNO" value="${curPageNO}"/>
+     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+<input type="hidden" name="curPageNO" id="curPageNO" value="${curPageNO}"/>
 			用户名称&nbsp;
 			<input type="text" name="userName" maxlength="50" value="<%=request.getAttribute("userName")%>" />
 			<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
@@ -33,6 +34,10 @@
 				<option value="1">已读</option>
 			</select>
 			<input type="submit" value="搜索"/>
+ </div>
+ </td></tr></tbody>
+    </table>
+		
 <c:if test="${requestScope.list != null && fn:length(requestScope.list) > 0}">
 <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

@@ -21,15 +21,19 @@
 	    <thead>
 	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/productcomment/query">评论管理</a></td></tr>
 	    </thead>
-	    </table>
-        	<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+	     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+	<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
         	评价人&nbsp;<input type="text" name="userName" id="userName" maxlength="50" value="${bean.userName}" />
               商品名称&nbsp;<input type="text" name="prodName" id="prodName" maxlength="50" value="${bean.prodName}" />
            <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
             	商城名称&nbsp;<input type="text" name="ownerName" maxlength="50" value="${bean.ownerName}" />
             </auth:auth>
             <input type="submit" value="搜索"/>
-            <br>
+ </div>
+ </td></tr></tbody>
+	    </table>
+        
     </form>
     <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

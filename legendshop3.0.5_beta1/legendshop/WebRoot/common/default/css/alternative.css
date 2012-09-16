@@ -1,19 +1,22 @@
 /* alternative styles */
-table.its thead tr {
-	background-color: #9AD075;
-
+table.its thead tr td{
+	background: buttonface;
+	border-width: 1px;
+	border-style: solid;
+	border-color: threedhighlight threedshadow threedshadow threedhighlight;
+	height: 28px;
 }
 
 table.its  tr td{
     padding: 3px 3px ;
+    height: 25px;
 }
 
-/**
+
 table.its {
 	color: #666666;
 	border: 0px;
 	margin: 0px;
-	padding: 0px;
 }
 
 table.its th {
@@ -22,9 +25,10 @@ table.its th {
 	border-style: solid;
 	border-color: threedhighlight threedshadow threedshadow threedhighlight;
 	cursor: pointer;
+	height: 25px;
 }
 
-**/
+/**  **/
 
 table.its a {color: #666666;}
 

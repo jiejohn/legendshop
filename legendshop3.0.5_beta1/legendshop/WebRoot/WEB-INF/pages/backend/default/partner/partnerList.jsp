@@ -24,15 +24,19 @@
 			    	</td>
 		    	</tr>
 		    </thead>
-	    </table>
-        <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+		     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
+ <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
         	<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
             	商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${partner.userName}" />
             </auth:auth>
             &nbsp;&nbsp;登录名&nbsp;<input type="text" name="partnerName" maxlength="50" value="${partner.partnerName}" />
             <input type="submit" value="搜索"/>
             <input type="button" value="创建供应商" onclick='window.location="<ls:url address='/admin/partner/load'/>"'/>
-            <br>
+ </div>
+ </td></tr></tbody>
+	    </table>
+       
     </form>
     <div align="center">
           <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
@@ -41,22 +45,8 @@
       <display:column title="登录名" property="partnerName"></display:column>
       <display:column title="名称" property="title"></display:column>
       <display:column title="主页" property="homepage"></display:column>
-      <display:column title="银行名称" property="bankName"></display:column>
-      <display:column title="所在位置" property="location"></display:column>
       <display:column title="联系人" property="contact"></display:column>
       <display:column title="联系电话" property="phone"></display:column>
-      <display:column title="展示相关信息"> 
-      	<option:optionGroup type="label" required="true" cache="true"
-	                beanName="YES_NO" selectedValue="${item.showInfo}" defaultDisp=""/>
-      </display:column>
-      <display:column title="状态">      
-      	<option:optionGroup type="label" required="true" cache="true"
-	                beanName="ENABLED" selectedValue="${item.status}" defaultDisp=""/>
-      </display:column>
-      <display:column title="显示首页">      
-      	<option:optionGroup type="label" required="true" cache="true"
-	                beanName="YES_NO" selectedValue="${item.display}" defaultDisp=""/>
-      </display:column>
       <display:column title="评论满意" property="commentGood"></display:column>
       <display:column title="评论一般" property="commentNone"></display:column>
       <display:column title="评论失望" property="commentBad"></display:column>

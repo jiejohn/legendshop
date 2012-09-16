@@ -25,15 +25,19 @@
 			    	</td>
 		    	</tr>
 		    </thead>
+		     <tbody><tr><td>
+		 <div align="left" style="padding: 3px">
+		<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+		        	<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
+		            	商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${deliveryCorp.userName}" />
+		            </auth:auth>
+		            	物流公司名称&nbsp;<input type="text" name="name" maxlength="50" value="${deliveryCorp.name}" />
+		            <input type="submit" value="搜索"/>
+		            <input type="button" value="创建物流公司" onclick='window.location="<ls:url address='/admin/deliveryCorp/load'/>"'/>
+		 </div>
+ </td></tr></tbody>
 	    </table>
-        <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
-        	<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
-            	商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${deliveryCorp.userName}" />
-            </auth:auth>
-            	物流公司名称&nbsp;<input type="text" name="name" maxlength="50" value="${deliveryCorp.name}" />
-            <input type="submit" value="搜索"/>
-            <input type="button" value="创建物流公司" onclick='window.location="<ls:url address='/admin/deliveryCorp/load'/>"'/>
-            <br>
+        
     </form>
     <div align="center">
           <%@ include file="/WEB-INF/pages/common/messages.jsp"%>

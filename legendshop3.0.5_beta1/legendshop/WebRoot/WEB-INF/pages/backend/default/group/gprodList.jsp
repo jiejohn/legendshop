@@ -29,7 +29,7 @@
 <form action="<ls:url address='/admin/group/product/query'/>" id="form1" method="post">
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><th style="font-weight: normal;"><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 团购管理 &raquo; <a href="<ls:url address='/admin/group/product/query'/>">团购管理</a></th></tr>
+    	<tr><td style="font-weight: normal;"><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 团购管理 &raquo; <a href="<ls:url address='/admin/group/product/query'/>">团购管理</a></td></tr>
     </thead>
     <tbody>
     	<tr><td>
@@ -61,8 +61,8 @@
                     param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
         </select>    
         </auth:auth>  
-        </div><div align="left" style="padding: 5px">
-			商品名称
+        </div><div align="left" style="padding: 3px">
+			商品名称&nbsp;
 			<input type="text" name="product.name" id="name" maxlength="50" value="${prod.name}" size="32"/>
 			状态
 			<select id="status" name="product.status">

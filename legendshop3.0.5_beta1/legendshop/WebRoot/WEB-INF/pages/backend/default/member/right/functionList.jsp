@@ -32,16 +32,17 @@
 	    <thead>
 	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 用户管理  &raquo; <a href="${pageContext.request.contextPath}/admin/member/right/query">权限管理</a> </td></tr>
 	    </thead>
-	    </table>
+	     <tbody><tr><td>
+ <div align="left" style="padding: 3px">
     <input type="hidden" name="curPageNO" value="<%=request.getAttribute("curPageNO")%>">
 			&nbsp; 名称 ：
 			<input type="text" name="name" maxlength="50" value="${bean.name }" />
 			<input type="submit" value="搜索"/>
 			<input type="button" value="创建权限" onclick='window.location="${pageContext.request.contextPath}/admin/member/right/load"'/>
-			&nbsp;&nbsp;
+ </div>
+ </td></tr></tbody>
+	    </table>
 	</form>		
-	
-	
 	<div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="${pageContext.request.contextPath}/admin/member/right/query" id="item" export="true" class="${tableclass}" style="width:100%">
