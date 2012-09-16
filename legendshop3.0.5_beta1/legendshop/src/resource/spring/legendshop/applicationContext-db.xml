@@ -19,6 +19,7 @@
 			<list>
 				<!-- JDBC访问的用户名、密码等 -->
 				<value>classpath*:config/*.properties</value>
+				<value>classpath:cas.properties</value>
 			</list>
 		</property>
 	</bean>
