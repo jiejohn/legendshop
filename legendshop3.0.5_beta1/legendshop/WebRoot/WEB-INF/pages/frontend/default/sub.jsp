@@ -174,7 +174,7 @@
 			alert('<fmt:message key="purchase.finished"/>');
 			<!-- 7： 货到付款  -->
 			updateSubStatus(subId,7);
-			window.location="${pageContext.request.contextPath}/order";
+			window.location="${pageContext.request.contextPath}/p/order";
 		}
 		
 	}

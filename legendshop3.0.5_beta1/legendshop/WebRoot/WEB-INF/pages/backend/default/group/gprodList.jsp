@@ -22,7 +22,7 @@
 
 <title>类型列表</title>
 </head>
-<body class="bodymargin">
+<body>
 <%
 			Integer offset = (Integer)request.getAttribute("offset");
 	%>

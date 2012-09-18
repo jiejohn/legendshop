@@ -127,7 +127,7 @@
 </script>
 
 </head>
-    <body class="bodymargin">
+    <body>
         <form action="${pageContext.request.contextPath}/admin/shopDetail/save" method="post" id="form1" enctype="multipart/form-data">
             <input id="userId" name="userId" value="${shopDetail.userId == null ? param.userId:shopDetail.userId}" type="hidden">
              <input id="id" name="id" value="${id}" type="hidden">

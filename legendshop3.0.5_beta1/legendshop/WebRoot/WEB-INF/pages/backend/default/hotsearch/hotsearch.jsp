@@ -47,7 +47,7 @@
 });
 </script>
 </head>
-    <body class="bodymargin">
+    <body>
         <form action="${pageContext.request.contextPath}/admin/hotsearch/save" method="post" id="form1">
             <input id="id" name="id" value="${bean.id}" type="hidden">
             <div align="center">

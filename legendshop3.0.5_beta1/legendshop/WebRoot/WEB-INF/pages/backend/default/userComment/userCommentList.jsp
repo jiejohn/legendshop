@@ -11,7 +11,7 @@
 <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
 <title>用户消息列表</title>
 </head>
-<body class="bodymargin">
+<body>
 <%
 			Integer offset = (Integer)request.getAttribute("offset");
 	%>

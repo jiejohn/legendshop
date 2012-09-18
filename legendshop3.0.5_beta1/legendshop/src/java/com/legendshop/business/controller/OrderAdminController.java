@@ -47,15 +47,6 @@ public class OrderAdminController extends BaseController implements AdminControl
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(OrderAdminController.class);
 	
-	/** The LIS t_ page. */
-	public static String LIST_PAGE = "/order/orderList";
-	
-	/** The EDI t_ page. */
-	public static String EDIT_PAGE="/order/order";
-	
-	/** The LIS t_ query. */
-	public static String LIST_QUERY = "/admin/order/query";
-	
 	/** The sub service. */
 	@Autowired
 	private SubService subService;
@@ -64,13 +55,10 @@ public class OrderAdminController extends BaseController implements AdminControl
 	 * @see com.legendshop.core.base.AdminController#query(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String, java.lang.Object)
 	 */
 	@Override
-	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Sub entity) {
+		log.debug("query sub by SubNumber {}, ShopName {}" + entity.getSubNumber(),entity.getShopName());
 		String loginName = UserManager.getUsername(request);
 		String subNumber = entity.getSubNumber();
-		if(entity!=null && entity.getSubCheck() == null){
-			entity.setSubCheck(Constants.FALSE_INDICATOR);
-		}
 		if (!AppUtils.isBlank(subNumber)) {
 			subNumber = subNumber.trim();
 		}
@@ -103,8 +91,39 @@ public class OrderAdminController extends BaseController implements AdminControl
 			PageSupport ps = subService.getOrderList(cq);
 			savePage(ps, request);
 			request.setAttribute("subForm", entity);
-			return PathResolver.getPath(request,response,BackPage.ORDER_LIST_PAGE);
-
+			return null; //no used
+	}
+	
+	/**
+	 * Query processing order.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param curPageNO the cur page no
+	 * @param entity the entity
+	 * @return the string
+	 */
+	@RequestMapping("/processing")
+	public String queryProcessingOrder(HttpServletRequest request, HttpServletResponse response, String curPageNO, Sub entity) { 
+		entity.setSubCheck(Constants.FALSE_INDICATOR);
+	    query(request, response, curPageNO, entity);
+		return PathResolver.getPath(request,response,BackPage.PROCESSING_ORDER_LIST_PAGE);
+	}
+	
+	/**
+	 * Query processed order.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param curPageNO the cur page no
+	 * @param entity the entity
+	 * @return the string
+	 */
+	@RequestMapping("/processed")
+	public String queryProcessedOrder(HttpServletRequest request, HttpServletResponse response, String curPageNO, Sub entity) { 
+		entity.setSubCheck(Constants.TRUE_INDICATOR);
+		query(request, response, curPageNO, entity);
+		return PathResolver.getPath(request,response,BackPage.PROCESSED_ORDER_LIST_PAGE);
 	}
 
 	/* (non-Javadoc)
@@ -113,7 +132,6 @@ public class OrderAdminController extends BaseController implements AdminControl
 	@Override
 	@RequestMapping("/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, Sub entity) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -176,9 +194,16 @@ public class OrderAdminController extends BaseController implements AdminControl
 		return null;
 	}
 	
+	/**
+	 * Modify price.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param id the id
+	 * @return the string
+	 */
 	@RequestMapping(value = "/modifyPrice")
 	public String modifyPrice(HttpServletRequest request, HttpServletResponse response, Long id) {
-		// TODO Auto-generated method stub
 		return PathResolver.getPath(request,response,BackPage.MODIFYPRICE);
 	}
 	

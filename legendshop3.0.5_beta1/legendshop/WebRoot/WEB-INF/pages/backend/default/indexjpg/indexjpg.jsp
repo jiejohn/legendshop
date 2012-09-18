@@ -48,7 +48,7 @@ $.validator.setDefaults({
 </script>
 
 </head>
-<body class="bodymargin">
+<body>
 <form action="${pageContext.request.contextPath}/admin/indexjpg/save"  method="post" id="indexJpgForm" enctype="multipart/form-data" >
   <input id="id" name="id" value="${index.id}" type="hidden">
   <table class="${tableclass}" style="width: 100%">

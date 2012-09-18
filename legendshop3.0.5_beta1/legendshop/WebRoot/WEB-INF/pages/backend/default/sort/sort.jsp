@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/default/css/indexJpgForm.css" />
 <title>创建商品类型</title>
 </head>
-<body class="bodymargin">
+<body>
 <script language="javascript">
   $.validator.setDefaults({
 	});

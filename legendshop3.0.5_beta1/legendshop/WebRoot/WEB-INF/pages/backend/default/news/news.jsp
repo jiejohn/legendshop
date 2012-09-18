@@ -56,7 +56,7 @@ jQuery("#form1").validate({
 //-->
 </script>
 </head>
-<body class="bodymargin">
+<body>
 <center>
 <form method="post" action="${pageContext.request.contextPath}/admin/news/save" id="form1">
     <table class="${tableclass}" style="width: 100%">

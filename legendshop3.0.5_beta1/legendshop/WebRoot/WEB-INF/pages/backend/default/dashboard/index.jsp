@@ -25,7 +25,7 @@
 <title>LegendShop后台首页</title> 
 
 </head>
-<body  class="bodymargin">
+<body >
     <table class="${tableclass}" style="width: 100%;">
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 首页管理</td></tr>
@@ -166,7 +166,7 @@
 										<c:when test="${userInfo.processingOrderNum == 0}">${userInfo.processingOrderNum}</c:when>
 										<c:otherwise><font color="#BD1205;">${userInfo.processingOrderNum}</font></c:otherwise>
 									</c:choose>
-									 &nbsp; <a href="${pageContext.request.contextPath}/admin/order/query">[查看订单]</a>
+									 &nbsp; <a href="${pageContext.request.contextPath}/admin/order/processing">[查看订单]</a>
 								</td>
 							</tr>
 							<tr>

@@ -22,216 +22,220 @@ import com.legendshop.util.AppUtils;
  */
 public enum BackPage implements PageDefinition{
 	
-	/** The VARIABLE. 可变路径 */
+	/** The variable. */
 	VARIABLE(""),
 	
-	/** The BAC k_ erro r_ page. */
+	/** The back error page. */
 	BACK_ERROR_PAGE(ERROR_PAGE_PATH),
 
-	/** The ORDERDETAIL. */
+	/** The orderdetail. */
 	ORDERDETAIL("/order/orderDetail"),
 
-	/** The AD v_ lis t_ page. */
+	/** The adv list page. */
 	ADV_LIST_PAGE("/advertisement/advertisementList"),
 
-	/** The AD v_ edi t_ page. */
+	/** The adv edit page. */
 	ADV_EDIT_PAGE("/advertisement/advertisement"),
 
-	/** The BRAN d_ lis t_ page. */
+	/** The brand list page. */
 	BRAND_LIST_PAGE("/brand/brandList"),
 
-	/** The BRAN d_ edi t_ page. */
+	/** The brand edit page. */
 	BRAND_EDIT_PAGE("/brand/brand"),
 
-	/** The LIN k_ lis t_ page. */
+	/** The link list page. */
 	LINK_LIST_PAGE("/externallink/externallinkList"),
 
-	/** The LIN k_ edi t_ page. */
+	/** The link edit page. */
 	LINK_EDIT_PAGE("/externallink/externallink"),
 
-	/** The HO t_ lis t_ page. */
+	/** The hot list page. */
 	HOT_LIST_PAGE("/hotsearch/hotsearchList"),
 
-	/** The HO t_ edi t_ page. */
+	/** The hot edit page. */
 	HOT_EDIT_PAGE("/hotsearch/hotsearch"),
 
-	/** The IM g_ lis t_ page. */
+	/** The img list page. */
 	IMG_LIST_PAGE("/imgFile/imgFileList"),
 
-	/** The IM g_ edi t_ page. */
+	/** The img edit page. */
 	IMG_EDIT_PAGE("/prod/prod"),
 
-	/** The DAS h_ board. */
+	/** The dash board. */
 	DASH_BOARD("/dashboard/index"),
 
-	/** The ADMI n_ home. */
+	/** The admin home. */
 	ADMIN_HOME("/frame/index"),
 
-	/** The ADMI n_ top. */
+	/** The admin top. */
 	ADMIN_TOP("/frame/top"),
 
-	/** The IJP g_ lis t_ page. */
+	/** The ijpg list page. */
 	IJPG_LIST_PAGE("/indexjpg/indexjpgList"),
 
-	/** The IJP g_ edi t_ page. */
+	/** The ijpg edit page. */
 	IJPG_EDIT_PAGE("/indexjpg/indexjpg"),
 
-	/** The UPGRAD e_ page. */
+	/** The upgrade page. */
 	UPGRADE_PAGE("/dashboard/upgrade"),
 
-	/** The LOGI n_ his t_ lis t_ page. */
+	/** The login hist list page. */
 	LOGIN_HIST_LIST_PAGE("/loginhistory/loginHistoryList"),
 
-	/** The LOGI n_ his t_ su m_ page. */
+	/** The login hist sum page. */
 	LOGIN_HIST_SUM_PAGE("/loginhistory/loginHistorySum"),
 
-	/** The LOG o_ lis t_ page. */
+	/** The logo list page. */
 	LOGO_LIST_PAGE("/logo/logoList"),
 
-	/** The LOG o_ edi t_ page. */
+	/** The logo edit page. */
 	LOGO_EDIT_PAGE("/logo/logo"),
 
-	/** The LUCEN e_ page. */
+	/** The lucene page. */
 	LUCENE_PAGE("/lucene/reindexer"),
 
-	/** The LEAGU e_ lis t_ page. */
+	/** The league list page. */
 	LEAGUE_LIST_PAGE("/myleague/myleagueList"),
 
-	/** The LEAGU e_ edi t_ page. */
+	/** The league edit page. */
 	LEAGUE_EDIT_PAGE("/myleague/myleague"),
 
-	/** The NEW s_ lis t_ page. */
+	/** The news list page. */
 	NEWS_LIST_PAGE("/news/newsList"),
 
-	/** The NEW s_ edi t_ page. */
+	/** The news edit page. */
 	NEWS_EDIT_PAGE("/news/news"),
 
-	/** The NEWSCA t_ lis t_ page. */
+	/** The newscat list page. */
 	NEWSCAT_LIST_PAGE("/newsCategory/newsCategoryList"),
 
-	/** The NEWSCA t_ edi t_ page. */
+	/** The newscat edit page. */
 	NEWSCAT_EDIT_PAGE("/newsCategory/newsCategory"),
 
-	/** The NSOR t_ lis t_ page. */
+	/** The nsort list page. */
 	NSORT_LIST_PAGE("/nsort/nsortList"),
 
-	/** The NSOR t_ edi t_ page. */
+	/** The nsort edit page. */
 	NSORT_EDIT_PAGE("/nsort/nsort"),
 
-	/** The NSOR t_ appendbran d_ page. */
+	/** The nsort appendbrand page. */
 	NSORT_APPENDBRAND_PAGE("/nsort/appendBrand"),
 
-	/** The ORDE r_ lis t_ page. */
-	ORDER_LIST_PAGE("/order/orderList"),
+	/** The processing order list page. */
+	PROCESSING_ORDER_LIST_PAGE("/order/processingOrder"),
+	
+	/** The processed order list page. */
+	PROCESSED_ORDER_LIST_PAGE("/order/processedOrder"),
 
-	/** The PA y_ page. */
+	/** The pay page. */
 	PAY_PAGE("/payment/payto"),
 
-	/** The PA y_ typ e_ lis t_ page. */
+	/** The pay type list page. */
 	PAY_TYPE_LIST_PAGE("/payType/payTypeList"),
 
-	/** The PA y_ typ e_ edi t_ page. */
+	/** The pay type edit page. */
 	PAY_TYPE_EDIT_PAGE("/payType/payType"),
 
-	/** The PRO d_ lis t_ page. */
+	/** The prod list page. */
 	PROD_LIST_PAGE("/prod/prodList"),
 
-	/** The PRO d_ edi t_ page. */
+	/** The prod edit page. */
 	PROD_EDIT_PAGE("/prod/prod"),
 
-	/** The APPEN d_ product. */
+	/** The append product. */
 	APPEND_PRODUCT("/prod/appendProduct"),
 
-	/** The CREATE p_ roduc t_ step. */
+	/** The createp roduct step. */
 	CREATEP_RODUCT_STEP("/prod/createProductStep"),
 
-	/** The PRO d_ com m_ lis t_ page. */
+	/** The prod comm list page. */
 	PROD_COMM_LIST_PAGE("/prodComment/prodCommentList"),
 
-	/** The PRO d_ com m_ edi t_ page. */
+	/** The prod comm edit page. */
 	PROD_COMM_EDIT_PAGE("/prodComment/prodComment"),
 
-	/** The PU b_ lis t_ page. */
+	/** The pub list page. */
 	PUB_LIST_PAGE("/pub/pubList"),
 
-	/** The PU b_ edi t_ page. */
+	/** The pub edit page. */
 	PUB_EDIT_PAGE("/pub/pub"),
 
-	/** The SHO p_ detai l_ lis t_ page. */
+	/** The shop detail list page. */
 	SHOP_DETAIL_LIST_PAGE("/shopDetail/shopDetailList"),
 
-	/** The SHO p_ detai l_ edi t_ page. */
+	/** The shop detail edit page. */
 	SHOP_DETAIL_EDIT_PAGE("/shopDetail/shopDetail"),
 
-	/** The SOR t_ lis t_ page. */
+	/** The sort list page. */
 	SORT_LIST_PAGE("/sort/sortList"),
 
-	/** The SOR t_ edi t_ page. */
+	/** The sort edit page. */
 	SORT_EDIT_PAGE("/sort/sort"),
 
-	/** The SOR t_ lis t_ page. */
+	/** The gsort list page. */
 	GSORT_LIST_PAGE("/gsort/gsortList"),
 
-	/** The SOR t_ edi t_ page. */
+	/** The gsort edit page. */
 	GSORT_EDIT_PAGE("/gsort/gsort"),
 
-	/** The PARA m_ lis t_ page. */
+	/** The param list page. */
 	PARAM_LIST_PAGE("/systemParameter/systemParameterList"),
 
-	/** The PARA m_ edi t_ page. */
+	/** The param edit page. */
 	PARAM_EDIT_PAGE("/systemParameter/systemParameter"),
 
-	/** The USE r_ com m_ lis t_ page. */
+	/** The user comm list page. */
 	USER_COMM_LIST_PAGE("/userComment/userCommentList"),
 
-	/** The USE r_ com m_ edi t_ page. */
+	/** The user comm edit page. */
 	USER_COMM_EDIT_PAGE("/userComment/userComment"),
 
-	/** The USE r_ detai l_ lis t_ page. */
+	/** The user detail list page. */
 	USER_DETAIL_LIST_PAGE("/userDetail/userDetailList"),
 
-	/** The VLO g_ lis t_ page. */
+	/** The vlog list page. */
 	VLOG_LIST_PAGE("/visitLog/visitLogList"),
 
-	/** The VLO g_ edi t_ page. */
+	/** The vlog edit page. */
 	VLOG_EDIT_PAGE("/visitLog/visitLog"),
 
-	/** The SHO w_ dynami c_ attribute. */
+	/** The show dynamic attribute. */
 	SHOW_DYNAMIC_ATTRIBUTE("/xml/showDynamicAttribute"),
 
-	/** The SHO w_ dynamic. */
+	/** The show dynamic. */
 	SHOW_DYNAMIC("/xml/showdynamic"),
 
-	/** The DYNAMI c_ attribute. */
+	/** The dynamic attribute. */
 	DYNAMIC_ATTRIBUTE("/xml/dynamicAttribute"),
 
-	
-
-	/** The MODIFYPRICE. */
+	/** The modifyprice. */
 	MODIFYPRICE("/order/modifyPrice"), 
 	
-	/** The DELIVERYCOR p_ lis t_ page. */
+	/** The deliverycorp list page. */
 	DELIVERYCORP_LIST_PAGE("/deliveryCorp/deliveryCorpList"), 
 	
-	/** The DELIVERYCOR p_ edi t_ page. */
+	/** The deliverycorp edit page. */
 	DELIVERYCORP_EDIT_PAGE("/deliveryCorp/deliveryCorp"), 
 	
-	/** The DELIVERYTYP e_ lis t_ page. */
+	/** The deliverytype list page. */
 	DELIVERYTYPE_LIST_PAGE("/deliveryType/deliveryTypeList"), 
 	
-	/** The DELIVERYTYP e_ edi t_ page. */
+	/** The deliverytype edit page. */
 	DELIVERYTYPE_EDIT_PAGE("/deliveryType/deliveryType"), 
 	
-	/** The DELIVERYTYP e_ lis t_ page. */
+	/** The partner list page. */
 	PARTNER_LIST_PAGE("/partner/partnerList"), 
 	
-	/** The DELIVERYTYP e_ edi t_ page. */
+	/** The partner edit page. */
 	PARTNER_EDIT_PAGE("/partner/partner"),
 	
+	/** The partner change password page. */
 	PARTNER_CHANGE_PASSWORD_PAGE("/partner/partnerChangePassword"), 
 	
+	/** The tag list. */
 	TAG_LIST("/tag/tagList"),
 	
+	/** The tag. */
 	TAG("/tag/tag"),
 	
 	;
@@ -239,9 +243,18 @@ public enum BackPage implements PageDefinition{
 	/** The value. */
 	private final String value;
 	
+	/** The templates. */
 	private List<String> templates;
 	
 
+	/**
+	 * Instantiates a new back page.
+	 * 
+	 * @param value
+	 *            the value
+	 * @param template
+	 *            the template
+	 */
 	private BackPage(String value,String ... template) {
 		this.value = value;
 		if(AppUtils.isNotBlank(template)){
@@ -271,12 +284,18 @@ public enum BackPage implements PageDefinition{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.core.constant.PageDefinition#getNativeValue()
+	 */
 	@Override
 	public String getNativeValue() {
 		return value;
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.core.constant.PageDefinition#getTemplates()
+	 */
 	@Override
 	public List<String> getTemplates() {
 		return this.templates;

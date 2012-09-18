@@ -12,7 +12,7 @@
     <script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
     <title>新闻列表</title>
 </head>
-<body class="bodymargin">
+<body>
     <%
         Integer offset = (Integer) request.getAttribute("offset");
     %>

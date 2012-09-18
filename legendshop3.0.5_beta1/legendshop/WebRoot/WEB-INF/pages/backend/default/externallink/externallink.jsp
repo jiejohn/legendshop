@@ -49,7 +49,7 @@
 });
 </script>
 </head>
-  <body class="bodymargin">
+  <body>
    <table class="${tableclass}" style="width: 100%">
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/externallink/query">连接管理</a> &raquo; 创建友情连接</td></tr>

@@ -9,36 +9,24 @@
 	<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
 	 <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
 	 <script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
-	 <script src="${pageContext.request.contextPath}/common/js/top.js" type="text/javascript"></script>
-	 
-	   <script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/artDialog.js'/>"></script>
-  		<script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/plugins/iframeTools.js'/>"></script>  		  		
-       <link  href="<ls:templateResource item='/plugins/artDialog/skins/aero.css' />"  rel="stylesheet"   type="text/css"/>    
+	  <script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/artDialog.js'/>"></script>
+  	 <script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/plugins/iframeTools.js'/>"></script>  		  		
+      <link  href="<ls:templateResource item='/plugins/artDialog/skins/aero.css' />"  rel="stylesheet"   type="text/css"/>    
        
-     <style type="text/css" media="all">
-		 .selected {
-			margin: 0px;
-			text-align: center;
-			font-weight: bold;
-		}
-    </style>
-
 <%
  Integer offset = (Integer) request.getAttribute("offset");
 %>
     <table class="${tableclass}" style="width: 100%;">
     <thead>
-    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/order/query">订单管理</a></td></tr>
-    <tr><td>
-                 <a href="javascript:void(0)" onclick="changetab(1);" id="processingbutton" name="processingbutton">处理中的订单</a>
-        <a href="javascript:void(0)" onclick="changetab(2);" id="processedbutton" name="processedbutton"><span>已成交订单</span></a>
-    </td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 
+    	商品管理  &raquo; 
+    	<a href="${pageContext.request.contextPath}/admin/order/processed">订单管理</a> &raquo; 已成交订单
+    	</td></tr>
     </thead>
      <tbody><tr><td>
-     <form action="${pageContext.request.contextPath}/admin/order/query" id="processedOrderForm" name="processedOrderForm" method="post" style="margin: 0px"> &nbsp;
+     <form action="${pageContext.request.contextPath}/admin/order/processed" id="processedOrderForm" name="processedOrderForm" method="post" style="margin: 0px">
               <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}"/> 
  <div align="left" style="padding: 3px">
-       			<input type="hidden" name="subCheck" id="subCheck" value="N"/>
                &nbsp; 订单号&nbsp;<input type="text" name="subNumber" id="subNumber" value="${subForm.subNumber}" size="30" maxlength="30"/>
                &nbsp; 买家&nbsp;<input type="text" name="userName" id="userName" value="${subForm.userName}"/>
                <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
@@ -47,7 +35,7 @@
                 &nbsp; 状态&nbsp;
                 	<select id="status" name="status"  class="input">
         				<option:optionGroup type="select" required="false" cache="true"
-	                		beanName="ORDER_STATUS" selectedValue="${subForm.status}"/>
+	                		beanName="ORDER_STATUS" selectedValue="${subForm.status}" exclude="1,2,3,6,7"/>
 			     </select>
         <input type="submit" value="搜索" class="s"/>
            </form>
@@ -59,7 +47,7 @@
         <td valign="top">
    <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
-    <display:table name="list" requestURI="${pageContext.request.contextPath}/admin/order/query" id="item"
+    <display:table name="list" requestURI="${pageContext.request.contextPath}/admin/order/processed" id="item"
          export="true"  class="${tableclass}" style="width:100%" sort="external">
       <display:column title="顺序" style="width:40px"><%=offset++%></display:column>
       <display:column title="订单号" sortable="true" sortName="subNumber">
@@ -79,27 +67,6 @@
      	<a href="${pageContext.request.contextPath}/shop/${item.shopName}" target="_blank">${item.shopName}</a>
      </display:column>
      </auth:auth>
-     
-      <auth:auth ifAnyGranted="F_OPERATOR">
-	     <display:column title="操作" media="html" style="width:110px">
-       <a href='javascript:orderList.orderDetail("${item.subNumber}");'>详情</a>
-      <c:if test="${subForm.subCheck == 'N'}">
-        <c:if test="${item.status == 1}"> <!-- 1: 等待买家付款 -->
-        	<a href="javascript:void(0)" onclick='javascript:openScript("${pageContext.request.contextPath}/admin/order/modifyPrice?total=${item.total}&subId=${item.subId}&subNumber=${item.subNumber}","330","150")'>修改</a>
-       	</c:if>
-       <c:if test="${item.status == 2}"> <!-- 2:买家已经付款 -->
-             <!-- 4:交易成功 -->
-         	<a href="javascript:void(0)" onclick='javascript:updateSubStatus("${item.subId}",3,"${item.subNumber}");'>发货</a>
-         </c:if>
-         <c:if test="${item.payTypeId == 3 &&( item.status != 3 && item.status != 6)}"> <!-- 3:货到付款,没有退货又没有发货的 -->
-         	<a href="javascript:void(0)" onclick='javascript:updateSubStatus("${item.subId}",3,"${item.subNumber}");'>发货</a>
-         </c:if>
-        </c:if>
-        <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
-            <a href="javascript:void(0)" onclick='javascript:deleteSub("${item.subId}","${item.subNumber}");'>删除</a>
-        </auth:auth>
-	      </display:column>
-      </auth:auth>
     </display:table>
         <c:if test="${not empty toolBar}">
             <c:out value="${toolBar}" escapeXml="${toolBar}"></c:out>
@@ -114,30 +81,13 @@
 		   2. 用户申请退款，在退款之后点击关闭交易，订单完成。<br>
   		
    <script>
-	  function submitForm(subCheck){
-            document.getElementById("subCheck").value= subCheck;
-            document.getElementById("processedOrderForm").submit();
-        }
-
-function changetab(a){
-		if(a==1){
-			document.getElementById('processingbutton').className='selected';
-			document.getElementById('processedbutton').className='';
-			submitForm("N");
-		}else{
-			document.getElementById('processedbutton').className='selected';
-			document.getElementById('processingbutton').className='';
-			submitForm("Y");
-		}
-	}
-	
 function deleteSub(subId,subNumber) {
 	  if(confirm('确定删除订单 '+subNumber+' ?')){
         CommonService.adminDeleteSub(subId, function(retData){
         
 	       if(retData == null ){
 	          //alert("成功删除该纪录！") ;
-	          window.location.href='${pageContext.request.contextPath}/admin/order/query';
+	          window.location.href='${pageContext.request.contextPath}/admin/order/processed';
 	       }else{
 	          alert("删除失败！请确认改订单的状态和所有人。") ;
 	       }
@@ -151,7 +101,7 @@ function deleteSub(subId,subNumber) {
         CommonService.updateSub(subId,status,'${sessionScope.SPRING_SECURITY_LAST_USERNAME}', function(retData){
 	       if(retData == null ){
 	          //alert('更新订单成功') ;
-	           window.location.href='${pageContext.request.contextPath}/admin/order/query';
+	           window.location.href='${pageContext.request.contextPath}/admin/order/processed';
 	       }else{
 	          alert('更新订单失败，订单号 ' + subNumber) ;
 	       }
@@ -160,29 +110,12 @@ function deleteSub(subId,subNumber) {
     }
 }
 
-  function openbag(subNumber,userName) {
-   	window.open("${pageContext.request.contextPath}/admin/order/loadBySubnumber/" + subNumber+ '', "","height=200,width=710,left=190,top=0,resizable=yes,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no");
-   } 
-   
+
    function pager(curPageNO){
 			document.getElementById("curPageNO").value=curPageNO;
 			document.getElementById("processedOrderForm").submit();
 	}
 	
-	function onloadSetup(){
-		if(${subForm.subCheck == 'Y'}){
-
-			document.getElementById('processedbutton').className='selected';
-			document.getElementById('processingbutton').className='';
-			document.getElementById("subCheck").value= 'Y';
-		}else{
-			document.getElementById('processingbutton').className='selected';
-			document.getElementById('processedbutton').className='';
-			document.getElementById("subCheck").value= 'N';
-		}
-		
-  }
-
 	var orderList={
        orderDetail:function(subNumber){ 
            var url="${pageContext.request.contextPath}/admin/order/loadBySubnumber/" + subNumber;
@@ -191,7 +124,5 @@ function deleteSub(subId,subNumber) {
        }
          };
          
-         
-	onloadSetup();
 	highlightTableRows("item");  
 </script>

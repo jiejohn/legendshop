@@ -50,7 +50,7 @@
 </head>
 
 
-<body class="bodymargin">
+<body>
 <div align="center">      
       <form  action="${pageContext.request.contextPath}/admin/member/right/save" id="form1" method="post">
         <table class="${tableclass}" style="width: 100%">

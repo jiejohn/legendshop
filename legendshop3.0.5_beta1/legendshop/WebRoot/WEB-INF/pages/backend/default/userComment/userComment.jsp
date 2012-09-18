@@ -28,7 +28,7 @@ jQuery(document).ready(function() {
 	
 </script>
 </head>
-<body class="bodymargin">
+<body>
 	<table class="${tableclass}" style="width: 100%">
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/userComment/query?status=0">消息管理</a> &raquo; 回复用户消息</td></tr>

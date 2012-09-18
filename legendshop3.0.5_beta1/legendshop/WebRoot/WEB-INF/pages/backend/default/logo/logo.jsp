@@ -38,7 +38,7 @@
 });
 </script>
 	</head>
-	<body class="bodymargin">
+	<body>
 		<form action="${pageContext.request.contextPath}/admin/logo/save" method="post" id="form1"
 			enctype="multipart/form-data">
 			<input id="id" name="id" value="${bean.id}" type="hidden">

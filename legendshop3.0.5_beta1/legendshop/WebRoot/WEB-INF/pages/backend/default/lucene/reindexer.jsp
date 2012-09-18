@@ -135,7 +135,7 @@ function writeTimeGroup(fieldNamePrefix)
 }
 </script>
 	</head>
-	<body class="bodymargin">
+	<body>
 		<form action="${pageContext.request.contextPath}/system/lucene/reindex" method="post" id="form1"
 			 onSubmit="return validateReindexForm(this);">
 			<input id="id" name="id" value="${bean.id}" type="hidden">

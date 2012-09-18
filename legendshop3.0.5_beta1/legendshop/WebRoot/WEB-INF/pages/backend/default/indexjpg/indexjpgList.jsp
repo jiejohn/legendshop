@@ -12,7 +12,7 @@
       <script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
 <title>首页广告图片列表</title>
 </head>
-<body class="bodymargin">
+<body>
 <% Integer offset = (Integer)request.getAttribute("offset");%>
     <table class="${tableclass}" style="width: 100%">
     <thead>
