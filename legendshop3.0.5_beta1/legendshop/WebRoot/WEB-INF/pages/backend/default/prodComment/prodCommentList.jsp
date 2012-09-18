@@ -46,13 +46,10 @@
       <display:column title="评价人" property="userName"></display:column>
       <display:column title="评论内容" property="content"></display:column>
       <display:column title="评价时间" sortable="true" sortName="hc.addtime"><fmt:formatDate value="${item.addtime}" pattern="yyyy-MM-dd HH:mm"/></display:column>
-      <display:column title="评价人IP" property="postip" sortable="true" sortName="hc.postip"></display:column>
-      <display:column title="回复内容" property="replyContent"></display:column>
       <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
       	<display:column title="回复人" property="replyName"></display:column>
       	<display:column title="商城名称" property="ownerName"></display:column>
       </auth:auth>
-      <display:column title="回复时间"><fmt:formatDate value="${item.replyTime}" pattern="yyyy-MM-dd HH:mm"/></display:column>
       <display:column title="操作" media="html" class="actionwidth">
       		<a href= "${pageContext.request.contextPath}/admin/productcomment/load/${item.id}" title="回复"><img alt="回复" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "></a>
 		      <auth:auth ifAllGranted="F_OPERATOR">

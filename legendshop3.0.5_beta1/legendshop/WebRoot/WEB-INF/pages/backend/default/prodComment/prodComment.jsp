@@ -88,6 +88,25 @@
            <p><fmt:formatDate value="${bean.addtime}" pattern="yyyy-MM-dd HH:mm"/></p>
         </td>
       </tr>
+         <tr>
+        <td>
+        <div align="center">评论IP</div>
+       </td>
+        <td>
+           <p>${bean.postip}</p>
+        </td>
+      </tr>
+      <c:if test="${bean.replyName != null }">
+       <tr>
+        <td>
+        <div align="center">回复人</div>
+       </td>
+        <td>
+           <p>回复人：${bean.replyName}</p>
+           <p>回复时间： <fmt:formatDate value="${bean.replyTime}" pattern="yyyy-MM-dd HH:mm"/></p>
+        </td>
+      </tr>
+      </c:if>
      <tr>
         <td>
           <div align="center">回复内容 <font color="ff0000">*</font></div>
