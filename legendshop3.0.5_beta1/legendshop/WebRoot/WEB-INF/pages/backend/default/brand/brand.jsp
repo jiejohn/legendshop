@@ -66,7 +66,6 @@
            <p><input type="text" name="brandName" id="brandName" value="${bean.brandName}" maxlength="30"/></p>
         </td>
       </tr>
-      <!-- 
       <tr>
         <td>
           <div align="center">上传图片 <font color="ff0000">*</font></div>
@@ -80,7 +79,6 @@
            </p>
         </td>
       </tr>
-       -->
       <tr>
         <td>
           <div align="center">备注</div>
@@ -89,7 +87,7 @@
            <p><input type="text" name="memo" id="memo" value="${bean.memo}" size="31" maxlength="50"/></p>
         </td>
       </tr>
-      <!-- 
+ 
       	<c:if test="${bean.brandPic!=null}">
 					<tr>
 						<td>
@@ -106,7 +104,7 @@
 						</td>
 					</tr>
 				</c:if>
- 	-->
+
                 <tr>
                     <td colspan="2">
                         <div align="center">

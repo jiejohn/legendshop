@@ -6,7 +6,7 @@
 	<import resource="legendshop/applicationContext-aop.xml" />
 	<import resource="legendshop/applicationContext-db.xml" />
 	<import resource="legendshop/applicationContext-quartz.xml" />
-	<import resource="legendshop/applicationContext-cas.xml" />
+	<import resource="legendshop/applicationContext-security.xml" />
 	<import resource="legendshop/applicationContext-util.xml" />
 	<import resource="legendshop/applicationContext-cache.xml" />
 	<import resource="legendshop/applicationContext-dwr.xml" />

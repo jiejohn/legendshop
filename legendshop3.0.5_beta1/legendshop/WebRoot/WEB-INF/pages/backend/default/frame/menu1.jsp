@@ -37,14 +37,6 @@
                 <div class='flrct'> <a href='<ls:url address='/admin/product/query'/>'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='商品管理' title='商品管理'/></a> </div>
               </div>
             </li>
-            
-           <li>
-              <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/group/product/query'   target='main'>团购管理</a></div>
-                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/group/product/query'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='团购管理' title='团购管理'/></a> </div>
-              </div>
-            </li>
-            
             <li>
               <div class='items'>
                 <div class='fllct'><a href='${pageContext.request.contextPath}/admin/sort/query'  target='main'>类型管理</a></div>
@@ -85,10 +77,25 @@
         </dd>
       </dl>
        
-       
-     <dl class='bitem'>
-        <dt onClick='showHide("items1_3")'><b>订单管理</b></dt>
+ <dl class='bitem'>
+        <dt onClick='showHide("items1_3")'><b>团购管理</b></dt>
         <dd style='display:block' class='sitem' id='items1_3'>
+          <ul class='sitemu'>
+           <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/group/product/query'   target='main'>团购管理</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/group/product/query'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='团购管理' title='团购管理'/></a> </div>
+              </div>
+            </li>
+          </ul>
+        </dd>
+      </dl> 
+        
+        
+           
+     <dl class='bitem'>
+        <dt onClick='showHide("items1_4")'><b>订单管理</b></dt>
+        <dd style='display:block' class='sitem' id='items1_4'>
           <ul class='sitemu'>
            <li>
               <div class='items'>

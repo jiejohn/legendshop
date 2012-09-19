@@ -15,7 +15,9 @@
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
 		<script src="<ls:templateResource item='/common/js/linked-select.js'/>" type="text/javascript"></script>
 		<script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
-
+		<script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/artDialog.js'/>"></script>
+		<script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/plugins/iframeTools.js'/>"></script>
+		<link  href="<ls:templateResource item='/plugins/artDialog/skins/idialog.css'/>"  rel="stylesheet"   type="text/css"/>
 <title>产品列表</title>
 </head>
 <body>
@@ -108,10 +110,10 @@
 	      <display:column title="操作" media="html" style="width: 80px;">
 		  	<c:choose>
 		  		<c:when test="${item.status == 1}">
-		  			<a href='javascript:productTurnOff("${item.prodId}","${item.name}")'>下线</a>
+		  			<a href='javascript:productTurnOff("${item.prodId}","${item.name}")'><img alt="下线" src="<ls:templateResource item='/common/default/images/blue_down.png'/> "></a>
 		  		</c:when>
 		  		<c:otherwise>
-		  			<a href='javascript:productTurnOn("${item.prodId}","${item.name}")'><font color="red">上线</font></a>
+		  			<a href='javascript:productTurnOn("${item.prodId}","${item.name}")'><img alt="上线" src="<ls:templateResource item='/common/default/images/yellow_up.png'/> "></a>
 		  		</c:otherwise>
 		  	</c:choose>
 		  	 <a href= "${pageContext.request.contextPath}/admin/product/update/${item.prodId}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "></a>
@@ -177,33 +179,38 @@
 }
 
   function productTurnOn(prodId,name) {
-	  if(confirm('确定商品 '+name+' 上线?')){
-        CommonService.productTurnOn(prodId, function(retData){
-        
+        art.dialog.confirm('确定将商品 '+name+' 上线?',
+		    function(){
+		     CommonService.productTurnOn(prodId, function(retData){
 	       if(retData == null ){
-	          alert("成功上线！") ;
 	          window.location.reload() ;
 	       }else{
-	          alert("上线失败！") ;
+	           alert("上线失败！") ;
 	       }
-	       
 	    }) ;
-    }
+		    },
+		    function(){
+		    }
+		   );
 }
 
   function productTurnOff(prodId,name) {
-	  if(confirm('确定商品 '+name+' 下线?')){
-        CommonService.productTurnOff(prodId, function(retData){
-        
+    art.dialog.confirm('确定将商品 '+name+' 下线?',
+		    function(){
+		    CommonService.productTurnOff(prodId, function(retData){
 	       if(retData == null ){
-	          alert("成功下线！") ;
+	         // alert("成功下线！") ;
 	          window.location.reload() ;
 	       }else{
 	          alert("下线失败！") ;
 	       }
 	       
 	    }) ;
-    }
+		    },
+		    function(){
+		    }
+		    
+		   );
 }
 
   function changeNsort(sortId) {

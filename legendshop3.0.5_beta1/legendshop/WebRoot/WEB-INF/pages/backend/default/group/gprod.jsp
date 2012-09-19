@@ -198,7 +198,7 @@
       <td width="25%" rowspan="9" align="center" valign="middle" style="margin: 0px">
       	<c:choose>
       		<c:when test="${prod.product.pic!=null}"><a href="<ls:photo item='${prod.product.pic}'/>" target="_blank">
-      		<img src="<ls:photo item='${prod.product.pic}'/> height="235px" width="320px"/></a>
+      		<img src="<ls:photo item='${prod.product.pic}'/>"  height="235px" width="320px"/></a>
       		</c:when>
       		<c:otherwise>请上传商品图片</c:otherwise>
       	</c:choose>

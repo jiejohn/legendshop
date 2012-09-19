@@ -69,9 +69,9 @@
      
       <auth:auth ifAnyGranted="F_OPERATOR">
 	     <display:column title="操作" media="html" style="width:110px">
-       <a href='javascript:orderList.orderDetail("${item.subNumber}");'>详情</a>
+       <a  href="javascript:void(0)" onclick='javascript:orderList.orderDetail("${item.subNumber}");'>详情</a>
         <c:if test="${item.status == 1}"> <!-- 1: 等待买家付款 -->
-        	<a href="javascript:void(0)" onclick='javascript:openScript("${pageContext.request.contextPath}/admin/order/modifyPrice?total=${item.total}&subId=${item.subId}&subNumber=${item.subNumber}","330","150")'>修改</a>
+        	<a href="javascript:void(0)" onclick='javascript:orderList2.modifyPrice("${item.total}", "${item.subId}", "${item.subNumber}");'>修改</a>
        	</c:if>
        <c:if test="${item.status == 2}"> <!-- 2:买家已经付款 -->
              <!-- 4:交易成功 -->
@@ -80,9 +80,11 @@
          <c:if test="${item.payTypeId == 3 &&( item.status != 3 && item.status != 6)}"> <!-- 3:货到付款,没有退货又没有发货的 -->
          	<a href="javascript:void(0)" onclick='javascript:updateSubStatus("${item.subId}",3,"${item.subNumber}");'>发货</a>
          </c:if>
+         <!-- 
         <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
             <a href="javascript:void(0)" onclick='javascript:deleteSub("${item.subId}","${item.subNumber}");'>删除</a>
         </auth:auth>
+         -->
 	      </display:column>
       </auth:auth>
     </display:table>
@@ -141,6 +143,15 @@ function deleteSub(subId,subNumber) {
 		    art.dialog.open(url,options);
        }
          };
+         
+ 	var orderList2={
+       modifyPrice:function(total, subId, subNumber){ 
+           var url="${pageContext.request.contextPath}/admin/order/modifyPrice?total=" +total + "&subId=" + subId + "&subNumber=" + subNumber;
+		    var options={id:"orderDetail",title:"修改价格",width:330,height:150,lock:false,closeFn: function(){} };
+		    art.dialog.open(url,options);
+       }
+         };        
+         
          
 	highlightTableRows("item");  
 </script>

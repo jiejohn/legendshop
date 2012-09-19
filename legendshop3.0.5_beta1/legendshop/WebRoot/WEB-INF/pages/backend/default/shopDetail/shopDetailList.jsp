@@ -21,10 +21,10 @@
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/shopDetail/query">商城管理</a></td></tr>
     </thead>
+            <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
      <tbody><tr><td>
  <div align="left" style="padding: 3px">
   <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
-        <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
            商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${shopDetail.userName}" size="30"/>
            &nbsp;类型&nbsp;	
            <select id="type" name="type">
@@ -45,9 +45,9 @@
              <c:if test="${fn:length(list) == 0}">
             <input type="button" value="创建商城" onclick='window.location="${pageContext.request.contextPath}/admin/shopDetail/load"'/>
             </c:if>
-            </auth:auth>
  </div>
  </td></tr></tbody>
+           </auth:auth>
     </table>
       
     </form>
