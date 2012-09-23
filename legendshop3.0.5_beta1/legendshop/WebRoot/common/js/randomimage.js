@@ -1,14 +1,19 @@
 function checkRandNum (){
 	var inputVal = document.getElementById('randNum');
+	//如果找不到对象则表示不用验证
+	if(inputVal == null){
+		return true;
+	}
+	
 	if(inputVal.value==null||inputVal.value==''){
 		 	alert(document.getElementById("cannonull").value) ; 
 		 	inputVal.focus() ;
-		    return false;
+		    return false; //验证失败
 		 }
-	 if(inputVal.value.length!=6){
+	 if(inputVal.value.length!=4){
 	 	alert(document.getElementById("charactors4").value) ;
 	 	inputVal.focus() ;
-		return false;
+		return false; //验证失败
 	 }
 
 	 return true;
@@ -17,6 +22,7 @@ function checkRandNum (){
 function validateRandNum (path){
 	var checkResult = checkRandNum();
 	if(!checkResult){
+		 //验证失败，返回
 		return checkResult;
 	}
 	var randNum = document.getElementById("randNum").value;
@@ -37,7 +43,7 @@ function validateRandNum (path){
 
     function changeRandImg(path){
         var obj = document.getElementById("randImage") ;
-        obj.src = path + "/captcha.svl?d=" + new Date();
+        obj.src = path + "/common/captcha.svl?d=" + new Date();
      }
      
     function changeRandImg_bak(path){

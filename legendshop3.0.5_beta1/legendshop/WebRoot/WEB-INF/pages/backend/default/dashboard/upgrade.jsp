@@ -15,7 +15,7 @@
 	<form action="<ls:url address='/admin/license/postUpgrade'/>" method="POST" onsubmit="return validateRandNum('${pageContext.request.contextPath}');">
 	        <input type="hidden" id="rand" name="rand"/>
 			<input type="hidden" id="cannonull" name="cannonull" value='<fmt:message key="randomimage.errors.required"/>'/>
-			<input type="hidden" id="charactors4" name="charactors4" value='<ls:i18n key="randomimage.charactors.required" length="6"/>'/> 
+			<input type="hidden" id="charactors4" name="charactors4" value='<ls:i18n key="randomimage.charactors.required" length="4"/>'/> 
 			<input type="hidden" id="errorImage" name="errorImage" value='<fmt:message key="error.image.validation"/>'/>            
 		 <table>
 		 	<tr><td>激活码：</td><td><input type="text" id="liensekey" name="liensekey"/><input name="submit" type="submit" value='确认' class="s" tabindex="4"></td></tr>

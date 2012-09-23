@@ -12,11 +12,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.legendshop.core.constant.LuceneIndexerEnum;
+import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.helper.FunctionUtil;
+import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.security.AuthenticationFailureHandlerImpl;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
@@ -205,6 +210,21 @@ public class CommonServiceUtil extends FunctionUtil {
 	 */
 	public static DES2 getDES() {
 		return new DES2("!23done!");
+	}
+	
+	//是否需要验证码
+	public static boolean needToValidation(HttpSession session) {
+		if(session == null){
+			return false;
+		}
+		Integer count = (Integer)session.getAttribute(AuthenticationFailureHandlerImpl.TRY_LOGIN_COUNT);
+		
+		Boolean needToValidation = true;
+		if(count == null || count <= 3){
+			needToValidation  = false;
+		}
+		Boolean result = PropertiesUtil.getBooleanObject(ParameterEnum.VALIDATION_IMAGE.name());
+		return (result!= null && result) && needToValidation;
 	}
 
 }

@@ -28,15 +28,14 @@
                   <td class="titlebg"><font style="font-size: 1.4em"><fmt:message key="login"/></font></td>
                 </tr>
 	<tr><td><center>
-	<!-- onsubmit="return checkRandNum();" -->
-			<form name="loginform" action="${pageContext.request.contextPath}/admin/j_spring_security_check" method="POST"  >
+			<form name="loginform" action="${pageContext.request.contextPath}/admin/j_spring_security_check" method="POST"  onsubmit="return checkRandNum();" >
 			<input type="hidden" id="rand" name="rand"/>
 			<input type="hidden" id="cannonull" name="cannonull" value='<fmt:message key="randomimage.errors.required"/>'/>
-			<input type="hidden" id="charactors4" name="charactors4" value='<ls:i18n key="randomimage.charactors.required" length="6"/>'/>
+			<input type="hidden" id="charactors4" name="charactors4" value='<ls:i18n key="randomimage.charactors.required" length="4"/>'/>
 			<input type="hidden" id="errorImage" name="errorImage" value='<fmt:message key="error.image.validation"/>'/>
 			<input type="hidden" id="returnUrl" name="returnUrl" value="${param.returnUrl}"/>
             <table><tr><td>
-            <table cellpadding="5px" border="0"> 
+            <table cellpadding="5px" > 
             		<tr>
 						<td colspan="2" align="left">
 						  <b><fmt:message key="username.password"/></b> 
@@ -49,24 +48,24 @@
 						<td>
 							<fmt:message key="user.name"/>
 						</td>
-						<td align="left"><input id="username" type='text' name="j_username" style="font-size:11pt; width: 180px"  class="inputbutton2" tabindex="1" value="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"/> </td>
+						<td align="left"><input id="username" type='text' name="j_username" style="font-size:11pt; width: 180px"  class="inputbutton2" tabindex="1" value='<lb:lastLogingUser/>'/> </td>
 					</tr>
 					<tr>
 						<td><fmt:message key="editForm.password"/></td>
 						<td align="left"><input id="pwd" type='password' name='j_password' style="font-size:11pt; width: 180px"  autocomplete="off" class="inputbutton2" tabindex="2" onload="this.value=''"/></td>
 					</tr>
+					<lb:userValidationImage>
 					<tr>
 						<td><fmt:message key="validation.code"/></td>
-						<td align="left"><input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="7"  style="font-size:11pt; width: 180px" tabindex="3" >
+						<td align="left"><input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="4"  style="font-size:11pt; width: 50px;" tabindex="3" >
 						<!-- 
 						<img id="randImage" name="randImage"/>
 						 -->
-						
+						<img id="randImage" name="randImage" src="<ls:templateResource item='/common/captcha.svl'/>"  style="vertical-align: middle;"/>
+ 				&nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a>
 						</td>
-					</tr>			
-					<tr><td></td><td>
-				<img id="randImage" name="randImage" src="<ls:templateResource item='/common/captcha.svl'/>" />
- 				&nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a></td></tr>
+					</tr>	
+					</lb:userValidationImage>	
 					<tr>
 						<td></td>
 						<td><input name="submit" type="submit" value='<fmt:message key="login"/>' class="s" tabindex="4">

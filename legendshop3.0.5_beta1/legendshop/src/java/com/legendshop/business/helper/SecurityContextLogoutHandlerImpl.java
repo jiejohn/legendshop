@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import com.legendshop.spi.constants.Constants;
+import com.legendshop.util.CookieUtil;
 /**
  * 
  * LegendShop 版权所有 2009-2011,并保留所有权利。
@@ -46,15 +47,16 @@ public class SecurityContextLogoutHandlerImpl extends
 	@Override
 	public void logout(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) {
-		request.getSession().setAttribute(Constants.USER_NAME,null);
+	//	request.getSession().setAttribute(Constants.USER_NAME,null);
 		
 		if(supportSSO){
 			//删除Cookies
 			//增加BBS的登录用户 SSO to club
-			Cookie cookie = new Cookie(Constants.CLUB_COOIKES_NAME, null);
-			cookie.setPath("/");
-			cookie.setMaxAge(0); // -1为永不过期,或者指定过期时间
-			response.addCookie( cookie );//在退出登录操作中删除cookie.
+//			Cookie cookie = new Cookie(Constants.CLUB_COOIKES_NAME, null);
+//			cookie.setPath("/");
+//			cookie.setMaxAge(0); // -1为永不过期,或者指定过期时间
+//			response.addCookie( cookie );//在退出登录操作中删除cookie.
+			CookieUtil.deleteCookie(request, response, Constants.CLUB_COOIKES_NAME);
 		}
 		
 		//request.getSession().invalidate();

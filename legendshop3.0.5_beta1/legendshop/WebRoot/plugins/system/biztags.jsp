@@ -43,19 +43,30 @@
 		</tr>
 				<tr>
 			<td>com.legendshop.core.tag.CurrentShopTag</td>
-			<td>用法</td>
+			<td>用法：当前商城名称</td>
 			<td><lb:currentShop /></td>
 		</tr>
 				<tr>
 			<td>com.legendshop.core.tag.CurrentUserTag</td>
-			<td>用法</td>
+			<td>用法：当前用户</td>
 			<td><lb:currentUser /></td>
+		</tr>
+		<tr>
+			<td>com.legendshop.core.tag.LastLogingUserTag</td>
+			<td>用法：最后登录用户</td>
+			<td><lb:lastLogingUser/></td>
 		</tr>
 				<tr>
 			<td>com.legendshop.core.tag.UserLoginedTag</td>
-			<td>用法</td>
+			<td>用法：用户是否已经登录</td>
 			<td><lb:logined >当前登录用户: <lb:currentUser /></lb:logined></td>
 		</tr>
+		<tr>
+			<td>com.legendshop.business.tag.UserValidationImageTag</td>
+			<td>用法：需要验证码</td>
+			<td>需要验证码: <lb:userValidationImage></lb:userValidationImage></td>
+		</tr>		
+		
 	</table>
 </body>
 </html>

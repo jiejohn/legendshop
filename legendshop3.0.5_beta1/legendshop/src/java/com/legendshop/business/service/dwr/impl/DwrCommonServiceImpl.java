@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -1140,13 +1141,18 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 
 	@Override
 	public boolean validateRandImg(String validateCodeParameter) {
-		if(PropertiesUtil.getObject(ParameterEnum.VALIDATION_IMAGE, Boolean.class)){
-			WebContext webContext = WebContextFactory.get();
-			boolean result = CaptchaServiceSingleton.getInstance().validateResponseForID(webContext.getSession().getId(), validateCodeParameter);
-			return result;
-		}else{
-			throw new BusinessException("not support VALIDATION_IMAGE", EntityCodes.SYSTEM);
+		WebContext webContext = WebContextFactory.get();
+		HttpSession session = webContext.getSession();
+		
+		if(session == null){
+			return true;
 		}
+		if(!CommonServiceUtil.needToValidation(session)){
+			//无需验证
+			return true;
+		}
+			
+		return  CaptchaServiceSingleton.getInstance().validateResponseForID(session.getId(), validateCodeParameter);
 	}
 
 	public void setGroupProductService(GroupProductService groupProductService) {

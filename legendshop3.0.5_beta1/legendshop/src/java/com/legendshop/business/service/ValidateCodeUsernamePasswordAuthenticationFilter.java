@@ -23,13 +23,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.dao.BasketDao;
+import com.legendshop.business.tag.LastLogingUserTag;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.randing.CaptchaServiceSingleton;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.LoginService;
+import com.legendshop.util.CookieUtil;
 
 /**
  * 带验证码校验功能的用户名、密码认证过滤器
@@ -78,7 +81,16 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 		if (postOnly && !request.getMethod().equals("POST")) {
 			throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
 		}
-
+		
+		HttpSession session = request.getSession(false);
+		
+		// check validate code
+		if (CommonServiceUtil.needToValidation(session)) {
+			if(!checkValidateCode(request)){
+				throw new AuthenticationServiceException("验证码失败");
+			}
+		}
+		
 		String username = obtainUsername(request);
 		String password = obtainPassword(request);
 
@@ -92,19 +104,9 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 
 		username = username.trim();
 		
-
-//		if (session != null || getAllowSessionCreation()) {
-//			request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY,username);
-//		}
-		
-		// check validate code
-		if (isUseValidateCode()) {
-			if(!checkValidateCode(request)){
-				throw new AuthenticationServiceException("验证码失败");
-			}
+		if (session != null || getAllowSessionCreation()) {
+			CookieUtil.addCookie(response,LastLogingUserTag.LAST_USERNAME_KEY,username);
 		}
-
-		// String pass= MD5Util.Md5Password(username, password);
 
 		return onAuthentication(request, response, username, password);
 	}
@@ -222,16 +224,6 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 	@Override
 	public void setPostOnly(boolean postOnly) {
 		this.postOnly = postOnly;
-	}
-
-
-	/**
-	 * Checks if is allow empty validate code.
-	 * 
-	 * @return true, if is allow empty validate code
-	 */
-	public boolean isUseValidateCode() {
-		return PropertiesUtil.getObject(ParameterEnum.VALIDATION_IMAGE, Boolean.class);
 	}
 
 

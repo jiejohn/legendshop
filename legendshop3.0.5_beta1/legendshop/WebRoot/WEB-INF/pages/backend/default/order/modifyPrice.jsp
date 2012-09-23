@@ -15,7 +15,7 @@
 <body>
 	        <input type="hidden" id="rand" name="rand"/>
 			<input type="hidden" id="cannonull" name="cannonull" value='<fmt:message key="randomimage.errors.required"/>'/>
-			<input type="hidden" id="charactors4" name="charactors4" value='<ls:i18n key="randomimage.charactors.required" length="6"/>'/>
+			<input type="hidden" id="charactors4" name="charactors4" value='<ls:i18n key="randomimage.charactors.required" length="4"/>'/>
 			<input type="hidden" id="errorImage" name="errorImage" value='<fmt:message key="error.image.validation"/>'/>
          订单<b>${param.subNumber}</b>, 原价<b><fmt:formatNumber type="currency" value="${param.total}" pattern="${CURRENCY_PATTERN}"/></b><br>
 		最新价格：<input type="text" id="price" name="price"/>
