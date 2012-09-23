@@ -2,12 +2,8 @@ package com.legendshop.business.helper;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
-
-import com.legendshop.spi.service.LoginService;
 
 /**
  * 
@@ -15,16 +11,7 @@ import com.legendshop.spi.service.LoginService;
  * 
  */
 public class MethodHandlerAdapter extends AnnotationMethodHandlerAdapter {
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(MethodHandlerAdapter.class);
-	private  LoginService loginService;
-	
-    private boolean invalidateHttpSession = true;
-	
-	public void setInvalidateHttpSession(boolean invalidateHttpSession) {
-		this.invalidateHttpSession = invalidateHttpSession;
-	}
-	
+
 	@Override
 	public ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

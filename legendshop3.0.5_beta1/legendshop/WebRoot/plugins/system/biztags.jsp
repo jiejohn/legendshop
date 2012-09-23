@@ -64,7 +64,7 @@
 		<tr>
 			<td>com.legendshop.business.tag.UserValidationImageTag</td>
 			<td>用法：需要验证码</td>
-			<td>需要验证码: <lb:userValidationImage></lb:userValidationImage></td>
+			<td><lb:userValidationImage>本次需要验证码</lb:userValidationImage></td>
 		</tr>		
 		
 	</table>

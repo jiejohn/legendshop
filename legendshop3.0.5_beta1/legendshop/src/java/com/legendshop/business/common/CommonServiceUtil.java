@@ -17,11 +17,11 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.legendshop.business.security.AuthenticationFailureHandlerImpl;
 import com.legendshop.core.constant.LuceneIndexerEnum;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.helper.FoundationUtil;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.core.security.AuthenticationFailureHandlerImpl;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;

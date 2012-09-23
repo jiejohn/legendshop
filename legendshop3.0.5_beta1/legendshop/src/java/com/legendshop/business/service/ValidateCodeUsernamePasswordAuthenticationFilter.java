@@ -7,9 +7,6 @@
  */
 package com.legendshop.business.service;
 
-import java.util.Map;
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,11 +21,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.legendshop.business.common.CommonServiceUtil;
-import com.legendshop.business.dao.BasketDao;
 import com.legendshop.core.randing.CaptchaServiceSingleton;
 import com.legendshop.core.tag.LastLogingUserTag;
-import com.legendshop.model.entity.Basket;
-import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.LoginService;
 import com.legendshop.util.CookieUtil;
 
@@ -49,27 +43,8 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 	/** The post only. */
 	private boolean postOnly = true;
 	
-	/** The login history service. */
-	private LoginHistoryService loginHistoryService;
-	
-	/** The basket dao. */
-	private BasketDao basketDao;
-	
 	public static final String DEFAULT_SESSION_VALIDATE_CODE_FIELD = "randNum";
 	
-	/** The support sso. */
-	private boolean supportSSO = false;
-
-	/**
-	 * Sets the support sso.
-	 * 
-	 * @param supportSSO
-	 *            the new support sso
-	 */
-	public void setSupportSSO(boolean supportSSO) {
-		this.supportSSO = supportSSO;
-	}
-
 	/* (non-Javadoc)
 	 * @see org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter#attemptAuthentication(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
@@ -122,43 +97,12 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 			String password) {
 		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
 
-		// Place the last username attempted into HttpSession for views
-		HttpSession session = request.getSession();
-		
 
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);
 
 
 		Authentication auth = this.getAuthenticationManager().authenticate(authRequest);
-		if (auth != null && auth.isAuthenticated()) {
-			// 处理登录历史
-			loginHistoryService.saveLoginHistory(username, request.getRemoteAddr());
-			// 增加session登录信息
-			
-			session.setAttribute(Constants.USER_NAME, username);
-
-			// 处理在session中的购物车
-			Map<String, Basket> basketMap = (Map<String, Basket>) session.getAttribute(
-					Constants.BASKET_KEY);
-			if (basketMap != null) {
-				// 保存进去数据库
-				for (Basket basket : basketMap.values()) {
-					basketDao.saveToCart(basket.getProdId(), basket.getPic(), username, basket.getShopName(), basket
-							.getBasketCount(), basket.getAttribute(), basket.getProdName(), basket.getCash(), basket
-							.getCarriage());
-				}
-				session.setAttribute(Constants.BASKET_KEY, null);
-			}
-
-			if (supportSSO) {
-				// 增加BBS的登录用户 SSO to club
-				Cookie cookie = new Cookie(Constants.CLUB_COOIKES_NAME, username);
-				cookie.setPath("/");
-				cookie.setMaxAge(-1); // -1为永不过期,或者指定过期时间
-				response.addCookie(cookie);// 在退出登录操作中删除cookie.
-			}
-		}
 		return auth;
 	}
 
@@ -222,27 +166,6 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 	@Override
 	public void setPostOnly(boolean postOnly) {
 		this.postOnly = postOnly;
-	}
-
-
-	/**
-	 * Sets the login history service.
-	 * 
-	 * @param loginHistoryService
-	 *            the new login history service
-	 */
-	public void setLoginHistoryService(LoginHistoryService loginHistoryService) {
-		this.loginHistoryService = loginHistoryService;
-	}
-
-	/**
-	 * Sets the basket dao.
-	 * 
-	 * @param basketDao
-	 *            the new basket dao
-	 */
-	public void setBasketDao(BasketDao basketDao) {
-		this.basketDao = basketDao;
 	}
 
 }

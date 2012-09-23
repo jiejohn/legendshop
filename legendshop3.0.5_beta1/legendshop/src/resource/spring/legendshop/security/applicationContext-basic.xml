@@ -5,9 +5,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
            
-    <global-method-security pre-post-annotations="enabled">
-    </global-method-security>
-    
     <http pattern="/p/login" security="none"/>  
     
     <http use-expressions="true"  access-denied-page="/p/login"  entry-point-ref="authenticationProcessingFilterEntryPoint">
@@ -26,6 +23,16 @@
         </session-management>
     </http>
     
+    <beans:bean id="validateCodeAuthenticationFilter"
+		class="com.legendshop.business.service.ValidateCodeUsernamePasswordAuthenticationFilter">
+		<beans:property name="filterProcessesUrl" value="/admin/j_spring_security_check"></beans:property>
+		<beans:property name="authenticationSuccessHandler"
+			ref="loginLogAuthenticationSuccessHandler"></beans:property>
+		<beans:property name="authenticationFailureHandler"
+			ref="simpleUrlAuthenticationFailureHandler"></beans:property>
+		<beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
+	</beans:bean>
+    
     <beans:bean id="authenticationProcessingFilterEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
 		<beans:property name="loginFormUrl" value="/p/login"></beans:property>
@@ -41,36 +48,6 @@
 	  </beans:constructor-arg>
 	  <beans:property name="filterProcessesUrl" value="/p/logout"/>
  </beans:bean>
-
-	<beans:bean id="validateCodeAuthenticationFilter"
-		class="com.legendshop.business.service.ValidateCodeUsernamePasswordAuthenticationFilter">
-		<beans:property name="filterProcessesUrl" value="/admin/j_spring_security_check"></beans:property>
-		<beans:property name="authenticationSuccessHandler"
-			ref="loginLogAuthenticationSuccessHandler"></beans:property>
-		<beans:property name="authenticationFailureHandler"
-			ref="simpleUrlAuthenticationFailureHandler"></beans:property>
-		<beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
-		<beans:property name="loginHistoryService" ref="loginHistoryService"></beans:property>
-		<beans:property name="basketDao" ref="basketDao"></beans:property>
-		<beans:property name="supportSSO" value="false"></beans:property>
-	</beans:bean>
-	
-	<beans:bean id="loginService" class="com.legendshop.business.newservice.LoginServiceImpl" parent="validateCodeAuthenticationFilter">
-	</beans:bean>
-	
-	<beans:bean id="loginLogAuthenticationSuccessHandler"
-		class="com.legendshop.core.security.AuthenticationSuccessHandlerImpl">
-		<beans:property name="defaultTargetUrl" value="/index"></beans:property>
-		<beans:property name="redirectStrategy" ref="originUrlRedirectStrategy"></beans:property>
-	</beans:bean>
-
-	<beans:bean id="originUrlRedirectStrategy" class="com.legendshop.core.security.OriginUrlRedirectStrategy">
-	</beans:bean>
-	
-	<beans:bean id="simpleUrlAuthenticationFailureHandler"
-		class="com.legendshop.core.security.AuthenticationFailureHandlerImpl">
-		<beans:property name="defaultFailureUrl" value="/p/login?error=true"></beans:property>
-	</beans:bean>
 
 	<!-- 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
 	<authentication-manager alias="authenticationManager">
@@ -91,10 +68,6 @@
 	<!-- 
 	<beans:bean id="ssoPasswordEncoder" class="com.legendshop.core.sso.SSOPasswordEncoder" />
 	 -->
-	
-	<beans:bean id="authService" class="com.legendshop.business.service.impl.AuthServiceImpl">
-		<beans:property name="jdbcTemplate" ref="jdbcTemplate" />
-    </beans:bean>
 
 	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
 	<beans:bean id="accessDecisionManager"
@@ -108,15 +81,7 @@
 		</beans:property>
 	</beans:bean>
 	
-	
-	<beans:bean id="loginHistoryService" class="com.legendshop.business.service.impl.LoginHistoryServiceImpl">
-        <beans:property name="jdbcTemplate" ref="jdbcTemplate"></beans:property>
-        <beans:property name="loginHistoryDao" ref="loginHistoryDao"></beans:property>
-        <beans:property name="threadPoolExecutor" ref="threadPoolExecutor"></beans:property>
-    </beans:bean>
-
-	<beans:bean id="loginHistoryDao" class="com.legendshop.business.dao.impl.LoginHistoryDaoImpl" parent="baseDao">
+   <beans:bean id="loginService" class="com.legendshop.business.newservice.LoginServiceImpl" parent="validateCodeAuthenticationFilter">
 	</beans:bean>
-
-
+	
 </beans:beans>

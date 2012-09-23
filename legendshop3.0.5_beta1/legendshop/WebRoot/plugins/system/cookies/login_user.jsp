@@ -37,7 +37,7 @@ if(UserManager.getUser(request.getSession())!=null)
   
   <body>
     UserId：<%=UserManager.getUserId(request) %> <br>
-    Username：${sessionScope.SPRING_SECURITY_LAST_USERNAME} <br><br>
+    Username：<%=UserManager.getUsername(request) %><br><br>
     Has Function F_VIEW_ALL_DATA：<%=UserManager.hasFunction(request,"F_VIEW_ALL_DATA") %> <br><br>
     登录用户所拥有的角色： <br>
     <c:forEach items="${auth}" var="authorities" varStatus="status">

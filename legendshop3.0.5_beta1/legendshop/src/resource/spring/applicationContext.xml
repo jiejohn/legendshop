@@ -6,7 +6,6 @@
 	<import resource="legendshop/applicationContext-aop.xml" />
 	<import resource="legendshop/applicationContext-db.xml" />
 	<import resource="legendshop/applicationContext-quartz.xml" />
-	<import resource="legendshop/applicationContext-security.xml" />
 	<import resource="legendshop/applicationContext-util.xml" />
 	<import resource="legendshop/applicationContext-cache.xml" />
 	<import resource="legendshop/applicationContext-dwr.xml" />
@@ -15,12 +14,27 @@
 	<import resource="legendshop/applicationContext-event.xml" />
 	
 	<!-- 权限管理部分 -->
-	<import resource="legendshop/security/applicationContext-command.xml" />
-	<import resource="legendshop/security/applicationContext-dao.xml" />
-	<import resource="legendshop/security/applicationContext-processor.xml" />
-	<import resource="legendshop/security/applicationContext-service.xml" />
+	<import resource="legendshop/authentication/applicationContext-command.xml" />
+	<import resource="legendshop/authentication/applicationContext-dao.xml" />
+	<import resource="legendshop/authentication/applicationContext-processor.xml" />
+	<import resource="legendshop/authentication/applicationContext-service.xml" />
+	
+	<!-- 权限部分，可以配置为cas，basic -->
+	 <import resource="legendshop/security/applicationContext-cas.xml" />
+	  <import resource="legendshop/security/applicationContext-security.xml" />
 	
 	<!-- 插件部分 -->
 	<import resource="classpath*:/spring/legendshop/plugins/**/*-plugins.xml" />
+	
+		<!-- 属性文件读入 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<!-- JDBC访问的用户名、密码等 -->
+				<value>classpath*:config/*.properties</value>
+			</list>
+		</property>
+	</bean>
 </beans>
    

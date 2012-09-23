@@ -85,7 +85,7 @@
     </div>
 	<div>
 	<ul id="topnav">
-	<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
+	<lb:logined >
 	   <c:if test="${shopExists && 'C2C' == applicationScope.BUSINESS_MODE}">
                <li><a href="<ls:url address='/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}'/>"><fmt:message key="myShop"/></a></li>
         </c:if>
@@ -95,7 +95,7 @@
        </auth:auth>
       	<li><a href="<ls:url address='/leaveword'/>"><fmt:message key="leaveword"/></a></li>
 		<li><a href="<ls:url address='/p/order'/>"><fmt:message key="myorder"/></a></li>
-	</c:if>
+	</lb:logined>
 		<li class="navCartSum"><a href="<ls:url address='/p/buy'/>"><fmt:message key="shopingCar"/></a></li>	
 		<li class="hl"><a href="<ls:url address='/allNews'/>"><fmt:message key="newsCenter"/></a></li>
 	</ul>

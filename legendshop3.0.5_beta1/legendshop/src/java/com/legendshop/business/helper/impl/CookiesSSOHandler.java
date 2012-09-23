@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.legendshop.business.form.UserForm;
 import com.legendshop.business.helper.Handler;
+import com.legendshop.business.service.DefaultLoginServiceImpl;
 import com.legendshop.business.service.UserDetailService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.exception.ApplicationException;
@@ -20,6 +21,7 @@ import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.LoginService;
+import com.legendshop.util.ContextServiceLocator;
 import com.legendshop.util.CookieUtil;
 
 public class CookiesSSOHandler implements Handler {
@@ -52,7 +54,7 @@ public class CookiesSSOHandler implements Handler {
 					userDetailService.saveUserReg(request, response, form);
 				}
 				
-				loginService.onAuthentication(request, response, loginedUserName, loginedUserName);
+				getLoginService().onAuthentication(request, response, loginedUserName, loginedUserName);
 				
 			}else if(requiresLogout(loginedUserName,userName)){
 				logout(request,response); 
@@ -114,8 +116,15 @@ public class CookiesSSOHandler implements Handler {
 				this.userDetailService = userDetailService;
 			}
 
-			public void setLoginService(LoginService loginService) {
-				this.loginService = loginService;
+			private LoginService getLoginService(){
+				if(loginService==null){
+					if(ContextServiceLocator.getInstance().containsBean("loginService")){
+						loginService = (LoginService)ContextServiceLocator.getInstance().getBean("loginService");
+					}
+					if(loginService == null){
+						loginService = new DefaultLoginServiceImpl();
+					}
+				}
+				return loginService;
 			}
-			
 }

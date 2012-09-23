@@ -31,7 +31,6 @@
       					<!-- 
       					<bean class="com.legendshop.business.helper.impl.CookiesSSOHandler">
       						<property name="userDetailService" ref="userDetailService" />
-      						<property name="loginService" ref="loginService" />
       					</bean>
       					 -->
       				</list>

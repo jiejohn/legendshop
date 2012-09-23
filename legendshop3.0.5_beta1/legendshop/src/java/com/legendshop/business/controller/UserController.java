@@ -23,6 +23,7 @@ import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.event.EventId;
 import com.legendshop.business.form.UserForm;
 import com.legendshop.business.service.BasketService;
+import com.legendshop.business.service.DefaultLoginServiceImpl;
 import com.legendshop.business.service.UserDetailService;
 import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.UserManager;
@@ -42,6 +43,7 @@ import com.legendshop.model.entity.UserDetail;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.LoginService;
 import com.legendshop.util.AppUtils;
+import com.legendshop.util.ContextServiceLocator;
 
 /**
  * 用户控制器。.
@@ -61,7 +63,6 @@ public class UserController extends BaseController{
 	@Autowired
 	private BasketService basketService;
 	
-	@Autowired
 	private  LoginService loginService;
 	/**
 	 * Myaccount.
@@ -190,10 +191,20 @@ public class UserController extends BaseController{
 	public String userReg(HttpServletRequest request, HttpServletResponse response,UserForm userForm) {
 		String result =  userDetailService.saveUserReg(request, response,userForm);
 		//用户注册即登录
-		if(loginService!=null){
-			 loginService.onAuthentication(request, response, userForm.getName(), userForm.getPassword());
-		}
+		getLoginService().onAuthentication(request, response, userForm.getName(), userForm.getPassword());
 		return result;
+	}
+	
+	private LoginService getLoginService(){
+		if(loginService==null){
+			if(ContextServiceLocator.getInstance().containsBean("loginService")){
+				loginService = (LoginService)ContextServiceLocator.getInstance().getBean("loginService");
+			}
+			if(loginService == null){
+				loginService = new DefaultLoginServiceImpl();
+			}
+		}
+		return loginService;
 	}
 	
 	/**
