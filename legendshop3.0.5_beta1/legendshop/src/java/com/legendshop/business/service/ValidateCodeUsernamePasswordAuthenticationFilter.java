@@ -25,10 +25,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.dao.BasketDao;
-import com.legendshop.business.tag.LastLogingUserTag;
-import com.legendshop.core.constant.ParameterEnum;
-import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.randing.CaptchaServiceSingleton;
+import com.legendshop.core.tag.LastLogingUserTag;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.LoginService;

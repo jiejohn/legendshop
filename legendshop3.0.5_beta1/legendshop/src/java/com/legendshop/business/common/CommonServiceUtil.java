@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import com.legendshop.core.constant.LuceneIndexerEnum;
 import com.legendshop.core.constant.ParameterEnum;
-import com.legendshop.core.helper.FunctionUtil;
+import com.legendshop.core.helper.FoundationUtil;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.security.AuthenticationFailureHandlerImpl;
 import com.legendshop.model.entity.Basket;
@@ -34,7 +34,7 @@ import com.legendshop.util.des.DES2;
 /**
  * 公用服务类.
  */
-public class CommonServiceUtil extends FunctionUtil {
+public class CommonServiceUtil extends FoundationUtil {
 	
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(CommonServiceUtil.class);
@@ -212,19 +212,5 @@ public class CommonServiceUtil extends FunctionUtil {
 		return new DES2("!23done!");
 	}
 	
-	//是否需要验证码
-	public static boolean needToValidation(HttpSession session) {
-		if(session == null){
-			return false;
-		}
-		Integer count = (Integer)session.getAttribute(AuthenticationFailureHandlerImpl.TRY_LOGIN_COUNT);
-		
-		Boolean needToValidation = true;
-		if(count == null || count <= 3){
-			needToValidation  = false;
-		}
-		Boolean result = PropertiesUtil.getBooleanObject(ParameterEnum.VALIDATION_IMAGE.name());
-		return (result!= null && result) && needToValidation;
-	}
 
 }
