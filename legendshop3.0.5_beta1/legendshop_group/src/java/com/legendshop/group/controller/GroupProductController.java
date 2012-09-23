@@ -34,7 +34,7 @@ import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.helper.FileProcessor;
-import com.legendshop.core.helper.FunctionUtil;
+import com.legendshop.core.helper.FoundationUtil;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
@@ -81,7 +81,7 @@ public class GroupProductController extends BaseController{
 				}
 
 				//数据权限
-				if (!FunctionUtil.haveViewAllDataFunction(request)) {
+				if (!FoundationUtil.haveViewAllDataFunction(request)) {
 					String userName = UserManager.getUsername(request.getSession());
 					if (userName == null) {
 						throw new AuthorizationException("you are not logon yet!",EntityCodes.PROD);
@@ -95,11 +95,11 @@ public class GroupProductController extends BaseController{
 				}
 				
 
-				if (!FunctionUtil.isDataForExport(hql, request)) {// 非导出情况
+				if (!FoundationUtil.isDataForExport(hql, request)) {// 非导出情况
 					hql.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 				}
 				
-				if (!FunctionUtil.isDataSortByExternal(hql, request, map)) {
+				if (!FoundationUtil.isDataSortByExternal(hql, request, map)) {
 					map.put(AttributeKeys.ORDER_INDICATOR, "order by p.modifyDate desc");
 				}
 				
