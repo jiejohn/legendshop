@@ -20,7 +20,7 @@
 	<import resource="legendshop/authentication/applicationContext-service.xml" />
 	
 	<!-- 权限部分，可以配置为cas，basic -->
-	 <import resource="legendshop/security/applicationContext-cas.xml" />
+	 <import resource="legendshop/security/applicationContext-basic.xml" />
 	  <import resource="legendshop/security/applicationContext-security.xml" />
 	
 	<!-- 插件部分 -->
