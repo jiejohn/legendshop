@@ -46,7 +46,8 @@
 </head>
     <body>
         <form action="${pageContext.request.contextPath}/admin/imgFile/save" method="post" id="form1">
-            <input id="fileId" name="fileId" value="${bean.fileId}" type="            <div align="center">
+            <input id="fileId" name="fileId" value="${bean.fileId}"  type="hidden"/>
+             <div align="center">
             <table border="0" align="center" class="${tableclass}" id="col1">
                 <thead>
                     <tr class="sortable">

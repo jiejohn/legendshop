@@ -46,7 +46,8 @@
 </head>
     <body>
         <form action="${pageContext.request.contextPath}/admin/visitLog/save" method="post" id="form1">
-            <input id="visitId" name="visitId" value="${bean.visitId}" type="            <div align="center">
+            <input id="visitId" name="visitId" value="${bean.visitId}"  type="hidden"/>
+             <div align="center">
             <table border="0" align="center" class="${tableclass}" id="col1">
                 <thead>
                     <tr class="sortable">

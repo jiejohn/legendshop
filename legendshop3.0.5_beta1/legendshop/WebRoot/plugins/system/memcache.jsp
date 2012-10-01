@@ -1,3 +1,9 @@
+<%@page import="net.spy.memcached.NodeLocator"%>
+<%@page import="java.net.SocketAddress"%>
+<%@page import="net.spy.memcached.MemcachedClient"%>
+<%@page import="com.legendshop.core.cache.MemcachedCache"%>
+<%@page import="net.sf.ehcache.Ehcache"%>
+<%@page import="com.legendshop.core.cache.LegendCache"%>
 <%@page import="com.legendshop.util.SafeHtml"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
@@ -7,35 +13,62 @@
 <%@ page import="java.util.*, java.io.*"%>
 <%@page import="java.text.NumberFormat"%>
 
-<br>系统缓存<br>
+<br>Memcached系统缓存<br>
+<table border="1" width="100%" style="border-collapse: collapse;">
+			       <tr style="font-weight: bold;">
+							   <td width="100px">顺序</td>
+								<td width="250px">Cache Name</td>
+								<td  width="100px">Cache Size</td>
+								<td>Cache Detail</td>
+						</tr>
 <%
 	SafeHtml safeHtml = new SafeHtml();
- 	int total = 1000;
+ 	int total = 10000;
+ 	int cacheNum = 0;
+ 	int addressNum = 0;
 	CacheManager cacheManager = (CacheManager)ContextServiceLocator.getInstance().getBean("cacheManager");
-	String[] cacheNames = cacheManager.getCacheNames();
+	Collection<String> cacheNames = cacheManager.getCacheNames();
 	if(cacheNames != null){
-		for(int i = 0; i <cacheNames.length; i++){
-			Cache cache = cacheManager.getCache(cacheNames[i]) ;
+	Iterator<String> itr = cacheNames.iterator();
+	while(itr.hasNext()){
+	       String cacheName = itr.next();
+		   cacheNum++;
+			MemcachedClient cache = ((MemcachedCache)cacheManager.getCache(cacheName)).getNativeCache();
 			if(cache != null){
-				List names = cache.getKeys();
-				if(names != null){
-					int len =names.size() > total ? total :names.size();
-					for(int j = 0; j <len; j++){
+			Map<SocketAddress, Map<String,String>> map = cache.getStats();
+				Set<SocketAddress> socketAddresses = map.keySet();
+				Collection<Map<String,String>>  values = map.values();
+				for(SocketAddress address: socketAddresses){
+				 addressNum++;
 						%>
-						<table border="1" width="100%">
-							<tr>
-								<td width="150px"><%=j%> : <%=cache.getName() %> </td>
-								<td  width="30px"><%=cache.getSize() %> </td>
-								<td>
-								<%=cache.get(names.get(j)) == null ? null : safeHtml.makeSafe(cache.get(names.get(j)).toString()) %></pre> </td>
-							</tr>
-						</table>
+			       <tr style="background: #bbb">
+							   <td colspan="4"><%=cacheNum%> Cache Name: <%=cacheName %>,  address: <%=address.toString() %></td>
+						</tr>
 						<%
-					}
+				   Map<String,String> valueMap =  map.get(address);
+					Set<String> keyValue  = valueMap.keySet();
+					int valueNum = 0;
+					for(String key: keyValue){
+					   valueNum++;
+						String valueValue = valueMap.get(key);
+					if(cacheNum % 2 == 0){
+						%>
+			       <tr style="background: #ccc">
+			       <% }else{%>
+			       <tr>
+			    <%} %>
+							   <td width="100px"><%=addressNum%> </td>
+								<td width="150px"><%=valueNum%> : <%=key %> </td>
+								<td  width="30px"><%=keyValue.size() %> </td>
+								<td><pre><%=valueValue == null ? null : safeHtml.makeSafe(valueValue).toString() %></pre> </td>
+						</tr>
+						<%
+					 }
+				   }
 				}
 			}
 		}
-		
-	}
 %>
+
+</table>
 

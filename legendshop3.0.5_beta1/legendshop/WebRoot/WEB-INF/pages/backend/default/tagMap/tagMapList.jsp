@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/pages/common/back-common.jsp"%>
-<%@ include file="/pages/common/taglib.jsp"%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
@@ -37,7 +37,7 @@
 	    </table>
     </form>
     <div align="center">
-          <%@ include file="/pages/common/messages.jsp"%>
+          <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
 		<display:table name="list" requestURI="/admin/tagMap/query" id="item" export="false" class="${tableclass}" style="width:100%">
 	             <display:column title="TagMapId" property="tagMapId"></display:column>
       <display:column title="TagId" property="tagId"></display:column>

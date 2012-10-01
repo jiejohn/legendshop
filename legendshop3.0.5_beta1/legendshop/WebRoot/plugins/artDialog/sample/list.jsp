@@ -6,7 +6,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <script type="text/javascript" src="<%=request.getContextPath() %>/plugins/artDialog/artDialog.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/plugins/artDialog/plugins/iframeTools.js"></script>
-<link  href="<%=request.getContextPath() %>/plugins/artDialog/skins/green.css"  rel="stylesheet"   type="text/css"/>
+<link  href="<%=request.getContextPath() %>/plugins/artDialog/skins/idialog.css"  rel="stylesheet"   type="text/css"/>
 <style type="text/css">
 body {color:#333;font-size:12px;  font-family: "\5b8b\4f53", sans-serif;line-height: 1.5em;}
 ul li{ list-style:none;}
@@ -21,7 +21,9 @@ ul li{ list-style:none;}
 		  }
 		  
 		  function showPopDiv(){
+		 
 		   var url="step1.jsp";
+		    alert(url);
 		   var options={id:"test01",title:"查看用户详情",width:400,height:240,lock:false,closeFn: function(){} };
 		    art.dialog.open(url,options);
 		  }

@@ -5,7 +5,7 @@
 	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
 
 	<cache:annotation-driven key-generator="stringKeyGenerator" />
-		
+	
 	<bean id="stringKeyGenerator" class="com.legendshop.core.cache.StringKeyGenerator" />
 	
 
@@ -15,7 +15,7 @@
 	<bean id="ehcacheFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:config-location="classpath:ehcache.xml" />
 	
 
-<!-- 
+<!-- 	
 	<bean id="cacheManager" class="com.legendshop.core.cache.MemCachedManager">
 	
 		<property name="supportQueryCache" value="true" />
@@ -164,9 +164,10 @@
 
 	<bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">
 		<property name="servers" value="127.0.0.1:11211,127.0.0.1:11212" />
-		 
+		
 		deprecated
 		<property name="protocol" value="BINARY" />
+		
 		<property name="transcoder">
 			<bean class="net.spy.memcached.transcoders.SerializingTranscoder">
 				<property name="compressionThreshold" value="1024" />
@@ -182,6 +183,6 @@
 		<property name="useNagleAlgorithm" value="false" />
 	
 	</bean>
-
-	-->
+-->
+	
 </beans>

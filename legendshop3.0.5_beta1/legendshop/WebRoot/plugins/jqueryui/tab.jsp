@@ -5,7 +5,7 @@
 <script src="<ls:templateResource item='/plugins/jqueryui/js/jquery.ui.core.js'/>"  type="text/javascript"></script>
 <script src="<ls:templateResource item='/plugins/jqueryui/js/jquery.ui.widget.js'/>"  type="text/javascript"></script>
 <script src="<ls:templateResource item='/plugins/jqueryui/js/jquery.ui.tabs.js'/>"  type="text/javascript"></script>
-<link rel="stylesheet" href="<ls:templateResource item='/plugins/jqueryui/css/demos.css'/>">
+<link rel="stylesheet" href="<ls:templateResource item='/plugins/jqueryui/theme/base/jquery.ui.all.css'/>">
 
 <html>
 <head>
