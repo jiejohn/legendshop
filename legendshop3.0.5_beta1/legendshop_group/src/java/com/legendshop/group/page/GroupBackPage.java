@@ -30,6 +30,11 @@ public enum GroupBackPage implements PageDefinition {
 	/** The PRO d_ edi t_ page. */
 	PROD_EDIT_PAGE("/group/gprod"),
 
+	/** The gsort list page. */
+	GSORT_LIST_PAGE("/gsort/gsortList"),
+
+	/** The gsort edit page. */
+	GSORT_EDIT_PAGE("/gsort/gsort"),
 	;
 
 	/** The value. */

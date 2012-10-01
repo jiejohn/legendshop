@@ -25,9 +25,11 @@ public enum GroupFowardPage implements PageDefinition {
 	/** The VARIABLE. 可变路径 */
 	VARIABLE(""),
 
-	/** The PRO d_ lis t_ query. */
+	/** The prod list query. */
 	PROD_LIST_QUERY("/admin/group/product/query"),
 
+	/** The gsort list query. */
+	GSORT_LIST_QUERY("/admin/gsort/query"),
 	;
 
 	/** The value. */
@@ -79,11 +81,17 @@ public enum GroupFowardPage implements PageDefinition {
 		return PagePathCalculator.calculateActionPath("forward:", path);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.core.constant.PageDefinition#getNativeValue()
+	 */
 	@Override
 	public String getNativeValue() {
 		return value;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.core.constant.PageDefinition#getTemplates()
+	 */
 	@Override
 	public List<String> getTemplates() {
 		return this.templates;

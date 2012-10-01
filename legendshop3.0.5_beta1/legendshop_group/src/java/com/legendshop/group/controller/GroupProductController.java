@@ -60,8 +60,6 @@ public class GroupProductController extends BaseController{
 	@Autowired
 	private GroupProductService groupProductService;
 	
-	
-	
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, GroupProduct groupProduct) {
 		// Qbc查找方式
