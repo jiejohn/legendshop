@@ -76,7 +76,7 @@ public class ExternalLinkAdminController extends BaseController {
 		if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {// 非外部排序
 			cq.addOrder("desc", "bs");
 		}
-		cq.add();
+		
 		PageSupport ps = externalLinkService.getDataByCriteriaQuery(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", externalLink);

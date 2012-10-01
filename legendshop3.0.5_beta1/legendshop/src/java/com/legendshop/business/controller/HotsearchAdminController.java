@@ -69,7 +69,7 @@ public class HotsearchAdminController extends BaseController {
 		cq.eq("sort", hotsearch.getSort());
 		cq.eq("title", hotsearch.getTitle());
 		cq.addOrder("desc", "date");
-		cq.add();
+		
 		PageSupport ps = hotsearchService.getDataByCriteriaQuery(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", hotsearch);

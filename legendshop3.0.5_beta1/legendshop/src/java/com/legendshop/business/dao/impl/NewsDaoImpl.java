@@ -51,7 +51,7 @@ public class NewsDaoImpl extends BaseDaoImpl implements NewsDao {
 		cq.eq("position", newsPositionEnum.value());
 		cq.eq("status", Constants.ONLINE);
 		cq.addOrder("desc", "newsDate");
-		cq.add();
+		
 		List<News> list = findListByCriteria(cq, 0, num);
 
 		if (AppUtils.isBlank(list)) {
@@ -59,7 +59,7 @@ public class NewsDaoImpl extends BaseDaoImpl implements NewsDao {
 			cq.eq("userName", Constants.COMMON_USER);
 			cq.eq("status", newsPositionEnum.value());
 			cq.addOrder("desc", "newsDate");
-			cq.add();
+			
 			list = findListByCriteria(cq, 0, num);
 		}
 		
@@ -88,7 +88,7 @@ public class NewsDaoImpl extends BaseDaoImpl implements NewsDao {
 		cq.eq("userName", userName);
 		cq.eq("newsCategory.newsCategoryId", newsCategoryId);
 		cq.addOrder("desc", "newsDate");
-		cq.add();
+		
 		PageSupport ps = find(cq);
 		ps.setToolBar(locale, Constants.SIMPLE_PAGE_PROVIDER);
 		return ps;

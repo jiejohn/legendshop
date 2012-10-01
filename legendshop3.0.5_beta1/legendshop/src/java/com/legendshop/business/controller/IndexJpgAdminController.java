@@ -84,7 +84,7 @@ public class IndexJpgAdminController extends BaseController {
 		if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {
 			cq.addOrder("desc", "id");
 		}
-		cq.add();
+		
 		PageSupport ps = indexJpgService.getIndexJpg(cq);
 		savePage(ps, request);
 		request.setAttribute("indexJpg", indexjpg);

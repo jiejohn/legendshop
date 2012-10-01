@@ -148,7 +148,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 			}
 
 			cq.addOrder("desc", "prodId");
-			cq.add();
+			
 			PageSupport ps = productDao.getProdDetail(cq);
 			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
 			request.setAttribute("offset", new Integer(ps.getOffset() + 1));

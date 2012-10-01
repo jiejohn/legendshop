@@ -51,7 +51,7 @@ public class TagController extends BaseController implements AdminController<Tag
         /*
            //TODO add your condition
         */
-        cq.add();
+        
         PageSupport ps = tagService.getTag(cq);
         savePage(ps, request);
         request.setAttribute("tag", tag);

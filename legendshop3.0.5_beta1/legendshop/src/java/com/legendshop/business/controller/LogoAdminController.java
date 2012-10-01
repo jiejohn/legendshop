@@ -70,7 +70,7 @@ public class LogoAdminController extends BaseController {
 		CriteriaQuery cq = new CriteriaQuery(Logo.class, curPageNO, "javascript:pager");
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(logo.getUserName()));
-		cq.add();
+		
 		PageSupport ps = logoService.getLogoList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", logo);

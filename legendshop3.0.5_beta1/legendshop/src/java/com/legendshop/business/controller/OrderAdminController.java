@@ -87,7 +87,7 @@ public class OrderAdminController extends BaseController implements AdminControl
 			if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {
 				cq.addOrder("desc", "subDate");
 			}
-			cq.add();
+			
 			PageSupport ps = subService.getOrderList(cq);
 			savePage(ps, request);
 			request.setAttribute("subForm", entity);

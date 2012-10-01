@@ -82,15 +82,6 @@
       </td>
     </tr>
     <tr>
-      <td width="30%" ><div align="center">分类类型：</div></td>
-      <td width="70%" >
-				<select id="sortType" name="sortType">
-				  <option:optionGroup type="select" required="false" cache="true"
-	                beanName="PRODUCT_TYPE" selectedValue="${sort.sortType}"/>
-	            </select>	
-      </td>
-    </tr>
-    <tr>
       <td width="30%" ><div align="center">Header菜单：</div></td>
       <td width="70%" >
 				<select id="headerMenu" name="headerMenu">
@@ -109,21 +100,21 @@
       </td>
     </tr>
 	<tr>
-      <td ><div align="center">类型图片(765*240)<font color="#ff0000">*</font></div></td>
+      <td ><div align="center">类型图片(765*240)</div></td>
       <td >
       	<input type="file" name="file" id="file" size="30"/>
       	<input type="hidden" name="pictureName" id="pictureName" size="30" value="${sort.picture}"/>
       </td>
     </tr>
+          <c:if test="${sort.picture!=null}">
     <tr>
     <td  ><div align="center">原有图片</div></td>
       <td >
-      <c:if test="${sort.picture!=null}">
       	<a href="<ls:photo item='${sort.picture}'/>" target="_blank">
       	<img src="<ls:photo item='${sort.picture}'/>" height="60" width="300"/></a>
-      	</c:if>
       </td>
     </tr>
+     	</c:if>
     <tr>
       <td colspan="2" ><div align="center">  
       <auth:auth ifAnyGranted="F_OPERATOR">

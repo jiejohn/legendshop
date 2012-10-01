@@ -70,7 +70,7 @@ public class SystemParameterController extends BaseController {
 		cq.eq("name", systemParameter.getName());
 		cq.eq("changeOnline", "Y");
 		cq.addOrder("asc", "displayOrder");
-		cq.add();
+		
 		PageSupport ps = systemParameterService.getSystemParameterList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", systemParameter);

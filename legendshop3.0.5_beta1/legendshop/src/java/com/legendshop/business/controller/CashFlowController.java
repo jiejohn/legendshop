@@ -47,7 +47,7 @@ public class CashFlowController extends BaseController implements AdminControlle
         /*
            //TODO add your condition
         */
-        cq.add();
+        
         PageSupport ps = cashFlowService.getCashFlow(cq);
         savePage(ps, request);
         request.setAttribute("cashFlow", cashFlow);

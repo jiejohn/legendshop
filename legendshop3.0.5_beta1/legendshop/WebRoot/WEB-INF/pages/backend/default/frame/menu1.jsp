@@ -81,10 +81,16 @@
         <dt onClick='showHide("items1_3")'><b>团购管理</b></dt>
         <dd style='display:block' class='sitem' id='items1_3'>
           <ul class='sitemu'>
-           <li>
+             <li>
               <div class='items'>
                 <div class='fllct'><a href='${pageContext.request.contextPath}/admin/group/product/query'   target='main'>团购管理</a></div>
                 <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/group/product/query'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='团购管理' title='团购管理'/></a> </div>
+              </div>
+            </li>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/gsort/query'   target='main'>类型管理</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/gsort/query'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='类型管理' title='类型管理'/></a> </div>
               </div>
             </li>
           </ul>

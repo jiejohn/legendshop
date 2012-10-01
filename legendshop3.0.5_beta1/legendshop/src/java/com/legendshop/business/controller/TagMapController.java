@@ -46,7 +46,7 @@ public class TagMapController extends BaseController implements AdminController<
         /*
            //TODO add your condition
         */
-        cq.add();
+        
         PageSupport ps = tagMapService.getTagMap(cq);
         savePage(ps, request);
         request.setAttribute("tagMap", tagMap);

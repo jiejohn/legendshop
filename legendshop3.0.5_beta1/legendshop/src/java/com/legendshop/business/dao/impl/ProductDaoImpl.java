@@ -138,7 +138,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 		cq.eq("sortId", sortId);
 		cq.eq("nsortId", nsortId);
 		cq.eq("subNsortId", subNsortId);
-		cq.add();
+		
 		PageSupport ps = find(cq);
 		ps.setToolBar(locale, Constants.SIMPLE_PAGE_PROVIDER);
 		return ps;

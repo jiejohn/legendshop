@@ -84,7 +84,7 @@ public class ImgFileAdminController extends BaseController {
 			request.setAttribute("prod", product);
 
 		}
-		cq.add();
+		
 		PageSupport ps = imgFileService.getImgFileList(cq);
 		savePage(ps, request);
 		request.setAttribute("productId", productId);

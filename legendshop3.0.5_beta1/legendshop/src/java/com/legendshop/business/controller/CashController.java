@@ -47,7 +47,7 @@ public class CashController extends BaseController implements AdminController<Ca
         /*
            //TODO add your condition
         */
-        cq.add();
+        
         PageSupport ps = cashService.getCash(cq);
         savePage(ps, request);
         request.setAttribute("cash", cash);

@@ -69,7 +69,7 @@ public class LoginHistoryController extends BaseController{
 		cq.ge("time", login.getStartTime());
 		cq.le("time", login.getEndTime());
 		cq.addOrder("desc", "time");
-		cq.add();
+		
 		PageSupport ps = loginHistoryService.getLoginHistory(cq);
 		savePage(ps, request);
 		request.setAttribute("login", login);

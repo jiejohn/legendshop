@@ -67,7 +67,7 @@ public class PubAdminController extends BaseController {
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(pub.getUserName()));
 		cq.addOrder("desc", "date");
-		cq.add();
+		
 		PageSupport ps = pubService.getPubList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", pub);

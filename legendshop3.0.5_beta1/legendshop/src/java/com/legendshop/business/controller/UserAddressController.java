@@ -47,7 +47,7 @@ public class UserAddressController extends BaseController implements AdminContro
         /*
            //TODO add your condition
         */
-        cq.add();
+        
         PageSupport ps = userAddressService.getUserAddress(cq);
         savePage(ps, request);
         request.setAttribute("userAddress", userAddress);

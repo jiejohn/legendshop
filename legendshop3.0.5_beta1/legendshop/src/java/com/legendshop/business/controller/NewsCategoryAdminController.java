@@ -77,7 +77,7 @@ public class NewsCategoryAdminController extends BaseController {
 
 		}
 		cq.eq("status", newsCategory.getStatus());
-		cq.add();
+		
 		PageSupport ps = newsCategoryService.getNewsCategoryList(cq);
 		ps.savePage(request);
 		request.setAttribute("bean", newsCategory);

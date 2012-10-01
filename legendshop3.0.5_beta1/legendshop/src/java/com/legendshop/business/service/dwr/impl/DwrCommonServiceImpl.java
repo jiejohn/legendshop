@@ -995,7 +995,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
 			cq.addOrder("desc", "addtime");
 			cq.eq("prodId", prodId);
-			cq.add();
+			
 			PageSupport ps = productDao.getProdDetail(cq);
 			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
 			Map<String, Object> map = new HashMap<String, Object>();

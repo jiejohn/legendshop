@@ -78,7 +78,7 @@ public class PayTypeAdminController extends BaseController {
 		CriteriaQuery cq = new CriteriaQuery(PayType.class, curPageNO, "javascript:pager");
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 		cq = hasAllDataAndOperationFunction(cq, request, StringUtils.trim(payType.getUserName()));
-		cq.add();
+		
 		PageSupport ps = payTypeService.getPayTypeList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", payType);

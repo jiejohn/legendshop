@@ -1,11 +1,12 @@
 <%@ page contentType="text/html; charset=utf-8" language="java"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@include file='/WEB-INF/pages/common/common.jsp'%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
-		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
-  		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
-		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
-		<script language="javascript" src='${pageContext.request.contextPath}/common/js/ScrachParam.js'></script>
-		<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/json.js"></script>
+<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
+<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+<script type='text/javascript'  src='${pageContext.request.contextPath}/common/js/ScrachParam.js'></script>
+<script type="text/javascript"  src="${pageContext.request.contextPath}/common/js/json.js"></script>
 <html>
 	<head>
 		<title>增加相关商品</title>
@@ -244,12 +245,10 @@
 											    
 											</td>
 											<td class="" rowspan="2">
-												<input type="button" value=">>" title="全部添加"  onClick="toRightAll(Select1,Select2)" id="Button3" name="Button1"
-													 class="s"><br>
-												<input type="button" value=">" title="添加" onClick="toRight(Select1,Select2)" id="Button4" name="Button2"  class="s"><br>
-												<input type="button" value="<" title="删除" onClick="toLeft(Select2,Select1)" id="Button11" name="Button3"  class="s"><br>
-												<input type="button" value="<<" title="全部删除" onClick="toLeftAll(Select2,Select1)"  id="Button12" name="Button4"
-													 class="s"><br>
+												<input type="button" value=">>" title="全部添加"  onclick="toRightAll(Select1,Select2)" id="Button3" name="Button1"  class="s" /><br />
+												<input type="button" value=">" title="添加" onclick="toRight(Select1,Select2)" id="Button4" name="Button2"  class="s" /><br />
+												<input type="button" value="<" title="删除" onclick="toLeft(Select2,Select1)" id="Button11" name="Button3"  class="s" /><br />
+												<input type="button" value="<<" title="全部删除" onclick="toLeftAll(Select2,Select1)"  id="Button12" name="Button4" class="s" /><br />
 											</td>
 											<td class="fim_m">
 												<select id="Select2" multiple ondblclick="toLeft(Select2,Select1)" class="com_textarea"
@@ -265,9 +264,8 @@
 			</tr>
 			<tr>
 										<td align="center">
-											<input type="button" class="s" onClick="save(this)" value="确定" id="Button1"
-												name="Button1"> <input type="button" class="s" onclick="window.close();" value="取消" id="Button2"
-												name="Button2"><br><br> 
+											<input type="button" class="s" onclick="save(this)" value="确定" id="Button1"  name="Button1" />
+											<br></br> 
 										</td>
 			</tr>
 		</table>

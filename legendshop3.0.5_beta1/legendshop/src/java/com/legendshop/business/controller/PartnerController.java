@@ -61,7 +61,7 @@ public class PartnerController extends BaseController implements AdminController
         /*
            //TODO add your condition
         */
-        cq.add();
+        
         PageSupport ps = partnerService.getPartner(cq);
         savePage(ps, request);
         request.setAttribute("partner", partner);

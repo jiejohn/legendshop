@@ -47,7 +47,7 @@ public class EventController extends BaseController implements AdminController<E
         /*
            //TODO add your condition
         */
-        cq.add();
+        
         PageSupport ps = eventService.getEvent(cq);
         savePage(ps, request);
         request.setAttribute("event", event);

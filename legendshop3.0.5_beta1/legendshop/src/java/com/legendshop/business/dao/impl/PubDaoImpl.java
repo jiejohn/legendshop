@@ -42,13 +42,13 @@ public class PubDaoImpl extends BaseDaoImpl implements PubDao {
 		CriteriaQuery cq = new CriteriaQuery(Pub.class);
 		cq.eq("userName", shopName);
 		cq.addOrder("desc", "date");
-		cq.add();
+		
 		List<Pub> list = findListByCriteria(cq, 0, 4);
 		if (AppUtils.isBlank(list)) {
 			cq = new CriteriaQuery(Pub.class);
 			cq.eq("userName", Constants.COMMON_USER);
 			cq.addOrder("desc", "date");
-			cq.add();
+			
 			list = findListByCriteria(cq, 0, 4);
 		}
 		return list;

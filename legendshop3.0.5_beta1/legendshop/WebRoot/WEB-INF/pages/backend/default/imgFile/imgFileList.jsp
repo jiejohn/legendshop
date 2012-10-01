@@ -53,18 +53,14 @@
       <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
      	 <display:column title="商城名称" property="userName"></display:column>
       </auth:auth>
-      <display:column title="状态">
-      		      	  <option:optionGroup type="label" required="true" cache="true"
-	                beanName="ONOFF_STATUS" selectedValue="${item.status}" defaultDisp=""/>
-      </display:column>
-      <display:column title="Action" media="html" style="width:50px">
+      <display:column title="操作" media="html" style="width:50px">
       <auth:auth ifAnyGranted="F_OPERATOR">
        <c:choose>
   		<c:when test="${item.status == 1}">
-  			<a href='javascript:imgFileOffline("${item.fileId}")'>下线</a>
+  			<a href='javascript:imgFileOffline("${item.fileId}")' ><img alt="下线"  src="<ls:templateResource item='/common/default/images/blue_down.png'/> "></a>
   		</c:when>
   		<c:otherwise>
-  			<a href='javascript:imgFileOnline("${item.fileId}")'><font color="red">上线</font></a>
+  			<a href='javascript:imgFileOnline("${item.fileId}")'><font color="red"><img alt="上线" src="<ls:templateResource item='/common/default/images/yellow_up.png'/> "></font></a>
   		</c:otherwise>
   	  </c:choose>
       	<a href='javascript:deleteById("${item.fileId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/> "></a>

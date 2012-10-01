@@ -84,7 +84,7 @@ public class ProductAdminController extends BaseController {
 		cq.eq("commend", product.getCommend());
 		cq.eq("status", product.getStatus());
 		cq.eq("brandId", product.getBrandId());
-		cq.eq("prodType", "P");
+		cq.eq("prodType", ProductTypeEnum.PRODUCT.value());
 		if (CommonServiceUtil.haveViewAllDataFunction(request)) {
 			if (!AppUtils.isBlank(product.getUserName())) {
 				cq.eq("userName", StringUtils.trim(product.getUserName()));
@@ -103,7 +103,7 @@ public class ProductAdminController extends BaseController {
 		if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {
 			cq.addOrder("desc", "recDate");
 		}
-		cq.add();
+		
 		PageSupport ps = productService.getProductList(cq);
 		savePage(ps, request);
 		request.setAttribute("prod", product);

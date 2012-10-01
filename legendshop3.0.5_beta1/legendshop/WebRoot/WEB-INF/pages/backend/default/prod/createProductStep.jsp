@@ -1,14 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/pages/common/common.jsp"%>
+<%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
-<script type="text/javascript" language="javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
-  <script language="javascript">
-	function appendProduct(id){
-	    var win = openWindow("${pageContext.request.contextPath}/admin/product/append/"+id , "appendBrand",'500','450') ;
-	    win.focus() ;
-	}
-
-</script>
+        <script type="text/javascript"  src="${pageContext.request.contextPath}/common/js/common.js"></script>
+		<script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/artDialog.js'/>"></script>
+		<script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/plugins/iframeTools.js'/>"></script>
+		<link  href="<ls:templateResource item='/plugins/artDialog/skins/aero.css'/>"  rel="stylesheet"   type="text/css"/>
       <c:choose>
       	<c:when test="${prod.prodId == null}">
       		商品详细信息
@@ -50,7 +46,7 @@
 		      	</c:choose>   
 	      
 	      </a> 
-	      <a href="javascript:appendProduct(${prod.prodId})">
+	      <a id="relProdSetp" href="javascript:createprodStep.relProduct(${prod.prodId})">
 	      	    <c:choose>
 		      	  	<c:when test="${param.step == 5}"><b>5.相关商品</b></c:when>
 		      	  	<c:otherwise>5.相关商品</c:otherwise>
@@ -59,3 +55,21 @@
 
       	</c:otherwise>
       </c:choose>
+         
+ <script language="JavaScript" type="text/javascript">
+	function appendProduct(id){
+	    var win = openWindow("${pageContext.request.contextPath}/admin/product/append/"+id , "appendProduct",'500','450') ;
+	    win.focus() ;
+	}
+	
+  var createprodStep={
+       relProduct:function(id){
+           var url="${pageContext.request.contextPath}/admin/product/append/"+id ;
+		   var options={id:"relProduct",title:"增加相关产品",
+		   follow: document.getElementById('relProdSetp'),
+		   width:500,height:450,lock:false,closeFn: function(){} };
+		    art.dialog.open(url,options);
+       }
+  };	
+
+</script>

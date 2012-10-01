@@ -85,7 +85,7 @@ public class MyleagueAdminController extends BaseController {
 		if (!AppUtils.isBlank(myleague.getFriendId())) {
 			cq.like("friendId", "%" + myleague.getFriendId() + "%");
 		}
-		cq.add();
+		
 		PageSupport ps = myleagueService.getMyleagueList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", myleague);

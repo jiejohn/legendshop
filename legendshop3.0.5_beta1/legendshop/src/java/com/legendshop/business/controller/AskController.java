@@ -47,7 +47,7 @@ public class AskController extends BaseController implements AdminController<Ask
         /*
            //TODO add your condition
         */
-        cq.add();
+        
         PageSupport ps = askService.getAsk(cq);
         savePage(ps, request);
         request.setAttribute("ask", ask);

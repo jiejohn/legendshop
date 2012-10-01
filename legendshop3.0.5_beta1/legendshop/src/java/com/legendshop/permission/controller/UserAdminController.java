@@ -385,7 +385,7 @@ public class UserAdminController extends BaseController implements AdminControll
 			if (AppUtils.isNotBlank(enabled)) {
 				cq.eq("enabled", enabled);
 			}
-			cq.add();
+			
 			State state = new StateImpl();
 			PageSupport ps = rightDelegate.findAllUser(cq, state);
 
@@ -472,7 +472,7 @@ public class UserAdminController extends BaseController implements AdminControll
 		if (AppUtils.isNotBlank(enabled)) {
 			cq.eq("enabled", enabled);
 		}
-		cq.add();
+		
 		State state = new StateImpl();
 		PageSupport ps = rightDelegate.findAllUser(cq, state);
 

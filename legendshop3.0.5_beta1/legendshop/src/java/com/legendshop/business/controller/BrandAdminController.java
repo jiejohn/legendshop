@@ -61,7 +61,7 @@ public class BrandAdminController extends BaseController implements AdminControl
 		CriteriaQuery cq = new CriteriaQuery(Brand.class, curPageNO);
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(brand.getUserName()));
-		cq.add();
+		
 		PageSupport ps = brandService.getDataByCriteriaQuery(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", brand);

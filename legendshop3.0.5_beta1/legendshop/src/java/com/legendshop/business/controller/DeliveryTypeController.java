@@ -57,7 +57,7 @@ public class DeliveryTypeController extends BaseController implements AdminContr
         /*
            //TODO add your condition
         */
-        cq.add();
+        
         PageSupport ps = deliveryTypeService.getDeliveryType(cq);
         savePage(ps, request);
         request.setAttribute("deliveryType", deliveryType);

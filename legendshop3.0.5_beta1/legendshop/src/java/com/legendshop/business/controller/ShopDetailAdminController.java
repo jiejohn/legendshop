@@ -93,7 +93,7 @@ public class ShopDetailAdminController extends BaseController {
 		cq.eq("type", shopDetail.getType());
 		cq.eq("colorStyle", shopDetail.getColorStyle());
 		cq.eq("status", shopDetail.getStatus());
-		cq.add();
+		
 		PageSupport ps = shopDetailService.getShopDetail(cq);
 		savePage(ps, request);
 		request.setAttribute("shopDetail", shopDetail);

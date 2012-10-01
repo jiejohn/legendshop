@@ -172,12 +172,6 @@ public enum BackPage implements PageDefinition{
 	/** The sort edit page. */
 	SORT_EDIT_PAGE("/sort/sort"),
 
-	/** The gsort list page. */
-	GSORT_LIST_PAGE("/gsort/gsortList"),
-
-	/** The gsort edit page. */
-	GSORT_EDIT_PAGE("/gsort/gsort"),
-
 	/** The param list page. */
 	PARAM_LIST_PAGE("/systemParameter/systemParameterList"),
 

@@ -85,7 +85,7 @@ public class VisitLogAdminController extends BaseController implements AdminCont
 		if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {
 			cq.addOrder("desc", "date");
 		}
-		cq.add();
+		
 		PageSupport ps = visitLogService.getVisitLogList(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", visitLog);

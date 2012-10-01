@@ -75,7 +75,7 @@ public class UserCenterController extends BaseController {
 		cq.eq("userName", userName);
 		cq.gt("subDate", DateUtil.getTimeMonthsAgo(1));
 		cq.addOrder("desc", "subDate");
-		cq.add();
+		
 		PageSupport ps = subService.getOrderList(cq);
 
 		savePage(ps, request);

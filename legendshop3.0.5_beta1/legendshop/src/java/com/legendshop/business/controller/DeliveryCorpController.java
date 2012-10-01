@@ -57,7 +57,7 @@ public class DeliveryCorpController extends BaseController implements AdminContr
         /*
            //TODO add your condition
         */
-        cq.add();
+        
         PageSupport ps = deliveryCorpService.getDeliveryCorp(cq);
         savePage(ps, request);
         request.setAttribute("deliveryCorp", deliveryCorp);

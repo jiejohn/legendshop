@@ -113,7 +113,7 @@ public class OrderController extends BaseController {
 			cq.eq("status", entity.getStatus());
 			cq.eq("subCheck", entity.getSubCheck());
 			cq.addOrder("desc", "subDate");
-			cq.add();
+			
 			PageSupport ps = subService.getOrderList(cq);
 			savePage(ps, request);
 			request.setAttribute("subForm", entity);

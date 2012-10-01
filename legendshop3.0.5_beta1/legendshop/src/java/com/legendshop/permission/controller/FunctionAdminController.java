@@ -219,7 +219,7 @@ public class FunctionAdminController extends BaseController implements AdminCont
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 		if (!AppUtils.isBlank(search)) {
 			cq.like("name", "%" + search + "%");// 1
-			cq.add();
+			
 		}
 		State state = new StateImpl();
 		PageSupport ps = rightDelegate.findAllFunction(cq, state);
@@ -421,7 +421,7 @@ public class FunctionAdminController extends BaseController implements AdminCont
 		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
 		if (!AppUtils.isBlank(search)) {
 			cq.like("name", "%" + search + "%");
-			cq.add();
+			
 		}
 
 		State state = new StateImpl();
@@ -540,7 +540,7 @@ public class FunctionAdminController extends BaseController implements AdminCont
 
 		if (!AppUtils.isBlank(name)) {
 			cq.like("name", "%" + name + "%");// 1
-			cq.add();
+			
 		}
 		State state = new StateImpl();
 		PageSupport ps = rightDelegate.findAllFunction(cq, state);

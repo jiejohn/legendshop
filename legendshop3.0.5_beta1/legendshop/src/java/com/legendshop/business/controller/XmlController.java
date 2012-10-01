@@ -142,9 +142,12 @@ public class XmlController extends BaseController {
 	@RequestMapping(value = "/admin/dynamic/loadAttribute/{prodId}")
 	public String loadAttributeprodAttribute(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long prodId) {
-		String userName = UserManager.getUsername(request.getSession());
-		Product product = productService.getProd(prodId, userName);
+		Product product = productService.getProductById(prodId);
 		if (AppUtils.isNotBlank(product)) {
+			String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), product.getUserName());
+			if(result!=null){
+				return result;
+			}
 			request.setAttribute("prod", product);
 			if (AppUtils.isNotBlank(product.getAttribute())) {
 				JSONArray jsonArray = JSONArray.fromObject(product.getAttribute());
@@ -169,9 +172,12 @@ public class XmlController extends BaseController {
 	@RequestMapping(value = "/admin/dynamic/loadParameter/{prodId}")
 	public String loadParameter(HttpServletRequest request, HttpServletResponse response, @PathVariable
 	Long prodId) {
-		String userName = UserManager.getUsername(request.getSession());
-		Product product = productService.getProd(prodId, userName);
+		Product product = productService.getProductById(prodId);
 		if (AppUtils.isNotBlank(product)) {
+			String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), product.getUserName());
+			if(result!=null){
+				return result;
+			}
 			request.setAttribute("prod", product);
 			if (AppUtils.isNotBlank(product.getAttribute())) {
 				JSONArray jsonArray = JSONArray.fromObject(product.getParameter());

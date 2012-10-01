@@ -94,7 +94,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 		if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {
 			cq.addOrder("desc", "addtime");
 		}
-		cq.add();
+		
 		PageSupport ps = userCommentService.getUserCommentList(cq);
 		savePage(ps, request);
 		request.setAttribute("search", search);

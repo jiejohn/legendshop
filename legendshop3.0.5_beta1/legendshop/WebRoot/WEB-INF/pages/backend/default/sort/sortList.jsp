@@ -28,12 +28,7 @@
 			<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
 			&nbsp; 商城名称
 			<input type="text" name="userName"  id="userName" maxlength="50" value="${sort.userName}" />
-			</auth:auth>
-			&nbsp; 分类类型			
-	      <select id="sortType" name="sortType">
-	      <option:optionGroup type="select" required="false" cache="true"
-	                beanName="PRODUCT_TYPE" selectedValue="${sort.sortType}" />
-	        </select>	
+			</auth:auth>	
 	        </div>
 	        <div align="left" style="padding: 3px">
 			&nbsp; Header菜单			
@@ -62,10 +57,6 @@
       <display:column title="顺序" class="orderwidth"><%=offset++%></display:column>
       <display:column title="名称" property="sortName" sortable="true" sortName="sortName"></display:column>
       <display:column title="次序" property="seq" sortable="true" sortName="seq"></display:column>
-      <display:column title="类型">          
-      	<option:optionGroup type="label" required="false" cache="true"
-	                beanName="PRODUCT_TYPE" selectedValue="${item.sortType}" defaultDisp="普通商品"/>
-      </display:column>
       <display:column title="Header菜单">          
       	<option:optionGroup type="label" required="false" cache="true"
 	                beanName="YES_NO" selectedValue="${item.headerMenu}" defaultDisp="否"/>

@@ -74,7 +74,7 @@ public class AdvertisementAdminController extends BaseController {
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(advertisement.getUserName()));
 		// cq.eq("enabled", ENABLED);
 		cq.addOrder("asc", "type");
-		cq.add();
+		
 		PageSupport ps = advertisementService.getDataByCriteriaQuery(cq);
 		savePage(ps, request);
 		request.setAttribute("bean", advertisement);
