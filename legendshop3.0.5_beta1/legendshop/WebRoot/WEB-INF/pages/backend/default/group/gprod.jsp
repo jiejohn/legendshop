@@ -7,7 +7,6 @@
 <html>
 <head>
 <title>创建团购商品类型</title>
-
 		<script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
 		<script src="<ls:templateResource item='/plugins/My97DatePicker/WdatePicker.js'/>" type="text/javascript"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
@@ -193,7 +192,7 @@
                     param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"  selectedValue="${prod.product.brandId}"/>
         </select>
         </div><div style="margin-top: 3px">
-        还没有商品类型？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/sort/load">创建类型</a>&nbsp;<a href="${pageContext.request.contextPath}/admin/brand/load">创建品牌</a>
+        还没有商品类型？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/gsort/load">创建类型</a>&nbsp;<a href="${pageContext.request.contextPath}/admin/brand/load">创建品牌</a>
 		</div></td>
       <td width="25%" rowspan="9" align="center" valign="middle" style="margin: 0px">
       	<c:choose>

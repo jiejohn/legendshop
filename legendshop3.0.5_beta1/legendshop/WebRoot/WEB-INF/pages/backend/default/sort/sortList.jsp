@@ -16,7 +16,7 @@
 	%>
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; <a href="${pageContext.request.contextPath}/admin/sort/query">类型管理</a></td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 团购管理  &raquo; <a href="${pageContext.request.contextPath}/admin/gsort/query">类型管理</a></td></tr>
     </thead>
     <tbody>
     	<tr><td>
@@ -65,7 +65,7 @@
       	<option:optionGroup type="label" required="false" cache="true"
 	                beanName="YES_NO" selectedValue="${item.navigationMenu}" defaultDisp="否"/>
       </display:column>
-      <display:column title="图片" style="width:300px" media="html"><a href="<ls:photo item='${item.picture}'/>" target="_blank"><img src="<ls:photo item='${item.picture}'/>" height="60" width="300"/></a></display:column>
+
       <auth:auth ifAnyGranted="F_VIEW_ALL_DATA"><display:column title="商城名称" property="userName" sortable="true" sortName="userName"></display:column></auth:auth>
       <display:column title="操作" media="html" style="width:100px">
       <c:if test="${item.sortType ne 'G'}">

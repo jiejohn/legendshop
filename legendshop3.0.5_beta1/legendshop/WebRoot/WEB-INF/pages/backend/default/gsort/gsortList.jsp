@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
+<%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <html>
 <head>
      <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
@@ -15,25 +16,40 @@
 	%>
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 团购管理  &raquo; <a href="${pageContext.request.contextPath}/admin/gsort/query">团购分类</a></td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 团购管理  &raquo; <a href="${pageContext.request.contextPath}/admin/sort/query">类型管理</a></td></tr>
     </thead>
-     <tbody><tr><td>
- <div align="left" style="padding: 3px">
-<form id="form1" action="${pageContext.request.contextPath}/admin/gsort/query">
+    <tbody>
+    	<tr><td>
+    	 <form id="form1" action="${pageContext.request.contextPath}/admin/gsort/query">
 		<input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}">
+		<div align="left" style="padding: 3px">
 			&nbsp; 类型名称
 			<input type="text" name="sortName"  id="sortName" maxlength="50" value="${sort.sortName}" />
 			<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
 			&nbsp; 商城名称
 			<input type="text" name="userName"  id="userName" maxlength="50" value="${sort.userName}" />
-			</auth:auth>
+			</auth:auth>	
+	        </div>
+	        <div align="left" style="padding: 3px">
+			&nbsp; Header菜单			
+	      <select id="headerMenu" name="headerMenu">
+	      <option:optionGroup type="select" required="false" cache="true"
+	                beanName="YES_NO" selectedValue="${sort.headerMenu}" />
+	        </select>	
+			&nbsp; 导航菜单			
+	      <select id="navigationMenu" name="navigationMenu">
+	      <option:optionGroup type="select" required="false" cache="true"
+	                beanName="YES_NO" selectedValue="${sort.navigationMenu}" />
+	        </select>	
 			<input type="submit" value="搜索"/>
 			<input type="button" value="创建商品类型" onclick='window.location="${pageContext.request.contextPath}/admin/gsort/load"'/>
-			<input type="button" value="返回商品列表" onclick='window.location="<ls:url address='/admin/product/query'/>"'/>
+			<input type="button" value="返回商品列表" onclick='window.location="<ls:url address='/admin/group/product/query'/>"'/>
+			</div>
 			</form>
- </div>
- </td></tr></tbody>
+    	</td></tr>
+    </tbody>
     </table>
+   
   <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
     <display:table name="list" requestURI="/admin/gsort/query" id="item"
@@ -41,10 +57,17 @@
       <display:column title="顺序" class="orderwidth"><%=offset++%></display:column>
       <display:column title="名称" property="sortName" sortable="true" sortName="sortName"></display:column>
       <display:column title="次序" property="seq" sortable="true" sortName="seq"></display:column>
-      <display:column title="图片" style="width:300px" media="html"><a href="<ls:photo item='${item.picture}'/>" target="_blank"><img src="<ls:photo item='${item.picture}'/>" height="60" width="300"/></a></display:column>
+      <display:column title="Header菜单">          
+      	<option:optionGroup type="label" required="false" cache="true"
+	                beanName="YES_NO" selectedValue="${item.headerMenu}" defaultDisp="否"/>
+      </display:column>
+      <display:column title="导航菜单">          
+      	<option:optionGroup type="label" required="false" cache="true"
+	                beanName="YES_NO" selectedValue="${item.navigationMenu}" defaultDisp="否"/>
+      </display:column>
+
       <auth:auth ifAnyGranted="F_VIEW_ALL_DATA"><display:column title="商城名称" property="userName" sortable="true" sortName="userName"></display:column></auth:auth>
       <display:column title="操作" media="html" style="width:100px">
-    <a href="${pageContext.request.contextPath}/admin/nsort/query?sortId=${item.sortId}">二级类型</a>
      <a href="${pageContext.request.contextPath}/admin/gsort/update/${item.sortId}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "></a>
      <auth:auth ifAnyGranted="F_OPERATOR">
         <a href='javascript:deleteSort("${item.sortId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/> "></a>
