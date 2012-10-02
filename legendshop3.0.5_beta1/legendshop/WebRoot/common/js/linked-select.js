@@ -24,6 +24,11 @@ function changeLinkedOptions2(sql, callAfter) {
 }
 
 function fillSelect(data) {
+	if(data == null){
+		document.getElementById(dwrChildSelectId).style.display="none";
+	}else{
+		document.getElementById(dwrChildSelectId).style.display="";
+	}
 	dwr.util.removeAllOptions(dwrChildSelectId);
 	if(dwrChildSelectIsRequired == false || !data || data.length == 0) {
 		dwr.util.addOptions(dwrChildSelectId, [{ value:'', disp : defaultDisp }], "value", "disp");

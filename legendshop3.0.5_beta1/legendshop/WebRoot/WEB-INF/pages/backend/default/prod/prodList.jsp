@@ -46,17 +46,14 @@
 	                hql="select t.sortId, t.sortName from Sort t where t.sortType = 'P' and t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"/>
              </c:if>
 		</select>
-		<select id="nsortId" name="nsortId" onChange="changeSubNsort(this.value)">
+		<select style="display:none;" id="nsortId" name="nsortId" onChange="changeSubNsort(this.value)">
 			<option value="">-- 二级类型 --</option>
 		</select>  
-		 <select id="subNsortId" name="subNsortId">
+		 <select  style="display:none;"  id="subNsortId" name="subNsortId" onChange="changeBrand(this.value)">
             <option value="">-- 三级类型 --</option>
         </select>
-          &nbsp;品牌
-        <select id="brandId" name="brandId">
-        	   <option:optionGroup type="select" required="false" cache="fasle"
-                    hql="select t.brandId, t.brandName from Brand t where t.userName = ?" defaultDisp="--商品品牌--" 
-                    param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
+        <select id="brandId"   style="display:none;"  name="brandId">
+        	   <option value="">-- 商品品牌 --</option>
         </select>    
         </auth:auth>  
         </div><div align="left" style="padding: 3px">
@@ -229,6 +226,17 @@
             }
             dwr.engine.setAsync(true); 
         }
+        
+       function changeBrand(subNsortId) {
+        dwr.engine.setAsync(false);
+        if(subNsortId!=null &&subNsortId!=''){
+                var sql ="SELECT nsort_id id, brand_name name from ls_ns_brand n, ls_brand b where n.brand_id = b.brand_id and nsort_id =  '"+subNsortId+"'" ;
+                changeLinkedOptions1("brandId", false, sql,"-- 商品品牌 --");
+                
+            }
+            dwr.engine.setAsync(true); 
+        }     
+        
         
        function initSelect(sortIdValue,nsortIdValue,subNsortIdValue,brandIdValue){
 			//设置商品类型当前值

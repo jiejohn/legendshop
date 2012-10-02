@@ -197,7 +197,7 @@
 				<td><br>
 				&nbsp;&nbsp;<img src="${pageContext.request.contextPath}/plugins/theme/skin/images/frame/menusearch.gif">商品品牌										
 				<input name="selectname" type="text" id="selectname" size="15" onKeyDown="javascript:onEnter(event)" >
-                <input name="search" type="button" id="search" onClick="loadDataByName()" value="查询" class="s"></td>
+                <input name="search" type="button" id="search" onclick="loadDataByName()" value="查询" class="s"></td>
 			</tr>
 				<tr>
 <td>
@@ -244,11 +244,11 @@
 											    
 											</td>
 											<td class="" rowspan="2">
-												<input type="button" value=">>" title="全部添加"  onClick="toRightAll(Select1,Select2)" id="Button3" name="Button1"
+												<input type="button" value=">>" title="全部添加"  onclick="toRightAll(Select1,Select2)" id="Button3" name="Button1"
 													 class="s"><br>
-												<input type="button" value=">" title="添加" onClick="toRight(Select1,Select2)" id="Button4" name="Button2"  class="s"><br>
-												<input type="button" value="<" title="删除" onClick="toLeft(Select2,Select1)" id="Button11" name="Button3"  class="s"><br>
-												<input type="button" value="<<" title="全部删除" onClick="toLeftAll(Select2,Select1)"  id="Button12" name="Button4"
+												<input type="button" value=">" title="添加" onclick="toRight(Select1,Select2)" id="Button4" name="Button2"  class="s"><br>
+												<input type="button" value="<" title="删除" onclick="toLeft(Select2,Select1)" id="Button11" name="Button3"  class="s"><br>
+												<input type="button" value="<<" title="全部删除" onclick="toLeftAll(Select2,Select1)"  id="Button12" name="Button4"
 													 class="s"><br>
 											</td>
 											<td class="fim_m">
@@ -265,9 +265,8 @@
 			</tr>
 			<tr>
 										<td align="center">
-											<input type="button" class="s" onClick="saveBrand(this)" value="确定" id="Button1"
-												name="Button1"> <input type="button" class="s" onclick="window.close();" value="取消" id="Button2"
-												name="Button2"><br><br> 
+											<input type="button" class="s" onclick="saveBrand(this)" value="确定" id="Button1" name="Button1">
+											<br><br> 
 										</td>
 			</tr>
 		</table>

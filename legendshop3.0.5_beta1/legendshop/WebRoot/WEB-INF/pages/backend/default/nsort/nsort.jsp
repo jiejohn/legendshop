@@ -3,6 +3,9 @@
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
 <%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
+<script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/artDialog.js'/>"></script>
+<script type="text/javascript" src="<ls:templateResource item='/plugins/artDialog/plugins/iframeTools.js'/>"></script>
+<link  href="<ls:templateResource item='/plugins/artDialog/skins/aero.css'/>"  rel="stylesheet"   type="text/css"/>
 <html>
     <head>
         <title>创建二级商品类型</title>
@@ -49,6 +52,16 @@
 	    var win = openWindow("${pageContext.request.contextPath}/admin/nsort/appendBrand/" + id ,"appendBrand",'500','450') ;
 	    win.focus() ;
 	}
+	
+	  var nsort={
+       appendBrand:function(id){
+           var url="${pageContext.request.contextPath}/admin/nsort/appendBrand/"+id ;
+		   var options={id:" appendBrand",title:"增加品牌",
+		  // follow: document.getElementById('relProdSetp'),
+		   width:500,height:450,lock:false,closeFn: function(){} };
+		    art.dialog.open(url,options);
+       }
+  };	
 </script>
 
 </head>
@@ -118,7 +131,7 @@
           <div align="center">品牌：</div>
        </td>
         <td>
-           <p><a href="javascript:appendBrand(${bean.nsortId})">增加品牌</a>&nbsp;还没有商品品牌？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/brand/load">创建品牌</a></p>
+           <p><a href="javascript:nsort.appendBrand(${bean.nsortId})">增加品牌</a>&nbsp;还没有商品品牌？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/brand/load">创建品牌</a></p>
         </td>
       </tr>
       </c:if>
