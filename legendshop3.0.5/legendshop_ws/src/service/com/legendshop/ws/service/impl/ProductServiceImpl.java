@@ -12,6 +12,7 @@ import java.util.Date;
 import javax.jws.WebService;
 
 import com.legendshop.core.constant.ProductStatusEnum;
+import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.ws.dao.ProductDao;
 import com.legendshop.ws.model.Product;
 import com.legendshop.ws.service.ProductService;
@@ -40,7 +41,7 @@ public class ProductServiceImpl implements ProductService{
 		product.setModifyDate(date);
 		product.setViews(0);
 		product.setBuys(0);
-		product.setProdType("P");
+		product.setProdType(ProductTypeEnum.PRODUCT.value());
 		if (product.getStocks() != null) {
 			product.setActualStocks(product.getStocks());
 		}
