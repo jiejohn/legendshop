@@ -43,6 +43,16 @@
             dwr.engine.setAsync(true); 
         }
         
+       function changeBrand(subNsortId) {
+        dwr.engine.setAsync(false);
+        if(subNsortId!=null &&subNsortId!=''){
+                var sql ="select b.brand_id id, b.brand_name name  from ls_ns_brand n, ls_brand b where n.brand_id = b.brand_id and nsort_id =  '"+subNsortId+"'" ;
+                changeLinkedOptions1("brandId", false, sql,"-- 商品品牌 --");
+                
+            }
+            dwr.engine.setAsync(true); 
+        }     
+        
         
    function initSelect(sortIdValue,nsortIdValue,subNsortIdValue,brandIdValue){
 			//设置商品类型当前值
@@ -51,6 +61,7 @@
             dwr.util.setValues({nsortId:nsortIdValue});
             changeSubNsort(nsortIdValue);
             dwr.util.setValues({subNsortId:subNsortIdValue});
+            changeBrand(subNsortIdValue);
              dwr.util.setValues({brandId:brandIdValue});
 			}	
 			
@@ -188,18 +199,16 @@
              </c:if>
             </auth:auth>
 		</select>    
-		<select id="nsortId" name="nsortId" onChange="changeSubNsort(this.value)">
+		<select style="display:none;"   id="nsortId" name="nsortId" onChange="changeSubNsort(this.value)">
             <option value="">-- 二级类型 --</option>
         </select>  
-         <select id="subNsortId" name="subNsortId">
+         <select style="display:none;"  id="subNsortId" name="subNsortId"  onChange="changeBrand(this.value)"> 
             <option value="">-- 三级类型 --</option>
         </select> 
-        &nbsp;品牌
-        <select id="brandId" name="brandId">
-        	   <option:optionGroup type="select" required="false" cache="fasle"
-                    hql="select t.brandId, t.brandName from Brand t where t.userName = ?" defaultDisp="--商品品牌--" 
-                    param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
+         <select style="display:none;"  id="brandId"   name="brandId">
+        	   <option value="">-- 商品品牌 --</option>
         </select>
+           
         </div><div style="margin-top: 3px">
         还没有商品类型？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/sort/load">创建类型</a>&nbsp;<a href="${pageContext.request.contextPath}/admin/brand/load">创建品牌</a>
 		</div></td>
