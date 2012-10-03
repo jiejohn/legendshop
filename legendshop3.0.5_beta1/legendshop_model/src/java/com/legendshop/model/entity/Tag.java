@@ -12,7 +12,8 @@ import java.util.Date;
 
 
 /**
- * The Class Tag.
+ * 标签类，包括对应的产品分类和新闻分类，便于在页面中显示对应的产品分类和新闻等信息，
+ * 在产品中要设置"精品推荐"属性，在新闻中要设置“高亮”属性。
  */
 public class Tag implements BaseEntity {
 
@@ -24,9 +25,15 @@ public class Tag implements BaseEntity {
 
 	/** The sort id. */
 	private Long sortId;
+	
+	/** The sort name. */
+	private String sortName;
 
 	/** The news category id. */
 	private Long newsCategoryId;
+	
+	/** The news category name. */
+	private String newsCategoryName;
 
 	/** The type. */
 	private String type;
@@ -105,6 +112,24 @@ public class Tag implements BaseEntity {
 	public void setSortId(Long sortId) {
 		this.sortId = sortId;
 	}
+	
+	/**
+	 * Gets the sort name.
+	 *
+	 * @return the sort name
+	 */
+	public String getSortName() {
+		return sortName;
+	}
+
+	/**
+	 * Sets the sort name.
+	 *
+	 * @param sortName the new sort name
+	 */
+	public void setSortName(String sortName) {
+		this.sortName = sortName;
+	}
 
 	/**
 	 * Gets the news category id.
@@ -123,6 +148,24 @@ public class Tag implements BaseEntity {
 	 */
 	public void setNewsCategoryId(Long newsCategoryId) {
 		this.newsCategoryId = newsCategoryId;
+	}
+
+	/**
+	 * Gets the news category name.
+	 *
+	 * @return the news category name
+	 */
+	public String getNewsCategoryName() {
+		return newsCategoryName;
+	}
+
+	/**
+	 * Sets the news category name.
+	 *
+	 * @param newsCategoryName the new news category name
+	 */
+	public void setNewsCategoryName(String newsCategoryName) {
+		this.newsCategoryName = newsCategoryName;
 	}
 
 	/**
