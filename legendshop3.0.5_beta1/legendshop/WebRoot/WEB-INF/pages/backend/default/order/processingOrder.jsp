@@ -18,7 +18,7 @@
 %>
     <table class="${tableclass}" style="width: 100%;">
     <thead>
-    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商品管理  &raquo; 
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 
     	<a href="${pageContext.request.contextPath}/admin/order/processing">订单管理</a> &raquo; 未处理订单
     	</td></tr>
     </thead>
@@ -56,13 +56,13 @@
       	<b><fmt:formatNumber type="currency" value="${item.total}" pattern="${CURRENCY_PATTERN}"/></b>
       </display:column>
       <display:column title="商品" property="prodName" sortable="true" sortName="prodName"></display:column>
-      <display:column title="买家帐号" sortable="true" sortName="userName" style="width: 80px">${item.userName}</display:column>
+      <display:column title="买家帐号" sortable="true" sortName="userName" style="width: 100px">${item.userName}</display:column>
        <display:column title="状态" sortable="true" sortName="status" style="width: 80px">
        	       <option:optionGroup type="label" required="true" cache="true"
 	                beanName="ORDER_STATUS" selectedValue="${item.status}"/>
        </display:column>      
      <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
-     <display:column title="商城" property="shopName" sortable="true" sortName="shopName">
+     <display:column title="商城" property="shopName" sortable="true" sortName="shopName" style="width: 100px">
      	<a href="${pageContext.request.contextPath}/shop/${item.shopName}" target="_blank">${item.shopName}</a>
      </display:column>
      </auth:auth>

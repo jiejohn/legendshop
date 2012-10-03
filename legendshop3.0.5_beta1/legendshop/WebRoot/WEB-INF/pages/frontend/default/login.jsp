@@ -22,12 +22,11 @@
 		});
 	</script>
 
-</style>
     <table width="954px" cellpadding="0" cellspacing="0" class="tables">
                     <tr>
                   <td class="titlebg"><font style="font-size: 1.4em"><fmt:message key="login"/></font></td>
                 </tr>
-	<tr><td><center>
+	<tr><td>
 			<form name="loginform" action="${pageContext.request.contextPath}/admin/j_spring_security_check" method="POST"  onsubmit="return checkRandNum();" >
 			<input type="hidden" id="rand" name="rand"/>
 			<input type="hidden" id="cannonull" name="cannonull" value='<fmt:message key="randomimage.errors.required"/>'/>
@@ -87,10 +86,7 @@
             </td>
             </tr>
            </table>
-				
-		
 			</form>
-		</center>
 	</td>
 	</tr>
 	</table>
@@ -101,7 +97,12 @@
     		window.top.location.href=location.href;    
 		}
 
-		document.getElementById("username").focus();
+		var userName = document.getElementById("username");
+		if(userName == null || userName =='' ){
+			document.getElementById("username").focus();
+		}else{
+		    document.getElementById("pwd").focus();
+		}
     }
  
 	</script>

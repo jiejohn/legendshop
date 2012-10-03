@@ -20,7 +20,7 @@
     <form action="${pageContext.request.contextPath}/admin/visitLog/query" id="form1" method="post">
     <table class="${tableclass}" style="width: 100%">
     <thead>
-    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/visitLog/query">浏览历史</a></td></tr>
+    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 报表管理  &raquo; <a href="${pageContext.request.contextPath}/admin/visitLog/query">浏览历史</a></td></tr>
     </thead>
      <tbody><tr><td>
 <div align="left" style="padding: 3px">

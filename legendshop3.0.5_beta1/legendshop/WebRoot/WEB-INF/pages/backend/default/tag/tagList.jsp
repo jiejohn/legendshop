@@ -9,9 +9,9 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
     <style type="text/css" media="all">
-       @import url("<ls:templateResource item='/css/screen.css'/>");
+      @import url(<ls:templateResource item='/common/default/css/screen.css'/>);
     </style>
-    <title>Tag列表</title>
+    <title>标签列表</title>
 </head>
 <body>
     <form action="<ls:url address='/admin/tag/query'/>" id="form1" method="post">
@@ -20,18 +20,19 @@
 		    	<tr>
 			    	<td>
 				    	<a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; 
-				    	<a href="<ls:url address='/admin/tag/query'/>">Tag</a>
+				    	<a href="<ls:url address='/admin/tag/query'/>">标签管理</a>
 			    	</td>
 		    	</tr>
 		    </thead>
 		     <tbody><tr><td>
  <div align="left" style="padding: 3px">
 <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
+          标签名称&nbsp;<input type="text" name="name" maxlength="50" value="${tag.name}" />
         	<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
             	商城名称&nbsp;<input type="text" name="userName" maxlength="50" value="${tag.userName}" />
             </auth:auth>
             <input type="submit" value="搜索"/>
-            <input type="button" value="创建Tag" onclick='window.location="<ls:url address='/admin/tag/load'/>"'/>
+            <input type="button" value="创建标签" onclick='window.location="<ls:url address='/admin/tag/load'/>"'/>
  </div>
  </td></tr></tbody>
 	    </table>
@@ -40,17 +41,17 @@
     <div align="center">
           <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
 		<display:table name="list" requestURI="/admin/tag/query" id="item" export="false" class="${tableclass}" style="width:100%">
-	             <display:column title="TagId" property="tagId"></display:column>
-      <display:column title="Name" property="name"></display:column>
-      <display:column title="SortId" property="sortId"></display:column>
-      <display:column title="NewsCategoryId" property="newsCategoryId"></display:column>
-      <display:column title="Type" property="type"></display:column>
-      <display:column title="Status" property="status"></display:column>
-      <display:column title="CreateTime" property="createTime"></display:column>
-      <display:column title="UserId" property="userId"></display:column>
-      <display:column title="UserName" property="userName"></display:column>
-
-	    <display:column title="Action" media="html">
+      <display:column title="名称" property="name"></display:column>
+      <display:column title="商品分类" property="sortName"></display:column>
+      <display:column title="新闻栏目" property="newsCategoryName"></display:column>
+      <display:column title="类型" property="type"></display:column>
+      <display:column title="状态" property="status"></display:column>
+     <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
+     <display:column title="商城" property="userName" sortable="true" sortName="userName" style="width: 100px">
+     	<a href="${pageContext.request.contextPath}/shop/${item.userName}" target="_blank">${item.userName}</a>
+     </display:column>
+     </auth:auth>
+	    <display:column title="操作" media="html">
 		      <a href="<ls:url address='/admin/tag/load/${item.tagId}'/>" title="修改">
 		     		 <img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/>">
 		      </a>

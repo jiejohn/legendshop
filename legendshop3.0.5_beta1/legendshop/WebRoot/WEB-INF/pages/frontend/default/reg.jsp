@@ -133,7 +133,9 @@
 	// check if confirm password is still valid after password changed
 	jQuery("#password").blur(function() {
 		jQuery("#password2").valid();
-	})
+	});
+	
+	jQuery("#name").focus();
 });
 
 	// propose username by combining first- and lastname

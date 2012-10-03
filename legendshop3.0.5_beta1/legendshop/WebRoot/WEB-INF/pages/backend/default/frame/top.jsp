@@ -12,7 +12,7 @@
 var preFrameW = '206,*';
 var FrameHide = 0;
 var curStyle = 1;
-var totalItem = 5; //need to be changed when add tab
+var totalItem = 6; //need to be changed when add tab
 function ChangeMenu(way){
 	
 	var addwidth = 10;
@@ -26,14 +26,14 @@ function ChangeMenu(way){
 			FrameHide = 1;
 			return;
 		}else{
-			top.document.all.btFrame.cols = preFrameW;
+			window.top.document.getElementById("btFrame").cols = preFrameW;
 			FrameHide = 0;
 			return;
 		}
 	}
 	fcols = fcol.split(',');
 	fcols[0] = parseInt(fcols[0]) + addwidth;
-	top.document.all.btFrame.cols = fcols[0]+',*';
+	window.top.document.getElementById("btFrame").cols = fcols[0]+',*';
 }
 
 
@@ -174,6 +174,7 @@ a:link,a:visited {
 		<dd><div class='itemsel' id='item1' onMouseMove="mv(this,'m',1);" onMouseOut="mv(this,'o',1);"><a href="${pageContext.request.contextPath}/admin/menu/1" onclick="changeSel(1)" target="menu">商品管理</a></div></dd>
 		<dd><div class='item' id='item4' onMouseMove="mv(this,'m',4);" onMouseOut="mv(this,'o',4);"><a href="${pageContext.request.contextPath}/admin/menu/4" onclick="changeSel(4)" target="menu">订单管理</a></div></dd>
 		<dd><div class='item' id='item2' onMouseMove="mv(this,'m',2);" onMouseOut="mv(this,'o',2);"><a href="${pageContext.request.contextPath}/admin/menu/2" onclick="changeSel(2)" target="menu">商城管理</a></div></dd>
+		<dd><div class='item' id='item5' onMouseMove="mv(this,'m',5);" onMouseOut="mv(this,'o',5);"><a href="${pageContext.request.contextPath}/admin/menu/5" onclick="changeSel(5)" target="menu">报表管理</a></div></dd>
 		 <auth:auth ifAnyGranted="F_SYSTEM">
 		<dd><div class='item' id='item0' onMouseMove="mv(this,'m',0);" onMouseOut="mv(this,'o',0);"><a href="${pageContext.request.contextPath}/admin/menu/0" onclick="changeSel(0)" target="menu">用户管理</a></div></dd>
 		<dd><div class='item' id='item3' onMouseMove="mv(this,'m',3);" onMouseOut="mv(this,'o', 3);"><a href="${pageContext.request.contextPath}/admin/menu/3" onclick="changeSel(3)" target="menu">系统管理</a></div></dd>

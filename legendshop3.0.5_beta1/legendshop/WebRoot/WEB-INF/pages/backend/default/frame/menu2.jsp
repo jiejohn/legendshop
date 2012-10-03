@@ -96,13 +96,13 @@
         </dd>
       </dl>   
  <dl class='bitem'>
-        <dt onClick='showHide("items1_1")'><b>浏览管理</b></dt>
+        <dt onClick='showHide("items1_1")'><b>标签管理</b></dt>
         <dd style='display:block' class='sitem' id='items1_1'>
           <ul class='sitemu'>
              <li>
               <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/visitLog/query' target='main'>浏览管理</a></div>
-                <div class='flrct'><a href='${pageContext.request.contextPath}/admin/visitLog/query' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='查看用户浏览历史' title='查看用户浏览历史'/></a> </div>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/tag/query' target='main'>标签管理</a></div>
+                <div class='flrct'><a href='${pageContext.request.contextPath}/admin/tag/query' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='标签管理' title='标签管理'/></a> </div>
               </div>
             </li>
           </ul>
