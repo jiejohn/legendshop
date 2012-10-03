@@ -97,7 +97,7 @@
     		window.top.location.href=location.href;    
 		}
 
-		var userName = document.getElementById("username");
+		var userName = document.getElementById("username").value;
 		if(userName == null || userName =='' ){
 			document.getElementById("username").focus();
 		}else{
