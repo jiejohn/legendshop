@@ -2,6 +2,7 @@
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
 <%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
+<%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option" %>
 <html>
     <head>
         <title>创建标签</title>
@@ -92,7 +93,7 @@
 			<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null && sessionScope.SPRING_SECURITY_LAST_USERNAME !=''}">
 	            <option:optionGroup type="select" required="false" cache="fasle"
 	                defaultDisp="-- 一级类型 --" 
-	                hql="select t.sortId, t.sortName from Sort t where t.sortType = 'P' and t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"/>
+	                hql="select t.sortId, t.sortName from Sort t where t.sortType = 'P' and t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${tag.sortId}"/>
              </c:if>
 		</select>
            </p>
@@ -103,7 +104,13 @@
           <div align="center">新闻栏目<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="newsCategoryId" id="newsCategoryId" value="${tag.newsCategoryId}" /></p>
+           <p>
+	           <select id="newsCategoryId" name="newsCategoryId">
+	                 <option:optionGroup type="select" required="false" cache="fasle"
+	                beanName="NewsCategory" beanId="newsCategoryId" beanDisp="newsCategoryName" 
+	                hql="select t.newsCategoryId, t.newsCategoryName from NewsCategory t where t.status = 1 and t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${tag.newsCategoryId}"/>
+	            </select>
+           </p>
         </td>
       </tr>
       <tr>

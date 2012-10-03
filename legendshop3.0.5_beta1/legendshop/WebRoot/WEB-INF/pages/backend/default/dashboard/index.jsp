@@ -245,7 +245,7 @@
 									<a href="<ls:url address='/admin/product/query'/>">商品管理</a>
 								</td>
 								<td>
-									增加，删除，修改商品。每个商品有若干固定属性、产品相关图片、相关产品等，另外还可以设置动态属性和动态参数
+									增加，删除，修改商品。每个商品有若干固定属性、商品相关图片、相关商品等，另外还可以设置动态属性和动态参数
 								</td>
 							</tr>
 							<tr>
@@ -282,7 +282,7 @@
 								<td>
 									<a href="${pageContext.request.contextPath}/admin/visitLog/query">浏览管理</a>
 								</td>
-								<td>看看谁浏览过你的商城和产品了，方便于做营销</td>
+								<td>看看谁浏览过你的商城和商品了，方便于做营销</td>
 							</tr>
 							<tr>
 								<td>

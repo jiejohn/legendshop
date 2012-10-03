@@ -104,7 +104,7 @@ jQuery("#form1").validate({
 				  <option:optionGroup type="select" required="true" cache="true"
 	                beanName="ONOFF_STATUS" selectedValue="${bean.status}"/>
 	            </select>
-	            &nbsp;产品分类            
+	            &nbsp;商品类型            
 	            <select id="sortId" name="sortId">
 	                 <option:optionGroup type="select" required="false" cache="fasle"
 	                beanName="Sort" beanId="sortId" beanDisp="sortName" defaultDisp="-- 请选择 --"

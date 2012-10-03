@@ -97,7 +97,7 @@
 														target="_blank">技术交流区</A>
 													<A
 														href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/15.page"
-														target="_blank">产品资讯与销售</A>
+														target="_blank">商品资讯与销售</A>
 													<A
 														href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/22.page"
 														target="_blank">意见与建议</A>

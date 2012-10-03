@@ -46,7 +46,7 @@
 		</tr>
 		<tr>
 			<td>com.legendshop.core.tag.ImagesTag（images）</td>
-			<td>图片定位器，主要针对产品图片资源</td>
+			<td>图片定位器，主要针对商品图片资源</td>
 			<td>
 				      <img src="<ls:images item='360buy/hw/KLV-46V530A.jpg'/>" />
 				      <img border="0" alt="" width="780" height="300" src="photoserver/photo/360buy/fckeditor/image/haixin32k01z/1314784348093718542.jpg" />
@@ -54,7 +54,7 @@
 		</tr>
 				<tr>
 			<td>com.legendshop.core.tag.PhotoTag（photo）</td>
-			<td>图片定位器，主要针对产品图片资源</td>
+			<td>图片定位器，主要针对商品图片资源</td>
 			<td>
 				<br><img src="<ls:photo item='360buy/hw/KLV-46V530A.jpg'/>" />
 			</td>

@@ -65,7 +65,7 @@
   var createprodStep={
        relProduct:function(id){
            var url="${pageContext.request.contextPath}/admin/product/append/"+id ;
-		   var options={id:"relProduct",title:"增加相关产品",
+		   var options={id:"relProduct",title:"增加相关商品",
 		   follow: document.getElementById('relProdSetp'),
 		   width:500,height:450,lock:false,closeFn: function(){} };
 		    art.dialog.open(url,options);

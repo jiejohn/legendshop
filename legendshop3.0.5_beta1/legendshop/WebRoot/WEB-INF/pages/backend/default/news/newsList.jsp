@@ -43,7 +43,7 @@
 	                beanName="NewsCategory" beanId="newsCategoryId" beanDisp="newsCategoryName" 
 	                hql="select t.newsCategoryId, t.newsCategoryName from NewsCategory t where t.status = 1 and t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${bean.newsCategoryId}"/>
 	            </select>
-	       产品分类
+	       商品类型
 	           <select id="sortId" name="sortId">
 	                 <option:optionGroup type="select" required="false" cache="fasle"
 	                beanName="Sort" beanId="sortId" beanDisp="sortName"
@@ -75,7 +75,7 @@
       <display:column title="栏目">
 	                 ${item.newsCategoryName}
       </display:column>
-      <display:column title="产品分类">
+      <display:column title="商品类型">
 	                 ${item.sortName}
       </display:column>
       <display:column title="录入时间" property="newsDate" format="{0,date,yyyy-MM-dd HH:mm}" sortable="true" sortName="n.newsDate"></display:column>
@@ -109,7 +109,7 @@
          <table style="width: 100%; border: 0px"><tr><td align="left">说明：<br>
    1. 每个文章都是挂在栏目下面<br>
    2. 文章处于上线状态页面可见，处于下线状态页面不可见<br>
-   3. 分类，指产品分类，用于标识该文章是描述那一个产品类型<br>
+   3. 分类，指商品类型，用于标识该文章是描述那一个商品类型<br>
    4. 是否重点，如果是重点则在页面中以醒目颜色标注<br>
    </td><tr></table> 
         
