@@ -52,7 +52,8 @@
          <h3>排序</h3>
          <ul>           
            <li class="on upa"><span>销量</span></li>
-           <li class="on downa"><span>价格</span></li>
+           <li><span>价格</span></li>
+           <!-- <li class="on downb"><span>价格</span></li> -->
            <li><span>评论数</span></li>  
            <li><span>上架时间</span></li>           
          </ul>       
@@ -61,199 +62,22 @@
         
         <!--------------产品列表--------------------->
         <div class="plist" class="m">
-				<ul class="list-h">                   
+				<ul class="list-h">       
+				
+                <c:forEach items="${requestScope.list}" var="prodDetail" varStatus="status">            
                   <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
+                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="<ls:images item='${prodDetail.pic}'/>"></a><div class="pi3"></div></div>
+                    <div class="p-name"><a href="#" target="_blank">${prodDetail.name}</a></div>
+                    <div class="p-price" > <c:if test="${not empty prodDetail.cash}">
+                                                                <fmt:message key="prod_cash" /> 
+                                                                <fmt:formatNumber
+                                                                        type="currency" value="${prodDetail.cash}" pattern="${CURRENCY_PATTERN}"/>
+                                                                
+                                                              </c:if></div>
+                    <!-- <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div> -->
                      <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
                   </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>                   
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                     <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>                   
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                     <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>                   
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                     <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>                   
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                     <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>                   
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                     <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-                  
-                  <li>
-                    <div class="p-img"><a href="#" target="_blank"><img width="180" height="160"  src="../images/plists.jpg"></a><div class="pi3"></div></div>
-                    <div class="p-name"><a href="#" target="_blank">三星（SAMSUNG）NP-E3415-S01CN 14英寸笔记本电脑 (E350 2G 320G HD6470<font class="adwords" style="color:#ff0000"></font></a></div>
-                    <div class="p-price" >￥ 2800</div>                   
-                    <div class="extra"><span class="evaluate"><a href="#" target="_blank">已有68人评价</a></span><span class="reputation">(91%好评)</span><span id="p533471"></span></div>
-                    <div class="btns"><input type="button"  value="购买" ><input type="button"  value="关注"  ><input type="button" value="对比" ></div>
-                  </li>
-
+                 </c:forEach>
 
 				</ul>              
                 

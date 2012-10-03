@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <jsp:include flush="true" page="/top">
-	<jsp:param name="sortId" value="-1" />
+	<jsp:param name="sortId" value="${sort.id }" />
 </jsp:include>
 <!----地址---->
  <div class="w addr">

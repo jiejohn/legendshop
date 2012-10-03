@@ -138,8 +138,8 @@ public class SortController extends BaseController {
 	 */
 	@RequestMapping("/sort/{sortId}")
 	public String sort(HttpServletRequest request, HttpServletResponse response, String curPageNO,
-			@PathVariable Long sortId) {
-		return parseSort(request, response,curPageNO, sortId);
+			@PathVariable Long sortId,String order,String seq) {
+		return parseSort(request, response,curPageNO, sortId, order, seq);
 	}
 
 	/**
@@ -156,8 +156,8 @@ public class SortController extends BaseController {
 	 * @return the string
 	 */
 	@RequestMapping("/sort")
-	public String sortById(HttpServletRequest request, HttpServletResponse response, String curPageNO, Long sortId) {
-		return parseSort(request, response,curPageNO, sortId);
+	public String sortById(HttpServletRequest request, HttpServletResponse response, String curPageNO, Long sortId,String order,String seq) {
+		return parseSort(request, response,curPageNO, sortId, order, seq);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class SortController extends BaseController {
 	 * @param sortId
 	 * @return
 	 */
-	private String parseSort(HttpServletRequest request, HttpServletResponse response,String curPageNO, Long sortId) {
+	private String parseSort(HttpServletRequest request, HttpServletResponse response,String curPageNO, Long sortId,String order,String seq) {
 		if (curPageNO == null) {
 			curPageNO = "1";
 		}
