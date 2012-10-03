@@ -230,7 +230,7 @@
        function changeBrand(subNsortId) {
         dwr.engine.setAsync(false);
         if(subNsortId!=null &&subNsortId!=''){
-                var sql ="SELECT nsort_id id, brand_name name from ls_ns_brand n, ls_brand b where n.brand_id = b.brand_id and nsort_id =  '"+subNsortId+"'" ;
+                var sql ="select b.brand_id id, b.brand_name name  from ls_ns_brand n, ls_brand b where n.brand_id = b.brand_id and nsort_id =  '"+subNsortId+"'" ;
                 changeLinkedOptions1("brandId", false, sql,"-- 商品品牌 --");
                 
             }

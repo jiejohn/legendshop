@@ -8,9 +8,6 @@
     <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
     <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
-    <style type="text/css" media="all">
-      @import url(<ls:templateResource item='/common/default/css/screen.css'/>);
-    </style>
     <title>标签列表</title>
 </head>
 <body>

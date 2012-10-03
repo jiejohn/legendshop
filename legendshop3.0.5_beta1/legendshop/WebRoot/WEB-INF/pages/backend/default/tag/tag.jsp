@@ -7,10 +7,12 @@
         <title>创建标签</title>
          <script type='text/javascript' src="<ls:templateResource item='/common/js/jquery.js'/>"></script>
          <script type='text/javascript' src="<ls:templateResource item='/common/js/jquery.validate.js'/>" /></script>
+        <script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+		 <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
+
         <link rel="stylesheet" type="text/css" media="screen" href="<ls:templateResource item='/common/default/css/indexJpgForm.css'/>" />
-        <style type="text/css" media="all">
-          @import url(<ls:templateResource item='/common/default/css/screen.css'/>);
-        </style>
         <script language="javascript">
 		    $.validator.setDefaults({
 		    });
@@ -21,7 +23,7 @@
             name: {
                 required: true
             },
-            sortId: "required"，
+            sortId: "required",
             newsCategoryId: "required"
             
         },
@@ -83,10 +85,17 @@
       </tr>
      <tr>
         <td>
-          <div align="center">商品分类<font color="ff0000">*</font></div>
+          <div align="center">商品类型<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="sortId" id="sortId" value="${tag.sortId}" /></p>
+           <p><select id="sortId" name="sortId" onChange="changeNsort(this.value)">
+			<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null && sessionScope.SPRING_SECURITY_LAST_USERNAME !=''}">
+	            <option:optionGroup type="select" required="false" cache="fasle"
+	                defaultDisp="-- 一级类型 --" 
+	                hql="select t.sortId, t.sortName from Sort t where t.sortType = 'P' and t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}"/>
+             </c:if>
+		</select>
+           </p>
         </td>
       </tr>
      <tr>
