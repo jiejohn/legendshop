@@ -96,29 +96,6 @@
           </ul>
         </dd>
       </dl> 
-        
-        
-           
-     <dl class='bitem'>
-        <dt onClick='showHide("items1_4")'><b>订单管理</b></dt>
-        <dd style='display:block' class='sitem' id='items1_4'>
-          <ul class='sitemu'>
-           <li>
-              <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/order/processing' target='main'>未处理订单</a></div>
-                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/order/processing' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='未处理订单' title='未处理订单'/></a> </div>
-              </div>
-            </li>
-            <li>
-              <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/order/processed' target='main'>已成交订单</a></div>
-                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/order/processed' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='已成交订单' title='已成交订单'/></a> </div>
-              </div>
-            </li>
-          </ul>
-        </dd>
-      </dl> 
-       
      </td>
   </tr>
 </table>

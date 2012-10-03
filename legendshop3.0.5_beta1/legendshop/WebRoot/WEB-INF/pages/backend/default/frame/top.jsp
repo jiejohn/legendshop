@@ -12,7 +12,7 @@
 var preFrameW = '206,*';
 var FrameHide = 0;
 var curStyle = 1;
-var totalItem = 4;
+var totalItem = 5; //need to be changed when add tab
 function ChangeMenu(way){
 	
 	var addwidth = 10;
@@ -48,7 +48,7 @@ function mv(selobj,moveout,itemnum)
 function changeSel(itemnum)
 {
   curStyle = itemnum;
-  for(i=1;i<=totalItem;i++)
+  for(i=0;i<=totalItem -1;i++)
   {
      if(document.getElementById('item'+i)) document.getElementById('item'+i).className='item';
   }
@@ -172,10 +172,11 @@ a:link,a:visited {
 		<dd class='img'><a href="javascript:ChangeMenu(0);"><img vspace="3" src="${pageContext.request.contextPath}/plugins/theme/skin/images/frame/arrfc.gif"  width="12" height="12" alt="Show/Hide left frame" title="Show/Hide left frame" /></a></dd>
 		<dd class='img' style="margin-right:10px;"><a href="javascript:ChangeMenu(1);"><img vspace="5" src="${pageContext.request.contextPath}/plugins/theme/skin/images/frame/arrr.gif"  width="5" height="8" alt="Add left frame" title="Add left frame" /></a></dd>
 		<dd><div class='itemsel' id='item1' onMouseMove="mv(this,'m',1);" onMouseOut="mv(this,'o',1);"><a href="${pageContext.request.contextPath}/admin/menu/1" onclick="changeSel(1)" target="menu">商品管理</a></div></dd>
+		<dd><div class='item' id='item4' onMouseMove="mv(this,'m',4);" onMouseOut="mv(this,'o',4);"><a href="${pageContext.request.contextPath}/admin/menu/4" onclick="changeSel(4)" target="menu">订单管理</a></div></dd>
 		<dd><div class='item' id='item2' onMouseMove="mv(this,'m',2);" onMouseOut="mv(this,'o',2);"><a href="${pageContext.request.contextPath}/admin/menu/2" onclick="changeSel(2)" target="menu">商城管理</a></div></dd>
 		 <auth:auth ifAnyGranted="F_SYSTEM">
-		<dd><div class='item' id='item3' onMouseMove="mv(this,'m',3);" onMouseOut="mv(this,'o',3);"><a href="${pageContext.request.contextPath}/admin/menu/0" onclick="changeSel(3)" target="menu">用户管理</a></div></dd>
-		<dd><div class='item' id='item4' onMouseMove="mv(this,'m',4);" onMouseOut="mv(this,'o', 4);"><a href="${pageContext.request.contextPath}/admin/menu/3" onclick="changeSel(4)" target="menu">系统管理</a></div></dd>
+		<dd><div class='item' id='item0' onMouseMove="mv(this,'m',0);" onMouseOut="mv(this,'o',0);"><a href="${pageContext.request.contextPath}/admin/menu/0" onclick="changeSel(0)" target="menu">用户管理</a></div></dd>
+		<dd><div class='item' id='item3' onMouseMove="mv(this,'m',3);" onMouseOut="mv(this,'o', 3);"><a href="${pageContext.request.contextPath}/admin/menu/3" onclick="changeSel(3)" target="menu">系统管理</a></div></dd>
 		</auth:auth>
 		</dl>
 		</td>
