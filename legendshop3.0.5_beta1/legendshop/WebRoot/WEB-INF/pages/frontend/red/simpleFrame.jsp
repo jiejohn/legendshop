@@ -11,15 +11,16 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/jquery1.6.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/red/js/menu.js"></script>
 </head>
-
 <body>
-
-<jsp:include flush="true" page="/header">
-	<jsp:param name="sortId" value="-1" />
-</jsp:include>
-
+<jsp:include flush="true" page="header.jsp" />
+<!--logo+search--> 
+<div id="logo" class="w">
+      <p class="logopic"><img src="<ls:templateResource item='/common/red/images/logo.gif'/>"  />
+  <img src="<ls:templateResource item='/common/red/images/dl_031.gif'/>" width="72" height="38" /></p>
+  <div class="clear"></div>
+</div>
+<!--logo+search-->
 <tiles2:insertAttribute name="main" ignore="true" />
-
  <jsp:include page="/bottom"/>
 </body>
 </html>

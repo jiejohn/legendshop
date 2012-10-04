@@ -64,7 +64,8 @@ $(document).ready(function() {
  <c:choose>
    <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
    
-			<li id="loginbar"  class="ld">${sessionScope.SPRING_SECURITY_LAST_USERNAME}			
+			<li id="loginbar"  class="ld">
+			<font color="#FF3300" style="font-weight: bold;">${sessionScope.SPRING_SECURITY_LAST_USERNAME}</font>
 			<span>
 			<a href="<ls:url address='/p/myaccount'/>")>[<ls:i18n key="myaccount"/>]</a> 
 			<a href="${pageContext.request.contextPath}/p/logout" target="_parent">[<ls:i18n key="logout"/>]</a>
@@ -72,7 +73,7 @@ $(document).ready(function() {
    
    </c:when>
    <c:otherwise>
-			<li id="loginbar"  class="ld">欢迎来到LengedShop！
+			<li id="loginbar"  class="ld">
 			<span><a href="<ls:url address='/p/login'/>">[<ls:i18n key="login"/>]</a> 
 			<a class="link-regist" href="<ls:url address='/reg'/>">[<ls:i18n key="regFree"/>]</a></span></li>
    </c:otherwise>
