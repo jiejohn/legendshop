@@ -12,112 +12,95 @@
 			<tr>
 				<td valign="top" align="left">
 					<div id="site-nav">
-						<UL class="quick-menu">
-							<LI class="first">
-								<A href="${pageContext.request.contextPath}/all" target="_blank"><b><fmt:message key="search.total.index" />
-								</b>
-								</A>
-							</LI>
+						<ul class="quick-menu">
+							<li class="first">
+								<a href="${pageContext.request.contextPath}/all" target="_blank"><b><ls:i18n key="search.total.index" /></b></a>
+							</li>
 							<c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
 								<%
-									if (PropertiesUtil.getDefaultShopName() != null && PropertiesUtil.getDefaultShopName().length() > 0) {
+									if (PropertiesUtil.getDefaultShopName() != null) {
 								%>
-								<LI>
-									<a href="${pageContext.request.contextPath}/shop/<%=PropertiesUtil.getDefaultShopName()%>"><fmt:message key="shop.total.index" /></a>
-								</LI>
+								<li>
+									<a href="${pageContext.request.contextPath}/shop/<%=PropertiesUtil.getDefaultShopName()%>"><ls:i18n key="shop.total.index" /></a>
+								</li>
 								<%
 									}
 								%>
 							</c:if>
-							<LI>
-								<fmt:message key="nows.location" />
+							<li>
+								<ls:i18n key="nows.location" />
 								<c:if test="${shopDetail.province != null}">
 								  		 ${shopDetail.province}/${shopDetail.city}/${shopDetail.area}/
 								  </c:if>
 								<b><a href="${pageContext.request.contextPath}/shopcontact">${sessionScope.shopName}</a>
 								</b>
-							</LI>
+							</li>
 							<c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
-								<LI>
-									<A href="${pageContext.request.contextPath}/reg?openshop=1" target="_blank"><fmt:message
+								<li>
+									<a href="${pageContext.request.contextPath}/reg?openshop=1" target="_blank"><ls:i18n
 											key="register.shop" />
-									</A>
-								</LI>
+									</a>
+								</li>
 							</c:if>
-							<LI class="favorite">
+							<li class="favorite">
 								<a href='#'
-									onclick="javascript:bookmark('<fmt:message key="welcome.to.legendshop"/><%=PropertiesUtil.getDefaultShopName()%> - LegendShop购物商城','${DOMAIN_NAME}/shop/<%=PropertiesUtil.getDefaultShopName()%>');">
-									<fmt:message key="shop.favorite" />
+									onclick="javascript:bookmark('<ls:i18n key="welcome.to.legendshop"/><%=PropertiesUtil.getDefaultShopName()%> - LegendShop购物商城','${DOMAIN_NAME}/shop/<%=PropertiesUtil.getDefaultShopName()%>');">
+									<ls:i18n key="shop.favorite" />
 								</a>
-							</LI>
-
-
-							<LI class="services menu-item last">
+							</li>
+							<li class="services menu-item last">
 								<div class="menu">
-									<A class="menu-hd"
+									<a class="menu-hd"
 										href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club"
-										target="_blank"><fmt:message key="club.navigation" /><B></B>
-									</A>
+										target="_blank"><ls:i18n key="club.navigation" /><B></B>
+									</a>
 									<div class="menu-bd"
 										style="WIDTH: 280px; HEIGHT: 240px; _width: 202px;">
 										<div class="menu-bd-panel">
-											<DL>
-												<DT>
+											<dl>
+												<dt>
 													<b>站务公告</b>
-												<DD>
-													<A
-														href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/14.page"
-														target="_blank">公告专区</A>
-												</DD>
-											</DL>
-											<DL>
-												<DT>
+												<dd>
+													<a href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/14.page" target="_blank">公告专区</a>
+												</dd>
+												</dt>
+											</dl>
+											<dl>
+												<dt>
 													<b>网商之家</b>
-												<DD>
-													<A
-														href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/17.page"
-														target="_blank">店长经验交流</A>
-													<A
-														href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/3.page"
-														target="_blank">网店营销推广</A>
-												</DD>
-											</DL>
-											<DL>
-												<DT>
+												<dd>
+													<a href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/17.page" target="_blank">店长经验交流</a>
+													<a href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/3.page" target="_blank">网店营销推广</a>
+												</dd>
+												</dt>
+											</dl>
+											<dl>
+												<dt>
 													<b>LegendShop商城系统</b>
-												<DD>
-													<A
-														href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/16.page"
-														target="_blank">程序发布与升级</A>
-													<A
-														href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/12.page"
-														target="_blank">安装与使用</A>
-													<A
-														href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/13.page"
-														target="_blank">技术交流区</A>
-													<A
-														href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/15.page"
-														target="_blank">商品资讯与销售</A>
-													<A
-														href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/22.page"
-														target="_blank">意见与建议</A>
-												</DD>
-											</DL>
-											<DL class=last>
-												<DD>
-													<STRONG style="FONT-WEIGHT: bold"><A href="/club"
-														target="_blank">更多内容</A>
-													</STRONG>
-												</DD>
-											</DL>
+												<dd>
+													<a href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/16.page" target="_blank">程序发布与升级</a>
+													<a href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/12.page" target="_blank">安装与使用</a>
+													<a href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/13.page" target="_blank">技术交流区</a>
+													<a href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/15.page" target="_blank">商品资讯与销售</a>
+													<a href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/forums/show/22.page" target="_blank">意见与建议</a>
+												</dd>
+												</dt>
+											</dl>
+											<dl class=last>
+												<dd>
+													<strong style="FONT-WEIGHT: bold"><a href="/club"
+														target="_blank">更多内容</a>
+													</strong>
+												</dd>
+											</dl>
 										</div>
-										<S class=r></S><S class=rt></S><S class=lt></S><S class=b
-											style="WIDTH: 169px"></S><S class="b b2" style="WIDTH: 169px"></S><S
-											class=rb></S><S class=lb></S>
+										<s class=r></s><s class=rt></s><s class=lt></s><s class=b
+											style="WIDTH: 169px"></s><s class="b b2" style="WIDTH: 169px"></s><s
+											class=rb></s><s class=lb></s>
 									</div>
 								</div>
-							</LI>
-						</UL>
+							</li>
+						</ul>
 					</div>
 				</td>
 			</tr>

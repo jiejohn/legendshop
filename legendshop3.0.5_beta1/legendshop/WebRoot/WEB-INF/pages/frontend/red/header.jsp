@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
-
+<%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/top.js"></script>
 <script type=text/javascript>
 $(document).ready(function() {
@@ -24,10 +24,20 @@ $(document).ready(function() {
 <div id="shortcut">
 	<div class="w">
 		<ul class="fl lh">
-		  <li  class="fore1"><a href="<ls:url address='/index'/>">&lt;&lt;返回商城</a></li>	
+		  <li  class="fore1"><a href="${pageContext.request.contextPath}/all" target="_blank"><b><ls:i18n key="search.total.index" /></b></a></li>	
+		  	<c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
+								<%
+									if (PropertiesUtil.getDefaultShopName() != null) {
+								%>
+								<li>
+									<a href="${pageContext.request.contextPath}/shop/<%=PropertiesUtil.getDefaultShopName()%>"><ls:i18n key="shop.total.index" /></a>
+								</li>
+								<%
+									}
+								%>
+			</c:if>
 		  <li>
-		  
-				<fmt:message key="nows.location" />
+				<ls:i18n key="nows.location" />
 				<c:if test="${shopDetail.province != null}">
 				  		 ${shopDetail.province}/${shopDetail.city}/${shopDetail.area}/
 				  </c:if>
@@ -37,15 +47,15 @@ $(document).ready(function() {
 		  
 			<c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
 				<li>
-					<a href="${pageContext.request.contextPath}/reg?openshop=1" target="_blank"><fmt:message
+					<a href="${pageContext.request.contextPath}/reg?openshop=1" target="_blank"><ls:i18n
 							key="register.shop" />
 					</a>
 				</li>
 			</c:if>
 			<li class="favorite">
 				<a href='#'
-					onclick="javascript:bookmark('<fmt:message key="welcome.to.legendshop"/><%=PropertiesUtil.getDefaultShopName()%> - LegendShop购物商城','${DOMAIN_NAME}/shop/<%=PropertiesUtil.getDefaultShopName()%>');">
-					<fmt:message key="shop.favorite" />
+					onclick="javascript:bookmark('<ls:i18n key="welcome.to.legendshop"/><%=PropertiesUtil.getDefaultShopName()%> - LegendShop购物商城','${DOMAIN_NAME}/shop/<%=PropertiesUtil.getDefaultShopName()%>');">
+					<ls:i18n key="shop.favorite" />
 				</a>
 			</li>
 		  	
@@ -56,24 +66,24 @@ $(document).ready(function() {
    
 			<li id="loginbar"  class="ld">${sessionScope.SPRING_SECURITY_LAST_USERNAME}			
 			<span>
-			<a href="<ls:url address='/p/myaccount'/>")>[<fmt:message key="myaccount"/>]</a> 
-			<a href="${pageContext.request.contextPath}/p/logout" target="_parent">[<fmt:message key="logout"/>]</a>
+			<a href="<ls:url address='/p/myaccount'/>")>[<ls:i18n key="myaccount"/>]</a> 
+			<a href="${pageContext.request.contextPath}/p/logout" target="_parent">[<ls:i18n key="logout"/>]</a>
 			</span></li>
    
    </c:when>
    <c:otherwise>
 			<li id="loginbar"  class="ld">欢迎来到LengedShop！
-			<span><a href="<ls:url address='/p/login'/>">[<fmt:message key="login"/>]</a> 
-			<a class="link-regist" href="<ls:url address='/reg'/>">[<fmt:message key="regFree"/>]</a></span></li>
+			<span><a href="<ls:url address='/p/login'/>">[<ls:i18n key="login"/>]</a> 
+			<a class="link-regist" href="<ls:url address='/reg'/>">[<ls:i18n key="regFree"/>]</a></span></li>
    </c:otherwise>
 </c:choose>
 
 			
 			<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
-			<li ><a href="<ls:url address='/leaveword'/>"><fmt:message key="leaveword"/></a></li>
+			<li ><a href="<ls:url address='/leaveword'/>"><ls:i18n key="leaveword"/></a></li>
 			<li ><a href="<ls:url address='/p/order'/>">我的订单</a></li>
 	        </c:if>
-	        <li><a href="<ls:url address='/allNews'/>"><fmt:message key="newsCenter"/></a></li>
+	        <li><a href="<ls:url address='/allNews'/>"><ls:i18n key="newsCenter"/></a></li>
 <%-- 	        <li class="menu">
 				<dl>
 					<dt class="ld">常见问题<b></b></dt>
