@@ -1,14 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
+<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/default/css/overlay.css" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<script type="text/javascript">
+		function pager(curPageNO){
+			document.getElementById("curPageNO").value=curPageNO;
+			document.getElementById("form1").submit();
+		}
+	</script>
     <!-----------right_con-------------->
      <div class="right_con">
-     
           <div class="i-right" ><div class="hotsale">
             <div  class="mc list-h">
             <dl>
-            <dt><a href="#" target="_blank"><img width="100" height="100" alt=" " src="http://img14.360buyimg.com/n4/1445/93addefa-8c64-4819-b52b-eed494165837.jpg"></a></dt>
+            <dt><a href="#" target="_blank"><img width="100" height="100" alt=" " src="http://img14.360buyimg.com/n4/1445/93addefa-8c64-4819-b52b-eed494165837.jpg"/></a></dt>
             <dd>
              <div class="p-name"><a href="#" target="_blank">周末放价，强悍小Y仅4599，抢完关仓！精工之作，唯美首选！强劲小Y，性能无可比拟！</a></div>
              <div class="p-price">特价：<span>￥499.00</span></div>
@@ -16,7 +21,7 @@
             </dd>
             </dl>
              <dl>
-            <dt><a href="#" target="_blank"><img width="100" height="100" alt=" " src="http://img14.360buyimg.com/n4/1445/93addefa-8c64-4819-b52b-eed494165837.jpg"></a></dt>
+            <dt><a href="#" target="_blank"><img width="100" height="100" alt=" " src="http://img14.360buyimg.com/n4/1445/93addefa-8c64-4819-b52b-eed494165837.jpg"/></a></dt>
             <dd>
              <div class="p-name"><a href="#" target="_blank">周末放价，强悍小Y仅4599，抢完关仓！精工之作，唯美首选！强劲小Y，性能无可比拟！</a></div>
              <div class="p-price">特价：<span>￥499.00</span></div>
@@ -87,15 +92,16 @@
             
          <div class="clear"></div>
          <div class="fanye">
-          <span class="ysel">1</span>
-          <span class="nsel"><a href="#">2</a></span>
-          <span class="nsel"><a href="#">3</a></span>
-          <span class="nsel"><a href="#">4</a></span>
-          <span class="nsel"><a href="#">5</a></span>
-          <span class="nsel"><a href="#">6</a></span>
-          <span class="nsel"><a href="#">下一页</a></span>
-          <span class="nsel"><a href="#">尾页</a></span>
+		<c:if test="${toolBar!=null}">
+			<p align="right">
+				<c:out value="${toolBar}" escapeXml="${toolBar}"></c:out>
+			</p>
+			</c:if>
          
+                                    <form action="${pageContext.request.contextPath}/sort" id="form1" method="post">
+                                        <input type="hidden" id="curPageNO" name="curPageNO" value="${prod.curPageNO}"/>
+                                        <input type="hidden" name="sortId" value="${sort.sortId}"/>
+                                    </form>
          </div> 
        
        

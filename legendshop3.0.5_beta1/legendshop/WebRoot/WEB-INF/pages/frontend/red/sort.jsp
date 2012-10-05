@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
+<link href="${pageContext.request.contextPath}/common/default/css/pager.css" rel="stylesheet" type="text/css" />
 <jsp:include flush="true" page="/top">
 	<jsp:param name="sortId" value="${sort.id }" />
 </jsp:include>
