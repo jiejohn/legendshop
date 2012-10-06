@@ -16,6 +16,7 @@ import com.legendshop.business.dao.TagDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.dao.support.SimpleHqlQuery;
 import com.legendshop.model.entity.Tag;
 /**
  * The Class TagDaoImpl.
@@ -46,6 +47,11 @@ public class TagDaoImpl extends BaseDaoImpl implements TagDao {
 	
 	public PageSupport getTag(CriteriaQuery cq){
 		return find(cq);
+	}
+
+	@Override
+	public PageSupport getTag(SimpleHqlQuery hql) {
+		return find(hql);
 	}
 	
  }

@@ -12,7 +12,7 @@
    <div class="wrap">
    <p class="dengl">
    <span class="yongh">用户登录</span>
-   <span class="zhuce">还没有注册，现在就 <a href="<ls:url address='/reg'/>" style="color:#FFF">注册</a></span>
+   <span class="zhuce">还没有注册，现在就 <a href="<ls:url address='/reg'/>" style="color:#FFF"><b>注册</b></a></span>
    </p>
    </div> 
  </div>
@@ -60,7 +60,7 @@
               <table>
                 <tr>
                     <td>
-                    	<input name="submit" type="image" src="<ls:templateResource item='/common/red/images/dl_11.gif'/>"  width="80" height="35"  tabindex="4">
+                    	<input name="submit" type="image" src="<ls:templateResource item='/common/red/images/dl_11.gif'/>"  width="80" height="35"  tabindex="4" />
 					</td>
                   </tr>
                 </table>

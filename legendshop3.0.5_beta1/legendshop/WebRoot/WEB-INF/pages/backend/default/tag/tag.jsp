@@ -89,7 +89,7 @@
           <div align="center">商品类型<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><select id="sortId" name="sortId" onChange="changeNsort(this.value)">
+           <p><select id="sortId" name="sortId" >
 			<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null && sessionScope.SPRING_SECURITY_LAST_USERNAME !=''}">
 	            <option:optionGroup type="select" required="false" cache="fasle"
 	                defaultDisp="-- 一级类型 --" 
@@ -110,6 +110,18 @@
 	                beanName="NewsCategory" beanId="newsCategoryId" beanDisp="newsCategoryName" 
 	                hql="select t.newsCategoryId, t.newsCategoryName from NewsCategory t where t.status = 1 and t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${tag.newsCategoryId}"/>
 	            </select>
+           </p>
+        </td>
+      </tr>
+      <tr>
+      <td>
+          <div align="center">状态<font color="ff0000">*</font></div>
+       </td>
+        <td>
+           <p><select id="status" name="status">
+	        <option:optionGroup type="select" required="true" cache="true"
+	                beanName="YES_NO" selectedValue="${tag.status}"/>
+		</select>
            </p>
         </td>
       </tr>

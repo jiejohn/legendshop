@@ -4,7 +4,6 @@
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
-<%@ taglib uri="http://www.legendesign.net/biz" prefix="lb"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
  <link href="${pageContext.request.contextPath}/common/default/css/searchall.css" rel="stylesheet" type="text/css" />
@@ -44,8 +43,8 @@
 	    		 <c:choose>
 					 <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
 					  <span style="color: red; font-weight: bold;">${sessionScope.SPRING_SECURITY_LAST_USERNAME}</span>
-					   	<a href="${pageContext.request.contextPath}/p/myaccount")><fmt:message key="myaccount"/></a>
-					   	<a href="${pageContext.request.contextPath}/p/order")><fmt:message key="myorder"/></a>
+					   	<a href="${pageContext.request.contextPath}/p/myaccount"><fmt:message key="myaccount"/></a>
+					   	<a href="${pageContext.request.contextPath}/p/order"><fmt:message key="myorder"/></a>
 						<a href="${pageContext.request.contextPath}/p/logout" target="_parent"><fmt:message key="logout"/></a>
        			        <auth:auth ifAnyGranted="F_ADMIN">
        			          <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">

@@ -15,7 +15,8 @@ function searchSubmit(){
 <!--logo+search--> 
 <div id="logo" class="w">
   
-      <p class="logopic"><img src="${pageContext.request.contextPath}/img/group/logo.gif" width="257" height="42" /></p>
+      <p class="logopic"><a href="<ls:url address='/index'/>">
+      <img src="${pageContext.request.contextPath}/img/group/logo.gif" width="257" height="42" /></a></p>
       
       <div class="searchwrap">
       	<form action="${pageContext.request.contextPath}/searcFIX}" method="get" id="searchAllform" name="searchAllform">
@@ -42,7 +43,7 @@ function searchSubmit(){
       <p class="shoplist">
       
 	  <c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
-      <a href="<ls:url address='/p/myaccount'/>">
+      <a href="<ls:url address='/p/usercenter'/>">
       <img src="${pageContext.request.contextPath}/img/group/geren.gif" width="142" height="46" /> 
       </a>
       </c:if>

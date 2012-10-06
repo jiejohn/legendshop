@@ -67,7 +67,7 @@ $(document).ready(function() {
 			<li id="loginbar"  class="ld">
 			<font color="#FF3300" style="font-weight: bold;">${sessionScope.SPRING_SECURITY_LAST_USERNAME}</font>
 			<span>
-			<a href="<ls:url address='/p/myaccount'/>")>[<ls:i18n key="myaccount"/>]</a> 
+			<a href="<ls:url address='/p/usercenter'/>")>[<ls:i18n key="myaccount"/>]</a> 
 			<a href="${pageContext.request.contextPath}/p/logout" target="_parent">[<ls:i18n key="logout"/>]</a>
 			</span></li>
    
@@ -81,7 +81,7 @@ $(document).ready(function() {
 
 			
 			<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
-			<li ><a href="<ls:url address='/leaveword'/>"><ls:i18n key="leaveword"/></a></li>
+			<li ><a href="<ls:url address='/admin/index'/>"><b><fmt:message key="system.management"/></b></a></li>
 			<li ><a href="<ls:url address='/p/order'/>">我的订单</a></li>
 	        </c:if>
 	        <li><a href="<ls:url address='/allNews'/>"><ls:i18n key="newsCenter"/></a></li>

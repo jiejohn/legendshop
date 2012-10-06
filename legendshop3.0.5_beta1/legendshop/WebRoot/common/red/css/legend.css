@@ -1503,6 +1503,7 @@ table {
     border-width: 1px;
     padding: 1px 2px;
     width: 200px;
+    height: 25px;
 }
 .record_text{ padding-left:5px; float:left;}
 .record_text p{ color:#666; text-align:left;}

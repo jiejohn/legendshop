@@ -15,8 +15,9 @@
 <jsp:include flush="true" page="header.jsp" />
 <!--logo+search--> 
 <div id="logo" class="w">
-      <p class="logopic"><img src="<ls:templateResource item='/common/red/images/logo.gif'/>"  />
-  <img src="<ls:templateResource item='/common/red/images/dl_031.gif'/>" width="72" height="38" /></p>
+      <p class="logopic">
+      <a href="<ls:url address='/index'/>"><img src="<ls:templateResource item='/common/red/images/logo.gif'/>"  /></a>
+ </p>
   <div class="clear"></div>
 </div>
 <!--logo+search-->

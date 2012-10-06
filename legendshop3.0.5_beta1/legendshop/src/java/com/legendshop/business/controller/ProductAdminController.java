@@ -85,17 +85,7 @@ public class ProductAdminController extends BaseController {
 		cq.eq("status", product.getStatus());
 		cq.eq("brandId", product.getBrandId());
 		cq.eq("prodType", ProductTypeEnum.PRODUCT.value());
-		if (CommonServiceUtil.haveViewAllDataFunction(request)) {
-			if (!AppUtils.isBlank(product.getUserName())) {
-				cq.eq("userName", StringUtils.trim(product.getUserName()));
-			}
-		} else {
-			String name = UserManager.getUsername(request);
-			if (name == null) {
-				throw new AuthorizationException("you are not logon yet!",EntityCodes.PROD);
-			}
-			cq.eq("userName", name);
-		}
+		cq = hasAllDataFunction(cq, request, StringUtils.trim(product.getUserName()));
 
 		if (!CommonServiceUtil.isDataForExport(cq, request)) {// 非导出情况
 			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));

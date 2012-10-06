@@ -41,8 +41,11 @@
       <display:column title="名称" property="name"></display:column>
       <display:column title="商品分类" property="sortName"></display:column>
       <display:column title="新闻栏目" property="newsCategoryName"></display:column>
-      <display:column title="类型" property="type"></display:column>
-      <display:column title="状态" property="status"></display:column>
+       <display:column title="状态" style="width:40px">
+      <font color="red">
+				  <option:optionGroup type="label" required="false" cache="true"
+	                beanName="SHOP_STATUS" selectedValue="${item.status}" defaultDisp=""/></font>
+      </display:column>
      <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
      <display:column title="商城" property="userName" sortable="true" sortName="userName" style="width: 100px">
      	<a href="${pageContext.request.contextPath}/shop/${item.userName}" target="_blank">${item.userName}</a>
@@ -50,10 +53,10 @@
      </auth:auth>
 	    <display:column title="操作" media="html">
 		      <a href="<ls:url address='/admin/tag/load/${item.tagId}'/>" title="修改">
-		     		 <img alt="修改" src="<ls:templateResource item='/img/grid_edit.png'/>">
+		     		 <img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/>">
 		      </a>
 		      <a href='javascript:deleteById("${item.tagId}")' title="删除">
-		      		<img alt="删除" src="<ls:templateResource item='/img/grid_delete.png'/>">
+		      		<img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/>">
 		      </a>
 	      </display:column>
 	    </display:table>

@@ -12,6 +12,7 @@ import java.util.List;
 import com.legendshop.core.dao.BaseDao;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.dao.support.SimpleHqlQuery;
 import com.legendshop.model.entity.Tag;
 
 /**
@@ -28,6 +29,14 @@ public interface TagDao extends BaseDao {
 	 * @return the tag
 	 */
     public abstract List<Tag> getTag(String shopName);
+    
+    /**
+     * Gets the tag.
+     *
+     * @param hql the hql
+     * @return the tag
+     */
+    public abstract PageSupport getTag(SimpleHqlQuery hql);
 
 	/**
 	 * Gets the tag.

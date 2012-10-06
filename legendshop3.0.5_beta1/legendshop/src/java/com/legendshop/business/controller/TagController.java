@@ -8,6 +8,7 @@
 package com.legendshop.business.controller;
 
 
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.TagService;
@@ -27,10 +29,13 @@ import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.TagTypeEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.dao.support.SimpleHqlQuery;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.Tag;
+import com.legendshop.spi.constants.Constants;
 
 /**
  * The Class TagController
@@ -45,15 +50,15 @@ public class TagController extends BaseController implements AdminController<Tag
     @Override
 	@RequestMapping("/query")
     public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Tag tag) {
-        CriteriaQuery cq = new CriteriaQuery(Tag.class, curPageNO);
-        cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
-        cq = hasAllDataFunction(cq, request, StringUtils.trim(tag.getUserName()));
-        /*
-           //TODO add your condition
-        */
-        
-        PageSupport ps = tagService.getTag(cq);
-        savePage(ps, request);
+    	SimpleHqlQuery hql = new SimpleHqlQuery(curPageNO);
+    	hql.fillLikeParameter("name", tag.getName());
+    	hql.fillParameter("status", tag.getStatus());
+    	hql.hasAllDataFunction(request, tag.getUserName());
+    	hql.fillOrder(request, "order by t.createTime desc");
+		hql.fillPageSize(request);
+    	hql.initSQL("biz.QueryTag", "biz.QueryTagCount");
+    	PageSupport ps = tagService.getTag(hql);
+    	ps.savePage(request);
         request.setAttribute("tag", tag);
         return PathResolver.getPath(request,response,BackPage.TAG_LIST);
     }
@@ -61,9 +66,13 @@ public class TagController extends BaseController implements AdminController<Tag
     @Override
 	@RequestMapping(value = "/save")
     public String save(HttpServletRequest request, HttpServletResponse response, Tag tag) {
+    	tag.setCreateTime(new Date());
+    	tag.setType(TagTypeEnum.INDEX.value());
+    	tag.setUserId(UserManager.getUserId(request));
+    	tag.setUserName(UserManager.getUsername(request));
         tagService.saveTag(tag);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
-        return "forward:/admin/tag/query.htm";
+        return PathResolver.getPath(request, response, FowardPage.TAG);
     }
 
     @Override
@@ -89,7 +98,7 @@ public class TagController extends BaseController implements AdminController<Tag
 		if(result!=null){
 			return result;
 		}
-        request.setAttribute("#entityClassInstance", tag);
+        request.setAttribute("tag", tag);
         return PathResolver.getPath(request,response,BackPage.TAG);
     }
     

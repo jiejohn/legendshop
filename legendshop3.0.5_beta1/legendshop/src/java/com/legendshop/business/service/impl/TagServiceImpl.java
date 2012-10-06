@@ -13,6 +13,7 @@ import com.legendshop.business.dao.TagDao;
 import com.legendshop.business.service.TagService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.dao.support.SimpleHqlQuery;
 import com.legendshop.model.entity.Tag;
 import com.legendshop.util.AppUtils;
 
@@ -53,5 +54,10 @@ public class TagServiceImpl  implements TagService{
     public PageSupport getTag(CriteriaQuery cq) {
         return tagDao.find(cq);
     }
+
+	@Override
+	public PageSupport getTag(SimpleHqlQuery hql) {
+		return tagDao.getTag(hql);
+	}
 }
 

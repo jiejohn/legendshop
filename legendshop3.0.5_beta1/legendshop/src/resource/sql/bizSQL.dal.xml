@@ -69,6 +69,19 @@
                 {? and n.position = $position$}
                 {! order by n.newsDate desc||$orderIndicator$}
             </Method>
+            <Method name="QueryTagCount">
+               select count(*) from Tag t, Sort s, NewsCategory c where  t.newsCategoryId = c.newsCategoryId and t.sortId = s.sortId
+                {? and t.name like $name$}
+                {? and t.status = $status$}
+                {? and t.userName = $userName$}
+            </Method>
+            <Method name="QueryTag">
+               select new Tag(t.tagId, t.name, s.sortName,  c.newsCategoryName, t.type, t.status, t.createTime, t.userId,  t.userName) from Tag t, Sort s, NewsCategory c where  t.newsCategoryId = c.newsCategoryId and t.sortId = s.sortId
+                {? and t.name like $name$}
+                {? and t.status = $status$}
+                {? and t.userName = $userName$}
+                {! order by t.createTime desc||$orderIndicator$}
+            </Method>
             <Method name="getCommend"><![CDATA[
 	      	 select new Product(prod.prodId, prod.sortId, prod.nsortId,prod.subNsortId,prod.name,prod.pic,prod.price,prod.cash,prod.proxyPrice,prod.views,prod.buys) from Product prod where prod.commend ='Y' and prod.userName = ? and prod.status = 1 and ( prod.startDate is null or prod.startDate <= ? ) and 
          		(prod.endDate is null or prod.endDate >= ? ) order by prod.modifyDate desc

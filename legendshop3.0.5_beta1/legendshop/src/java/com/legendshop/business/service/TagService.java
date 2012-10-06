@@ -7,10 +7,9 @@
  */
 package com.legendshop.business.service;
 
-import java.util.List;
-
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.dao.support.SimpleHqlQuery;
 import com.legendshop.model.entity.Tag;
 
 /**
@@ -18,7 +17,7 @@ import com.legendshop.model.entity.Tag;
  */
 public interface TagService  {
 
-    public List<Tag> getTag(String userName);
+    public PageSupport getTag(SimpleHqlQuery hql);
 
     public Tag getTag(Long id);
     
