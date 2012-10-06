@@ -122,7 +122,6 @@ public class NsortAdminController extends BaseController implements AdminControl
 		if(result!=null){
 			return result;
 		}
-		System.out.println("-----------------"+nsort.getNsortName()+nsort.getSortDeputy());
 		nsortService.save(nsort);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
 		Nsort bean = (Nsort) request.getAttribute("bean");

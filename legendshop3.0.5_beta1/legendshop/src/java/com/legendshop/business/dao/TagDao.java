@@ -80,6 +80,15 @@ public interface TagDao extends BaseDao {
 	 * @return the tag
 	 */
 	public abstract PageSupport getTag(CriteriaQuery cq);
+
+	/**
+	 * Gets the tag.
+	 *
+	 * @param name the name
+	 * @param userName the user name
+	 * @return the tag
+	 */
+	public abstract Tag getTag(String name, String userName);
 	
  }
 

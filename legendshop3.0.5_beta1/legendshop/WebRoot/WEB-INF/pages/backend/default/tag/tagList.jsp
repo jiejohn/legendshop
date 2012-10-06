@@ -52,7 +52,10 @@
      </display:column>
      </auth:auth>
 	    <display:column title="操作" media="html">
-		      <a href="<ls:url address='/admin/tag/load/${item.tagId}'/>" title="修改">
+	    		<a href="<ls:url address='/admin/tag/update/${item.tagId}'/>" title="增加产品">
+		     		 <img alt="增加产品" src="<ls:templateResource item='/common/default/images/grid_add.png'/>">
+		      </a>
+		      <a href="<ls:url address='/admin/tag/update/${item.tagId}'/>" title="修改">
 		     		 <img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/>">
 		      </a>
 		      <a href='javascript:deleteById("${item.tagId}")' title="删除">

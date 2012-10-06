@@ -40,10 +40,6 @@ public class TagServiceImpl  implements TagService{
     }
 
     public Long saveTag(Tag tag) {
-        if (!AppUtils.isBlank(tag.getTagId())) {
-            updateTag(tag);
-            return tag.getTagId();
-        }
         return (Long) tagDao.save(tag);
     }
 
@@ -58,6 +54,11 @@ public class TagServiceImpl  implements TagService{
 	@Override
 	public PageSupport getTag(SimpleHqlQuery hql) {
 		return tagDao.getTag(hql);
+	}
+
+	@Override
+	public Tag getTag(String name, String userName) {
+		return tagDao.getTag(name,userName);
 	}
 }
 

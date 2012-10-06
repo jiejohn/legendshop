@@ -51,7 +51,17 @@ public class TagDaoImpl extends BaseDaoImpl implements TagDao {
 
 	@Override
 	public PageSupport getTag(SimpleHqlQuery hql) {
+    	hql.initSQL("biz.QueryTag", "biz.QueryTagCount");
 		return find(hql);
+	}
+
+	@Override
+	public Tag getTag(String name, String userName) {
+		List<Tag> result =  findByHQL("from Tag where name = ? and userName = ?", name,userName);
+		if(result !=null){
+			return result.get(0);
+		}
+		return null;
 	}
 	
  }
