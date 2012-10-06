@@ -39,7 +39,7 @@ public class Tag implements BaseEntity {
 	private String type;
 
 	/** The status. */
-	private Long status;
+	private Integer status;
 
 	/** The create time. */
 	private Date createTime;
@@ -54,6 +54,19 @@ public class Tag implements BaseEntity {
 	 * Instantiates a new tag.
 	 */
 	public Tag() {
+	}
+
+	public Tag(Long tagId,String name, String sortName, String newsCategoryName, String type, Integer status, Date createTime,String userId, String userName) {
+		super();
+		this.tagId = tagId;
+		this.name = name;
+		this.sortName = sortName;
+		this.newsCategoryName = newsCategoryName;
+		this.type = type;
+		this.status = status;
+		this.createTime = createTime;
+		this.userId = userId;
+		this.userName = userName ;
 	}
 
 	/**
@@ -192,7 +205,7 @@ public class Tag implements BaseEntity {
 	 * 
 	 * @return the status
 	 */
-	public Long getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
@@ -202,7 +215,7 @@ public class Tag implements BaseEntity {
 	 * @param status
 	 *            the new status
 	 */
-	public void setStatus(Long status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

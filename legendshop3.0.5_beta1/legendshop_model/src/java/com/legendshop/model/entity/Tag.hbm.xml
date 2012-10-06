@@ -13,7 +13,7 @@
 	<property name="sortId" column="sort_id" type="java.lang.Long" />
 	<property name="newsCategoryId" column="news_category_id" type="java.lang.Long" />
 	<property name="type" column="type" type="java.lang.String" />
-	<property name="status" column="status" type="java.lang.Long" />
+	<property name="status" column="status" type="java.lang.Integer" />
 	<property name="createTime" column="create_time" type="java.util.Date" />
 	<property name="userId" column="user_id" type="java.lang.String" />
 	<property name="userName" column="user_name" type="java.lang.String" />
