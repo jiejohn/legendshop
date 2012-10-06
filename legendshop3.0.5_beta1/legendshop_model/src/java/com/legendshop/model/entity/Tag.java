@@ -17,6 +17,8 @@ import java.util.Date;
  */
 public class Tag implements BaseEntity {
 
+	private static final long serialVersionUID = -8233024988103164755L;
+
 	/** The tag id. */
 	private Long tagId;
 
