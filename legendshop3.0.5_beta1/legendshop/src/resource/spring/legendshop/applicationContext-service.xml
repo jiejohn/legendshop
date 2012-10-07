@@ -433,7 +433,11 @@
 		<property name="tagMapDao" ref="tagMapDao" />
 	</bean>
 
+    <bean id="messageDao" class="com.legendshop.business.dao.impl.MessageDaoImpl" parent="baseDao" />
 
+	<bean id="messageService" class="com.legendshop.business.service.impl.MessageServiceImpl">
+        <property name="messageDao" ref="messageDao" />
+    </bean>  
 
 
 </beans>
