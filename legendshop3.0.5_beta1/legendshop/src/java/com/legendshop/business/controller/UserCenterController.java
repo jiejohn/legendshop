@@ -66,8 +66,25 @@ public class UserCenterController extends BaseController {
 		return PathResolver.getPath(request, response, TilesPage.USER_CENTER_MAIN);
 	}
 
+	@RequestMapping("/p/user")
+	public String toPersonalInfo(HttpServletRequest request, HttpServletResponse response) {
+		try {
+
+			logger.debug("toPersonalInfo calling...");
+
+			String userName = UserManager.getUsername(request.getSession());
+
+			// Query the order list during the latest month
+
+			// TODO
+
+		} catch (Exception e) {
+			logger.error("invoking toPersonalInfo", e);
+		}
+		return PathResolver.getPath(request, response, TilesPage.USER_INFO);
+	}
+
 	private void queryOrdersLatestMonth(String userName, String curPageNO, HttpServletRequest request) {
-		logger.debug("find orders during the latest month, userName {}", userName);
 
 		// Create criteria query
 		CriteriaQuery cq = new CriteriaQuery(Sub.class, curPageNO);
@@ -75,7 +92,7 @@ public class UserCenterController extends BaseController {
 		cq.eq("userName", userName);
 		cq.gt("subDate", DateUtil.getTimeMonthsAgo(1));
 		cq.addOrder("desc", "subDate");
-		
+
 		PageSupport ps = subService.getOrderList(cq);
 
 		savePage(ps, request);

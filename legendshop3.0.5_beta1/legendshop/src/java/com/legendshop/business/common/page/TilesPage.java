@@ -81,7 +81,7 @@ public enum TilesPage implements PageDefinition {
 
 	/** The OPENSHOP. */
 	OPENSHOP("openShop."),
-	
+
 	/** The VIEWS. */
 	VIEWS("views."),
 
@@ -109,6 +109,11 @@ public enum TilesPage implements PageDefinition {
 	SITE_MESSAGE_OUTBOX("outbox.", TemplateEnum.RED),
 
 	/**
+	 * The user personal information page.
+	 */
+	USER_INFO("userinfo.", TemplateEnum.RED),
+
+	/**
 	 * All products sort page
 	 */
 	ALL_PRODUCT_SORT("allProductSort.", TemplateEnum.RED),
@@ -131,7 +136,7 @@ public enum TilesPage implements PageDefinition {
 	/**
 	 * The warning message page
 	 */
-	WARNING("warning.", TemplateEnum.RED) ;
+	WARNING("warning.", TemplateEnum.RED);
 
 	/** The value. */
 	private final String value;
@@ -158,12 +163,12 @@ public enum TilesPage implements PageDefinition {
 	 */
 	@Override
 	public String getValue(HttpServletRequest request, HttpServletResponse response) {
-		return getValue(request,response,value, templates);
+		return getValue(request, response, value, templates);
 	}
 
 	@Override
-	public String getValue(HttpServletRequest request, HttpServletResponse response,String path, List<String> templates) {
-		return PagePathCalculator.calculateTilesPath(request,response,path, templates);
+	public String getValue(HttpServletRequest request, HttpServletResponse response, String path, List<String> templates) {
+		return PagePathCalculator.calculateTilesPath(request, response, path, templates);
 	}
 
 	@Override

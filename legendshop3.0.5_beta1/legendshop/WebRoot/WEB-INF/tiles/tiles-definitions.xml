@@ -96,6 +96,10 @@
 		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/myfavorite.jsp" />
 	</definition>
 
+<definition name="userinfo.*" template="/WEB-INF/pages/frontend/{1}/indexFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/userinfo.jsp" />
+	</definition>
+	
 	<definition name="inbox.*" template="/WEB-INF/pages/frontend/{1}/indexFrame.jsp">
 		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/inbox.jsp" />
 	</definition>

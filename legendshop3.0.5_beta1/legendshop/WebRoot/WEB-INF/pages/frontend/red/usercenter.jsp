@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
+<%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <!----地址---->
 <div class="w addr">
 	<span><a href="#">首页</a></span>&gt;<span><a href="#">个人中心</a></span>&gt;<span><a
@@ -165,39 +166,19 @@
 
 <c:forEach items="${requestScope.list}" var="order" varStatus="status">
 					<tr>
-						<td><a href='${pageContext.request.contextPath}/p/orderDetail/${order.subNumber}' target="_blank">${order.subNumber}</a></td>
-						<td><div class="img-list">
-								<a target="_blank" href="#"><img
-									title="TP-LINK TL-WR841N  300M无线路由器（蓝色）"
-									src="../images/a173ba1c-84b2-4270-a3ee-0ddaf4b95484.jpg"></a>
-							</div>${order.prodName}</td>
-						<td>lf</td>
-						<td><fmt:formatNumber type="currency" value="${order.total}" pattern="${CURRENCY_PATTERN}"/><br>货到付款
+						<td><a href='${pageContext.request.contextPath}/p/orderDetail/${order.subNumber}'  target="_blank" class=""  title="查看订单详情">${order.subNumber}</a></td>
+						<td>${order.prodName}</td>
+						<td>${order.orderName}</td>
+						<td><fmt:formatNumber type="currency" value="${order.total}" pattern="${CURRENCY_PATTERN}"/><br>${order.payTypeName}
 						</td>
-						<td><span class="ftx-03">2012-02-23 <br /> 11:10:00
-						</span></td>
-						<td><span class="ftx-03">已完成</span></td>
-						<td class="order-doi"><a href="#" target="_blank">查看</a>|<a
-							target="_blank" href="#">晒单</a>|<a target="_blank" href="#">评价</a><a
-							target="_blank" href="#" class="btn-again">还要买</a></td>
-					</tr>
-					<tr>
-						<td><a href="#" target="_blank">158861817</a></td>
-						<td><div class="img-list">
-								<a target="_blank" href="#"><img
-									title="TP-LINK TL-WR841N  300M无线路由器（蓝色）"
-									src="../images/a173ba1c-84b2-4270-a3ee-0ddaf4b95484.jpg"></a>
-							</div></td>
-						<td>lf</td>
-						<td>￥258.00<br>货到付款
+						<td><span class="ftx-03">
+						 <fmt:formatDate value="${ order.subDate}" type="date"/><br /><fmt:formatDate value="${ order.subDate}" type="time"/>
+						 </span>
 						</td>
-						<td><span class="ftx-03">2012-02-23 <br /> 11:10:00
-						</span></td>
-						<td><span class="ftx-03">已完成</span></td>
-						<td class="order-doi"><a href="#" target="_blank">查看</a>|<a
-							target="_blank" href="#">晒单</a>|<a target="_blank" href="#">评价</a><a
-							target="_blank" href="#" class="btn-again">还要买</a></td>
-					</tr>
+						<td><span class="ftx-03"><option:optionGroup type="label" required="true" cache="true"
+	                beanName="ORDER_STATUS" selectedValue="${order.status}"/></span></td>
+						<td class="order-doi"><a href='${pageContext.request.contextPath}/p/orderDetail/${order.subNumber}'  target="_blank"  title="查看订单详情">查看</a>|<a target="_blank" href="${pageContext.request.contextPath}/p/orderDetail/${order.subNumber}?comment=true"  title="对商品质量进行评价">评价</a></td>
+					</tr>					
 </c:forEach>
 				</tbody>
 			</table>

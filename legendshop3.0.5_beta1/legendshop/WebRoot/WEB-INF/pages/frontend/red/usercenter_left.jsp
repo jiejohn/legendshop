@@ -28,7 +28,7 @@
 			<a href="<ls:url address='/p/favourite'/>">我的收藏</a>
 		</h3>
 		<h3>
-			<a href="<ls:url address='/p/myaccount'/>">个人信息</a>
+			<a href="<ls:url address='/p/user'/>">个人信息</a>
 		</h3>
 		<h3 class="open last">
 			我的消息
