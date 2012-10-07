@@ -34,8 +34,11 @@ public class Myfavorite implements BaseEntity {
 	/** The addtime. */
 	private Date addtime;
 
-	/** The memo. */
-	private String memo;
+	/** The user id. */
+	private String userId;
+
+	/** The user name. */
+	private String userName;
 
 	// Constructors
 
@@ -54,31 +57,6 @@ public class Myfavorite implements BaseEntity {
 	public Myfavorite(String id) {
 		this.id = id;
 	}
-
-	/**
-	 * full constructor.
-	 * 
-	 * @param id
-	 *            the id
-	 * @param prodId
-	 *            the prod id
-	 * @param prodName
-	 *            the prod name
-	 * @param addtime
-	 *            the addtime
-	 * @param memo
-	 *            the memo
-	 */
-	public Myfavorite(String id, Long prodId, String prodName, Date addtime,
-			String memo) {
-		this.id = id;
-		this.prodId = prodId;
-		this.prodName = prodName;
-		this.addtime = addtime;
-		this.memo = memo;
-	}
-
-	// Property accessors
 
 	/**
 	 * Gets the id.
@@ -155,24 +133,23 @@ public class Myfavorite implements BaseEntity {
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
 	}
+	
 
-	/**
-	 * Gets the memo.
-	 * 
-	 * @return the memo
-	 */
-	public String getMemo() {
-		return this.memo;
+	public String getUserId() {
+		return userId;
 	}
 
-	/**
-	 * Sets the memo.
-	 * 
-	 * @param memo
-	 *            the new memo
-	 */
-	public void setMemo(String memo) {
-		this.memo = memo;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 
 }

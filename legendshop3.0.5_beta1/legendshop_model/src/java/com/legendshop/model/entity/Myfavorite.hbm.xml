@@ -23,9 +23,14 @@
                 <comment>收藏时间</comment>
             </column>
         </property>
-        <property name="memo" type="java.lang.String">
-            <column name="memo">
-                <comment>收藏原因</comment>
+        <property name="userId" type="java.lang.String">
+            <column name="user_id">
+                <comment>发表人ID</comment>
+            </column>
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="user_name">
+                <comment>用户名称,备用</comment>
             </column>
         </property>
     </class>
