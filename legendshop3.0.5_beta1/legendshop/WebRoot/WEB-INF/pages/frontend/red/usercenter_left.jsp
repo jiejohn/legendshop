@@ -9,20 +9,7 @@
 			<h3>
 				<span><lb:currentUser />
 				</span>，欢迎您！
-			</h3>
-			<%
-				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-				if (auth != null) {
-				    Object principal=auth.getPrincipal();
-					if (principal instanceof UserDetails) {
-						UserDetails userDetail = (UserDetails) principal;
-						request.setAttribute("userName", userDetail.getUsername());
-					}
-				}
-			%>
-			<h3>
-				<span>${userName }</span>，欢迎您！
-			</h3>
+			</h3>		
 			<p>会员等级：普通会员</p>
 		</div>
 	</div>
