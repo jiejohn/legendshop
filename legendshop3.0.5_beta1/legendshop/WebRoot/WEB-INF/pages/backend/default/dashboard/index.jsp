@@ -6,7 +6,6 @@
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option"%>
 <%@ taglib uri="/WEB-INF/tld/displaytag.tld" prefix="display"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
@@ -32,7 +31,7 @@
     </thead>
     </table>
      <div align="center" >
-			<table style="border: 0px;" style="width: 100%;"> 
+			<table style="border: 0px;" > 
 				<tr>
 					<td>
 						<table align="center" class="${tableclass}" id="col1" style="width: 100%;">

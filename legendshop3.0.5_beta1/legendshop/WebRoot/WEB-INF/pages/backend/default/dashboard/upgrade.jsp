@@ -19,11 +19,11 @@
 			<input type="hidden" id="errorImage" name="errorImage" value='<fmt:message key="error.image.validation"/>'/>            
 		 <table>
 		 	<tr><td>激活码：</td><td><input type="text" id="liensekey" name="liensekey"/><input name="submit" type="submit" value='确认' class="s" tabindex="4"></td></tr>
-		 	<tr><td>验证码：</td><td><input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="7" size="7" tabindex="3" ></td></tr>
-		 	<tr><td></td><td>
-				<img id="randImage" name="randImage" src="<ls:templateResource item='/common/captcha.svl'/>" />
-				&nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a>
-			</td></tr>
+		 	<tr><td>
+		 					验证码：</td><td><input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="7" size="7" tabindex="3" >
+		 					<img id="randImage" name="randImage" src="<ls:templateResource item='/common/captcha.svl'/>"   style="vertical-align: middle;"/>
+				             &nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a>
+		 	</td></tr>
 		 </table>
 		 
 		<c:if test="${postUpgrade}">

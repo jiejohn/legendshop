@@ -177,20 +177,28 @@
 
   var prodList={
        productTurnOn:function(prodId,name){
-        art.dialog.confirm('确定将商品 '+name+' 上线?',
-		    function(){
-		     CommonService.productTurnOn(prodId, function(retData){
+   art.dialog({
+    content: '确定将商品 '+name+' 上线?',
+    lock:false,
+    ok: function () {
+		    CommonService.productTurnOn(prodId, function(retData){
 	       if(retData == null ){
 	          window.location.reload() ;
 	       }else{
 	           alert("上线失败！") ;
 	       }
 	    }) ;
-		    }
-		   );
+        return false;
+    },
+    cancelVal: '关闭',
+    cancel: true //为true等价于function(){}
+});
+		   
 }
 };
-  var prodList2={
+
+/* can not set to lock:false,so deprecated
+  var prodList3={
       productTurnOff:function(prodId,name){
     art.dialog.confirm('确定将商品 '+name+' 下线?',
 		    function(){
@@ -205,6 +213,30 @@
 	    }) ;
 		    }
 		   );
+}
+};
+*/
+
+  var prodList2={
+      productTurnOff:function(prodId,name){
+art.dialog({
+    content: '确定将商品 '+name+' 下线?',
+    lock:false,
+    ok: function () {
+     CommonService.productTurnOff(prodId, function(retData){
+	       if(retData == null ){
+	         // alert("成功下线！") ;
+	          window.location.reload() ;
+	       }else{
+	          alert("下线失败！") ;
+	       }
+	       
+	    }) ;
+        return false;
+    },
+    cancelVal: '关闭',
+    cancel: true //为true等价于function(){}
+});
 }
 };
 

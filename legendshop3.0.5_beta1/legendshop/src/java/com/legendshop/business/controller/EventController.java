@@ -19,11 +19,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.legendshop.business.common.page.BackPage;
+import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.EventService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -51,14 +54,14 @@ public class EventController extends BaseController implements AdminController<E
         PageSupport ps = eventService.getEvent(cq);
         savePage(ps, request);
         request.setAttribute("event", event);
-        return "/event/eventList";
+        return  PathResolver.getPath(request, response, BackPage.EVENT_LIST_PAGE);
     }
 
     @RequestMapping(value = "/save")
     public String save(HttpServletRequest request, HttpServletResponse response, Event event) {
         eventService.saveEvent(event);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
-        return "forward:/admin/event/query.htm";
+        return PathResolver.getPath(request, response, FowardPage.EVENT_QUERY);
     }
 
     @RequestMapping(value = "/delete/{id}")
@@ -71,7 +74,7 @@ public class EventController extends BaseController implements AdminController<E
 		}
 		eventService.deleteEvent(event);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("entity.deleted"));
-        return "forward:/admin/event/query.htm";
+        return PathResolver.getPath(request, response, FowardPage.EVENT_QUERY);
     }
 
     @RequestMapping(value = "/load/{id}")
@@ -83,12 +86,12 @@ public class EventController extends BaseController implements AdminController<E
 			return result;
 		}
         request.setAttribute("#entityClassInstance", event);
-        return "/event/event";
+        return PathResolver.getPath(request, response, BackPage.EVENT_EDIT_PAGE);
     }
     
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
-		return "/event/event";
+        return PathResolver.getPath(request, response, BackPage.EVENT_EDIT_PAGE);
 	}
 
     @RequestMapping(value = "/update")
@@ -99,7 +102,7 @@ public class EventController extends BaseController implements AdminController<E
 			return result;
 		}
 		request.setAttribute("event", event);
-		return "forward:/admin/event/query.htm";
+		  return PathResolver.getPath(request, response, FowardPage.EVENT_QUERY);
     }
 
 }

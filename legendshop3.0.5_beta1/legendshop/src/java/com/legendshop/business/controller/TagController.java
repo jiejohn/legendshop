@@ -91,7 +91,7 @@ public class TagController extends BaseController implements AdminController<Tag
     	}
 
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
-        return PathResolver.getPath(request, response, FowardPage.TAG);
+        return PathResolver.getPath(request, response, FowardPage.TAG_QUERY);
     }
 
     @Override
@@ -105,7 +105,7 @@ public class TagController extends BaseController implements AdminController<Tag
 		}
 		tagService.deleteTag(tag);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("entity.deleted"));
-        return PathResolver.getPath(request,response,FowardPage.TAG);
+        return PathResolver.getPath(request,response,FowardPage.TAG_QUERY);
         
     }
 
@@ -119,7 +119,7 @@ public class TagController extends BaseController implements AdminController<Tag
 	@RequestMapping(value = "/update/{id}")
     public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
         Tag tag = tagService.getTag(id);
-        checkNullable("TAG", tag);
+        checkNullable("TAG_QUERY", tag);
 		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), tag.getUserName());
 		if(result!=null){
 			return result;

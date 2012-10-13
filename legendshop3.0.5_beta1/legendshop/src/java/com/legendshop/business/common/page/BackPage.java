@@ -232,6 +232,9 @@ public enum BackPage implements PageDefinition{
 	/** The tag. */
 	TAG("/tag/tag"),
 	
+	EVENT_LIST_PAGE("/event/eventList"),
+	
+	EVENT_EDIT_PAGE("/event/event")
 	;
 	
 	/** The value. */

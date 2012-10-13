@@ -7,8 +7,6 @@
  */
 package com.legendshop.business.service;
 
-import java.util.List;
-
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.model.entity.Message;

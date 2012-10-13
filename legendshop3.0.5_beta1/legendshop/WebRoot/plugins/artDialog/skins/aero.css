@@ -8,8 +8,11 @@
  * For details, see: http://creativecommons.org/licenses/LGPL/2.1/
  */
  
-/* common start */
+/* common start 
 body { _margin:0; _height:100%; /*IE6 BUG*/ }
+*/
+
+body { _height:100%; /*IE6 BUG*/ }
 .aui_outer { text-align:left; }
 table.aui_border, table.aui_dialog { border:0; margin:0; border-collapse:collapse; width:auto; }
 .aui_nw, .aui_n, .aui_ne, .aui_w, .aui_c, .aui_e, .aui_sw, .aui_s, .aui_se, .aui_header, .aui_tdIcon, .aui_main, .aui_footer { padding:0; }

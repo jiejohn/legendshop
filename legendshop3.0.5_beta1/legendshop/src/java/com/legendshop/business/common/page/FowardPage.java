@@ -99,7 +99,10 @@ public enum FowardPage implements PageDefinition {
 
 	PARTNER_LIST_QUERY("/admin/partner/query"),
 
-	TAG("/admin/tag/query");
+	TAG_QUERY("/admin/tag/query"),
+	
+	EVENT_QUERY("/admin/event/query")
+	;
 
 	/** The value. */
 	private final String value;

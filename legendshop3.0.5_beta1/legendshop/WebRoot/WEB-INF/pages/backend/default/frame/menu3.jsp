@@ -34,6 +34,19 @@
         </dd>
       </dl>
       <!-- Item 1 End -->
+        <dl class='bitem'>
+        <dt onClick='showHide("items1_2")'><b>日志管理</b></dt>
+        <dd style='display:block' class='sitem' id='items1_2'>
+          <ul class='sitemu'>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/event/query' target='main'>系统日志</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/event/query' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='系统日志' title='系统日志'/></a> </div>
+              </div>
+            </li>
+          </ul>
+        </dd>
+      </dl>
 	  </td>
   </tr>
 </table>

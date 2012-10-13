@@ -372,7 +372,7 @@
 
 	<bean id="constTableDao" class="com.legendshop.business.dao.impl.ConstTableDaoImpl" parent="baseDao" />
 
-	<bean id="tagLibDao" class="com.legendshop.business.dao.impl.TagLibDaoImpl" parent="baseDao" />
+	<bean id="tagLibDao" class="com.legendshop.core.tag.TagLibDaoImpl" parent="baseDao" />
 
 	<bean id="redCommonPageService" class="com.legendshop.business.service.impl.RedCommonPageServiceImpl" parent="abstractCommonPageService">
 		<property name="hotsearchDao" ref="hotsearchDao" />
