@@ -14,6 +14,9 @@ import java.util.Date;
  * The Class AbstractProduct.
  */
 public abstract class AbstractProduct extends UploadFile implements BaseEntity{
+	
+	private static final long serialVersionUID = 639772483681855956L;
+
 	/** The prod id. */
 	protected Long prodId;
 	
