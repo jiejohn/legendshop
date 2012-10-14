@@ -15,7 +15,7 @@ import java.util.Date;
  * The Class GroupProduct.
  * 团购产品
  */
-public class GroupProduct implements BaseEntity{
+public class GroupProduct extends AbstractEntity implements BaseEntity{
 	
 	private Product product;
 	

@@ -11,12 +11,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 系统事件
+ * 用户事件
  */
 
-public class Event implements BaseEntity {
+public class UserEvent implements BaseEntity {
 
-	// Fields
+	private static final long serialVersionUID = 1477990911266692837L;
 
 	/** The event id. */
 	private Long eventId;

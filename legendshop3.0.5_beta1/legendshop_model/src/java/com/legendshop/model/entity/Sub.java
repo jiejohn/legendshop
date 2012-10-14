@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 订单对象.
  */
-public class Sub implements BaseEntity {
+public class Sub extends AbstractEntity implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4030702631697447802L;

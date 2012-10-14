@@ -19,7 +19,7 @@ import java.util.Date;
  * ----------------------------------------------------------------------------
  */
 
-public class News implements BaseEntity {
+public class News extends AbstractEntity implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 5866824730655175491L;

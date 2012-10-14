@@ -12,7 +12,7 @@ package com.legendshop.model.entity;
  * 
  * 官方网站：http://www.legendesign.net
  */
-public class User implements BaseEntity {
+public class User extends AbstractEntity implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5151325646123051299L;
