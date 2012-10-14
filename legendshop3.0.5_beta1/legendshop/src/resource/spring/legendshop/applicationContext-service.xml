@@ -90,12 +90,6 @@
 
 	<bean id="userDetailDao" class="com.legendshop.business.dao.impl.UserDetailDaoImpl" parent="baseDao">
 		<property name="commonUtil" ref="commonUtil"></property>
-		<property name="threadPoolExecutor">
-			<ref bean="threadPoolExecutor" />
-		</property>
-		<property name="javaMailSender">
-			<ref bean="javaMailSender" />
-		</property>
 	</bean>
 
 	<bean id="userDetailService" class="com.legendshop.business.service.impl.UserDetailServiceImpl" parent="baseService">
@@ -118,12 +112,6 @@
 
 
 	<bean id="baseService" class="com.legendshop.business.service.impl.BaseServiceImpl" abstract="true" parent="abstractService">
-		<property name="threadPoolExecutor">
-			<ref bean="threadPoolExecutor" />
-		</property>
-		<property name="javaMailSender">
-			<ref bean="javaMailSender" />
-		</property>
 	</bean>
 
 	<bean id="abstractService" class="com.legendshop.spi.service.impl.AbstractService" abstract="true">

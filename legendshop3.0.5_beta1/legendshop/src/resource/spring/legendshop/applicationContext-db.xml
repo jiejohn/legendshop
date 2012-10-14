@@ -110,8 +110,6 @@
 
 	<bean id="baseDao" class="com.legendshop.core.dao.impl.BaseDaoImpl" abstract="true">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
-		<property name="eventDao" ref="eventDao" />
-		<property name="logEvent"  value="true" />
 	</bean>
 	
 	<bean id="hibernateTemplate"

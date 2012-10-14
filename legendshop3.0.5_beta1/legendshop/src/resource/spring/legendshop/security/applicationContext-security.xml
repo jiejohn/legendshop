@@ -9,7 +9,6 @@
 		class="com.legendshop.business.security.AuthenticationSuccessHandlerImpl">
 		<beans:property name="defaultTargetUrl" value="/index"></beans:property>
 		<beans:property name="redirectStrategy" ref="originUrlRedirectStrategy"></beans:property>
-		<beans:property name="loginHistoryService" ref="loginHistoryService"></beans:property>
 		<beans:property name="basketDao" ref="basketDao"></beans:property>
 		<beans:property name="supportSSO" value="false"></beans:property>
 	</beans:bean>
@@ -30,7 +29,6 @@
 	<beans:bean id="loginHistoryService" class="com.legendshop.business.service.impl.LoginHistoryServiceImpl">
         <beans:property name="jdbcTemplate" ref="jdbcTemplate"></beans:property>
         <beans:property name="loginHistoryDao" ref="loginHistoryDao"></beans:property>
-        <beans:property name="threadPoolExecutor" ref="threadPoolExecutor"></beans:property>
     </beans:bean>
 
 	<beans:bean id="loginHistoryDao" class="com.legendshop.business.dao.impl.LoginHistoryDaoImpl" parent="baseDao">
