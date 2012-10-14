@@ -22,13 +22,16 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 
 import com.legendshop.business.dao.ProductDao;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.ProductStatusEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.dynamic.Model;
 import com.legendshop.model.entity.DynamicTemp;
 import com.legendshop.model.entity.Product;
@@ -233,6 +236,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	@Caching(evict = { @CacheEvict(value = "ProductDetail", key = "#product.prodId"),
 			@CacheEvict(value = "Product", key = "#product.prodId") })
 	public void updateProduct(Product product) {
+		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.UPDATE));
 		update(product);
 	}
 
@@ -271,7 +275,11 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 			@CacheEvict(value = "ProductDetail", key = "#prodId"),
 			@CacheEvict(value = "Product", key = "#prodId") })
 	public void deleteProdById(Long prodId) {
-		deleteById(Product.class, prodId);
+		Product product = getProduct(prodId);
+		if(product != null){
+			EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.DELETE));
+			delete(product);
+		}
 	}
 
 	/**
@@ -283,8 +291,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 *            the status
 	 * @return true, if successful
 	 */
-	private boolean updateProductStatus(Long prodId, Integer status) {
-		Product product = get(Product.class, prodId);
+	private boolean updateProductStatus(Product product, Integer status) {
 		if (!status.equals(product.getStatus())) {
 			product.setStatus(status);
 			this.updateProduct(product);
@@ -301,7 +308,9 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 */
 	@Override
 	public boolean updateProdOnline(Long prodId) {
-		return updateProductStatus(prodId, ProductStatusEnum.PROD_ONLINE.value());
+		Product product = get(Product.class, prodId);
+		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.TURN_ON));
+		return updateProductStatus(product, ProductStatusEnum.PROD_ONLINE.value());
 	}
 
 	/*
@@ -312,7 +321,9 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 */
 	@Override
 	public boolean updateProdOffline(Long prodId) {
-		return updateProductStatus(prodId, ProductStatusEnum.PROD_OFFLINE.value());
+		Product product = get(Product.class, prodId);
+		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.TURN_OFF));
+		return updateProductStatus(product, ProductStatusEnum.PROD_OFFLINE.value());
 	}
 
 	/*

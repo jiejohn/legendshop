@@ -12,7 +12,10 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
+import com.legendshop.core.event.impl.FireEvent;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.User;
 import com.legendshop.util.StringUtil;
 /**
@@ -123,5 +126,6 @@ public class UserDao extends BaseDaoImpl {
 	 */
 	public void updateUser(User user) {
 		update(user);
+		EventHome.publishEvent(new FireEvent(user, OperationTypeEnum.UPDATE));
 	}
 }

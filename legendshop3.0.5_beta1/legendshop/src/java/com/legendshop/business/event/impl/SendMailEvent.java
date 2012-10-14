@@ -9,8 +9,9 @@ package com.legendshop.business.event.impl;
 
 import com.legendshop.business.event.EventId;
 import com.legendshop.event.SystemEvent;
+import com.legendshop.model.MailInfo;
 
-public class SendMailEvent extends SystemEvent<String>{
+public class SendMailEvent extends SystemEvent<MailInfo>{
 
 	/**
 	 * Instantiates a new user reg event.
@@ -18,8 +19,13 @@ public class SendMailEvent extends SystemEvent<String>{
 	 * @param source
 	 *            the source
 	 */
-	public SendMailEvent(String source) {
-		super(source, EventId.SEND_MAIL_EVENT);
+	public SendMailEvent( String to,String subject,String text) {
+		super(EventId.SEND_MAIL_EVENT);
+		MailInfo mail = new MailInfo();
+		mail.setSubject(subject);
+		mail.setText(text);
+		mail.setTo(to);
+		setSource(mail);
 	}
 
 }

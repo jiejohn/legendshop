@@ -19,8 +19,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import com.legendshop.business.dao.BasketDao;
-import com.legendshop.business.service.LoginHistoryService;
+import com.legendshop.business.event.impl.LoginEvent;
 import com.legendshop.core.security.model.UserDetail;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.CookieUtil;
@@ -29,11 +30,6 @@ public class AuthenticationSuccessHandlerImpl extends SavedRequestAwareAuthentic
     
 	/** The support sso. */
 	private boolean supportSSO = false;
-	
-
-	/** The login history service. */
-	private LoginHistoryService loginHistoryService;
-	
 	
 	/** The basket dao. */
 	private BasketDao basketDao;
@@ -46,15 +42,16 @@ public class AuthenticationSuccessHandlerImpl extends SavedRequestAwareAuthentic
             Authentication authentication) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-    	String username = ((UserDetail)authentication.getPrincipal()).getUsername();
+		UserDetail userDetail= (UserDetail)authentication.getPrincipal();
+    	String username =userDetail.getUsername();
     	
 		// Place the last username attempted into HttpSession for views
 		session.setAttribute(Constants.USER_NAME, username);
 		
     	//remove login error count
     	clearTryLoginCount(request);
-		// 处理登录历史
-		loginHistoryService.saveLoginHistory(username, request.getRemoteAddr());
+		// 登录事件
+		EventHome.publishEvent(new LoginEvent(userDetail, request.getRemoteAddr()));
 		// 增加session登录信息
 		
 		// 处理在session中的购物车
@@ -94,10 +91,6 @@ public class AuthenticationSuccessHandlerImpl extends SavedRequestAwareAuthentic
 		this.supportSSO = supportSSO;
 	}
 
-
-	public void setLoginHistoryService(LoginHistoryService loginHistoryService) {
-		this.loginHistoryService = loginHistoryService;
-	}
 
 	public void setBasketDao(BasketDao basketDao) {
 		this.basketDao = basketDao;

@@ -16,7 +16,7 @@ import com.legendshop.core.dao.EventDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.model.entity.Event;
+import com.legendshop.model.entity.UserEvent;
 /**
  * The Class EventDaoImpl.
  */
@@ -24,24 +24,24 @@ import com.legendshop.model.entity.Event;
 public class EventDaoImpl extends BaseDaoImpl implements EventDao {
     private static Logger log = LoggerFactory.getLogger(EventDaoImpl.class);
      
-    public List<Event> getEvent(String userName){
-   		return findByHQL("from Event where userName = ?", userName);
+    public List<UserEvent> getEvent(String userName){
+   		return findByHQL("from UserEvent where userName = ?", userName);
     }
 
-	public Event getEvent(Long id){
-		return get(Event.class, id);
+	public UserEvent getEvent(Long id){
+		return get(UserEvent.class, id);
 	}
 	
-    public void deleteEvent(Event event){
-    	delete(event);
+    public void deleteEvent(UserEvent userEvent){
+    	delete(userEvent);
     }
 	
-	public Long saveEvent(Event event){
-		return (Long)save(event);
+	public Long saveEvent(UserEvent userEvent){
+		return (Long)save(userEvent);
 	}
 	
-	public void updateEvent(Event event){
-		 update(event);
+	public void updateEvent(UserEvent userEvent){
+		 update(userEvent);
 	}
 	
 	public PageSupport getEvent(CriteriaQuery cq){

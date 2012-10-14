@@ -25,9 +25,8 @@ import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.dao.UserDetailDao;
+import com.legendshop.business.event.impl.SendMailEvent;
 import com.legendshop.business.form.UserForm;
-import com.legendshop.business.helper.TaskThread;
-import com.legendshop.business.helper.impl.SendMailTask;
 import com.legendshop.business.service.UserDetailService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.FunctionEnum;
@@ -43,6 +42,7 @@ import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.User;
@@ -246,27 +246,8 @@ public class UserDetailServiceImpl  extends BaseServiceImpl  implements UserDeta
 		// 发送通知注册成功邮件
 		if (PropertiesUtil.sendMail()) {
 			try {
-				String filePath = request.getSession().getServletContext().getRealPath("/")
-						+ "/WEB-INF/template/mail/registersuccess.jsp";
-				// String text = FileProcessor.readFile(new File(filePath));
-				Map<String, String> values = new HashMap<String, String>();
-				values.put("#nickName#", userDetail.getNickName());
-				values.put("#userName#", userDetail.getUserName());
-				values.put("#password#", userDetail.getPassword());
-				if (AppUtils.isNotBlank(userDetail.getRegisterCode())) {
-					StringBuffer buffer = new StringBuffer();
-					buffer.append("<p>你的帐号尚未开通，<a href=\"").append(Constants.LEGENDSHOP_DOMAIN_NAME)
-							.append("/userRegSuccess" + "?userName=").append(user.getName()).append("&registerCode=")
-							.append(userDetail.getRegisterCode()).append("\">点击开通我的帐号</a></p><br>");
-					values.put("#registerCode#", buffer.toString());
-				} else {
-					StringBuffer buffer = new StringBuffer();
-					buffer.append("<p>你的帐号已经开通成功!</p><br>");
-					values.put("#registerCode#", buffer.toString());
-				}
-				String text = AppUtils.convertTemplate(filePath, values);
-				threadPoolExecutor.execute(new TaskThread(new SendMailTask(javaMailSender, userDetail.getUserMail(),
-						"恭喜您，注册商城成功", text)));
+				String text = getMailText(request, user, userDetail);
+				EventHome.publishEvent(new SendMailEvent( userDetail.getUserMail(), "恭喜您，注册商城成功", text));
 				log.info("{} 注册成功，发送通知邮件", userDetail.getUserMail());
 			} catch (Exception e) {
 				log.info("{}，发送通知邮件失败，请检查邮件配置", userDetail.getUserMail());
@@ -276,6 +257,29 @@ public class UserDetailServiceImpl  extends BaseServiceImpl  implements UserDeta
 		}
 		return PathResolver.getPath(request,response,TilesPage.AFTER_OPERATION);
 
+	}
+
+	private String getMailText(HttpServletRequest request, User user, UserDetail userDetail)
+			throws MalformedPatternException {
+		String filePath = request.getSession().getServletContext().getRealPath("/") + "/WEB-INF/template/mail/registersuccess.jsp";
+		// String text = FileProcessor.readFile(new File(filePath));
+		Map<String, String> values = new HashMap<String, String>();
+		values.put("#nickName#", userDetail.getNickName());
+		values.put("#userName#", userDetail.getUserName());
+		values.put("#password#", userDetail.getPassword());
+		if (AppUtils.isNotBlank(userDetail.getRegisterCode())) {
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("<p>你的帐号尚未开通，<a href=\"").append(Constants.LEGENDSHOP_DOMAIN_NAME)
+					.append("/userRegSuccess" + "?userName=").append(user.getName()).append("&registerCode=")
+					.append(userDetail.getRegisterCode()).append("\">点击开通我的帐号</a></p><br>");
+			values.put("#registerCode#", buffer.toString());
+		} else {
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("<p>你的帐号已经开通成功!</p><br>");
+			values.put("#registerCode#", buffer.toString());
+		}
+		String text = AppUtils.convertTemplate(filePath, values);
+		return text;
 	}
 	
 	@Override

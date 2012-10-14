@@ -21,8 +21,11 @@ import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.ScoreDao;
 import com.legendshop.business.dao.SubDao;
 import com.legendshop.business.payment.alipay.AlipayService;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.event.impl.FireEvent;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.Basket;
 import com.legendshop.model.entity.PayType;
 import com.legendshop.model.entity.Product;
@@ -71,6 +74,7 @@ public class SubDaoImpl extends SubCommonDaoImpl implements SubDao {
 			saveSubHistory(sub, SubStatusEnum.ORDER_DEL.value());
 			delete(sub);
 			basketDao.deleteBasketBySubNumber(sub.getSubNumber());
+			EventHome.publishEvent(new FireEvent(sub, OperationTypeEnum.DELETE));
 			return true;
 		}
 		return false;
@@ -85,6 +89,7 @@ public class SubDaoImpl extends SubCommonDaoImpl implements SubDao {
 			saveSubHistory(sub, SubStatusEnum.PRICE_CHANGE.value());
 			sub.setTotal(totalPrice);
 			update(sub);
+			EventHome.publishEvent(new FireEvent(sub, OperationTypeEnum.UPDATE_PRICE));
 			return true;
 		}
 		return false;

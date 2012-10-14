@@ -14,12 +14,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.legendshop.business.dao.TagLibDao;
 import com.legendshop.business.service.dwr.OptionService;
 import com.legendshop.core.exception.ApplicationException;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.ErrorCodes;
+import com.legendshop.core.tag.TagLibDao;
 import com.legendshop.util.AppUtils;
 
 /**

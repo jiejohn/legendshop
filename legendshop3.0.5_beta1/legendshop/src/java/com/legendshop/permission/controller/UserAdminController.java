@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.command.framework.State;
 import com.legendshop.command.framework.StateImpl;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
@@ -32,11 +33,13 @@ import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.helper.FunctionChecker;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.StateChecker;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserRole;
 import com.legendshop.model.entity.UserRoleId;
@@ -178,7 +181,6 @@ public class UserAdminController extends BaseController implements AdminControll
 			olduser.setNote(user.getNote());
 			rightDelegate.updateUser(olduser, state);
 			stateChecker.check(state, request);
-
 			return PathResolver.getPath(request,response,SecurityFowardPage.USERS_LIST);
 	}
 
@@ -587,7 +589,7 @@ public class UserAdminController extends BaseController implements AdminControll
 
 	
 	@RequestMapping(value = "/functions/{id}")
-	public String functions(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {		
+	public String functions(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
 		logger.info("UserAction findFunctionByUser : " + id);
 		State state = new StateImpl();
 			User user = rightDelegate.findUserById(id, state);

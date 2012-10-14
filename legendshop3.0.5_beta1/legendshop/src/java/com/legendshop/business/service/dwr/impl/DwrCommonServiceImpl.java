@@ -44,11 +44,13 @@ import com.legendshop.business.service.PayTypeService;
 import com.legendshop.business.service.ScoreService;
 import com.legendshop.business.service.ValidateCodeUsernamePasswordAuthenticationFilter;
 import com.legendshop.business.service.dwr.DwrCommonService;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.exception.ApplicationException;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
@@ -57,6 +59,7 @@ import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.randing.CaptchaServiceSingleton;
 import com.legendshop.core.randing.RandomStringUtils;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.dynamic.Item;
 import com.legendshop.model.dynamic.Model;
 import com.legendshop.model.entity.Basket;
@@ -284,6 +287,9 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 					return "fail";
 				}
 			}
+			
+			//TODO
+			//检查是否有订单，如果已经订购了就不可以删除
 
 			productDao.deleteProdById(prodId);
 			
@@ -293,7 +299,6 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 					groupProductService.deleteProduct(prodId);
 				}
 			}
-
 			// 删除相关产品
 			
 			List<RelProduct> list = productDao.getReleationProd(prodId, product.getUserName());

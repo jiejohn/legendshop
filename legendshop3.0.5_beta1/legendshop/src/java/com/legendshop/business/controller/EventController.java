@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
-import com.legendshop.business.service.EventService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
@@ -30,7 +29,8 @@ import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.model.entity.Event;
+import com.legendshop.core.newservice.EventService;
+import com.legendshop.model.entity.UserEvent;
 
 /**
  * The Class EventController
@@ -38,28 +38,28 @@ import com.legendshop.model.entity.Event;
  */
 @Controller
 @RequestMapping("/admin/event")
-public class EventController extends BaseController implements AdminController<Event, Long> {
+public class EventController extends BaseController implements AdminController<UserEvent, Long> {
     @Autowired
     private EventService eventService;
 
     @RequestMapping("/query")
-    public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Event event) {
-        CriteriaQuery cq = new CriteriaQuery(Event.class, curPageNO);
+    public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, UserEvent userEvent) {
+        CriteriaQuery cq = new CriteriaQuery(UserEvent.class, curPageNO);
         cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
-        cq = hasAllDataFunction(cq, request, StringUtils.trim(event.getUserName()));
+        cq = hasAllDataFunction(cq, request, StringUtils.trim(userEvent.getUserName()));
         /*
            //TODO add your condition
         */
         
         PageSupport ps = eventService.getEvent(cq);
         savePage(ps, request);
-        request.setAttribute("event", event);
+        request.setAttribute("event", userEvent);
         return  PathResolver.getPath(request, response, BackPage.EVENT_LIST_PAGE);
     }
 
     @RequestMapping(value = "/save")
-    public String save(HttpServletRequest request, HttpServletResponse response, Event event) {
-        eventService.saveEvent(event);
+    public String save(HttpServletRequest request, HttpServletResponse response, UserEvent userEvent) {
+        eventService.saveEvent(userEvent);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("operation.successful"));
         return PathResolver.getPath(request, response, FowardPage.EVENT_QUERY);
     }
@@ -67,12 +67,12 @@ public class EventController extends BaseController implements AdminController<E
     @RequestMapping(value = "/delete/{id}")
     public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable
     Long id) {
-        Event event = eventService.getEvent(id);
-        String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), event.getUserName());
+        UserEvent userEvent = eventService.getEvent(id);
+        String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), userEvent.getUserName());
 		if(result!=null){
 			return result;
 		}
-		eventService.deleteEvent(event);
+		eventService.deleteEvent(userEvent);
         saveMessage(request, ResourceBundle.getBundle("i18n/ApplicationResources").getString("entity.deleted"));
         return PathResolver.getPath(request, response, FowardPage.EVENT_QUERY);
     }
@@ -80,12 +80,12 @@ public class EventController extends BaseController implements AdminController<E
     @RequestMapping(value = "/load/{id}")
     public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable
     Long id) {
-        Event event = eventService.getEvent(id);
-        String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), event.getUserName());
+        UserEvent userEvent = eventService.getEvent(id);
+        String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), userEvent.getUserName());
 		if(result!=null){
 			return result;
 		}
-        request.setAttribute("#entityClassInstance", event);
+        request.setAttribute("#entityClassInstance", userEvent);
         return PathResolver.getPath(request, response, BackPage.EVENT_EDIT_PAGE);
     }
     
@@ -96,12 +96,12 @@ public class EventController extends BaseController implements AdminController<E
 
     @RequestMapping(value = "/update")
     public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {        
-        Event event = eventService.getEvent(id);
-		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), event.getUserName());
+        UserEvent userEvent = eventService.getEvent(id);
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), userEvent.getUserName());
 		if(result!=null){
 			return result;
 		}
-		request.setAttribute("event", event);
+		request.setAttribute("event", userEvent);
 		  return PathResolver.getPath(request, response, FowardPage.EVENT_QUERY);
     }
 

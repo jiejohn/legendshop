@@ -21,24 +21,23 @@ import org.hibernate.Hibernate;
 import org.hibernate.type.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.legendshop.business.dao.UserDetailDao;
-import com.legendshop.business.helper.TaskThread;
-import com.legendshop.business.helper.impl.SendMailTask;
+import com.legendshop.business.event.impl.SendMailEvent;
 import com.legendshop.business.service.CommonUtil;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.dao.support.SqlQuery;
+import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.randing.RandomStringUtils;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserDetail;
@@ -62,12 +61,6 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 	
 	/** The common util. */
 	private CommonUtil commonUtil;
-	
-	/** The thread pool executor. */
-	protected ThreadPoolTaskExecutor threadPoolExecutor;
-	
-	/** The java mail sender. */
-	protected JavaMailSenderImpl javaMailSender;
 	
 	/** The REGISTE d_ tag. */
 	private final String REGISTED_TAG = "REGISTED";
@@ -363,7 +356,16 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 		if (isAdmin) {
 			return "不能删除商家用户或者管理员用户，请先备份好数据和去掉该用户的权限再试！";
 		}
-
+		
+		User user = getUser(userId);
+		if(user != null){
+			delete(user);
+			EventHome.publishEvent(new FireEvent(user, OperationTypeEnum.DELETE));
+		}else{
+			log.debug("删除用户{}不存在",  userName);
+			return "删除用户" +userName + "不存在";
+		}
+		
 		// 删除basket
 		Integer dbr = exeByHQL("delete from Basket where userName = ?", new Object[] { userName },
 				new Type[] { Hibernate.STRING });
@@ -492,33 +494,11 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 		values.put("#password#", newPassword);
 		String text = AppUtils.convertTemplate(templateFilePath, values);
 		if (PropertiesUtil.sendMail()) {
-			threadPoolExecutor.execute(new TaskThread(new SendMailTask(javaMailSender, userDetail.getUserMail(), "恭喜您，修改密码成功！", text)));
+			EventHome.publishEvent(new SendMailEvent( userDetail.getUserMail(), "恭喜您，修改密码成功！", text));
 		}
 		return true;
 	}
 	
-	/**
-	 * Sets the thread pool executor.
-	 * 
-	 * @param threadPoolExecutor
-	 *            the new thread pool executor
-	 */
-	@Required
-	public void setThreadPoolExecutor(ThreadPoolTaskExecutor threadPoolExecutor) {
-		this.threadPoolExecutor = threadPoolExecutor;
-	}
-	
-	/**
-	 * Sets the java mail sender.
-	 * 
-	 * @param javaMailSender
-	 *            the new java mail sender
-	 */
-	@Required
-	public void setJavaMailSender(JavaMailSenderImpl javaMailSender) {
-		this.javaMailSender = javaMailSender;
-	
-	}
 
 	@Override
 	public Long getAllUserCount() {

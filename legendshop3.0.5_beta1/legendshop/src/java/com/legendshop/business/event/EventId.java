@@ -22,7 +22,8 @@ public enum EventId implements BaseEventId {
 	//发送短消息
 	SEND_SMS_EVENT("SEND_SMS"),
 	
-
+	//登录
+	LOGIN_EVENT("LOGIN_EVENT"),
 	
 	//商城系统更改
 	SHOP_CHANGE_EVENT("SHOP_CHANGE"),

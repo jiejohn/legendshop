@@ -16,11 +16,14 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.NewsDao;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.News;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.constants.NewsPositionEnum;
@@ -97,15 +100,18 @@ public class NewsDaoImpl extends BaseDaoImpl implements NewsDao {
 	@Override
 	@CacheEvict(value = "News", key = "#news.newsId")
 	public void updateNews(News news) {
+		EventHome.publishEvent(new FireEvent(news, OperationTypeEnum.UPDATE));
 		update(news);
-		
 	}
 
 	@Override
 	@CacheEvict(value = "News", key = "#id")
 	public void deleteNewsById(Long id) {
-		deleteById(News.class, id);
-		
+		News news = getNewsById(id);
+		if(news != null){
+			EventHome.publishEvent(new FireEvent(news, OperationTypeEnum.DELETE));
+			delete(news);
+		}
 	}
 
 	@Override

@@ -23,15 +23,18 @@ import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.dao.ImgFileDao;
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.business.search.facade.ProductSearchFacade;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.constant.ProductStatusEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.helper.ResourceBundleHelper;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.DynamicTemp;
 import com.legendshop.model.entity.ImgFile;
@@ -154,6 +157,7 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
 		productDao.updateProduct(origin);
 		shopDetailDao.updateShopDetailWhenProductChange(origin);
 		productSearchFacade.update(origin);
+		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.UPDATE));
 	}
 
 	/* (non-Javadoc)
@@ -175,6 +179,7 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
 		product.setProdId(prodId);
 		shopDetailDao.updateShopDetailWhenProductChange(product);
 		productSearchFacade.create(product);
+		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.SAVE));
 		return prodId;
 	}
 	

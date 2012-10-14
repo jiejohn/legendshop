@@ -13,17 +13,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import com.legendshop.business.dao.LoginHistoryDao;
-import com.legendshop.business.helper.TaskThread;
 import com.legendshop.business.service.LoginHistoryService;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.dao.support.SqlQuery;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.event.TaskItem;
 import com.legendshop.model.entity.LoginHistory;
 import com.legendshop.util.ip.IPSeeker;
 import com.legendshop.util.sql.ConfigCode;
@@ -42,19 +39,6 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
 	/** The jdbc template. */
 	private JdbcTemplate jdbcTemplate;
 
-	/** The thread pool executor. */
-	private ThreadPoolTaskExecutor threadPoolExecutor;
-
-	/**
-	 * Sets the thread pool executor.
-	 * 
-	 * @param threadPoolExecutor
-	 *            the new thread pool executor
-	 */
-	@Required
-	public void setThreadPoolExecutor(ThreadPoolTaskExecutor threadPoolExecutor) {
-		this.threadPoolExecutor = threadPoolExecutor;
-	}
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.LoginHistoryService#saveLoginHistory(java.lang.String, java.lang.String)
@@ -62,39 +46,6 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
 	@Override
 	public void saveLoginHistory(String userName, String ip) {
 		if (PropertiesUtil.getObject(ParameterEnum.LOGIN_LOG_ENABLE, Boolean.class)) {
-			threadPoolExecutor.execute(new TaskThread(new PersistLoginHistoryTask(userName, ip)));
-		}
-	}
-
-	/**
-	 * The Class PersistLoginHistoryTask.
-	 */
-	class PersistLoginHistoryTask implements TaskItem {
-
-		/** The user name. */
-		private final String userName;
-
-		/** The ip. */
-		private final String ip;
-
-		/**
-		 * Instantiates a new persist login history task.
-		 * 
-		 * @param userName
-		 *            the user name
-		 * @param ip
-		 *            the ip
-		 */
-		public PersistLoginHistoryTask(String userName, String ip) {
-			this.userName = userName;
-			this.ip = ip;
-		}
-
-		/* (non-Javadoc)
-		 * @see com.legendshop.business.helper.TaskItem#execute()
-		 */
-		@Override
-		public void execute() {
 			log.debug("user {} login system from ip {}", userName, ip);
 			try {
 				LoginHistory loginHistory = new LoginHistory();
@@ -114,11 +65,8 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
 			} catch (Exception e) {
 				log.error("save userLoginHistory", e);
 			}
-
 		}
-
 	}
-
 
 	/**
 	 * Sets the jdbc template.

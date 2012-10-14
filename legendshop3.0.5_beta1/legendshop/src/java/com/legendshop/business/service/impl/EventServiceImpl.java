@@ -9,11 +9,11 @@ package com.legendshop.business.service.impl;
 
 import java.util.List;
 
-import com.legendshop.business.dao.EventDao;
-import com.legendshop.business.service.EventService;
+import com.legendshop.core.dao.EventDao;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.model.entity.Event;
+import com.legendshop.core.newservice.EventService;
+import com.legendshop.model.entity.UserEvent;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -26,28 +26,28 @@ public class EventServiceImpl  implements EventService{
         this.eventDao = eventDao;
     }
 
-    public List<Event> getEvent(String userName) {
+    public List<UserEvent> getEvent(String userName) {
         return eventDao.getEvent(userName);
     }
 
-    public Event getEvent(Long id) {
+    public UserEvent getEvent(Long id) {
         return eventDao.getEvent(id);
     }
 
-    public void deleteEvent(Event event) {
-        eventDao.deleteEvent(event);
+    public void deleteEvent(UserEvent userEvent) {
+        eventDao.deleteEvent(userEvent);
     }
 
-    public Long saveEvent(Event event) {
-        if (!AppUtils.isBlank(event.getEventId())) {
-            updateEvent(event);
-            return event.getEventId();
+    public Long saveEvent(UserEvent userEvent) {
+        if (!AppUtils.isBlank(userEvent.getEventId())) {
+            updateEvent(userEvent);
+            return userEvent.getEventId();
         }
-        return (Long) eventDao.save(event);
+        return (Long) eventDao.save(userEvent);
     }
 
-    public void updateEvent(Event event) {
-        eventDao.updateEvent(event);
+    public void updateEvent(UserEvent userEvent) {
+        eventDao.updateEvent(userEvent);
     }
 
     public PageSupport getEvent(CriteriaQuery cq) {

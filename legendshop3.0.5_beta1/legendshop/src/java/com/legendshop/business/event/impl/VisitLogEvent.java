@@ -16,7 +16,7 @@ import com.legendshop.spi.constants.VisitTypeEnum;
 
 /**
  * 记录访问历史
- * The Class VisitLogEvent.
+ * The Class FireEvent.
  */
 public class VisitLogEvent extends SystemEvent<VisitLog>{
 
