@@ -71,7 +71,7 @@
           <div align="right">标题<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="title" id="title" value="${bean.title}" size="50"/></p>
+           <input type="text" name="title" id="title" value="${bean.title}" size="50"/>
         </td>
       </tr>
      <tr>
@@ -79,7 +79,7 @@
           <div align="right">链接地址<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="msg" id="msg" value="${bean.msg}" size="50"/></p>
+           <input type="text" name="msg" id="msg" value="${bean.msg}" size="50"/>
         </td>
       </tr>
        <tr>
@@ -87,11 +87,11 @@
           <div align="right">分类</div>
        </td>
         <td>
-           <p>	  <select id="sort" name="sort">
+           	  <select id="sort" name="sort">
 	                 <option:optionGroup type="select" required="false" cache="fasle"
 	                beanName="Sort" beanId="sortId" beanDisp="sortName" defaultDisp="-- 一级分类 --"
 	                hql="select t.sortId, t.sortName from Sort t where t.userName = ?" param="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" selectedValue="${bean.sort}"/>
-	            </select></p>
+	            </select>
         </td>
       </tr>
        <tr>

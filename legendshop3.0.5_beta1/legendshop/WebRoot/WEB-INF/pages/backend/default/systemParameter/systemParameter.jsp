@@ -65,9 +65,9 @@
           <div align="center">功能说明</div>
        </td>
         <td>
-           <p>
+           
 			${bean.memo}
-	       </p>
+	       
         </td>
       </tr>
       <tr>
@@ -75,7 +75,7 @@
           <div align="center">参数值</div>
        </td>
         <td>
-           <p>
+           
          <c:choose>
            	<c:when test="${bean.type == 'Selection' || bean.type == 'Boolean'}">
 		       <select id="value" name="value">
@@ -87,7 +87,7 @@
            		<input type="text" name="value" id="value" value="${bean.value}" size="50" maxlength="200"/>
            	</c:otherwise>
            </c:choose>
-           </p>
+           
         </td>
       </tr>
                 <tr>

@@ -65,57 +65,57 @@ $.validator.setDefaults({
     <tr style="display: none;">
       <td width="30%"><div align="right">链接地址<font color="#ff0000">*</font></div></td>
       <td width="70%">
-      <p>
-          <input type="text" name="href" id="href" size="30" value="${index.href}"> </p>
+      
+          <input type="text" name="href" id="href" size="30" value="${index.href}"> 
       </td>
     </tr>
     <tr>
       <td width="30%"><div align="right">说明文字<font color="#ff0000">*</font></div></td>
       <td width="70%">
-      <p>
+      
       <input type="text" name="alt" id="alt" size="30" value="${index.alt}">
-      </p>
+      
       </td>
     </tr>
      <tr>
       <td width="30%"><div align="right">标题<font color="#ff0000">*</font></div></td>
       <td width="70%">
-      <p>
+      
       <input type="text" name="title" id="title" size="30" value="${index.title}">
-      </p>
+      
       </td>
     </tr>   
     <tr>
       <td width="30%"><div align="right">小标题<font color="#ff0000">*</font></div></td>
       <td width="70%">
-      <p>
+      
       <input type="text" name="stitle" id="stitle" size="30" value="${index.stitle}">
-      </p>
+      
       </td>
     </tr>   
     <tr>
       <td width="30%"><div align="right">图片链接地址<font color="#ff0000">*</font></div></td>
       <td width="70%">
-      <p>
+      
       <input type="text" name="link" id="link" size="30" value="${index.link}">
-      </p>
+      
       </td>
     </tr>  
     <tr>
       <td width="30%"><div align="right">标题链接地址<font color="#ff0000">*</font></div></td>
       <td width="70%">
-      <p>
+      
       <input type="text" name="titleLink" id="titleLink" size="30" value="${index.titleLink}">
-      </p>
+      
       </td>
     </tr> 
 	<tr>
       <td>
       	<div align="right">上传图片，不能大于3M，大小为530*290<font color="#ff0000">*</font></div></td>
       <td>
-      	<p>
+      	
       	<input type="file" name="file" id="file" size="30"/>
-      	</p>
+      	
       	<input type="hidden" name="imgName" id="imgName" size="30" value="${index.img}"/>
       </td>
     </tr>

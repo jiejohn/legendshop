@@ -64,50 +64,50 @@
                 </thead>
      			     <tr>
         <td>
-          <div align="center">UserId: <font color="ff0000">*</font></div>
+          <div align="center">UserId: <font cr="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="userId" id="userId" value="${event.userId}" /></p>
+           <p><input type="text" name="userId" id="userId" value="${event.userId}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">UserName: <font color="ff0000">*</font></div>
+          <div align="center">UserName:ont color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="userName" id="userName" value="${event.userName}" /></p>
+           <p><input type="text" name="userName" id="userName" value="${event.userName}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">Type: <font color="ff0000">*</font></div>
+          <div align="centeType: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="type" id="type" value="${event.type}" /></p>
+           <p><input type="text" name="type" id="type" value="${event.type}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">Operation: <font color="ff0000">*</font></div>
+          <div align="cer">Operation: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="operation" id="operation" value="${event.operation}" /></p>
+           <p><input type="text" name="operation" id="operation" value="${event.operation}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">RelateData: <font color="ff0000">*</font></div>
+          <div al="center">RelateData: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="relateData" id="relateData" value="${event.relateData}" /></p>
+           <p><input type="text" name="relateData" id="relateData" value="${event.relateData}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">CreateTime: <font color="ff0000">*</font></div>
+         iv align="center">CreateTime: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="createTime" id="createTime" value="${event.createTime}" /></p>
+           <p><input type="text" name="createTime" id="createTime" value="${event.createTime}" />
         </td>
       </tr>
 

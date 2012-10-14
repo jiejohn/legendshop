@@ -80,19 +80,19 @@
 				<tr>
 					<td>
 						<div align="center">
-							物流公司名称: <font color="ff0000">*</font>
+				物流公司名称: <font color="ff0000">*</font>
 						</div>
 					</td>
 					<td>
 						<p>
 							<input type="text" name="name" id="name"
 								value="${deliveryCorp.name}" />
-						</p>
+						
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<div align="center">
+						<div aligcenter">
 							URL: <font color="ff0000">*</font>
 						</div>
 					</td>
@@ -100,7 +100,7 @@
 						<p>
 							<input type="text" name="url" id="url"
 								value="${deliveryCorp.url}" />
-						</p>
+						
 					</td>
 				</tr>
 

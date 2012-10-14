@@ -89,7 +89,7 @@
           <div align="center">名称 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="name" id="name" value="" maxlength="30" /></p>
+           <input type="text" name="name" id="name" value="" maxlength="30" />
         </td>
       </tr>
       <tr>
@@ -97,7 +97,7 @@
           <div align="center">密码 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="password" name="password" id="password" value="" maxlength="30"/></p>
+           <input type="password" name="password" id="password" value="" maxlength="30"/>
         </td>
       </tr>
       <tr>
@@ -105,7 +105,7 @@
           <div align="center">确认密码 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="password" name="passwordag" id="passwordag" value="" maxlength="30"/></p>
+           <input type="password" name="passwordag" id="passwordag" value="" maxlength="30"/>
         </td>
       </tr>
 
@@ -114,7 +114,7 @@
           <div align="center">状态</div>
        </td>
         <td>
-           <p>           
+                      
           <label>
             <input type="radio" name="enabled" value="1"  checked="checked" />
             有效</label> &nbsp; &nbsp; 
@@ -125,7 +125,7 @@
         </c:if>  
             />
             无效</label>
-           </p>
+           
         </td>
       </tr>
       <tr>
@@ -133,7 +133,7 @@
           <div align="center">注释</div>
        </td>
         <td>
-           <p><input type="text" name="note" id="note" value=""/></p>
+           <input type="text" name="note" id="note" value=""/>
         </td>
       </tr>
        <tr>

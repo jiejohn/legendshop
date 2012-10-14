@@ -67,7 +67,7 @@
           <div align="center">TagId: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="tagId" id="tagId" value="${tagMap.tagId}" /></p>
+           <input type="text" name="tagId" id="tagId" value="${tagMap.tagId}" />
         </td>
       </tr>
      <tr>
@@ -75,7 +75,7 @@
           <div align="center">ReferId: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="referId" id="referId" value="${tagMap.referId}" /></p>
+           <input type="text" name="referId" id="referId" value="${tagMap.referId}" />
         </td>
       </tr>
      <tr>
@@ -83,7 +83,7 @@
           <div align="center">Type: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="type" id="type" value="${tagMap.type}" /></p>
+           <input type="text" name="type" id="type" value="${tagMap.type}" />
         </td>
       </tr>
      <tr>
@@ -91,7 +91,7 @@
           <div align="center">StartTime: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="startTime" id="startTime" value="${tagMap.startTime}" /></p>
+           <input type="text" name="startTime" id="startTime" value="${tagMap.startTime}" />
         </td>
       </tr>
      <tr>
@@ -99,7 +99,7 @@
           <div align="center">EndTime: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="endTime" id="endTime" value="${tagMap.endTime}" /></p>
+           <input type="text" name="endTime" id="endTime" value="${tagMap.endTime}" />
         </td>
       </tr>
 

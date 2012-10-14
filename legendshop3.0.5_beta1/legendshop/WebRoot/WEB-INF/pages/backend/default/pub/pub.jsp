@@ -69,7 +69,7 @@
           <div align="right">标题 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="title" id="title" value="${bean.title}" size="50"/></p>
+           <input type="text" name="title" id="title" value="${bean.title}" size="50"/>
         </td>
       </tr>
      <tr>
@@ -77,9 +77,9 @@
           <div align="right">链接地址<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p>
+           
             <input name="msg" id="msg" value="${bean.msg}" size="80"/>
-           </p>
+           
         </td>
       </tr>
       <tr>

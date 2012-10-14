@@ -72,14 +72,14 @@
           <div align="right">广告类型: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p>
+           
 
               <select id="type" name="type">
 				  <option:optionGroup type="select" required="true" cache="true"
 	                beanName="ADVERTISEMENT_TYPE" selectedValue="${bean.type}"/>
 	            </select>
            
-           </p>
+           
         </td>
       </tr>
      <tr>
@@ -87,7 +87,7 @@
           <div align="right">链接地址<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="linkUrl" id="linkUrl" value="${bean.linkUrl}" size="50"/></p>
+           <input type="text" name="linkUrl" id="linkUrl" value="${bean.linkUrl}" size="50"/>
         </td>
       </tr>
       <tr>
@@ -95,7 +95,7 @@
           <div align="right">标题</div>
        </td>
         <td>
-           <p><input type="text" name="title" id="title" value="${bean.title}" size="50" maxlength="255"/></p>
+           <input type="text" name="title" id="title" value="${bean.title}" size="50" maxlength="255"/>
         </td>
       </tr>
       <tr>
@@ -103,7 +103,7 @@
           <div align="right">需求描述</div>
        </td>
         <td>
-           <p><input type="text" name="sourceInput" id="sourceInput" value="${bean.sourceInput}" size="50" maxlength="255"/></p>
+           <input type="text" name="sourceInput" id="sourceInput" value="${bean.sourceInput}" size="50" maxlength="255"/>
         </td>
       </tr>
       <tr>
@@ -111,12 +111,12 @@
           <div align="right">状态<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p>
+           
 				<select id="enabled" name="enabled">
 				  <option:optionGroup type="select" required="true" cache="true"
 	                beanName="ONOFF_STATUS" selectedValue="${bean.enabled}"/>
 	            </select>
-			</p>
+			
         </td>
       </tr>
       
@@ -128,11 +128,11 @@
                         </div>
                     </td>
                     <td>
-                        <p>
+                        
                             <input type="file" name="file" id="file" size="50"/>
                             <input type="hidden" name="picUrlName" id="picUrlName" size="80"
                                 value="${bean.picUrl}" />
-                        </p>
+                        
                     </td>
                 </tr>
                 <tr>

@@ -75,11 +75,11 @@
           <div align="center">名称 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="name" id="name" value="${bean.name}" maxlength="30"            
+           <input type="text" name="name" id="name" value="${bean.name}" maxlength="30"            
         <c:if test="${not empty bean}">
             <c:out value="readonly=\"true\""></c:out>
         </c:if>  
-           /></p>
+           />
         </td>
       </tr>
       <tr>
@@ -87,7 +87,7 @@
           <div align="center">密码 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="password" name="password" id="password" value="" maxlength="30"/></p>
+           <input type="password" name="password" id="password" value="" maxlength="30"/>
         </td>
       </tr>
       <tr>
@@ -95,7 +95,7 @@
           <div align="center">确认密码 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="password" name="passwordag" id="passwordag" value="" maxlength="30"/></p>
+           <input type="password" name="passwordag" id="passwordag" value="" maxlength="30"/>
         </td>
       </tr>
        <tr>

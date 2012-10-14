@@ -61,7 +61,7 @@
           <div align="center">UserId: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="userId" id="userId" value="${bean.userId}" /></p>
+           <input type="text" name="userId" id="userId" value="${bean.userId}" />
         </td>
       </tr>
      <tr>
@@ -69,7 +69,7 @@
           <div align="right">加盟商城<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="friendId" id="friendId" value="${bean.friendId}" readonly="readonly"/></p>
+           <input type="text" name="friendId" id="friendId" value="${bean.friendId}" readonly="readonly"/>
         </td>
       </tr>
      <tr>
@@ -77,7 +77,7 @@
           <div align="right">加盟商城名称</div>
        </td>
         <td>
-           <p><input type="text" name="friendName" id="friendName" value="${bean.friendName}" /></p>
+           <input type="text" name="friendName" id="friendName" value="${bean.friendName}" />
         </td>
       </tr>
      <tr>
@@ -85,7 +85,7 @@
           <div align="right">显示顺序（数字，越小越靠前）</div>
        </td>
         <td>
-           <p><input type="text" name="displayOrder" id="displayOrder" value="${bean.displayOrder}" /></p>
+           <input type="text" name="displayOrder" id="displayOrder" value="${bean.displayOrder}" />
         </td>
       </tr>
 	  <tr>

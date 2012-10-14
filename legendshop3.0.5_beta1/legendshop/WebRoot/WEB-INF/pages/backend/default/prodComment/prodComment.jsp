@@ -61,7 +61,7 @@
           <div align="center">商品名称</div>
        </td>
         <td>
-           <p>${bean.prodName}</p>
+           ${bean.prodName}
         </td>
       </tr>
      <tr>
@@ -69,7 +69,7 @@
           <div align="center">评价人</div>
        </td>
         <td>
-           <p>${bean.userName}</p>
+           ${bean.userName}
         </td>
       </tr>
      <tr>
@@ -77,7 +77,7 @@
           <div align="center">评论内容</div>
        </td>
         <td>
-           <p>${bean.content}</p>
+           ${bean.content}
         </td>
       </tr>
      <tr>
@@ -85,7 +85,7 @@
           <div align="center">评论时间</div>
        </td>
         <td>
-           <p><fmt:formatDate value="${bean.addtime}" pattern="yyyy-MM-dd HH:mm"/></p>
+           <fmt:formatDate value="${bean.addtime}" pattern="yyyy-MM-dd HH:mm"/>
         </td>
       </tr>
          <tr>
@@ -93,7 +93,7 @@
         <div align="center">评论IP</div>
        </td>
         <td>
-           <p>${bean.postip}</p>
+           ${bean.postip}
         </td>
       </tr>
       <c:if test="${bean.replyName != null }">
@@ -102,8 +102,8 @@
         <div align="center">回复人</div>
        </td>
         <td>
-           <p>回复人：${bean.replyName}</p>
-           <p>回复时间： <fmt:formatDate value="${bean.replyTime}" pattern="yyyy-MM-dd HH:mm"/></p>
+           回复人：${bean.replyName}
+           回复时间： <fmt:formatDate value="${bean.replyTime}" pattern="yyyy-MM-dd HH:mm"/>
         </td>
       </tr>
       </c:if>
@@ -112,7 +112,7 @@
           <div align="center">回复内容 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><textarea rows="5" cols="50" id="replyContent" name="replyContent">${bean.replyContent}</textarea></p>
+           <textarea rows="5" cols="50" id="replyContent" name="replyContent">${bean.replyContent}</textarea>
         </td>
       </tr>
                 <tr>

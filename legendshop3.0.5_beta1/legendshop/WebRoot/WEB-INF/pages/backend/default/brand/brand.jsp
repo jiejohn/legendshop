@@ -63,7 +63,7 @@
           <div align="center">品牌 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="brandName" id="brandName" value="${bean.brandName}" maxlength="30"/></p>
+           <input type="text" name="brandName" id="brandName" value="${bean.brandName}" maxlength="30"/>
         </td>
       </tr>
       <tr>
@@ -71,12 +71,12 @@
           <div align="center">上传图片 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p>
+           
                     		<input type="file" name="file" id="file"/>
 							<input type="hidden" name="brandPic" id="brandPic"
 								value="${bean.brandPic}" />  
 
-           </p>
+           
         </td>
       </tr>
       <tr>
@@ -84,7 +84,7 @@
           <div align="center">备注</div>
        </td>
         <td>
-           <p><input type="text" name="memo" id="memo" value="${bean.memo}" size="31" maxlength="50"/></p>
+           <input type="text" name="memo" id="memo" value="${bean.memo}" size="31" maxlength="50"/>
         </td>
       </tr>
  

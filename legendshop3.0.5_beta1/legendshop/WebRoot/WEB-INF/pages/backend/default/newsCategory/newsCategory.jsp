@@ -65,7 +65,7 @@
           <div align="right">栏目名称 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="newsCategoryName" id="newsCategoryName" value="${bean.newsCategoryName}" size="50"/></p>
+           <input type="text" name="newsCategoryName" id="newsCategoryName" value="${bean.newsCategoryName}" size="50"/>
         </td>
       </tr>
      <tr>
@@ -73,7 +73,6 @@
           <div align="right">状态 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p>
             <select id="status" name="status">
             <c:choose>
                 <c:when test="${bean.status == '0'}">
@@ -86,8 +85,6 @@
                 </c:otherwise>
             </c:choose>
             </select> 
-           
-           </p>
         </td>
       </tr>
               <tr>

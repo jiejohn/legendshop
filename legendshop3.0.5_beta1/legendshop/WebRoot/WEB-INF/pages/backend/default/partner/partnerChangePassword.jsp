@@ -75,26 +75,26 @@
                 </thead>
      			     <tr>
         <td>
-          <div align="center">供应商登录名: <font color="ff0000">*</font></div>
+          <div align="center">供应商登 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p>${partner.partnerName}</p>
+           <p>${partner.partnerName}
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">登录密码: <font color="ff0000">*</font></div>
+          <div align="cer">登录密码: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="password" name="password" id="password" /></p>
+           <p><input type="password" name="password" id="password" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">确认密码: <font color="ff0000">*</font></div>
+          <div an="center">确认密码: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="password" name="passwordag" id="passwordag" /></p>
+           <p><input type="password" name="passwordag" id="passwordag" />
         </td>
       </tr>
                 <tr>

@@ -71,7 +71,7 @@
           <div align="right">连接地址<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="url" id="url" value="${bean.url}" size="50" maxlength="300"/></p>
+           <input type="text" name="url" id="url" value="${bean.url}" size="50" maxlength="300"/>
         </td>
       </tr>
      <tr>
@@ -79,7 +79,7 @@
           <div align="right">连接显示文字<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="wordlink" id="wordlink" value="${bean.wordlink}" size="50" maxlength="50"/></p>
+           <input type="text" name="wordlink" id="wordlink" value="${bean.wordlink}" size="50" maxlength="50"/>
         </td>
       </tr>
      <tr>
@@ -87,18 +87,18 @@
           <div align="right">描述<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="content" id="content" value="${bean.content}" size="50"/></p>
+           <input type="text" name="content" id="content" value="${bean.content}" size="50"/>
         </td>
       </tr>
       <tr><td>
               <div align="right">上传友情连接图片</div>
            </td>
            <td>
-                        <p>
+                        
                             <input type="file" name="file" id="file" size="50"/>
                             <input type="hidden" name="picture" id="picture" size="80"
                                 value="${bean.picture}" />
-                        </p>
+                        
                     </td>
       </tr>
      <tr>
@@ -106,7 +106,7 @@
           <div align="right">显示顺序（数字，越小越靠前）</div>
        </td>
         <td>
-           <p><input type="text" name="bs" id="bs" value="${bean.bs}" /></p>
+           <input type="text" name="bs" id="bs" value="${bean.bs}" />
         </td>
       </tr>
                 <tr>

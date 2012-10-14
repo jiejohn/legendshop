@@ -81,6 +81,6 @@
         </c:if>
     </div>
 	<div align="center">
-    <P>
+    
 </body>
 </html>

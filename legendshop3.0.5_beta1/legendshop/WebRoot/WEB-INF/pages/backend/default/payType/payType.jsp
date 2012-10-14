@@ -81,7 +81,7 @@
           <div align="center">合作身份者ID(Partner):</div>
        </td>
         <td>
-           <p><input type="text" name="partner" id="partner" value="${bean.partner}" size="50" maxlength="100"/></p>
+           <input type="text" name="partner" id="partner" value="${bean.partner}" size="50" maxlength="100"/>
         </td>
       </tr>
      <tr>
@@ -89,7 +89,7 @@
           <div align="center">安全检验码:</div>
        </td>
         <td>
-           <p><input type="text" name="validateKey" id="validateKey" value="${bean.validateKey}" size="50" maxlength="50"/></p>
+           <input type="text" name="validateKey" id="validateKey" value="${bean.validateKey}" size="50" maxlength="50"/>
         </td>
       </tr>
      <tr>
@@ -97,7 +97,7 @@
           <div align="center">签约账号:</div>
        </td>
         <td>
-           <p><input type="text" name="sellerEmail" id="sellerEmail" value="${bean.sellerEmail}" size="50" maxlength="100"/></p>
+           <input type="text" name="sellerEmail" id="sellerEmail" value="${bean.sellerEmail}" size="50" maxlength="100"/>
         </td>
       </tr>
      <tr>
@@ -105,7 +105,7 @@
           <div align="center">备注:</div>
        </td>
         <td>
-           <p><input type="text" name="memo" id="memo" value="${bean.memo}" size="50" maxlength="100"/></p>
+           <input type="text" name="memo" id="memo" value="${bean.memo}" size="50" maxlength="100"/>
         </td>
       </tr>
 

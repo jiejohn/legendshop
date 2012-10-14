@@ -81,7 +81,7 @@
           <div align="center">名称 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="name" id="name" value="${bean.name}"/></p>
+           <input type="text" name="name" id="name" value="${bean.name}"/>
         </td>
       </tr>
       <tr>
@@ -89,7 +89,7 @@
           <div align="center">角色名称 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="roleType" id="roleType" value="${bean.roleType}" /></p>
+           <input type="text" name="roleType" id="roleType" value="${bean.roleType}" />
         </td>
       </tr>
       <tr>
@@ -97,7 +97,7 @@
           <div align="center">状态</div>
        </td>
         <td>
-           <p>           
+                      
           <label>
             <input type="radio" name="enabled" value="1"   checked="checked"
             />
@@ -109,7 +109,7 @@
         </c:if>  
             />
             无效</label>
-           </p>
+           
         </td>
       </tr>
       <tr>
@@ -117,7 +117,7 @@
           <div align="center">备注</div>
        </td>
         <td>
-           <p><input name="note" type="text" value="${bean.note}"></p>
+           <input name="note" type="text" value="${bean.note}">
         </td>
       </tr>
        <tr>

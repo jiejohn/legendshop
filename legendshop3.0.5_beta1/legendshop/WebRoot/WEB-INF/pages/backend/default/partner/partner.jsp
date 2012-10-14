@@ -116,7 +116,7 @@
           <div align="center">供应商登录名: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="partnerName" id="partnerName" value="${partner.partnerName}" /></p>
+           <input type="text" name="partnerName" id="partnerName" value="${partner.partnerName}" />
         </td>
       </tr>
      <c:if test="${empty partner}">
@@ -125,7 +125,7 @@
           <div align="center">登录密码: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="password" name="password" id="password" value="${partner.password}" /></p>
+           <input type="password" name="password" id="password" value="${partner.password}" />
         </td>
       </tr>
      <tr>
@@ -133,7 +133,7 @@
           <div align="center">确认密码: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="password" name="passwordag" id="passwordag" value="${partner.password}" /></p>
+           <input type="password" name="passwordag" id="passwordag" value="${partner.password}" />
         </td>
       </tr>
       </c:if>
@@ -142,7 +142,7 @@
           <div align="center">供应商名称: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="title" id="title" value="${partner.title}" /></p>
+           <input type="text" name="title" id="title" value="${partner.title}" />
         </td>
       </tr>
      <tr>
@@ -150,7 +150,7 @@
           <div align="center">供应商主页: </div>
        </td>
         <td>
-           <p><input type="text" name="homepage" id="homepage" value="${partner.homepage}" /></p>
+           <input type="text" name="homepage" id="homepage" value="${partner.homepage}" />
         </td>
       </tr>
      <tr>
@@ -158,7 +158,7 @@
           <div align="center">银行名称: </div>
        </td>
         <td>
-           <p><input type="text" name="bankName" id="bankName" value="${partner.bankName}" /></p>
+           <input type="text" name="bankName" id="bankName" value="${partner.bankName}" />
         </td>
       </tr>
      <tr>
@@ -166,7 +166,7 @@
           <div align="center">银行账号: </div>
        </td>
         <td>
-           <p><input type="text" name="bankNo" id="bankNo" value="${partner.bankNo}" /></p>
+           <input type="text" name="bankNo" id="bankNo" value="${partner.bankNo}" />
         </td>
       </tr>
      <tr>
@@ -174,7 +174,7 @@
           <div align="center">银行用户名: </div>
        </td>
         <td>
-           <p><input type="text" name="bankUser" id="bankUser" value="${partner.bankUser}" /></p>
+           <input type="text" name="bankUser" id="bankUser" value="${partner.bankUser}" />
         </td>
       </tr>
      <tr>
@@ -182,7 +182,7 @@
           <div align="center">商户所在位置: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="location" id="location" value="${partner.location}" /></p>
+           <input type="text" name="location" id="location" value="${partner.location}" />
         </td>
       </tr>
      <tr>
@@ -190,7 +190,7 @@
           <div align="center">联系人: </div>
        </td>
         <td>
-           <p><input type="text" name="contact" id="contact" value="${partner.contact}" /></p>
+           <input type="text" name="contact" id="contact" value="${partner.contact}" />
         </td>
       </tr>
      <tr>
@@ -198,12 +198,12 @@
           <div align="center">商户图片1: </div>
        </td>
         <td>
-           <p>
+           
            
      		<c:if test="${not empty partner.image}">
      		<img width="300px" src="<ls:photo item='${partner.image}'/>"/><br/>
      		</c:if>
-           <input type="file" name="imageFile" id="file" size="50"/></p>
+           <input type="file" name="imageFile" id="file" size="50"/>
            <input type="hidden" name="image" id="image" value="${partner.image}" />
         </td>
       </tr>
@@ -212,11 +212,11 @@
           <div align="center">商户图片2: </div>
        </td>
         <td>
-           <p>
+           
      		<c:if test="${not empty partner.image1}">
      		<img width="300px" src="<ls:photo item='${partner.image1}'/>"/><br/>
      		</c:if>
-           <input type="file" name="imageFile1" id="file" size="50"/></p>
+           <input type="file" name="imageFile1" id="file" size="50"/>
            <input type="hidden" name="image1" id="image1" value="${partner.image1}" />
         </td>
       </tr>
@@ -225,11 +225,11 @@
           <div align="center">商户图片3: </div>
        </td>
         <td>
-           <p>
+           
      		<c:if test="${not empty partner.image2}">
      		<img width="300px" src="<ls:photo item='${partner.image2}'/>"/><br/>
      		</c:if>
-           <input type="file" name="imageFile2" id="file" size="50"/></p>
+           <input type="file" name="imageFile2" id="file" size="50"/>
            <input type="hidden" name="image2" id="image2" value="${partner.image2}" />
         </td>
       </tr>
@@ -238,7 +238,7 @@
           <div align="center">联系电话: </div>
        </td>
         <td>
-           <p><input type="text" name="phone" id="phone" value="${partner.phone}" /></p>
+           <input type="text" name="phone" id="phone" value="${partner.phone}" />
         </td>
       </tr>
      <tr>
@@ -246,7 +246,7 @@
           <div align="center">商户地址: </div>
        </td>
         <td>
-           <p><input type="text" name="address" id="address" value="${partner.address}" /></p>
+           <input type="text" name="address" id="address" value="${partner.address}" />
         </td>
       </tr>
      <tr>
@@ -254,7 +254,7 @@
           <div align="center">商户其他信息: </div>
        </td>
         <td>
-           <p><input type="text" name="other" id="other" value="${partner.other}" /></p>
+           <input type="text" name="other" id="other" value="${partner.other}" />
         </td>
       </tr>
      <tr>
@@ -262,7 +262,7 @@
           <div align="center">商户手机号码: </div>
        </td>
         <td>
-           <p><input type="text" name="mobile" id="mobile" value="${partner.mobile}" /></p>
+           <input type="text" name="mobile" id="mobile" value="${partner.mobile}" />
         </td>
       </tr>
      <tr>
@@ -270,7 +270,7 @@
           <div align="center">是否展示相关信息: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p>           
+                      
 				<select id="showInfo" name="showInfo">
 				  <option:optionGroup type="select" required="true" cache="true"  beanName="YES_NO" selectedValue="${partner.showInfo}"/>
 	            </select>
@@ -281,12 +281,12 @@
           <div align="center">商户状态: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p>
+           
 				<select id="status" name="status">
 				  <option:optionGroup type="select" required="true" cache="true"
 	                beanName="ENABLED" selectedValue="${partner.status}"/>
 	            </select>
-	        </p>
+	        
         </td>
       </tr>
      <tr>
@@ -294,12 +294,12 @@
           <div align="center">是否显示首页: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p>
+           
 				<select id="display" name="display">
 				  <option:optionGroup type="select" required="true" cache="true"
 	                beanName="YES_NO" selectedValue="${partner.display}"/>
 	            </select>
-	        </p>
+	        
         </td>
       </tr>
       
@@ -309,7 +309,7 @@
           <div align="center">评论满意数量: </div>
        </td>
         <td>
-           <p><input disabled="disabled" type="text" name="commentGood" id="commentGood" value="${partner.commentGood}" /></p>
+           <input disabled="disabled" type="text" name="commentGood" id="commentGood" value="${partner.commentGood}" />
         </td>
       </tr>
      <tr>
@@ -317,7 +317,7 @@
           <div align="center">评论一般数量: </div>
        </td>
         <td>
-           <p><input disabled="disabled" type="text" name="commentNone" id="commentNone" value="${partner.commentNone}" /></p>
+           <input disabled="disabled" type="text" name="commentNone" id="commentNone" value="${partner.commentNone}" />
         </td>
       </tr>
      <tr>
@@ -325,7 +325,7 @@
           <div align="center">评论失望数量: </div>
        </td>
         <td>
-           <p><input disabled="disabled" type="text" name="commentBad" id="commentBad" value="${partner.commentBad}" /></p>
+           <input disabled="disabled" type="text" name="commentBad" id="commentBad" value="${partner.commentBad}" />
         </td>
       </tr>
       </c:if>

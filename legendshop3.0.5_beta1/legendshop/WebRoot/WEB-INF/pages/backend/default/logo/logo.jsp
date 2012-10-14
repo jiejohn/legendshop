@@ -66,11 +66,11 @@
 						</div>
 					</td>
 					<td>
-						<p>
+						
 							<input type="file" name="file" id="file"/>
 							<input type="hidden" name="bannerName" id="bannerName" size="80"
 								value="${bean.banner}" />
-						</p>
+						
 					</td>
 				</tr>
 				<tr>
@@ -81,9 +81,9 @@
 						</div>
 					</td>
 					<td>
-						<p>
+						
 							<input type="text" name="url" id="url" size="81" value="${bean.url}" />
-						</p>
+						
 					</td>
 				</tr>
 				<tr>
@@ -93,9 +93,9 @@
 						</div>
 					</td>
 					<td>
-						<p>
+						
 						<input type="text" name="memo" id="memo" size="81" maxlength="100" value="${bean.memo}" />
-						</p>
+						
 					</td>
 				</tr>
 				<c:if test="${bean.banner!=null}">

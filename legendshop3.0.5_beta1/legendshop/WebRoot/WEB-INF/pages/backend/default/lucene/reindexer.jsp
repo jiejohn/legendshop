@@ -164,7 +164,7 @@ function writeTimeGroup(fieldNamePrefix)
 						</div>
 					</td>
 					<td>
-						<p>
+						
 							开始
 								<span class="gensmall">(dd/mm/yyyy hh:mm)</span>
 
@@ -182,7 +182,7 @@ function writeTimeGroup(fieldNamePrefix)
 									writeOptions("toYear", 1995, new Date().getFullYear());
 									writeTimeGroup("to");
 								</script>
-						</p>
+						
 					</td>
 				</tr>
 				<tr>
@@ -208,10 +208,10 @@ function writeTimeGroup(fieldNamePrefix)
 						</div>
 					</td>
 					<td>
-						<p>
+						
 							开始 <input type="text" name="firstPostId" onblur="chooseByPostId(this);" />
 							结束 <input type="text" name="lastPostId" onBlur="chooseByPostId(this);" />
-						</p>
+						
 					</td>
 				</tr>
 				<tr>

@@ -63,7 +63,7 @@
           <div align="center">Ip: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="ip" id="ip" value="${bean.ip}" /></p>
+           <input type="text" name="ip" id="ip" value="${bean.ip}" />
         </td>
       </tr>
      <tr>
@@ -71,7 +71,7 @@
           <div align="center">Country: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="country" id="country" value="${bean.country}" /></p>
+           <input type="text" name="country" id="country" value="${bean.country}" />
         </td>
       </tr>
      <tr>
@@ -79,7 +79,7 @@
           <div align="center">Area: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="area" id="area" value="${bean.area}" /></p>
+           <input type="text" name="area" id="area" value="${bean.area}" />
         </td>
       </tr>
      <tr>
@@ -87,7 +87,7 @@
           <div align="center">UserName: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="userName" id="userName" value="${bean.userName}" /></p>
+           <input type="text" name="userName" id="userName" value="${bean.userName}" />
         </td>
       </tr>
      <tr>
@@ -95,7 +95,7 @@
           <div align="center">ShopName: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="shopName" id="shopName" value="${bean.shopName}" /></p>
+           <input type="text" name="shopName" id="shopName" value="${bean.shopName}" />
         </td>
       </tr>
      <tr>
@@ -103,7 +103,7 @@
           <div align="center">ProductName: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="productName" id="productName" value="${bean.productName}" /></p>
+           <input type="text" name="productName" id="productName" value="${bean.productName}" />
         </td>
       </tr>
      <tr>
@@ -111,7 +111,7 @@
           <div align="center">Page: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="page" id="page" value="${bean.page}" /></p>
+           <input type="text" name="page" id="page" value="${bean.page}" />
         </td>
       </tr>
      <tr>
@@ -119,7 +119,7 @@
           <div align="center">Date: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="date" id="date" value="${bean.date}" /></p>
+           <input type="text" name="date" id="date" value="${bean.date}" />
         </td>
       </tr>
 

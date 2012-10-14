@@ -153,8 +153,8 @@
           <div align="right">用户名:</div>
        </td>
         <td>
-           <p><input type="text" name="userName" id="userName" value="${shopDetail.userName == null ? param.userName : shopDetail.userName}" size="50" readonly="readonly"/>
-           <a href="${pageContext.request.contextPath}/p/myaccount" target="_blank">我的账号</a></p>
+           <input type="text" name="userName" id="userName" value="${shopDetail.userName == null ? param.userName : shopDetail.userName}" size="50" readonly="readonly"/>
+           <a href="${pageContext.request.contextPath}/p/myaccount" target="_blank">我的账号</a>
         </td>
       </tr>
      <tr>
@@ -162,7 +162,7 @@
           <div align="right">网店名称: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="siteName" id="siteName" value="${shopDetail.siteName}" size="50"/></p>
+           <input type="text" name="siteName" id="siteName" value="${shopDetail.siteName}" size="50"/>
         </td>
       </tr>
      <tr>
@@ -170,7 +170,7 @@
           <div align="right">网店地址: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="shopAddr" id="shopAddr" value="${shopDetail.shopAddr}" size="50"/></p>
+           <input type="text" name="shopAddr" id="shopAddr" value="${shopDetail.shopAddr}" size="50"/>
         </td>
       </tr>
      <tr>
@@ -178,7 +178,7 @@
           <div align="right">银行汇款帐号:</div>
        </td>
         <td>
-           <p><input type="text" name="bankCard" id="bankCard" value="${shopDetail.bankCard}" size="50"/></p>
+           <input type="text" name="bankCard" id="bankCard" value="${shopDetail.bankCard}" size="50"/>
         </td>
       </tr>
      <tr>
@@ -186,7 +186,7 @@
           <div align="right">收款人姓名:</div>
        </td>
         <td>
-           <p><input type="text" name="payee" id="payee" value="${shopDetail.payee}" size="50" /></p>
+           <input type="text" name="payee" id="payee" value="${shopDetail.payee}" size="50" />
         </td>
       </tr>
      <tr>
@@ -194,7 +194,7 @@
           <div align="right">邮政编码:</div>
        </td>
         <td>
-           <p><input type="text" name="code" id="code" value="${shopDetail.code}" size="50"/></p>
+           <input type="text" name="code" id="code" value="${shopDetail.code}" size="50"/>
         </td>
       </tr>
      <tr>
@@ -202,7 +202,7 @@
           <div align="right">汇款地址:</div>
        </td>
         <td>
-           <p><input type="text" name="postAddr" id="postAddr" value="${shopDetail.postAddr}" size="50"/></p>
+           <input type="text" name="postAddr" id="postAddr" value="${shopDetail.postAddr}" size="50"/>
         </td>
       </tr>
      <tr>
@@ -210,7 +210,7 @@
           <div align="right">邮递接收人: </div>
        </td>
         <td>
-           <p><input type="text" name="recipient" id="recipient" value="${shopDetail.recipient}" size="50"/></p>
+           <input type="text" name="recipient" id="recipient" value="${shopDetail.recipient}" size="50"/>
         </td>
       </tr>
       <tr>
@@ -277,7 +277,7 @@
           <div align="right">简要描述: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="briefDesc" id="briefDesc" value="${shopDetail.briefDesc}" size="50"/></p>
+           <input type="text" name="briefDesc" id="briefDesc" value="${shopDetail.briefDesc}" size="50"/>
         </td>
       </tr>
      <tr>
@@ -285,9 +285,9 @@
           <div align="right">商城服务(出现在商品说明中): </div>
        </td>
         <td>
-           <p>
+           
               <textarea  name="detailDesc" id="detailDesc">${shopDetail.detailDesc}</textarea>
-           </p>
+           
         </td>
       </tr>
       <tr>
@@ -352,18 +352,18 @@
       </c:if>
       <tr>
       	<td><div align="right">商城图片</div></td>
-      	<td><p><input type="file" name="file" id="file"/><br>
+      	<td><input type="file" name="file" id="file"/><br>
 			<c:if test="${shopDetail.shopPic != null}">
               <img src="<ls:photo item='${shopDetail.shopPic}'/>" height="150" width="200"/> &nbsp;&nbsp;&nbsp;
              </c:if>
-						</p></td>
+						</td>
       </tr>
       <tr>
         <td>
           <div align="right">验证信息: </div>
        </td>
         <td>
-           <p>
+           
            <c:if test="${shopDetail.type != null}">
               网店类型：
              <option:optionGroup type="label" required="false" cache="true" beanName="SHOP_TYPE" selectedValue="${shopDetail.type}"/><br><br>
@@ -377,7 +377,7 @@
               <c:if test="${shopDetail.trafficPic != null}">
              营业执照照片： <img src="<ls:photo item='${shopDetail.trafficPic}'/>" height="150" width="200"/><br>
              </c:if>
-           </p>
+           
         </td>
       </tr>
                 <tr>

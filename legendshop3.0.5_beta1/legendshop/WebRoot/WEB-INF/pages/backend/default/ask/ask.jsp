@@ -64,74 +64,72 @@
                 </thead>
      			     <tr>
         <td>
-          <div align="center">UserId: <font color="ff0000">*</font></div>
+          <div align="center">UserId: <font cr="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="userId" id="userId" value="${ask.userId}" /></p>
+           <p><input type="text" name="userId" id="userId" value="${ask.userId}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">UserName: <font color="ff0000">*</font></div>
+          <div align="center">UserName:ont color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="userName" id="userName" value="${ask.userName}" /></p>
+           <p><input type="text" name="userName" id="userName" value="${ask.userName}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">ProdId: <font color="ff0000">*</font></div>
+          <div align="center"odId: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="prodId" id="prodId" value="${ask.prodId}" /></p>
+           <p><input type="text" name="prodId" id="prodId" value="${ask.prodId}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">ShopId: <font color="ff0000">*</font></div>
+          <div align=nter">ShopId: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="shopId" id="shopId" value="${ask.shopId}" /></p>
+           <p><input type="text" name="shopId" id="shopId" value="${ask.shopId}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">Type: <font color="ff0000">*</font></div>
+          < align="center">Type: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="type" id="type" value="${ask.type}" /></p>
+           <p><input type="text" name="type" id="type" value="${ask.type}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">Content: <font color="ff0000">*</font></div>
+       <div align="center">Content: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="content" id="content" value="${ask.content}" /></p>
+           <p><input type="text" name="content" id="content" value="${ask.content}" />
         </td>
       </tr>
      <tr>
-        <td>
-          <div align="center">Comment: <font color="ff0000">*</font></div>
+        <td>         <div align="center">Comment: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="comment" id="comment" value="${ask.comment}" /></p>
+           <p><input type="text" name="comment" id="comment" value="${ask.comment}" />
         </td>
       </tr>
      <tr>
-        <td>
+       d>
           <div align="center">CreateTime: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="createTime" id="createTime" value="${ask.createTime}" /></p>
+           <p><input type="text" name="createTime" id="createTime" value="${ask.createTime}" />
         </td>
       </tr>
-     <tr>
-        <td>
+     <tr>       <td>
           <div align="center">ReplyTime: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="replyTime" id="replyTime" value="${ask.replyTime}" /></p>
+           <p><input type="text" name="replyTime" id="replyTime" value="${ask.replyTime}" />
         </td>
       </tr>
 

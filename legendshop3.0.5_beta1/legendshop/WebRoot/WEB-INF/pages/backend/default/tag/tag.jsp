@@ -81,7 +81,7 @@
           <div align="center">名称 <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="name" id="name" value="${tag.name}" /></p>
+           <input type="text" name="name" id="name" value="${tag.name}" />
         </td>
       </tr>
      <tr>
@@ -89,14 +89,14 @@
           <div align="center">商品类型<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><select id="sortId" name="sortId" >
+           <select id="sortId" name="sortId" >
 			<c:if test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null && sessionScope.SPRING_SECURITY_LAST_USERNAME !=''}">
 	            <option:optionGroup type="select" required="false" cache="fasle"
 	                defaultDisp="-- 一级类型 --" 
 	                hql="select t.sortId, t.sortName from Sort t where t.sortType = 'P' and t.userName = ?" param="${tag.userName}" selectedValue="${tag.sortId}"/>
              </c:if>
 		</select>
-           </p>
+           
         </td>
       </tr>
      <tr>
@@ -104,13 +104,13 @@
           <div align="center">新闻栏目<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p>
+           
 	           <select id="newsCategoryId" name="newsCategoryId">
 	                 <option:optionGroup type="select" required="false" cache="fasle"
 	                beanName="NewsCategory" beanId="newsCategoryId" beanDisp="newsCategoryName" 
 	                hql="select t.newsCategoryId, t.newsCategoryName from NewsCategory t where t.status = 1 and t.userName = ?" param="${tag.userName}" selectedValue="${tag.newsCategoryId}"/>
 	            </select>
-           </p>
+           
         </td>
       </tr>
       <tr>
@@ -118,11 +118,11 @@
           <div align="center">状态<font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><select id="status" name="status">
+           <select id="status" name="status">
 	        <option:optionGroup type="select" required="true" cache="true"
 	                beanName="YES_NO" selectedValue="${tag.status}"/>
 		</select>
-           </p>
+           
         </td>
       </tr>
       <tr>

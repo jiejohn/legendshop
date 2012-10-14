@@ -99,7 +99,7 @@
           <div align="center">商品类型名称: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="nsortName" id="nsortName" value="${bean.nsortName}" /></p>
+           <input type="text" name="nsortName" id="nsortName" value="${bean.nsortName}" />
         </td>
       </tr>
       <tr>
@@ -107,7 +107,7 @@
           <div align="center">排序(必须为数字)：</div>
        </td>
         <td>
-           <p><input type="text" name="seq" id="seq" value="${bean.seq}" /></p>
+           <input type="text" name="seq" id="seq" value="${bean.seq}" />
         </td>
       </tr>
       <c:if test="${bean.parentNsortId == null}">  
@@ -116,12 +116,12 @@
           <div align="center">分类代表：</div>
        </td>
         <td>
-           <p>           
+                      
 				<select id="sortDeputy" name="sortDeputy">
 				  <option:optionGroup type="select" required="true" cache="true"
 	                beanName="YES_NO" selectedValue="${bean.sortDeputy}"/>
 	            </select>
-           </p>
+           
         </td>
       </tr>
       </c:if>
@@ -131,7 +131,7 @@
           <div align="center">品牌：</div>
        </td>
         <td>
-           <p><a href="javascript:nsort.appendBrand(${bean.nsortId})">增加品牌</a>&nbsp;还没有商品品牌？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/brand/load">创建品牌</a></p>
+           <a href="javascript:nsort.appendBrand(${bean.nsortId})">增加品牌</a>&nbsp;还没有商品品牌？请先&nbsp;<a href="${pageContext.request.contextPath}/admin/brand/load">创建品牌</a>
         </td>
       </tr>
       </c:if>

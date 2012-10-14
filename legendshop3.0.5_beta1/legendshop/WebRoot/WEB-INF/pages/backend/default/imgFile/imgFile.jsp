@@ -63,7 +63,7 @@
           <div align="center">UserName: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="userName" id="userName" value="${bean.userName}" /></p>
+           <input type="text" name="userName" id="userName" value="${bean.userName}" />
         </td>
       </tr>
      <tr>
@@ -71,7 +71,7 @@
           <div align="center">ProductId: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="productId" id="productId" value="${bean.productId}" /></p>
+           <input type="text" name="productId" id="productId" value="${bean.productId}" />
         </td>
       </tr>
      <tr>
@@ -79,7 +79,7 @@
           <div align="center">ProductType: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="productType" id="productType" value="${bean.productType}" /></p>
+           <input type="text" name="productType" id="productType" value="${bean.productType}" />
         </td>
       </tr>
      <tr>
@@ -87,7 +87,7 @@
           <div align="center">FilePath: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="filePath" id="filePath" value="${bean.filePath}" /></p>
+           <input type="text" name="filePath" id="filePath" value="${bean.filePath}" />
         </td>
       </tr>
      <tr>
@@ -95,7 +95,7 @@
           <div align="center">FileType: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="fileType" id="fileType" value="${bean.fileType}" /></p>
+           <input type="text" name="fileType" id="fileType" value="${bean.fileType}" />
         </td>
       </tr>
      <tr>
@@ -103,7 +103,7 @@
           <div align="center">FileSize: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="fileSize" id="fileSize" value="${bean.fileSize}" /></p>
+           <input type="text" name="fileSize" id="fileSize" value="${bean.fileSize}" />
         </td>
       </tr>
      <tr>
@@ -111,7 +111,7 @@
           <div align="center">UpoadTime: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="upoadTime" id="upoadTime" value="${bean.upoadTime}" /></p>
+           <input type="text" name="upoadTime" id="upoadTime" value="${bean.upoadTime}" />
         </td>
       </tr>
      <tr>
@@ -119,7 +119,7 @@
           <div align="center">Status: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="status" id="status" value="${bean.status}" /></p>
+           <input type="text" name="status" id="status" value="${bean.status}" />
         </td>
       </tr>
 

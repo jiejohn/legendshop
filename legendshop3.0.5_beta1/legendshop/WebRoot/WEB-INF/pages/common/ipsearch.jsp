@@ -127,7 +127,6 @@ function isIP() {
       <LI><A href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club/jforum.page?module=posts&action=insert&forum_id=4">我要投诉</A> - 到论坛上投诉 </LI>
    </UL>
   </OL>
-  <P></P>
   </BLOCKQUOTE>
    </td></tr></table>
 </center>

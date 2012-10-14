@@ -82,7 +82,7 @@
           <div align="center">配送名称: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="name" id="name" value="${deliveryType.name}" /></p>
+           <input type="text" name="name" id="name" value="${deliveryType.name}" />
         </td>
       </tr>
      <tr>
@@ -90,7 +90,7 @@
           <div align="center">默认物流公司: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p>
+           
            	<select id="dvyId" name="dvyId">
 	            <option:optionGroup type="select" required="true" cache="fasle"
 	                beanId="dvyId" beanDisp="name" defaultDisp="-- 物流公司 --" 
@@ -100,7 +100,7 @@
 			</select>
            
            
-           </p>
+           
         </td>
       </tr>
      <tr>
@@ -108,7 +108,7 @@
           <div align="center">描述: </div>
        </td>
         <td>
-           <p><input type="text" name="notes" id="notes" value="${deliveryType.notes}" /></p>
+           <input type="text" name="notes" id="notes" value="${deliveryType.notes}" />
         </td>
       </tr>
 

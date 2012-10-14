@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
      <tr>
       <td width="20%"><div align="right">回复<font color="#ff0000">*</font></div></td>
       <td width="80%">
-      		<p><textarea rows="6" id="answer" name="answer"></textarea></p>
+      		<textarea rows="6" id="answer" name="answer"></textarea>
       </td>
     </tr>  
     <tr>

@@ -64,114 +64,111 @@
                 </thead>
      			     <tr>
         <td>
-          <div align="center">UserId: <font color="ff0000">*</font></div>
+          <div align="center">UserId: <font cr="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="userId" id="userId" value="${cash.userId}" /></p>
+           <p><input type="text" name="userId" id="userId" value="${cash.userId}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">UserName: <font color="ff0000">*</font></div>
+          <div align="center">UserName:ont color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="userName" id="userName" value="${cash.userName}" /></p>
+           <p><input type="text" name="userName" id="userName" value="${cash.userName}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">Code: <font color="ff0000">*</font></div>
+          <div align="centeCode: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="code" id="code" value="${cash.code}" /></p>
+           <p><input type="text" name="code" id="code" value="${cash.code}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">ShopId: <font color="ff0000">*</font></div>
+          <div align=nter">ShopId: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="shopId" id="shopId" value="${cash.shopId}" /></p>
+           <p><input type="text" name="shopId" id="shopId" value="${cash.shopId}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">ProdId: <font color="ff0000">*</font></div>
+          <dilign="center">ProdId: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="prodId" id="prodId" value="${cash.prodId}" /></p>
+           <p><input type="text" name="prodId" id="prodId" value="${cash.prodId}" />
         </td>
       </tr>
      <tr>
         <td>
-          <div align="center">PartnerId: <font color="ff0000">*</font></div>
+        div align="center">PartnerId: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="partnerId" id="partnerId" value="${cash.partnerId}" /></p>
+           <p><input type="text" name="partnerId" id="partnerId" value="${cash.partnerId}" />
         </td>
       </tr>
      <tr>
-        <td>
+        <t
           <div align="center">SubId: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="subId" id="subId" value="${cash.subId}" /></p>
+           <p><input type="text" name="subId" id="subId" value="${cash.subId}" />
         </td>
       </tr>
      <tr>
-        <td>
+     <td>
           <div align="center">Detail: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="detail" id="detail" value="${cash.detail}" /></p>
+           <p><input type="text" name="detail" id="detail" value="${cash.detail}" />
         </td>
       </tr>
-     <tr>
+     >
         <td>
           <div align="center">Money: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="money" id="money" value="${cash.money}" /></p>
+           <p><input type="text" name="money" id="money" value="${cash.money}" />
         </td>
-      </tr>
-     <tr>
+      </tr>    <tr>
         <td>
           <div align="center">Status: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="status" id="status" value="${cash.status}" /></p>
+           <p><input type="text" name="status" id="status" value="${cash.status}" />
         </td>
-      </tr>
+      r>
      <tr>
         <td>
           <div align="center">BeginTime: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="beginTime" id="beginTime" value="${cash.beginTime}" /></p>
-        </td>
+           <p><input type="text" name="beginTime" id="beginTime" value="${cash.beginTime}" />
+        </t
       </tr>
      <tr>
         <td>
           <div align="center">EndTime: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="endTime" id="endTime" value="${cash.endTime}" /></p>
-        </td>
+           <p><input type="text" name="endTime" id="endTime" value="${cash.endTime}" p>       </td>
       </tr>
      <tr>
         <td>
           <div align="center">Ip: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="ip" id="ip" value="${cash.ip}" /></p>
-        </td>
+           <p><input type="text" name="ip" id="ip" value="${cash.ip}" p>       </td>
       </tr>
      <tr>
         <td>
           <div align="center">CreateTime: <font color="ff0000">*</font></div>
        </td>
         <td>
-           <p><input type="text" name="createTime" id="createTime" value="${cash.createTime}" /></p>
+           <p><input type="text" name="createTime" id="createTime" value="${cash.createTime}" p>
         </td>
       </tr>
 
