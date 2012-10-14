@@ -12,7 +12,10 @@ import java.util.List;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
+import com.legendshop.core.event.impl.FireEvent;
+import com.legendshop.event.EventHome;
 import com.legendshop.group.dao.GroupProductDao;
 import com.legendshop.model.entity.GroupProduct;
 import com.legendshop.model.entity.Product;
@@ -37,6 +40,7 @@ public class GroupProductDaoImpl extends BaseDaoImpl implements GroupProductDao 
 	@Override
 	@CacheEvict(value = "Product", key = "#product.prodId")
 	public void updateProduct(GroupProduct product) {
+		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.SAVE));
 		update(product);
 	}
 
@@ -45,6 +49,7 @@ public class GroupProductDaoImpl extends BaseDaoImpl implements GroupProductDao 
 	 */
 	@Override
 	public void saveProduct(GroupProduct product) {
+		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.SAVE));
 		save(product);
 	}
 	
@@ -72,7 +77,11 @@ public class GroupProductDaoImpl extends BaseDaoImpl implements GroupProductDao 
 	@Override
 	@CacheEvict(value = "Product", key = "#prodId")
 	public void deleteProduct(Long prodId) {
-		deleteById(GroupProduct.class, prodId);
+		GroupProduct product = getGroupProduct(prodId);
+		if(product != null){
+			EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.SAVE));
+			delete(product);
+		}
 	}
 
 }
