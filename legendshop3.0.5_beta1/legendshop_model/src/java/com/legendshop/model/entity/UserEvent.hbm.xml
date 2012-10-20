@@ -15,6 +15,11 @@
         </property>
         <property name="userName" type="java.lang.String">
             <column name="user_name">
+                <comment>所属用户名称</comment>
+            </column>
+        </property>
+         <property name="modifyUser" type="java.lang.String">
+            <column name="modify_user">
                 <comment>操作员名称</comment>
             </column>
         </property>
@@ -26,6 +31,11 @@
         <property name="operation" type="java.lang.String">
             <column name="operation">
                 <comment>操作描述</comment>
+            </column>
+        </property>
+         <property name="relateId" type="java.lang.String">
+            <column name="relate_id">
+                <comment>相关数据ID</comment>
             </column>
         </property>
         <property name="relateData" type="java.lang.String">

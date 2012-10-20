@@ -13,7 +13,7 @@ import java.util.Date;
  * 产品评论表.
  */
 
-public class ProductComment implements BaseEntity {
+public class ProductComment extends AbstractEntity implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3118765177322131488L;

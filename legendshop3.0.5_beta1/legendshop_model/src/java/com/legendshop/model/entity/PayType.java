@@ -17,7 +17,7 @@ import java.io.Serializable;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class PayType implements BaseEntity {
+public class PayType extends AbstractEntity implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 173116392190218430L;

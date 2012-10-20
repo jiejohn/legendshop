@@ -173,5 +173,15 @@
                 <comment>后台风格</comment>
             </column>
         </property> 
+        <property name="domainName" type="java.lang.String">
+            <column name="domain_name">
+                <comment>独立域名</comment>
+            </column>
+        </property> 
+        <property name="icpInfo" type="java.lang.String">
+            <column name="icp_info">
+                <comment>备案信息</comment>
+            </column>
+        </property> 
     </class>
 </hibernate-mapping>

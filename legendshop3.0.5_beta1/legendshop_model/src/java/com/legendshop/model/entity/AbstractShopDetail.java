@@ -26,7 +26,7 @@ public abstract class AbstractShopDetail extends UploadFile implements BaseEntit
     /** The user id. */
     protected String userId;
 
-    /** The user name. */
+    /** 商城名称. */
     protected String userName;
 
     /** The siteName. */
@@ -152,6 +152,15 @@ public abstract class AbstractShopDetail extends UploadFile implements BaseEntit
 	
 	/** The end type. */
 	protected String endType;
+	/**
+	 * 独立域名
+	 */
+	protected String domainName;
+	
+	/**
+	 * 备案信息
+	 */
+	protected String icpInfo;
 	
 	/** The qq list. */
 	protected List<String> qqList; //copy from userDetail qq
@@ -196,7 +205,7 @@ public abstract class AbstractShopDetail extends UploadFile implements BaseEntit
 
 	/**
 	 * Gets the user name.
-	 * 
+	 * 商城名称
 	 * @return the user name
 	 */
 	public String getUserName() {
@@ -995,5 +1004,21 @@ public abstract class AbstractShopDetail extends UploadFile implements BaseEntit
 
 	public Serializable getId() {
 		return shopId;
+	}
+
+	public String getDomainName() {
+		return domainName;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
+
+	public String getIcpInfo() {
+		return icpInfo;
+	}
+
+	public void setIcpInfo(String icpInfo) {
+		this.icpInfo = icpInfo;
 	}
 }

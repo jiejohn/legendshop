@@ -18,7 +18,7 @@ import java.util.Set;
  * 
  * 官方网站：http://www.legendesign.net
  */
-public class UserDetail implements BaseEntity {
+public class UserDetail extends AbstractEntity implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -3648830158220060652L;

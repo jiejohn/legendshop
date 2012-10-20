@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 上传文件对象.
  */
-public class UploadFile extends AbstractEntity implements Serializable{
+public abstract class UploadFile extends AbstractEntity implements Serializable{
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8055409574740815068L;

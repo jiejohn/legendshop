@@ -11,11 +11,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户事件
+ * 用户事件.
  */
 
 public class UserEvent implements BaseEntity {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1477990911266692837L;
 
 	/** The event id. */
@@ -36,8 +37,20 @@ public class UserEvent implements BaseEntity {
 	/** The relate data. */
 	private String relateData;
 	
+	/** The relate id. */
+	private String relateId;
+	
 	/** The create time. */
 	private Date createTime;
+	
+	/** The start time. */
+	private Date startTime;
+
+	/** The end time. */
+	private Date endTime;
+	
+	/** The modify user. */
+	private String modifyUser;
 	
 	/**
 	 * Gets the event id.
@@ -172,8 +185,73 @@ public class UserEvent implements BaseEntity {
 		this.createTime = createTime;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.legendshop.model.entity.BaseEntity#getId()
+	 */
 	public Serializable getId() {
 		return eventId;
+	}
+
+	/**
+	 * Gets the relate id.
+	 *
+	 * @return the relate id
+	 */
+	public String getRelateId() {
+		return relateId;
+	}
+
+	/**
+	 * Sets the relate id.
+	 *
+	 * @param relateId the new relate id
+	 */
+	public void setRelateId(String relateId) {
+		this.relateId = relateId;
+	}
+
+	/**
+	 * Gets the start time.
+	 *
+	 * @return the start time
+	 */
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	/**
+	 * Sets the start time.
+	 *
+	 * @param startTime the new start time
+	 */
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	/**
+	 * Gets the end time.
+	 *
+	 * @return the end time
+	 */
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	/**
+	 * Sets the end time.
+	 *
+	 * @param endTime the new end time
+	 */
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getModifyUser() {
+		return modifyUser;
+	}
+
+	public void setModifyUser(String modifyUser) {
+		this.modifyUser = modifyUser;
 	}
 
 }

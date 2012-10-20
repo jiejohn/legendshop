@@ -361,4 +361,12 @@ public class GroupProduct extends AbstractEntity implements BaseEntity{
 	public Serializable getId() {
 		return prodId;
 	}
+
+	@Override
+	public String getUserName() {
+		if(product == null){
+			return null;
+		}
+		return product.getUserName();
+	}
 }

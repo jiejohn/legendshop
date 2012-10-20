@@ -199,4 +199,9 @@ public class User extends AbstractEntity implements BaseEntity {
 		this.passwordag = passwordag;
 	}
 
+	@Override
+	public String getUserName() {
+		return name;
+	}
+
 }
