@@ -116,7 +116,7 @@ public class GroupServiceImpl extends AbstractService implements GroupService  {
 				request.setAttribute("partner", partner);
 			}
 			request.setAttribute("groupProduct", groupProduct);
-			return PathResolver.getPath(request,response,GroupFrontPage.VIEW);
+			return PathResolver.getPath(request,response,GroupTilesPage.GVIEW);
 		}else{
 			UserMessages uem = new UserMessages();
 			Locale locale = localeResolver.resolveLocale(request);

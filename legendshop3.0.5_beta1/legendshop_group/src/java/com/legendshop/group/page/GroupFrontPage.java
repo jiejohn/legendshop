@@ -25,12 +25,6 @@ public enum GroupFrontPage implements PageDefinition {
 	/** The VARIABLE. 可变路径 */
 	VARIABLE(""),
 
-	/** The INDEX. */
-	INDEX("/group/index",TemplateEnum.RED),
-
-	/** The VIEWS. */
-	VIEW("/group/view",TemplateEnum.RED),
-
 	/** The CLIEN t_ servic e_ panel. */
 	CLIENT_SERVICE_PANEL("/group/clientServicePanel",TemplateEnum.RED),
 

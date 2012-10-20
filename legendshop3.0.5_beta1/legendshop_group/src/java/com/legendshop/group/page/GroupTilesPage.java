@@ -26,7 +26,9 @@ public enum GroupTilesPage implements PageDefinition{
 	VARIABLE(""),
 	
 	/** The Index. */
-	GINDEX("gindex.",TemplateEnum.RED);
+	GINDEX("gindex.",TemplateEnum.RED),
+	
+	GVIEW("gview.",TemplateEnum.RED);
 	
 	
 	/** The value. */
