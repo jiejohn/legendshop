@@ -222,4 +222,6 @@ public interface ShopDetailDao extends BaseDao{
 	 */
 	public abstract Long getAllShopCount();
 
+	public abstract String getShopNameByDomain(String domainName);
+
 }
