@@ -63,7 +63,7 @@
        </display:column>      
      <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
      <display:column title="商城" property="shopName" sortable="true" sortName="shopName">
-     	<a href="${pageContext.request.contextPath}/shop/${item.shopName}" target="_blank">${item.shopName}</a>
+     	<a href="<ls:domain shopName='${item.shopName}'  />" target="_blank">${item.shopName}</a>
      </display:column>
      </auth:auth>
     </display:table>

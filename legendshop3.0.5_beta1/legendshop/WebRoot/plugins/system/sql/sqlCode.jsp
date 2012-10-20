@@ -57,12 +57,6 @@ if(signnature!=null){
     </form>
     
     </auth:auth>
-     <!-- 
-     <auth:auth ifNotGranted = "OP_LOGOUT">
-          <a href="javascript:window.parent.location='${DOMAIN_NAME}/cas/logout?next-chain=${DOMAIN_NAME}/j_acegi_logout'">
-          系统注销</a>
-  	</auth:auth>
-  	 -->
   	<br><br>
       通过ID查找系统参数的对应值：
     <form name="form1" method="post" action="sqlCode.jsp">

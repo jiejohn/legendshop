@@ -74,7 +74,7 @@
 	     <tr>
 		     <td align="left">
 		    <%if(PropertiesUtil.getDefaultShopName()!=null && PropertiesUtil.getDefaultShopName().length() > 0){ %>
-		   		<a href="${pageContext.request.contextPath}/shop/<%=PropertiesUtil.getDefaultShopName() %>"><fmt:message key="shop.index"/></a>
+		   		<a href="<ls:domain shopName='<%=PropertiesUtil.getDefaultShopName()%>' />"><fmt:message key="shop.index"/></a>
 		   <%} %>
 		   <a href="<ls:url address='/all'/>"><fmt:message key="search"/></a></td>
 		     <td align="right">
@@ -86,7 +86,7 @@
 						<a href="${pageContext.request.contextPath}/p/logout" target="_parent"><fmt:message key="logout"/></a>
        			        <auth:auth ifAnyGranted="F_ADMIN">
        			        	<c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
-       			                <a href="<ls:url address='/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}'/>"><fmt:message key="myShop"/></a>
+       			                <a href="<ls:domain shopName='${sessionScope.SPRING_SECURITY_LAST_USERNAME}' />"><fmt:message key="myShop"/></a>
        			             </c:if>
 					            <a href="<ls:url address='/admin/index'/>"><fmt:message key="system.management"/></a>
 					    </auth:auth>

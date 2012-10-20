@@ -67,8 +67,7 @@ public class LogoDaoImpl extends BaseDaoImpl implements LogoDao {
 	@Override
 	@CacheEvict(value = "Logo", key = "#logo.userName")
 	public void updateLogo(Logo logo) {
-		// TODO Auto-generated method stub
-		
+		update(logo);
 	}
 
 }

@@ -307,6 +307,9 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * com.legendshop.business.dao.ProductDao#updateProdOnline(java.lang.Long)
 	 */
 	@Override
+	@Caching(evict = {
+			@CacheEvict(value = "ProductDetail", key = "#prodId"),
+			@CacheEvict(value = "Product", key = "#prodId") })
 	public boolean updateProdOnline(Long prodId) {
 		Product product = get(Product.class, prodId);
 		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.TURN_ON));
@@ -320,6 +323,9 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * com.legendshop.business.dao.ProductDao#updateProdOffline(java.lang.Long)
 	 */
 	@Override
+	@Caching(evict = {
+			@CacheEvict(value = "ProductDetail", key = "#prodId"),
+			@CacheEvict(value = "Product", key = "#prodId") })
 	public boolean updateProdOffline(Long prodId) {
 		Product product = get(Product.class, prodId);
 		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.TURN_OFF));
@@ -388,6 +394,9 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	}
 
 	@Override
+	@Caching(evict = {
+			@CacheEvict(value = "ProductDetail", key = "#prodId"),
+			@CacheEvict(value = "Product", key = "#prodId") })
 	public boolean updateDynamicTemp(Long tempId, String userName, Short type, String content) {
 		if (AppUtils.isBlank(tempId) || AppUtils.isBlank(userName)) {
 			return false;
@@ -403,6 +412,9 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	}
 
 	@Override
+	@Caching(evict = {
+			@CacheEvict(value = "ProductDetail", key = "#prodId"),
+			@CacheEvict(value = "Product", key = "#prodId") })
 	public boolean deleteDynamicTemp(Long tempId, String userName) {
 		DynamicTemp temp = findUniqueBy("from DynamicTemp where id = ?  and userName = ?",
 				DynamicTemp.class, tempId, userName);

@@ -60,6 +60,12 @@
                 <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/advertisement/query' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='广告管理' title='广告管理'/></a> </div>
               </div>
             </li>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/admin/indexjpg/query'  target='main' title="主页上的轮换图片广告管理">图片管理</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/indexjpg/query'  target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='主页图片管理' title='主页图片管理'/></a> </div>
+              </div>
+            </li>
             <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
             <li>
               <div class='items'>

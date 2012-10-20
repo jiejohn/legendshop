@@ -154,10 +154,10 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
 		origin.setStartDate(product.getStartDate());
 		origin.setEndDate(product.getEndDate());
 		origin.setCommend(product.getCommend());
+		EventHome.publishEvent(new FireEvent(origin, OperationTypeEnum.UPDATE));
 		productDao.updateProduct(origin);
 		shopDetailDao.updateShopDetailWhenProductChange(origin);
 		productSearchFacade.update(origin);
-		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.UPDATE));
 	}
 
 	/* (non-Javadoc)

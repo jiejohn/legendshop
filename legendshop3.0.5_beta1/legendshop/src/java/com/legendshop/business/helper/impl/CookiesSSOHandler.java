@@ -12,19 +12,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.legendshop.business.form.UserForm;
-import com.legendshop.business.helper.Handler;
+import com.legendshop.business.helper.AbstractHandler;
 import com.legendshop.business.service.DefaultLoginServiceImpl;
 import com.legendshop.business.service.UserDetailService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.exception.ApplicationException;
 import com.legendshop.core.exception.EntityCodes;
-import com.legendshop.core.helper.ThreadLocalContext;
+import com.legendshop.core.helper.Handler;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.LoginService;
 import com.legendshop.util.ContextServiceLocator;
 import com.legendshop.util.CookieUtil;
 
-public class CookiesSSOHandler implements Handler {
+public class CookiesSSOHandler extends AbstractHandler implements Handler {
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(CookiesSSOHandler.class);
 	
@@ -36,7 +36,7 @@ public class CookiesSSOHandler implements Handler {
 	
 	public static String LOGINED_USER = "LEGENDSHOP_LOGINED_USER";
 	@Override
-	public void handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException{
+	public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
 			String loginedUserName = CookieUtil.getCookieValue(request, LOGINED_USER);
 			String userName = UserManager.getUsername(request);
@@ -60,7 +60,6 @@ public class CookiesSSOHandler implements Handler {
 				logout(request,response); 
 			}
 		} catch (Exception e) {
-			ThreadLocalContext.clean();
 			throw new ApplicationException(e, "CookiesSSOHandler Fail", EntityCodes.SYSTEM);
 		}
 

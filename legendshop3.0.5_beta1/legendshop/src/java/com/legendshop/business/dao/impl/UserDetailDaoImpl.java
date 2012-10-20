@@ -171,7 +171,6 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 			log.info("{} 营业执照照片文件 {} ", userDetail.getUserName(), filename);
 			shopDetail.setTrafficPic(filename);
 		}
-
 		this.save(shopDetail);
 		return shopDetail.getStatus();
 	}
@@ -182,6 +181,7 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 	 */
 	@Override
 	public void updateUser(UserDetail userDetail) {
+		EventHome.publishEvent(new FireEvent(userDetail, OperationTypeEnum.UPDATE));
 		this.update(userDetail);
 		updatePassword(userDetail);
 	}
@@ -195,6 +195,7 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 		if (!AppUtils.isBlank(userDetail.getPassword())) {
 			User user = this.get(User.class, userDetail.getUserId());
 			user.setPassword(MD5Util.Md5Password(userDetail.getUserName(), userDetail.getPassword()));
+			EventHome.publishEvent(new FireEvent(user, OperationTypeEnum.UPDATE_PASSWORD));
 			this.update(user);
 		}
 	}

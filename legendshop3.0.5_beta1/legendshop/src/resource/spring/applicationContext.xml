@@ -36,5 +36,23 @@
 			</list>
 		</property>
 	</bean>
+	
+	  <bean id="handlerManager" class="com.legendshop.core.helper.HandlerManager">
+    	<property name="handlers">
+    		      	<list>
+      					<bean class="com.legendshop.business.helper.impl.EncodingHandler" >
+      						<property name="encoding" value="UTF-8"></property>
+      					</bean>
+      					 <bean class="com.legendshop.business.helper.impl.IndependDomainHandler" >
+      					 	<property name="shopService" ref="shopDetailService"></property>
+      					</bean>
+      					<!-- 
+      					<bean class="com.legendshop.business.helper.impl.CookiesSSOHandler">
+      						<property name="userDetailService" ref="userDetailService" />
+      					</bean>
+      					 -->
+      				</list>
+    	</property>
+    </bean>
 </beans>
    

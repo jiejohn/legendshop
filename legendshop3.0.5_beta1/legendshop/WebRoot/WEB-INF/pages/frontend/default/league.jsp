@@ -23,7 +23,7 @@
                                                         <tr>
                                                             <td align="center" >
                                                             <div id="apple">
-                                                             <a href="${pageContext.request.contextPath}/shop/${league.friendId}">
+                                                             <a href="<ls:domain shopName='${league.friendId}'/>">
                                                                     <img src="<ls:photo item='${league.banner}'/>" 
                                                                         height="65px" style="margin: 2px" title="${league.province}/${league.city}/${league.area}/${league.friendId}">
                                                              </a>

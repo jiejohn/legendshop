@@ -8,8 +8,14 @@
            <a href="${pageContext.request.contextPath}/ipsearch" target="_blank">IP地址查询</a>
   </td></tr>
     <tr> 
-  <td width="100%" align="center"> 
-  &copy;Copyright 2009 - 2011 Power By <a href="http://www.legendesign.net" target="_blank">LegendShop ${LEGENDSHOP_VERSION} ${licenseDesc}</a>  All Rights Reserved.
+  <td width="100%" align="center">
+    	 &copy;Copyright 2009 - 2012 Power By 
+    	 <c:choose>
+	    	 	<c:when test="${shopDetail.domainName != null }"></c:when>
+	    	 	<c:otherwise>
+	    	 			<a href="http://www.legendesign.net" target="_blank">LegendShop ${LEGENDSHOP_VERSION} ${licenseDesc}</a>  All Rights Reserved.
+	    	 	</c:otherwise>
+    	 </c:choose>
        </td></tr>
   <tr> 
 </table>

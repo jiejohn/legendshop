@@ -6,4 +6,8 @@
 		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/group/index2.jsp" />
 	</definition>
 	
+	<definition name="gview.*"   template="/WEB-INF/pages/frontend/{1}/group/indexFrame.jsp">
+		<put-attribute name="main" value="/WEB-INF/pages/frontend/{1}/group/view.jsp" />
+	</definition>
+	
 </tiles-definitions>

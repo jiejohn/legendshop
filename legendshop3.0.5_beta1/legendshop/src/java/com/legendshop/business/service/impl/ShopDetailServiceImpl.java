@@ -14,11 +14,14 @@ import org.springframework.cache.annotation.Cacheable;
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.search.facade.ShopDetailSearchFacade;
 import com.legendshop.business.service.ShopDetailService;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.helper.ShopStatusChecker;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.ShopDetailView;
@@ -110,6 +113,12 @@ public class ShopDetailServiceImpl   extends BaseServiceImpl  implements ShopDet
 //			throw new BusinessException("Check shop failed", EntityCodes.SHOP);
 //		}
 		return shopDetail;
+	}
+	
+	@Override
+	@Cacheable(value = "ShopDetailView")
+	public String getShopNameByDomain(String domainName){
+		return shopDetailDao.getShopNameByDomain(domainName);
 	}
 
 

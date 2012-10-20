@@ -11,7 +11,9 @@
 		<intercept-url pattern="/p/**" access="isAuthenticated()" />
 		<intercept-url pattern="/admin/member/**" access="hasRole('ROLE_SUPERVISOR')" />
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />	
+		<!-- 
 		<intercept-url pattern="/plugins/system/**" access="hasRole('ROLE_SYSTEM')" />
+		 -->
 		<intercept-url pattern="/**" access="permitAll" />
 		<custom-filter ref="validateCodeAuthenticationFilter" position="FORM_LOGIN_FILTER" />
 		<!-- 

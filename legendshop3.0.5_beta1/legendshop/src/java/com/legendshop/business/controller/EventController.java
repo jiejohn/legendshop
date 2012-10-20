@@ -31,6 +31,7 @@ import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.newservice.EventService;
 import com.legendshop.model.entity.UserEvent;
+import com.legendshop.util.AppUtils;
 
 /**
  * The Class EventController
@@ -46,11 +47,17 @@ public class EventController extends BaseController implements AdminController<U
     public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, UserEvent userEvent) {
         CriteriaQuery cq = new CriteriaQuery(UserEvent.class, curPageNO);
         cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
-        cq = hasAllDataFunction(cq, request, StringUtils.trim(userEvent.getUserName()));
-        /*
-           //TODO add your condition
-        */
-        
+
+		if (!AppUtils.isBlank(userEvent.getUserName())) {
+			cq.like("userName", "%" + StringUtils.trim(userEvent.getUserName()) + "%");
+		}
+		if (!AppUtils.isBlank(userEvent.getModifyUser())) {
+			cq.eq("modifyUser", userEvent.getModifyUser());
+		}
+		cq.ge("createTime", userEvent.getStartTime());
+		cq.le("createTime", userEvent.getEndTime());
+		cq.addOrder("desc", "createTime");
+
         PageSupport ps = eventService.getEvent(cq);
         savePage(ps, request);
         request.setAttribute("event", userEvent);
@@ -85,7 +92,7 @@ public class EventController extends BaseController implements AdminController<U
 		if(result!=null){
 			return result;
 		}
-        request.setAttribute("#entityClassInstance", userEvent);
+        request.setAttribute("event", userEvent);
         return PathResolver.getPath(request, response, BackPage.EVENT_EDIT_PAGE);
     }
     

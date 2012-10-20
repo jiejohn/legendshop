@@ -42,6 +42,3 @@ function changeOrder(order,seq){
 <tiles2:insertAttribute name="main" ignore="true" />
 
 <jsp:include page="/bottom"/>
- 
-</body>
-</html>

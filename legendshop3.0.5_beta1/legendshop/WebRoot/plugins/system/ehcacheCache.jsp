@@ -44,7 +44,9 @@
 							   <td width="100px"><%=num%> </td>
 								<td width="150px"><%=j%> : <%=cache.getName() %> </td>
 								<td  width="30px"><%=cache.getSize()%> </td>
-								<td><%=cache.get(names.get(j)) == null ? null : safeHtml.makeSafe(cache.get(names.get(j)).toString()) %></pre> </td>
+								<td><pre>
+								<%=cache.get(names.get(j)) == null ? null : safeHtml.makeSafe(cache.get(names.get(j)).toString()) %>
+								</pre> </td>
 						</tr>
 						<%
 					}

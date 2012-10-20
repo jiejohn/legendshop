@@ -96,6 +96,7 @@ public class ImgFileDaoImpl extends BaseDaoImpl implements ImgFileDao {
 	}
 	
 	@Override
+	@CacheEvict(value = "ImgFile", key = "#fileId")
 	public boolean updateImgFileOnline(Long fileId) {	
 		return updateImgFileStatus(fileId,ProductStatusEnum.PROD_ONLINE.value());
 	}
@@ -104,6 +105,7 @@ public class ImgFileDaoImpl extends BaseDaoImpl implements ImgFileDao {
 	 * @see com.legendshop.business.service.impl.AdminService#imgFileOffline(java.lang.Long)
 	 */
 	@Override
+	@CacheEvict(value = "ImgFile", key = "#fileId")
 	public boolean updateImgFileOffline(Long fileId) {
 		return updateImgFileStatus(fileId,ProductStatusEnum.PROD_OFFLINE.value());
 	}

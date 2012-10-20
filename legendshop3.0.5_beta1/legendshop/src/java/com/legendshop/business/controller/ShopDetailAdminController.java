@@ -25,6 +25,7 @@ import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.search.facade.ShopDetailSearchFacade;
 import com.legendshop.business.service.ShopDetailService;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.ParameterEnum;
@@ -32,13 +33,16 @@ import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.helper.FileProcessor;
+import com.legendshop.core.helper.FoundationUtil;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.UserDetail;
 import com.legendshop.spi.constants.ShopTypeEnum;
@@ -132,7 +136,7 @@ public class ShopDetailAdminController extends BaseController {
 				throw new NotFoundException("userDetail can not be null!",EntityCodes.SHOP);
 			}
 			try {
-				SafeHtml safeHtml = new SafeHtml();
+				//SafeHtml safeHtml = new SafeHtml();
 				shopDetail.setUserId(userDetail.getUserId());
 				Date date = new Date();
 				shopDetail.setModifyTime(date);
@@ -242,6 +246,7 @@ public class ShopDetailAdminController extends BaseController {
 		if (shop == null) {
 			throw new NotFoundException("shop can not be null, getShopId = " + shopDetail.getShopId(),EntityCodes.SHOP);
 		}
+		EventHome.publishEvent(new FireEvent(shopDetail, OperationTypeEnum.UPDATE));
 		String originShopPic = shop.getShopPic();
 		String shopPic = null;
 		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), shopDetail.getUserName());
@@ -279,6 +284,11 @@ public class ShopDetailAdminController extends BaseController {
 						+ shopDetail.getUserName());
 				shop.setShopPic(shopPic);
 			}
+			if(FoundationUtil.haveViewAllDataFunction(request)){
+				shop.setDomainName(shopDetail.getDomainName());
+				shop.setIcpInfo(shopDetail.getIcpInfo());
+			}
+
 			shopDetailService.update(shop);
 		} catch (Exception e) {
 			if (shopPic != null) {

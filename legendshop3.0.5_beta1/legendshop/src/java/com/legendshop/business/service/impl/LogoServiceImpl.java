@@ -11,10 +11,13 @@ import java.util.List;
 
 import com.legendshop.business.dao.LogoDao;
 import com.legendshop.business.service.LogoService;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.Logo;
 
 /**
@@ -58,6 +61,7 @@ public class LogoServiceImpl implements LogoService {
 	 */
     @Override
 	public void delete(Logo logo) {
+    	EventHome.publishEvent(new FireEvent(logo, OperationTypeEnum.DELETE));
     	logoDao.deleteLogo(logo);
     }
 
@@ -78,6 +82,7 @@ public class LogoServiceImpl implements LogoService {
 	 */
     @Override
 	public void update(Logo logo) {
+    	EventHome.publishEvent(new FireEvent(logo, OperationTypeEnum.UPDATE));
     	logoDao.updateLogo(logo);
     }
 

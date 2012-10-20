@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <html>
     <head>
-        <title>创建Event</title>
+        <title>系统日志</title>
          <script type='text/javascript' src="<ls:templateResource item='/common/js/jquery.js'/>"></script>
          <script type='text/javascript' src="<ls:templateResource item='/common/js/jquery.validate.js'/>" /></script>
         <link rel="stylesheet" type="text/css" media="screen" href="<ls:templateResource item='/common/default/css/indexJpgForm.css'/>" />
@@ -55,67 +55,40 @@
             <table border="0" align="center" class="${tableclass}" id="col1">
                 <thead>
                     <tr class="sortable">
-                        <th colspan="2">
+                        <th>
                             <div align="center">
-                                创建Event
+                               数据
                             </div>
                         </th>
                     </tr>
                 </thead>
-     			     <tr>
-        <td>
-          <div align="center">UserId: <font cr="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="userId" id="userId" value="${event.userId}" />
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="center">UserName:ont color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="userName" id="userName" value="${event.userName}" />
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="centeType: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="type" id="type" value="${event.type}" />
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div align="cer">Operation: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="operation" id="operation" value="${event.operation}" />
-        </td>
-      </tr>
-     <tr>
-        <td>
-          <div al="center">RelateData: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="relateData" id="relateData" value="${event.relateData}" />
-        </td>
-      </tr>
-     <tr>
-        <td>
-         iv align="center">CreateTime: <font color="ff0000">*</font></div>
-       </td>
-        <td>
-           <p><input type="text" name="createTime" id="createTime" value="${event.createTime}" />
-        </td>
-      </tr>
 
+     	<tr>
+        <td>
+          <div align="center">
+          <textarea>${event.relateData}</textarea>
+          </div>
+       </td>
+      </tr>
+                 <tr>
+        <td>
+          <div align="center">
+           详细信息
+          </div>
+       </td>
+      </tr>
+      
+         	<tr>
+        <td>
+          <div align="center">
+          ${event.relateData}
+          </div>
+       </td>
+      </tr>
+     
                 <tr>
-                    <td colspan="2">
+                    <td>
                         <div align="center">
-                            <input type="submit" value="添加" />
-                            <input type="reset" value="重置" />
                             <input type="button" value="返回"
                                 onclick="window.location='<ls:url address="/admin/event/query"/>'" />
                         </div>

@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.legendshop.business.dao.PayTypeDao;
 import com.legendshop.business.service.PayTypeService;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.event.impl.FireEvent;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.PayType;
 
 /**
@@ -65,7 +68,12 @@ public class PayTypeServiceImpl implements PayTypeService  {
 	 */
     @Override
 	public void delete(Long id) {
-        payTypeDao.deletePayTypeById(id);
+    	PayType payType = getPayTypeById(id);
+    	if(payType != null){
+        	EventHome.publishEvent(new FireEvent(payType, OperationTypeEnum.DELETE));
+    		 payTypeDao.deletePayTypeById(id);
+    	}
+       
     }
 
     /* (non-Javadoc)
@@ -81,6 +89,7 @@ public class PayTypeServiceImpl implements PayTypeService  {
 	 */
     @Override
 	public void update(PayType payType) {
+    	EventHome.publishEvent(new FireEvent(payType, OperationTypeEnum.UPDATE));
         payTypeDao.updatePayType(payType);
     }
 

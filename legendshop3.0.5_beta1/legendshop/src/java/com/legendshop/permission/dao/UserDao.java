@@ -125,7 +125,7 @@ public class UserDao extends BaseDaoImpl {
 	 *            the user
 	 */
 	public void updateUser(User user) {
-		update(user);
 		EventHome.publishEvent(new FireEvent(user, OperationTypeEnum.UPDATE));
+		update(user);
 	}
 }

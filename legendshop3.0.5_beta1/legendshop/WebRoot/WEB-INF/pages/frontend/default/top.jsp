@@ -87,7 +87,7 @@
 	<ul id="topnav">
 	<lb:logined >
 	   <c:if test="${shopExists && 'C2C' == applicationScope.BUSINESS_MODE}">
-               <li><a href="<ls:url address='/shop/${sessionScope.SPRING_SECURITY_LAST_USERNAME}'/>"><fmt:message key="myShop"/></a></li>
+               <li><a href="<ls:domain shopName='${sessionScope.SPRING_SECURITY_LAST_USERNAME}' />"><fmt:message key="myShop"/></a></li>
         </c:if>
 	   <auth:auth ifAnyGranted="F_ADMIN">
 	   	<c:if test="${canbeLeagueShop}"><li><a href='javascript:addMyLeague("${sessionScope.SPRING_SECURITY_LAST_USERNAME}","${sessionScope.shopName}")'><fmt:message key="addLeague"/><fmt:message key="this.shop"/></a></li></c:if>
@@ -119,7 +119,9 @@
 <div id="headernav">
 	<ul>
 		<li class="n2"><a href="<ls:url address='/index'/>"><fmt:message key="shop.index"/></a></li>
+		<!-- 
 		<li><a href="<ls:url address='/group/index'/>" target="_blank"><fmt:message key="group.on"/></a></li>
+		 -->
 		<c:if test="${'C2C' == applicationScope.BUSINESS_MODE }">
         <li class="n2"><a href="<ls:url address='/league'/>"><fmt:message key="leagueShop"/></a></li>
         </c:if>
@@ -158,7 +160,7 @@
 		</div>
 		<div id="topcatalog">
 			<h2>
-			    <a href='#' onclick="javascript:bookmark('${shopDetail.userName} - ${shopDetail.siteName}','${DOMAIN_NAME}/shop/${shopDetail.userName}');">
+			    <a href='#' onclick="javascript:bookmark('${shopDetail.userName} - ${shopDetail.siteName}','<ls:domain shopName="${shopDetail.userName}" />');">
                     <fmt:message key="favorite"/>
                 </a>
 			</h2>

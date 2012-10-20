@@ -20,25 +20,26 @@
     <mvc:resources mapping="/img/**" location="/img/" /> 
     <mvc:resources mapping="/admin/j_spring_security_check/**" location="/admin/j_spring_security_check/" /> 
     <mvc:resources mapping="/photoserver/photo/**" location="/photoserver/photo/" /> 
-    <mvc:default-servlet-handler/>
+    <!-- 
     <mvc:interceptors>  
-      <bean class="com.legendshop.business.helper.SystemInterceptor" > 
+      <bean class="com.legendshop.core.helper.SystemInterceptor" > 
       		<property name="handlers">
       				<list>
       					<bean class="com.legendshop.business.helper.impl.EncodingHandler" >
       						<property name="encoding" value="UTF-8"></property>
       					</bean>
-      					<!-- 
+      					 <bean class="com.legendshop.business.helper.impl.IndependDomainHandler" >
+      					 	<property name="shopService" ref="shopDetailService"></property>
+      					</bean>
       					<bean class="com.legendshop.business.helper.impl.CookiesSSOHandler">
       						<property name="userDetailService" ref="userDetailService" />
       					</bean>
-      					 -->
       				</list>
       		</property>
       </bean>
     </mvc:interceptors>  
+     -->
     
-
 	<!-- 自动搜索@Controller标注的类 -->
 	<context:component-scan base-package="com.**.controller" />
 	
@@ -59,9 +60,10 @@
 			<bean class="com.legendshop.core.MyBindingInitializer" />
 		</property>
 	</bean>
+		<bean class="com.legendshop.business.helper.MethodHandlerAdapter" />
  -->
  
-	<bean class="com.legendshop.business.helper.MethodHandlerAdapter" />
+
 
 	<!-- Default ViewResolver -->
 	<bean id="viewResolver1"

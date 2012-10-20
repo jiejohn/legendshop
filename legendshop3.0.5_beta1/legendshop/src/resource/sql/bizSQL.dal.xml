@@ -181,13 +181,14 @@
 					sd.lang_style AS langStyle,sd.grade_id AS gradeId,sd.type AS type,sd.id_card_pic AS idCardPic,sd.traffic_pic AS trafficPic,
 					sd.id_card_num AS idCardNum,sd.create_country_code AS createCountryCode,sd.create_area_code AS createAreaCode,
 					sd.provinceid AS provinceid,sd.cityid AS cityid,sd.areaid AS areaid,p.province AS province,c.city AS city,a.area AS area,
-					u.user_tel AS userTel,u.nick_name AS nickName,u.user_mobile AS userMobile,u.qq AS qq,u.msn AS msnNumber,u.user_postcode AS userPostcode,u.fax AS fax,sd.front_type as frontType,sd.end_type as endType
+					u.user_tel AS userTel,u.nick_name AS nickName,u.user_mobile AS userMobile,u.qq AS qq,u.msn AS msnNumber,u.user_postcode AS userPostcode,u.fax AS fax,
+					sd.front_type as frontType,sd.end_type as endType,sd.domain_name as domainName, sd.icp_info as icpInfo
 					from ls_shop_detail sd left join ls_usr_detail u on sd.user_id = u.user_id
 					left join ls_provinces p on sd.provinceid = p.provinceid
 					left join ls_cities c on sd.cityid = c.cityid
 					left join ls_areas a on sd.areaid = a.areaid
 					where sd.user_name = ?
-            </Method>  
+            </Method>
              <Method name="getShopDetailViewList">
 		           	select sd.shop_id AS shopId,sd.user_id AS userId,sd.user_name AS userName,sd.site_name AS siteName,sd.shop_addr AS shopAddr,sd.bank_card AS bankCard,sd.payee AS payee,
 					sd.code AS code,sd.post_addr AS postAddr,sd.recipient AS recipient,sd.status AS status,sd.visit_times AS visitTimes,
@@ -196,7 +197,8 @@
 					sd.lang_style AS langStyle,sd.grade_id AS gradeId,sd.type AS type,sd.id_card_pic AS idCardPic,sd.traffic_pic AS trafficPic,
 					sd.id_card_num AS idCardNum,sd.create_country_code AS createCountryCode,sd.create_area_code AS createAreaCode,
 					sd.provinceid AS provinceid,sd.cityid AS cityid,sd.areaid AS areaid,p.province AS province,c.city AS city,a.area AS area,
-					u.user_tel AS userTel,u.nick_name AS nickName,u.user_mobile AS userMobile,u.qq AS qq,u.msn AS msnNumber,u.user_postcode AS userPostcode,u.fax AS fax,sd.front_type as frontType,sd.end_type as endType
+					u.user_tel AS userTel,u.nick_name AS nickName,u.user_mobile AS userMobile,u.qq AS qq,u.msn AS msnNumber,u.user_postcode AS userPostcode,u.fax AS fax,
+					sd.front_type as frontType,sd.end_type as endType, sd.domain_name as domainName, sd.icp_info as icpInfo
 					from ls_shop_detail sd left join ls_usr_detail u on sd.user_id = u.user_id
 					left join ls_provinces p on sd.provinceid = p.provinceid
 					left join ls_cities c on sd.cityid = c.cityid 

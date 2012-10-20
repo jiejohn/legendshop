@@ -11,7 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.dao.ProductCommentDao;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
+import com.legendshop.core.event.impl.FireEvent;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.ProductComment;
 
 /**
@@ -41,13 +44,18 @@ public class ProductCommentDaoImpl extends BaseDaoImpl implements ProductComment
 
 	@Override
 	public void updateProductComment(ProductComment productComment) {
+		EventHome.publishEvent(new FireEvent(productComment, OperationTypeEnum.UPDATE));
 		update(productComment);
 		
 	}
 
 	@Override
 	public void deleteProductCommentById(Long id) {
-		deleteById(ProductComment.class, id);
+		ProductComment productComment = get(ProductComment.class, id);
+		if(productComment != null){
+			EventHome.publishEvent(new FireEvent(productComment, OperationTypeEnum.DELETE));
+			delete(productComment);
+		}
 		
 	}
      

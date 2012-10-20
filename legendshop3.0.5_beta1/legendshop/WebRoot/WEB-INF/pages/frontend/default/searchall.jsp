@@ -146,7 +146,7 @@ BODY {
 							</div>
 							<c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
 							<div style="color: green">
-							<fmt:message key="shop.name"/> - <a href="${pageContext.request.contextPath}/shop/${record.userName }" style="color: green" target="_blank">${record.userName}</a>
+							<fmt:message key="shop.name"/> - <a href="<ls:domain shopName='${record.userName}' />"  style="color: green" target="_blank">${record.userName}</a>
 							</div>
 							</c:if>
 							</div></td>
@@ -171,7 +171,7 @@ BODY {
 							<td style="vertical-align: top" align="left">
 							<div>
 							<div style="margin-top: 8px;font-size: 13pt">
-							  <a href="${pageContext.request.contextPath}/shop/${record.userName}" target="_blank">${record.siteName}</a>
+							  <a href="<ls:domain shopName='${record.userName}' />"  target="_blank">${record.siteName}</a>
 							</div>
 							<div>${record.detailDesc}</div>
 							<div><fmt:message key="shop.contact.method"/> - <fmt:message key="Phone"/>：

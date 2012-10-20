@@ -71,10 +71,10 @@ public class SubDaoImpl extends SubCommonDaoImpl implements SubDao {
 	@Override
 	public boolean deleteSub(Sub sub) {
 		if (sub != null) {
+			EventHome.publishEvent(new FireEvent(sub, OperationTypeEnum.DELETE));
 			saveSubHistory(sub, SubStatusEnum.ORDER_DEL.value());
 			delete(sub);
 			basketDao.deleteBasketBySubNumber(sub.getSubNumber());
-			EventHome.publishEvent(new FireEvent(sub, OperationTypeEnum.DELETE));
 			return true;
 		}
 		return false;
@@ -88,8 +88,8 @@ public class SubDaoImpl extends SubCommonDaoImpl implements SubDao {
 		if (sub != null) {
 			saveSubHistory(sub, SubStatusEnum.PRICE_CHANGE.value());
 			sub.setTotal(totalPrice);
-			update(sub);
 			EventHome.publishEvent(new FireEvent(sub, OperationTypeEnum.UPDATE_PRICE));
+			update(sub);
 			return true;
 		}
 		return false;

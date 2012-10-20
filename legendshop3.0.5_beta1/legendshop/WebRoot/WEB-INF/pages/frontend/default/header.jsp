@@ -21,7 +21,7 @@
 									if (PropertiesUtil.getDefaultShopName() != null) {
 								%>
 								<li>
-									<a href="${pageContext.request.contextPath}/shop/<%=PropertiesUtil.getDefaultShopName()%>"><ls:i18n key="shop.total.index" /></a>
+									<a href=" <ls:domain shopName='<%=PropertiesUtil.getDefaultShopName()%>'/>"><ls:i18n key="shop.total.index" /></a>
 								</li>
 								<%
 									}
@@ -44,7 +44,7 @@
 							</c:if>
 							<li class="favorite">
 								<a href='#'
-									onclick="javascript:bookmark('<ls:i18n key="welcome.to.legendshop"/><%=PropertiesUtil.getDefaultShopName()%> - LegendShop购物商城','${DOMAIN_NAME}/shop/<%=PropertiesUtil.getDefaultShopName()%>');">
+									onclick="javascript:bookmark('<ls:i18n key="welcome.to.legendshop"/><%=PropertiesUtil.getDefaultShopName()%> - LegendShop购物商城','<ls:domain shopName='<%=PropertiesUtil.getDefaultShopName()%>' />');">
 									<ls:i18n key="shop.favorite" />
 								</a>
 							</li>

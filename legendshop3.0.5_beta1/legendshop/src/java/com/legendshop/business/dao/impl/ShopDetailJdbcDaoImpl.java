@@ -38,7 +38,6 @@ public class ShopDetailJdbcDaoImpl extends ShopDetailDaoImpl{
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#getShopDetailView(java.lang.String)
 	 */
 	@Override
-	@Cacheable(value = "ShopDetailView", key="#userName")
 	public ShopDetailView getShopDetailView(final String userName) {
 		if (AppUtils.isBlank(userName)) {
 			return null;
@@ -51,6 +50,20 @@ public class ShopDetailJdbcDaoImpl extends ShopDetailDaoImpl{
 				new ShopDetailRowMapper());
 		if (AppUtils.isNotBlank(list)) {
 			return list.get(0);
+		}
+		return null;
+	}
+	
+	@Override
+	public String getShopNameByDomain(String domainName) {
+		if (AppUtils.isBlank(domainName)) {
+			return null;
+		}
+		String sql = "select user_name from ls_shop_detail where domain_name = ?";
+		log.debug("getShopNameByDomain run sql {}, domainName {} ",sql,domainName);
+		List<String> result = jdbcTemplate.queryForList(sql, new Object[]{domainName}, String.class);
+		if(AppUtils.isNotBlank(result)){
+			return result.get(0);
 		}
 		return null;
 	}
@@ -155,7 +168,8 @@ public class ShopDetailJdbcDaoImpl extends ShopDetailDaoImpl{
 			if (colorTypeOneDay.equals(shopDetail.getColorStyle())) {
 				shopDetail.setColorStyle(getColorTyle(shopDetail.getUserName()));
 			}
-
+			shopDetail.setDomainName(rs.getString("domainName"));
+			shopDetail.setIcpInfo(rs.getString("icpInfo"));
 			return shopDetail;
 		}
 

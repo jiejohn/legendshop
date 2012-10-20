@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.legendshop.business.helper.Handler;
+import com.legendshop.business.helper.AbstractHandler;
+import com.legendshop.core.helper.Handler;
 
-public class EncodingHandler implements Handler {
+public class EncodingHandler extends AbstractHandler implements Handler {
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(EncodingHandler.class);
 
@@ -20,7 +21,7 @@ public class EncodingHandler implements Handler {
 	private boolean forceEncoding = false;
 	
 	@Override
-	public void handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException {
+	public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (this.encoding != null && (this.forceEncoding || request.getCharacterEncoding() == null)) {
 			request.setCharacterEncoding(this.encoding);
 			if (this.forceEncoding) {

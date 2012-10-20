@@ -269,7 +269,7 @@ public class UserDetailServiceImpl  extends BaseServiceImpl  implements UserDeta
 		values.put("#password#", userDetail.getPassword());
 		if (AppUtils.isNotBlank(userDetail.getRegisterCode())) {
 			StringBuffer buffer = new StringBuffer();
-			buffer.append("<p>你的帐号尚未开通，<a href=\"").append(Constants.LEGENDSHOP_DOMAIN_NAME)
+			buffer.append("<p>你的帐号尚未开通，<a href=\"").append(PropertiesUtil.getDomainName())
 					.append("/userRegSuccess" + "?userName=").append(user.getName()).append("&registerCode=")
 					.append(userDetail.getRegisterCode()).append("\">点击开通我的帐号</a></p><br>");
 			values.put("#registerCode#", buffer.toString());

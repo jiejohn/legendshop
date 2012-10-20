@@ -280,6 +280,24 @@
            <input type="text" name="briefDesc" id="briefDesc" value="${shopDetail.briefDesc}" size="50"/>
         </td>
       </tr>
+      <tr>
+        <td>
+          <div align="right">独立域名配置 </div>
+       </td>
+        <td>
+        <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
+                  接入域名（需要管理员审批并开通）
+		          <input type="text" name="domainName"  id="domainName" value="${shopDetail.domainName}" />&nbsp;
+		          ICP信息 <input type="text" name="icpInfo"  id="icpInfo" value="${shopDetail.icpInfo}" />
+        </auth:auth>
+        <auth:auth ifNotGranted="F_VIEW_ALL_DATA">
+                  接入域名（需要管理员审批并开通）
+		          <input type="text" name="domainName"  id="domainName" value="${shopDetail.domainName}"   disabled="disabled"/>&nbsp;
+		          ICP信息 <input type="text" name="icpInfo"  id="icpInfo" value="${shopDetail.icpInfo}"  disabled="disabled" />
+        </auth:auth>
+
+        </td>
+      </tr>
      <tr>
         <td>
           <div align="right">商城服务(出现在商品说明中): </div>

@@ -5,7 +5,7 @@
 					    <tr><td class="titlebg"><fmt:message key="visited.mall"/></td></tr>
 						<tr><td align="left">
 							  <c:forEach items="${visitedShop}" var="visitedShop" varStatus="status">
-							  <div style="margin: 2px;"><a href="${pageContext.request.contextPath}/shop/${visitedShop.siteName}"   target="_blank">${visitedShop.siteName}</a></div>
+							  <div style="margin: 2px;"><a href="<ls:domain shopName='${visitedShop.siteName}' />"   target="_blank">${visitedShop.siteName}</a></div>
 							  </c:forEach>
 						</td></tr>
 					</table>

@@ -49,7 +49,7 @@
 				  <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
 					<td height="25">
 						<div align="center">
-							<a href="${pageContext.request.contextPath}/shop/${basket.shopName}">${basket.shopName}</a>
+							<a href="<ls:domain shopName='${basket.shopName}' />">${basket.shopName}</a>
 						</div>
 					</td>
 				</c:if>

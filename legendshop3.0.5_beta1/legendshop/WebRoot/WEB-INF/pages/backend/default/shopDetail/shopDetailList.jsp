@@ -58,7 +58,7 @@
       <display:column title="顺序" class="orderwidth"><%=offset++%></display:column>
       <c:if test="${'C2C' == applicationScope.BUSINESS_MODE }">
       <display:column title="商城名称">
-      	<a href="${pageContext.request.contextPath}/shop/${item.userName}">${item.userName}</a>
+      	<a href="<ls:domain shopName='${item.userName}'  />">${item.userName}</a>
       </display:column>
       </c:if>
       <display:column title="网站名称" property="siteName">

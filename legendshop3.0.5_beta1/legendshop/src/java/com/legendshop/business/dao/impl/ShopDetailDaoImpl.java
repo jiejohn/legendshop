@@ -21,11 +21,14 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 
 import com.legendshop.business.service.CommonUtil;
+import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.constant.ShopStatusEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
+import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.tag.TableCache;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.Myleague;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
@@ -281,6 +284,7 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 
 				}
 				shopDetail.setStatus(status);
+				EventHome.publishEvent(new FireEvent(shopDetail, OperationTypeEnum.UPDATE_STATUS));
 				saveOrUpdateShopDetail(shopDetail);
 
 		} catch (Exception e) {
@@ -314,7 +318,12 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 			@CacheEvict(value="ShopDetailView", key="#id")
 			})
 	public void deleteShopDetailById(Long id){
-		deleteById(ShopDetail.class, id);
+		ShopDetail shopDetail = getShopDetailByShopId(id);
+		if(shopDetail != null){
+			EventHome.publishEvent(new FireEvent(shopDetail, OperationTypeEnum.DELETE));
+			delete(shopDetail);
+		}
+
 	}
 
 	/**
@@ -329,8 +338,8 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 			@CacheEvict(value="ShopDetailView", key="#shopDetail.userName")
 			})
 	public void deleteShopDetail(ShopDetail shopDetail){
+		EventHome.publishEvent(new FireEvent(shopDetail, OperationTypeEnum.DELETE));
 		delete(shopDetail);
-		
 	}
 	
 	

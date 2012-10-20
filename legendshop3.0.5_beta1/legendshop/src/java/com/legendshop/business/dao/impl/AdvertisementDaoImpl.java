@@ -61,6 +61,7 @@ public class AdvertisementDaoImpl extends BaseDaoImpl implements AdvertisementDa
 	 * @see com.legendshop.business.dao.impl.AdvertisementDao#getAdvertisement(java.lang.String, java.lang.String)
 	 */
 	@Override
+	@Deprecated
 	public List<Advertisement> getAdvertisement(String shopName, String key) {
 		if (log.isDebugEnabled()) {
 			log.debug("shopName = {},key = {}", shopName, key);
