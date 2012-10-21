@@ -369,4 +369,17 @@ public class GroupProduct extends AbstractEntity implements BaseEntity{
 		}
 		return product.getUserName();
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		Product prod = getProduct();
+		if(prod!=null){
+			sb.append(" [prodId=").append(prodId).append(", partnerId=").append(partnerId).append(", isPost=").append(isPost).append(", name=").append(prod.getName()).append(", userName=").append(prod.getUserName()).append("] ");
+		}else{
+			sb.append(" [prodId=").append(prodId).append(", partnerId=").append(partnerId).append(", isPost=").append(isPost).append("] ");
+		}
+		
+		return sb.toString();
+	}
 }

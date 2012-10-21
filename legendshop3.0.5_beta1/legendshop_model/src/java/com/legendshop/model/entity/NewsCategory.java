@@ -18,7 +18,7 @@ import java.util.Date;
  * 官方网站：http://www.legendesign.net
  * ----------------------------------------------------------------------------
  */
-public class NewsCategory implements BaseEntity {
+public class NewsCategory extends AbstractEntity implements BaseEntity {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8019865349891607453L;

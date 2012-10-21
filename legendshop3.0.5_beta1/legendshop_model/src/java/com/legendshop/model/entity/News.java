@@ -452,5 +452,13 @@ public class News extends AbstractEntity implements BaseEntity {
 	public void setPosition(Integer position) {
 		this.position = position;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb =new StringBuilder();
+		sb.append(" [newsId=").append(newsId).append(", sortId=").append(sortId).append(", sortName=").append(sortName).append(", newsTitle=").append(newsTitle)
+		.append(", userName=").append(userName).append(", status=").append(status).append(", position=").append(position).append("] ");
+		return sb.toString();
+	}
 
 }

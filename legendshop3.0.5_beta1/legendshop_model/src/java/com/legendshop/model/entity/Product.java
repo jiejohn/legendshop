@@ -40,5 +40,12 @@ public class Product extends AbstractProduct {
 		this.views = views;
 		this.buys = buys;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(" [prodId=").append(prodId).append(", sortId=").append(sortId).append(", nsortId=").append(nsortId).append(", name=").append(name).append(", userName=").append(userName).append("] ");
+		return sb.toString();
+	}
 
 }
