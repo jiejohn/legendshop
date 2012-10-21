@@ -13,7 +13,7 @@
                         <c:choose>
                           <c:when test="${fn:length(article.newsTitle) > 18}">
                             <div  title="${article.newsTitle}" class="topnewsfixed">
-                                <img src="${pageContext.request.contextPath}/common/default/images/dot.gif" style="margin-left: 3px"><a href="${pageContext.request.contextPath}/news/${new.newsId}">${article.newsTitle}</a>
+                                <img src="${pageContext.request.contextPath}/common/default/images/dot.gif" style="margin-left: 3px"><a href="${pageContext.request.contextPath}/news/${article.newsId}">${article.newsTitle}</a>
                             </div>
                           </c:when>
                           <c:otherwise>
