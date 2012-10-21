@@ -52,7 +52,9 @@ public class StartupServiceImpl implements StartupService {
 			Map<String, Plugin> beans = ContextLoader.getCurrentWebApplicationContext().getBeansOfType(Plugin.class);
 			if (AppUtils.isNotBlank(beans)) {
 				for (Plugin plugin : beans.values()) {
-					pluginManager.registerPlugins(plugin);
+					if(plugin.getPluginConfig() != null && plugin.getPluginConfig().getPulginId() != null){
+						pluginManager.registerPlugins(plugin);
+					}
 				}
 			}
 			pluginManager.startPlugins(servletContext);

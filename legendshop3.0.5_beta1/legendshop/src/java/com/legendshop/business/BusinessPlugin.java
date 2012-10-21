@@ -70,12 +70,26 @@ public class BusinessPlugin extends AbstractPlugin{
 
 		servletContext.setAttribute(ConfigPropertiesEnum.LEGENDSHOP_VERSION.name(), PropertiesUtil.getProperties(
 				FileConfig.GlobalFile, ConfigPropertiesEnum.LEGENDSHOP_VERSION.name()));
-
-		servletContext.setAttribute(AttributeKeys.BUSINESS_MODE, BusinessModeEnum.C2C.name());
+		
+		//业务模式
+		String businessMode = PropertiesUtil.getProperties(FileConfig.GlobalFile, ConfigPropertiesEnum.BUSINESS_MODE.name());
+		if(BusinessModeEnum.C2C.name().equals(businessMode)){
+			servletContext.setAttribute(AttributeKeys.BUSINESS_MODE, BusinessModeEnum.C2C.name());
+		}else{
+			servletContext.setAttribute(AttributeKeys.BUSINESS_MODE, BusinessModeEnum.B2C.name());
+		}
+		
+		//业务模式
+		String languageMode = PropertiesUtil.getProperties(FileConfig.GlobalFile, ConfigPropertiesEnum.LANGUAGE_MODE.name());
+		if(LanguageEnum.ENGLISH.equals(languageMode)){
+			servletContext.setAttribute(AttributeKeys.LANGUAGE_MODE, LanguageEnum.USERCHOICE);
+		}else if(LanguageEnum.CHINESE.equals(languageMode)){
+			servletContext.setAttribute(AttributeKeys.LANGUAGE_MODE, LanguageEnum.CHINESE);
+		}else{
+			servletContext.setAttribute(AttributeKeys.LANGUAGE_MODE, LanguageEnum.USERCHOICE);
+		}
 
 		servletContext.setAttribute(AttributeKeys.RUNTIME_MODE, RuntimeModeEnum.PRODUCTION);
-
-		servletContext.setAttribute(AttributeKeys.LANGUAGE_MODE, LanguageEnum.USERCHOICE);
 		
 	}
 
