@@ -29,14 +29,14 @@ public class IndependDomainHandler extends AbstractHandler implements Handler {
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(supportIndepend){
-			String serverName = request.getServerName();
-		    String uri = request.getRequestURI();
-			String remoteAddr = request.getRemoteAddr();
-			System.out.println("------------------------------ serverName = " + serverName + ", uri = " + uri + ".  remoteAddr = " +  remoteAddr);
+     		String serverName = request.getServerName();
+//		    String uri = request.getRequestURI();
+//			String remoteAddr = request.getRemoteAddr();
+//			System.out.println("------------------------------ serverName = " + serverName + ", uri = " + uri + ".  remoteAddr = " +  remoteAddr);
 			String domainName = resolveDomainName(serverName);
 
 			String shopName = shopService.getShopNameByDomain(domainName);
-			System.out.println("--------------------------------domainName = " + domainName + ", shopName = " + shopName);
+//			System.out.println("--------------------------------domainName = " + domainName + ", shopName = " + shopName);
 			if(AppUtils.isNotBlank(shopName)){
 				log.debug("processing domainName {}, shopName {}", domainName, shopName);
 				ThreadLocalContext.setCurrentShopName(request, response, shopName);

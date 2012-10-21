@@ -8,6 +8,7 @@
 package com.legendshop.business.service.dwr.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,8 @@ import org.directwebremoting.WebContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.web.servlet.LocaleResolver;
 
 import com.legendshop.business.common.CommonServiceUtil;
@@ -44,13 +47,12 @@ import com.legendshop.business.service.PayTypeService;
 import com.legendshop.business.service.ScoreService;
 import com.legendshop.business.service.ValidateCodeUsernamePasswordAuthenticationFilter;
 import com.legendshop.business.service.dwr.DwrCommonService;
-import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.UserManager;
+import com.legendshop.core.cache.MemCachedManager;
 import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.ProductTypeEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.exception.ApplicationException;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
@@ -59,7 +61,6 @@ import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.randing.CaptchaServiceSingleton;
 import com.legendshop.core.randing.RandomStringUtils;
-import com.legendshop.event.EventHome;
 import com.legendshop.model.dynamic.Item;
 import com.legendshop.model.dynamic.Model;
 import com.legendshop.model.entity.Basket;
@@ -130,6 +131,8 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	private UserCommentDao userCommentDao;
 	
 	private ProductCommentDao productCommentDao;
+	
+	private CacheManager cacheManager;
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.dwr.impl.DwrCommonService#getSessionId()
@@ -338,6 +341,25 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			log.error("", e);
 			return "fail";
 		}
+
+	}
+	
+	//清空缓存列表
+	public String clearSecondLevelCache(){
+		try {
+			Collection<String> cacheNames = cacheManager.getCacheNames();
+			for (String cacheName : cacheNames) {
+				Cache cache = cacheManager.getCache(cacheName);
+				if(cache != null){
+					System.out.println("clear cache " + cache.getName() );
+					cache.clear();
+				}
+			}
+			return null;
+		} catch (Exception e) {
+			return "fail";
+		}
+
 
 	}
 
@@ -1180,5 +1202,10 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	@Required
 	public void setProductCommentDao(ProductCommentDao productCommentDao) {
 		this.productCommentDao = productCommentDao;
+	}
+	
+	@Required
+	public void setCacheManager(CacheManager cacheManager) {
+		this.cacheManager = cacheManager;
 	}
 }

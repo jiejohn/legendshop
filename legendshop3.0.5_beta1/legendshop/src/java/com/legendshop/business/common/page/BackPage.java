@@ -175,6 +175,9 @@ public enum BackPage implements PageDefinition{
 	/** The param list page. */
 	PARAM_LIST_PAGE("/systemParameter/systemParameterList"),
 
+	/** The cache list page. */
+	CACHE_LIST_PAGE("/cache/cacheList"),
+	
 	/** The param edit page. */
 	PARAM_EDIT_PAGE("/systemParameter/systemParameter"),
 

@@ -68,7 +68,7 @@
                </auth:auth>
                 &nbsp; 状态&nbsp;
                 	<select id="status" name="status"  class="input">
-        				<option:optionGroup type="select" required="false" cache="true"
+        				<ls:optionGroup type="select" required="false" cache="true"
 	                		beanName="ORDER_STATUS" selectedValue="${subForm.status}"/>
 			     </select>
         <input type="submit" value="搜索" class="s"/>
@@ -105,7 +105,7 @@
       <display:column title="商品" property="prodName" sortable="true" sortName="prodName"></display:column>
       <display:column title="买家帐号" sortable="true" sortName="userName" style="width: 80px">${item.userName}</display:column>
        <display:column title="状态" sortable="true" sortName="status">
-       	       <option:optionGroup type="label" required="true" cache="true"
+       	       <ls:optionGroup type="label" required="true" cache="true"
 	                beanName="ORDER_STATUS" selectedValue="${item.status}"/>
        </display:column>      
      <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">

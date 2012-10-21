@@ -41,7 +41,7 @@
       <display:column title="参数值">
       	<c:choose>
       		<c:when test="${item.type == 'Selection'}">
-      			  <option:optionGroup type="label" required="true" cache="true"
+      			  <ls:optionGroup type="label" required="true" cache="true"
 	                beanName="${item.optional}" selectedValue="${item.value}"/>
       		</c:when>
       		<c:otherwise>${item.value}</c:otherwise>

@@ -39,6 +39,7 @@
 		<property name="subDao" ref="subDao"></property>
 		<property name="localeResolver" ref="localeResolver"></property>
 		<property name="productCommentDao" ref="productCommentDao"></property>
+		<property name="cacheManager" ref="cacheManager"></property>
 	</bean>
 	
 	  <bean id="optionService" class="com.legendshop.business.service.dwr.impl.OptionServiceImpl">

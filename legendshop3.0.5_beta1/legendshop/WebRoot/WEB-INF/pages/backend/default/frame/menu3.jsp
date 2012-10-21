@@ -30,6 +30,12 @@
                 <div class='flrct'> <a href='${pageContext.request.contextPath}/system/systemParameter/query' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='系统配置' title='系统配置'/></a> </div>
               </div>
             </li>
+           <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/system/cache/query' target='main'>清空缓存</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/system/cache/query' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='清空缓存' title='清空缓存'/></a> </div>
+              </div>
+            </li>
           </ul>
         </dd>
       </dl>
