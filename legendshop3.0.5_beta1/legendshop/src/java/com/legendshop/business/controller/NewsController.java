@@ -29,6 +29,7 @@ import com.legendshop.model.entity.News;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.constants.NewsPositionEnum;
 import com.legendshop.spi.service.NewsService;
+import com.legendshop.util.AppUtils;
 
 /**
  * 产品分类控制器。.
@@ -110,7 +111,7 @@ public class NewsController extends BaseController{
 	 */
 	@RequestMapping("/allNews")
 	public String allNews(HttpServletRequest request, HttpServletResponse response,String curPageNO,Long newsCategoryId) {
-		if(curPageNO == null){
+		if(AppUtils.isBlank(curPageNO)){
 			curPageNO = "1";
 		}
 		String shopName = ThreadLocalContext.getCurrentShopName(request,response);

@@ -147,17 +147,13 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 				cq.add(c);
 			}
 
-			cq.addOrder("desc", "prodId");
+			cq.addOrder("desc", "modifyDate");
 			
 			PageSupport ps = productDao.getProdDetail(cq);
-			request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
-			request.setAttribute("offset", new Integer(ps.getOffset() + 1));
-			request.setAttribute("prodDetailList", ps.getResultList());
+			ps.setToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER);
+			ps.savePage(request);
 			request.setAttribute("searchForm", searchForm);
-			if (ps.hasMutilPage()) {
-				request.setAttribute("toolBar",
-						ps.getToolBar(localeResolver.resolveLocale(request), Constants.SIMPLE_PAGE_PROVIDER));
-			}
+
 		} catch (Exception e) {
 			log.error("getProdDetail", e);
 			return PathResolver.getPath(request, response, FowardPage.INDEX_QUERY);
