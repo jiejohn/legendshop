@@ -22,9 +22,11 @@
 	    </thead>
 	    	     <tbody><tr><td>
  <div align="left" style="padding: 3px">
+ <auth:auth ifAnyGranted="F_OPERATOR">
  <a href='javascript:clearCache()'>
 <input type="button" value="一键清除缓存" />
 </a>
+</auth:auth>
  </td></tr></tbody>
 	    </table>
     
