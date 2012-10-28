@@ -1011,7 +1011,20 @@ public abstract class AbstractShopDetail extends UploadFile implements BaseEntit
 	}
 
 	public void setDomainName(String domainName) {
-		this.domainName = domainName;
+		if(domainName != null){
+			String domain = domainName.trim();
+			if(domain.toLowerCase().startsWith("http://")){
+				domain = domain.substring(7);
+			}
+			
+			if(domain.startsWith("www.")){
+				this.domainName = domain.substring(4).trim();
+				return;
+			}
+			
+			this.domainName = domain.trim();
+		}
+	
 	}
 
 	public String getIcpInfo() {
