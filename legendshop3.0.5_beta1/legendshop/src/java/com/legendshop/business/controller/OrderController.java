@@ -228,7 +228,7 @@ public class OrderController extends BaseController {
 		if (!AppUtils.isBlank(member)) {
 			request.setAttribute("member", member);
 		}
-		setSessionAttribute(request, Constants.SHOP_NAME, ThreadLocalContext.getCurrentShopName(request,response));
+		//setSessionAttribute(request, Constants.SHOP_NAME, ThreadLocalContext.getCurrentShopName(request,response));
 		return PathResolver.getPath(request,response,FrontPage.CASH_SAVE);
 		
 	}

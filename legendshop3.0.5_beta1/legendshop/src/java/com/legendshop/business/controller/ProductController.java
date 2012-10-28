@@ -123,7 +123,7 @@ public class ProductController extends BaseController{
 				log.info(
 						"{},{},{},{},viewsprod",
 						new Object[] { request.getRemoteAddr(), userName == null ? "" : userName,
-								getSessionAttribute(request, Constants.SHOP_NAME), prod.getName() });
+								ThreadLocalContext.getCurrentShopName(request, response), prod.getName() });
 			}
 
 			// 记录登录历史

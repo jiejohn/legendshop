@@ -215,7 +215,10 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#updateShopDetail(com.legendshop.model.entity.ShopDetail)
 	 */
 	@Override
-	@CacheEvict(value="ShopDetailView", key="#shopdetail.userName")
+	@Caching(evict = { 
+			@CacheEvict(value = "ShopDetailView", key="#shopdetail.userName"), 
+			@CacheEvict(value = "ShopDetailView", key= "'DM_' + #shopdetail.domainName")
+			})
 	public void updateShopDetail(ShopDetail shopdetail) {
 		update(shopdetail);
 	}

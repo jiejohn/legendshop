@@ -165,7 +165,7 @@ public class SortServiceImpl extends BaseServiceImpl implements SortService  {
 				ThreadLocalContext.getCurrentShopName(request, response), sortId, nsortId });
 		Sort sort = sortDao.getSort(sortId);
 		if (sort != null) {
-			setShopName(request, response, sort.getUserName());
+			ThreadLocalContext.setCurrentShopName(request, response, sort.getUserName());
 			getAndSetAdvertisement(request,response,sort.getUserName());
 			request.setAttribute("sort", sort);
 		}

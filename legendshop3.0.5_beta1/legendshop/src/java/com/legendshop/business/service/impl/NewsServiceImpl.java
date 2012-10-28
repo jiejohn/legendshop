@@ -62,10 +62,15 @@ public class NewsServiceImpl extends BaseServiceImpl implements NewsService {
 	@Override
 	public News getNewsById(Long id) {
 		News news = newsDao.get(News.class, id);
-		if (news.getSort() != null)
-			news.setSortId(news.getSort().getSortId());
-		if (news.getNewsCategory() != null)
-			news.setNewsCategoryId(news.getNewsCategory().getNewsCategoryId());
+		if(news !=null){
+			if (news.getSort() != null){
+				news.setSortId(news.getSort().getSortId());
+			}
+			if (news.getNewsCategory() != null){
+				news.setNewsCategoryId(news.getNewsCategory().getNewsCategoryId());
+			}
+		}
+
 		return news;
 	}
 

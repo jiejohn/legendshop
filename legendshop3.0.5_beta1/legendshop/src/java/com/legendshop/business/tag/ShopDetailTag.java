@@ -44,7 +44,7 @@ public class ShopDetailTag extends LegendShopTag {
 	 */
 	@Override
 	public void doTag() throws JspException, IOException {
-		String shopName = (String)request().getSession().getAttribute(Constants.SHOP_NAME);
+		String shopName = ThreadLocalContext.getCurrentShopName(request(), response());
 		if(AppUtils.isNotBlank(shopName)){
 			ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(request(),response(),shopName);
 			if(shopDetail != null){

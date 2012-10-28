@@ -116,7 +116,7 @@ public class ShopDetailServiceImpl   extends BaseServiceImpl  implements ShopDet
 	}
 	
 	@Override
-	@Cacheable(value = "ShopDetailView")
+	@Cacheable(value = "ShopDetailView", key="'DM_' + #domainName")
 	public String getShopNameByDomain(String domainName){
 		return shopDetailDao.getShopNameByDomain(domainName);
 	}

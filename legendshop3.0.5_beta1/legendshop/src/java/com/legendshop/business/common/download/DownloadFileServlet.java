@@ -25,6 +25,7 @@ import com.legendshop.command.framework.StateImpl;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.constant.FunctionEnum;
 import com.legendshop.core.helper.PropertiesUtil;
+import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.model.entity.DownloadLog;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
@@ -89,7 +90,7 @@ public class DownloadFileServlet extends HttpServlet {
 					downloadLog.setUserName(UserManager.getUsername(request.getSession()));
 					downloadLog.setArea(IPSeeker.getInstance().getArea(downloadLog.getIp()));
 					downloadLog.setCountry(IPSeeker.getInstance().getCountry(downloadLog.getIp()));
-					downloadLog.setShopName((String) request.getSession().getAttribute(Constants.SHOP_NAME));
+					downloadLog.setShopName(ThreadLocalContext.getCurrentShopName(request, response));
 
 					DownloadFileUtil.getInstance().downloadFile(response, fullName, name, true,
 							getDownloadLogService(), downloadLog);

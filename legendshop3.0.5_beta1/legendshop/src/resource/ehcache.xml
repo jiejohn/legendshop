@@ -36,14 +36,15 @@
 
 	<cache name="Pub" maxElementsInMemory="1000" eternal="true"
 		overflowToDisk="true" timeToIdleSeconds="130" timeToLiveSeconds="130" />
+		
 	<cache name="PubList" maxElementsInMemory="1000" eternal="true"
 		overflowToDisk="true" timeToIdleSeconds="130" timeToLiveSeconds="130" />
 
 	<cache name="Advertisement" maxElementsInMemory="1000" eternal="true"
 		overflowToDisk="true" timeToIdleSeconds="150" timeToLiveSeconds="150" />
+		
 	<cache name="AdvertisementList" maxElementsInMemory="1000"
-		eternal="true" overflowToDisk="true" timeToIdleSeconds="650"
-		timeToLiveSeconds="650" />
+		eternal="true" overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />
 
 	<cache name="Product" maxElementsInMemory="1000" eternal="true"
 		overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />
@@ -76,10 +77,10 @@
 		overflowToDisk="true" timeToIdleSeconds="130" timeToLiveSeconds="130" />
 		
 	<cache name="GrantedFunction" maxElementsInMemory="1000" eternal="true"
-		overflowToDisk="true" timeToIdleSeconds="820" timeToLiveSeconds="820" />
+		overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />
 
 	<cache name="GrantedFunctionList" maxElementsInMemory="1000" eternal="true"
-		overflowToDisk="true" timeToIdleSeconds="820" timeToLiveSeconds="820" />
+		overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />
 		
 	<cache name="ImgFile" maxElementsInMemory="1000" eternal="true"
 		overflowToDisk="true" timeToIdleSeconds="130" timeToLiveSeconds="130" />

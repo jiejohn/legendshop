@@ -110,7 +110,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (!AppUtils.isBlank(searchForm.getSortId()) && !defaultInt.equals(searchForm.getSortId())) {
 			sort = sortDao.getSort(searchForm.getSortId());
 			if (sort != null) {
-				setShopName(request, response, sort.getUserName());
+				ThreadLocalContext.setCurrentShopName(request, response, sort.getUserName());
 				request.setAttribute("sort", sort);
 				request.setAttribute("CurrentSortId", sort.getSortId());
 				nsortList = nsortDao.getNsortBySortId(searchForm.getSortId());
@@ -186,6 +186,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		if (AppUtils.isBlank(keyword)) {
 			return PathResolver.getPath(request, response, FrontPage.ALL);
 		}
+		keyword = keyword.trim();
 		int curPageNO = PagerUtil.getCurPageNO(curPageNOStr);// 当前页
 		SearchArgs args = new SearchArgs();
 		args.setKeywords(keyword);
@@ -292,11 +293,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	 */
 	@Override
 	public String getLeague(HttpServletRequest request, HttpServletResponse response) {
-		String shopName = (String) getSessionAttribute(request, Constants.SHOP_NAME);// 当前商城
-		if (shopName == null) {// 如果找不到就找默认商城
-			shopName = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
-			this.setShopName(request, response, shopName);
-		}
+		String shopName = ThreadLocalContext.getCurrentShopName(request, response);
 		String curPageNO = request.getParameter("curPageNO");
 		PageSupport ps = myleagueDao.getLeague(shopName, curPageNO);
 		request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));

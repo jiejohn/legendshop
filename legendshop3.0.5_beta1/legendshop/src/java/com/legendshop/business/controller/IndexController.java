@@ -93,11 +93,7 @@ public class IndexController extends BaseController {
 	 * @return
 	 */
 	private String getShopname(HttpServletRequest request, HttpServletResponse response) {
-		String shopName = (String)request.getAttribute(Constants.SHOP_NAME);
-		if(AppUtils.isBlank(shopName)){
-			shopName = ThreadLocalContext.getCurrentShopName(request,response);
-		}
-		return shopName;
+		return ThreadLocalContext.getCurrentShopName(request,response);
 	}
 	
 	

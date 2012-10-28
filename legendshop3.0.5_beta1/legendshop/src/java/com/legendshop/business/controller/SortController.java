@@ -190,7 +190,7 @@ public class SortController extends BaseController {
 		request.setAttribute("nsortList", nsortList);
 		String userName = UserManager.getUsername(request.getSession());
 		log.info("[{}],{},{},sort", new Object[] { request.getRemoteAddr(), userName == null ? "" : userName,
-				getSessionAttribute(request, Constants.SHOP_NAME) });
+				ThreadLocalContext.getCurrentShopName(request, response) });
 
 		PageSupport ps = productService.getProdDetail(localeResolver.resolveLocale(request), curPageNO, sortId);
 		ps.savePage(request);
