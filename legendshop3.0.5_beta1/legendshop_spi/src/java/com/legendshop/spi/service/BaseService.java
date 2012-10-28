@@ -37,18 +37,6 @@ public interface BaseService {
 	public abstract void setSessionAttribute(HttpServletRequest request, String name, Object obj);
 
 	/**
-	 * Sets the shop name.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @param shopName
-	 *            the shop name
-	 */
-	public abstract void setShopName(HttpServletRequest request, HttpServletResponse response, String shopName);
-
-	/**
 	 * Convert string to integer.
 	 * 
 	 * @param id

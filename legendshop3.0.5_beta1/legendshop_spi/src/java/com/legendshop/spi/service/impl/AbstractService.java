@@ -80,30 +80,6 @@ public abstract class AbstractService implements BaseService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.legendshop.business.service.impl.BaseService#setShopName(javax.servlet
-	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse,
-	 * java.lang.String)
-	 */
-
-	public void setShopName(HttpServletRequest request, HttpServletResponse response, String shopName) {
-		// Session
-		String name = ThreadLocalContext.getCurrentShopName(request, response);
-		if (name == null || !name.equals(shopName)) {
-			setSessionAttribute(request, Constants.SHOP_NAME, shopName);
-		}
-
-		// Cookie
-		// Cookie cookie = new Cookie(Constants.SHOP_NAME, shopName);
-		// //生命周期
-		// cookie.setMaxAge(60 * 60 * 24 * 365);
-		// cookie.setPath("/");
-		// response.addCookie(cookie);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
 	 * com.legendshop.business.service.impl.BaseService#convertStringToInteger
 	 * (java.lang.String)
 	 */
