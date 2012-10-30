@@ -1,3 +1,4 @@
+<%@page import="com.legendshop.spi.constants.SysParamEnum"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
@@ -15,14 +16,17 @@
 <body>
     <%
         Integer offset = (Integer) request.getAttribute("offset");
+        String groupId = (String)request.getAttribute("groupId");
     %>
 	 <table class="${tableclass}" style="width: 100%">
 	    <thead>
-	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 系统管理  &raquo; <a href="${pageContext.request.contextPath}/system/systemParameter/query">系统参数配置管理</a></td></tr>
+	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 系统管理  &raquo; <a href="${pageContext.request.contextPath}/system/systemParameter/query/<%=groupId %>">
+	    	<%=SysParamEnum.getValue(groupId) %></a>
+	    	</td></tr>
 	    </thead>
 	     <tbody><tr><td>
  <div align="left" style="padding: 3px">
-<form action="${pageContext.request.contextPath}/system/systemParameter/query" id="form1" method="post">
+<form action="${pageContext.request.contextPath}/system/systemParameter/query/${groupId}" id="form1" method="post">
         <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
            &nbsp; 参数名称&nbsp;<input type="text" name="name" id="name" maxlength="50" size="50" value="${bean.name}" />
             <input type="submit" value="搜索"/>
@@ -33,7 +37,7 @@
     
     <div align="center">
         <%@ include file="/WEB-INF/pages/common/messages.jsp"%>
-    <display:table name="list" requestURI="/system/systemParameter/query" id="item"
+    <display:table name="list" requestURI="/system/systemParameter/query/${groupId}" id="item"
          export="false" class="${tableclass}" style="width:100%">
       <display:column title="顺序"><%=offset++%></display:column>
       <display:column title="功能说明" property="memo"></display:column>

@@ -42,7 +42,10 @@ public enum EventId implements BaseEventId {
 	ORDER_SAVE_EVENT("ORDER_SAVE"),
 	
 		//取消订单
-	ORDER_CHANGE_EVENT("ORDER_CHANGE")
+	ORDER_CHANGE_EVENT("ORDER_CHANGE"),
+	
+	//更新系统配置
+	SYS_PARAM_EVENT("SYS_PARAM")
 	;
 	
 	 

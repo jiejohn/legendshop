@@ -98,7 +98,7 @@
 	                         </auth:auth>
                             <input type="reset" value="重置" />
                             <input type="button" value="返回"
-                                onclick="window.location='${pageContext.request.contextPath}/system/systemParameter/query'" />
+                                onclick="window.location='javascript:history.go(-1)'" />
                         </div>
                     </td>
                 </tr>

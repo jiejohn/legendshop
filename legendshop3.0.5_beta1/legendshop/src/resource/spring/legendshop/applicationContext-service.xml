@@ -226,18 +226,6 @@
 
 	<bean id="pluginManager" class="com.legendshop.core.plugins.PluginManagerImpl" />
 
-	<bean id="propertiesUpdater" class="com.legendshop.business.helper.PropertiesUpdaterImpl">
-		<property name="parameterList">
-			<list>
-				<value>MAIL_HOST</value>
-				<value>MAIL_NAME</value>
-				<value>MAIL_PASSWORD</value>
-				<value>MAIL_STMP_AUTH</value>
-				<value>MAIL_STMP_TIMEOUT</value>
-			</list>
-		</property>
-	</bean>
-
 	<bean id="commonUtil" class="com.legendshop.business.service.impl.CommonUtilImpl">
 		<property name="commonUtilDao" ref="commonUtilDao"></property>
 	</bean>

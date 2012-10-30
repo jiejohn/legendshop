@@ -96,6 +96,29 @@
 		</property>
 	</bean>	
 	
+		<!-- 更改系统配置事件 -->
+	<bean class="com.legendshop.event.EventListenerImpl">
+		<property name="eventId" value="SYS_PARAM" />
+		<property name="processors">
+			<list>
+				<bean class="com.legendshop.business.process.event.MailPropertiesUpdatedProcessor" >
+							<property name="parameterList">
+								<list>
+									<value>MAIL_HOST</value>
+									<value>MAIL_NAME</value>
+									<value>MAIL_PASSWORD</value>
+									<value>MAIL_STMP_AUTH</value>
+									<value>MAIL_STMP_TIMEOUT</value>
+								</list>
+							</property>
+				</bean>
+				<bean class="com.legendshop.business.process.event.DefaultShopPropertiesUpdatedProcessor" >
+						<property name="shopService"  ref="shopDetailService"/>
+				</bean>
+			</list>
+		</property>
+	</bean>	
+	
 	<!-- 发送邮件处理器 -->
 	<bean id="sendMailProcessor" class="com.legendshop.business.process.event.SendMailProcessor" parent="threadProcessor" >
 		<property name="javaMailSender">

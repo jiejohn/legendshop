@@ -9,6 +9,7 @@
         <title>创建商城</title>
   		<script type='text/javascript' src="<ls:templateResource item='/dwr/engine.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
+		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
 		<script type='text/javascript' src="<ls:templateResource item='/dwr/interface/optionService.js'/>"></script>
         <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>

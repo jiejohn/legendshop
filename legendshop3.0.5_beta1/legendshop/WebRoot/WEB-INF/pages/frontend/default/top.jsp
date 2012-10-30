@@ -119,7 +119,9 @@
 <div id="headernav">
 	<ul>
 		<li class="n2"><a href="<ls:url address='/index'/>"><fmt:message key="shop.index"/></a></li>
+		<!-- 
 		<li><a href="<ls:url address='/group/index'/>" target="_blank"><fmt:message key="group.on"/></a></li>
+		 -->
 		<c:if test="${'C2C' == applicationScope.BUSINESS_MODE }">
         <li class="n2"><a href="<ls:url address='/league'/>"><fmt:message key="leagueShop"/></a></li>
         </c:if>

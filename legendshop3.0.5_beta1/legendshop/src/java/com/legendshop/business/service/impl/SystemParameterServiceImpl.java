@@ -97,7 +97,7 @@ public class SystemParameterServiceImpl implements SystemParameterService {
 	public void initSystemParameter() {
 		List<SystemParameter> list = list();
 		for (SystemParameter parameter : list) {
-			PropertiesUtil.setParameter(parameter, null);
+			PropertiesUtil.setParameter(parameter);
 		}
 		log.info("System Parameter size = {}", list.size());
 	}

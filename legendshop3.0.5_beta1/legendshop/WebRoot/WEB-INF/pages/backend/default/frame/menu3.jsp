@@ -26,14 +26,29 @@
             </li>
             <li>
               <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/system/systemParameter/query' target='main'>系统配置</a></div>
-                <div class='flrct'> <a href='${pageContext.request.contextPath}/system/systemParameter/query' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='系统配置' title='系统配置'/></a> </div>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/system/systemParameter/query/sy' target='main'>系统配置</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/system/systemParameter/query/sy' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='系统配置' title='系统配置'/></a> </div>
               </div>
             </li>
+
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/system/systemParameter/query/sh' target='main'>商城配置</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/system/systemParameter/query/sh' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='商城配置' title='商城配置'/></a> </div>
+              </div>
+            </li>
+            
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/system/systemParameter/query/ma' target='main'>邮件配置</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/system/systemParameter/query/ma' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='邮件配置' title='邮件配置'/></a> </div>
+              </div>
+            </li>
+            
            <li>
               <div class='items'>
-                <div class='fllct'><a href='${pageContext.request.contextPath}/system/cache/query' target='main'>清空缓存</a></div>
-                <div class='flrct'> <a href='${pageContext.request.contextPath}/system/cache/query' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='清空缓存' title='清空缓存'/></a> </div>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/system/systemParameter/query/lo' target='main'>日志配置</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/system/systemParameter/query/lo' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='日志配置' title='日志配置'/></a> </div>
               </div>
             </li>
           </ul>
@@ -48,6 +63,20 @@
               <div class='items'>
                 <div class='fllct'><a href='${pageContext.request.contextPath}/admin/event/query' target='main'>系统日志</a></div>
                 <div class='flrct'> <a href='${pageContext.request.contextPath}/admin/event/query' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='系统日志' title='系统日志'/></a> </div>
+              </div>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+      
+         <dl class='bitem'>
+        <dt onClick='showHide("items1_3")'><b>缓存管理</b></dt>
+        <dd style='display:block' class='sitem' id='items1_2'>
+          <ul class='sitemu'>
+           <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/system/cache/query' target='main'>清空缓存</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/system/cache/query' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='清空缓存' title='清空缓存'/></a> </div>
               </div>
             </li>
           </ul>

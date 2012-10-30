@@ -17,16 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
+import com.legendshop.business.event.impl.SysParamUpdateEvent;
 import com.legendshop.business.service.SystemParameterService;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.helper.PropertiesUpdater;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
+import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.SystemParameter;
-import com.legendshop.util.ContextServiceLocator;
+import com.legendshop.spi.constants.SysParamEnum;
 
 /**
  * 系统参数控制器.
@@ -40,39 +41,28 @@ public class SystemParameterController extends BaseController {
 	private SystemParameterService systemParameterService;
 
 	/**
-	 * Gets the properties updater.
-	 * 
-	 * @return the properties updater
-	 */
-	private PropertiesUpdater getPropertiesUpdater() {
-		return (PropertiesUpdater) ContextServiceLocator.getInstance().getBean("propertiesUpdater");
-	}
-
-	/**
 	 * Query.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @param curPageNO
-	 *            the cur page no
-	 * @param systemParameter
-	 *            the system parameter
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param curPageNO the cur page no
+	 * @param systemParameter the system parameter
+	 * @param groupId the group id
 	 * @return the string
 	 */
-	@RequestMapping("/query")
+	@RequestMapping("/query/{groupId}")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO,
-			SystemParameter systemParameter) {
+			SystemParameter systemParameter, @PathVariable String groupId) {
 		CriteriaQuery cq = new CriteriaQuery(SystemParameter.class, curPageNO, "javascript:pager");
-		// cq.setPageSize((Integer)PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE.name()));
 		cq.setPageSize(30);
 		cq.eq("name", systemParameter.getName());
 		cq.eq("changeOnline", "Y");
+		cq.eq("groupId", groupId);
 		cq.addOrder("asc", "displayOrder");
 		
 		PageSupport ps = systemParameterService.getSystemParameterList(cq);
 		savePage(ps, request);
+		request.setAttribute("groupId", groupId);
 		request.setAttribute("bean", systemParameter);
 		return PathResolver.getPath(request,response,BackPage.PARAM_LIST_PAGE);
 	}
@@ -91,15 +81,20 @@ public class SystemParameterController extends BaseController {
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, SystemParameter systemParameter) {
 		SystemParameter parameter = systemParameterService.getSystemParameter(systemParameter.getName());
+		String groupId = SysParamEnum.sy.name();
 		if (parameter != null) {
+			groupId = parameter.getGroupId();
 			parameter.setValue(systemParameter.getValue());
-			PropertiesUtil.setParameter(parameter, getPropertiesUpdater());
+			PropertiesUtil.setParameter(parameter);
+			// 发布更改系统配置事件
+			EventHome.publishEvent(new SysParamUpdateEvent(parameter));
 			systemParameterService.update(parameter);
 			saveMessage(request, ResourceBundleHelper.getSucessfulString());
 		} else {
 			saveMessage(request, ResourceBundleHelper.getErrorString());
 		}
-		return PathResolver.getPath(request,response,FowardPage.PARAM_LIST_QUERY);
+		return FowardPage.PARAM_LIST_QUERY.getValue(request, response) + "/" + groupId;
+		//return PathResolver.getPath(request,response,FowardPage.PARAM_LIST_QUERY);
 	}
 
 	/**
@@ -143,9 +138,10 @@ public class SystemParameterController extends BaseController {
 
 	/**
 	 * Update.
-	 * 
-	 * @param systemParameter
-	 *            the system parameter
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param systemParameter the system parameter
 	 * @return the string
 	 */
 	@RequestMapping(value = "/update")
