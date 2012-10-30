@@ -38,5 +38,10 @@
                 <comment>显示顺序</comment>
             </column>
         </property>
+         <property name="groupId" type="java.lang.String">
+            <column name="group_id">
+                <comment>分类</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

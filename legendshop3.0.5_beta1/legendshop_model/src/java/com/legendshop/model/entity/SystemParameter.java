@@ -40,6 +40,8 @@ public class SystemParameter implements java.io.Serializable {
 	
 	/** The display order. */
 	private Integer  displayOrder;
+	
+	private String groupId;
 
 	// Constructors
 
@@ -182,6 +184,14 @@ public class SystemParameter implements java.io.Serializable {
 	 */
 	public void setChangeOnline(String changeOnline) {
 		this.changeOnline = changeOnline;
+	}
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
 
 }
