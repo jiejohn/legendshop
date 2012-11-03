@@ -34,7 +34,6 @@ public enum EventId implements BaseEventId {
 	//用户查看历史
 	VISIT_LOG_EVENT("VISIT_LOG"),
 	
-	
 	//是否可以增加商店
 	CAN_ADD_SHOPDETAIL_EVENT("CAN_ADD_SHOPDETAIL"), 
 	
@@ -46,6 +45,7 @@ public enum EventId implements BaseEventId {
 	
 	//更新系统配置
 	SYS_PARAM_EVENT("SYS_PARAM")
+	
 	;
 	
 	 

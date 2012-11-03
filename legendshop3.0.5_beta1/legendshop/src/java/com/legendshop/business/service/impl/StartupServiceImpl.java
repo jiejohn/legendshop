@@ -14,8 +14,8 @@ import javax.servlet.ServletContext;
 import org.springframework.web.context.ContextLoader;
 
 import com.legendshop.core.StartupService;
-import com.legendshop.core.plugins.Plugin;
-import com.legendshop.core.plugins.PluginManager;
+import com.legendshop.plugins.Plugin;
+import com.legendshop.plugins.PluginManager;
 import com.legendshop.util.AppUtils;
 
 /**
@@ -37,7 +37,7 @@ public class StartupServiceImpl implements StartupService {
 	private PluginManager pluginManager;
 
 	/** The is inited. */
-	private boolean isInited = false;
+	private Boolean isInited = false;
 
 	/**
 	 * 初始化,注意顺序不能调转.
@@ -46,21 +46,22 @@ public class StartupServiceImpl implements StartupService {
 	 *            the servlet context
 	 */
 	@Override
-	public synchronized void startup(ServletContext servletContext) {
-		// init all plugins
-		if (!isInited) {
-			Map<String, Plugin> beans = ContextLoader.getCurrentWebApplicationContext().getBeansOfType(Plugin.class);
-			if (AppUtils.isNotBlank(beans)) {
-				for (Plugin plugin : beans.values()) {
-					if(plugin.getPluginConfig() != null && plugin.getPluginConfig().getPulginId() != null){
-						pluginManager.registerPlugins(plugin);
+	public  void startup(ServletContext servletContext) {
+		synchronized (isInited) {
+			// init all plugins
+			if (!isInited) {
+				Map<String, Plugin> beans = ContextLoader.getCurrentWebApplicationContext().getBeansOfType(Plugin.class);
+				if (AppUtils.isNotBlank(beans)) {
+					for (Plugin plugin : beans.values()) {
+						if(plugin.getPluginConfig() != null && plugin.getPluginConfig().getPulginId() != null){
+							pluginManager.registerPlugins(plugin);
+						}
 					}
 				}
+				pluginManager.startPlugins(servletContext);
+				isInited = true;
 			}
-			pluginManager.startPlugins(servletContext);
-			isInited = true;
 		}
-
 	}
 
 	/**
@@ -71,6 +72,16 @@ public class StartupServiceImpl implements StartupService {
 	 */
 	public void setPluginManager(PluginManager pluginManager) {
 		this.pluginManager = pluginManager;
+	}
+
+	@Override
+	public void destory(ServletContext servletContext) {
+		synchronized (isInited) {
+			if(!isInited){
+				return;
+			}
+			pluginManager.stoptPlugins(servletContext);
+		}
 	}
 
 }

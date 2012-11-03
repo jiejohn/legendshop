@@ -77,13 +77,13 @@ public class IndexController extends BaseController {
 	 *            the response
 	 * @param curPageNO
 	 *            the cur page no
-	 * @param shopName
-	 *            the shop name
+	 * @param newShopName
+	 *            the new shop name
 	 * @return the string
 	 */
-	@RequestMapping("/shop/{shopName}")
-	public String shop(HttpServletRequest request, HttpServletResponse response, String curPageNO, @PathVariable String shopName) {
-		request.setAttribute(Constants.SHOP_NAME, shopName);
+	@RequestMapping("/shop/{newShopName}")
+	public String shop(HttpServletRequest request, HttpServletResponse response, String curPageNO, @PathVariable String newShopName) {
+		ThreadLocalContext.setCurrentShopName(request, response, newShopName);
 		return PathResolver.getPath(request,response,FowardPage.INDEX_QUERY);
 	}
 	

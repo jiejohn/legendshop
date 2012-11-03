@@ -8,6 +8,7 @@
 package com.legendshop.business;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,19 +21,17 @@ import com.legendshop.core.constant.LanguageEnum;
 import com.legendshop.core.constant.RuntimeModeEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.page.PagerUtil;
-import com.legendshop.core.plugins.AbstractPlugin;
 import com.legendshop.core.tag.TableCache;
-import com.legendshop.event.EventHome;
+import com.legendshop.event.processor.BaseProcessor;
 import com.legendshop.search.SearchFacade;
 import com.legendshop.util.FileConfig;
 
 /**
- * The Class BusinessPlugin.
+ * 系统初始化事件 eventId: SYS_INIT.
  */
-public class BusinessPlugin extends AbstractPlugin{
-	
+public class SysInitProcessor extends BaseProcessor<ServletContextEvent> {
 	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(BusinessPlugin.class);
+	private static Logger log = LoggerFactory.getLogger(SysInitProcessor.class);
 	/** The system parameter service. */
 	private SystemParameterService systemParameterService;
 
@@ -41,12 +40,13 @@ public class BusinessPlugin extends AbstractPlugin{
 
 	/** The search facade. */
 	private SearchFacade searchFacade;
-	
+
 	/* (non-Javadoc)
-	 * @see com.legendshop.core.plugins.Plugin#bind(javax.servlet.ServletContext)
+	 * @see com.legendshop.event.processor.AbstractProcessor#process(java.lang.Object)
 	 */
 	@Override
-	public void bind(ServletContext servletContext) {
+	public void process(ServletContextEvent event) {
+		ServletContext servletContext = event.getServletContext();
 		// Load System Parameter
 		systemParameterService.initSystemParameter();
 
@@ -56,10 +56,7 @@ public class BusinessPlugin extends AbstractPlugin{
 		log.info("luceneIndexPath is {}", luceneIndexPath);
 
 		searchFacade.init(luceneIndexPath);
-		
-		EventHome.initBaseEventListener();
-		
-		////////////
+
 		PagerUtil.setPath(servletContext.getContextPath());
 
 		servletContext.setAttribute(ConfigPropertiesEnum.CURRENCY_PATTERN.name(), PropertiesUtil.getCurrencyPattern());
@@ -68,57 +65,45 @@ public class BusinessPlugin extends AbstractPlugin{
 
 		servletContext.setAttribute("LEGENDSHOP_DOMAIN_NAME", AttributeKeys.LEGENDSHOP_DOMAIN_NAME);
 
-		servletContext.setAttribute(ConfigPropertiesEnum.LEGENDSHOP_VERSION.name(), PropertiesUtil.getProperties(
-				FileConfig.GlobalFile, ConfigPropertiesEnum.LEGENDSHOP_VERSION.name()));
-		
-		//业务模式
-		String businessMode = PropertiesUtil.getProperties(FileConfig.GlobalFile, ConfigPropertiesEnum.BUSINESS_MODE.name());
-		if(BusinessModeEnum.C2C.name().equals(businessMode)){
+		servletContext.setAttribute(ConfigPropertiesEnum.LEGENDSHOP_VERSION.name(),
+				PropertiesUtil.getProperties(FileConfig.GlobalFile, ConfigPropertiesEnum.LEGENDSHOP_VERSION.name()));
+
+		// 业务模式
+		String businessMode = PropertiesUtil.getProperties(FileConfig.GlobalFile,
+				ConfigPropertiesEnum.BUSINESS_MODE.name());
+		if (BusinessModeEnum.C2C.name().equals(businessMode)) {
 			servletContext.setAttribute(AttributeKeys.BUSINESS_MODE, BusinessModeEnum.C2C.name());
-		}else{
+		} else {
 			servletContext.setAttribute(AttributeKeys.BUSINESS_MODE, BusinessModeEnum.B2C.name());
 		}
-		
-		//业务模式
-		String languageMode = PropertiesUtil.getProperties(FileConfig.GlobalFile, ConfigPropertiesEnum.LANGUAGE_MODE.name());
-		if(LanguageEnum.ENGLISH.equals(languageMode)){
+
+		// 业务模式
+		String languageMode = PropertiesUtil.getProperties(FileConfig.GlobalFile,
+				ConfigPropertiesEnum.LANGUAGE_MODE.name());
+		if (LanguageEnum.ENGLISH.equals(languageMode)) {
 			servletContext.setAttribute(AttributeKeys.LANGUAGE_MODE, LanguageEnum.USERCHOICE);
-		}else if(LanguageEnum.CHINESE.equals(languageMode)){
+		} else if (LanguageEnum.CHINESE.equals(languageMode)) {
 			servletContext.setAttribute(AttributeKeys.LANGUAGE_MODE, LanguageEnum.CHINESE);
-		}else{
+		} else {
 			servletContext.setAttribute(AttributeKeys.LANGUAGE_MODE, LanguageEnum.USERCHOICE);
 		}
 
 		servletContext.setAttribute(AttributeKeys.RUNTIME_MODE, RuntimeModeEnum.PRODUCTION);
-		
 	}
-
-	/* (non-Javadoc)
-	 * @see com.legendshop.core.plugins.Plugin#unbind(javax.servlet.ServletContext)
-	 */
-	@Override
-	public void unbind(ServletContext servletContext) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 
 	/**
 	 * Sets the system parameter service.
-	 * 
-	 * @param systemParameterServiceImpl
-	 *            the new system parameter service
+	 *
+	 * @param systemParameterService the new system parameter service
 	 */
-	public void setSystemParameterService(SystemParameterService systemParameterServiceImpl) {
-		this.systemParameterService = systemParameterServiceImpl;
+	public void setSystemParameterService(SystemParameterService systemParameterService) {
+		this.systemParameterService = systemParameterService;
 	}
 
 	/**
 	 * Sets the code tables cache.
-	 * 
-	 * @param codeTablesCache
-	 *            the new code tables cache
+	 *
+	 * @param codeTablesCache the new code tables cache
 	 */
 	public void setCodeTablesCache(TableCache codeTablesCache) {
 		this.codeTablesCache = codeTablesCache;
@@ -126,9 +111,8 @@ public class BusinessPlugin extends AbstractPlugin{
 
 	/**
 	 * Sets the search facade.
-	 * 
-	 * @param searchFacade
-	 *            the new search facade
+	 *
+	 * @param searchFacade the new search facade
 	 */
 	public void setSearchFacade(SearchFacade searchFacade) {
 		this.searchFacade = searchFacade;

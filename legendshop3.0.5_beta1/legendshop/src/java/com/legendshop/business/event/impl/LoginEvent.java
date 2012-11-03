@@ -8,7 +8,6 @@
 package com.legendshop.business.event.impl;
 
 import com.legendshop.business.event.EventId;
-import com.legendshop.business.service.LoginHistoryService;
 import com.legendshop.core.security.model.UserDetail;
 import com.legendshop.event.SystemEvent;
 

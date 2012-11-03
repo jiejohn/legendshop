@@ -178,6 +178,9 @@ public enum BackPage implements PageDefinition{
 	/** The cache list page. */
 	CACHE_LIST_PAGE("/cache/cacheList"),
 	
+	/** The cache list page. */
+	PLUGIN_LIST_PAGE("/plugin/pluginList"),
+	
 	/** The param edit page. */
 	PARAM_EDIT_PAGE("/systemParameter/systemParameter"),
 
