@@ -128,4 +128,18 @@
 	
 	<!-- 用户注册处理器 -->
 	<bean id="userRegProcessor" class="com.legendshop.business.process.event.UserRegProcessor"  />
+	
+	<bean class="com.legendshop.event.EventListenerImpl">
+		<property name="eventId" value="SYS_INIT" />
+		<property name="processors">
+			<list>
+				<bean class="com.legendshop.business.SysInitProcessor">
+							<property name="systemParameterService" ref="systemParameterService" />
+					        <property name="codeTablesCache" ref="codeTablesCache" />
+					        <property name="searchFacade" ref="searchFacade" />
+				</bean>
+			</list>
+		</property>
+		<property name="order" value="1"></property>
+	</bean>
 </beans>

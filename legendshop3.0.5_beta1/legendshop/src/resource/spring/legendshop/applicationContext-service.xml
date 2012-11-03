@@ -224,7 +224,7 @@
 		<property name="pluginManager" ref="pluginManager" />
 	</bean>
 
-	<bean id="pluginManager" class="com.legendshop.core.plugins.PluginManagerImpl" />
+	<bean id="pluginManager" class="com.legendshop.plugins.PluginManagerImpl" />
 
 	<bean id="commonUtil" class="com.legendshop.business.service.impl.CommonUtilImpl">
 		<property name="commonUtilDao" ref="commonUtilDao"></property>

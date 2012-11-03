@@ -41,7 +41,7 @@
      -->
     
 	<!-- 自动搜索@Controller标注的类 -->
-	<context:component-scan base-package="com.**.controller" />
+	<context:component-scan base-package="com.legendshop.business.controller" />
 	
 	 <mvc:annotation-driven conversion-service="conversionService"/> 
 	  
@@ -119,5 +119,8 @@
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
 
+	<!-- 插件部分 -->
+	<import resource="classpath*:/spring/legendshop/plugins/**/*-plugins.xml" />
+	
 </beans>
    
