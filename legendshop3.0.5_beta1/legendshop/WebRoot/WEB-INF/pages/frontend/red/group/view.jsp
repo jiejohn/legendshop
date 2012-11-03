@@ -53,7 +53,7 @@ $(function(){
 				carriage = 0;
 			}
 		var prodAttr = "";
-		   CommonService.addtocart('${sessionScope.SPRING_SECURITY_LAST_USERNAME}', '${sessionScope.shopName}', ${groupProduct.product.prodId},'${groupProduct.product.pic}', '${groupProduct.product.name}', '${groupProduct.product.cash}', carriage, count,
+		   CommonService.addtocart('${sessionScope.SPRING_SECURITY_LAST_USERNAME}', '<lb:currentShop />', ${groupProduct.product.prodId},'${groupProduct.product.pic}', '${groupProduct.product.name}', '${groupProduct.product.cash}', carriage, count,
 		   prodAttr, function(retData){
 		       document.getElementById("basket_total_cash").innerHTML = "<b>" + retData.BASKET_TOTAL_CASH + "</b>";
 		       document.getElementById("basket_count").innerHTML = retData.BASKET_COUNT;

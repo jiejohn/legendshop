@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/default/css/overlay.css" />
    <table width="100%" cellspacing="0" cellpadding="0" class="tables">
                 <tr> 
-                  <td class="titlebg"><fmt:message key="contact.method"><fmt:param value="${sessionScope.shopName}"/></fmt:message></td>
+                  <td class="titlebg"><fmt:message key="contact.method"><fmt:param value="<lb:currentShop />"/></fmt:message></td>
                 </tr>
                 <tr> 
                   <td> <table width="100%" cellspacing="1" cellpadding="0" height="100%">

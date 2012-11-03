@@ -22,7 +22,7 @@
 	           		 <option value=""><fmt:message key="please.select"/></option>
 	                 <option:optionGroup type="select" required="true" cache="fasle"
 	                beanName="NewsCategory" beanId="newsCategoryId" beanDisp="newsCategoryName" 
-	                hql="select t.newsCategoryId, t.newsCategoryName from NewsCategory t where t.status = 1 and t.userName = ?" param="${sessionScope.shopName}" selectedValue="${newsCategoryId}" />
+	                hql="select t.newsCategoryId, t.newsCategoryName from NewsCategory t where t.status = 1 and t.userName = ?" param="<lb:currentShop />" selectedValue="${newsCategoryId}" />
 	            </select>
 	            <input type="hidden" id="curPageNO" name="curPageNO" value="${curPageNO}" />
 	            

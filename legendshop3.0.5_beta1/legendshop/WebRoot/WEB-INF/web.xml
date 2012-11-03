@@ -92,7 +92,7 @@
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 </listener>
  <listener>
-  <listener-class>com.legendshop.business.common.InitSysListener</listener-class>
+  <listener-class>com.legendshop.core.listener.InitSysListener</listener-class>
  </listener>
  
  <servlet>

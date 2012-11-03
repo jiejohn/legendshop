@@ -51,6 +51,13 @@
                 <div class='flrct'> <a href='${pageContext.request.contextPath}/system/systemParameter/query/lo' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='日志配置' title='日志配置'/></a> </div>
               </div>
             </li>
+            
+           <li>
+              <div class='items'>
+                <div class='fllct'><a href='${pageContext.request.contextPath}/system/plugin/query' target='main'>插件列表</a></div>
+                <div class='flrct'> <a href='${pageContext.request.contextPath}/system/plugin/query' target='main'><img src='${pageContext.request.contextPath}/plugins/theme/skin/images/frame/gtk-sadd.png' alt='插件列表' title='插件列表'/></a> </div>
+              </div>
+            </li>
           </ul>
         </dd>
       </dl>

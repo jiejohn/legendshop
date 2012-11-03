@@ -6,7 +6,7 @@
 <![endif]-->
 <div class="tables">
 	<table class="recommond" width="100%" cellpadding="0" cellspacing="0">
-	  <tr><td><fmt:message key="shop.hot.product"><fmt:param value="${sessionScope.shopName}"/></fmt:message></td></tr>
+	  <tr><td><fmt:message key="shop.hot.product"><fmt:param value="<lb:currentShop />"/></fmt:message></td></tr>
 	  <tr><td><table style="font-weight: normal;color: #666666">
 		<tr>
 			<c:forEach items="${requestScope.hotViewList}" var="prod" varStatus="status">

@@ -90,7 +90,7 @@
                <li><a href="<ls:domain shopName='${sessionScope.SPRING_SECURITY_LAST_USERNAME}' />"><fmt:message key="myShop"/></a></li>
         </c:if>
 	   <auth:auth ifAnyGranted="F_ADMIN">
-	   	<c:if test="${canbeLeagueShop}"><li><a href='javascript:addMyLeague("${sessionScope.SPRING_SECURITY_LAST_USERNAME}","${sessionScope.shopName}")'><fmt:message key="addLeague"/><fmt:message key="this.shop"/></a></li></c:if>
+	   	<c:if test="${canbeLeagueShop}"><li><a href='javascript:addMyLeague("${sessionScope.SPRING_SECURITY_LAST_USERNAME}","<lb:currentShop />")'><fmt:message key="addLeague"/><fmt:message key="this.shop"/></a></li></c:if>
 	     <li><a href="<ls:url address='/admin/index'/>"><b><fmt:message key="system.management"/></b></a></li>
        </auth:auth>
       	<li><a href="<ls:url address='/leaveword'/>"><fmt:message key="leaveword"/></a></li>
@@ -119,9 +119,9 @@
 <div id="headernav">
 	<ul>
 		<li class="n2"><a href="<ls:url address='/index'/>"><fmt:message key="shop.index"/></a></li>
-		<!-- 
+		<!-- 	 -->
 		<li><a href="<ls:url address='/group/index'/>" target="_blank"><fmt:message key="group.on"/></a></li>
-		 -->
+	
 		<c:if test="${'C2C' == applicationScope.BUSINESS_MODE }">
         <li class="n2"><a href="<ls:url address='/league'/>"><fmt:message key="leagueShop"/></a></li>
         </c:if>
@@ -167,7 +167,7 @@
 	  </div>
 	  <div>
 		<ul id="favourite">
-			<li><center><a href="<ls:url address='/shopcontact'/>?shop=${sessionScope.shopName}" title="${sessionScope.shopName}<fmt:message key='online.customer'/>"><fmt:message key="online.customer"/></a></center></li>
+			<li><center><a href="<ls:url address='/shopcontact'/>?shop=<lb:currentShop />" title="<lb:currentShop /><fmt:message key='online.customer'/>"><fmt:message key="online.customer"/></a></center></li>
 		</ul>
 		</div>
 	</div>

@@ -1,10 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c"%>
+<%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option" %>
 <%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <html>
     <head>
-        <title>${sessionScope.shopName} 加盟商城</title>
+        <title><lb:currentShop />加盟商城</title>
         <script src="<ls:templateResource item='/common/js/jquery.js'/>" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/common/default/css/indexJpgForm.css" />

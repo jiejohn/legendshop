@@ -32,7 +32,7 @@
 								<c:if test="${shopDetail.province != null}">
 								  		 ${shopDetail.province}/${shopDetail.city}/${shopDetail.area}/
 								  </c:if>
-								<b><a href="${pageContext.request.contextPath}/shopcontact">${sessionScope.shopName}</a>
+								<b><a href="${pageContext.request.contextPath}/shopcontact"><lb:currentShop /></a>
 								</b>
 							</li>
 							<c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
