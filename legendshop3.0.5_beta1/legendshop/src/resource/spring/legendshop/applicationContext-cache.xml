@@ -34,11 +34,6 @@
 					<property name="expiredDuration" value="3600" />
 				</bean>
 				<bean class="com.legendshop.core.cache.MemcachedCache">
-					<property name="name" value="ShopDetail" />
-					<property name="memcachedClient" ref="memcachedClient" />
-					<property name="expiredDuration" value="3600" />
-				</bean>
-				<bean class="com.legendshop.core.cache.MemcachedCache">
 					<property name="name" value="ShopDetailView" />
 					<property name="memcachedClient" ref="memcachedClient" />
 					<property name="expiredDuration" value="3600" />
@@ -90,16 +85,6 @@
 				</bean>
 				<bean class="com.legendshop.core.cache.MemcachedCache">
 					<property name="name" value="AdvertisementList" />
-					<property name="memcachedClient" ref="memcachedClient" />
-					<property name="expiredDuration" value="3600" />
-				</bean>
-				<bean class="com.legendshop.core.cache.MemcachedCache">
-					<property name="name" value="Product" />
-					<property name="memcachedClient" ref="memcachedClient" />
-					<property name="expiredDuration" value="3600" />
-				</bean>
-				<bean class="com.legendshop.core.cache.MemcachedCache">
-					<property name="name" value="ProductList" />
 					<property name="memcachedClient" ref="memcachedClient" />
 					<property name="expiredDuration" value="3600" />
 				</bean>

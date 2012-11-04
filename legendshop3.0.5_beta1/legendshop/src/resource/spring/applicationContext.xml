@@ -34,9 +34,13 @@
 	<import resource="legendshop/applicationContext-search.xml" />
 	<import resource="legendshop/applicationContext-service.xml" />
 	<import resource="legendshop/applicationContext-event.xml" />
+	
+		<!-- 插件部分 -->
+	<import resource="classpath*:/spring/legendshop/plugins/**/*-plugins.xml" />
+	<!-- 
 	<import resource="classpath*:/spring/legendshop/plugins/applicationContext-core.xml" />
 	<import resource="classpath*:/spring/legendshop/plugins/applicationContext-central.xml" />
-	
+	 -->
 	<!-- 可以配置为cas，basic -->
 	<conditional:import resource="legendshop/security/applicationContext-${AUTHENTICATION_MODE}.xml"  />
 	
@@ -45,14 +49,14 @@
 	  <bean id="handlerManager" class="com.legendshop.core.helper.HandlerManager">
     	<property name="handlers">
     		      	<list>
-      					<bean class="com.legendshop.business.helper.impl.EncodingHandler" >
+      					<bean class="com.legendshop.core.handler.EncodingHandler" >
       						<property name="encoding" value="UTF-8"></property>
       					</bean>
-      					 <bean class="com.legendshop.business.helper.impl.IndependDomainHandler" >
+      					<!-- 
+      					 <bean class="com.legendshop.core.handler.IndependDomainHandler" >
       					 	<property name="shopService" ref="shopDetailService"></property>
       					</bean>
-      					<!-- 
-      					<bean class="com.legendshop.business.helper.impl.CookiesSSOHandler">
+      					<bean class="com.legendshop.business.handler.CookiesSSOHandler">
       						<property name="userDetailService" ref="userDetailService" />
       					</bean>
       					 -->

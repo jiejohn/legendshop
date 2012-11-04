@@ -24,17 +24,6 @@
     <mvc:interceptors>  
       <bean class="com.legendshop.core.helper.SystemInterceptor" > 
       		<property name="handlers">
-      				<list>
-      					<bean class="com.legendshop.business.helper.impl.EncodingHandler" >
-      						<property name="encoding" value="UTF-8"></property>
-      					</bean>
-      					 <bean class="com.legendshop.business.helper.impl.IndependDomainHandler" >
-      					 	<property name="shopService" ref="shopDetailService"></property>
-      					</bean>
-      					<bean class="com.legendshop.business.helper.impl.CookiesSSOHandler">
-      						<property name="userDetailService" ref="userDetailService" />
-      					</bean>
-      				</list>
       		</property>
       </bean>
     </mvc:interceptors>  
@@ -53,17 +42,6 @@
         </list>
     </property>
 	</bean>
-	  <!-- 
-	 <bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="webBindingInitializer">
-			<bean class="com.legendshop.core.MyBindingInitializer" />
-		</property>
-	</bean>
-		<bean class="com.legendshop.business.helper.MethodHandlerAdapter" />
- -->
- 
-
 
 	<!-- Default ViewResolver -->
 	<bean id="viewResolver1"
@@ -120,7 +98,7 @@
 	</bean>
 
 	<!-- 插件部分 -->
-	<import resource="classpath*:/spring/legendshop/plugins/**/*-plugins.xml" />
+	<import resource="classpath*:/spring/legendshop/plugins/**/*-controller.xml" />
 	
 </beans>
    

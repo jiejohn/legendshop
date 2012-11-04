@@ -1,4 +1,4 @@
-package com.legendshop.business.helper.impl;
+package com.legendshop.business.handler;
 
 import java.io.IOException;
 
@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.legendshop.business.form.UserForm;
-import com.legendshop.business.helper.AbstractHandler;
 import com.legendshop.business.service.DefaultLoginServiceImpl;
 import com.legendshop.business.service.UserDetailService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.exception.ApplicationException;
 import com.legendshop.core.exception.EntityCodes;
+import com.legendshop.core.handler.AbstractHandler;
 import com.legendshop.core.helper.Handler;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.LoginService;

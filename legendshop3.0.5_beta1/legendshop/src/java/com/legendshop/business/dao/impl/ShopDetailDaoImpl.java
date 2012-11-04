@@ -32,6 +32,7 @@ import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.Myleague;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
+import com.legendshop.spi.cache.ShopDetailUpdate;
 import com.legendshop.spi.dao.ShopDetailDao;
 import com.legendshop.util.AppUtils;
 
@@ -68,7 +69,7 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#isShopExists(java.lang.String)
 	 */
 	@Override
-	@Cacheable(value="ShopDetail")
+	@Cacheable(value="ShopDetailView")
 	public Boolean isShopExists(final String userName) {
 		if (AppUtils.isBlank(userName)) {
 			return false;
@@ -99,7 +100,7 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#isLeagueShopExists(java.lang.String)
 	 */
 	@Override
-	@Cacheable(value="ShopDetail")
+	@Cacheable(value="ShopDetailView")
 	public Boolean isLeagueShopExists(final String userName) {
 		if (userName == null)
 			return false;
@@ -112,7 +113,7 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#canbeLeagueShop(boolean, java.lang.String, java.lang.String)
 	 */
 	@Override
-	@Cacheable(value="ShopDetail")
+	@Cacheable(value="ShopDetailView")
 	public Boolean isBeLeagueShop(final boolean isShopExists, final String userName, final String friendName) {
 		if (!isShopExists || AppUtils.isBlank(userName) || userName.equals(friendName)) {
 			return false;
@@ -215,10 +216,7 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#updateShopDetail(com.legendshop.model.entity.ShopDetail)
 	 */
 	@Override
-	@Caching(evict = { 
-			@CacheEvict(value = "ShopDetailView", key="#shopdetail.userName"), 
-			@CacheEvict(value = "ShopDetailView", key= "'DM_' + #shopdetail.domainName")
-			})
+	@ShopDetailUpdate
 	public void updateShopDetail(ShopDetail shopdetail) {
 		update(shopdetail);
 	}
@@ -229,7 +227,7 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 * @param shopdetail
 	 *            the shopdetail
 	 */
-	@CacheEvict(value="ShopDetailView", key="#shopdetail.userName")
+	@ShopDetailUpdate
 	private void saveOrUpdateShopDetail(ShopDetail shopdetail) {
 		saveOrUpdate(shopdetail);
 	}
@@ -239,6 +237,9 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 * @see com.legendshop.business.dao.impl.ShopDetailDao#updateShopDetailWhenProductChange(com.legendshop.model.entity.Product)
 	 */
 	@Override
+	@Caching(evict = { 
+			@CacheEvict(value = "ShopDetailView", key="#product.userName")
+			})
 	public void updateShopDetailWhenProductChange(Product product) {
 		ShopDetail shopdetail = getShopDetailForUpdate(product.getUserName());
 		if (shopdetail == null) {
@@ -261,6 +262,9 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 * @see com.legendshop.business.dao.ShopDetailDao#updateShopDetail(java.lang.String)
 	 */
 	@Override
+	@Caching(evict = { 
+			@CacheEvict(value = "ShopDetailView", key="#userName")
+			})
 	public void updateShopDetail(String userName) {
 		ShopDetail shopdetail = getShopDetailForUpdate(userName);
 		if (shopdetail == null) {
@@ -275,6 +279,9 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 * @see com.legendshop.business.dao.ShopDetailDao#updateShop(java.lang.String, java.lang.String, com.legendshop.model.entity.ShopDetail, java.lang.Integer)
 	 */
 	@Override
+	@Caching(evict = {
+			@CacheEvict(value = "ShopDetailView", key="#shopdetail.userName")
+			})
 	public  boolean updateShop(String loginUserName, String userId, ShopDetail shopDetail, Integer status){
 		
 		boolean result = true;
@@ -309,26 +316,7 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 		
 	}
 	
-	/**
-	 * Delete shop detail by id.
-	 * 
-	 * @param id
-	 *            the id
-	 */
-	@Override
-	@Caching(evict = { 
-			@CacheEvict(value="ShopDetail", key="#id"),
-			@CacheEvict(value="ShopDetailView", key="#id")
-			})
-	public void deleteShopDetailById(Long id){
-		ShopDetail shopDetail = getShopDetailByShopId(id);
-		if(shopDetail != null){
-			EventHome.publishEvent(new FireEvent(shopDetail, OperationTypeEnum.DELETE));
-			delete(shopDetail);
-		}
-
-	}
-
+	
 	/**
 	 * Delete shop detail.
 	 * 
@@ -336,10 +324,7 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 *            the shop detail
 	 */
 	@Override
-	@Caching(evict = {
-			@CacheEvict(value="ShopDetail", key="#shopDetail.userName"),
-			@CacheEvict(value="ShopDetailView", key="#shopDetail.userName")
-			})
+	@ShopDetailUpdate
 	public void deleteShopDetail(ShopDetail shopDetail){
 		EventHome.publishEvent(new FireEvent(shopDetail, OperationTypeEnum.DELETE));
 		delete(shopDetail);

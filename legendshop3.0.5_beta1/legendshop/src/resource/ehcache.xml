@@ -10,9 +10,6 @@
 	<cache name="LogoList" maxElementsInMemory="1000" eternal="true"
 		overflowToDisk="true" timeToIdleSeconds="120" timeToLiveSeconds="120" />
 
-	<cache name="ShopDetail" maxElementsInMemory="1000" eternal="true"
-		overflowToDisk="true" timeToIdleSeconds="120" timeToLiveSeconds="120" />
-
 	<cache name="ShopDetailView" maxElementsInMemory="1000" eternal="true"
 		overflowToDisk="true" timeToIdleSeconds="120" timeToLiveSeconds="120" />
 
@@ -45,12 +42,6 @@
 		
 	<cache name="AdvertisementList" maxElementsInMemory="1000"
 		eternal="true" overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />
-
-	<cache name="Product" maxElementsInMemory="1000" eternal="true"
-		overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />
-
-	<cache name="ProductList" maxElementsInMemory="1000" eternal="true"
-		overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />
 		
 	<cache name="ProductDetail" maxElementsInMemory="1000" eternal="true"
 		overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />

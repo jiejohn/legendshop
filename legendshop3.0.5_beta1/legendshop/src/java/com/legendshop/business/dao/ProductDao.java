@@ -202,7 +202,7 @@ public interface ProductDao extends BaseDao{
      * @param prodId
      *            the prod id
      */
-    public abstract void deleteProdById(Long prodId);
+    public abstract void deleteProd(Product product);
 
     /**
      * Update prod online.

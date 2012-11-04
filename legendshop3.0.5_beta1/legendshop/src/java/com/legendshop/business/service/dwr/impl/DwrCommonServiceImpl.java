@@ -294,7 +294,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 			//TODO
 			//检查是否有订单，如果已经订购了就不可以删除
 
-			productDao.deleteProdById(prodId);
+			productDao.deleteProd(product);
 			
 			if(ProductTypeEnum.GROUP.value().equals(product.getProdType())){
 				//delete group product

@@ -14,14 +14,12 @@ import org.springframework.cache.annotation.Cacheable;
 import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.search.facade.ShopDetailSearchFacade;
 import com.legendshop.business.service.ShopDetailService;
-import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.helper.ShopStatusChecker;
-import com.legendshop.event.EventHome;
+import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.ShopDetailView;
@@ -76,14 +74,6 @@ public class ShopDetailServiceImpl   extends BaseServiceImpl  implements ShopDet
 	}
 
 	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.ShopDetailService#delete(java.lang.Long)
-	 */
-	@Override
-	public void delete(Long id) {
-		shopDetailDao.deleteShopDetailById(id);
-	}
-
-	/* (non-Javadoc)
 	 * @see com.legendshop.business.service.ShopDetailService#delete(com.legendshop.model.entity.ShopDetail)
 	 */
 	@Override
@@ -109,9 +99,10 @@ public class ShopDetailServiceImpl   extends BaseServiceImpl  implements ShopDet
 	@Cacheable(value = "ShopDetailView", key="#currentShopName")
 	public ShopDetailView getShopDetailView(String currentShopName){
 		ShopDetailView shopDetail = shopDetailDao.getShopDetailView(currentShopName);
-//		if(shopDetail!=null && !shopStatusChecker.check(shopDetail, ThreadLocalContext.getRequest())){
-//			throw new BusinessException("Check shop failed", EntityCodes.SHOP);
-//		}
+		if(shopDetail!=null && !shopStatusChecker.check(shopDetail, ThreadLocalContext.getRequest())){
+			//throw new BusinessException("Check shop failed", EntityCodes.SHOP);
+			return null;
+		}
 		return shopDetail;
 	}
 	

@@ -36,6 +36,7 @@ import com.legendshop.model.dynamic.Model;
 import com.legendshop.model.entity.DynamicTemp;
 import com.legendshop.model.entity.Product;
 import com.legendshop.model.entity.RelProduct;
+import com.legendshop.spi.cache.ProductUpdate;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.sql.ConfigCode;
@@ -57,7 +58,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	@Cacheable(value = "ProductList")
+	@Cacheable(value = "ProductDetailList")
 	public List<Product> getCommendProd(final String shopName, final int total) {
 		log.debug("getCommendProd, shopName = {},total = {}", shopName, total);
 		// return (List<Product>)
@@ -86,7 +87,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * .String, java.lang.Long, int)
 	 */
 	@Override
-	@Cacheable(value = "ProductList")
+	@Cacheable(value = "ProductDetailList")
 	public List<Product> getReleationProd(final String shopName, final Long prodId, final int total) {
 		Date date = new Date();
 		return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getRelationProd"), 0, total, shopName, date, date,
@@ -101,7 +102,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * , int)
 	 */
 	@Override
-	@Cacheable(value = "ProductList")
+	@Cacheable(value = "ProductDetailList")
 	public List<Product> getNewestProd(final String shopName, final int total) {
 		Date date = new Date();
 		return findByHQLLimit(ConfigCode.getInstance().getCode("biz.getNewestProd"), 0, total, shopName, date, date);
@@ -115,7 +116,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * com.legendshop.business.dao.impl.ProductDao#gethotsale(java.lang.String)
 	 */
 	@Override
-	@Cacheable(value = "ProductList")
+	@Cacheable(value = "ProductDetailList")
 	public List<Product> gethotsale(final String shopName) {
 		if (shopName == null) {
 			return null;
@@ -132,7 +133,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * .core.dao.support.CriteriaQuery)
 	 */
 	@Override
-	@Cacheable(value = "ProductList", condition = "T(Integer).parseInt(#curPageNO) < 3")
+	@Cacheable(value = "ProductDetailList", condition = "T(Integer).parseInt(#curPageNO) < 3")
 	public PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId, Long nsortId, Long subNsortId) {
 		// Qbc查找方式
 		CriteriaQuery cq = new CriteriaQuery(Product.class, curPageNO);
@@ -177,7 +178,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * com.legendshop.business.dao.impl.ProductDao#getHotOn(java.lang.String)
 	 */
 	@Override
-	@Cacheable(value = "ProductList")
+	@Cacheable(value = "ProductDetailList")
 	public List<Product> getHotOn(String sortId) {
 		if (AppUtils.isBlank(sortId)) {
 			return Collections.EMPTY_LIST;
@@ -233,8 +234,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * .model.entity.Product)
 	 */
 	@Override
-	@Caching(evict = { @CacheEvict(value = "ProductDetail", key = "#product.prodId"),
-			@CacheEvict(value = "Product", key = "#product.prodId") })
+	@ProductUpdate
 	public void updateProduct(Product product) {
 		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.UPDATE));
 		update(product);
@@ -271,11 +271,8 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * com.legendshop.business.dao.ProductDao#deleteProdById(java.lang.Long)
 	 */
 	@Override
-	@Caching(evict = {
-			@CacheEvict(value = "ProductDetail", key = "#prodId"),
-			@CacheEvict(value = "Product", key = "#prodId") })
-	public void deleteProdById(Long prodId) {
-		Product product = getProduct(prodId);
+	@ProductUpdate
+	public void deleteProd(Product product) {
 		if(product != null){
 			EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.DELETE));
 			delete(product);
@@ -291,6 +288,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 *            the status
 	 * @return true, if successful
 	 */
+	@ProductUpdate
 	private boolean updateProductStatus(Product product, Integer status) {
 		if (!status.equals(product.getStatus())) {
 			product.setStatus(status);
@@ -307,9 +305,6 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * com.legendshop.business.dao.ProductDao#updateProdOnline(java.lang.Long)
 	 */
 	@Override
-	@Caching(evict = {
-			@CacheEvict(value = "ProductDetail", key = "#prodId"),
-			@CacheEvict(value = "Product", key = "#prodId") })
 	public boolean updateProdOnline(Long prodId) {
 		Product product = get(Product.class, prodId);
 		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.TURN_ON));
@@ -323,9 +318,6 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	 * com.legendshop.business.dao.ProductDao#updateProdOffline(java.lang.Long)
 	 */
 	@Override
-	@Caching(evict = {
-			@CacheEvict(value = "ProductDetail", key = "#prodId"),
-			@CacheEvict(value = "Product", key = "#prodId") })
 	public boolean updateProdOffline(Long prodId) {
 		Product product = get(Product.class, prodId);
 		EventHome.publishEvent(new FireEvent(product, OperationTypeEnum.TURN_OFF));
@@ -394,9 +386,6 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	}
 
 	@Override
-	@Caching(evict = {
-			@CacheEvict(value = "ProductDetail", key = "#prodId"),
-			@CacheEvict(value = "Product", key = "#prodId") })
 	public boolean updateDynamicTemp(Long tempId, String userName, Short type, String content) {
 		if (AppUtils.isBlank(tempId) || AppUtils.isBlank(userName)) {
 			return false;
@@ -412,9 +401,6 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	}
 
 	@Override
-	@Caching(evict = {
-			@CacheEvict(value = "ProductDetail", key = "#prodId"),
-			@CacheEvict(value = "Product", key = "#prodId") })
 	public boolean deleteDynamicTemp(Long tempId, String userName) {
 		DynamicTemp temp = findUniqueBy("from DynamicTemp where id = ?  and userName = ?",
 				DynamicTemp.class, tempId, userName);

@@ -41,14 +41,6 @@ public interface ShopDetailService extends ShopService{
 	/**
 	 * Delete.
 	 * 
-	 * @param id
-	 *            the id
-	 */
-	public abstract void delete(Long id);
-
-	/**
-	 * Delete.
-	 * 
 	 * @param shopDetail
 	 *            the shop detail
 	 */

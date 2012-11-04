@@ -10,7 +10,7 @@
    <script type='text/javascript' src="<ls:templateResource item='/dwr/util.js'/>"></script>
    <script type='text/javascript' src="<ls:templateResource item='/dwr/interface/CommonService.js'/>"></script>
     <script src="<ls:templateResource item='/common/default/js/alternative.js'/>" type="text/javascript"></script>
-    <title>缓存列表</title>
+    <title>插件列表</title>
 </head>
 <body>
     <%
@@ -32,6 +32,7 @@
       <display:column title="状态" property="pluginConfig.status"></display:column>
       <display:column title="是否必须" property="pluginConfig.required"></display:column>
       <display:column title="描述" property="pluginConfig.description"></display:column>
+      <display:column title="操作" ></display:column>
     </display:table>
     </div>
     

@@ -311,7 +311,7 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
 	}
 
 	@Override
-	@Cacheable(value = "ProductList", condition = "T(Integer).parseInt(#curPageNO) < 3")
+	@Cacheable(value = "ProductDetailList", condition = "T(Integer).parseInt(#curPageNO) < 3")
 	public PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId) {
 		return productDao.getProdDetail(locale, curPageNO, sortId);
 	}
