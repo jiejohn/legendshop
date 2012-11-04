@@ -39,7 +39,7 @@ public class AbstractSortController extends BaseController {
 	/** The log. */
 	protected final Logger log = LoggerFactory.getLogger(AbstractSortController.class);
 	/** The sort service. */
-	@Autowired
+	@Autowired(required=false)
 	protected SortService sortService;
 
 	public PageSupport querySort(HttpServletRequest request, HttpServletResponse response, String curPageNO, Sort sort) {

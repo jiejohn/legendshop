@@ -4,12 +4,10 @@
 	<classpathentry kind="src" path="src/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_lib"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_model"/>
 	<classpathentry kind="lib" path="/legendshop_lib/jeelib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="/legendshop_lib/jeelib/servlet-api.jar"/>
-	<classpathentry exported="true" kind="lib" path="/legendshop_lib/release/legendshop_central3.0.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="/legendshop_lib/release/legendshop_core3.0.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="/legendshop_lib/release/legendshop_search3.0.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="/legendshop_lib/release/legendshop_util3.0.5.jar"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_core3.0.5.jar" sourcepath="/legendshop_core"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_model3.0.3.jar" sourcepath="/legendshop_model"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_util3.0.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
