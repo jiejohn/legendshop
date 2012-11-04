@@ -3,7 +3,7 @@
   type="WEB"
   name="legendshop"
   id="myeclipse.1345298418714"
-  context-root="/legendshop"
+  context-root="/ROOT"
   j2ee-spec="6.0"
   archive="legendshop.war">
   <attributes>

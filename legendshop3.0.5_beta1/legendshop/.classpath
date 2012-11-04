@@ -6,14 +6,14 @@
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_6_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_group"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_lib"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_model"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_payment"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_spi"/>
-	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_central3.0.5.jar"/>
-	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_core3.0.5.jar"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_central3.0.5.jar" sourcepath="/legendshop_central"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_core3.0.5.jar" sourcepath="/legendshop_core"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_group3.0.5.jar"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_model3.0.3.jar" sourcepath="/legendshop_model"/>
 	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_search3.0.5.jar"/>
+	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_usermanager3.0.5.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/legendshop_spi"/>
 	<classpathentry kind="lib" path="/legendshop_lib/release/legendshop_util3.0.5.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
