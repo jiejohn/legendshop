@@ -8,7 +8,7 @@
 package com.legendshop.model.entity;
 
 /**
- * 产品动态属性.
+ * 产品动态属性模板.
  */
 public class DynamicTemp implements BaseEntity {
 
