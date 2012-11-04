@@ -200,14 +200,6 @@ public interface ShopDetailDao extends BaseDao{
 	public abstract ShopDetail getShopDetailByShopId(final Long shopId);
 
 	/**
-	 * Delete shop detail by id.
-	 * 
-	 * @param id
-	 *            the id
-	 */
-	public abstract void deleteShopDetailById(Long id);
-
-	/**
 	 * Delete shop detail.
 	 * 
 	 * @param shopDetail
