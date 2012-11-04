@@ -1,1 +1,0 @@
-legendshop_payment:  支付插件。
