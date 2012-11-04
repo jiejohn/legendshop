@@ -1,6 +1,0 @@
-legendshop_lib:  项目依赖包。
-ejblib:   包括ejb/jms的依赖包
-jdbclib:  jdbc驱动包
-jeelib:   跟servlet容器相关的依赖包
-lib    :     项目依赖包
-release:  legendshop其他项目build出来的依赖包。

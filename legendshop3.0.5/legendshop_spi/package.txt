@@ -1,1 +1,0 @@
-legendshop_spi:   service provider interface, 项目公用接口，包括legendshop内部项目和外部项目的接口定义。

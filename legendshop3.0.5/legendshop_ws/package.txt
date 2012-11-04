@@ -1,1 +1,0 @@
-legendshop_ws:  web service project, 跟外部沟通的工程。
