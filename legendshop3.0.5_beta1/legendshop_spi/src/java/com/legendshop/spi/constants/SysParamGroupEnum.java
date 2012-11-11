@@ -12,15 +12,19 @@ import com.legendshop.core.constant.StringEnum;
 /**
  * 系统参数类型
  */
-public enum SysParamEnum implements StringEnum {
+public enum SysParamGroupEnum implements StringEnum {
 
-	sy("系统参数配置"),
+	//系统参数配置
+	SYS("sy"),
 	
-	sh("商城参数配置"),
+	//商城参数配置
+	SHOP("sh"),
 	
-	lo("日志配置"),
+	//日志配置
+	LOG("lo"),
 	
-	ma("邮件配置");
+	//邮件配置
+	MAIL("ma");
 
 
 	/** The value. */
@@ -32,7 +36,7 @@ public enum SysParamEnum implements StringEnum {
 	 * @param value
 	 *            the value
 	 */
-	private SysParamEnum(String value) {
+	private SysParamGroupEnum(String value) {
 		this.value = value;
 	}
 
@@ -51,8 +55,8 @@ public enum SysParamEnum implements StringEnum {
 	 * @return true, if successful
 	 */
 	public static boolean instance(String name) {
-		SysParamEnum[] licenseEnums = values();
-		for (SysParamEnum licenseEnum : licenseEnums) {
+		SysParamGroupEnum[] licenseEnums = values();
+		for (SysParamGroupEnum licenseEnum : licenseEnums) {
 			if (licenseEnum.name().equals(name)) {
 				return true;
 			}
@@ -68,10 +72,20 @@ public enum SysParamEnum implements StringEnum {
 	 * @return the value
 	 */
 	public static String getValue(String name) {
-		SysParamEnum[] licenseEnums = values();
-		for (SysParamEnum licenseEnum : licenseEnums) {
+		SysParamGroupEnum[] licenseEnums = values();
+		for (SysParamGroupEnum licenseEnum : licenseEnums) {
 			if (licenseEnum.name().equals(name)) {
 				return licenseEnum.value();
+			}
+		}
+		return null;
+	}
+	
+	public static String getName(String value) {
+		SysParamGroupEnum[] licenseEnums = values();
+		for (SysParamGroupEnum licenseEnum : licenseEnums) {
+			if (licenseEnum.value().equals(value)) {
+				return licenseEnum.name();
 			}
 		}
 		return null;

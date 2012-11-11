@@ -11,8 +11,8 @@ import org.springframework.cache.annotation.Caching;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 @Caching(evict = { 
-		@CacheEvict(value = "ShopDetailView", key="#shopdetail.userName"), 
-		@CacheEvict(value = "ShopDetailView", key= "'DM_' + #shopdetail.domainName")
+		@CacheEvict(value = "ShopDetailView", key="#shopDetail.userName"), 
+		@CacheEvict(value = "ShopDetailView", key= "'DM_' + #shopDetail.domainName")
 		})
 public @interface ShopDetailUpdate {
 
