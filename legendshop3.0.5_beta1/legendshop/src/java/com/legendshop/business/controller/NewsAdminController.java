@@ -37,6 +37,7 @@ import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.NewsService;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.CodeFilter;
+import com.legendshop.util.SafeHtml;
 import com.legendshop.util.sql.ConfigCode;
 
 /**
@@ -147,6 +148,7 @@ public class NewsAdminController extends BaseController {
 		// if(AppUtils.isBlank(news.getNewsBrief())){
 		// setNewsBrief(news);
 		// }
+		
 		newsService.save(news);
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
 		return PathResolver.getPath(request,response,FowardPage.NEWS_LIST_QUERY);

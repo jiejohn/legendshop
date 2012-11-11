@@ -29,7 +29,7 @@ jQuery.validator.setDefaults({
 			},
 			userAdds: {
 				required: true,
-				minlength: 6
+				minlength: 3
 			}
 		},
 		messages: {

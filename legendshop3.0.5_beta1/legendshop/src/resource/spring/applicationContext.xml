@@ -49,14 +49,13 @@
 	  <bean id="handlerManager" class="com.legendshop.core.handler.HandlerManager">
     	<property name="handlers">
     		      	<list>
-    		      
       					<bean class="com.legendshop.core.handler.EncodingHandler" >
       						<property name="encoding" value="UTF-8"></property>
       					</bean>
-      						<!-- 
       					 <bean class="com.legendshop.core.handler.IndependDomainHandler" >
       					 	<property name="shopService" ref="shopDetailService"></property>
       					</bean>
+      						<!-- 
       					<bean class="com.legendshop.business.handler.CookiesSSOHandler">
       						<property name="userDetailService" ref="userDetailService" />
       					</bean>

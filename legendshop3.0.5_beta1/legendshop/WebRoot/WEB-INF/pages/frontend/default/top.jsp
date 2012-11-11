@@ -46,9 +46,21 @@
 	}
 	
 		jQuery(document).ready(function(){
-	  	 $.post("${pageContext.request.contextPath}/topuserinfo?t=" + new Date(), function(data) {
-			  $('#header').html(data);
-			});
+
+			$.ajax({
+				url:"${pageContext.request.contextPath}/topuserinfo", 
+				type:'get',   
+				data:'t='+ new Date(),   
+				async : false, //默认为true 异步   
+				error:function(){   
+				alert('error');   
+				},   
+				success:function(data){   
+				   $('#header').html(data);
+				}   
+				});  
+			
+			
 });
 </script>
 <lb:shopDetail var="shopDetail" />

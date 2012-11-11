@@ -122,7 +122,7 @@ public class LogoAdminController extends BaseController {
 
 		String originlogoPic = shopDetail.getLogoPic();
 		if (logo.getFile().getSize() > 0) {
-			logoPic = FileProcessor.uploadFileAndCallback(logo.getFile(), subPath, "LOG" + name);
+			logoPic = FileProcessor.uploadFileAndCallback(logo.getFile(), subPath, "" + name);
 			shopDetail.setLogoPic(logoPic);
 			logoService.updateLogo(shopDetail);
 			if(AppUtils.isNotBlank(originlogoPic)){
