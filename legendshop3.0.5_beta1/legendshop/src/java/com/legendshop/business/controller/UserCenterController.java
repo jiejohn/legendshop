@@ -19,13 +19,12 @@ import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.Sub;
-import com.legendshop.util.AppUtils;
 import com.legendshop.util.DateUtil;
 
 /**
@@ -88,7 +87,7 @@ public class UserCenterController extends BaseController {
 
 		// Create criteria query
 		CriteriaQuery cq = new CriteriaQuery(Sub.class, curPageNO);
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
+		cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.FRONT_PAGE_SIZE, Integer.class));
 		cq.eq("userName", userName);
 		cq.gt("subDate", DateUtil.getTimeMonthsAgo(1));
 		cq.addOrder("desc", "subDate");

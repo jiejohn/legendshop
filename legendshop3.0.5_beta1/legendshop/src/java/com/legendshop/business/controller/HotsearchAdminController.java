@@ -26,8 +26,8 @@ import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.HotsearchService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -64,7 +64,7 @@ public class HotsearchAdminController extends BaseController {
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Hotsearch hotsearch) {
 		CriteriaQuery cq = new CriteriaQuery(Hotsearch.class, curPageNO, "javascript:pager");
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+		cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(hotsearch.getUserName()));
 		cq.eq("sort", hotsearch.getSort());
 		cq.eq("title", hotsearch.getTitle());

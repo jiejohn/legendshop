@@ -26,8 +26,8 @@ import com.legendshop.business.service.ShopDetailService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.EntityCodes;
@@ -56,7 +56,7 @@ public class PartnerController extends BaseController implements AdminController
     @RequestMapping("/query")
     public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Partner partner) {
         CriteriaQuery cq = new CriteriaQuery(Partner.class, curPageNO);
-        cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+        cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
         cq = hasAllDataFunction(cq, request, StringUtils.trim(partner.getUserName()));
         /*
            //TODO add your condition

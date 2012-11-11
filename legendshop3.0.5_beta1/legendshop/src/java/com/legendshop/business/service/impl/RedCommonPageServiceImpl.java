@@ -119,5 +119,11 @@ public class RedCommonPageServiceImpl extends AbstractCommonPageService {
 		this.nsortDao = nsortDao;
 	}
 
+	@Override
+	public String getTopUserInfo(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

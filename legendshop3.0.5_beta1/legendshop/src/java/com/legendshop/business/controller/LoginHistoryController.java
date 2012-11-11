@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.service.LoginHistoryService;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.dao.support.SqlQuery;
@@ -63,7 +63,7 @@ public class LoginHistoryController extends BaseController{
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO,  LoginHistory login) {
 		// Qbc查找方式
 		CriteriaQuery cq = new CriteriaQuery(LoginHistory.class,curPageNO);
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE,
+		cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE,
 				Integer.class));
 		cq.eq("userName", login.getUserName());
 		cq.ge("time", login.getStartTime());
@@ -106,7 +106,7 @@ public class LoginHistoryController extends BaseController{
 	@RequestMapping("/sum")
 	public String loginHistorySum(HttpServletRequest request, HttpServletResponse response,String curPageNO,  LoginHistory login) {
 			// HQL查找方式
-			SqlQuery query = new SqlQuery(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class),curPageNO);
+			SqlQuery query = new SqlQuery(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class),curPageNO);
 			Map<String, String> map = new HashMap<String, String>();
 			if (!AppUtils.isBlank(login.getStartTime())) {
 				map.put("startTime", login.getStartTime().toString());

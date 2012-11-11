@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.event.processor.ThreadProcessor;
 import com.legendshop.model.MailInfo;
@@ -49,7 +49,7 @@ public class SendMailProcessor extends ThreadProcessor<MailInfo>{
 		configJavaMailSender();
 		MimeMessage message = javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-		helper.setFrom(PropertiesUtil.getObject(ParameterEnum.MAIL_NAME, String.class));
+		helper.setFrom(PropertiesUtil.getObject(SysParameterEnum.MAIL_NAME, String.class));
 		helper.setTo(to);
 		helper.setSubject(subject);
 		helper.setText(text, true);
@@ -60,24 +60,24 @@ public class SendMailProcessor extends ThreadProcessor<MailInfo>{
 	 * Config java mail sender.
 	 */
 	private void configJavaMailSender() {
-		Boolean changed = PropertiesUtil.getObject(ParameterEnum.MAIL_PROPERTIES_CHANGED, Boolean.class);
+		Boolean changed = PropertiesUtil.getObject(SysParameterEnum.MAIL_PROPERTIES_CHANGED, Boolean.class);
 		if (changed == null || changed) {
 			javaMailSender.setDefaultEncoding("UTF-8");
-			javaMailSender.setHost(PropertiesUtil.getObject(ParameterEnum.MAIL_HOST, String.class));
-			javaMailSender.setPort(PropertiesUtil.getObject(ParameterEnum.MAIL_PORT, Integer.class));
-			String mailname = PropertiesUtil.getObject(ParameterEnum.MAIL_NAME, String.class);
+			javaMailSender.setHost(PropertiesUtil.getObject(SysParameterEnum.MAIL_HOST, String.class));
+			javaMailSender.setPort(PropertiesUtil.getObject(SysParameterEnum.MAIL_PORT, Integer.class));
+			String mailname = PropertiesUtil.getObject(SysParameterEnum.MAIL_NAME, String.class);
 			javaMailSender.setUsername(mailname.substring(0, mailname.indexOf("@")));
-			javaMailSender.setPassword(PropertiesUtil.getObject(ParameterEnum.MAIL_PASSWORD, String.class));
+			javaMailSender.setPassword(PropertiesUtil.getObject(SysParameterEnum.MAIL_PASSWORD, String.class));
 			Properties properties = new Properties();
-			properties.setProperty("mail.smtp.auth", (PropertiesUtil.getObject(ParameterEnum.MAIL_STMP_AUTH,
+			properties.setProperty("mail.smtp.auth", (PropertiesUtil.getObject(SysParameterEnum.MAIL_STMP_AUTH,
 					Boolean.class)).toString());
-			properties.setProperty("mail.smtp.timeout", PropertiesUtil.getObject(ParameterEnum.MAIL_STMP_TIMEOUT,
+			properties.setProperty("mail.smtp.timeout", PropertiesUtil.getObject(SysParameterEnum.MAIL_STMP_TIMEOUT,
 					String.class));
 			javaMailSender.setJavaMailProperties(properties);
 			log.info("Configuration Mail Sender successful Host: {}, Username {}, mail.smtp.auth: {}", new Object[] {
 					javaMailSender.getHost(), javaMailSender.getUsername(),
 					javaMailSender.getJavaMailProperties().get("mail.smtp.auth") });
-			PropertiesUtil.setObject(ParameterEnum.MAIL_PROPERTIES_CHANGED, Boolean.FALSE);
+			PropertiesUtil.setObject(SysParameterEnum.MAIL_PROPERTIES_CHANGED, Boolean.FALSE);
 		}
 
 	}

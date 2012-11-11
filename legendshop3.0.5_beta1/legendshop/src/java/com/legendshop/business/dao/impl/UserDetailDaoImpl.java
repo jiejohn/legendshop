@@ -27,8 +27,8 @@ import com.legendshop.business.dao.UserDetailDao;
 import com.legendshop.business.event.impl.SendMailEvent;
 import com.legendshop.business.service.CommonUtil;
 import com.legendshop.core.OperationTypeEnum;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.ShopStatusEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
@@ -72,7 +72,7 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 	@Override
 	public String saveUser(User user, UserDetail userDetail, ShopDetail shopDetail, boolean isOpenShop) {
 		// 1/保存
-		Boolean validationFromMail = PropertiesUtil.getObject(ParameterEnum.VALIDATION_FROM_MAIL, Boolean.class);
+		Boolean validationFromMail = PropertiesUtil.getObject(SysParameterEnum.VALIDATION_FROM_MAIL, Boolean.class);
 		if (validationFromMail) {
 			user.setEnabled("0");// 不可用
 			userDetail.setRegisterCode(MD5Util.Md5Password(user.getName(), user.getPassword())); // 将RegisterCode发送到邮件，点击开通用户
@@ -141,7 +141,7 @@ public class UserDetailDaoImpl extends BaseDaoImpl implements UserDetailDao {
 		shopDetail.setProductNum(0);
 		shopDetail.setCommNum(0);
 		shopDetail.setColorStyle("oneday");
-		if (PropertiesUtil.getObject(ParameterEnum.VALIDATION_ON_OPEN_SHOP, Boolean.class)) {
+		if (PropertiesUtil.getObject(SysParameterEnum.VALIDATION_ON_OPEN_SHOP, Boolean.class)) {
 			shopDetail.setStatus(ShopStatusEnum.AUDITING.value());
 		} else {
 			shopDetail.setStatus(ShopStatusEnum.ONLINE.value());

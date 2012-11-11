@@ -27,9 +27,9 @@ import com.legendshop.business.event.impl.VisitLogEvent;
 import com.legendshop.business.service.ImgFileService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.constant.ProductTypeEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.exception.NotFoundException;
@@ -113,7 +113,7 @@ public class ProductController extends BaseController{
 			productService.getAndSetAdvertisement(request,response,prod.getUserName());
 
 			// 更新查看次数
-			if (PropertiesUtil.getObject(ParameterEnum.VISIT_HW_LOG_ENABLE, Boolean.class)) {
+			if (PropertiesUtil.getObject(SysParameterEnum.VISIT_HW_LOG_ENABLE, Boolean.class)) {
 				productService.updateProdViews(prodId);
 			}
 
@@ -130,7 +130,7 @@ public class ProductController extends BaseController{
 			//visit(prod, request);
 			VisitHistoryHelper.visit(prod, request, response);
 			// 多线程记录访问历史
-			if (PropertiesUtil.getObject(ParameterEnum.VISIT_LOG_ENABLE, Boolean.class)) {
+			if (PropertiesUtil.getObject(SysParameterEnum.VISIT_LOG_ENABLE, Boolean.class)) {
 				EventHome.publishEvent(new VisitLogEvent(request.getRemoteAddr(),prod.getUserName(),userName,prod.getProdId(),prod.getName(),VisitTypeEnum.HW.value()));
 			}
 			return PathResolver.getPath(request,response,TilesPage.VIEWS);

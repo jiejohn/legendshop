@@ -25,8 +25,8 @@ import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.EntityCodes;
@@ -82,7 +82,7 @@ public class OrderAdminController extends BaseController implements AdminControl
 			cq.eq("status", entity.getStatus());
 			cq.eq("subCheck", entity.getSubCheck());
 			if (!CommonServiceUtil.isDataForExport(cq, request)) {// 非导出情况
-				cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
+				cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.FRONT_PAGE_SIZE, Integer.class));
 			}
 			if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {
 				cq.addOrder("desc", "subDate");

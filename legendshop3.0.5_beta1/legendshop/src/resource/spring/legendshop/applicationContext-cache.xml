@@ -24,16 +24,6 @@
 		<property name="caches">
 			<set>
 				<bean class="com.legendshop.core.cache.MemcachedCache">
-					<property name="name" value="Logo" />
-					<property name="memcachedClient" ref="memcachedClient" />
-					<property name="expiredDuration" value="3600" />
-				</bean>
-				<bean class="com.legendshop.core.cache.MemcachedCache">
-					<property name="name" value="LogoList" />
-					<property name="memcachedClient" ref="memcachedClient" />
-					<property name="expiredDuration" value="3600" />
-				</bean>
-				<bean class="com.legendshop.core.cache.MemcachedCache">
 					<property name="name" value="ShopDetailView" />
 					<property name="memcachedClient" ref="memcachedClient" />
 					<property name="expiredDuration" value="3600" />

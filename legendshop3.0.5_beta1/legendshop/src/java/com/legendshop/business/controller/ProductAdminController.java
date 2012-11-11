@@ -22,16 +22,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
-import com.legendshop.business.event.impl.OrderSaveEvent;
-import com.legendshop.core.OperationTypeEnum;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
 import com.legendshop.core.constant.ProductTypeEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.core.event.impl.FireEvent;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.ErrorCodes;
@@ -39,7 +36,6 @@ import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
-import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.Product;
 import com.legendshop.spi.service.ProductService;
 import com.legendshop.util.AppUtils;
@@ -91,7 +87,7 @@ public class ProductAdminController extends BaseController {
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(product.getUserName()));
 
 		if (!CommonServiceUtil.isDataForExport(cq, request)) {// 非导出情况
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+			cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		}
 		if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {
 			cq.addOrder("desc", "recDate");

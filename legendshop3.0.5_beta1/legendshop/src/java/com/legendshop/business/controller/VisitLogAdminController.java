@@ -25,8 +25,8 @@ import com.legendshop.business.service.VisitLogService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.AuthorizationException;
@@ -80,7 +80,7 @@ public class VisitLogAdminController extends BaseController implements AdminCont
 			cq.like("productName", "%" + visitLog.getProductName() + "%");
 		}
 		if (!CommonServiceUtil.isDataForExport(cq, request)) {// 非导出情况
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+			cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		}
 		if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {
 			cq.addOrder("desc", "date");

@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.dao.LuceneDao;
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.search.LuceneIndexer;
 import com.legendshop.search.LuceneReindexArgs;
@@ -66,7 +66,7 @@ public class LuceneReindexer {
 			}
 		};
 
-		PropertiesUtil.setObject(ParameterEnum.LUCENE_CURRENTLY_INDEXING, "1");
+		PropertiesUtil.setObject(SysParameterEnum.LUCENE_CURRENTLY_INDEXING, "1");
 
 		Thread thread = new Thread(indexingJob);
 		thread.start();
@@ -93,7 +93,7 @@ public class LuceneReindexer {
 		LuceneSearch luceneSearch = ((LuceneManager) searchFacade.getSearchManager()).luceneSearch();
 		LuceneIndexer luceneIndexer = ((LuceneManager) searchFacade.getSearchManager()).luceneIndexer();
 
-		long fetchCount = PropertiesUtil.getObject(ParameterEnum.LUCENE_INDEXER_DB_FETCH_COUNT, Long.class);
+		long fetchCount = PropertiesUtil.getObject(SysParameterEnum.LUCENE_INDEXER_DB_FETCH_COUNT, Long.class);
 
 		try {
 			if (!recreate) {
@@ -128,7 +128,7 @@ public class LuceneReindexer {
 					}
 
 					for (Iterator iter = list.iterator(); iter.hasNext();) {
-						if ("0".equals(PropertiesUtil.getObject(ParameterEnum.LUCENE_CURRENTLY_INDEXING, String.class))) {
+						if ("0".equals(PropertiesUtil.getObject(SysParameterEnum.LUCENE_CURRENTLY_INDEXING, String.class))) {
 							hasMorePosts = false;
 							break;
 						}
@@ -160,7 +160,7 @@ public class LuceneReindexer {
 		} catch (IOException e) {
 			throw new SearchException(e);
 		} finally {
-			PropertiesUtil.setObject(ParameterEnum.LUCENE_CURRENTLY_INDEXING, "0");
+			PropertiesUtil.setObject(SysParameterEnum.LUCENE_CURRENTLY_INDEXING, "0");
 			luceneIndexer.flushRAMDirectory();
 			if (searcher != null) {
 				try {

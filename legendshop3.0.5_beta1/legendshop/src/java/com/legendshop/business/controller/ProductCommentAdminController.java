@@ -28,8 +28,8 @@ import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.ProductCommentService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.EntityCodes;
@@ -75,7 +75,7 @@ public class ProductCommentAdminController extends BaseController {
 
 		String userName = UserManager.getUsername(request.getSession());
 		Map<String, String> map = new HashMap<String, String>();
-		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class), curPageNO);
+		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class), curPageNO);
 		if (!CommonServiceUtil.haveViewAllDataFunction(request)) {
 			map.put("ownerName", userName); // 商品所有人
 			hql.addParams(userName);
@@ -97,7 +97,7 @@ public class ProductCommentAdminController extends BaseController {
 		}
 
 		if (!CommonServiceUtil.isDataForExport(hql, request)) {// 非导出情况
-			hql.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+			hql.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		}
 		if (!CommonServiceUtil.isDataSortByExternal(hql, request, map)) {
 			map.put(Constants.ORDER_INDICATOR, "order by hc.addtime desc");

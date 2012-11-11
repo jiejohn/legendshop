@@ -18,8 +18,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.ImgFileDao;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.ProductStatusEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.model.entity.ImgFile;
@@ -44,7 +44,7 @@ public class ImgFileDaoImpl extends BaseDaoImpl implements ImgFileDao {
 		log.debug("getIndexJpeg, userName = {}", userName);
 		String name = userName;
 		if (AppUtils.isBlank(userName)) {
-			name = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
+			name = PropertiesUtil.getObject(SysParameterEnum.DEFAULT_SHOP, String.class);
 		}
 		return findByHQL("from Indexjpg where userName = ? OR userName = 'common'", name);
 	}
@@ -67,7 +67,7 @@ public class ImgFileDaoImpl extends BaseDaoImpl implements ImgFileDao {
 		log.debug("getIndexJpeg, userName = {}", userName);
 		String name = userName;
 		if (AppUtils.isBlank(userName)) {
-			name = PropertiesUtil.getObject(ParameterEnum.DEFAULT_SHOP, String.class);
+			name = PropertiesUtil.getObject(SysParameterEnum.DEFAULT_SHOP, String.class);
 		}
 		List indexJpgList = findByHQL("from Indexjpg where userName = ? OR userName = 'common'", name);
 		if(AppUtils.isNotBlank(indexJpgList)){

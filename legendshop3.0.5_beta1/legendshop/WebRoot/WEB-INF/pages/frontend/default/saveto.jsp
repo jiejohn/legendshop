@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
-<%@page import="com.legendshop.core.constant.ParameterEnum"%>
+<%@page import="com.legendshop.core.constant.SysParameterEnum"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <%@include file='/WEB-INF/pages/common/common.jsp'%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option" %>
@@ -67,7 +67,9 @@
         	  	<fmt:message key="total.charge"/>
         	  	<span style="color: red;font-weight: bold;font-size: 12pt"><fmt:formatNumber type="currency" value="${sub.total}" pattern="${CURRENCY_PATTERN}"/></span> &nbsp; 
         	  	<c:if test="${sub.score ne null}"><fmt:message key="score.use"/>：${sub.score}</c:if>
-        	  	<%if(PropertiesUtil.getObject(ParameterEnum.USE_SCORE, Boolean.class)){ %>
+        	  	<%
+        	  		if(PropertiesUtil.getObject(SysParameterEnum.USE_SCORE, Boolean.class)){
+        	  	%>
         	  	<c:if test="${sub.scoreId == null and (sub.status == 1 or sub.status == 7)}">
         	  		<fmt:message key="score.add"/>：<font style="color: red;font-weight: bold;font-size: 10pt"><fmt:formatNumber value="${sub.total}" pattern="#" type="number"/></font> &nbsp; 
         	  	</c:if>

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.legendshop.business.service.TagMapService;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -41,7 +41,7 @@ public class TagMapController extends BaseController implements AdminController<
 	@RequestMapping("/query")
     public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, TagMap tagMap) {
         CriteriaQuery cq = new CriteriaQuery(TagMap.class, curPageNO);
-        cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+        cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
        // cq = hasAllDataFunction(cq, request, StringUtils.trim(tagMap.getUserName()));
         /*
            //TODO add your condition

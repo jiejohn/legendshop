@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
-<%@page import="com.legendshop.core.constant.ParameterEnum"%>
+<%@page import="com.legendshop.core.constant.SysParameterEnum"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <%@include file='/WEB-INF/pages/common/common.jsp'%>
 <%@ taglib uri="/WEB-INF/tld/options.tld" prefix="option" %>
@@ -138,11 +138,17 @@
 	<td class="myaccount"><fmt:message key="order.processing"/></td><td>${totalProcessingOrder}&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/p/order">[<fmt:message key="Query.Order.Status"/>]</a></td>
 	<td class="myaccount"><fmt:message key="product.subscribed.list"/></a></td><td>${totalBasketByuserName}&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/p/buy">[<fmt:message key="shopingCar"/>]</a></td>
 		<td class="myaccount">
-		<%if(PropertiesUtil.getObject(ParameterEnum.USE_SCORE, Boolean.class)){ %>
+		<%
+			if(PropertiesUtil.getObject(SysParameterEnum.USE_SCORE, Boolean.class)){
+		%>
 			<fmt:message key="score.total"/>
-		<%} %>
+		<%
+			}
+		%>
 		</td><td>
-		<%if(PropertiesUtil.getObject(ParameterEnum.USE_SCORE, Boolean.class)){ %>
+		<%
+			if(PropertiesUtil.getObject(SysParameterEnum.USE_SCORE, Boolean.class)){
+		%>
 			${user.score}
 		<%} %>
 		</td>

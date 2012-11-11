@@ -1,4 +1,4 @@
-<%@page import="com.legendshop.spi.constants.SysParamEnum"%>
+<%@page import="com.legendshop.spi.constants.SysParamGroupEnum"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
@@ -15,13 +15,13 @@
 </head>
 <body>
     <%
-        Integer offset = (Integer) request.getAttribute("offset");
-        String groupId = (String)request.getAttribute("groupId");
+    	Integer offset = (Integer) request.getAttribute("offset");
+            String groupId = (String)request.getAttribute("groupId");
     %>
 	 <table class="${tableclass}" style="width: 100%">
 	    <thead>
 	    	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 系统管理  &raquo; <a href="${pageContext.request.contextPath}/system/systemParameter/query/<%=groupId %>">
-	    	<%=SysParamEnum.getValue(groupId) %></a>
+	    	<%=SysParamGroupEnum.getName(groupId)%></a>
 	    	</td></tr>
 	    </thead>
 	     <tbody><tr><td>

@@ -8,21 +8,14 @@
 package com.legendshop.business.dao;
 
 import com.legendshop.core.dao.BaseDao;
-import com.legendshop.model.entity.Logo;
+import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.dao.support.SimpleHqlQuery;
+import com.legendshop.model.entity.ShopDetail;
 
 /**
  * The Interface LogoDao.
  */
 public interface LogoDao extends BaseDao{
-
-	/**
-	 * Gets the logo.
-	 * 
-	 * @param shopName
-	 *            the shop name
-	 * @return the logo
-	 */
-	public abstract Logo getLogo(final String shopName);
 
 
 	/**
@@ -31,7 +24,7 @@ public interface LogoDao extends BaseDao{
 	 * @param logo
 	 *            the logo
 	 */
-	public abstract void deleteLogo(Logo logo);
+	public abstract void deleteLogo(ShopDetail shopDetail);
 
 	/**
 	 * Update logo.
@@ -39,6 +32,15 @@ public interface LogoDao extends BaseDao{
 	 * @param logo
 	 *            the logo
 	 */
-	public abstract void updateLogo(Logo logo);
+	public abstract void updateLogo(ShopDetail shopDetail);
+
+
+	/**
+	 * Gets the logo.
+	 *
+	 * @param hql the hql
+	 * @return the logo
+	 */
+	public abstract PageSupport getLogo(SimpleHqlQuery hql);
 
 }

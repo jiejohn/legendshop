@@ -40,6 +40,9 @@ public enum FrontPage implements PageDefinition {
 
 	/** The TOP. */
 	TOP("/top"),
+	
+	/** The TOP. */
+	TOP_USER_INFO("/userinfo"),
 
 	/** The TOPSORT. */
 	TOPSORT("/topsort"),

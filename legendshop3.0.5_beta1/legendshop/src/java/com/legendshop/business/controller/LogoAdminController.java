@@ -10,7 +10,6 @@ package com.legendshop.business.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,20 +22,21 @@ import com.legendshop.business.common.CommonServiceUtil;
 import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.LogoService;
+import com.legendshop.business.service.ShopDetailService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
-import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
+import com.legendshop.core.dao.support.SimpleHqlQuery;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.exception.PermissionException;
 import com.legendshop.core.helper.FileProcessor;
-import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.model.entity.Logo;
+import com.legendshop.model.entity.ShopDetail;
+import com.legendshop.util.AppUtils;
 
 /**
  * Logo.
@@ -51,6 +51,9 @@ public class LogoAdminController extends BaseController {
 	/** The logo service. */
 	@Autowired
 	private LogoService logoService;
+	
+	@Autowired
+	private ShopDetailService shopDetailService;
 
 	/**
 	 * Query.
@@ -66,14 +69,15 @@ public class LogoAdminController extends BaseController {
 	 * @return the string
 	 */
 	@RequestMapping("/query")
-	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Logo logo) {
-		CriteriaQuery cq = new CriteriaQuery(Logo.class, curPageNO, "javascript:pager");
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
-		cq = hasAllDataFunction(cq, request, StringUtils.trim(logo.getUserName()));
-		
-		PageSupport ps = logoService.getLogoList(cq);
-		savePage(ps, request);
-		request.setAttribute("bean", logo);
+	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Logo logo) {		
+    	SimpleHqlQuery hql = new SimpleHqlQuery(curPageNO);
+    	//配置参数
+    	hql.hasAllDataFunction(request, logo.getUserName());
+    	//每页大小
+		hql.fillPageSize(request);
+    	PageSupport ps = logoService.getLogo(hql);
+    	ps.savePage(request);
+        request.setAttribute("logo", logo);		
 		return PathResolver.getPath(request,response,BackPage.LOGO_LIST_PAGE);
 	}
 
@@ -90,38 +94,43 @@ public class LogoAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/save")
 	public String save(MultipartHttpServletRequest request, HttpServletResponse response, Logo logo) {
-		Logo originLogo = null;
-		String banner = null;
+		String logoPic = null;
 		String name = UserManager.getUsername(request.getSession());
 		String subPath = name + "/logo/";
-		if ((logo != null) && (logo.getId() != null)) { // update
-			originLogo = logoService.getLogoById(logo.getId());
-			if (originLogo == null) {
-				throw new NotFoundException("Origin Logo is NULL",EntityCodes.LOGO);
+		String userId = logo.getId();
+		ShopDetail shopDetail = null;
+		if(AppUtils.isBlank(userId)){
+			//save
+			userId = UserManager.getUserId(request);
+			shopDetail = shopDetailService.getShopDetailByUserId(userId);
+			if(shopDetail == null){
+				throw new NotFoundException("ShopDetail is NULL",EntityCodes.SHOP);
 			}
-			String originBanner = originLogo.getBanner();
+		}else{
+			//update
+			shopDetail = shopDetailService.getShopDetailByUserId(userId);
+			if(shopDetail == null){
+				throw new NotFoundException("ShopDetail is NULL",EntityCodes.SHOP);
+			}
 			if (!CommonServiceUtil.haveViewAllDataFunction(request)) {
-				if (!name.equals(originLogo.getUserName())) {
+				if (!name.equals(shopDetail.getUserName())) {
 					throw new PermissionException(name + " can't edit Logo does not own to you!",EntityCodes.LOGO);
 				}
 			}
-			originLogo.setUrl(logo.getUrl());
-			originLogo.setMemo(logo.getMemo());
-			if (logo.getFile().getSize() > 0) {
-				banner = FileProcessor.uploadFileAndCallback(logo.getFile(), subPath, "lo" + name);
-				originLogo.setBanner(banner);
-				String url = RealPathUtil.getBigPicRealPath() + "/" + originBanner;
+		}
+
+
+		String originlogoPic = shopDetail.getLogoPic();
+		if (logo.getFile().getSize() > 0) {
+			logoPic = FileProcessor.uploadFileAndCallback(logo.getFile(), subPath, "LOG" + name);
+			shopDetail.setLogoPic(logoPic);
+			logoService.updateLogo(shopDetail);
+			if(AppUtils.isNotBlank(originlogoPic)){
+				String url = RealPathUtil.getBigPicRealPath() + "/" + originlogoPic;
 				FileProcessor.deleteFile(url);
 			}
-			logoService.update(originLogo);
-
-		} else {
-			banner = FileProcessor.uploadFileAndCallback(logo.getFile(), subPath, "lo" + name);
-			logo.setBanner(banner);
-			logo.setUserId(UserManager.getUserId(request.getSession()));
-			logo.setUserName(UserManager.getUsername(request.getSession()));
-			logoService.save(logo);
 		}
+		
 		saveMessage(request, ResourceBundleHelper.getSucessfulString());
 		return PathResolver.getPath(request,response,FowardPage.LOGO_LIST_QUERY);
 	}
@@ -137,18 +146,26 @@ public class LogoAdminController extends BaseController {
 	 *            the id
 	 * @return the string
 	 */
-	@RequestMapping(value = "/delete/{id}")
+	@RequestMapping(value = "/delete/{userId}")
 	public String delete(HttpServletRequest request, HttpServletResponse response, @PathVariable
-	Long id) {
-		Logo logo = logoService.getLogoById(id);
-		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), logo.getUserName());
+	String userId) {
+		ShopDetail shopDetail = shopDetailService.getShopDetailByUserId(userId);
+		if(shopDetail == null){
+			throw new NotFoundException("ShopDetail is NULL",EntityCodes.SHOP);
+		}
+		
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), shopDetail.getUserName());
 		if(result!=null){
 			return result;
 		}
-		log.info("{}, delete Logo Url {}", logo.getUserName(), logo.getUrl());
-		logoService.delete(logo);
-		String url = RealPathUtil.getBigPicRealPath() + "/" + logo.getBanner();
-		FileProcessor.deleteFile(url);
+		
+		log.info("{}, delete Logo Url {}", shopDetail.getUserName(), shopDetail.getLogoPic());
+		logoService.deleteLogo(shopDetail);
+		if(shopDetail.getLogoPic() != null){
+			String url = RealPathUtil.getBigPicRealPath() + "/" + shopDetail.getLogoPic();
+			FileProcessor.deleteFile(url);
+		}
+
 		saveMessage(request, ResourceBundleHelper.getDeleteString());
 		return PathResolver.getPath(request,response,FowardPage.LOGO_LIST_QUERY);
 	}
@@ -164,15 +181,18 @@ public class LogoAdminController extends BaseController {
 	 *            the id
 	 * @return the string
 	 */
-	@RequestMapping(value = "/load/{id}")
+	@RequestMapping(value = "/load/{userId}")
 	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable
-	Long id) {
-		Logo logo = logoService.getLogoById(id);
-		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), logo.getUserName());
+	String userId) {
+		ShopDetail shopDetail = shopDetailService.getShopDetailByUserId(userId);
+		if(shopDetail == null){
+			throw new NotFoundException("ShopDetail is NULL",EntityCodes.SHOP);
+		}
+		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), shopDetail.getUserName());
 		if(result!=null){
 			return result;
 		}
-		request.setAttribute("bean", logo);
+		request.setAttribute("bean", shopDetail);
 		return PathResolver.getPath(request,response,BackPage.LOGO_EDIT_PAGE);
 	}
 	
@@ -188,31 +208,6 @@ public class LogoAdminController extends BaseController {
 	@RequestMapping(value = "/load")
 	public String load(HttpServletRequest request, HttpServletResponse response) {
 		return PathResolver.getPath(request,response,BackPage.LOGO_EDIT_PAGE);
-	}
-
-	/**
-	 * Update.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @param logo
-	 *            the logo
-	 * @return the string
-	 */
-	@RequestMapping(value = "/update")
-	public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable
-	Logo logo) {
-		Logo origin = logoService.getLogoById(logo.getId());
-		String result = checkPrivilege(request, UserManager.getUsername(request.getSession()), origin.getUserName());
-		if(result!=null){
-			return result;
-		}
-		logo.setUserId(origin.getUserId());
-		logo.setUserName(origin.getUserName());
-		logoService.update(logo);
-		return PathResolver.getPath(request,response,FowardPage.LOGO_LIST_QUERY);
 	}
 
 }

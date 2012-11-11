@@ -27,8 +27,8 @@ import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.PayTypeService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.AuthorizationException;
@@ -76,7 +76,7 @@ public class PayTypeAdminController extends BaseController {
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, PayType payType) {
 		CriteriaQuery cq = new CriteriaQuery(PayType.class, curPageNO, "javascript:pager");
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+		cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		cq = hasAllDataAndOperationFunction(cq, request, StringUtils.trim(payType.getUserName()));
 		
 		PageSupport ps = payTypeService.getPayTypeList(cq);

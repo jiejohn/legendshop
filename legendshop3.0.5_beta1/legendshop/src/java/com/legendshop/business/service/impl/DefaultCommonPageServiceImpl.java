@@ -29,22 +29,28 @@ public class DefaultCommonPageServiceImpl extends AbstractCommonPageService {
 	@Override
 	public String getTop(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = ThreadLocalContext.getCurrentShopName(request, response);
-		String userName = UserManager.getUsername(request.getSession());
 		ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(request,response,shopName);
-		
 		if (shopDetail == null) {
 			return PathResolver.getPath(request,response,FrontPage.TOPALL);
 		}
-		//Logo
-		request.setAttribute("logo", logoDao.getLogo(shopName));
 		//产品分类
 		request.setAttribute("sortList", sortDao.getSort(shopName, true));
 
+		// 分类新闻
+		request.setAttribute("newsSortList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_SORT, 8));
+				
+		//返回页面
+		return PathResolver.getPath(request,response,FrontPage.TOP);
+	}
+
+	@Override
+	public String getTopUserInfo(HttpServletRequest request, HttpServletResponse response) {
+		String shopName = ThreadLocalContext.getCurrentShopName(request, response);
+		String userName = UserManager.getUsername(request.getSession());
+		
 		// 顶部新闻
 		request.setAttribute("newsTopList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_TOP, 8));
 
-		// 分类新闻
-		request.setAttribute("newsSortList", newsDao.getNews(shopName, NewsPositionEnum.NEWS_SORT, 8));
 		//是否是商家
 		boolean shopExists = shopDetailDao.isShopExists(userName);
 		request.setAttribute("shopExists", shopExists);
@@ -53,7 +59,7 @@ public class DefaultCommonPageServiceImpl extends AbstractCommonPageService {
 		request.setAttribute("canbeLeagueShop", shopDetailDao.isBeLeagueShop(shopExists, userName, shopName));
 		
 		//返回页面
-		return PathResolver.getPath(request,response,FrontPage.TOP);
+		return PathResolver.getPath(request,response,FrontPage.TOP_USER_INFO);
 	}
 
 

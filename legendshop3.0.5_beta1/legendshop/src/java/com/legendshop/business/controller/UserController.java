@@ -27,8 +27,8 @@ import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
 import com.legendshop.core.constant.FunctionEnum;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.NotFoundException;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -224,7 +224,7 @@ public class UserController extends BaseController{
 		request.setAttribute("supportOpenShop", eventContext.getBooleanResponse());
 		
 		request.setAttribute("validationOnOpenShop",
-				PropertiesUtil.getObject(ParameterEnum.VALIDATION_ON_OPEN_SHOP, Boolean.class));
+				PropertiesUtil.getObject(SysParameterEnum.VALIDATION_ON_OPEN_SHOP, Boolean.class));
 		return PathResolver.getPath(request,response,TilesPage.REG);
 	}
 	

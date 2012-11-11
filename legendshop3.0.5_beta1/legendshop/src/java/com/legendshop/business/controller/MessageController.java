@@ -18,17 +18,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.legendshop.core.UserManager;
-import com.legendshop.core.dao.support.CriteriaQuery;
-import com.legendshop.core.dao.support.PageSupport;
-
-import com.legendshop.core.base.BaseController;
-import com.legendshop.core.base.AdminController;
 
 import com.legendshop.business.service.MessageService;
-import com.legendshop.model.entity.Message;
+import com.legendshop.core.UserManager;
+import com.legendshop.core.base.AdminController;
+import com.legendshop.core.base.BaseController;
+import com.legendshop.core.constant.SysParameterEnum;
+import com.legendshop.core.dao.support.CriteriaQuery;
+import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.model.entity.Message;
 
 /**
  * The Class MessageController
@@ -43,7 +42,7 @@ public class MessageController extends BaseController implements AdminController
     @RequestMapping("/query")
     public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Message message) {
         CriteriaQuery cq = new CriteriaQuery(Message.class, curPageNO);
-        cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+        cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
         cq = hasAllDataFunction(cq, request, StringUtils.trim(message.getSender()));
         /*
            //TODO add your condition

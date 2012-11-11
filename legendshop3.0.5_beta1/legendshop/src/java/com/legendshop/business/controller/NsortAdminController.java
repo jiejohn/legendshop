@@ -28,8 +28,8 @@ import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.EntityCodes;
@@ -72,7 +72,7 @@ public class NsortAdminController extends BaseController implements AdminControl
 			throw new NotFoundException("Sort is null!", EntityCodes.SORT);
 		}
 		HqlQuery hql = new HqlQuery();
-		hql.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+		hql.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		hql.setCurPage(curPageNO);
 		Map<String, String> map = new HashMap<String, String>();
 		hql.addParams(sort.getSortId());

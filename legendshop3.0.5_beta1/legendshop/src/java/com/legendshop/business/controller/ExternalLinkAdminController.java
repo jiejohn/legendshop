@@ -24,8 +24,8 @@ import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.ExternalLinkService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.EntityCodes;
@@ -71,7 +71,7 @@ public class ExternalLinkAdminController extends BaseController {
 		CriteriaQuery cq = new CriteriaQuery(ExternalLink.class, curPageNO, "javascript:pager");
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(externalLink.getUserName()));
 		if (!CommonServiceUtil.isDataForExport(cq, request)) {// 非导出情况
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+			cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		}
 		if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {// 非外部排序
 			cq.addOrder("desc", "bs");

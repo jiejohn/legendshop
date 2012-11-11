@@ -14,7 +14,6 @@ import javax.servlet.jsp.JspException;
 import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.core.tag.LegendShopTag;
 import com.legendshop.model.entity.ShopDetailView;
-import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 
 
@@ -45,7 +44,7 @@ public class ShopDetailTag extends LegendShopTag {
 	@Override
 	public void doTag() throws JspException, IOException {
 		String shopName = ThreadLocalContext.getCurrentShopName(request(), response());
-		if(AppUtils.isNotBlank(shopName)){
+		if(AppUtils.isNotBlank(shopName) && request().getAttribute(this.var) == null){
 			ShopDetailView shopDetail = ThreadLocalContext.getShopDetailView(request(),response(),shopName);
 			if(shopDetail != null){
 				this.setAttribute(this.var, shopDetail);

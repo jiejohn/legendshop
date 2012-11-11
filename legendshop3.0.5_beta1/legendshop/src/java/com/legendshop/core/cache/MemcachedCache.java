@@ -12,6 +12,8 @@ import java.io.Serializable;
 
 import net.spy.memcached.MemcachedClient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.cache.support.SimpleValueWrapper;
 import org.springframework.util.Assert;
@@ -20,6 +22,9 @@ import org.springframework.util.Assert;
  * 用memcached实现spring的cache通用接口.
  */
 public class MemcachedCache extends AbstractLegendCache implements InitializingBean {
+	
+	/** The log. */
+	private final Logger log = LoggerFactory.getLogger(MemcachedCache.class);
 
 	/** The name. */
 	private String name;
@@ -76,6 +81,7 @@ public class MemcachedCache extends AbstractLegendCache implements InitializingB
 	 * @see org.springframework.cache.Cache#get(java.lang.Object)
 	 */
 	public ValueWrapper get(Object key) {
+		log.debug("get cache by name {}, key {}", getName(), key );
 		Object value = memcachedClient.get(name + key.toString());
 		return (value != null ? new SimpleValueWrapper(fromStoreValue(value)) : null);
 	}
@@ -84,6 +90,8 @@ public class MemcachedCache extends AbstractLegendCache implements InitializingB
 	 * @see org.springframework.cache.Cache#put(java.lang.Object, java.lang.Object)
 	 */
 	public void put(Object key, Object value) {
+		 log.debug("put into cache {} by key {}, value {}", new Object[] {
+		getName(), key, value });
 		memcachedClient.add(name + key.toString(), expiredDuration,   toStoreValue(value));
 		putObject(key, value);
 	}
@@ -92,6 +100,7 @@ public class MemcachedCache extends AbstractLegendCache implements InitializingB
 	 * @see org.springframework.cache.Cache#evict(java.lang.Object)
 	 */
 	public void evict(Object key) {
+		log.debug("evict from cache {} by key {}", getName(), key);
 		evictObject(key);
 		
 		memcachedClient.delete(name + key.toString());

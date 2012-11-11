@@ -23,7 +23,7 @@ import com.legendshop.business.service.CashService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -42,7 +42,7 @@ public class CashController extends BaseController implements AdminController<Ca
     @RequestMapping("/query")
     public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Cash cash) {
         CriteriaQuery cq = new CriteriaQuery(Cash.class, curPageNO);
-        cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+        cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
         cq = hasAllDataFunction(cq, request, StringUtils.trim(cash.getUserName()));
         /*
            //TODO add your condition

@@ -24,8 +24,17 @@
                                                             <td align="center" >
                                                             <div id="apple">
                                                              <a href="<ls:domain shopName='${league.friendId}'/>">
-                                                                    <img src="<ls:photo item='${league.banner}'/>" 
-                                                                        height="65px" style="margin: 2px" title="${league.province}/${league.city}/${league.area}/${league.friendId}">
+                                                             <c:choose>
+                                                             		<c:when test="${league.banner == null}">
+                                                             		                   <img src="common/images/legendshop.gif" 
+                                                                                         height="65px" style="margin: 2px" title="${league.province}/${league.city}/${league.area}/${league.friendId}">
+                                                             		</c:when>
+                                                             		<c:otherwise>
+                                                             			          <img src="<ls:photo item='${league.banner}'/>" 
+                                                                                     height="65px" style="margin: 2px" title="${league.province}/${league.city}/${league.area}/${league.friendId}">
+                                                             		</c:otherwise>
+                                                             </c:choose>
+       
                                                              </a>
                                                             </div>
                                                             </td>

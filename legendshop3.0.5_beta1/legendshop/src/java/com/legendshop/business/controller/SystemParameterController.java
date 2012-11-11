@@ -27,7 +27,7 @@ import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ResourceBundleHelper;
 import com.legendshop.event.EventHome;
 import com.legendshop.model.entity.SystemParameter;
-import com.legendshop.spi.constants.SysParamEnum;
+import com.legendshop.spi.constants.SysParamGroupEnum;
 
 /**
  * 系统参数控制器.
@@ -57,7 +57,7 @@ public class SystemParameterController extends BaseController {
 		cq.setPageSize(30);
 		cq.eq("name", systemParameter.getName());
 		cq.eq("changeOnline", "Y");
-		cq.eq("groupId", groupId);
+		cq.eq("groupId", SysParamGroupEnum.getName(groupId));
 		cq.addOrder("asc", "displayOrder");
 		
 		PageSupport ps = systemParameterService.getSystemParameterList(cq);
@@ -81,7 +81,7 @@ public class SystemParameterController extends BaseController {
 	@RequestMapping(value = "/save")
 	public String save(HttpServletRequest request, HttpServletResponse response, SystemParameter systemParameter) {
 		SystemParameter parameter = systemParameterService.getSystemParameter(systemParameter.getName());
-		String groupId = SysParamEnum.sy.name();
+		String groupId = SysParamGroupEnum.SYS.name();
 		if (parameter != null) {
 			groupId = parameter.getGroupId();
 			parameter.setValue(systemParameter.getValue());

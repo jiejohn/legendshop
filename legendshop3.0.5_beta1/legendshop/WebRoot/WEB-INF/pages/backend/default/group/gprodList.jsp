@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
-<%@page import="com.legendshop.core.constant.ParameterEnum"%>
+<%@page import="com.legendshop.core.constant.SysParameterEnum"%>
 <%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth"%>
@@ -18,8 +18,8 @@
 </head>
 <body>
 <%
-			Integer offset = (Integer)request.getAttribute("offset");
-	%>
+	Integer offset = (Integer)request.getAttribute("offset");
+%>
 <form action="<ls:url address='/admin/group/product/query'/>" id="form1" method="post">
     <table class="${tableclass}" style="width: 100%">
     <thead>
@@ -85,7 +85,7 @@
       <display:column title="原价" property="price" sortable="true" sortName="price"></display:column>
       <display:column title="现价" property="cash" sortable="true" sortName="cash"></display:column>
       <%
-      	if(PropertiesUtil.getObject(ParameterEnum.VISIT_HW_LOG_ENABLE, Boolean.class)){
+      	if(PropertiesUtil.getObject(SysParameterEnum.VISIT_HW_LOG_ENABLE, Boolean.class)){
       %>
       <display:column title="查看数" property="views" sortable="true" sortName="views"></display:column>
       <%

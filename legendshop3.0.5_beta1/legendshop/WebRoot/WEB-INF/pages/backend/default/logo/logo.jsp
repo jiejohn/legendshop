@@ -41,7 +41,7 @@
 	<body>
 		<form action="${pageContext.request.contextPath}/admin/logo/save" method="post" id="form1"
 			enctype="multipart/form-data">
-			<input id="id" name="id" value="${bean.id}" type="hidden">
+			<input id="userId" name="userId" value="${bean.userId}" type="hidden">
 			<div align="center">
 				    <table class="${tableclass}" style="width: 100%">
 	    <thead>
@@ -68,37 +68,11 @@
 					<td>
 						
 							<input type="file" name="file" id="file"/>
-							<input type="hidden" name="bannerName" id="bannerName" size="80"
-								value="${bean.banner}" />
+							<input type="hidden" name="bannerName" id="bannerName" size="80" 	value="${bean.logoPic}" />
 						
 					</td>
 				</tr>
-				<tr>
-					<td>
-						<div align="right">
-							连接地址
-							<font color="ff0000">*</font>
-						</div>
-					</td>
-					<td>
-						
-							<input type="text" name="url" id="url" size="81" value="${bean.url}" />
-						
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div align="right">
-							备注
-						</div>
-					</td>
-					<td>
-						
-						<input type="text" name="memo" id="memo" size="81" maxlength="100" value="${bean.memo}" />
-						
-					</td>
-				</tr>
-				<c:if test="${bean.banner!=null}">
+				<c:if test="${bean.logoPic!=null}">
 					<tr>
 						<td>
 							<div align="center">
@@ -107,8 +81,8 @@
 						</td>
 						<td>
 
-								<a href="<ls:photo item='${bean.banner}'/>" target="_blank"> <img
-									src="<ls:photo item='${bean.banner}'/>" width="170" height="44"/>
+								<a href="<ls:photo item='${bean.logoPic}'/>" target="_blank"> <img
+									src="<ls:photo item='${bean.logoPic}'/>" width="170" height="44"/>
 							</a>
 
 						</td>

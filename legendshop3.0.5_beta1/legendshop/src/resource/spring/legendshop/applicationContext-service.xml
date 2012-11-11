@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans"
+   	xmlns:conditional="http://www.legendesign.net/schema/conditional"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:oxm="http://www.springframework.org/schema/oxm"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
-                http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.1.xsd">
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+                http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.1.xsd
+                http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+                http://www.legendesign.net/schema/conditional http://www.legendesign.net/schema/conditional/conditional-plugin.xsd">
+                
 	<!-- Add additional controller beans here -->
 	<bean id="logoService" class="com.legendshop.business.service.impl.LogoServiceImpl">
 		<property name="logoDao" ref="logoDao"></property>
 	</bean>
 
-	<bean id="logoDao" class="com.legendshop.business.dao.impl.LogoDaoImpl" parent="baseDao" />
+	<bean id="logoDao" class="com.legendshop.business.dao.impl.LogoDaoImpl" parent="baseDao" >
+		<property name="jdbcTemplate"  ref="jdbcTemplate"/>
+	</bean>
 
 	<bean id="shopDetailDao" class="com.legendshop.business.dao.impl.ShopDetailJdbcDaoImpl" parent="baseDao">
 		<property name="codeTablesCache" ref="codeTablesCache"></property>
@@ -350,11 +361,6 @@
 
 	<bean id="tagLibDao" class="com.legendshop.core.tag.TagLibDaoImpl" parent="baseDao" />
 
-	<bean id="redCommonPageService" class="com.legendshop.business.service.impl.RedCommonPageServiceImpl" parent="abstractCommonPageService">
-		<property name="hotsearchDao" ref="hotsearchDao" />
-		<property name="nsortDao" ref="nsortDao" />
-	</bean>
-
 	<bean id="defaultCommonPageService" class="com.legendshop.business.service.impl.DefaultCommonPageServiceImpl"
 		parent="abstractCommonPageService" />
 
@@ -370,15 +376,13 @@
 	<!-- Locator -->
 	<bean id="commonPageServiceLocator" class="com.legendshop.business.service.locator.CommonPageServiceLocator">
 		<property name="shopDetailService" ref="shopDetailService" />
-		<property name="serviceMap">
-			<map>
-				<entry key="default" value-ref="defaultCommonPageService" />
-				<entry key="red" value-ref="redCommonPageService" />
-			</map>
-		</property>
-
+		<property name="serviceMap" ref="commonPageServiceMap" />
 	</bean>
-
+	
+	<conditional:map id="commonPageServiceMap"  default-key="default">
+		<entry key="default" value-ref="defaultCommonPageService" />
+	</conditional:map>
+	
 	<bean id="homeServiceLocator" class="com.legendshop.business.service.locator.GenericServiceLocator">
 		<property name="serviceMap">
 			<map>

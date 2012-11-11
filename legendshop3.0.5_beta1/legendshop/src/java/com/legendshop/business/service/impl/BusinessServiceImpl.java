@@ -31,8 +31,8 @@ import com.legendshop.business.dao.SortDao;
 import com.legendshop.business.form.SearchForm;
 import com.legendshop.business.service.BusinessService;
 import com.legendshop.core.constant.LuceneIndexerEnum;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -121,7 +121,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 		try {
 			// Qbc查找方式
 			CriteriaQuery cq = new CriteriaQuery(Product.class, searchForm.getCurPageNOTop());
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class) * 2);
+			cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.FRONT_PAGE_SIZE, Integer.class) * 2);
 			cq.eq("userName", ThreadLocalContext.getCurrentShopName(request, response));
 			Criterion c = null;
 			if (!AppUtils.isBlank(searchForm.getKeyword())) {

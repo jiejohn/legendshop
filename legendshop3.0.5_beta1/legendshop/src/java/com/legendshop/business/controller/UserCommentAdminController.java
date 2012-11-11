@@ -28,8 +28,8 @@ import com.legendshop.business.service.UserCommentService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.AuthorizationException;
@@ -68,7 +68,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 		String status = request.getParameter("status") == null ? "0" : request.getParameter("status");// 默认显示为未读
 		String userName = request.getParameter("userName") == null ? "" : request.getParameter("userName").trim();
 		CriteriaQuery cq = new CriteriaQuery(UserComment.class, curPageNO, "javascript:pager");
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+		cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		//right check
 		if (!AppUtils.isBlank(status)) {
 			cq.eq("status", Integer.valueOf(status));
@@ -89,7 +89,7 @@ public class UserCommentAdminController extends BaseController implements AdminC
 		}
 
 		if (!CommonServiceUtil.isDataForExport(cq, request)) {// 非导出情况
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+			cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		}
 		if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {
 			cq.addOrder("desc", "addtime");

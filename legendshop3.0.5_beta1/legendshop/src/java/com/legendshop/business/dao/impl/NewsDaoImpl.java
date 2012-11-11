@@ -17,7 +17,7 @@ import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.NewsDao;
 import com.legendshop.core.OperationTypeEnum;
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
@@ -85,7 +85,7 @@ public class NewsDaoImpl extends BaseDaoImpl implements NewsDao {
 	public PageSupport getNews(Locale locale, String curPageNO,String userName,Long newsCategoryId) {
 		// Qbc查找方式
 		CriteriaQuery cq = new CriteriaQuery(News.class, curPageNO);
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+		cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		cq.eq("status", Constants.ONLINE);
 		cq.eq("position", NewsPositionEnum.NEWS_NEWS.value());
 		cq.eq("userName", userName);

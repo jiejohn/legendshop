@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
-<%@page import="com.legendshop.core.constant.ParameterEnum"%>
+<%@page import="com.legendshop.core.constant.SysParameterEnum"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <%@include file='/WEB-INF/pages/common/common.jsp'%>
 <script type="text/javascript" language="javascript" src=" <ls:templateResource item='/common/js/randomimage.js'/>" ></script>
@@ -64,8 +64,8 @@
 																			<td colspan="2">
 																				<div align="center">
 																				<%
-																				if(!(PropertiesUtil.getObject(ParameterEnum.COMMENT_LEVEL,String.class)).equals("ANONYMOUS_COMMENT")){
-																				 %>
+																					if(!(PropertiesUtil.getObject(SysParameterEnum.COMMENT_LEVEL,String.class)).equals("ANONYMOUS_COMMENT")){
+																				%>
 																				<c:choose>
 																					<c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME == null}"><input type="button" value='<fmt:message key="logon.first"/>' class="s" disabled="disabled"></c:when>
 																					<c:otherwise><input type="button" value="<fmt:message key="submit"/>" class="s" onclick="addProdcutComment();"/></c:otherwise>

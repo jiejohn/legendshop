@@ -23,8 +23,8 @@ import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.NewsCategoryService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -70,7 +70,7 @@ public class NewsCategoryAdminController extends BaseController {
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO,
 			NewsCategory newsCategory) {
 		CriteriaQuery cq = new CriteriaQuery(NewsCategory.class, curPageNO);
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+		cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(newsCategory.getUserName()));
 		if (!AppUtils.isBlank(newsCategory.getNewsCategoryName())) {
 			cq.like("newsCategoryName", "%" + newsCategory.getNewsCategoryName() + "%");

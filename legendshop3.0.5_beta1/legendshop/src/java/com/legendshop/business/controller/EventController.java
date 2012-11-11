@@ -24,8 +24,8 @@ import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.AdminController;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -46,7 +46,7 @@ public class EventController extends BaseController implements AdminController<U
     @RequestMapping("/query")
     public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, UserEvent userEvent) {
         CriteriaQuery cq = new CriteriaQuery(UserEvent.class, curPageNO);
-        cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+        cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 
 		if (!AppUtils.isBlank(userEvent.getUserName())) {
 			cq.like("userName", "%" + StringUtils.trim(userEvent.getUserName()) + "%");

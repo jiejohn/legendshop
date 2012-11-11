@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
-<%@page import="com.legendshop.core.constant.ParameterEnum"%>
+<%@page import="com.legendshop.core.constant.SysParameterEnum"%>
 <%@ include file="/WEB-INF/pages/common/back-common.jsp"%>
 <%@ include file="/WEB-INF/pages/common/taglib.jsp"%>
 <%@ taglib uri="/WEB-INF/tld/auth.tld" prefix="auth" %>
@@ -13,7 +13,9 @@
 <title>首页广告图片列表</title>
 </head>
 <body>
-<% Integer offset = (Integer)request.getAttribute("offset");%>
+<%
+	Integer offset = (Integer)request.getAttribute("offset");
+%>
     <table class="${tableclass}" style="width: 100%">
     <thead>
     	<tr><td><a href="<ls:url address='/admin/index'/>" target="_parent">首页</a> &raquo; 商城管理  &raquo; <a href="${pageContext.request.contextPath}/admin/indexjpg/query">首页Flash图片管理</a></td></tr>
@@ -63,7 +65,7 @@
 	
 <table style="width: 100%; border: 0px"><tr><td align="left">说明：<br>
    1. 首页中上部广告图片，文字均可以加上超链接<br>
-   2. 创建首页中上部广告图片，注意:最多上传<b><%=PropertiesUtil.getObject(ParameterEnum.MAX_INDEX_JPG,Integer.class)%></b>张图片<br>
+   2. 创建首页中上部广告图片，注意:最多上传<b><%=PropertiesUtil.getObject(SysParameterEnum.MAX_INDEX_JPG,Integer.class)%></b>张图片<br>
    3. <img src="${pageContext.request.contextPath}/common/default/images/grid_refresh.png" title="文字连接">指向图片、文字连接地址<br>
    4. <img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "> 修改按钮<br>
    5. <img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/> "> 删除按钮<br>

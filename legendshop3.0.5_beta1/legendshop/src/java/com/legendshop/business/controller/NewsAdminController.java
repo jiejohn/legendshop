@@ -26,8 +26,8 @@ import com.legendshop.business.common.page.BackPage;
 import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.HqlQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -70,7 +70,7 @@ public class NewsAdminController extends BaseController {
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, News news) {
 		String userName = UserManager.getUsername(request.getSession());
 		Map<String, String> map = new HashMap<String, String>();
-		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class), curPageNO);
+		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class), curPageNO);
 		// 条件,注意条件顺序跟SQL对应
 		if (!CommonServiceUtil.haveViewAllDataFunction(request)) {
 			map.put("userName", userName);
@@ -108,7 +108,7 @@ public class NewsAdminController extends BaseController {
 		}
 		
 		if (!CommonServiceUtil.isDataForExport(hql, request)) {// 非导出情况
-			hql.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+			hql.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		}
 		if (!CommonServiceUtil.isDataSortByExternal(hql, request, map)) {
 			map.put(Constants.ORDER_INDICATOR, "order by n.newsDate desc");

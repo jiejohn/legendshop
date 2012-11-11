@@ -48,9 +48,8 @@ import com.legendshop.business.service.ScoreService;
 import com.legendshop.business.service.ValidateCodeUsernamePasswordAuthenticationFilter;
 import com.legendshop.business.service.dwr.DwrCommonService;
 import com.legendshop.core.UserManager;
-import com.legendshop.core.cache.MemCachedManager;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.ProductTypeEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.ApplicationException;
@@ -974,7 +973,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	 * @return the string
 	 */
 	private String validateComment(Long prodId, String userName) {
-		String level = PropertiesUtil.getObject(ParameterEnum.COMMENT_LEVEL, String.class);
+		String level = PropertiesUtil.getObject(SysParameterEnum.COMMENT_LEVEL, String.class);
 		if (Constants.LOGONED_COMMENT.equals(level)) {
 			if (AppUtils.isBlank(userName)) {
 				return "NOLOGON"; // 没有登录
@@ -1019,7 +1018,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 		}
 		try {
 			CriteriaQuery cq = new CriteriaQuery(ProductComment.class, curPageNO);
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
+			cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.FRONT_PAGE_SIZE, Integer.class));
 			cq.addOrder("desc", "addtime");
 			cq.eq("prodId", prodId);
 			

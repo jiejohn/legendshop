@@ -33,7 +33,6 @@ import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.model.entity.Hotsearch;
 import com.legendshop.model.entity.Nsort;
 import com.legendshop.model.entity.Sort;
-import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.NsortService;
 import com.legendshop.spi.service.ProductService;
 import com.legendshop.spi.service.SortService;

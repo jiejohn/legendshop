@@ -17,14 +17,12 @@ import net.sf.json.JSONArray;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.core.OperationTypeEnum;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.ProductStatusEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.HqlQuery;
@@ -137,7 +135,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	public PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId, Long nsortId, Long subNsortId) {
 		// Qbc查找方式
 		CriteriaQuery cq = new CriteriaQuery(Product.class, curPageNO);
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
+		cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.FRONT_PAGE_SIZE, Integer.class));
 		cq.addOrder("desc", "prodId");
 		cq.eq("sortId", sortId);
 		cq.eq("nsortId", nsortId);
@@ -158,7 +156,7 @@ public abstract class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
 	@Override
 	public PageSupport getProdDetail(Locale locale, String curPageNO, Long sortId) {
 		// HQL查找方式
-		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class), curPageNO);
+		HqlQuery hql = new HqlQuery(PropertiesUtil.getObject(SysParameterEnum.FRONT_PAGE_SIZE, Integer.class), curPageNO);
 		String QueryNsortCount = ConfigCode.getInstance().getCode("biz.getSortProdCount");
 		String QueryNsort = ConfigCode.getInstance().getCode("biz.getSortProd");
 		hql.setAllCountString(QueryNsortCount);

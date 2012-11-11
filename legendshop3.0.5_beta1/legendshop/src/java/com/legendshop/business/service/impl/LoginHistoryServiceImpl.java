@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.legendshop.business.dao.LoginHistoryDao;
 import com.legendshop.business.service.LoginHistoryService;
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.dao.support.SqlQuery;
@@ -45,7 +45,7 @@ public class LoginHistoryServiceImpl implements LoginHistoryService {
 	 */
 	@Override
 	public void saveLoginHistory(String userName, String ip) {
-		if (PropertiesUtil.getObject(ParameterEnum.LOGIN_LOG_ENABLE, Boolean.class)) {
+		if (PropertiesUtil.getObject(SysParameterEnum.LOGIN_LOG_ENABLE, Boolean.class)) {
 			log.debug("user {} login system from ip {}", userName, ip);
 			try {
 				LoginHistory loginHistory = new LoginHistory();

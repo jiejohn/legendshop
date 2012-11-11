@@ -5,6 +5,7 @@
 <title>menu</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/theme/skin/css/base.css" type="text/css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/theme/skin/css/menu.css" type="text/css" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <script language='javascript'>var curopenItem = '1';</script>
 <script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/plugins/theme/skin/js/frame/menu.js"></script>
 </head>

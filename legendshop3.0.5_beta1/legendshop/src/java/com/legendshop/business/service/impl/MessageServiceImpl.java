@@ -7,14 +7,12 @@
  */
 package com.legendshop.business.service.impl;
 
-import java.util.List;
-
+import com.legendshop.business.dao.MessageDao;
+import com.legendshop.business.service.MessageService;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.util.AppUtils;
-import com.legendshop.business.dao.MessageDao;
 import com.legendshop.model.entity.Message;
-import com.legendshop.business.service.MessageService;
+import com.legendshop.util.AppUtils;
 
 /**
  * The Class MessageServiceImpl.

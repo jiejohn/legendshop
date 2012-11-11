@@ -24,8 +24,8 @@ import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.MyleagueService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.EntityCodes;
@@ -74,7 +74,7 @@ public class MyleagueAdminController extends BaseController {
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response, String curPageNO, Myleague myleague) {
 		CriteriaQuery cq = new CriteriaQuery(Myleague.class, curPageNO, "javascript:pager");
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+		cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		if (CommonServiceUtil.haveViewAllDataFunction(request)) {
 			if (!AppUtils.isBlank(myleague.getUserId())) {
 				cq.like("userId", "%" + StringUtils.trim(myleague.getUserId()) + "%");

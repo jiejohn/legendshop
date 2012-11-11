@@ -36,5 +36,14 @@ public interface CommonPageService {
 	 * @return the copy all
 	 */
 	public String getCopy(HttpServletRequest request, HttpServletResponse response);
+
+	/**
+	 * Gets the top user info.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the top user info
+	 */
+	public String getTopUserInfo(HttpServletRequest request, HttpServletResponse response);
 	
 }

@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.legendshop.business.dao.ScoreDao;
 import com.legendshop.business.dao.UserDetailDao;
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.ErrorCodes;
 import com.legendshop.core.helper.PropertiesUtil;
@@ -69,7 +69,7 @@ public class ScoreDaoImpl extends SubCommonDaoImpl implements ScoreDao {
 		log.debug("addScore UserName = {},Score ={} ", sub.getUserName(), sub.getScore());
 		// 已经使用了积分的单子不再另外赠送积分
 		if (sub == null || sub.getTotal() <= 0 || sub.getScoreId() != null
-				|| !PropertiesUtil.getObject(ParameterEnum.USE_SCORE, Boolean.class)) {
+				|| !PropertiesUtil.getObject(SysParameterEnum.USE_SCORE, Boolean.class)) {
 			return;
 		}
 		UserDetail userDetail = userDetailDao.getUserDetailByName(sub.getUserName());
@@ -89,7 +89,7 @@ public class ScoreDaoImpl extends SubCommonDaoImpl implements ScoreDao {
 	@Override
 	public Map<String, Object> deleteScore(Sub sub, Long avaibleScore) {
 		if (sub == null || avaibleScore == null || avaibleScore <= 0
-				|| !PropertiesUtil.getObject(ParameterEnum.USE_SCORE, Boolean.class)) {
+				|| !PropertiesUtil.getObject(SysParameterEnum.USE_SCORE, Boolean.class)) {
 			return null;
 		}
 		Map<String, Object> map = new HashMap<String, Object>();

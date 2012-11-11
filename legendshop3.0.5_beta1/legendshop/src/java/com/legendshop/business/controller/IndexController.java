@@ -27,8 +27,6 @@ import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.model.entity.ShopDetailView;
-import com.legendshop.spi.constants.Constants;
-import com.legendshop.util.AppUtils;
 
 /**
  * The Class GroupController.

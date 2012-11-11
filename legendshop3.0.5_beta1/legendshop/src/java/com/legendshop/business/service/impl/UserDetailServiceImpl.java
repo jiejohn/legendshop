@@ -47,7 +47,6 @@ import com.legendshop.model.UserMessages;
 import com.legendshop.model.entity.ShopDetail;
 import com.legendshop.model.entity.User;
 import com.legendshop.model.entity.UserDetail;
-import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.constants.RegisterEnum;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.BeanHelper;

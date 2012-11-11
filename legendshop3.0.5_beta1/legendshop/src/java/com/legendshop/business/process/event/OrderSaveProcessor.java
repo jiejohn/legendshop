@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.legendshop.event.processor.BaseProcessor;
 import com.legendshop.model.entity.Sub;
-//import com.legendshop.ws.service.client.SubService_Client;
 
 /**
  * 下订单时触发的处理器

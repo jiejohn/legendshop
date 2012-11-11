@@ -153,23 +153,18 @@
 					{! order by hc.addtime desc||$orderIndicator$}
             </Method>
             <Method name="QueryLeagueCount">
-		            select count(*) from ls_league m,ls_logo l,ls_shop_detail sd 
-					where m.friend_id = l.user_name 
-					and sd.user_name = m.friend_id
-					and sd.status = 1 
-					and m.user_id = ?
+		            select count(*) from ls_league m,ls_shop_detail sd where sd.user_name = m.friend_id and sd.status = 1 and m.user_id = ?
             </Method>
             <Method name="QueryLeague">
-					select m.friend_id as friendId,m.friend_name as friendName,l.banner,s.province,s.city,s.area
-					from ls_league m,ls_logo l,
-					(select sd.user_name,p.province,c.city,a.area
+					select m.friend_id as friendId,m.friend_name as friendName,s.logo_pic as banner, s.province,s.city,s.area
+					from ls_league m,
+					(select sd.user_name,p.province,c.city,a.area,sd.logo_pic
 					from ls_shop_detail sd 
 					left join ls_provinces p on sd.provinceid = p.provinceid
 					left join ls_cities c on sd.cityid = c.cityid 
 					left join ls_areas a on sd.areaid = a.areaid
 					where sd.status = 1) s
-					where m.friend_id = l.user_name 
-					and s.user_name = m.friend_id 
+					where  s.user_name = m.friend_id 
 					and m.user_id = ? 
 					order by m.display_order desc
             </Method>   
@@ -182,7 +177,7 @@
 					sd.id_card_num AS idCardNum,sd.create_country_code AS createCountryCode,sd.create_area_code AS createAreaCode,
 					sd.provinceid AS provinceid,sd.cityid AS cityid,sd.areaid AS areaid,p.province AS province,c.city AS city,a.area AS area,
 					u.user_tel AS userTel,u.nick_name AS nickName,u.user_mobile AS userMobile,u.qq AS qq,u.msn AS msnNumber,u.user_postcode AS userPostcode,u.fax AS fax,
-					sd.front_type as frontType,sd.end_type as endType,sd.domain_name as domainName, sd.icp_info as icpInfo
+					sd.front_type as frontType,sd.end_type as endType,sd.domain_name as domainName, sd.icp_info as icpInfo,sd.logo_pic as logoPic
 					from ls_shop_detail sd left join ls_usr_detail u on sd.user_id = u.user_id
 					left join ls_provinces p on sd.provinceid = p.provinceid
 					left join ls_cities c on sd.cityid = c.cityid
@@ -198,7 +193,7 @@
 					sd.id_card_num AS idCardNum,sd.create_country_code AS createCountryCode,sd.create_area_code AS createAreaCode,
 					sd.provinceid AS provinceid,sd.cityid AS cityid,sd.areaid AS areaid,p.province AS province,c.city AS city,a.area AS area,
 					u.user_tel AS userTel,u.nick_name AS nickName,u.user_mobile AS userMobile,u.qq AS qq,u.msn AS msnNumber,u.user_postcode AS userPostcode,u.fax AS fax,
-					sd.front_type as frontType,sd.end_type as endType, sd.domain_name as domainName, sd.icp_info as icpInfo
+					sd.front_type as frontType,sd.end_type as endType, sd.domain_name as domainName, sd.icp_info as icpInfo,sd.logo_pic as logoPic
 					from ls_shop_detail sd left join ls_usr_detail u on sd.user_id = u.user_id
 					left join ls_provinces p on sd.provinceid = p.provinceid
 					left join ls_cities c on sd.cityid = c.cityid 
@@ -234,6 +229,14 @@
 					left join ls_nsort nsort3 on prod.sub_nsort_id = nsort3.nsort_id
 					left join ls_brand brand on prod.brand_id = brand.brand_id
 					where prod_id in (
+            </Method>
+            <Method name="QueryLogo">
+            		select new ShopDetail(sd.logoPic,sd.briefDesc,sd.userId,sd.userName) from ShopDetail sd where sd.logoPic is not null
+            		{? and sd.userName = $userName$}
+            </Method>
+            <Method name="QueryLogoCount">
+                    select count(*) from ShopDetail sd  where sd.logoPic is not null 
+            		{?and sd.userName = $userName$}
             </Method>
 		</Object>
 		<Object objectName="ad">

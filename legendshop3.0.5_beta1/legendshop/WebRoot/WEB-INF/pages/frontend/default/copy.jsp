@@ -9,13 +9,14 @@
   </td></tr>
     <tr> 
   <td width="100%" align="center">
-    	 &copy;Copyright 2009 - 2012 Power By 
-    	 <c:choose>
-	    	 	<c:when test="${shopDetail.domainName != null }"></c:when>
-	    	 	<c:otherwise>
-	    	 			<a href="http://www.legendesign.net" target="_blank">LegendShop ${LEGENDSHOP_VERSION} ${licenseDesc}</a>  All Rights Reserved.
-	    	 	</c:otherwise>
-    	 </c:choose>
+    	 &copy;Copyright 2012 Power By 
+    	 <a href="http://www.legendesign.net" target="_blank">LegendShop ${LEGENDSHOP_VERSION}</a> 
+    	  All Rights Reserved.
+    	    ${shopDetail.siteName }
+    	    <c:if test="${shopDetail.domainName != null }">
+    	        	     &nbsp; ${shopDetail.icpInfo }
+    	    </c:if>
+
        </td></tr>
   <tr> 
 </table>

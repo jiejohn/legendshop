@@ -45,13 +45,19 @@
 	    }
 	}
 	
+		jQuery(document).ready(function(){
+	  	 $.post("${pageContext.request.contextPath}/topuserinfo?t=" + new Date(), function(data) {
+			  $('#header').html(data);
+			});
+});
 </script>
-<lb:shopDetail var="shopDetail" >
+<lb:shopDetail var="shopDetail" />
     <link href="<ls:templateResource item='/common/style/style_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
     <link href="<ls:templateResource item='/common/style/global_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
-</lb:shopDetail>
+
 <title>${shopDetail.siteName}</title>
 <link rel="icon" href="<ls:templateResource item='/common/favicon.ico'/>" type="image/x-icon" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="description" content="${shopDetail.userName},${shopDetail.briefDesc}" />
 <meta name="keywords" content="${shopDetail.userName},${shopDetail.briefDesc}"/>
 <meta name="keywords" content="LegendShop 网购平台, 网店系统, 商城系统, 商城系统, 电子商务系统, B2C系统, 购物系统, 网上商店系统, 网上交易系统, JAVA网店, JAVA商城, JSP网店, JSP商城, SSH项目, JAVA开源项目"/>
@@ -60,61 +66,6 @@
 <body>
  <%@ include file="header.jsp"%>
 <div id="header">
-	<div id="logo">
-			<a href="${logo.url}">
-			<c:choose>
-			 <c:when test="${logo.id != -1}">
-			     <img style="Clear: Both; Border: 0px" src="<ls:photo item='${logo.banner}'/>" height="65px" title="${logo.memo}" />
-			 </c:when>
-			 <c:otherwise>
-			     <img src="<ls:templateResource item='/common/images/legendshop.gif'/>" height="65px" title="LegendShop"/>
-			 </c:otherwise>
-			</c:choose>
-		  </a>
-	</div>
-	<div>
-	   <ul id="topnews">
-	   <c:forEach items="${newsTopList}" var="newsTop">
-	       <li><a href="<ls:url address='/news/${newsTop.newsId}'/>">${newsTop.newsTitle}</a></li>
-	   </c:forEach>
-	   <c:if test="${'userChoice' eq sessionScope.shopDetail.langStyle}">
-        <li class="hl"><a href="<ls:url address='/changeLocale'/>?country=CN&language=zh">中文</a></li>
-        <li class="hl"><a href="<ls:url address='/changeLocale'/>?country=US&language=en">English</a></li>
-        </c:if>
-    </ul>
-    </div>
-	<div>
-	<ul id="topnav">
-	<lb:logined >
-	   <c:if test="${shopExists && 'C2C' == applicationScope.BUSINESS_MODE}">
-               <li><a href="<ls:domain shopName='${sessionScope.SPRING_SECURITY_LAST_USERNAME}' />"><fmt:message key="myShop"/></a></li>
-        </c:if>
-	   <auth:auth ifAnyGranted="F_ADMIN">
-	   	<c:if test="${canbeLeagueShop}"><li><a href='javascript:addMyLeague("${sessionScope.SPRING_SECURITY_LAST_USERNAME}","<lb:currentShop />")'><fmt:message key="addLeague"/><fmt:message key="this.shop"/></a></li></c:if>
-	     <li><a href="<ls:url address='/admin/index'/>"><b><fmt:message key="system.management"/></b></a></li>
-       </auth:auth>
-      	<li><a href="<ls:url address='/leaveword'/>"><fmt:message key="leaveword"/></a></li>
-		<li><a href="<ls:url address='/p/order'/>"><fmt:message key="myorder"/></a></li>
-	</lb:logined>
-		<li class="navCartSum"><a href="<ls:url address='/p/buy'/>"><fmt:message key="shopingCar"/></a></li>	
-		<li class="hl"><a href="<ls:url address='/allNews'/>"><fmt:message key="newsCenter"/></a></li>
-	</ul>
-	</div>
- <div id="headerlogin">
-	<span>
- <c:choose>
-   <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
-  <span><b>${sessionScope.SPRING_SECURITY_LAST_USERNAME}</b></span>
-   	<a href="<ls:url address='/p/myaccount'/>")>[<fmt:message key="myaccount"/>]</a>
-	<a href="${pageContext.request.contextPath}/p/logout" target="_parent">[<fmt:message key="logout"/>]</a>
-   </c:when>
-   <c:otherwise>
-  	<a href="<ls:url address='/p/login'/>">[<fmt:message key="login"/>]</a>
-   </c:otherwise>
-</c:choose>
-<a href="<ls:url address='/reg'/>" class="n2">[<fmt:message key="regFree"/>]</a>
-</span>
-	</div>
 </div>
 <div id="headernav">
 	<ul>

@@ -12,7 +12,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.event.processor.BaseProcessor;
 import com.legendshop.model.entity.SystemParameter;
@@ -56,7 +56,7 @@ public class MailPropertiesUpdatedProcessor extends BaseProcessor<SystemParamete
 	public void process(SystemParameter systemParameter) {
 		log.info("PropertiesUpdater update mail parameter {} , value {}", systemParameter.getName(), systemParameter
 				.getValue());
-		PropertiesUtil.setObject(ParameterEnum.MAIL_PROPERTIES_CHANGED, true);
+		PropertiesUtil.setObject(SysParameterEnum.MAIL_PROPERTIES_CHANGED, true);
 	}
 
 

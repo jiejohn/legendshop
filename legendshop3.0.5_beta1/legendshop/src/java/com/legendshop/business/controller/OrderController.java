@@ -29,8 +29,8 @@ import com.legendshop.business.service.UserDetailService;
 import com.legendshop.business.service.timer.SubService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.EntityCodes;
@@ -104,7 +104,7 @@ public class OrderController extends BaseController {
 		log.debug("find order userName {}, subNumber {}",userName ,subNumber);
 			// Qbc查找方式
 			CriteriaQuery cq = new CriteriaQuery(Sub.class, curPageNO);
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class));
+			cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.FRONT_PAGE_SIZE, Integer.class));
 			cq.eq("userName", userName);
 			if (AppUtils.isNotBlank(subNumber)) {
 				cq.like("subNumber", subNumber + "%");

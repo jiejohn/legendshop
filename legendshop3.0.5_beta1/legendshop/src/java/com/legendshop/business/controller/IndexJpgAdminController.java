@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +24,8 @@ import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.IndexJpgService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
@@ -80,7 +79,7 @@ public class IndexJpgAdminController extends BaseController {
 			cq.eq("userName", UserManager.getUsername(request));
 		}
 		if (!CommonServiceUtil.isDataForExport(cq, request)) {// 非导出情况
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+			cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		}
 		if (!CommonServiceUtil.isDataSortByExternal(cq, request)) {
 			cq.addOrder("desc", "id");
@@ -208,7 +207,7 @@ public class IndexJpgAdminController extends BaseController {
 	 */
 	private String  checkMaxJpgNum(HttpServletRequest request, HttpServletResponse response,Long num) {
 		String result = null;
-		Integer maxNum = PropertiesUtil.getObject(ParameterEnum.MAX_INDEX_JPG, Integer.class);
+		Integer maxNum = PropertiesUtil.getObject(SysParameterEnum.MAX_INDEX_JPG, Integer.class);
 		if ((num != null) && (num >= maxNum)) {
 			UserMessages uem = new UserMessages();
 			uem.setTitle("系统设置不能上传多于" + maxNum + "张图片");

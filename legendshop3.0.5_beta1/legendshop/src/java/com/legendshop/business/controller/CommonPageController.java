@@ -46,12 +46,40 @@ public class CommonPageController extends BaseController {
 		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(request,response, shopName, FrontPage.TOP);
 		return commonPageService.getTop(request, response);
 	}
+	
+	/**
+	 * Top user info.
+	 * 获取动态用户数据
+	 * @param request the request
+	 * @param response the response
+	 * @return the string
+	 */
+	@RequestMapping("/topuserinfo")
+	public String topUserInfo(HttpServletRequest request, HttpServletResponse response) {
+		String shopName = ThreadLocalContext.getCurrentShopName(request,response);
+		CommonPageService commonPageService = commonPageServiceLocator.getCommonPageService(request,response, shopName, FrontPage.TOP);
+		return commonPageService.getTopUserInfo(request, response);
+	}
 
+	/**
+	 * Home top.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the string
+	 */
 	@RequestMapping("/home/top")
 	public String homeTop(HttpServletRequest request, HttpServletResponse response) {
 		return PathResolver.getPath(request,response,FrontPage.HOME_TOP);
 	}
 
+	/**
+	 * Bottom.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the string
+	 */
 	@RequestMapping("/bottom")
 	public String bottom(HttpServletRequest request, HttpServletResponse response) {
 		return PathResolver.getPath(request,response,FrontPage.BOTTOM);
@@ -86,13 +114,13 @@ public class CommonPageController extends BaseController {
 	}
 
 	/**
-	 * 页面底部
-	 * 
-	 * @param request
-	 * @param response
-	 * @param curPageNO
-	 * @param newsCategory
-	 * @return
+	 * 页面底部.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param curPageNO the cur page no
+	 * @param newsCategory the news category
+	 * @return the string
 	 */
 	@RequestMapping("/copy")
 	public String copyAll(HttpServletRequest request, HttpServletResponse response, String curPageNO,

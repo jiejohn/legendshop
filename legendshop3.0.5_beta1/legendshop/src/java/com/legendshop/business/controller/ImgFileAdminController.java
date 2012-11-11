@@ -25,8 +25,8 @@ import com.legendshop.business.common.page.FowardPage;
 import com.legendshop.business.service.ImgFileService;
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.ApplicationException;
@@ -75,7 +75,7 @@ public class ImgFileAdminController extends BaseController {
 			throw new ApplicationException("miss productId",EntityCodes.IMG);
 		}
 		CriteriaQuery cq = new CriteriaQuery(ImgFile.class, curPageNO, "javascript:pager");
-		cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+		cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		cq = hasAllDataFunction(cq, request, StringUtils.trim(imgFile.getUserName()));
 		if (productId != null) {
 			cq.eq("productId", productId);

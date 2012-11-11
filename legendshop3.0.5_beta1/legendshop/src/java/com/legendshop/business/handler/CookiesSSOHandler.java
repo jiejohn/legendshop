@@ -18,7 +18,7 @@ import com.legendshop.core.UserManager;
 import com.legendshop.core.exception.ApplicationException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.handler.AbstractHandler;
-import com.legendshop.core.helper.Handler;
+import com.legendshop.core.handler.Handler;
 import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.LoginService;
 import com.legendshop.util.ContextServiceLocator;

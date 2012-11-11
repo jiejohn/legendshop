@@ -15,7 +15,6 @@ import javax.servlet.jsp.JspException;
 import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.core.tag.LegendShopTag;
 import com.legendshop.model.entity.Sort;
-import com.legendshop.spi.constants.Constants;
 import com.legendshop.spi.service.SortService;
 
 

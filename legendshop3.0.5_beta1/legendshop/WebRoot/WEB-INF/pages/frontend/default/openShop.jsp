@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="com.legendshop.core.helper.PropertiesUtil"%>
-<%@page import="com.legendshop.core.constant.ParameterEnum"%>
+<%@page import="com.legendshop.core.constant.SysParameterEnum"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
 <%@include file='/WEB-INF/pages/common/common.jsp'%>
 <script src="${pageContext.request.contextPath}/common/js/jquery.validate.js" type="text/javascript"></script>
@@ -74,7 +74,9 @@ jQuery.validator.setDefaults({
  	}
  }	
 </script>
-<%if(PropertiesUtil.getObject(ParameterEnum.OPEN_SHOP,Boolean.class)){ %>
+<%
+	if(PropertiesUtil.getObject(SysParameterEnum.OPEN_SHOP,Boolean.class)){
+%>
 <form action="${pageContext.request.contextPath}/addShop" method="post" name="openShopForm" id="openShopForm" enctype="multipart/form-data">
    <table width="100%"  cellpadding="0" cellspacing="0" class="tables">
                                <tr>

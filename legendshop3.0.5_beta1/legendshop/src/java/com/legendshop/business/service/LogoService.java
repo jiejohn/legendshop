@@ -1,58 +1,28 @@
+/*
+ * 
+ * LegendShop 多用户商城系统
+ * 
+ *  版权所有,并保留所有权利。
+ * 
+ */
 package com.legendshop.business.service;
-
-import java.util.List;
 
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
-import com.legendshop.model.entity.Logo;
+import com.legendshop.core.dao.support.SimpleHqlQuery;
+import com.legendshop.model.entity.ShopDetail;
 
+/**
+ * The Interface LogoService.
+ */
 public interface LogoService {
 
 	/**
-	 * List.
-	 * 
-	 * @param userName
-	 *            the user name
-	 * @return the list
+	 * Delete logo.
+	 *
+	 * @param userId the user id
 	 */
-	public abstract List<Logo> getLogoList(String userName);
-
-	/**
-	 * Load.
-	 * 
-	 * @param id
-	 *            the id
-	 * @return the logo
-	 */
-	public abstract Logo getLogoById(Long id);
-
-	/**
-	 * Load.
-	 * 
-	 * @param id
-	 *            the id
-	 * @param userName
-	 *            the user name
-	 * @return the logo
-	 */
-	public abstract Logo getLogoByIdAndName(Long id, String userName);
-
-	/**
-	 * Delete.
-	 * 
-	 * @param id
-	 *            the id
-	 */
-	public abstract void delete(Logo logo);
-
-	/**
-	 * Save.
-	 * 
-	 * @param logo
-	 *            the logo
-	 * @return the long
-	 */
-	public abstract Long save(Logo logo);
+	public abstract void deleteLogo(ShopDetail shopDetail);
 
 	/**
 	 * Update.
@@ -60,15 +30,16 @@ public interface LogoService {
 	 * @param logo
 	 *            the logo
 	 */
-	public abstract void update(Logo logo);
+	public abstract void updateLogo(ShopDetail shopDetail);
+
 
 	/**
-	 * Gets the data by criteria query.
-	 * 
-	 * @param cq
-	 *            the cq
-	 * @return the data by criteria query
+	 * Gets the logo.
+	 *
+	 * @param hql the hql
+	 * @return the logo
 	 */
-	public abstract PageSupport getLogoList(CriteriaQuery cq);
+	public abstract PageSupport getLogo(SimpleHqlQuery hql);
+
 
 }

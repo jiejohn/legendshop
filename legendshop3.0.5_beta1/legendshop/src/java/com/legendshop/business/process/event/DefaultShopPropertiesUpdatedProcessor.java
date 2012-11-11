@@ -10,7 +10,7 @@ package com.legendshop.business.process.event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.exception.BusinessException;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.service.ShopService;
@@ -35,7 +35,7 @@ public class DefaultShopPropertiesUpdatedProcessor extends BaseProcessor<SystemP
 	 */
 	@Override
 	public boolean isSupport(SystemParameter systemParameter) {
-		boolean result = systemParameter != null && ParameterEnum.DEFAULT_SHOP.name().equals(systemParameter.getName());
+		boolean result = systemParameter != null && SysParameterEnum.DEFAULT_SHOP.name().equals(systemParameter.getName());
 	
 		return result;
 	}

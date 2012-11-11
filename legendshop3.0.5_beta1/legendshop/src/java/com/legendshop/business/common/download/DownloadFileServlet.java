@@ -27,7 +27,6 @@ import com.legendshop.core.constant.FunctionEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.model.entity.DownloadLog;
-import com.legendshop.spi.constants.Constants;
 import com.legendshop.util.AppUtils;
 import com.legendshop.util.ContextServiceLocator;
 import com.legendshop.util.ip.IPSeeker;

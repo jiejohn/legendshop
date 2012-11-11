@@ -29,7 +29,7 @@
 		<auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
 			商城名称&nbsp;
 			<input type="text" name="userName" maxlength="50"
-				value="${bean.userName}" size="15" />
+				value="${logo.userName}" size="15" />
 			<input type="submit" value="搜索"/>
 		</auth:auth>
 		<c:if test="${fn:length(list) == 0}">
@@ -44,17 +44,14 @@
         <display:table name="list" requestURI="/admin/logo/query" id="item"
             export="true" class="${tableclass}" style="width:100%">
             <display:column title="顺序" class="orderwidth"><%=offset++%></display:column>
-            <display:column title="图片"><img src="<ls:photo item='${item.banner}'/>" height="65px" width="180px"/></display:column>           
-            <display:column title="链接地址"><a href="${item.url}" target="_blank">${item.url}</a></display:column>
-            <display:column title="备注" property="memo"></display:column>
+            <display:column title="图片"><img src="<ls:photo item='${item.logoPic}'/>" height="65px" width="180px"/></display:column>      
              <auth:auth ifAnyGranted="F_VIEW_ALL_DATA">
            		 <display:column title="商城名称" property="userName" sortable="true"></display:column>
+           		 <display:column title="商城简述">${item.briefDesc}</display:column>    
              </auth:auth>
             <display:column title="操作" media="html" class="actionwidth">
-                 <a href= "${pageContext.request.contextPath}/admin/logo/load/${item.id}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "></a> 
-                 <auth:auth ifAnyGranted="F_OPERATOR">
-                    <a href='javascript:deleteById("${item.id}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/> "></a>
-                 </auth:auth>
+                 <a href= "${pageContext.request.contextPath}/admin/logo/load/${item.userId}" title="修改"><img alt="修改" src="<ls:templateResource item='/common/default/images/grid_edit.png'/> "></a> 
+                 <a href='javascript:deleteById("${item.userId}")' title="删除"><img alt="删除" src="<ls:templateResource item='/common/default/images/grid_delete.png'/> "></a>
             </display:column>
         </display:table>
 		<c:if test="${not empty toolBar}">

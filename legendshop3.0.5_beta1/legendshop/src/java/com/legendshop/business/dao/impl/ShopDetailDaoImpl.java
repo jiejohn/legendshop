@@ -217,8 +217,8 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 */
 	@Override
 	@ShopDetailUpdate
-	public void updateShopDetail(ShopDetail shopdetail) {
-		update(shopdetail);
+	public void updateShopDetail(ShopDetail shopDetail) {
+		update(shopDetail);
 	}
 	
 	/**
@@ -228,8 +228,8 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 	 *            the shopdetail
 	 */
 	@ShopDetailUpdate
-	private void saveOrUpdateShopDetail(ShopDetail shopdetail) {
-		saveOrUpdate(shopdetail);
+	private void saveOrUpdateShopDetail(ShopDetail shopDetail) {
+		saveOrUpdate(shopDetail);
 	}
 	
 	

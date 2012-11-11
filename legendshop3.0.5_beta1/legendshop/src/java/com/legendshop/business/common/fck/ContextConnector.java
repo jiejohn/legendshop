@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 import com.legendshop.core.AttributeKeys;
 import com.legendshop.core.UserManager;
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.exception.InvalidFormatException;
 import com.legendshop.core.exception.PermissionException;
@@ -60,7 +60,7 @@ public class ContextConnector extends LocalConnector {
 		// 重命名操作在这里进行
 		try {
 			int size = inputStream.available();
-			if ((size < 0) || (size > PropertiesUtil.getObject(ParameterEnum.MAX_FILE_SIZE, Long.class))) {
+			if ((size < 0) || (size > PropertiesUtil.getObject(SysParameterEnum.MAX_FILE_SIZE, Long.class))) {
 				throw new RuntimeException("File is 0 or File Size exceeded MAX_FILE_SIZE: " + size);
 			}
 		} catch (IOException e) {
@@ -91,7 +91,7 @@ public class ContextConnector extends LocalConnector {
 	 * @return
 	 */
 	private boolean isPic(String extName){
-		List list = PropertiesUtil.getObject(ParameterEnum.ALLOWED_UPLOAD_FILE_TPYE, List.class);
+		List list = PropertiesUtil.getObject(SysParameterEnum.ALLOWED_UPLOAD_FILE_TPYE, List.class);
 		if (list.contains(extName)) {
 			return true;
 		} else {

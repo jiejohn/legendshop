@@ -15,7 +15,6 @@ import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.dao.support.SimpleHqlQuery;
 import com.legendshop.model.entity.Tag;
-import com.legendshop.util.AppUtils;
 
 /**
  * The Class TagServiceImpl.

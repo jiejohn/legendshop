@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.event.impl.VisitLogEvent;
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.event.EventHome;
 import com.legendshop.spi.service.impl.AbstractService;
@@ -33,7 +33,7 @@ public abstract class BaseServiceImpl extends AbstractService {
 	 */
 	protected void logUserAccess(HttpServletRequest request, String shopName, String userName) {
 		// 多线程记录访问历史
-		if (PropertiesUtil.getObject(ParameterEnum.VISIT_LOG_INDEX_ENABLE, Boolean.class)) {
+		if (PropertiesUtil.getObject(SysParameterEnum.VISIT_LOG_INDEX_ENABLE, Boolean.class)) {
 			EventHome.publishEvent(new VisitLogEvent(request.getRemoteAddr(), shopName, userName));
 		} else {
 			if (log.isInfoEnabled()) {

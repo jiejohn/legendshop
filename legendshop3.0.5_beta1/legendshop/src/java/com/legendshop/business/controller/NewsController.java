@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.legendshop.business.common.page.FrontPage;
 import com.legendshop.business.common.page.TilesPage;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
 import com.legendshop.core.constant.PathResolver;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ThreadLocalContext;
@@ -61,7 +61,7 @@ public class NewsController extends BaseController{
 			request.setAttribute(
 					"newList",
 					newsService.getNews(name, NewsPositionEnum.NEWS_NEWS,
-							PropertiesUtil.getObject(ParameterEnum.FRONT_PAGE_SIZE, Integer.class)));
+							PropertiesUtil.getObject(SysParameterEnum.FRONT_PAGE_SIZE, Integer.class)));
 			return PathResolver.getPath(request,response,FrontPage.TOPSORTNEWS);
 		} else {
 			request.setAttribute("newList", newsService.getNews(name, NewsPositionEnum.NEWS_NEWS, 6));
