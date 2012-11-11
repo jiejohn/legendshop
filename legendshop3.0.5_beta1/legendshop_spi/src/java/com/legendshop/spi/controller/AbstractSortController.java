@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.legendshop.core.UserManager;
 import com.legendshop.core.base.BaseController;
-import com.legendshop.core.constant.ParameterEnum;
+import com.legendshop.core.constant.SysParameterEnum;
 import com.legendshop.core.dao.support.CriteriaQuery;
 import com.legendshop.core.dao.support.PageSupport;
 import com.legendshop.core.exception.BusinessException;
@@ -57,7 +57,7 @@ public class AbstractSortController extends BaseController {
 		}
 		hasAllDataFunction(cq, request, "userName", sort.getUserName());
 		if (!FoundationUtil.isDataForExport(cq, request)) {// 非导出情况
-			cq.setPageSize(PropertiesUtil.getObject(ParameterEnum.PAGE_SIZE, Integer.class));
+			cq.setPageSize(PropertiesUtil.getObject(SysParameterEnum.PAGE_SIZE, Integer.class));
 		}
 		if (!FoundationUtil.isDataSortByExternal(cq, request)) {
 			cq.addOrder("asc", "seq");
