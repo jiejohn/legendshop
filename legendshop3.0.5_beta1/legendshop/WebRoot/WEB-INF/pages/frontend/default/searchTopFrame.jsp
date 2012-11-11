@@ -6,11 +6,8 @@
     <tr> 
       <td><tiles2:insertAttribute name="main" ignore="true" /></td>
     </tr>
-    <tr>
-      <td valign="top">
-      <jsp:include page="/bottom"/></td>
-    </tr>
 </table>
+<jsp:include page="/bottom"/>
 </div>
 </body>
 </html>
