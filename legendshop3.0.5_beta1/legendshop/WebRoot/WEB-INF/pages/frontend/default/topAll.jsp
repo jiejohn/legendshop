@@ -21,7 +21,7 @@
    </c:otherwise>
 </c:choose>
 </title>
-<link rel="icon" href="<ls:templateResource item='/common/favicon.ico'/>" type="image/x-icon" />
+<link rel="icon" href="<ls:templateResource item='/favicon.ico'/>" type="image/x-icon" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="description" content="${shopDetail.userName},${shopDetail.briefDesc}" />
 <meta name="keywords" content="${shopDetail.userName},${shopDetail.briefDesc}"/>
@@ -83,7 +83,7 @@
 					  <span style="color: red; font-weight: bold;">${sessionScope.SPRING_SECURITY_LAST_USERNAME}</span>
 					   	<a href="<ls:url address='/p/myaccount'/>")><fmt:message key="myaccount"/></a>
 					   	<a href="<ls:url address='/p/order'/>")><fmt:message key="myorder"/></a>
-						<a href="${pageContext.request.contextPath}/p/logout" target="_parent"><fmt:message key="logout"/></a>
+						<a href="${pageContext.request.contextPath}/logout" target="_parent"><fmt:message key="logout"/></a>
        			        <auth:auth ifAnyGranted="F_ADMIN">
        			        	<c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
        			                <a href="<ls:domain shopName='${sessionScope.SPRING_SECURITY_LAST_USERNAME}' />"><fmt:message key="myShop"/></a>
@@ -92,7 +92,7 @@
 					    </auth:auth>
 					   </c:when>
 					   <c:otherwise>
-					     	<a href="<ls:url address='/p/login'/>"><fmt:message key="login"/></a>
+					     	<a href="<ls:url address='/login'/>"><fmt:message key="login"/></a>
 				   </c:otherwise>
 	    		</c:choose>
 		     

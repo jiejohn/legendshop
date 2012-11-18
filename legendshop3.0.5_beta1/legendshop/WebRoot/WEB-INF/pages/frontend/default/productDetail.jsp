@@ -19,7 +19,11 @@ function basket(){
 		alert('<fmt:message key="please.select"/>：' + prodAttr.substring(5));
 	}else{
 		document.getElementById("prodattr").value = prodAttr;
-		document.getElementById("addtoCart").value = "buy";
+		var count = document.getElementById("count");
+		//add to cart
+		 CommonService.addtocart(${prod.prodId}, count.value, prodAttr, function(retData){
+		    });
+		
 		document.getElementById("form1").submit();
 	}
 }
@@ -61,7 +65,6 @@ return reg.test(this);
                       <form action="${pageContext.request.contextPath}/basket/query" id="form1" method="post">
                       <input type="hidden" id="prodId" name="prodId" value="${prod.prodId}"/>
                       <input type="hidden" id="prodattr" name="prodattr"/>
-                      <input type="hidden" id="addtoCart" name="addtoCart"/>
                         <table>
                           <tr> 
                             <td valign="top" align="center"> 

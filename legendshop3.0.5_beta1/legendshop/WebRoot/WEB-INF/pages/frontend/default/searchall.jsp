@@ -75,7 +75,7 @@ BODY {
 }
 </style>
 		<title>LegendShop - Java企业级多用户商城系统</title>
-		<link rel="icon" href="${pageContext.request.contextPath}/common/favicon.ico" type="image/x-icon" />
+		<link rel="icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="description"
 			content="${shopDetail.userName},${shopDetail.briefDesc}" />

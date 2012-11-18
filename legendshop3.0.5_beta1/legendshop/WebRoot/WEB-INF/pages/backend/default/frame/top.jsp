@@ -59,7 +59,7 @@ function  logout()
 {
    if  (confirm("确认退出管理系统?"))
    {
-     document.location.href="${pageContext.request.contextPath}/p/logout";
+     document.location.href="${pageContext.request.contextPath}/logout";
    }
 }
 </script>
@@ -162,7 +162,7 @@ a:link,a:visited {
       	    <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
             <span class="username"><a href="<ls:domain shopName='${sessionScope.SPRING_SECURITY_LAST_USERNAME}'  />"  target="_parent">我的商城</a></span>
             </c:if>
-        	<span class="username"><a href="${pageContext.request.contextPath}/p/logout" target="_parent">退出</a></span>
+        	<span class="username"><a href="${pageContext.request.contextPath}/logout" target="_parent">退出</a></span>
       </td>
       </tr>
       <tr>

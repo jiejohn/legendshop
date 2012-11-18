@@ -30,7 +30,7 @@
 							<A href="${pageContext.request.contextPath}/reg"><b><fmt:message key="regFree"/></b></A> - <fmt:message key="regFree.hint"/>
 						</LI>
 						<LI>
-							<A href="${pageContext.request.contextPath}/p/login"><b><fmt:message key="login"/></b></A> - <fmt:message key="logon.hint"/>
+							<A href="${pageContext.request.contextPath}/login"><b><fmt:message key="login"/></b></A> - <fmt:message key="logon.hint"/>
 						</LI>
 						<LI>
 							<A href="${applicationScope.LEGENDSHOP_DOMAIN_NAME}/club"><b><fmt:message key="bbs"/></b></A> - <fmt:message key="bbs.desc"/>

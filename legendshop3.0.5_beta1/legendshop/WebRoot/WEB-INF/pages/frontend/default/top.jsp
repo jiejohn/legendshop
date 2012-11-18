@@ -68,7 +68,7 @@
     <link href="<ls:templateResource item='/common/style/global_${shopDetail.colorStyle}.css'/>" rel="stylesheet" type="text/css" />
 
 <title>${shopDetail.siteName}</title>
-<link rel="icon" href="<ls:templateResource item='/common/favicon.ico'/>" type="image/x-icon" />
+<link rel="icon" href="<ls:templateResource item='/favicon.ico'/>" type="image/x-icon" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="description" content="${shopDetail.userName},${shopDetail.briefDesc}" />
 <meta name="keywords" content="${shopDetail.userName},${shopDetail.briefDesc}"/>

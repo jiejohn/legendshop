@@ -49,10 +49,10 @@
    <c:when test="${sessionScope.SPRING_SECURITY_LAST_USERNAME != null}">
   <span><b>${sessionScope.SPRING_SECURITY_LAST_USERNAME}</b></span>
    	<a href="<ls:url address='/p/myaccount'/>")>[<ls:i18n key="myaccount"/>]</a>
-	<a href="${pageContext.request.contextPath}/p/logout" target="_parent">[<ls:i18n key="logout"/>]</a>
+	<a href="${pageContext.request.contextPath}/logout" target="_parent">[<ls:i18n key="logout"/>]</a>
    </c:when>
    <c:otherwise>
-  	<a href="<ls:url address='/p/login'/>">[<ls:i18n key="login"/>]</a>
+  	<a href="<ls:url address='/login'/>">[<ls:i18n key="login"/>]</a>
    </c:otherwise>
 </c:choose>
 <a href="<ls:url address='/reg'/>" class="n2">[<ls:i18n key="regFree"/>]</a>

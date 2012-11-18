@@ -8,7 +8,7 @@
     <td align="left">
     	<div style="margin-left: 50px;margin-bottom: 20px;margin-top: 20px">
      		<fmt:message key="nologin.hint.self">
-     			<fmt:param value="${pageContext.request.contextPath}/p/login?returnUrl=${returnUrl}"></fmt:param>
+     			<fmt:param value="${pageContext.request.contextPath}/login?returnUrl=${returnUrl}"></fmt:param>
      			<fmt:param value="${pageContext.request.contextPath}/reg"></fmt:param>
      		</fmt:message>
      	</div>

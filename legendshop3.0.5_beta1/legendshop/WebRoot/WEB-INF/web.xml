@@ -87,7 +87,7 @@
 
 <!-- listener -->
  <listener>
-  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  <listener-class>com.legendshop.core.listener.PluginContextListener</listener-class>
  </listener>
      <!--
       - Publishes events for session creation and destruction through the application
@@ -104,11 +104,15 @@
  </listener>
  
  <servlet>
-  <servlet-name>legendshopmvc</servlet-name>
-  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	  <servlet-name>legendshopmvc</servlet-name>
+	  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
   <init-param>
- <param-name>contextConfigLocation</param-name>
- <param-value>classpath*:spring/applicationContext-mvc.xml</param-value>
+	 <param-name>contextConfigLocation</param-name>
+	 <param-value>classpath*:spring/applicationContext-mvc.xml</param-value>
+</init-param>
+  <init-param>
+	 <param-name>publishEvents</param-name>
+	 <param-value>false</param-value>
 </init-param>
   <load-on-startup>100</load-on-startup>
  </servlet>
