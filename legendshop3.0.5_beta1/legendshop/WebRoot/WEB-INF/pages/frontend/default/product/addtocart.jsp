@@ -27,7 +27,6 @@
 <script type="text/javascript">
 <!-- 
 function gotoCash(){
-		document.getElementById("addtoCart").value = "added";
 		document.getElementById("form1").submit();
 }
 
@@ -52,8 +51,7 @@ function gotoCash(){
 			alert('<fmt:message key="please.select" />：' + prodAttr.substring(5));
 			return;
 		}
-		   CommonService.addtocart('${sessionScope.SPRING_SECURITY_LAST_USERNAME}', '<lb:currentShop />', ${prod.prodId},'${prod.pic}', '${prod.name}', '${prod.cash}', carriage, count.value,
-		   prodAttr, function(retData){
+		   CommonService.addtocart(${prod.prodId}, count.value, prodAttr, function(retData){
 		       document.getElementById("basket_total_cash").innerHTML = "<b>" + retData.BASKET_TOTAL_CASH + "</b>";
 		       document.getElementById("basket_count").innerHTML = retData.BASKET_COUNT;
 		       if(retData.BASKET_COUNT > 0){

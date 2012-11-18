@@ -68,13 +68,13 @@ $(document).ready(function() {
 			<font color="#FF3300" style="font-weight: bold;">${sessionScope.SPRING_SECURITY_LAST_USERNAME}</font>
 			<span>
 			<a href="<ls:url address='/p/usercenter'/>")>[<ls:i18n key="myaccount"/>]</a> 
-			<a href="${pageContext.request.contextPath}/p/logout" target="_parent">[<ls:i18n key="logout"/>]</a>
+			<a href="${pageContext.request.contextPath}/logout" target="_parent">[<ls:i18n key="logout"/>]</a>
 			</span></li>
    
    </c:when>
    <c:otherwise>
 			<li id="loginbar"  class="ld">
-			<span><a href="<ls:url address='/p/login'/>">[<ls:i18n key="login"/>]</a> 
+			<span><a href="<ls:url address='/login'/>">[<ls:i18n key="login"/>]</a> 
 			<a class="link-regist" href="<ls:url address='/reg'/>">[<ls:i18n key="regFree"/>]</a></span></li>
    </c:otherwise>
 </c:choose>

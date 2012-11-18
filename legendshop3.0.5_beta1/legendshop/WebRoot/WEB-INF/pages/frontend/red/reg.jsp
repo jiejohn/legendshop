@@ -5,7 +5,7 @@
    <div class="wrap">
    <p class="dengl">
    <span class="yongh">注册新用户</span>
-   <span class="zhuce">我已经注册，现在就 <a href="<ls:url address='/p/login'/>" style="color:#FFF"><b>登录</b></a></span>
+   <span class="zhuce">我已经注册，现在就 <a href="<ls:url address='/login'/>" style="color:#FFF"><b>登录</b></a></span>
    </p>
    </div>
  </div>
