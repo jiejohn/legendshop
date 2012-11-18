@@ -6,10 +6,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Caching;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
-@CacheEvict(value = "ProductDetail", key="#product.prodId")
+@Caching(evict = { 
+		@CacheEvict(value = "ProductDetail", key="#product.prodId"), 
+		@CacheEvict(value = "Product", key="#product.prodId")
+		})
 public @interface ProductUpdate {
 
 }

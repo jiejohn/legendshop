@@ -105,5 +105,5 @@ public interface GroupProductService {
 	 *            the prod id
 	 * @return the group product
 	 */
-	public GroupProduct getGroupProduct(Long prodId);
+	public Product getGroupProduct(Long prodId);
 }
