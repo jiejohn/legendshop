@@ -58,6 +58,7 @@ import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.FileProcessor;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.RealPathUtil;
+import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.core.randing.CaptchaServiceSingleton;
 import com.legendshop.core.randing.RandomStringUtils;
 import com.legendshop.model.dynamic.Item;
@@ -753,14 +754,14 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 	}
 
 	// 加入购物车， 用户登录后保存到数据库中，没有登录先保存到session
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.dwr.impl.DwrCommonService#addtocart(java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.String, java.lang.Double, java.lang.Double, java.lang.Integer, java.lang.String)
-	 */
 	@Override
-	public Map addtocart(String userName, String shopName, Long prodId, String pic, String prodName, Double cash,
-			Double carriage, Integer count, String attribute) {
-		Map map = new HashMap();
-		if (prodId == null) {
+	public Map<String, Object> addtocart(Long prodId, Integer count, String attribute) {
+		String userName = UserManager.getUsername();
+		WebContext webContext = WebContextFactory.get();
+		String shopName = ThreadLocalContext.getCurrentShopName(webContext.getHttpServletRequest(), webContext.getHttpServletResponse());
+		Product product = productDao.getProduct(prodId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (product == null) {
 			return map;
 		}
 		if (attribute == null) { // default
@@ -771,36 +772,27 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 		}
 		// 检查库存
 		boolean canAddToCart = true;
-		Product product = productDao.getProduct(prodId);
+	
 		if (product == null || (product.getStocks() != null && product.getStocks() < count)) {
 			canAddToCart = false;
 		}
 
-		if (AppUtils.isBlank(userName)) {// 没有登录
-			WebContext webContext = WebContextFactory.get();
-			Map<String, Basket> basketMap = (Map<String, Basket>) webContext.getSession().getAttribute(
-					Constants.BASKET_KEY);
+		if (AppUtils.isBlank(userName)) {
+			// 没有登录, 先放到session
+			Map<String, Basket> basketMap = (Map<String, Basket>) webContext.getSession().getAttribute(Constants.BASKET_KEY);
 			if (basketMap == null) {
 				if (canAddToCart) {
 					basketMap = new HashMap<String, Basket>();
 					Basket b = new Basket();
 					b.setProdId(prodId);
-					b.setUserName(userName);
 					b.setBasketCount(count);
-					b.setProdName(prodName);
-					b.setCash(cash);
-					b.setPic(pic);
 					b.setAttribute(attribute);
-					b.setCarriage(carriage);
-					b.setBasketDate(new Date());
-					b.setBasketCheck(Constants.FALSE_INDICATOR);
-					b.setShopName(shopName);
 					basketMap.put(getBasketKey(shopName, prodId, attribute), b);
 					webContext.getSession().setAttribute(Constants.BASKET_KEY, basketMap);
 					map.put(Constants.BASKET_COUNT, 1);
-					Double totalCash = Arith.mul(count == null ? 1d : count, cash);
-					if (carriage != null) {
-						totalCash = Arith.add(totalCash, carriage);
+					Double totalCash = Arith.mul(count, product.getCash());
+					if (product.getCarriage() != null) {
+						totalCash = Arith.add(totalCash, product.getCarriage());
 					}
 					map.put(Constants.BASKET_TOTAL_CASH, totalCash);
 				} else {
@@ -810,20 +802,14 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 
 			} else {
 				if (canAddToCart) {
-					Basket b = basketMap.get(getBasketKey(shopName, prodId, attribute));
+					String basketKey = getBasketKey(shopName, prodId, attribute);
+					Basket b = basketMap.get(basketKey);
 					if (b == null) {
 						b = new Basket();
 						b.setProdId(prodId);
-						b.setUserName(userName);
 						b.setBasketCount(count);
-						b.setProdName(prodName);
-						b.setCash(cash);
 						b.setAttribute(attribute);
-						b.setCarriage(carriage);
-						b.setBasketDate(new Date());
-						b.setBasketCheck(Constants.FALSE_INDICATOR);
-						b.setShopName(shopName);
-						basketMap.put(getBasketKey(shopName, prodId, attribute), b);
+						basketMap.put(basketKey, b);
 						webContext.getSession().setAttribute(Constants.BASKET_KEY, basketMap);
 
 					} else {
@@ -831,7 +817,7 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 							canAddToCart = false;
 						} else {
 							b.setBasketCount(b.getBasketCount() + count);
-							basketMap.put(getBasketKey(shopName, prodId, attribute), b);
+							basketMap.put(basketKey, b);
 							webContext.getSession().setAttribute(Constants.BASKET_KEY, basketMap);
 						}
 					}
@@ -839,10 +825,10 @@ public class DwrCommonServiceImpl implements DwrCommonService {
 				map.put(Constants.BASKET_COUNT, basketMap.size());
 				map.put(Constants.BASKET_TOTAL_CASH, CommonServiceUtil.calculateTotalCash(basketMap));
 			}
-		} else {// 已经登录
+		} else {
+			// 已经登录
 			if (canAddToCart) {
-				canAddToCart = basketDao.saveToCart(prodId, pic, userName, shopName, count, attribute, prodName, cash,
-						carriage);
+				canAddToCart = basketDao.saveToCart(userName,prodId, count, attribute);
 			}
 			List<Basket> baskets = basketDao.getBasketByuserName(userName);
 			Double totalcash = CommonServiceUtil.calculateTotalCash(baskets);

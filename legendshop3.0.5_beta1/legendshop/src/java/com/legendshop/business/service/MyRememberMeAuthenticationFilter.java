@@ -27,7 +27,7 @@ import com.legendshop.spi.constants.Constants;
 public class MyRememberMeAuthenticationFilter extends RememberMeAuthenticationFilter {
 	
 	/** The basket dao. */
-	private BasketDao basketDaoImpl;
+	private BasketDao basketDao;
 
 	/* (non-Javadoc)
 	 * @see org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter#onSuccessfulAuthentication(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, org.springframework.security.core.Authentication)
@@ -44,11 +44,9 @@ public class MyRememberMeAuthenticationFilter extends RememberMeAuthenticationFi
 		if (basketMap != null) {
 			// 保存进去数据库
 			for (Basket basket : basketMap.values()) {
-				basketDaoImpl.saveToCart(basket.getProdId(), basket.getPic(), authResult.getName(), basket.getShopName(),
-						basket.getBasketCount(), basket.getAttribute(), basket.getProdName(), basket.getCash(), basket
-								.getCarriage());
+				basketDao.saveToCart(authResult.getName(), basket.getProdId(), basket.getBasketCount(), basket.getAttribute());
 			}
-			request.getSession().setAttribute(Constants.BASKET_KEY, null);
+			request.getSession().removeAttribute(Constants.BASKET_KEY);
 		}
 		//request.getSession().setAttribute("userName", authResult.getName());
 
@@ -61,8 +59,8 @@ public class MyRememberMeAuthenticationFilter extends RememberMeAuthenticationFi
 	 *            the new basket dao
 	 */
 	@Required
-	public void setBasketDao(BasketDao basketDaoImpl) {
-		this.basketDaoImpl = basketDaoImpl;
+	public void setBasketDao(BasketDao basketDao) {
+		this.basketDao = basketDao;
 	}
 
 }

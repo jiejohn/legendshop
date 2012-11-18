@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.legendshop.business.common.page.TilesPage;
@@ -55,6 +56,35 @@ public class BasketController extends BaseController {
 		String prodId = request.getParameter("prodId");
 		return getBasket(request, response, Long.parseLong(prodId));
 	}
+	
+	
+	@RequestMapping("/save")
+	public String save(HttpServletRequest request, HttpServletResponse response) {
+		String prodId = request.getParameter("prodId");
+		
+		String userName = UserManager.getUsername(request);
+		if(prodId == null){
+			throw new BusinessException("product id can not be null, userName =  " + userName, EntityCodes.BASKET);
+		}
+		String count = request.getParameter("count");
+		if (count == null) {
+			count = "1";
+		}
+		request.getSession().setAttribute(Constants.BASKET_HW_COUNT, count);
+		String prodattr = request.getParameter("prodattr");
+		request.getSession().setAttribute(Constants.BASKET_HW_ATTR, prodattr);
+		if (userName == null) {
+			String destView = "/basket/load/";
+			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + destView + prodId);
+			return PathResolver.getPath(request,response,TilesPage.NO_LOGIN);
+		}
+		String shopName = ThreadLocalContext.getCurrentShopName(request,response);
+		if(prodId != null){
+			basketService.saveToCart(Long.parseLong(prodId), shopName, prodattr, userName,  Integer.valueOf(count));
+		}
+		
+		return PathResolver.getPath(request,response,TilesPage.PAGE_CASH);
+	}
 
 	/**
 	 * Gets the basket.
@@ -73,7 +103,6 @@ public class BasketController extends BaseController {
 		if(prodId == null){
 			throw new BusinessException("product id can not be null, userName =  " + userName, EntityCodes.BASKET);
 		}
-		String addtoCart = request.getParameter("addtoCart");
 		String count = request.getParameter("count");
 		if (count == null) {
 			count = "1";
@@ -82,19 +111,10 @@ public class BasketController extends BaseController {
 		String prodattr = request.getParameter("prodattr");
 		request.getSession().setAttribute(Constants.BASKET_HW_ATTR, prodattr);
 		if (userName == null) {
-			String destView = "/views/";// 默认是重新回到产品介绍页面
-			if ("added".equals(addtoCart)) {// 如果是采用购物车订购的话直接进入付款页面
-				destView = "/basket/load/";
-			}
-			destView = "/basket/load/";
+			String destView = "/basket/load/";
 			request.setAttribute(Constants.RETURN_URL, PropertiesUtil.getDomainName() + destView + prodId);
 			return PathResolver.getPath(request,response,TilesPage.NO_LOGIN);
 		}
-		String shopName = ThreadLocalContext.getCurrentShopName(request,response);
-		if(prodId != null){
-			basketService.saveToCart(prodId, addtoCart, shopName, prodattr, userName,  Integer.valueOf(count));
-		}
-		
 		return PathResolver.getPath(request,response,TilesPage.PAGE_CASH);
 	}
 	
@@ -110,7 +130,7 @@ public class BasketController extends BaseController {
 	 * @return the string
 	 */
 	@RequestMapping("/load/{prodId}")
-	public String load(HttpServletRequest request, HttpServletResponse response,Long prodId) {
+	public String load(HttpServletRequest request, HttpServletResponse response, @PathVariable Long prodId) {
 		return getBasket(request, response, prodId);
 	}
 

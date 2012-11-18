@@ -152,7 +152,7 @@ public class UserController extends BaseController{
 	 *            the response
 	 * @return the string
 	 */
-	@RequestMapping("/p/login")
+	@RequestMapping("/login")
 	public String login(HttpServletRequest request, HttpServletResponse response) {
 		return PathResolver.getPath(request,response,TilesPage.LOGIN);
 	}

@@ -387,31 +387,16 @@ public interface DwrCommonService {
 	public abstract String saveProdItem(String idJson, String nameJson, Long prodId, String userName);
 
 	// 加入购物车， 用户登录后保存到数据库中，没有登录先保存到session
+
 	/**
 	 * Addtocart.
-	 * 
-	 * @param userName
-	 *            the user name
-	 * @param shopName
-	 *            the shop name
-	 * @param prodId
-	 *            the prod id
-	 * @param pic
-	 *            the pic
-	 * @param prodName
-	 *            the prod name
-	 * @param cash
-	 *            the cash
-	 * @param carriage
-	 *            the carriage
-	 * @param count
-	 *            the count
-	 * @param attribute
-	 *            the attribute
+	 *
+	 * @param prodId the prod id
+	 * @param count the count
+	 * @param attribute the attribute
 	 * @return the map
 	 */
-	public abstract Map addtocart(String userName, String shopName, Long prodId, String pic, String prodName,
-			Double cash, Double carriage, Integer count, String attribute);
+	public Map<String, Object> addtocart(Long prodId, Integer count, String attribute);
 
 	// 更新订单的支付类型，方便对方接口返回数据查询，subId：订单ID，payId：支付方式ID
 	/**

@@ -135,17 +135,14 @@ public class OrderController extends BaseController {
 	 */
 	@RequestMapping("/buy")
 	public String update(HttpServletRequest request, HttpServletResponse response, BasketForm basket) {
-		String userName = UserManager.getUsername(request.getSession());
-		if ("buy".equals(basket.getAction())) {
+			String userName = UserManager.getUsername(request.getSession());
 			String shopName = ThreadLocalContext.getCurrentShopName(request,response);
 			Integer count = basket.getCount();
 			if (count == null) {
 				count = 1;
 			}
-			basketService.saveToCart(basket.getProdId(), basket.getPic(), userName, shopName, basket.getCount(), basket
-					.getAttribute() == null ? "" : basket.getAttribute(), basket.getProdName(), basket.getCash(), basket.getCarriage());
-			request.getSession().setAttribute(Constants.BASKET_HW_COUNT, count);
-		}
+//			basketService.saveToCart(basket.getProdId(), shopName, basket.getAttribute(), userName, count);
+//			request.getSession().setAttribute(Constants.BASKET_HW_COUNT, count);
 		advertisementService.getAndSetOneAdvertisement(request,response,ThreadLocalContext.getCurrentShopName(request,response), Constants.USER_REG_ADV_950);
 		return PathResolver.getPath(request,response,TilesPage.BUY);
 	}

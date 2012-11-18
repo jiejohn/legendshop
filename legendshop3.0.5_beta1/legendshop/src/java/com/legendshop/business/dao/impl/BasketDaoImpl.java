@@ -196,38 +196,38 @@ public class BasketDaoImpl extends BaseDaoImpl implements BasketDao {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.legendshop.business.dao.impl.BasketDao#addtocart(java.lang.Long, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.Double, java.lang.Double)
+	 * @see com.legendshop.business.dao.BasketDao#saveToCart(java.lang.Long, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.Double, java.lang.Double)
 	 */
 	@Override
-	public boolean saveToCart(Long prodId, String pic, String userName, String shopName, Integer count,
-			String attribute, String prodName, Double cash, Double carriage) {
-		Basket basket = getBasketByIdName(prodId, userName, shopName, attribute);
+	public boolean saveToCart(String userName,Long prodId,  Integer count, String attribute) {
 		Product product = productDao.getProduct(prodId);
 		if (product == null) {
-			log.error("addtocart failed for prod does not exist prodId = {}", prodId);
+			log.error("saveToCart failed for prod does not exist");
 			return false;
 		}
-
-		if (basket == null) {// 没有保存过
+		Basket basket = getBasketByIdName(product.getProdId(), userName, product.getUserName(), attribute);
+		if (basket == null) {
+			// 没有保存过
 			// 检查库存
 			if (product.getStocks() != null && product.getStocks() < count) {
 				return false;
 			}
 			Basket b = new Basket();
-			b.setProdId(prodId);
-			b.setPic(pic);
+			b.setProdId(product.getProdId());
+			b.setPic(product.getPic());
 			b.setUserName(userName);
 			b.setBasketCount(count);
-			b.setProdName(prodName);
-			b.setCash(cash);
+			b.setProdName(product.getName());
+			b.setCash(product.getCash());
 			b.setAttribute(attribute);
-			b.setCarriage(carriage);
+			b.setCarriage(product.getCarriage());
 			b.setBasketDate(new Date());
 			b.setLastUpdateDate(b.getBasketDate());
 			b.setBasketCheck(Constants.FALSE_INDICATOR);
-			b.setShopName(shopName);
+			b.setShopName(product.getUserName());
 			saveBasket(b);
 		} else {
+			//增加订购数量
 			if (product.getStocks() != null && product.getStocks() < basket.getBasketCount() + count) {
 				return false;
 			} else {
@@ -242,6 +242,11 @@ public class BasketDaoImpl extends BaseDaoImpl implements BasketDao {
 
 	/* (non-Javadoc)
 	 * @see com.legendshop.business.dao.impl.BasketDao#setProductDao(com.legendshop.business.dao.impl.ProductDaoImpl)
+	 */
+	/**
+	 * Sets the product dao.
+	 *
+	 * @param productDaoImpl the new product dao
 	 */
 	@Required
 	public void setProductDao(ProductDao productDaoImpl) {

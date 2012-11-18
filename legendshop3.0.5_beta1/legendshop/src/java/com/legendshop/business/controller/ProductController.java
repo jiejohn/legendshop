@@ -88,7 +88,7 @@ public class ProductController extends BaseController{
 				return PathResolver.getPath(request,response,"/group/view/" + prodId, FowardPage.VARIABLE);
 			}
 			if (!Constants.ONLINE.equals(prod.getStatus())) {
-				throw new NotFoundException("Product " + prod.getName() + " does not online.",EntityCodes.PROD);
+				throw new NotFoundException("产品 " + prod.getName() + " 已经下线.",EntityCodes.PROD);
 			}
 			// 查看商品的说明图片
 			List<ImgFile> prodPics = imgFileService.getProductPics(prod.getUserName(), prodId);

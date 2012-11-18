@@ -53,19 +53,23 @@ public class AuthenticationSuccessHandlerImpl extends SavedRequestAwareAuthentic
 		// 登录事件
 		EventHome.publishEvent(new LoginEvent(userDetail, request.getRemoteAddr()));
 		// 增加session登录信息
-		
-		// 处理在session中的购物车
-		Map<String, Basket> basketMap = (Map<String, Basket>) session.getAttribute(
-				Constants.BASKET_KEY);
-		if (basketMap != null) {
-			// 保存进去数据库
-			for (Basket basket : basketMap.values()) {
-				basketDao.saveToCart(basket.getProdId(), basket.getPic(), username, basket.getShopName(), basket
-						.getBasketCount(), basket.getAttribute(), basket.getProdName(), basket.getCash(), basket
-						.getCarriage());
+		try {
+			// 处理在session中的购物车
+			Map<String, Basket> basketMap = (Map<String, Basket>) session.getAttribute(
+					Constants.BASKET_KEY);
+			if (basketMap != null) {
+				// 保存进去数据库
+				for (Basket basket : basketMap.values()) {
+					basketDao.saveToCart( username,basket.getProdId(), basket.getBasketCount(), basket.getAttribute());
+				}
+				session.removeAttribute(Constants.BASKET_KEY);
+				session.removeAttribute(Constants.BASKET_HW_COUNT);
+				session.removeAttribute(Constants.BASKET_HW_ATTR);
 			}
-			session.setAttribute(Constants.BASKET_KEY, null);
+		} catch (Exception e) {
+			logger.error("process unsave order", e);
 		}
+
 
 		if (supportSSO) {
 			// 增加BBS的登录用户 SSO to club

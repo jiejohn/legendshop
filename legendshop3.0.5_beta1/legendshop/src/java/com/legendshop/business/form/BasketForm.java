@@ -26,9 +26,6 @@ public class BasketForm{
 
 	/** The count. */
 	private Integer count;
-	
-	/** The action. */
-	private String action;
     
     /** The carriage. */
     private Double carriage;//运费
@@ -274,25 +271,6 @@ public class BasketForm{
 	 */
 	public void setDaili(String daili) {
 		this.daili = daili;
-	}
-
-	/**
-	 * Gets the action.
-	 * 
-	 * @return the action
-	 */
-	public String getAction() {
-		return action;
-	}
-
-	/**
-	 * Sets the action.
-	 * 
-	 * @param action
-	 *            the new action
-	 */
-	public void setAction(String action) {
-		this.action = action;
 	}
 
 	/**
