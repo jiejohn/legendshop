@@ -18,7 +18,7 @@
 	
 	<beans:bean id="simpleUrlAuthenticationFailureHandler"
 		class="com.legendshop.business.security.AuthenticationFailureHandlerImpl">
-		<beans:property name="defaultFailureUrl" value="/p/login?error=true"></beans:property>
+		<beans:property name="defaultFailureUrl" value="/login?error=true"></beans:property>
 	</beans:bean>
 
 	<beans:bean id="authService" class="com.legendshop.business.service.impl.AuthServiceImpl">

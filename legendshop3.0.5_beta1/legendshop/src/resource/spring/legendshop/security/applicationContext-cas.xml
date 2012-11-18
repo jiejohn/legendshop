@@ -11,7 +11,7 @@
 		<intercept-url pattern="/plugins/system/**" access="ROLE_SYSTEM" />
 		<intercept-url pattern="/**" access="ROLE_USER" />
 
-		<session-management invalid-session-url="/p/login">
+		<session-management invalid-session-url="/login">
 			<concurrency-control max-sessions="5" error-if-maximum-exceeded="true" />
 		</session-management>
 

@@ -15,7 +15,6 @@ import com.legendshop.business.dao.BasketDao;
 import com.legendshop.business.dao.ProductDao;
 import com.legendshop.business.service.BasketService;
 import com.legendshop.model.entity.Basket;
-import com.legendshop.model.entity.ProductDetail;
 
 /**
  * Basket服务.
@@ -27,33 +26,18 @@ public class BasketServiceImpl implements BasketService {
 	
 	/** The product dao. */
 	private ProductDao productDao;
+
 	
 	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.BasketService#addtocart(java.lang.Long, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer)
+	 * @see com.legendshop.business.service.BasketService#saveToCart(java.lang.Long, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer)
 	 */
 	@Override
-	public void saveToCart(Long prodId,String addtoCart,String shopName,String prodattr,String userName,Integer count){
-		ProductDetail prod = productDao.getProdDetail(prodId);
-		if (prod != null) {
-			if ("buy".equals(addtoCart)) {
+	public void saveToCart(Long prodId,String shopName,String prodattr,String userName,Integer count){
 				String attribute = prodattr == null ? "" : prodattr;
 				Basket basket = basketDao.getBasketByIdName(prodId, userName, shopName, attribute);
 				if (basket == null) {
-					basketDao.saveToCart(prod.getProdId(), prod.getPic(), userName, shopName,count,
-							attribute, prod.getName(), prod.getCash(), prod.getCarriage());
+					basketDao.saveToCart(userName, prodId, count, attribute);
 				}
-			}
-		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.legendshop.business.service.BasketService#addtocart(java.lang.Long, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.Double, java.lang.Double)
-	 */
-	@Override
-	public void saveToCart(Long prodId, String pic, String userName, String shopName, Integer count, String attribute,
-			String prodName, Double cash, Double carriage) {
-		basketDao.saveToCart(prodId, pic, userName, shopName, count, attribute, prodName, cash, carriage);
-		
 	}
 
 	/**

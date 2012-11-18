@@ -12,14 +12,19 @@
                 http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.1.xsd
                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
  
-  	
+  	<!-- 
  	<mvc:resources mapping="/common/**" location="/common/" /> 
- 	<mvc:resources mapping="/p/logout/**" location="/p/logout/" />
+ 	
+ 	<mvc:resources mapping="/logout/**" location="/logout/" />
+ 	 <mvc:resources mapping="/j_spring_security_check/**" location="/j_spring_security_check/" /> 
+ 	 
     <mvc:resources mapping="/plugins/**" location="/plugins/" /> 
     <mvc:resources mapping="/dwr/**" location="/dwr/" /> 
     <mvc:resources mapping="/img/**" location="/img/" /> 
-    <mvc:resources mapping="/admin/j_spring_security_check/**" location="/admin/j_spring_security_check/" /> 
+
     <mvc:resources mapping="/photoserver/photo/**" location="/photoserver/photo/" /> 
+    -->
+    <mvc:default-servlet-handler/>
     <!-- 
     <mvc:interceptors>  
       <bean class="com.legendshop.core.helper.SystemInterceptor" > 
@@ -48,7 +53,7 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/pages" />
+		<property name="prefix" value="/WEB-INF" />
 		<property name="suffix" value=".jsp"></property>
 		<property name="order" value="2"></property>
 	</bean>
@@ -85,8 +90,7 @@
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<property name="definitions">
 			<list>
-				<value>/WEB-INF/tiles/tiles-definitions.xml</value>
-				<value>/WEB-INF/tiles/tiles-group-definitions.xml</value>
+				<value>classpath*:/tiles/**/*.xml</value>
 			</list>
 		</property>
 	</bean>

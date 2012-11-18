@@ -39,8 +39,14 @@
 		
 	<cache name="ProductDetail" maxElementsInMemory="1000" eternal="false"
 		overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />
+		
+	<cache name="Product" maxElementsInMemory="1000" eternal="false"
+		overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />
 
 	<cache name="ProductDetailList" maxElementsInMemory="1000" eternal="false"
+		overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />
+		
+	<cache name="ProductList" maxElementsInMemory="1000" eternal="false"
 		overflowToDisk="true" timeToIdleSeconds="135" timeToLiveSeconds="135" />
 
 	<cache name="News" maxElementsInMemory="1000" eternal="false"
