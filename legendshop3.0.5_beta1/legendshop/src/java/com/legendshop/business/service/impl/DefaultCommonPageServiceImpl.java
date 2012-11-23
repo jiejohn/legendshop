@@ -53,8 +53,6 @@ public class DefaultCommonPageServiceImpl extends AbstractCommonPageService {
 
 		//是否是商家
 		boolean shopExists = shopDetailDao.isShopExists(userName);
-		request.setAttribute("shopExists", shopExists);
-		
 		//是否可以做为联盟商城
 		request.setAttribute("canbeLeagueShop", shopDetailDao.isBeLeagueShop(shopExists, userName, shopName));
 		

@@ -33,9 +33,9 @@
 					   	<li><a href="${pageContext.request.contextPath}/p/order"><fmt:message key="myorder"/></a></li>
 						<li><a href="${pageContext.request.contextPath}/logout" target="_parent"><fmt:message key="logout"/></a></li>
        			        <auth:auth ifAnyGranted="F_ADMIN">
-       			          <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
+       			            <ls:myshop>
        			               <li> <a href="<ls:domain shopName='${sessionScope.SPRING_SECURITY_LAST_USERNAME}' />"><fmt:message key="myShop"/></a></li>
-       			           </c:if>
+       			           </ls:myshop>
 					            <a href="<ls:url address='/admin/index'/>"><fmt:message key="system.management"/></a>
 					    </auth:auth>
 					   </c:when>

@@ -159,9 +159,9 @@ a:link,a:visited {
       	         当前用户：<b>${sessionScope.SPRING_SECURITY_LAST_USERNAME}</b> &nbsp;
       	    <span class="username"><a href="${pageContext.request.contextPath}/all"" target="_parent">搜索商城</a></span>
       	    <span class="username"><a href="${pageContext.request.contextPath}/index" target="_parent">返回前台</a></span>
-      	    <c:if test="${'C2C' == applicationScope.BUSINESS_MODE}">
-            <span class="username"><a href="<ls:domain shopName='${sessionScope.SPRING_SECURITY_LAST_USERNAME}'  />"  target="_parent">我的商城</a></span>
-            </c:if>
+      	    <ls:myshop>
+            	<span class="username"><a href="<ls:domain shopName='${sessionScope.SPRING_SECURITY_LAST_USERNAME}'  />"  target="_parent">我的商城</a></span>
+           </ls:myshop>
         	<span class="username"><a href="${pageContext.request.contextPath}/logout" target="_parent">退出</a></span>
       </td>
       </tr>

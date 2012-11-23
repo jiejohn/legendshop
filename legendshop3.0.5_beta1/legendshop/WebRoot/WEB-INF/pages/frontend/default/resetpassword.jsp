@@ -55,7 +55,7 @@
 		<tr height="25px">
 			<td></td>
 			<td>
-			<img id="randImage" name="randImage" src="<ls:templateResource item='/common/captcha.svl'/>"/>
+			<img id="randImage" name="randImage" src="<ls:templateResource item='/captcha.svl'/>"/>
 			&nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a>
 			</td>
 		</tr>

@@ -60,7 +60,7 @@
 						<!-- 
 						<img id="randImage" name="randImage"/>
 						 -->
-						<img id="randImage" name="randImage" src="<ls:templateResource item='/common/captcha.svl'/>"  style="vertical-align: middle;"/>
+						<img id="randImage" name="randImage" src="<ls:templateResource item='/captcha.svl'/>"  style="vertical-align: middle;"/>
  				&nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a>
 						</td>
 					</tr>	

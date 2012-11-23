@@ -14,8 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.legendshop.business.service.SystemParameterService;
-import com.legendshop.central.license.BusinessModeEnum;
 import com.legendshop.core.AttributeKeys;
+import com.legendshop.core.constant.BusinessModeEnum;
 import com.legendshop.core.constant.ConfigPropertiesEnum;
 import com.legendshop.core.constant.LanguageEnum;
 import com.legendshop.core.constant.RuntimeModeEnum;

@@ -80,7 +80,9 @@ function isIP() {
 					   	<a href="${pageContext.request.contextPath}/p/myaccount")><fmt:message key="myaccount"/></a>
 						<a href="${pageContext.request.contextPath}/logout" target="_parent"><fmt:message key="logout"/></a>
        			        <auth:auth ifAnyGranted="F_ADMIN">
+       			          <ls:myshop>
        			                <a href="<ls:domain shopName='${sessionScope.SPRING_SECURITY_LAST_USERNAME}' />"><fmt:message key="myShop"/></a>
+					      </ls:myshop>
 					            <a href="<ls:url address='/admin/index'/>"><fmt:message key="system.management"/></a>
 					    </auth:auth>
 					   </c:when>

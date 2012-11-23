@@ -27,9 +27,9 @@
 	<div>
 	<ul id="topnav">
 	<lb:logined >
-	   <c:if test="${shopExists && 'C2C' == applicationScope.BUSINESS_MODE}">
+	   <ls:myshop>
                <li><a href="<ls:domain shopName='${sessionScope.SPRING_SECURITY_LAST_USERNAME}' />"><ls:i18n key="myShop"/></a></li>
-        </c:if>
+        </ls:myshop>
 	   <auth:auth ifAnyGranted="F_ADMIN">
 	   	<c:if test="${canbeLeagueShop}">
 	   		<li><a href='javascript:addMyLeague("${sessionScope.SPRING_SECURITY_LAST_USERNAME}","<lb:currentShop />")'><ls:i18n key="addLeague"/><ls:i18n key="this.shop"/></a></li>

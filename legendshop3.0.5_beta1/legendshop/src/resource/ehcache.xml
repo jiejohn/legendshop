@@ -79,6 +79,12 @@
 	<cache name="ImgFileList" maxElementsInMemory="1000" eternal="false"
 		overflowToDisk="true" timeToIdleSeconds="130" timeToLiveSeconds="130" />
 		
+  <cache name="Myleague" maxElementsInMemory="1000" eternal="false"
+		overflowToDisk="true" timeToIdleSeconds="130" timeToLiveSeconds="130" />
+
+	<cache name="MyleagueList" maxElementsInMemory="1000" eternal="false"
+		overflowToDisk="true" timeToIdleSeconds="130" timeToLiveSeconds="130" />
+		
 	<cache name="LEGENDSHOP_CACHE" maxElementsInMemory="30000" eternal="false"
 		overflowToDisk="true" timeToIdleSeconds="110" timeToLiveSeconds="110" />		
 

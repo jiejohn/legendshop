@@ -27,6 +27,7 @@ import com.legendshop.core.exception.EntityCodes;
 import com.legendshop.core.helper.PropertiesUtil;
 import com.legendshop.core.helper.ThreadLocalContext;
 import com.legendshop.spi.constants.Constants;
+import com.legendshop.util.AppUtils;
 
 /**
  * 购物车控制器。.
@@ -54,7 +55,12 @@ public class BasketController extends BaseController {
 	@RequestMapping("/query")
 	public String query(HttpServletRequest request, HttpServletResponse response) {
 		String prodId = request.getParameter("prodId");
-		return getBasket(request, response, Long.parseLong(prodId));
+		if(AppUtils.isNotBlank(prodId)){
+			return getBasket(request, response, Long.parseLong(prodId));
+		}else{
+			throw new BusinessException("product id can not be null, prodId =  " + prodId, EntityCodes.BASKET);
+		}
+		
 	}
 	
 	

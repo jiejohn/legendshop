@@ -175,6 +175,11 @@ public class ShopDetailServiceImpl   extends BaseServiceImpl  implements ShopDet
 		this.shopStatusChecker = shopStatusChecker;
 	}
 
+	@Override
+	public Boolean isShopExists(String userName) {
+		return shopDetailDao.isShopExists(userName);
+	}
+
 
 
 }

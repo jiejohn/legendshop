@@ -43,7 +43,7 @@ function validateRandNum (path){
 
     function changeRandImg(path){
         var obj = document.getElementById("randImage") ;
-        obj.src = path + "/common/captcha.svl?d=" + new Date();
+        obj.src = path + "/captcha.svl?d=" + new Date();
      }
      
     function changeRandImg_bak(path){

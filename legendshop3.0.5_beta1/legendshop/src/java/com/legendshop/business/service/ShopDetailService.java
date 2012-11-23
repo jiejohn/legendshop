@@ -73,6 +73,12 @@ public interface ShopDetailService extends ShopService{
 	public abstract PageSupport getShopDetail(CriteriaQuery cq);
 	
 
+	/**
+	 * Gets the shop detail by user id.
+	 *
+	 * @param userId the user id
+	 * @return the shop detail by user id
+	 */
 	public abstract ShopDetail getShopDetailByUserId(String userId);
 	
 
@@ -86,19 +92,14 @@ public interface ShopDetailService extends ShopService{
 	
 	/**
 	 * 审核商城.
-	 * 
-	 * @param loginUserName
-	 *            the login user name
-	 * @param userId
-	 *            the user id
-	 * @param shopId
-	 *            the shop id
-	 * @param status
-	 *            状态,是否上线1：在线，0下线，-1审核中,-2拒绝,-3关闭（管理员操作）
+	 *
+	 * @param loginUserName the login user name
+	 * @param userId the user id
+	 * @param shopDetail the shop detail
+	 * @param status 状态,是否上线1：在线，0下线，-1审核中,-2拒绝,-3关闭（管理员操作）
 	 * @return true, if successful
 	 */
 	public abstract boolean updateShop(String loginUserName, String userId, ShopDetail shopDetail, Integer status);
-
 
 
 }

@@ -1,19 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file='/WEB-INF/pages/common/taglib.jsp'%>
-<link rel="stylesheet" type="text/css" media='screen' href="${pageContext.request.contextPath}/common/default/css/overlay.css" />
 <c:forEach items="${requestScope.USER_REG_ADV_740}" var="adv">
 <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 5px" class="picstyle">
 <tr><td><a href="${adv.linkUrl}"><img src="<ls:photo item='${adv.picUrl}'/>" title="${adv.title}" width="740px"/></a></td></tr>
  </table>
 </c:forEach>
-	<table class="tables" cellpadding="0" cellspacing="0">
-	            <tr> 
-                    <td class="titlebg">
-                    <fmt:message key="leagueShop"/></td>
-                  </tr>
+	<table>
 	<tr>
 		<td width="744px">
-			<table width="100%" cellspacing="0" cellpadding="0">
+			<table width="100%" cellspacing="0" cellpadding="0" border="0">
                                         <tr>
 						                    <c:choose>
 						                       <c:when test="${leagues != null}">
@@ -22,25 +17,27 @@
                                                     <table>
                                                         <tr>
                                                             <td align="center" >
-                                                            <div id="apple">
                                                              <a href="<ls:domain shopName='${league.friendId}'/>">
                                                              <c:choose>
                                                              		<c:when test="${league.banner == null}">
                                                              		                   <img src="common/images/legendshop.gif" 
-                                                                                         height="65px" style="margin: 2px" title="${league.province}/${league.city}/${league.area}/${league.friendId}">
+                                                                                         height="65px"  width="230px" style="margin: 1px" title="${league.province}/${league.city}/${league.area}/${league.friendId}">
                                                              		</c:when>
                                                              		<c:otherwise>
                                                              			          <img src="<ls:photo item='${league.banner}'/>" 
-                                                                                     height="65px" style="margin: 2px" title="${league.province}/${league.city}/${league.area}/${league.friendId}">
+                                                                                     height="65px"  width="230px" style="margin: 1px"  title="${league.province}/${league.city}/${league.area}/${league.friendId}">
                                                              		</c:otherwise>
                                                              </c:choose>
-       
                                                              </a>
-                                                            </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="center">${league.friendName}</td>
+                                                            <td align="center" height="30px">
+                                                            <c:choose>
+                                                            	<c:when test="${league.friendName == null || league.friendName == ''}">${league.friendId}</c:when>
+                                                            	<c:otherwise>${league.friendName}</c:otherwise>
+                                                            </c:choose>
+                                                            </td>
                                                          </tr>
                                                     </table>
                                                     </td>

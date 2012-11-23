@@ -294,7 +294,7 @@ public class BusinessServiceImpl extends BaseServiceImpl implements BusinessServ
 	@Override
 	public String getLeague(HttpServletRequest request, HttpServletResponse response) {
 		String shopName = ThreadLocalContext.getCurrentShopName(request, response);
-		String curPageNO = request.getParameter("curPageNO");
+		String curPageNO =  AppUtils.getDefaultValue(request.getParameter("curPageNO"), "1");
 		PageSupport ps = myleagueDao.getLeague(shopName, curPageNO);
 		request.setAttribute("curPageNO", new Integer(ps.getCurPageNO()));
 		request.setAttribute("leagues", ps.getResultList());

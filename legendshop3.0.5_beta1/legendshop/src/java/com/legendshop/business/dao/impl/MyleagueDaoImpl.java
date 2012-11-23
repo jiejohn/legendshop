@@ -7,9 +7,11 @@
  */
 package com.legendshop.business.dao.impl;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.legendshop.business.dao.MyleagueDao;
 import com.legendshop.core.dao.impl.BaseDaoImpl;
@@ -33,6 +35,7 @@ public class MyleagueDaoImpl extends BaseDaoImpl implements MyleagueDao {
 	private static Logger log = LoggerFactory.getLogger(MyleagueDaoImpl.class);
 
 	@Override
+	@Cacheable(value="MyleagueList",condition="T(Integer).parseInt(#curPageNO) < 3")
 	public PageSupport getLeague(String shopName, String curPageNO) {
 		SqlQuery sqlQuery = new SqlQuery(15, curPageNO);
 		String queryAllSQL = ConfigCode.getInstance().getCode("biz.QueryLeagueCount");

@@ -21,7 +21,7 @@
 		最新价格：<input type="text" id="price" name="price"/>
 		<input name="submit" type="button" value='确认' class="s" tabindex="4" onclick="javascript:changePrice();">
 		<br>
-		<img id="randImage" name="randImage" src="<ls:templateResource item='/common/captcha.svl'/>"/>
+		<img id="randImage" name="randImage" src="<ls:templateResource item='/captcha.svl'/>"/>
 		<input type="text" id="randNum" name="randNum" class="inputbutton2" maxlength="7" size="7" tabindex="3" >
 		 &nbsp;<a href="javascript:void(0)" onclick="javascript:changeRandImg('${pageContext.request.contextPath}')" style="font-weight: bold;"><fmt:message key="change.random2"/></a>
 		 <br>

@@ -129,10 +129,24 @@
 					<property name="expiredDuration" value="3600" />
 				</bean>
 				<bean class="com.legendshop.core.cache.MemcachedCache">
+					<property name="name" value="Myleague" />
+					<property name="memcachedClient" ref="memcachedClient" />
+					<property name="expiredDuration" value="3600" />
+				</bean>
+				<bean class="com.legendshop.core.cache.MemcachedCache">
+					<property name="name" value="MyleagueList" />
+					<property name="memcachedClient" ref="memcachedClient" />
+					<property name="expiredDuration" value="3600" />
+				</bean>
+				<bean class="com.legendshop.core.cache.MemcachedCache">
 					<property name="name" value="LEGENDSHOP_CACHE" />
 					<property name="memcachedClient" ref="memcachedClient" />
 					<property name="expiredDuration" value="3600" />
 				</bean>
+				
+				
+				
+				
 			</set>
 		</property>
 	</bean>

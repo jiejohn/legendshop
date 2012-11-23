@@ -74,7 +74,7 @@ public abstract class ShopDetailDaoImpl extends BaseDaoImpl implements ShopDetai
 		if (AppUtils.isBlank(userName)) {
 			return false;
 		}
-		List list = findByHQL("select userName from ShopDetail where userName = ?", userName);
+		List list = findByHQL("select userName from ShopDetail where  status = 1 and userName = ?", userName);
 		return list != null && list.size() > 0;
 	}
 

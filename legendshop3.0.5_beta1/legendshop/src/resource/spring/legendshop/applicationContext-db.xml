@@ -61,10 +61,18 @@
  <bean id="c3p0DataSource"  
     class="com.mchange.v2.c3p0.ComboPooledDataSource"  
     destroy-method="close">  
+       <!-- c3p0数据源的一个专有属性，只可以存放密码和用户名-->  
+      <property name="properties">  
+          <bean class="com.legendshop.util.DatasourcePropertiesFactory" factory-method="getProperties">  
+                <constructor-arg  value="${jdbc.password}" />  
+                <!-- 生产环境模式 ，才特殊处理加密密码-->  
+                <constructor-arg  value="${password.protected}" />  
+            </bean>  
+    </property>  
+    
     <property name="driverClass" value="${jdbc.driverClassName}"></property>  
     <property name="jdbcUrl" value="${jdbc.url}"></property>  
     <property name="user" value="${jdbc.username}"></property>  
-    <property name="password" value="${jdbc.password}"></property>  
     <property name="acquireIncrement" value="${jdbc.acquireIncrement}"></property>  
     <property name="initialPoolSize" value="${jdbc.initialPoolSize}"></property>  
     <property name="maxIdleTime" value="${jdbc.maxIdleTime}"></property>  
