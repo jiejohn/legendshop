@@ -21,9 +21,10 @@ function basket(){
 		document.getElementById("prodattr").value = prodAttr;
 		var count = document.getElementById("count");
 		//add to cart
+		dwr.engine.setAsync(false);
 		 CommonService.addtocart(${prod.prodId}, count.value, prodAttr, function(retData){
 		    });
-		
+		dwr.engine.setAsync(true);
 		document.getElementById("form1").submit();
 	}
 }

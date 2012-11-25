@@ -49,8 +49,7 @@
 
 			$.ajax({
 				url:"${pageContext.request.contextPath}/topuserinfo", 
-				type:'get',   
-				data:'t='+ new Date(),   
+				type:'get', 
 				async : false, //默认为true 异步   
 				error:function(){   
 				alert('error');   
