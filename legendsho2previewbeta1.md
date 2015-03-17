@@ -1,0 +1,1 @@
+http://www.legendesign.net/servlet/downloadfileservlet/legendshop2.0_beta1_ALL_IN_ONE.rar
